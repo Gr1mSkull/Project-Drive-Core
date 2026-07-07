@@ -47,21 +47,22 @@
 7. ECU
 8. Gen2
 
-## Документация (целевая структура)
+## Документация
 
 | ID | Документ | Статус |
 |----|----------|--------|
-| 000 | Project Vision | ✅ |
-| 001 | System Architecture | ✅ |
-| 002 | DCC Hardware | 🔲 |
-| 003 | ECU Architecture | 🔲 |
-| 004 | Communication Protocol | 🔲 |
-| 005 | Configuration Model | 🔲 |
-| 006 | Web Interface | 🔲 |
+| 000 | Project Vision | ✅ концепция |
+| 001 | System Architecture | ✅ концепция |
+| 002 | DCC Hardware | ✅ концепция (тепловая модель TBD) |
+| 003 | ECU Architecture | ✅ концепция (железо — Фаза 2) |
+| 004 | Communication Protocol | ✅ концепция (CAN/SPI spec TBD) |
+| 005 | Configuration Model | ✅ концепция (schema TBD) |
+| 006 | Web Interface | ✅ концепция |
 | 007 | Component Selection | ✅ |
-| 008 | Testing and Validation | 🔲 |
+| 008 | Testing and Validation | ✅ концепция |
 | 009 | Roadmap | ✅ |
-| EDL | Engineering Decision Log | 🔲 |
+| EDL | Engineering Decision Log | ✅ начальный (7 записей) |
+| — | agents_stuff/ | ✅ конспекты для агентов |
 
 ## Будущее: single source of truth для CAN
 
