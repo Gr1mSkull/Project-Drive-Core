@@ -55,7 +55,7 @@
 | **2. Аппаратура** | 002, 007, EDL 011 | ✅ v0.1 |
 | **3. ECU + UI** | 003, 006, EDL 012–013 | ✅ v0.1 |
 | **4. Валидация** | 008, EDL 014 | ✅ v0.1 |
-| **5. Реализация** | firmware/, hardware/, web/ | 🔲 следующий |
+| **5. Реализация** | firmware/shared, tools/, web/ui, hardware/devkit | ✅ scaffold v0.1 |
 
 Прогресс: `agents_stuff/DOC_PROGRESS.md`
 

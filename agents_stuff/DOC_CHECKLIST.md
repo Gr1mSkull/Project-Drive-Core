@@ -19,6 +19,11 @@
 | 008 | 008_Testing_and_Validation.md | ✅ | **v0.1** — DevKit, фазы A–F |
 | 009 | 009_Roadmap.md | ✅ | |
 | — | config/vehicles/e30_gen1.yaml | ✅ | Профиль E30 |
+| — | firmware/shared/ | ✅ | DCP headers + CRC |
+| — | tools/config_compiler/ | ✅ | YAML → DCFG |
+| — | tools/can_sim/ | ✅ | CAN simulator CLI |
+| — | web/ui/ | ✅ | Минимальный UI |
+| — | hardware/devkit/ | ✅ | KiCad scaffold |
 | — | agents_stuff/dcpi_structs_v0.1.md | ✅ | Конспект SPI |
 | — | agents_stuff/config_binary_v0.1.md | ✅ | Конспект binary config |
 | — | agents_stuff/ecu_can_messages_v0.1.md | ✅ | ECU CAN конспект |
@@ -35,10 +40,10 @@
 
 | Артефакт | Когда |
 |----------|-------|
-| `firmware/` дерево исходников | Фаза 0, после протокола |
-| `web/` статика UI | После DevKit |
+| `firmware/` дерево исходников | ✅ shared; logic/radio — TBD |
+| `web/` статика UI | ✅ web/ui минимальный |
 | `config/schema/` YAML schema | После 004/005 детализации |
-| `hardware/` KiCad | После тепловой модели |
+| `hardware/` KiCad | ✅ devkit scaffold; полная схема TBD |
 | CAN DBC / `.dcmsg` spec | Этап протокола |
 
 ## Быстрая проверка «всё на месте»

@@ -62,4 +62,9 @@ Project-Drive-Core/
 
 ## Статус
 
-🔲 Кодовые директории ещё не созданы — только план. Создавать при старте Фазы 0.
+✅ Скелет этапа 5 создан — см. `firmware/`, `tools/`, `web/`, `hardware/devkit/`.
+
+```bash
+make test-all      # CRC + config compiler + can_sim smoke
+make build-config  # build/*.dcfg
+```

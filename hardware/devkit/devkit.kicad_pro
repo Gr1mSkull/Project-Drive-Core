@@ -1,0 +1,23 @@
+{
+  "board": {
+    "design_settings": {},
+    "layer_presets": []
+  },
+  "boards": [],
+  "cvpcb": {},
+  "libraries": {},
+  "meta": {
+    "filename": "devkit.kicad_pro",
+    "version": 1
+  },
+  "net_settings": {},
+  "pcbnew": {},
+  "schematic": {
+    "legacy_lib_dir": ""
+  },
+  "text_variables": {
+    "PROJECT": "DriveCore DevKit",
+    "REV": "DK",
+    "COMMENT": "Scaffold — implement power Rev.DK per hardware/devkit/README.md"
+  }
+}

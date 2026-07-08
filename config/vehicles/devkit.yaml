@@ -1,0 +1,167 @@
+# DriveCore DevKit — bench profile
+
+config_version: "0.1"
+
+vehicle:
+  name: "DriveCore DevKit"
+  profile: devkit
+
+hardware:
+  profile: devkit
+  channels:
+    hs60: 0
+    hs30: 2
+    hs15: 4
+    hs05: 4
+  hbridges: 1
+
+modes:
+  - OFF
+  - MASTER_ON
+  - IGNITION
+  - PRIME
+  - READY
+  - ENGINE_RUN
+  - RACE
+  - COOL_DOWN
+
+outputs:
+  fan1:
+    channel: 1
+    type: pwm
+    current_limit_a: 30
+    pwm: true
+    retry: 3
+    modes:
+      OFF: off
+      ENGINE_RUN: auto
+      RACE: auto
+      COOL_DOWN: auto
+
+  water_pump:
+    channel: 2
+    type: pwm
+    current_limit_a: 20
+    pwm: true
+    retry: 2
+    modes:
+      OFF: off
+      ENGINE_RUN: on
+      RACE: on
+      COOL_DOWN: on
+
+  fuel_pump:
+    channel: 3
+    type: high_side
+    current_limit_a: 15
+    pwm: false
+    retry: 3
+    modes:
+      OFF: off
+      IGNITION: prime
+      PRIME: on
+      READY: on
+      ENGINE_RUN: on
+
+  ecu_power:
+    channel: 4
+    type: high_side
+    current_limit_a: 10
+    pwm: false
+    retry: 2
+    modes:
+      OFF: off
+      IGNITION: on
+      READY: on
+      ENGINE_RUN: on
+
+  test_load_5:
+    channel: 5
+    type: high_side
+    current_limit_a: 15
+    pwm: false
+    retry: 1
+    modes:
+      ENGINE_RUN: on
+
+  test_load_6:
+    channel: 6
+    type: high_side
+    current_limit_a: 15
+    pwm: false
+    retry: 1
+    modes:
+      ENGINE_RUN: on
+
+  led_ch7:
+    channel: 7
+    type: high_side
+    current_limit_a: 5
+    pwm: false
+    retry: 1
+    modes:
+      MASTER_ON: on
+
+  led_ch8:
+    channel: 8
+    type: high_side
+    current_limit_a: 5
+    pwm: false
+    retry: 1
+    modes:
+      MASTER_ON: on
+
+  motor_hb1:
+    channel: 101
+    type: hbridge
+    current_limit_a: 20
+    modes:
+      ENGINE_RUN: auto
+
+inputs:
+  kill_switch:
+    source: digital
+    pin: DIN1
+
+  user_button:
+    source: digital
+    pin: DIN3
+
+ecu_bindings:
+  rpm: ecu.telemetry.rpm
+  coolant_temp: ecu.telemetry.coolant_temp
+  oil_pressure: ecu.telemetry.oil_pressure
+  engine_running: ecu.telemetry.engine_running
+  cooling_level: ecu.telemetry.cooling_level
+
+rules:
+  - name: fan1_coolant_stage1
+    when:
+      engine_running: true
+      coolant_temp_gt: 92
+    then:
+      - output_on: fan1
+
+  - name: fan1_and_pump_stage2
+    when:
+      engine_running: true
+      coolant_temp_gt: 100
+    then:
+      - output_on: fan1
+      - output_on: water_pump
+
+  - name: fuel_prime_on_ignition
+    when:
+      vehicle_mode: IGNITION
+    then:
+      - output_on: fuel_pump
+      - log_event: "DevKit fuel prime"
+
+  - name: low_oil_warning
+    when:
+      engine_running: true
+      oil_pressure_lt: 1.2
+      rpm_gt: 2500
+    then:
+      - log_event: "Low oil pressure"
+      - notify: warning

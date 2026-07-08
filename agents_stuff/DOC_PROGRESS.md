@@ -4,27 +4,27 @@
 
 ## Этапы
 
-| Этап | Фокус | Документы | Статус |
-|------|-------|-----------|--------|
+| Этап | Фокус | Документы / код | Статус |
+|------|-------|-----------------|--------|
 | **1** | Архитектура | 001, 004, 005 | ✅ v0.1 |
 | **2** | Аппаратура DCC | 002, 007 | ✅ v0.1 |
 | **3** | ECU + интерфейсы | 003, 006 | ✅ v0.1 |
 | **4** | Валидация + DevKit | 008 | ✅ v0.1 |
-| **5** | Схемы / код | hardware/, firmware/ | 🔲 |
+| **5** | Скелет реализации | firmware/, tools/, web/, hardware/ | ✅ v0.1 |
 
-## Этап 4 — чеклист
+## Этап 5 — чеклист
 
-- [x] 008 — DevKit spec, стенд, фазы A–F, acceptance, fail operational
-- [x] EDL-014 — DevKit gate перед машиной
-- [x] `agents_stuff/devkit_bench_v0.1.md`
+- [x] `firmware/shared` — CRC, DCP/DCPI/config headers, CMake + test
+- [x] `tools/config_compiler` — YAML → DCFG, unit tests
+- [x] `tools/can_sim` — ECU heartbeat/telemetry CLI
+- [x] `config/vehicles/devkit.yaml`
+- [x] `web/ui` — Race / Service / Logger (vanilla JS)
+- [x] `hardware/devkit` — README + KiCad scaffold
+- [x] `Makefile` — test-all, build-config
 
-## Следующий этап (5)
+## Следующий шаг (реализация v0.2)
 
-- [ ] `firmware/shared`, `tools/can_sim`, `tools/config_compiler`
-- [ ] `config/vehicles/devkit.yaml`
-- [ ] `hardware/devkit` KiCad Rev.DK
-- [ ] `web/ui` минимальный UI
-
-## Правило
-
-Документация этапов 1–4 закрыта. Этап 5 — реализация по `CODE_LAYOUT_PLAN.md`.
+- [ ] `firmware/dcc/logic` STM32 CubeIDE project
+- [ ] `firmware/dcc/radio` ESP-IDF + REST/WS stub
+- [ ] KiCad Power Rev.DK полная схема
+- [ ] `tools/can_sim` SocketCAN backend

@@ -106,3 +106,19 @@
 ### Следующий этап
 
 **Этап 5:** код — `firmware/shared`, `tools/can_sim`, `web/ui`, KiCad DevKit.
+
+## 2026-07-08 — Этап 5: Скелет реализации
+
+### Сделано
+
+- `firmware/shared` — proto/dcpi/config headers, CRC-16, CMake test
+- `tools/config_compiler` — e30 + devkit → DCFG, unittest
+- `tools/can_sim` — ECU/heartbeat CLI
+- `config/vehicles/devkit.yaml`
+- `web/ui` — Race/Service/Logger vanilla JS
+- `hardware/devkit` — README + devkit.kicad_pro scaffold
+- `Makefile` — test-all, build-config
+
+### Следующий шаг
+
+STM32/ESP32 проекты, KiCad Power Rev.DK, SocketCAN в can_sim.

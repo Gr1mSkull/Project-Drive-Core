@@ -34,6 +34,22 @@
 ## Конфигурация
 
 - [config/vehicles/e30_gen1.yaml](config/vehicles/e30_gen1.yaml) — профиль BMW E30 Gen1
+- [config/vehicles/devkit.yaml](config/vehicles/devkit.yaml) — профиль DevKit стенда
+
+## Код (этап 5)
+
+| Путь | Описание |
+|------|----------|
+| [firmware/shared/](firmware/shared/) | DCP/DCPI structs, CRC-16 |
+| [tools/config_compiler/](tools/config_compiler/) | YAML → DCFG binary |
+| [tools/can_sim/](tools/can_sim/) | CAN ECU/heartbeat simulator |
+| [web/ui/](web/ui/) | Минимальный Web UI |
+| [hardware/devkit/](hardware/devkit/) | KiCad scaffold Rev.DK |
+
+```bash
+make test-all
+make build-config
+```
 
 ## Статус
 
@@ -41,5 +57,6 @@
 - **Этап 2 (аппаратура):** ✅ docs 002, 007 v0.1
 - **Этап 3 (ECU + UI):** ✅ docs 003, 006 v0.1
 - **Этап 4 (валидация):** ✅ doc 008 v0.1
-- **Этап 5 (реализация):** 🔲 firmware, hardware, web
+- **Этап 5 (реализация):** ✅ scaffold — `firmware/shared`, `tools/`, `web/ui`, `hardware/devkit`
+- Сборка/тесты: `make test-all`
 - Прогресс: [agents_stuff/DOC_PROGRESS.md](agents_stuff/DOC_PROGRESS.md)
