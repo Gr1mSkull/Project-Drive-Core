@@ -40,5 +40,6 @@
 - **Этап 1 (архитектура):** ✅ docs 001, 004, 005 v0.1
 - **Этап 2 (аппаратура):** ✅ docs 002, 007 v0.1
 - **Этап 3 (ECU + UI):** ✅ docs 003, 006 v0.1
-- **Этап 4 (валидация):** 🔲 doc 008
+- **Этап 4 (валидация):** ✅ doc 008 v0.1
+- **Этап 5 (реализация):** 🔲 firmware, hardware, web
 - Прогресс: [agents_stuff/DOC_PROGRESS.md](agents_stuff/DOC_PROGRESS.md)

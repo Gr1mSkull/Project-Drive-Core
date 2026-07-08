@@ -88,3 +88,21 @@
 ### Следующий этап
 
 **Этап 4:** `008_Testing_and_Validation` — DevKit spec, test procedures, acceptance.
+
+### Для следующего агента
+
+1. `agents_stuff/DOC_PROGRESS.md` — этап 5 (код)
+2. `agents_stuff/CODE_LAYOUT_PLAN.md` — структура репо
+3. Документация 000–009 + EDL — **закрыта v0.1**
+
+## 2026-07-08 — Этап 4: Валидация
+
+### Сделано
+
+- **008** v0.1: DevKit spec, стенд, фазы A–F, channel tests, integration, DCC/E30 acceptance
+- EDL-014 — обязательный DevKit gate перед машиной
+- `agents_stuff/devkit_bench_v0.1.md`
+
+### Следующий этап
+
+**Этап 5:** код — `firmware/shared`, `tools/can_sim`, `web/ui`, KiCad DevKit.

@@ -54,8 +54,8 @@
 | **1. Архитектура** | 001, 004, 005, EDL 008–010 | ✅ v0.1 |
 | **2. Аппаратура** | 002, 007, EDL 011 | ✅ v0.1 |
 | **3. ECU + UI** | 003, 006, EDL 012–013 | ✅ v0.1 |
-| **4. Валидация** | 008 | 🔲 следующий |
-| **5. Реализация** | firmware/, hardware/ | 🔲 |
+| **4. Валидация** | 008, EDL 014 | ✅ v0.1 |
+| **5. Реализация** | firmware/, hardware/, web/ | 🔲 следующий |
 
 Прогресс: `agents_stuff/DOC_PROGRESS.md`
 
@@ -71,9 +71,9 @@
 | 005 | Configuration Model | ✅ **schema v0.1** + e30_gen1.yaml |
 | 006 | Web Interface | ✅ **v0.1** |
 | 007 | Component Selection | ✅ **v0.1** |
-| 008 | Testing and Validation | ✅ концепция |
+| 008 | Testing and Validation | ✅ **v0.1** |
 | 009 | Roadmap | ✅ |
-| EDL | Engineering Decision Log | ✅ 13 записей |
+| EDL | Engineering Decision Log | ✅ 14 записей |
 | — | agents_stuff/ | ✅ |
 | — | config/vehicles/e30_gen1.yaml | ✅ |
 
