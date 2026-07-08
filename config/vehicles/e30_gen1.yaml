@@ -1,0 +1,253 @@
+# DriveCore Gen1 — BMW E30 (race)
+
+config_version: "0.1"
+
+vehicle:
+  name: "BMW E30 Race"
+  profile: e30_gen1
+
+hardware:
+  channels:
+    hs60: 2
+    hs30: 4
+    hs15: 8
+    hs05: 8
+  hbridges: 2
+
+modes:
+  - OFF
+  - MASTER_ON
+  - IGNITION
+  - PRIME
+  - READY
+  - ENGINE_RUN
+  - RACE
+  - COOL_DOWN
+
+# Логическое имя → физический канал (назначение только здесь, не в прошивке)
+outputs:
+  ehps:
+    channel: 1
+    type: high_side
+    current_limit_a: 60
+    pwm: false
+    retry: 1
+    modes:
+      OFF: off
+      MASTER_ON: off
+      IGNITION: off
+      READY: on
+      ENGINE_RUN: on
+      RACE: on
+      COOL_DOWN: off
+
+  fan1:
+    channel: 3
+    type: pwm
+    current_limit_a: 30
+    pwm: true
+    retry: 3
+    modes:
+      OFF: off
+      ENGINE_RUN: auto
+      RACE: auto
+      COOL_DOWN: auto
+
+  fan2:
+    channel: 4
+    type: pwm
+    current_limit_a: 30
+    pwm: true
+    retry: 3
+    modes:
+      OFF: off
+      ENGINE_RUN: auto
+      RACE: auto
+      COOL_DOWN: auto
+
+  water_pump:
+    channel: 5
+    type: pwm
+    current_limit_a: 20
+    pwm: true
+    retry: 2
+    modes:
+      OFF: off
+      ENGINE_RUN: on
+      RACE: on
+      COOL_DOWN: on
+
+  fuel_pump:
+    channel: 6
+    type: high_side
+    current_limit_a: 15
+    pwm: false
+    retry: 3
+    modes:
+      OFF: off
+      IGNITION: prime
+      PRIME: on
+      READY: on
+      ENGINE_RUN: on
+      RACE: on
+
+  ecu_power:
+    channel: 7
+    type: high_side
+    current_limit_a: 10
+    pwm: false
+    retry: 2
+    modes:
+      OFF: off
+      IGNITION: on
+      READY: on
+      ENGINE_RUN: on
+      RACE: on
+
+  headlights_low:
+    channel: 9
+    type: high_side
+    current_limit_a: 15
+    pwm: false
+    modes:
+      OFF: off
+      IGNITION: auto
+      ENGINE_RUN: auto
+      RACE: auto
+
+  headlights_high:
+    channel: 10
+    type: high_side
+    current_limit_a: 15
+    pwm: false
+    modes:
+      OFF: off
+      ENGINE_RUN: auto
+      RACE: auto
+
+  parking_lights:
+    channel: 15
+    type: high_side
+    current_limit_a: 5
+    pwm: false
+    modes:
+      OFF: off
+      IGNITION: auto
+      ENGINE_RUN: auto
+
+  heater_blower:
+    channel: 11
+    type: pwm
+    current_limit_a: 15
+    pwm: true
+    modes:
+      OFF: off
+      ENGINE_RUN: auto
+      RACE: auto
+
+  wipers:
+    channel: 16
+    type: high_side
+    current_limit_a: 10
+    pwm: false
+    modes:
+      OFF: off
+      ENGINE_RUN: auto
+      RACE: auto
+
+  window_fl:
+    channel: 101   # H-bridge 1 (логическая нумерация: 101=HB1, 102=HB2)
+    type: hbridge
+    current_limit_a: 20
+    modes:
+      ENGINE_RUN: auto
+
+  window_fr:
+    channel: 102
+    type: hbridge
+    current_limit_a: 20
+    modes:
+      ENGINE_RUN: auto
+
+  # Резервные каналы: 2, 8, 12-14, 17-22 — не назначены
+
+inputs:
+  start_button:
+    source: button_box
+    control_id: 0x0010
+
+  headlight_switch:
+    source: button_box
+    control_id: 0x0020
+
+  wiper_stalk:
+    source: button_box
+    control_id: 0x0030
+
+  fan_override:
+    source: button_box
+    control_id: 0x0040
+
+  kill_switch:
+    source: digital
+    pin: DIN1
+
+  master_contactor_fb:
+    source: digital
+    pin: DIN2
+
+ecu_bindings:
+  rpm: ecu.telemetry.rpm
+  coolant_temp: ecu.telemetry.coolant_temp
+  oil_pressure: ecu.telemetry.oil_pressure
+  engine_running: ecu.telemetry.engine_running
+  cooling_level: ecu.telemetry.cooling_level
+
+rules:
+  - name: fan1_coolant_stage1
+    when:
+      engine_running: true
+      coolant_temp_gt: 92
+      battery_gt: 11.8
+    then:
+      - output_on: fan1
+
+  - name: fan1_and_fan2_coolant_stage2
+    when:
+      engine_running: true
+      coolant_temp_gt: 100
+    then:
+      - output_on: fan1
+      - output_on: fan2
+
+  - name: fan_override_both
+    when:
+      button_event:
+        control_id: 0x0040
+        action: long_press
+    then:
+      - output_on: fan1
+      - output_on: fan2
+
+  - name: fuel_prime_on_ignition
+    when:
+      vehicle_mode: IGNITION
+    then:
+      - output_on: fuel_pump
+      - log_event: "Fuel Pump Prime"
+
+  - name: low_oil_warning
+    when:
+      engine_running: true
+      oil_pressure_lt: 1.2
+      rpm_gt: 2500
+    then:
+      - log_event: "Low oil pressure"
+      - notify: warning
+
+  - name: ehps_voltage_derate
+    when:
+      battery_lt: 11.0
+    then:
+      - log_event: "Battery low — check loads"
+      - notify: warning

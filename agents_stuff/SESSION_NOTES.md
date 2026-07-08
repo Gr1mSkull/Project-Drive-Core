@@ -28,8 +28,32 @@
 - Точный бинарный формат SPI STM32↔ESP32?
 - Logic↔Power: только SPI+enable или ещё сигналы?
 
+## 2026-07-08 — Этап 1: Архитектура
+
+### Сделано
+
+- **001** v0.1: одна CAN FD, E30 нагрузки, безопасность, DTM12, VCM
+- **004** DCP v0.1: CAN ID layout, сообщения, DCPI/SPI, REST/WS
+- **005** schema v0.1 + `config/vehicles/e30_gen1.yaml`
+- EDL-008 (одна шина), EDL-009 (DCP), EDL-010 (бинарный SPI)
+- Конспекты: `dcpi_structs_v0.1.md`, `config_binary_v0.1.md`
+
+### Закрытые вопросы
+
+- ~~Одна CAN vs две~~ → **одна** (EDL-008)
+- SPI формат → **DCPI v0.1** (EDL-010)
+
+### Открытые
+
+- Logic↔Power: SPI + enable (детализация на этапе 2)
+- JSON Schema файл — этап 2 или позже
+
+### Следующий этап
+
+**Этап 2:** `002_DCC_Hardware` — тепловая модель, Logic↔Power, pinout expansion.
+
 ### Для следующего агента
 
-1. Читать `agents_stuff/DOC_CHECKLIST.md` + `MODULE_MAP.md`.
-2. Официальные решения — только `docs/`.
-3. Код пока не начат — при старте следовать `CODE_LAYOUT_PLAN.md`.
+1. `agents_stuff/DOC_PROGRESS.md` — текущий этап
+2. Официальные решения — `docs/`; конспекты — `agents_stuff/`
+3. Профиль E30 — `config/vehicles/e30_gen1.yaml`

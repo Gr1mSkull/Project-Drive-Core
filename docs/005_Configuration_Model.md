@@ -1,113 +1,174 @@
 # 005 — Configuration Model
 
+Версия схемы: **config-v0.1** · Профиль E30: [config/vehicles/e30_gen1.yaml](../config/vehicles/e30_gen1.yaml)
+
 > **Hardware is fixed, behavior is fully configurable.**
 
-Поведение автомобиля задаётся конфигурацией, а не перепрошивкой.
+## 1. Поток данных
 
-## Формат (человекочитаемый)
+```
+config/vehicles/*.yaml  (Git, ручное редактирование)
+        ↓
+   Web UI / REST PUT
+        ↓
+   ESP32: validate (schema v0.1)
+        ↓
+   config_compiler → binary blob
+        ↓
+   SPI CONFIG_LOAD → STM32 → FRAM (active) + Flash (backup)
+        ↓
+   Runtime: VCM + Power Manager + Rules Engine
+```
 
-YAML — единый файл конфигурации, хранимый в Git, с понятными diff.
+## 2. Структура YAML (schema v0.1)
 
 ```yaml
+config_version: "0.1"          # обязательно
 vehicle:
-  name: BMW E30
+  name: string
+  profile: string              # e.g. e30_gen1
 
-outputs:
-  fuel_pump:
-    channel: 5
-    current_limit: 15
-    pwm: false
-    retry: 3
+hardware:                      # описание ёмкости (для валидатора)
+  channels:
+  hbridges:
 
-  fan1:
-    channel: 2
-    pwm: true
-    temp_on: 92
+modes:                         # VCM — порядок переходов
+  - OFF
+  - MASTER_ON
+  # ...
+
+outputs:                       # логические функции → физические каналы
+  <name>:
+    channel: int               # 1..22
+    type: high_side|pwm|hbridge
+    current_limit_a: float
+    pwm: bool
+    retry: int
+    modes:                     # режим → поведение
+      IGNITION: off|on|auto|prime
+      ENGINE_RUN: ...
 
 inputs:
-  start_button:
-    source: ButtonBox.Start
+  <name>:
+    source: button_box|can|analog|digital
+    control_id: int            # для button_box
+    pin: string                # для digital
 
-rules:
-  - if: ignition_on
-    then: fuel_pump_prime
+rules:                         # условная логика
+  - name: string
+    when: { ... }              # выражение
+    then: [ actions ]          # список действий
+
+ecu_bindings:                  # сигналы с CAN ECU
+  coolant_temp: ecu.telemetry.coolant_temp
+  cooling_request_from: ecu.telemetry.cooling_level
 ```
 
-## Поток данных
+## 3. VCM — коды режимов (runtime)
 
-```
-YAML (редактор / Web UI)
-    ↓
-ESP32: валидация, хранение
-    ↓
-Бинарный формат → STM32 (через SPI)
-    ↓
-Runtime: Power Manager, VCM, rules engine
-```
+| ID | Имя | Описание |
+|----|-----|----------|
+| 0 | OFF | |
+| 1 | MASTER_ON | |
+| 2 | IGNITION | |
+| 3 | PRIME | |
+| 4 | READY | |
+| 5 | ENGINE_RUN | |
+| 6 | RACE | |
+| 7 | COOL_DOWN | |
 
-## Сущности конфигурации
+Переходы задаются в прошивке VCM; таблица `outputs.*.modes` определяет **что включено** в каждом режиме.
 
-| Сущность | Описание |
+## 4. Поведение выходов в режимах
+
+| Значение | Смысл |
+|----------|-------|
+| `off` | Выключен |
+| `on` | Включен |
+| `auto` | По rules / ECU / датчикам |
+| `prime` | Импульс прогрева (бензонасос) |
+
+## 5. Rules engine (v0.1)
+
+Минимальный набор условий:
+
+| Условие | Тип |
+|---------|-----|
+| `vehicle_mode` | enum |
+| `ignition_on` | bool |
+| `engine_running` | bool |
+| `coolant_temp_gt` | °C |
+| `oil_pressure_lt` | bar |
+| `battery_lt` / `battery_gt` | V |
+| `vehicle_speed_lt` | km/h |
+| `button_event` | control_id + action |
+| `ecu.cooling_level` | int |
+
+Действия:
+
+| Действие | Описание |
 |----------|----------|
-| `vehicle` | Имя/профиль машины |
-| `outputs` | Каналы: номер, лимиты, PWM, retry |
-| `inputs` | Источники: Button Box, CAN, аналог |
-| `rules` | Условная логика «если → то» |
-| `modes` | Таблица активности выходов по режимам VCM |
+| `output_on: <name>` | Включить выход |
+| `output_off: <name>` | Выключить |
+| `set_mode: <mode>` | Смена VCM |
+| `log_event: <text>` | Журнал |
+| `notify: <level>` | Уведомление UI |
 
-## Режимы VCM (привязка к конфигу)
+## 6. Бинарный runtime-формат (STM32)
 
-Режимы: OFF → MASTER ON → IGNITION → PRIME → READY → ENGINE RUN → RACE → COOL DOWN.
+Заголовок blob:
 
-Каждый output имеет таблицу: в каких режимах активен (и как — ON / AUTO / PRIME).
+| Offset | Size | Поле |
+|--------|------|------|
+| 0 | 4 | Magic `DCFG` |
+| 4 | 2 | `config_version` |
+| 6 | 2 | `crc16` |
+| 8 | 2 | `output_count` |
+| 10 | 2 | `rule_count` |
+| 12 | n | `outputs[]` — фиксированная struct per channel |
+| | m | `rules[]` — компактные записи |
+| | k | `mode_table[]` — битовая матрица |
 
-## Виртуальные выходы и правила
+Детальные размеры struct — в `agents_stuff/config_binary_v0.1.md`.
 
-Примеры из концепции:
+## 7. Журнал событий
 
-```yaml
-rules:
-  - if:
-      engine_running: true
-      coolant_temp_gt: 95
-      battery_gt: 11.8
-      vehicle_speed_lt: 30
-    then: fan1_on
-
-  - if:
-      oil_pressure_lt: 1.2
-      rpm_gt: 2500
-    then: [buzzer, flash_dash, log_error]
-```
-
-## Журнал событий
-
-Не только коды ошибок — история с метками времени:
+Записи (FRAM кольцевой буфер + Flash архив):
 
 ```text
-08:15:11  IGN ON
-08:15:12  Fuel Pump Prime
-08:28:42  Fan1 Overcurrent
-08:28:43  Fan1 Recovered
+<unix_ts> <severity> <source> <message>
 ```
 
-Хранение: FRAM (краткосрочно) + Flash (архив). Экспорт через Web UI.
+Примеры: `IGN ON`, `Fuel Pump Prime`, `Fan1 Overcurrent`, `Fan1 Recovered`.
 
-## Версионирование
+Экспорт: `GET /api/events` → JSON / CSV.
 
-- Версия схемы конфига в заголовке файла
-- Миграции при смене формата
-- Экспорт/импорт через ESP32 (файловая система)
+## 8. Версионирование и миграция
 
-## Статус
+- `config_version` в YAML обязателен
+- Несовпадение версии → отказ `CONFIG_FAIL` + сообщение в UI
+- Миграции: `tools/config_migrate/v0.1_to_v0.2.py` (когда появится v0.2)
 
-- [x] Концепция и примеры YAML
-- [ ] JSON Schema / валидатор
-- [ ] Бинарный runtime-формат для STM32
+## 9. Валидация
+
+Правила v0.1:
+
+1. Каждый `outputs.*.channel` уникален и в пределах 1..22
+2. `current_limit_a` ≤ аппаратного максимума класса канала
+3. H-bridge только на `type: hbridge`
+4. `rules` не ссылаются на несуществующие outputs/inputs
+5. Критичные выходы (ECU, fuel_pump) имеют `retry ≥ 1`
+
+## 10. Статус
+
+- [x] Схема v0.1 и семантика
+- [x] Профиль E30 (`config/vehicles/e30_gen1.yaml`)
+- [ ] JSON Schema файл (`config/schema/v0.1.json`)
+- [ ] `tools/config_compiler`
 - [ ] Редактор в Web UI
 
 ## Связанные документы
 
+- [001_System_Architecture.md](001_System_Architecture.md)
 - [004_Communication_Protocol.md](004_Communication_Protocol.md)
-- [006_Web_Interface.md](006_Web_Interface.md)
-- [001_System_Architecture.md](001_System_Architecture.md) — VCM
+- [config/vehicles/e30_gen1.yaml](../config/vehicles/e30_gen1.yaml)

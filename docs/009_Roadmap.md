@@ -47,22 +47,35 @@
 7. ECU
 8. Gen2
 
+## Заполнение документации (по этапам)
+
+| Этап | Документы | Статус |
+|------|-----------|--------|
+| **1. Архитектура** | 001, 004, 005, EDL 008–010 | ✅ v0.1 |
+| **2. Аппаратура** | 002, 007 | 🔲 следующий |
+| **3. ECU + UI** | 003, 006 | 🔲 |
+| **4. Валидация** | 008 | 🔲 |
+| **5. Реализация** | firmware/, hardware/ | 🔲 |
+
+Прогресс: `agents_stuff/DOC_PROGRESS.md`
+
 ## Документация
 
 | ID | Документ | Статус |
 |----|----------|--------|
-| 000 | Project Vision | ✅ концепция |
-| 001 | System Architecture | ✅ концепция |
-| 002 | DCC Hardware | ✅ концепция (тепловая модель TBD) |
+| 000 | Project Vision | ✅ |
+| 001 | System Architecture | ✅ **v0.1** |
+| 002 | DCC Hardware | ✅ концепция (тепловая модель — этап 2) |
 | 003 | ECU Architecture | ✅ концепция (железо — Фаза 2) |
-| 004 | Communication Protocol | ✅ концепция (CAN/SPI spec TBD) |
-| 005 | Configuration Model | ✅ концепция (schema TBD) |
+| 004 | Communication Protocol | ✅ **DCP v0.1** |
+| 005 | Configuration Model | ✅ **schema v0.1** + e30_gen1.yaml |
 | 006 | Web Interface | ✅ концепция |
 | 007 | Component Selection | ✅ |
 | 008 | Testing and Validation | ✅ концепция |
 | 009 | Roadmap | ✅ |
-| EDL | Engineering Decision Log | ✅ начальный (7 записей) |
-| — | agents_stuff/ | ✅ конспекты для агентов |
+| EDL | Engineering Decision Log | ✅ 10 записей |
+| — | agents_stuff/ | ✅ |
+| — | config/vehicles/e30_gen1.yaml | ✅ |
 
 ## Будущее: single source of truth для CAN
 

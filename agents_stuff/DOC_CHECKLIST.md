@@ -18,7 +18,10 @@
 | 007 | 007_Component_Selection.md | ✅ | |
 | 008 | 008_Testing_and_Validation.md | ✅ | |
 | 009 | 009_Roadmap.md | ✅ | |
-| EDL | EDL/README.md | ✅ | 7 записей; новые — по мере решений |
+| — | config/vehicles/e30_gen1.yaml | ✅ | Профиль E30 |
+| — | agents_stuff/dcpi_structs_v0.1.md | ✅ | Конспект SPI |
+| — | agents_stuff/config_binary_v0.1.md | ✅ | Конспект binary config |
+| — | agents_stuff/DOC_PROGRESS.md | ✅ | Этапы заполнения |
 
 ## Источник концепции
 
