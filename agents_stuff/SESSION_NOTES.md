@@ -68,3 +68,23 @@
 ### Следующий этап
 
 **Этап 3:** ECU architecture + Web Interface.
+
+### Для следующего агента
+
+1. `agents_stuff/DOC_PROGRESS.md` — текущий этап (4)
+2. Официальные решения — `docs/`; конспекты — `agents_stuff/`
+3. Профиль E30 — `config/vehicles/e30_gen1.yaml`
+
+## 2026-07-08 — Этап 3: ECU + Web UI
+
+### Сделано
+
+- **003** v0.1: CAN ECU messages (ID, payload), hardware outline, sensors E30, cooling request, firmware modules
+- **006** v0.1: UIMode screens, PIN+Bearer auth, REST full map, WebSocket formats, Wi-Fi SoftAP
+- EDL-012 — симулятор/сторонний ECU до Фазы 2
+- EDL-013 — Web UI auth model
+- `agents_stuff/ecu_can_messages_v0.1.md`, `web_ui_routes_v0.1.md`
+
+### Следующий этап
+
+**Этап 4:** `008_Testing_and_Validation` — DevKit spec, test procedures, acceptance.

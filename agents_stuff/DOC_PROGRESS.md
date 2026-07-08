@@ -8,7 +8,7 @@
 |------|-------|-----------|--------|
 | **1** | Архитектура | 001, 004, 005 | ✅ v0.1 |
 | **2** | Аппаратура DCC | 002, 007 | ✅ v0.1 |
-| **3** | ECU + интерфейсы | 003, 006 | 🔲 |
+| **3** | ECU + интерфейсы | 003, 006 | ✅ v0.1 |
 | **4** | Валидация + DevKit | 008 | 🔲 |
 | **5** | Схемы / код | hardware/, firmware/ | 🔲 |
 
@@ -28,10 +28,17 @@
 - [x] EDL-011 — Logic↔Power J_LP интерфейс
 - [x] `agents_stuff/thermal_notes_v0.1.md`
 
-## Следующий этап (3)
+## Этап 3 — чеклист
 
-- [ ] 003 — ECU hardware sketch, CAN messages к DCC, сенсоры
-- [ ] 006 — Web UI screens, auth, REST endpoints mapping
+- [x] 003 — ECU CAN messages, hardware outline, sensors E30, cooling request, firmware arch
+- [x] 006 — UIMode, экраны, auth PIN+token, REST/WS полная карта, Wi-Fi
+- [x] EDL-012 — ECU simulator / сторонний ECU до Фазы 2
+- [x] EDL-013 — Web UI auth model
+- [x] `agents_stuff/ecu_can_messages_v0.1.md`, `web_ui_routes_v0.1.md`
+
+## Следующий этап (4)
+
+- [ ] 008 — DevKit spec, test procedures, acceptance criteria, стенд
 
 ## Правило
 

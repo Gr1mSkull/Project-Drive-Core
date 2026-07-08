@@ -1,6 +1,6 @@
 # Doc checklist
 
-Проверка полноты документации Gen1. Обновлено: 2026-07-07.
+Проверка полноты документации Gen1. Обновлено: 2026-07-08.
 
 ## Официальные документы (`docs/`)
 
@@ -11,16 +11,18 @@
 | 000 | 000_Project_Vision.md | ✅ | |
 | 001 | 001_System_Architecture.md | ✅ | |
 | 002 | 002_DCC_Hardware.md | ✅ | **v0.1** — тепловая модель, J_LP/J_EXP |
-| 003 | 003_ECU_Architecture.md | ✅ | Детали железа ECU — Фаза 2 |
+| 003 | 003_ECU_Architecture.md | ✅ | **v0.1** — CAN, sensors, firmware outline |
 | 004 | 004_Communication_Protocol.md | ✅ | **DCP v0.1** |
 | 005 | 005_Configuration_Model.md | ✅ | **schema v0.1** |
-| 006 | 006_Web_Interface.md | ✅ | Auth, макеты UI — TBD |
+| 006 | 006_Web_Interface.md | ✅ | **v0.1** — auth, REST, screens |
 | 007 | 007_Component_Selection.md | ✅ | **v0.1** — BOM per channel |
 | 008 | 008_Testing_and_Validation.md | ✅ | |
 | 009 | 009_Roadmap.md | ✅ | |
 | — | config/vehicles/e30_gen1.yaml | ✅ | Профиль E30 |
 | — | agents_stuff/dcpi_structs_v0.1.md | ✅ | Конспект SPI |
 | — | agents_stuff/config_binary_v0.1.md | ✅ | Конспект binary config |
+| — | agents_stuff/ecu_can_messages_v0.1.md | ✅ | ECU CAN конспект |
+| — | agents_stuff/web_ui_routes_v0.1.md | ✅ | REST/WS конспект |
 | — | agents_stuff/DOC_PROGRESS.md | ✅ | Этапы заполнения |
 
 ## Источник концепции
