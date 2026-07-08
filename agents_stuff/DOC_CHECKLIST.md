@@ -10,12 +10,12 @@
 | — | CONCEPT_GEN1_SUMMARY.md | ✅ | Сжатое ТЗ |
 | 000 | 000_Project_Vision.md | ✅ | |
 | 001 | 001_System_Architecture.md | ✅ | |
-| 002 | 002_DCC_Hardware.md | ✅ | Тепловая модель — TBD |
+| 002 | 002_DCC_Hardware.md | ✅ | **v0.1** — тепловая модель, J_LP/J_EXP |
 | 003 | 003_ECU_Architecture.md | ✅ | Детали железа ECU — Фаза 2 |
-| 004 | 004_Communication_Protocol.md | ✅ | CAN ID / бинарный SPI — TBD |
-| 005 | 005_Configuration_Model.md | ✅ | Schema / бинарный runtime — TBD |
+| 004 | 004_Communication_Protocol.md | ✅ | **DCP v0.1** |
+| 005 | 005_Configuration_Model.md | ✅ | **schema v0.1** |
 | 006 | 006_Web_Interface.md | ✅ | Auth, макеты UI — TBD |
-| 007 | 007_Component_Selection.md | ✅ | |
+| 007 | 007_Component_Selection.md | ✅ | **v0.1** — BOM per channel |
 | 008 | 008_Testing_and_Validation.md | ✅ | |
 | 009 | 009_Roadmap.md | ✅ | |
 | — | config/vehicles/e30_gen1.yaml | ✅ | Профиль E30 |

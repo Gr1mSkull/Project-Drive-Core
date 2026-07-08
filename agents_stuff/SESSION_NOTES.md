@@ -45,15 +45,26 @@
 
 ### Открытые
 
-- Logic↔Power: SPI + enable (детализация на этапе 2)
-- JSON Schema файл — этап 2 или позже
+- JSON Schema файл — этап 3 или позже
 
 ### Следующий этап
 
-**Этап 2:** `002_DCC_Hardware` — тепловая модель, Logic↔Power, pinout expansion.
+**Этап 3:** `003_ECU_Architecture`, `006_Web_Interface` — детализация железа ECU и Web UI.
 
-### Для следующего агента
+## 2026-07-08 — Этап 2: Аппаратура DCC
 
-1. `agents_stuff/DOC_PROGRESS.md` — текущий этап
-2. Официальные решения — `docs/`; конспекты — `agents_stuff/`
-3. Профиль E30 — `config/vehicles/e30_gen1.yaml`
+### Сделано
+
+- **002** v0.1: трёхплатная структура, J_LP 30-pin, J_EXP 20-pin, канальная карта PROFET
+- **007** v0.1: BOM Logic/Power/Radio, пассивы, разъёмы Deutsch, DevKit subset
+- Тепловая модель E30 (worst case RACE ~15 W)
+- EDL-011 — Logic↔Power SPI + fail-safe
+- `agents_stuff/thermal_notes_v0.1.md`
+
+### Закрытые вопросы
+
+- ~~Logic↔Power интерфейс~~ → **J_LP SPI + enable** (EDL-011)
+
+### Следующий этап
+
+**Этап 3:** ECU architecture + Web Interface.

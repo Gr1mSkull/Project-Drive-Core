@@ -210,3 +210,33 @@ JSON на SPI — лишняя нагрузка на STM32.
 
 ### Последствия
 `STATE_PUSH` 50 ms; ESP32 агрегирует JSON для UI.
+
+---
+
+## EDL-011: Интерфейс Logic ↔ Power (J_LP)
+
+**Дата:** 2026-07-08  
+**Статус:** accepted
+
+### Контекст
+Как Logic Board управляет 22 силовыми каналами на Power Board без прямого GPIO на каждый PROFET.
+
+### Решение
+**30-pin board-to-board J_LP:**
+- SPI (Logic = master, 10 MHz max): команды on/off, PWM, diag
+- Аппаратные линии: `nKILL_HW`, `nENABLE_GLOBAL`, `FAULT_N`
+- Аналог: MUX ISENSE (4 линии + 3-bit select), VBATT_SENSE, NTC
+- 4× PWM от таймеров STM32
+
+Fail-safe: SPI timeout > 100 ms или `nENABLE_GLOBAL`=LOW → все выходы OFF.
+
+### Альтернативы
+- Прямой GPIO на каждый IN (22+ проводов) — не помещается в B2B, хуже EMI.
+- Только I²C на Power — медленнее для PWM и diag burst.
+- Отдельный MCU на Power — лишняя точка отказа.
+
+### Последствия
+- Распиновка зафиксирована в `docs/002` §5.1.
+- Power Board: 3× shift register + ADG708 MUX.
+- SPI1 (Power) и SPI2 (Radio) разделены на STM32.
+- Тепловой NTC и BOARD_ID — идентификация ревизии Power при Gen2 swap.

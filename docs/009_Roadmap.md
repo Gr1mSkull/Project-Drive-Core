@@ -52,8 +52,8 @@
 | Этап | Документы | Статус |
 |------|-----------|--------|
 | **1. Архитектура** | 001, 004, 005, EDL 008–010 | ✅ v0.1 |
-| **2. Аппаратура** | 002, 007 | 🔲 следующий |
-| **3. ECU + UI** | 003, 006 | 🔲 |
+| **2. Аппаратура** | 002, 007, EDL 011 | ✅ v0.1 |
+| **3. ECU + UI** | 003, 006 | 🔲 следующий |
 | **4. Валидация** | 008 | 🔲 |
 | **5. Реализация** | firmware/, hardware/ | 🔲 |
 
@@ -65,15 +65,15 @@
 |----|----------|--------|
 | 000 | Project Vision | ✅ |
 | 001 | System Architecture | ✅ **v0.1** |
-| 002 | DCC Hardware | ✅ концепция (тепловая модель — этап 2) |
+| 002 | DCC Hardware | ✅ **v0.1** |
 | 003 | ECU Architecture | ✅ концепция (железо — Фаза 2) |
 | 004 | Communication Protocol | ✅ **DCP v0.1** |
 | 005 | Configuration Model | ✅ **schema v0.1** + e30_gen1.yaml |
 | 006 | Web Interface | ✅ концепция |
-| 007 | Component Selection | ✅ |
+| 007 | Component Selection | ✅ **v0.1** |
 | 008 | Testing and Validation | ✅ концепция |
 | 009 | Roadmap | ✅ |
-| EDL | Engineering Decision Log | ✅ 10 записей |
+| EDL | Engineering Decision Log | ✅ 11 записей |
 | — | agents_stuff/ | ✅ |
 | — | config/vehicles/e30_gen1.yaml | ✅ |
 
