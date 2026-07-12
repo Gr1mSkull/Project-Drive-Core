@@ -132,8 +132,7 @@ Unassigned loads (brake lights, horn, etc.) require architect channel assignment
 | State machine | [Power_Channel_State_Model.md](Power_Channel_State_Model.md) |
 | Protection | [Power_Channel_Protection.md](Power_Channel_Protection.md) |
 | Diagnostics | [Power_Channel_Diagnostics.md](Power_Channel_Diagnostics.md) |
-
-## 10. Revision history
+| DCC internal modules | [DCC_Internal_Architecture.md](DCC_Internal_Architecture.md) |
 
 | Version | Date | Change |
 |---------|------|--------|
