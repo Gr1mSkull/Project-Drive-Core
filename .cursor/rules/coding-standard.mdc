@@ -1,0 +1,15 @@
+---
+description: DriveCore firmware and software coding standards
+alwaysApply: true
+---
+
+# Coding Standard
+
+- **Readable** — clear names, layered modules, no register access from domain logic.
+- **Deterministic** — no unbounded loops, blocking calls, or silent errors on real-time paths.
+- **No magic numbers** — protocol constants in shared headers; vehicle mapping in config YAML.
+- **No vehicle hardcoding** in common layers — use `config/vehicles/*.yaml`.
+- **Explicit serialization** — packed structs with defined layout for CAN/SPI/storage; no raw compiler-dependent structs on the wire.
+- **Imports at top of file** — no inline imports unless documented circular dependency.
+
+Layout: `agents_stuff/CODE_LAYOUT_PLAN.md`, `firmware/shared/`.

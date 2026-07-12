@@ -1,0 +1,18 @@
+---
+description: DriveCore change review checklist before submission
+alwaysApply: true
+---
+
+# Review Checklist
+
+Before marking a task complete, verify:
+
+| Area | Question |
+|------|----------|
+| **Requirements** | Does the diff satisfy the stated task only? |
+| **Architecture** | Any ADR-level change? If yes — was it approved? |
+| **Tests** | Were relevant tests run? Results honest? |
+| **Docs** | Updated docs/handbook/EDL affected by the change? |
+| **Risks** | Open questions, assumptions, regressions reported? |
+
+See `docs/handbook/REVIEW_PROCESS.md`.

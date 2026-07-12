@@ -1,0 +1,14 @@
+---
+description: DriveCore documentation standards — IDs, EDL/ADR, lifecycle statuses
+alwaysApply: true
+---
+
+# Documentation Standard
+
+- Use **requirement IDs** where they exist; preserve traceability.
+- Record architectural decisions in **EDL** (`docs/EDL/`) or ADR — context, decision, alternatives, consequences.
+- Use approved **document statuses**: Concept, Proposed, Under Review, Approved for DevKit, Approved for Prototype, Verified, Deprecated.
+- Mark unknowns: **TBD**, **TBC**, **ASSUMPTION**, **OPEN ISSUE**.
+- Official specs: `docs/000–009`. Handbook: `docs/handbook/`. Agent notes: `agents_stuff/`.
+
+Do not mark Approved or Verified without explicit instruction.

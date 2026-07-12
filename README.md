@@ -20,6 +20,7 @@
 | 008 | [Testing and Validation](docs/008_Testing_and_Validation.md) | DevKit, стенд, чеклисты |
 | 009 | [Roadmap](docs/009_Roadmap.md) | Дорожная карта |
 | EDL | [Engineering Decision Log](docs/EDL/README.md) | Ключевые решения |
+| HB | [Engineering Handbook v1.0](docs/handbook/README.md) | Философия, workflow, ревью, квалификация |
 
 ## Для агентов
 

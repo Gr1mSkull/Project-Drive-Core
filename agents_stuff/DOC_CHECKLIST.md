@@ -7,7 +7,8 @@
 | ID | Файл | Статус | Примечание |
 |----|------|--------|------------|
 | — | README.md (root) | ✅ | Обзор + индекс |
-| — | CONCEPT_GEN1_SUMMARY.md | ✅ | Сжатое ТЗ |
+| — | docs/handbook/ | ✅ | Engineering Handbook v1.0 |
+| — | docs/handbook/DriveCore_Engineering_Handbook_v1.0.zip | ✅ | Оригинальный архив |
 | 000 | 000_Project_Vision.md | ✅ | |
 | 001 | 001_System_Architecture.md | ✅ | |
 | 002 | 002_DCC_Hardware.md | ✅ | **v0.1** — тепловая модель, J_LP/J_EXP |

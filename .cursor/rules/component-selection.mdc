@@ -1,0 +1,18 @@
+---
+description: DriveCore component selection checklist — no unqualified BOM entries
+alwaysApply: true
+---
+
+# Component Selection
+
+Before adding a component to BOM or schematic:
+
+1. **Datasheet** — manufacturer primary source; revision and URL.
+2. **Lifecycle** — active preferred; EOL/NRND documented with migration plan.
+3. **Thermal** — P_loss, Rth, cooling, simultaneous loads, derating.
+4. **Alternatives** — second source or documented single-source risk.
+5. **Qualification** — record or provisional task authorization.
+
+Never infer continuous current from part number or marketing text.
+
+Full rules: `drivecore-engineering.mdc` §5, `docs/handbook/COMPONENT_QUALIFICATION_PROCESS.md`.

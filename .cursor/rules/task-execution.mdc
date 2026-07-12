@@ -1,0 +1,16 @@
+---
+description: DriveCore task execution workflow — Read, Implement, Validate, Report, Stop
+alwaysApply: true
+---
+
+# Task Execution
+
+```
+Read → Implement → Validate → Report → Stop
+```
+
+1. **Read** — task, docs, EDL, existing code.
+2. **Implement** — minimal scope only.
+3. **Validate** — tests, build, lint; do not claim unrun checks.
+4. **Report** — mandatory completion report (see `drivecore-engineering.mdc` §13).
+5. **Stop** — wait for review; no extra work without new task.

@@ -1,0 +1,18 @@
+---
+description: DriveCore hardware design standards — diagnostics and serviceability
+alwaysApply: true
+---
+
+# Hardware Design Standard
+
+Design for **diagnostics** and **serviceability**:
+
+- Modular boards (Logic / Power / Radio); Gen2 swaps Power only where approved.
+- Test points: SWD, CAN, SPI, sense, NTC — without unsafe high-current exposure on production.
+- Approved connector families (Deutsch DTM/DT/DTP) unless EDL changes policy.
+- Separate power/logic domains; documented ground strategy and thermal paths.
+- High-current: verified copper, busbars, connector derating — not headline amp ratings alone.
+
+Create KiCad/schematics **only when explicitly requested**.
+
+Refs: `docs/002_DCC_Hardware.md`, `docs/007_Component_Selection.md`, `drivecore-engineering.mdc` §10.
