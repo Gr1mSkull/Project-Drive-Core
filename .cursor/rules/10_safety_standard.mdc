@@ -1,0 +1,41 @@
+---
+description: DriveCore safety principles
+alwaysApply: true
+---
+
+# 10 — Safety Standard
+
+## Layer safety ownership
+
+| Layer | Safety role |
+|-------|-------------|
+| STM32 | Safety-relevant real-time, VCM, power enable chain, kill interaction |
+| ESP32 | **Never safety-critical** |
+| Tablet / Web UI | **Never required** for vehicle operation |
+| ECU | Engine protection algorithms only; not body loads |
+
+## Fail operational
+
+ESP32, tablet, or Wi-Fi loss shall not stop engine, pumps, cooling execution per VCM/rules.
+
+## Per-function safe state
+
+Do **not** assume “all outputs OFF” is universally safe. Each function needs defined reaction for:
+
+ECU power · fuel pump · coolant pump · fans · lighting · EHPS · wipers · isolation circuits
+
+Missing reaction → report as **OPEN ISSUE**.
+
+## Kill / isolation
+
+Competition battery-isolation and engine-stop shall not depend solely on STM32, ESP32, CAN, or Web UI. Regulations and alternator isolation — TBD in SRS.
+
+## Configuration safety
+
+Config shall not override hardware channel capability, current ceilings, PWM limits, retry limits, or revision compatibility.
+
+## Testing
+
+DevKit gate before vehicle (EDL-014). Fail-operational tests in `docs/008` Phase D.
+
+Refs: `docs/001` § safety, `docs/002` §9, `docs/008` §11.

@@ -1,0 +1,44 @@
+# DriveCore — AI Project Context
+
+**WP-001** · Operational context for AI assistants. Not an official specification.
+
+## Identity
+
+| Field | Value |
+|-------|-------|
+| Project | DriveCore (open modular automotive platform) |
+| Repository | Project-Drive-Core |
+| Gen1 vehicle | BMW E30 race (profile: `config/vehicles/e30_gen1.yaml`) |
+| Your role | Implementation Engineer — **not** System Architect |
+
+## Modules (fixed boundaries)
+
+| Module | Responsibility |
+|--------|----------------|
+| **DCC** | PDM + VCM + diagnostics + CAN + logging + config execution |
+| **ECU** | Engine only |
+| **Button Box** | HMI events → CAN |
+| **Tablet** | Web UI client (optional) |
+
+## Non-negotiables
+
+- STM32 works without ESP32/tablet.
+- Configuration over code (`config/vehicles/*.yaml`).
+- One CAN FD bus Gen1 (DCC — ECU — Button Box).
+- Binary DCPI on SPI; JSON for browser only.
+
+## Where to read first
+
+1. Current work package / user task
+2. `.ai/architecture_summary.md`
+3. `docs/001`, `docs/004`, `docs/005`
+4. `docs/ADR/` and `docs/EDL/`
+5. `docs/SRS/` (when populated)
+
+## Where agents write notes
+
+`agents_stuff/` — session notes, checklists, cheat-sheets. **Not** official docs.
+
+## Rules
+
+`.cursor/rules/00`–`10` — always applied.

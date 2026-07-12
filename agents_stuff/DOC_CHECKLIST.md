@@ -7,6 +7,16 @@
 | ID | Файл | Статус | Примечание |
 |----|------|--------|------------|
 | — | README.md (root) | ✅ | Обзор + индекс |
+| — | docs/PROJECT_PHILOSOPHY.md | ✅ | WP-001 foundation |
+| — | docs/ENGINEERING_*.md, REVIEW_PROCESS, COMPONENT_QUALIFICATION | ✅ | WP-001 |
+| — | docs/SRS/ | ✅ | Structure only (WP-001) |
+| — | docs/ADR/ | ✅ | Index + EDL link |
+| — | docs/templates/ | ✅ | WP-001 templates |
+| — | .ai/ | ✅ | AI context |
+| — | .cursor/rules/00-10 | ✅ | WP-001 rules |
+| — | docs/Component_Qualification/ | ✅ | WP-002 qualification framework |
+| — | hardware/qualification/* (15 categories) | ✅ | WP-002 category READMEs |
+| — | docs/handbook/ | ✅ | Archive v1.0 zip |
 | — | CONCEPT_GEN1_SUMMARY.md | ✅ | Сжатое ТЗ |
 | 000 | 000_Project_Vision.md | ✅ | |
 | 001 | 001_System_Architecture.md | ✅ | |

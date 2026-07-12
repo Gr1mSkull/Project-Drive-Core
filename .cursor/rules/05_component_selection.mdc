@@ -1,0 +1,38 @@
+---
+description: DriveCore component selection and qualification rules
+alwaysApply: true
+---
+
+# 05 — Component Selection
+
+## Rule
+
+**No BOM entry without qualification** (or explicit provisional authorization in the task).
+
+## Never infer continuous current from
+
+Part number · marketing text · headline current limit · abs max rating · package size
+
+## Qualification workflow
+
+```
+Requirements → Candidates → Datasheet → Electrical → Thermal → Availability → Lifecycle → Decision
+```
+
+## Required evidence (TBD until recorded)
+
+- Exact MPN, datasheet revision and URL
+- Lifecycle and automotive qualification status
+- Continuous vs pulse vs limit current (distinct)
+- Thermal: Rds, Rth, cooling, simultaneous operation
+- Alternatives and procurement risk
+
+## Channel classes
+
+Use abstract class (HS05, HS15, HS30, HS60) until qualified for defined conditions (voltage, T_amb, PCB, duty).
+
+Do not add components in WP/documentation tasks unless task authorizes it.
+
+Process: `docs/COMPONENT_QUALIFICATION_PROCESS.md`, `hardware/qualification/README.md`.
+
+Approved BOM reference (when qualified): `docs/007` — status per document, not frozen by this rule pack.
