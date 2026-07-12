@@ -1,40 +1,22 @@
 ---
-description: DriveCore communication protocol standards
+description: DriveCore communication standards — wrapper to Engineering Constitution §16
 alwaysApply: true
 ---
 
 # 09 — Protocol Standard
 
-## DriveCore Protocol (DCP) v0.1
+> **Policy authority:** [.cursor/ENGINEERING_CONSTITUTION.mdc](../ENGINEERING_CONSTITUTION.mdc)  
+> Wrapper only — not an independent source of truth.
 
-Authoritative spec: `docs/004_Communication_Protocol.md`.
+## Constitution sections
 
-## CAN FD Gen1
+| Topic | Section |
+|-------|---------|
+| DCP, CAN FD, DCPI, REST/WS | §16 |
+| Architecture protection (no JSON on SPI) | §9, §16 |
 
-- One bus, linear topology, 500 kbit/s nominal, 2 Mbit/s data.
-- Nodes: DCC `0x10`, ECU `0x20`, Button Box `0x30`.
-- ID layout: Message Class + Device Type + Instance.
-- No new CAN IDs without updating protocol source of truth.
+Authoritative spec: `docs/004_Communication_Protocol.md`
 
-## Message requirements
+## Historical note
 
-Each message shall define (in spec): sender, scope, rate/timeout, payload layout, scaling, version, stale handling.
-
-## DCPI (STM32 ↔ ESP32)
-
-- Binary, versioned, CRC — see `docs/004` §4, `firmware/shared/include/drivecore/dcpi.h`.
-- **JSON not on SPI.** ESP32 translates to JSON for REST/WebSocket only.
-
-## REST / WebSocket
-
-Authoritative UI contract: `docs/006`. Base `/api/v1/`, telemetry WebSocket 20 Hz.
-
-## Heartbeat
-
-Presence ≠ full health. States: BOOT, INIT, RUN, DEGRADED, FAULT, LOST (per `docs/004`).
-
-## Single source of truth
-
-Protocol constants in `firmware/shared/`. Future: codegen from `.dcmsg` (roadmap — not implemented).
-
-EDL-008 (one bus), EDL-009 (DCP), EDL-010 (binary SPI).
+WP-001 protocol rules preserved in constitution §16.

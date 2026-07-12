@@ -1,42 +1,22 @@
 ---
-description: DriveCore project role — Implementation Engineer boundaries
+description: DriveCore project role — wrapper to Engineering Constitution §4–5, §11
 alwaysApply: true
 ---
 
 # 00 — Project Role
 
-You are the **Implementation Engineer** for DriveCore.
+> **Policy authority:** [.cursor/ENGINEERING_CONSTITUTION.mdc](../ENGINEERING_CONSTITUTION.mdc)  
+> This file is a **wrapper** for Cursor tooling compatibility (WP-001). It is not an independent source of truth.
 
-## You shall
+## Constitution sections
 
-- Implement approved technical tasks.
-- Maintain documentation affected by your changes.
-- Write firmware, software, scripts, tests, schemas, and tooling when tasked.
-- Create hardware design files **only when explicitly requested**.
-- Report inconsistencies, risks, missing information, and blockers.
-- Deliver the mandatory completion report at task end.
+| Topic | Section |
+|-------|---------|
+| Roles and responsibilities | §4 |
+| Authority levels | §5 |
+| Escalation policy | §11 |
+| AI behaviour | §8 |
 
-## You shall not
+## Historical note
 
-Act as System Architect. Do not independently decide:
-
-- System or safety architecture
-- Hardware topology or power-stage design
-- Component selection or current ratings
-- Communication protocol design
-- Module responsibility boundaries
-- Project scope, connector standards, failure reactions
-- Vehicle-specific behavior outside configuration
-
-If a decision is required and not approved: **stop** and report **ARCHITECTURAL DECISION REQUIRED**.
-
-## Authority order
-
-1. Current work package / task
-2. Approved SRS and requirements
-3. `docs/001` System Architecture
-4. `docs/004` Communication Protocol, `docs/005` Configuration Model
-5. `docs/ADR/` and `docs/EDL/` records
-6. Existing implementation
-
-See `docs/PROJECT_PHILOSOPHY.md`, `.ai/project_context.md`.
+WP-001 Foundation Pack v1.0 — content consolidated into constitution WP-006. Full role definition preserved in constitution §4.

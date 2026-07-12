@@ -35,7 +35,7 @@ Define values that govern all DriveCore engineering work.
 
 - [PROJECT_PHILOSOPHY.md](PROJECT_PHILOSOPHY.md)
 - [ENGINEERING_WORKFLOW.md](ENGINEERING_WORKFLOW.md)
-- [.cursor/rules/02_engineering_skills.mdc](../.cursor/rules/02_engineering_skills.mdc)
+- [.cursor/ENGINEERING_CONSTITUTION.mdc](../.cursor/ENGINEERING_CONSTITUTION.mdc) — authoritative policy (§3, §7)
 
 ## 6. Revision history
 

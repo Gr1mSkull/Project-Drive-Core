@@ -1,34 +1,20 @@
 ---
-description: DriveCore engineering skills and professional mindset
+description: DriveCore engineering skills — wrapper to Engineering Constitution §7
 alwaysApply: true
 ---
 
 # 02 — Engineering Skills
 
-Think as a **senior automotive embedded engineer**. Optimize for correctness, maintainability, safety, diagnosability — not speed.
+> **Policy authority:** [.cursor/ENGINEERING_CONSTITUTION.mdc](../ENGINEERING_CONSTITUTION.mdc)  
+> Wrapper only — not an independent source of truth.
 
-## Required skills (summary)
+## Constitution sections
 
-| # | Skill | Application |
-|---|-------|-------------|
-| 1 | Systems thinking | Evaluate cross-module impact before every change |
-| 2 | Datasheet-driven | Requirements → datasheet → electrical/thermal → lifecycle → decision |
-| 3 | Design review | Self-review: failure modes, assumptions, technical debt |
-| 4 | DFMEA mindset | Failure mode → cause → effect → detection → mitigation |
-| 5 | DFM | Assemble, solder, test, repair, repeatability |
-| 6 | Serviceability | Modular assemblies, connectors, test points, fault logging |
-| 7 | Interface first | Define ownership, data model, timing, errors before code |
-| 8 | Thermal awareness | P_loss, Rth, copper, ambient, simultaneous loads, derating |
-| 9 | Functional safety | Safe state per function; detectability; logging |
-| 10 | Cost awareness | BOM, lifecycle, second source, supply chain |
-| 11 | Traceability | Link artifact → requirement → doc → test |
-| 12 | Design for debug | Diagnostics, timestamps, fault codes, state visibility |
-| 13 | Skepticism | Report ASSUMPTION / NEEDS VALIDATION / OPEN QUESTION — never guess |
-| 14 | Simplicity | Simpler solution wins when requirements are met |
-| 15 | Integrity | Distinguish facts, assumptions, hypotheses, recommendations |
-| 16 | Senior engineer mode | Would this pass formal design review? |
-| 17 | Architectural humility | Stop and report; do not decide architecture |
+| Topic | Section |
+|-------|---------|
+| All 17 engineering skills | §7 |
+| Engineering values | §3 |
 
-When evidence is insufficient: **Stop. Report. Ask.**
+## Historical note
 
-See `docs/ENGINEERING_VALUES.md`.
+WP-001 skills list preserved in constitution §7 (Systems Thinking through Architectural Humility).

@@ -1,42 +1,21 @@
 ---
-description: DriveCore firmware and software standards
+description: DriveCore firmware standards — wrapper to Engineering Constitution §14
 alwaysApply: true
 ---
 
 # 07 — Firmware Standard
 
-## Layering (mandatory separation)
+> **Policy authority:** [.cursor/ENGINEERING_CONSTITUTION.mdc](../ENGINEERING_CONSTITUTION.mdc)  
+> Wrapper only — not an independent source of truth.
 
-HAL · drivers · platform services · domain logic · configuration · communication · diagnostics · application
+## Constitution sections
 
-No peripheral register access from domain logic.
+| Topic | Section |
+|-------|---------|
+| Layering, ownership, determinism | §14 |
+| Protocol serialization | §14, §16 |
+| Configuration in YAML | §14, §6 |
 
-## Ownership
+## Historical note
 
-Each service: responsibility, public interface, dependencies, state, error behavior, test strategy. Minimize global mutable state.
-
-## Determinism (safety-relevant paths)
-
-No unbounded loops · no blocking in real-time paths · no uncontrolled dynamic allocation · no silent error suppression.
-
-## Watchdog
-
-Service reflects health of critical services — not generic timer kick alone.
-
-## Protocol serialization
-
-Never send raw compiler-dependent structs on CAN, SPI, UART, or network.
-
-Use `firmware/shared/` layouts: explicit sizes, endianness, scaling, version, CRC.
-
-## Configuration
-
-Vehicle behavior in `config/vehicles/*.yaml` → binary via `tools/config_compiler`. No E30 hardcoding in common code.
-
-## Layout
-
-`firmware/shared`, `firmware/dcc/logic`, `firmware/dcc/radio` per `agents_stuff/CODE_LAYOUT_PLAN.md`.
-
-Imports at top of file (no inline imports unless documented circular dependency).
-
-Do not write firmware in foundation/documentation work packages unless explicitly tasked.
+WP-001 firmware rules preserved in constitution §14.

@@ -1,37 +1,21 @@
 ---
-description: DriveCore mandatory engineering rules — architecture boundaries and discipline
+description: DriveCore engineering rules — wrapper to Engineering Constitution §6, §9
 alwaysApply: true
 ---
 
 # 01 — Engineering Rules
 
-## Mission
+> **Policy authority:** [.cursor/ENGINEERING_CONSTITUTION.mdc](../ENGINEERING_CONSTITUTION.mdc)  
+> Wrapper only — not an independent source of truth.
 
-DriveCore is an open, modular automotive electronics platform (Gen1 target: BMW E30 race). Platform behavior shall not hardcode E30 specifics outside vehicle configuration (`config/vehicles/`).
+## Constitution sections
 
-## Mandatory architecture (do not change without ADR)
+| Topic | Section |
+|-------|---------|
+| Mandatory architecture | §6, §9 |
+| Decision discipline | §6 |
+| Prohibited actions | §6, §21 |
 
-| Principle | Rule |
-|-----------|------|
-| ECU | Engine only — injection, ignition, boost, protection, telemetry |
-| DCC | Vehicle — PDM, VCM, loads, diagnostics, logging, config execution |
-| STM32 | Real-time and safety-relevant control; works without ESP32/tablet |
-| ESP32 | Service layer — Wi-Fi, REST, WebSocket, OTA, UI assets |
-| Tablet | Presentation client only; not required for operation |
-| Config | Logical functions → physical channels via YAML; not in firmware |
-| CAN Gen1 | One CAN FD bus, linear: DCC — ECU — Button Box |
-| SPI | Binary DCPI STM32↔ESP32; JSON only for browser clients |
+## Historical note
 
-## Decision discipline
-
-- Do not resolve document contradictions silently.
-- Do not create architecture by implication (extra CAN bus, ESP32 safety, tablet mandatory, etc.).
-- Minimal scope per task; no unrelated refactor.
-- No speculative “future-proof” features without approved requirement.
-- Mark unknowns: TBD, TBC, ASSUMPTION, OPEN ISSUE.
-
-## Prohibited
-
-Invent datasheet values; infer current from part numbers; approve own architecture; claim unrun tests as passed; continue past assigned task.
-
-Refs: `docs/001`, `docs/003`, `docs/006`, `docs/EDL/`.
+WP-001 — mission and Gen1 architecture rules consolidated WP-006.

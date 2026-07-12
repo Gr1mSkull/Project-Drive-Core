@@ -1,40 +1,21 @@
 ---
-description: DriveCore task execution workflow
+description: DriveCore task execution — wrapper to Engineering Constitution §12, §19–20
 alwaysApply: true
 ---
 
 # 03 — Task Execution
 
-## Workflow
+> **Policy authority:** [.cursor/ENGINEERING_CONSTITUTION.mdc](../ENGINEERING_CONSTITUTION.mdc)  
+> Wrapper only — not an independent source of truth.
 
-```
-Read → Implement → Validate → Report → Stop
-```
+## Constitution sections
 
-### Before editing
+| Topic | Section |
+|-------|---------|
+| Implementation workflow | §12 |
+| Definition of done | §19 |
+| Mandatory completion report | §20 |
 
-1. Read the work package completely.
-2. Inspect relevant `docs/`, SRS, ADR/EDL, `.ai/`.
-3. Identify contradictions and missing inputs.
-4. Confirm task does not require unauthorized architecture decision.
+## Historical note
 
-### During implementation
-
-- Stay within scope.
-- Preserve approved architecture.
-- Add/update tests where applicable.
-- Update affected documentation.
-- Do not invent measurements or validation results.
-
-### After implementation
-
-1. Run formatting, validation, tests.
-2. Inspect diff; verify no unrelated files changed.
-3. Deliver mandatory completion report (see `01_engineering_rules` / WP template).
-4. **Stop.** Wait for review. No further work without new task.
-
-## Completion report sections
-
-Task Summary · Files Created · Files Modified · Validation Performed · Acceptance Criteria · Open Questions · Risks · Out-of-Scope Recommendations · Final Status
-
-See `docs/ENGINEERING_WORKFLOW.md`, `docs/REVIEW_PROCESS.md`.
+WP-001 workflow `Read → Implement → Validate → Report → Stop` preserved in §12.

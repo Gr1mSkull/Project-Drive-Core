@@ -1,35 +1,21 @@
 ---
-description: DriveCore documentation standards
+description: DriveCore documentation standards — wrapper to Engineering Constitution §13
 alwaysApply: true
 ---
 
 # 06 — Documentation Standard
 
-## Document hierarchy
+> **Policy authority:** [.cursor/ENGINEERING_CONSTITUTION.mdc](../ENGINEERING_CONSTITUTION.mdc)  
+> Wrapper only — not an independent source of truth.
 
-| Layer | Location | Purpose |
-|-------|----------|---------|
-| Vision / architecture | `docs/000–009` | Official Gen1 specifications |
-| Foundation | `docs/PROJECT_*.md`, `ENGINEERING_*.md` | Philosophy, workflow, process |
-| SRS | `docs/SRS/` | System requirements (volumes) |
-| Decisions | `docs/ADR/`, `docs/EDL/` | Architectural decisions |
-| Handbook archive | `docs/handbook/` | v1.0 zip and legacy index |
-| Agent context | `.ai/`, `agents_stuff/` | Operational AI context (not official spec) |
+## Constitution sections
 
-## Requirements language
+| Topic | Section |
+|-------|---------|
+| Document hierarchy | §13 |
+| Requirements language | §13 |
+| ADR / EDL rules | §13 |
 
-- Atomic, unambiguous, testable requirements use **shall**.
-- Avoid vague terms without measurable criteria.
-- Use TBD / TBC / ASSUMPTION / OPEN ISSUE for unknowns.
+## Historical note
 
-## ADR / EDL
-
-Every approved architectural decision: context, decision, alternatives, consequences, status, date.
-
-Supersede — do not delete — prior decisions.
-
-## Templates
-
-`docs/templates/` — ADR, Requirement, Qualification, Architecture Review, Work Package.
-
-Do not duplicate long spec text; cross-reference `docs/NNN_*.md`.
+WP-001 documentation hierarchy extended WP-006 with DCC and Vehicle_Integration layers.

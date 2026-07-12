@@ -1,32 +1,22 @@
 ---
-description: DriveCore review process and checklist
+description: DriveCore review process — wrapper to Engineering Constitution §18
 alwaysApply: true
 ---
 
 # 04 — Review Process
 
-**Every change requires review.**
+> **Policy authority:** [.cursor/ENGINEERING_CONSTITUTION.mdc](../ENGINEERING_CONSTITUTION.mdc)  
+> Wrapper only — not an independent source of truth.
 
-## Review checklist
+## Constitution sections
 
-| Area | Verify |
-|------|--------|
-| Requirements | Diff matches stated task scope only |
-| Architecture | No ADR-level change without approval |
-| Tests | Executed tests reported honestly; unrun = NOT VERIFIED |
-| Documentation | SRS, ADR/EDL, affected docs updated |
-| Risks | Assumptions, regressions, open questions listed |
+| Topic | Section |
+|-------|---------|
+| Review sequence (Implementation → Engineering → Critical) | §18 |
+| Checklist and outcomes | §18 |
 
-## Document statuses (authorized use only)
+Extended narrative: `docs/REVIEW_PROCESS.md` (references constitution).
 
-Concept · Proposed · Under Review · Approved for DevKit · Approved for Prototype · Verified · Deprecated
+## Historical note
 
-Do not mark Approved or Verified without explicit instruction.
-
-## Traceability
-
-Preserve requirement IDs. Reference ADR/EDL for decisions. Do not renumber requirements without authorization.
-
-Templates: `docs/templates/Architecture_Review_Template.md`, `docs/templates/Work_Package_Template.md`.
-
-See `docs/REVIEW_PROCESS.md`.
+WP-001 — three-stage review sequence added WP-006 §18.

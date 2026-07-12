@@ -47,7 +47,7 @@ Ensure every change is reviewed before acceptance.
 
 ## 7. Related documents
 
-- [.cursor/rules/04_review_process.mdc](../.cursor/rules/04_review_process.mdc)
+- [.cursor/ENGINEERING_CONSTITUTION.mdc](../.cursor/ENGINEERING_CONSTITUTION.mdc) — §18 Review Process
 - [ENGINEERING_WORKFLOW.md](ENGINEERING_WORKFLOW.md)
 
 ## 8. Revision history
