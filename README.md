@@ -20,11 +20,14 @@
 | 008 | [Testing and Validation](docs/008_Testing_and_Validation.md) | DevKit, стенд, чеклисты |
 | 009 | [Roadmap](docs/009_Roadmap.md) | Дорожная карта |
 | EDL | [Engineering Decision Log](docs/EDL/README.md) | Ключевые решения |
-| HB | [Engineering Handbook v1.0](docs/handbook/README.md) | Философия, workflow, ревью, квалификация |
+| HB | [Engineering foundation](docs/PROJECT_PHILOSOPHY.md) | Philosophy, workflow, SRS, ADR |
+| SRS | [System Requirements](docs/SRS/README.md) | Volumes 1–3 (structure) |
+| ADR | [Architecture decisions](docs/ADR/README.md) | ADR + EDL index |
 
-## Для агентов
+## AI context
 
-Конспекты, чеклисты и карта модулей — в [`agents_stuff/`](agents_stuff/) (не официальная документация).
+- [`.ai/`](.ai/) — operational context for assistants
+- [`.cursor/rules/`](.cursor/rules/) — WP-001 engineering rules (`00`–`10`)
 
 ## Ключевой принцип
 

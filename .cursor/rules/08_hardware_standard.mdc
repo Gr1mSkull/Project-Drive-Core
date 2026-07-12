@@ -1,0 +1,34 @@
+---
+description: DriveCore hardware design standards
+alwaysApply: true
+---
+
+# 08 — Hardware Standard
+
+## DCC structure (approved — do not redesign)
+
+Logic Board + Power Board + Radio Board in one enclosure. Gen2 may replace Power Board only.
+
+Internal DCC links: SPI (Logic↔Radio, Logic↔Power via J_LP). No CAN inside DCC.
+
+## Design principles
+
+- Separate logic and power domains; document ground strategy and thermal paths.
+- High-current: verified copper/busbar — not headline ratings alone.
+- Protection coordination: fuse, switch limit, wiring, connector derating, software limits.
+- Connector policy: approved families per `docs/002` / EDL (Deutsch DTM/DT/DTP) unless ADR changes.
+- Prototype: test points for SWD, CAN, SPI, sense — without unsafe high-current exposure on production unit.
+
+## Serviceability
+
+Modular boards, replaceable Radio, BOARD_ID for Power revision detection.
+
+## Qualification
+
+Component records in `hardware/qualification/` before approved BOM.
+
+## Scope
+
+Create KiCad, schematics, PCB **only when work package explicitly requests**.
+
+Reference (not frozen by this pack): `docs/002`, `docs/007`, `docs/008` DevKit gate (EDL-014).

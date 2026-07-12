@@ -1,41 +1,21 @@
-# DriveCore Engineering Handbook v1.0
+# DriveCore Engineering Handbook v1.0 (archive)
 
-Официальный инженерный справочник проекта. Дополняет нумерованную документацию `docs/000–009` и EDL.
+> **Canonical foundation documents** moved to `docs/` root (WP-001):
+>
+> - [PROJECT_PHILOSOPHY.md](../PROJECT_PHILOSOPHY.md)
+> - [ENGINEERING_VALUES.md](../ENGINEERING_VALUES.md)
+> - [ENGINEERING_WORKFLOW.md](../ENGINEERING_WORKFLOW.md)
+> - [REVIEW_PROCESS.md](../REVIEW_PROCESS.md)
+> - [COMPONENT_QUALIFICATION_PROCESS.md](../COMPONENT_QUALIFICATION_PROCESS.md)
 
-| Документ | Содержание |
-|----------|------------|
-| [PROJECT_PHILOSOPHY.md](PROJECT_PHILOSOPHY.md) | Философия платформы |
-| [ENGINEERING_VALUES.md](ENGINEERING_VALUES.md) | Инженерные ценности |
-| [ENGINEERING_WORKFLOW.md](ENGINEERING_WORKFLOW.md) | Жизненный цикл работ |
-| [REVIEW_PROCESS.md](REVIEW_PROCESS.md) | Процесс ревью |
-| [COMPONENT_QUALIFICATION_PROCESS.md](COMPONENT_QUALIFICATION_PROCESS.md) | Квалификация компонентов |
+## Archive
 
-## Cursor rules (из handbook)
+Original package: [DriveCore_Engineering_Handbook_v1.0.zip](DriveCore_Engineering_Handbook_v1.0.zip)
 
-Полные правила агента:
+## Cursor rules
 
-| Файл | Уровень |
-|------|---------|
-| [`.cursor/rules/drivecore-engineering.mdc`](../../.cursor/rules/drivecore-engineering.mdc) | Полный — mandatory instructions |
-| [`.cursor/rules/drivecore-engineering-skills.mdc`](../../.cursor/rules/drivecore-engineering-skills.mdc) | Полный — engineering skills |
+Canonical numbered rules: [`.cursor/rules/`](../.cursor/rules/README.md) (`00`–`10`).
 
-Краткие rule-индексы v1.0 (из handbook):
+## Legacy stubs (superseded)
 
-| Файл | Тема |
-|------|------|
-| `task-execution.mdc` | Read → Implement → Validate → Report → Stop |
-| `review-checklist.mdc` | Requirements, Architecture, Tests, Docs, Risks |
-| `component-selection.mdc` | Datasheet, Lifecycle, Thermal, Alternatives, Qualification |
-| `documentation-standard.mdc` | IDs, ADR/EDL, статусы |
-| `coding-standard.mdc` | Readable, deterministic, no magic numbers |
-| `hardware-design-standard.mdc` | Diagnostics, serviceability |
-| `communication-protocols.mdc` | Versioned binary protocols |
-| `safety-principles.mdc` | ESP32 never safety-critical |
-
-## Архив
-
-Оригинальный пакет: [DriveCore_Engineering_Handbook_v1.0.zip](DriveCore_Engineering_Handbook_v1.0.zip)
-
-## Статус
-
-**v1.0** — каркас handbook + rule-индексы. Развёрнутые тексты — в `.cursor/rules/drivecore-engineering*.mdc` и `docs/000+`.
+Files in this folder (short v1.0 stubs) are **superseded** by WP-001 documents above. Retained for archive reference only.

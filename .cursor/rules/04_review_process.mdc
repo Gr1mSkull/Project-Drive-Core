@@ -1,0 +1,32 @@
+---
+description: DriveCore review process and checklist
+alwaysApply: true
+---
+
+# 04 — Review Process
+
+**Every change requires review.**
+
+## Review checklist
+
+| Area | Verify |
+|------|--------|
+| Requirements | Diff matches stated task scope only |
+| Architecture | No ADR-level change without approval |
+| Tests | Executed tests reported honestly; unrun = NOT VERIFIED |
+| Documentation | SRS, ADR/EDL, affected docs updated |
+| Risks | Assumptions, regressions, open questions listed |
+
+## Document statuses (authorized use only)
+
+Concept · Proposed · Under Review · Approved for DevKit · Approved for Prototype · Verified · Deprecated
+
+Do not mark Approved or Verified without explicit instruction.
+
+## Traceability
+
+Preserve requirement IDs. Reference ADR/EDL for decisions. Do not renumber requirements without authorization.
+
+Templates: `docs/templates/Architecture_Review_Template.md`, `docs/templates/Work_Package_Template.md`.
+
+See `docs/REVIEW_PROCESS.md`.

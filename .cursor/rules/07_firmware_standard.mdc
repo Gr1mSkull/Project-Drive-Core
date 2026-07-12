@@ -1,0 +1,42 @@
+---
+description: DriveCore firmware and software standards
+alwaysApply: true
+---
+
+# 07 — Firmware Standard
+
+## Layering (mandatory separation)
+
+HAL · drivers · platform services · domain logic · configuration · communication · diagnostics · application
+
+No peripheral register access from domain logic.
+
+## Ownership
+
+Each service: responsibility, public interface, dependencies, state, error behavior, test strategy. Minimize global mutable state.
+
+## Determinism (safety-relevant paths)
+
+No unbounded loops · no blocking in real-time paths · no uncontrolled dynamic allocation · no silent error suppression.
+
+## Watchdog
+
+Service reflects health of critical services — not generic timer kick alone.
+
+## Protocol serialization
+
+Never send raw compiler-dependent structs on CAN, SPI, UART, or network.
+
+Use `firmware/shared/` layouts: explicit sizes, endianness, scaling, version, CRC.
+
+## Configuration
+
+Vehicle behavior in `config/vehicles/*.yaml` → binary via `tools/config_compiler`. No E30 hardcoding in common code.
+
+## Layout
+
+`firmware/shared`, `firmware/dcc/logic`, `firmware/dcc/radio` per `agents_stuff/CODE_LAYOUT_PLAN.md`.
+
+Imports at top of file (no inline imports unless documented circular dependency).
+
+Do not write firmware in foundation/documentation work packages unless explicitly tasked.
