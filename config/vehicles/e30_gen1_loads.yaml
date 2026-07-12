@@ -1,0 +1,1528 @@
+# DriveCore Gen1 — BMW E30 electrical load inventory (WP-003)
+# NOT merged into active DCC configuration. Reference only until architecture review.
+# Numeric electrical values: null = unknown. Do not treat null as zero.
+
+schema_version: "0.1"
+work_package: WP-003
+vehicle_profile: e30_gen1
+status: proposed
+active_dcc_config: config/vehicles/e30_gen1.yaml  # unchanged by this file
+
+evidence_status_enum:
+  - measured
+  - datasheet
+  - estimated
+  - unknown
+
+presence_enum:
+  - Confirmed
+  - Planned
+  - Optional
+  - TBD
+
+simultaneous_operation_groups:
+  - id: GRP-COOLING-HIGH
+    description: High-draw cooling and steering loads that may overlap in ENGINE_RUN/RACE
+    members: [ehps, water_pump, fan1, fan2]
+  - id: GRP-ENGINE-CRITICAL
+    description: Engine control and fuel delivery
+    members: [ecu_power, fuel_pump, ignition_coils, injectors]
+  - id: GRP-LIGHTING-FRONT
+    description: Front lighting cluster
+    members: [headlights_low, headlights_high, parking_lights]
+  - id: GRP-LIGHTING-REAR
+    description: Rear lighting and signaling
+    members: [brake_lights, indicators, hazard_lights, rear_rain_light]
+  - id: GRP-CABIN
+    description: Cabin comfort and visibility
+    members: [heater_blower, wipers, washer_pump, interior_equipment]
+  - id: GRP-WINDOWS
+    description: Power window motors (mutual exclusion TBD)
+    members: [window_fl, window_fr]
+  - id: GRP-AUX
+    description: Horn and non-safety UI power
+    members: [horn, tablet_supply]
+  - id: GRP-CAN-NODES
+    description: CAN peripheral nodes (not DCC high-side outputs)
+    members: [button_box, radio_board]
+
+loads:
+  - load_id: E30LD-001
+    load_key: ehps
+    functional_name: Electric hydraulic power steering pump
+    presence: Confirmed
+    physical_location: Engine bay
+    load_technology: Electric motor-driven hydraulic pump
+    load_classification: inductive
+    dcc_switched: true
+    dcc_output_key: ehps
+    dcc_channel: 1
+    dcc_channel_class: HS60
+    nominal_supply_voltage_v: 12
+    nominal_current_a: null
+    max_continuous_current_a: null
+    startup_inrush_current_a: null
+    startup_duration_s: null
+    stall_current_a: null
+    pwm_required: false
+    pwm_frequency_range_hz: null
+    reverse_current_behavior: TBD
+    regenerative_behavior: none_expected
+    switching_frequency: TBD
+    operating_duty_cycle: TBD
+    max_continuous_operating_time: TBD
+    simultaneous_operation_group: GRP-COOLING-HIGH
+    criticality: critical
+    required_degraded_behavior: ARCHITECTURAL DECISION REQUIRED
+    safe_state: off
+    diagnostic_requirements: TBD
+    open_load_detection_required: TBD
+    current_measurement_required: TBD
+    retry_policy_required: per active config (retry 1)
+    external_fuse_required: TBD
+    connector_requirement_status: TBD
+    wire_requirement_status: TBD
+    data_source: config/vehicles/e30_gen1.yaml; docs/001_System_Architecture.md
+    evidence_status: unknown
+    measurement_required: true
+    notes: Assigned DCC Ch01. Conceptual priority in docs/001 — not a measured rating.
+
+  - load_id: E30LD-002
+    load_key: water_pump
+    functional_name: Electric coolant pump
+    presence: Confirmed
+    physical_location: Engine bay
+    load_technology: Electric coolant pump
+    load_classification: inductive
+    dcc_switched: true
+    dcc_output_key: water_pump
+    dcc_channel: 5
+    dcc_channel_class: HS30
+    nominal_supply_voltage_v: 12
+    nominal_current_a: null
+    max_continuous_current_a: null
+    startup_inrush_current_a: null
+    startup_duration_s: null
+    stall_current_a: null
+    pwm_required: true
+    pwm_frequency_range_hz: null
+    reverse_current_behavior: TBD
+    regenerative_behavior: none_expected
+    switching_frequency: TBD
+    operating_duty_cycle: TBD
+    max_continuous_operating_time: TBD
+    simultaneous_operation_group: GRP-COOLING-HIGH
+    criticality: critical
+    required_degraded_behavior: ARCHITECTURAL DECISION REQUIRED
+    safe_state: off
+    diagnostic_requirements: TBD
+    open_load_detection_required: TBD
+    current_measurement_required: TBD
+    retry_policy_required: per active config (retry 2)
+    external_fuse_required: TBD
+    connector_requirement_status: TBD
+    wire_requirement_status: TBD
+    data_source: config/vehicles/e30_gen1.yaml; docs/001_System_Architecture.md
+    evidence_status: unknown
+    measurement_required: true
+    notes: Assigned DCC Ch05 PWM.
+
+  - load_id: E30LD-003
+    load_key: fan1
+    functional_name: Radiator fan 1
+    presence: Confirmed
+    physical_location: Engine bay — radiator
+    load_technology: Electric fan motor
+    load_classification: inductive
+    dcc_switched: true
+    dcc_output_key: fan1
+    dcc_channel: 3
+    dcc_channel_class: HS30
+    nominal_supply_voltage_v: 12
+    nominal_current_a: null
+    max_continuous_current_a: null
+    startup_inrush_current_a: null
+    startup_duration_s: null
+    stall_current_a: null
+    pwm_required: true
+    pwm_frequency_range_hz: null
+    reverse_current_behavior: TBD
+    regenerative_behavior: none_expected
+    switching_frequency: TBD
+    operating_duty_cycle: TBD
+    max_continuous_operating_time: TBD
+    simultaneous_operation_group: GRP-COOLING-HIGH
+    criticality: high
+    required_degraded_behavior: ARCHITECTURAL DECISION REQUIRED
+    safe_state: off
+    diagnostic_requirements: TBD
+    open_load_detection_required: TBD
+    current_measurement_required: TBD
+    retry_policy_required: per active config (retry 3)
+    external_fuse_required: TBD
+    connector_requirement_status: TBD
+    wire_requirement_status: TBD
+    data_source: config/vehicles/e30_gen1.yaml; docs/001_System_Architecture.md
+    evidence_status: unknown
+    measurement_required: true
+    notes: Assigned DCC Ch03 PWM. Stage-1 cooling per rules.
+
+  - load_id: E30LD-004
+    load_key: fan2
+    functional_name: Radiator fan 2
+    presence: Confirmed
+    physical_location: Engine bay — radiator
+    load_technology: Electric fan motor
+    load_classification: inductive
+    dcc_switched: true
+    dcc_output_key: fan2
+    dcc_channel: 4
+    dcc_channel_class: HS30
+    nominal_supply_voltage_v: 12
+    nominal_current_a: null
+    max_continuous_current_a: null
+    startup_inrush_current_a: null
+    startup_duration_s: null
+    stall_current_a: null
+    pwm_required: true
+    pwm_frequency_range_hz: null
+    reverse_current_behavior: TBD
+    regenerative_behavior: none_expected
+    switching_frequency: TBD
+    operating_duty_cycle: TBD
+    max_continuous_operating_time: TBD
+    simultaneous_operation_group: GRP-COOLING-HIGH
+    criticality: high
+    required_degraded_behavior: ARCHITECTURAL DECISION REQUIRED
+    safe_state: off
+    diagnostic_requirements: TBD
+    open_load_detection_required: TBD
+    current_measurement_required: TBD
+    retry_policy_required: per active config (retry 3)
+    external_fuse_required: TBD
+    connector_requirement_status: TBD
+    wire_requirement_status: TBD
+    data_source: config/vehicles/e30_gen1.yaml; docs/001_System_Architecture.md
+    evidence_status: unknown
+    measurement_required: true
+    notes: Assigned DCC Ch04 PWM. Stage-2 cooling per rules.
+
+  - load_id: E30LD-005
+    load_key: fuel_pump
+    functional_name: Fuel pump
+    presence: Confirmed
+    physical_location: Fuel tank / delivery line
+    load_technology: Electric fuel pump motor
+    load_classification: inductive
+    dcc_switched: true
+    dcc_output_key: fuel_pump
+    dcc_channel: 6
+    dcc_channel_class: HS30
+    nominal_supply_voltage_v: 12
+    nominal_current_a: null
+    max_continuous_current_a: null
+    startup_inrush_current_a: null
+    startup_duration_s: null
+    stall_current_a: null
+    pwm_required: false
+    pwm_frequency_range_hz: null
+    reverse_current_behavior: TBD
+    regenerative_behavior: none_expected
+    switching_frequency: TBD
+    operating_duty_cycle: TBD
+    max_continuous_operating_time: TBD
+    simultaneous_operation_group: GRP-ENGINE-CRITICAL
+    criticality: critical
+    required_degraded_behavior: ARCHITECTURAL DECISION REQUIRED
+    safe_state: off
+    diagnostic_requirements: TBD
+    open_load_detection_required: TBD
+    current_measurement_required: TBD
+    retry_policy_required: per active config (retry 3)
+    external_fuse_required: TBD
+    connector_requirement_status: TBD
+    wire_requirement_status: TBD
+    data_source: config/vehicles/e30_gen1.yaml; docs/001_System_Architecture.md
+    evidence_status: unknown
+    measurement_required: true
+    notes: Assigned DCC Ch06. Prime behavior in IGNITION/PRIME modes per active config.
+
+  - load_id: E30LD-006
+    load_key: ecu_power
+    functional_name: Engine ECU supply
+    presence: Confirmed
+    physical_location: Engine bay — ECU module
+    load_technology: Electronic control unit
+    load_classification: electronic
+    dcc_switched: true
+    dcc_output_key: ecu_power
+    dcc_channel: 7
+    dcc_channel_class: HS15
+    nominal_supply_voltage_v: 12
+    nominal_current_a: null
+    max_continuous_current_a: null
+    startup_inrush_current_a: null
+    startup_duration_s: null
+    stall_current_a: null
+    pwm_required: false
+    pwm_frequency_range_hz: null
+    reverse_current_behavior: TBD
+    regenerative_behavior: none_expected
+    switching_frequency: TBD
+    operating_duty_cycle: TBD
+    max_continuous_operating_time: TBD
+    simultaneous_operation_group: GRP-ENGINE-CRITICAL
+    criticality: critical
+    required_degraded_behavior: ARCHITECTURAL DECISION REQUIRED
+    safe_state: off
+    diagnostic_requirements: TBD
+    open_load_detection_required: TBD
+    current_measurement_required: TBD
+    retry_policy_required: per active config (retry 2)
+    external_fuse_required: TBD
+    connector_requirement_status: TBD
+    wire_requirement_status: TBD
+    data_source: config/vehicles/e30_gen1.yaml; docs/003_ECU_Architecture.md
+    evidence_status: unknown
+    measurement_required: true
+    notes: Assigned DCC Ch07. Powers ECU J_PWR; coils/injectors downstream of ECU.
+
+  - load_id: E30LD-007
+    load_key: ignition_coils
+    functional_name: Ignition coils supply
+    presence: TBD
+    physical_location: Engine bay — coil pack / individual coils
+    load_technology: Ignition coil bank
+    load_classification: inductive
+    dcc_switched: false
+    dcc_output_key: null
+    dcc_channel: null
+    dcc_channel_class: null
+    nominal_supply_voltage_v: 12
+    nominal_current_a: null
+    max_continuous_current_a: null
+    startup_inrush_current_a: null
+    startup_duration_s: null
+    stall_current_a: null
+    pwm_required: false
+    pwm_frequency_range_hz: null
+    reverse_current_behavior: TBD
+    regenerative_behavior: TBD
+    switching_frequency: TBD
+    operating_duty_cycle: TBD
+    max_continuous_operating_time: TBD
+    simultaneous_operation_group: GRP-ENGINE-CRITICAL
+    criticality: critical
+    required_degraded_behavior: ARCHITECTURAL DECISION REQUIRED
+    safe_state: ARCHITECTURAL DECISION REQUIRED
+    diagnostic_requirements: TBD
+    open_load_detection_required: TBD
+    current_measurement_required: TBD
+    retry_policy_required: TBD
+    external_fuse_required: TBD
+    connector_requirement_status: TBD
+    wire_requirement_status: TBD
+    data_source: docs/001_System_Architecture.md; docs/003_ECU_Architecture.md
+    evidence_status: unknown
+    measurement_required: true
+    notes: docs/003 places coils on ECU J_IGN — not a DCC high-side output unless architect assigns separate feed.
+
+  - load_id: E30LD-008
+    load_key: injectors
+    functional_name: Injectors supply
+    presence: TBD
+    physical_location: Engine bay — fuel rail / injectors
+    load_technology: Peak-and-hold injector drivers (ECU)
+    load_classification: inductive
+    dcc_switched: false
+    dcc_output_key: null
+    dcc_channel: null
+    dcc_channel_class: null
+    nominal_supply_voltage_v: 12
+    nominal_current_a: null
+    max_continuous_current_a: null
+    startup_inrush_current_a: null
+    startup_duration_s: null
+    stall_current_a: null
+    pwm_required: false
+    pwm_frequency_range_hz: null
+    reverse_current_behavior: TBD
+    regenerative_behavior: TBD
+    switching_frequency: TBD
+    operating_duty_cycle: TBD
+    max_continuous_operating_time: TBD
+    simultaneous_operation_group: GRP-ENGINE-CRITICAL
+    criticality: critical
+    required_degraded_behavior: ARCHITECTURAL DECISION REQUIRED
+    safe_state: ARCHITECTURAL DECISION REQUIRED
+    diagnostic_requirements: TBD
+    open_load_detection_required: TBD
+    current_measurement_required: TBD
+    retry_policy_required: TBD
+    external_fuse_required: TBD
+    connector_requirement_status: TBD
+    wire_requirement_status: TBD
+    data_source: docs/003_ECU_Architecture.md
+    evidence_status: unknown
+    measurement_required: true
+    notes: Switched by ECU drivers; measure at ECU/injector harness for DCC channel sizing boundary only.
+
+  - load_id: E30LD-009
+    load_key: starter_control
+    functional_name: Starter control
+    presence: Planned
+    physical_location: Engine bay — starter solenoid circuit
+    load_technology: Starter solenoid / control relay coil
+    load_classification: inductive
+    dcc_switched: false
+    dcc_output_key: null
+    dcc_channel: null
+    dcc_channel_class: null
+    nominal_supply_voltage_v: 12
+    nominal_current_a: null
+    max_continuous_current_a: null
+    startup_inrush_current_a: null
+    startup_duration_s: null
+    stall_current_a: null
+    pwm_required: false
+    pwm_frequency_range_hz: null
+    reverse_current_behavior: TBD
+    regenerative_behavior: none_expected
+    switching_frequency: TBD
+    operating_duty_cycle: TBD
+    max_continuous_operating_time: TBD
+    simultaneous_operation_group: GRP-ENGINE-CRITICAL
+    criticality: high
+    required_degraded_behavior: ARCHITECTURAL DECISION REQUIRED
+    safe_state: off
+    diagnostic_requirements: TBD
+    open_load_detection_required: TBD
+    current_measurement_required: TBD
+    retry_policy_required: TBD
+    external_fuse_required: TBD
+    connector_requirement_status: TBD
+    wire_requirement_status: TBD
+    data_source: WP-003 scope list; E30 integration TBD
+    evidence_status: unknown
+    measurement_required: true
+    notes: Starter motor inrush not switched by DCC Gen1 channel map; control path TBD. High-current starter feed is out of DCC HS scope until architect assigns.
+
+  - load_id: E30LD-010
+    load_key: headlights_low
+    functional_name: Low beam
+    presence: Confirmed
+    physical_location: Front — headlamp assemblies
+    load_technology: TBD (halogen / LED retrofit)
+    load_classification: TBD
+    dcc_switched: true
+    dcc_output_key: headlights_low
+    dcc_channel: 9
+    dcc_channel_class: HS15
+    nominal_supply_voltage_v: 12
+    nominal_current_a: null
+    max_continuous_current_a: null
+    startup_inrush_current_a: null
+    startup_duration_s: null
+    stall_current_a: null
+    pwm_required: false
+    pwm_frequency_range_hz: null
+    reverse_current_behavior: TBD
+    regenerative_behavior: none_expected
+    switching_frequency: TBD
+    operating_duty_cycle: TBD
+    max_continuous_operating_time: TBD
+    simultaneous_operation_group: GRP-LIGHTING-FRONT
+    criticality: medium
+    required_degraded_behavior: ARCHITECTURAL DECISION REQUIRED
+    safe_state: off
+    diagnostic_requirements: TBD
+    open_load_detection_required: TBD
+    current_measurement_required: TBD
+    retry_policy_required: TBD
+    external_fuse_required: TBD
+    connector_requirement_status: TBD
+    wire_requirement_status: TBD
+    data_source: config/vehicles/e30_gen1.yaml
+    evidence_status: unknown
+    measurement_required: true
+    notes: Assigned DCC Ch09.
+
+  - load_id: E30LD-011
+    load_key: headlights_high
+    functional_name: High beam
+    presence: Confirmed
+    physical_location: Front — headlamp assemblies
+    load_technology: TBD (halogen / LED retrofit)
+    load_classification: TBD
+    dcc_switched: true
+    dcc_output_key: headlights_high
+    dcc_channel: 10
+    dcc_channel_class: HS15
+    nominal_supply_voltage_v: 12
+    nominal_current_a: null
+    max_continuous_current_a: null
+    startup_inrush_current_a: null
+    startup_duration_s: null
+    stall_current_a: null
+    pwm_required: false
+    pwm_frequency_range_hz: null
+    reverse_current_behavior: TBD
+    regenerative_behavior: none_expected
+    switching_frequency: TBD
+    operating_duty_cycle: TBD
+    max_continuous_operating_time: TBD
+    simultaneous_operation_group: GRP-LIGHTING-FRONT
+    criticality: medium
+    required_degraded_behavior: ARCHITECTURAL DECISION REQUIRED
+    safe_state: off
+    diagnostic_requirements: TBD
+    open_load_detection_required: TBD
+    current_measurement_required: TBD
+    retry_policy_required: TBD
+    external_fuse_required: TBD
+    connector_requirement_status: TBD
+    wire_requirement_status: TBD
+    data_source: config/vehicles/e30_gen1.yaml
+    evidence_status: unknown
+    measurement_required: true
+    notes: Assigned DCC Ch10.
+
+  - load_id: E30LD-012
+    load_key: parking_lights
+    functional_name: Position lights
+    presence: Confirmed
+    physical_location: Front and rear lamp assemblies
+    load_technology: TBD
+    load_classification: TBD
+    dcc_switched: true
+    dcc_output_key: parking_lights
+    dcc_channel: 15
+    dcc_channel_class: HS05
+    nominal_supply_voltage_v: 12
+    nominal_current_a: null
+    max_continuous_current_a: null
+    startup_inrush_current_a: null
+    startup_duration_s: null
+    stall_current_a: null
+    pwm_required: false
+    pwm_frequency_range_hz: null
+    reverse_current_behavior: TBD
+    regenerative_behavior: none_expected
+    switching_frequency: TBD
+    operating_duty_cycle: TBD
+    max_continuous_operating_time: TBD
+    simultaneous_operation_group: GRP-LIGHTING-FRONT
+    criticality: low
+    required_degraded_behavior: ARCHITECTURAL DECISION REQUIRED
+    safe_state: off
+    diagnostic_requirements: TBD
+    open_load_detection_required: TBD
+    current_measurement_required: TBD
+    retry_policy_required: TBD
+    external_fuse_required: TBD
+    connector_requirement_status: TBD
+    wire_requirement_status: TBD
+    data_source: config/vehicles/e30_gen1.yaml
+    evidence_status: unknown
+    measurement_required: true
+    notes: Assigned DCC Ch15. May share wiring with rear position lamps — harness survey TBD.
+
+  - load_id: E30LD-013
+    load_key: brake_lights
+    functional_name: Brake lights
+    presence: Planned
+    physical_location: Rear lamp assemblies
+    load_technology: TBD
+    load_classification: TBD
+    dcc_switched: false
+    dcc_output_key: null
+    dcc_channel: null
+    dcc_channel_class: null
+    nominal_supply_voltage_v: 12
+    nominal_current_a: null
+    max_continuous_current_a: null
+    startup_inrush_current_a: null
+    startup_duration_s: null
+    stall_current_a: null
+    pwm_required: false
+    pwm_frequency_range_hz: null
+    reverse_current_behavior: TBD
+    regenerative_behavior: none_expected
+    switching_frequency: TBD
+    operating_duty_cycle: TBD
+    max_continuous_operating_time: TBD
+    simultaneous_operation_group: GRP-LIGHTING-REAR
+    criticality: high
+    required_degraded_behavior: ARCHITECTURAL DECISION REQUIRED
+    safe_state: ARCHITECTURAL DECISION REQUIRED
+    diagnostic_requirements: TBD
+    open_load_detection_required: TBD
+    current_measurement_required: TBD
+    retry_policy_required: TBD
+    external_fuse_required: TBD
+    connector_requirement_status: TBD
+    wire_requirement_status: TBD
+    data_source: WP-003 scope list
+    evidence_status: unknown
+    measurement_required: true
+    notes: No DCC channel assigned in active config. Brake switch input path TBD.
+
+  - load_id: E30LD-014
+    load_key: rear_rain_light
+    functional_name: Rear rain light
+    presence: Optional
+    physical_location: Rear lamp assembly
+    load_technology: TBD
+    load_classification: TBD
+    dcc_switched: false
+    dcc_output_key: null
+    dcc_channel: null
+    dcc_channel_class: null
+    nominal_supply_voltage_v: 12
+    nominal_current_a: null
+    max_continuous_current_a: null
+    startup_inrush_current_a: null
+    startup_duration_s: null
+    stall_current_a: null
+    pwm_required: false
+    pwm_frequency_range_hz: null
+    reverse_current_behavior: TBD
+    regenerative_behavior: none_expected
+    switching_frequency: TBD
+    operating_duty_cycle: TBD
+    max_continuous_operating_time: TBD
+    simultaneous_operation_group: GRP-LIGHTING-REAR
+    criticality: low
+    required_degraded_behavior: ARCHITECTURAL DECISION REQUIRED
+    safe_state: off
+    diagnostic_requirements: TBD
+    open_load_detection_required: TBD
+    current_measurement_required: TBD
+    retry_policy_required: TBD
+    external_fuse_required: TBD
+    connector_requirement_status: TBD
+    wire_requirement_status: TBD
+    data_source: WP-003 scope list
+    evidence_status: unknown
+    measurement_required: true
+    notes: Required only if regulations or series rules mandate — confirm with architect.
+
+  - load_id: E30LD-015
+    load_key: hazard_lights
+    functional_name: Hazard lights
+    presence: Planned
+    physical_location: All corner lamp assemblies
+    load_technology: TBD
+    load_classification: TBD
+    dcc_switched: false
+    dcc_output_key: null
+    dcc_channel: null
+    dcc_channel_class: null
+    nominal_supply_voltage_v: 12
+    nominal_current_a: null
+    max_continuous_current_a: null
+    startup_inrush_current_a: null
+    startup_duration_s: null
+    stall_current_a: null
+    pwm_required: false
+    pwm_frequency_range_hz: null
+    reverse_current_behavior: TBD
+    regenerative_behavior: none_expected
+    switching_frequency: TBD
+    operating_duty_cycle: TBD
+    max_continuous_operating_time: TBD
+    simultaneous_operation_group: GRP-LIGHTING-REAR
+    criticality: medium
+    required_degraded_behavior: ARCHITECTURAL DECISION REQUIRED
+    safe_state: ARCHITECTURAL DECISION REQUIRED
+    diagnostic_requirements: TBD
+    open_load_detection_required: TBD
+    current_measurement_required: TBD
+    retry_policy_required: TBD
+    external_fuse_required: TBD
+    connector_requirement_status: TBD
+    wire_requirement_status: TBD
+    data_source: WP-003 scope list
+    evidence_status: unknown
+    measurement_required: true
+    notes: May share indicator circuits — simultaneous group overlap TBD.
+
+  - load_id: E30LD-016
+    load_key: indicators
+    functional_name: Indicators (turn signals)
+    presence: Planned
+    physical_location: Corner lamp assemblies
+    load_technology: TBD
+    load_classification: TBD
+    dcc_switched: false
+    dcc_output_key: null
+    dcc_channel: null
+    dcc_channel_class: null
+    nominal_supply_voltage_v: 12
+    nominal_current_a: null
+    max_continuous_current_a: null
+    startup_inrush_current_a: null
+    startup_duration_s: null
+    stall_current_a: null
+    pwm_required: false
+    pwm_frequency_range_hz: null
+    reverse_current_behavior: TBD
+    regenerative_behavior: none_expected
+    switching_frequency: TBD
+    operating_duty_cycle: TBD
+    max_continuous_operating_time: TBD
+    simultaneous_operation_group: GRP-LIGHTING-REAR
+    criticality: medium
+    required_degraded_behavior: ARCHITECTURAL DECISION REQUIRED
+    safe_state: off
+    diagnostic_requirements: TBD
+    open_load_detection_required: TBD
+    current_measurement_required: TBD
+    retry_policy_required: TBD
+    external_fuse_required: TBD
+    connector_requirement_status: TBD
+    wire_requirement_status: TBD
+    data_source: WP-003 scope list
+    evidence_status: unknown
+    measurement_required: true
+    notes: Flasher relay or electronic flasher TBD.
+
+  - load_id: E30LD-017
+    load_key: horn
+    functional_name: Horn
+    presence: Planned
+    physical_location: Engine bay — horn
+    load_technology: Electromagnetic horn
+    load_classification: inductive
+    dcc_switched: false
+    dcc_output_key: null
+    dcc_channel: null
+    dcc_channel_class: null
+    nominal_supply_voltage_v: 12
+    nominal_current_a: null
+    max_continuous_current_a: null
+    startup_inrush_current_a: null
+    startup_duration_s: null
+    stall_current_a: null
+    pwm_required: false
+    pwm_frequency_range_hz: null
+    reverse_current_behavior: TBD
+    regenerative_behavior: none_expected
+    switching_frequency: TBD
+    operating_duty_cycle: TBD
+    max_continuous_operating_time: TBD
+    simultaneous_operation_group: GRP-AUX
+    criticality: medium
+    required_degraded_behavior: ARCHITECTURAL DECISION REQUIRED
+    safe_state: off
+    diagnostic_requirements: TBD
+    open_load_detection_required: TBD
+    current_measurement_required: TBD
+    retry_policy_required: TBD
+    external_fuse_required: TBD
+    connector_requirement_status: TBD
+    wire_requirement_status: TBD
+    data_source: WP-003 scope list
+    evidence_status: unknown
+    measurement_required: true
+    notes: Reserve DCC channel candidate — not assigned in active config.
+
+  - load_id: E30LD-018
+    load_key: wipers
+    functional_name: Windscreen wiper motor
+    presence: Confirmed
+    physical_location: Cowl / wiper linkage
+    load_technology: DC wiper motor
+    load_classification: inductive
+    dcc_switched: true
+    dcc_output_key: wipers
+    dcc_channel: 16
+    dcc_channel_class: HS05
+    nominal_supply_voltage_v: 12
+    nominal_current_a: null
+    max_continuous_current_a: null
+    startup_inrush_current_a: null
+    startup_duration_s: null
+    stall_current_a: null
+    pwm_required: false
+    pwm_frequency_range_hz: null
+    reverse_current_behavior: TBD
+    regenerative_behavior: possible
+    switching_frequency: TBD
+    operating_duty_cycle: TBD
+    max_continuous_operating_time: TBD
+    simultaneous_operation_group: GRP-CABIN
+    criticality: medium
+    required_degraded_behavior: ARCHITECTURAL DECISION REQUIRED
+    safe_state: off
+    diagnostic_requirements: TBD
+    open_load_detection_required: TBD
+    current_measurement_required: TBD
+    retry_policy_required: TBD
+    external_fuse_required: TBD
+    connector_requirement_status: TBD
+    wire_requirement_status: TBD
+    data_source: config/vehicles/e30_gen1.yaml
+    evidence_status: unknown
+    measurement_required: true
+    notes: Assigned DCC Ch16. Park position behavior TBD.
+
+  - load_id: E30LD-019
+    load_key: washer_pump
+    functional_name: Washer pump
+    presence: Planned
+    physical_location: Washer fluid reservoir
+    load_technology: DC pump motor
+    load_classification: inductive
+    dcc_switched: false
+    dcc_output_key: null
+    dcc_channel: null
+    dcc_channel_class: null
+    nominal_supply_voltage_v: 12
+    nominal_current_a: null
+    max_continuous_current_a: null
+    startup_inrush_current_a: null
+    startup_duration_s: null
+    stall_current_a: null
+    pwm_required: false
+    pwm_frequency_range_hz: null
+    reverse_current_behavior: TBD
+    regenerative_behavior: none_expected
+    switching_frequency: TBD
+    operating_duty_cycle: TBD
+    max_continuous_operating_time: TBD
+    simultaneous_operation_group: GRP-CABIN
+    criticality: low
+    required_degraded_behavior: ARCHITECTURAL DECISION REQUIRED
+    safe_state: off
+    diagnostic_requirements: TBD
+    open_load_detection_required: TBD
+    current_measurement_required: TBD
+    retry_policy_required: TBD
+    external_fuse_required: TBD
+    connector_requirement_status: TBD
+    wire_requirement_status: TBD
+    data_source: WP-003 scope list
+    evidence_status: unknown
+    measurement_required: true
+    notes: Often paired with wiper stalk input — channel assignment TBD.
+
+  - load_id: E30LD-020
+    load_key: heater_blower
+    functional_name: Heater blower
+    presence: Confirmed
+    physical_location: HVAC blower motor
+    load_technology: DC blower motor
+    load_classification: inductive
+    dcc_switched: true
+    dcc_output_key: heater_blower
+    dcc_channel: 11
+    dcc_channel_class: HS15
+    nominal_supply_voltage_v: 12
+    nominal_current_a: null
+    max_continuous_current_a: null
+    startup_inrush_current_a: null
+    startup_duration_s: null
+    stall_current_a: null
+    pwm_required: true
+    pwm_frequency_range_hz: null
+    reverse_current_behavior: TBD
+    regenerative_behavior: possible
+    switching_frequency: TBD
+    operating_duty_cycle: TBD
+    max_continuous_operating_time: TBD
+    simultaneous_operation_group: GRP-CABIN
+    criticality: medium
+    required_degraded_behavior: ARCHITECTURAL DECISION REQUIRED
+    safe_state: off
+    diagnostic_requirements: TBD
+    open_load_detection_required: TBD
+    current_measurement_required: TBD
+    retry_policy_required: TBD
+    external_fuse_required: TBD
+    connector_requirement_status: TBD
+    wire_requirement_status: TBD
+    data_source: config/vehicles/e30_gen1.yaml
+    evidence_status: unknown
+    measurement_required: true
+    notes: Assigned DCC Ch11 PWM.
+
+  - load_id: E30LD-021
+    load_key: interior_equipment
+    functional_name: Interior electrical equipment
+    presence: Planned
+    physical_location: Cabin — aggregate loads
+    load_technology: Mixed cabin loads
+    load_classification: mixed
+    dcc_switched: false
+    dcc_output_key: null
+    dcc_channel: null
+    dcc_channel_class: null
+    nominal_supply_voltage_v: 12
+    nominal_current_a: null
+    max_continuous_current_a: null
+    startup_inrush_current_a: null
+    startup_duration_s: null
+    stall_current_a: null
+    pwm_required: false
+    pwm_frequency_range_hz: null
+    reverse_current_behavior: TBD
+    regenerative_behavior: none_expected
+    switching_frequency: TBD
+    operating_duty_cycle: TBD
+    max_continuous_operating_time: TBD
+    simultaneous_operation_group: GRP-CABIN
+    criticality: low
+    required_degraded_behavior: ARCHITECTURAL DECISION REQUIRED
+    safe_state: off
+    diagnostic_requirements: TBD
+    open_load_detection_required: TBD
+    current_measurement_required: TBD
+    retry_policy_required: TBD
+    external_fuse_required: TBD
+    connector_requirement_status: TBD
+    wire_requirement_status: TBD
+    data_source: docs/001_System_Architecture.md; WP-003 scope list
+    evidence_status: unknown
+    measurement_required: true
+    notes: Aggregate of dome, map, USB outlets, gauges, etc. — decompose after harness survey.
+
+  - load_id: E30LD-022
+    load_key: tablet_supply
+    functional_name: USB / tablet supply
+    presence: Planned
+    physical_location: Cabin — tablet mount / DCC service path
+    load_technology: USB power converter
+    load_classification: electronic
+    dcc_switched: false
+    dcc_output_key: null
+    dcc_channel: null
+    dcc_channel_class: null
+    nominal_supply_voltage_v: 12
+    nominal_current_a: null
+    max_continuous_current_a: null
+    startup_inrush_current_a: null
+    startup_duration_s: null
+    stall_current_a: null
+    pwm_required: false
+    pwm_frequency_range_hz: null
+    reverse_current_behavior: TBD
+    regenerative_behavior: none_expected
+    switching_frequency: TBD
+    operating_duty_cycle: TBD
+    max_continuous_operating_time: TBD
+    simultaneous_operation_group: GRP-AUX
+    criticality: low
+    required_degraded_behavior: off
+    safe_state: off
+    diagnostic_requirements: TBD
+    open_load_detection_required: TBD
+    current_measurement_required: TBD
+    retry_policy_required: TBD
+    external_fuse_required: TBD
+    connector_requirement_status: TBD
+    wire_requirement_status: TBD
+    data_source: docs/001_System_Architecture.md
+    evidence_status: unknown
+    measurement_required: true
+    notes: Non-safety UI client; loss must not affect vehicle per architecture.
+
+  - load_id: E30LD-023
+    load_key: window_fl
+    functional_name: Power window front left
+    presence: Confirmed
+    physical_location: Door FL
+    load_technology: DC window motor
+    load_classification: inductive
+    dcc_switched: true
+    dcc_output_key: window_fl
+    dcc_channel: 101
+    dcc_channel_class: HB
+    nominal_supply_voltage_v: 12
+    nominal_current_a: null
+    max_continuous_current_a: null
+    startup_inrush_current_a: null
+    startup_duration_s: null
+    stall_current_a: null
+    pwm_required: false
+    pwm_frequency_range_hz: null
+    reverse_current_behavior: bidirectional
+    regenerative_behavior: possible
+    switching_frequency: TBD
+    operating_duty_cycle: TBD
+    max_continuous_operating_time: TBD
+    simultaneous_operation_group: GRP-WINDOWS
+    criticality: low
+    required_degraded_behavior: ARCHITECTURAL DECISION REQUIRED
+    safe_state: off
+    diagnostic_requirements: TBD
+    open_load_detection_required: TBD
+    current_measurement_required: TBD
+    retry_policy_required: TBD
+    external_fuse_required: TBD
+    connector_requirement_status: TBD
+    wire_requirement_status: TBD
+    data_source: config/vehicles/e30_gen1.yaml
+    evidence_status: unknown
+    measurement_required: true
+    notes: Assigned DCC HB1 (channel 101). Stall test — specialist review required.
+
+  - load_id: E30LD-024
+    load_key: window_fr
+    functional_name: Power window front right
+    presence: Confirmed
+    physical_location: Door FR
+    load_technology: DC window motor
+    load_classification: inductive
+    dcc_switched: true
+    dcc_output_key: window_fr
+    dcc_channel: 102
+    dcc_channel_class: HB
+    nominal_supply_voltage_v: 12
+    nominal_current_a: null
+    max_continuous_current_a: null
+    startup_inrush_current_a: null
+    startup_duration_s: null
+    stall_current_a: null
+    pwm_required: false
+    pwm_frequency_range_hz: null
+    reverse_current_behavior: bidirectional
+    regenerative_behavior: possible
+    switching_frequency: TBD
+    operating_duty_cycle: TBD
+    max_continuous_operating_time: TBD
+    simultaneous_operation_group: GRP-WINDOWS
+    criticality: low
+    required_degraded_behavior: ARCHITECTURAL DECISION REQUIRED
+    safe_state: off
+    diagnostic_requirements: TBD
+    open_load_detection_required: TBD
+    current_measurement_required: TBD
+    retry_policy_required: TBD
+    external_fuse_required: TBD
+    connector_requirement_status: TBD
+    wire_requirement_status: TBD
+    data_source: config/vehicles/e30_gen1.yaml
+    evidence_status: unknown
+    measurement_required: true
+    notes: Assigned DCC HB2 (channel 102). Stall test — specialist review required.
+
+  - load_id: E30LD-025
+    load_key: button_box
+    functional_name: Button Box
+    presence: Confirmed
+    physical_location: Cabin — CAN node
+    load_technology: STM32 CAN peripheral controller
+    load_classification: electronic
+    dcc_switched: false
+    dcc_output_key: null
+    dcc_channel: null
+    dcc_channel_class: null
+    nominal_supply_voltage_v: 12
+    nominal_current_a: null
+    max_continuous_current_a: null
+    startup_inrush_current_a: null
+    startup_duration_s: null
+    stall_current_a: null
+    pwm_required: false
+    pwm_frequency_range_hz: null
+    reverse_current_behavior: N/A
+    regenerative_behavior: none_expected
+    switching_frequency: N/A
+    operating_duty_cycle: continuous_when_ignition
+    max_continuous_operating_time: TBD
+    simultaneous_operation_group: GRP-CAN-NODES
+    criticality: high
+    required_degraded_behavior: ARCHITECTURAL DECISION REQUIRED
+    safe_state: ARCHITECTURAL DECISION REQUIRED
+    diagnostic_requirements: CAN heartbeat
+    open_load_detection_required: N/A
+    current_measurement_required: TBD
+    retry_policy_required: N/A
+    external_fuse_required: TBD
+    connector_requirement_status: TBD
+    wire_requirement_status: TBD
+    data_source: docs/001_System_Architecture.md; config/vehicles/e30_gen1.yaml inputs
+    evidence_status: unknown
+    measurement_required: true
+    notes: Powered via DTM12 or dedicated feed — not a DCC high-side channel load.
+
+  - load_id: E30LD-026
+    load_key: radio_board
+    functional_name: DCC Radio Board (ESP32 service layer)
+    presence: Confirmed
+    physical_location: Inside DCC enclosure
+    load_technology: ESP32 wireless module
+    load_classification: electronic
+    dcc_switched: false
+    dcc_output_key: null
+    dcc_channel: null
+    dcc_channel_class: null
+    nominal_supply_voltage_v: 12
+    nominal_current_a: null
+    max_continuous_current_a: null
+    startup_inrush_current_a: null
+    startup_duration_s: null
+    stall_current_a: null
+    pwm_required: false
+    pwm_frequency_range_hz: null
+    reverse_current_behavior: N/A
+    regenerative_behavior: none_expected
+    switching_frequency: N/A
+    operating_duty_cycle: TBD
+    max_continuous_operating_time: TBD
+    simultaneous_operation_group: GRP-CAN-NODES
+    criticality: low
+    required_degraded_behavior: off
+    safe_state: off
+    diagnostic_requirements: SPI/CAN service health
+    open_load_detection_required: N/A
+    current_measurement_required: TBD
+    retry_policy_required: N/A
+    external_fuse_required: TBD
+    connector_requirement_status: internal
+    wire_requirement_status: internal
+    data_source: docs/001_System_Architecture.md
+    evidence_status: unknown
+    measurement_required: true
+    notes: Internal DCC sub-board; Wi-Fi transmit burst current TBD.
+
+  - load_id: E30LD-027
+    load_key: spare_ch02
+    functional_name: Spare future load — DCC Ch02
+    presence: Confirmed
+    physical_location: TBD
+    load_technology: TBD
+    load_classification: TBD
+    dcc_switched: true
+    dcc_output_key: null
+    dcc_channel: 2
+    dcc_channel_class: HS60
+    nominal_supply_voltage_v: 12
+    nominal_current_a: null
+    max_continuous_current_a: null
+    startup_inrush_current_a: null
+    startup_duration_s: null
+    stall_current_a: null
+    pwm_required: TBD
+    pwm_frequency_range_hz: null
+    reverse_current_behavior: TBD
+    regenerative_behavior: TBD
+    switching_frequency: TBD
+    operating_duty_cycle: TBD
+    max_continuous_operating_time: TBD
+    simultaneous_operation_group: null
+    criticality: TBD
+    required_degraded_behavior: off
+    safe_state: off
+    diagnostic_requirements: TBD
+    open_load_detection_required: TBD
+    current_measurement_required: TBD
+    retry_policy_required: TBD
+    external_fuse_required: TBD
+    connector_requirement_status: TBD
+    wire_requirement_status: TBD
+    data_source: config/vehicles/e30_gen1.yaml comment; docs/002_DCC_Hardware.md
+    evidence_status: unknown
+    measurement_required: false
+    notes: Reserve HS60 channel — unassigned in active config.
+
+  - load_id: E30LD-028
+    load_key: spare_ch08
+    functional_name: Spare future load — DCC Ch08
+    presence: Confirmed
+    physical_location: TBD
+    load_technology: TBD
+    load_classification: TBD
+    dcc_switched: true
+    dcc_output_key: null
+    dcc_channel: 8
+    dcc_channel_class: HS15
+    nominal_supply_voltage_v: 12
+    nominal_current_a: null
+    max_continuous_current_a: null
+    startup_inrush_current_a: null
+    startup_duration_s: null
+    stall_current_a: null
+    pwm_required: TBD
+    pwm_frequency_range_hz: null
+    reverse_current_behavior: TBD
+    regenerative_behavior: TBD
+    switching_frequency: TBD
+    operating_duty_cycle: TBD
+    max_continuous_operating_time: TBD
+    simultaneous_operation_group: null
+    criticality: TBD
+    required_degraded_behavior: off
+    safe_state: off
+    diagnostic_requirements: TBD
+    open_load_detection_required: TBD
+    current_measurement_required: TBD
+    retry_policy_required: TBD
+    external_fuse_required: TBD
+    connector_requirement_status: TBD
+    wire_requirement_status: TBD
+    data_source: config/vehicles/e30_gen1.yaml comment
+    evidence_status: unknown
+    measurement_required: false
+    notes: Reserve HS15 channel.
+
+  - load_id: E30LD-029
+    load_key: spare_ch12
+    functional_name: Spare future load — DCC Ch12
+    presence: Confirmed
+    physical_location: TBD
+    load_technology: TBD
+    load_classification: TBD
+    dcc_switched: true
+    dcc_output_key: null
+    dcc_channel: 12
+    dcc_channel_class: HS15
+    nominal_supply_voltage_v: 12
+    nominal_current_a: null
+    max_continuous_current_a: null
+    startup_inrush_current_a: null
+    startup_duration_s: null
+    stall_current_a: null
+    pwm_required: TBD
+    pwm_frequency_range_hz: null
+    reverse_current_behavior: TBD
+    regenerative_behavior: TBD
+    switching_frequency: TBD
+    operating_duty_cycle: TBD
+    max_continuous_operating_time: TBD
+    simultaneous_operation_group: null
+    criticality: TBD
+    required_degraded_behavior: off
+    safe_state: off
+    diagnostic_requirements: TBD
+    open_load_detection_required: TBD
+    current_measurement_required: TBD
+    retry_policy_required: TBD
+    external_fuse_required: TBD
+    connector_requirement_status: TBD
+    wire_requirement_status: TBD
+    data_source: config/vehicles/e30_gen1.yaml comment
+    evidence_status: unknown
+    measurement_required: false
+    notes: Reserve HS15 channel.
+
+  - load_id: E30LD-030
+    load_key: spare_ch13
+    functional_name: Spare future load — DCC Ch13
+    presence: Confirmed
+    physical_location: TBD
+    load_technology: TBD
+    load_classification: TBD
+    dcc_switched: true
+    dcc_output_key: null
+    dcc_channel: 13
+    dcc_channel_class: HS15
+    nominal_supply_voltage_v: 12
+    nominal_current_a: null
+    max_continuous_current_a: null
+    startup_inrush_current_a: null
+    startup_duration_s: null
+    stall_current_a: null
+    pwm_required: TBD
+    pwm_frequency_range_hz: null
+    reverse_current_behavior: TBD
+    regenerative_behavior: TBD
+    switching_frequency: TBD
+    operating_duty_cycle: TBD
+    max_continuous_operating_time: TBD
+    simultaneous_operation_group: null
+    criticality: TBD
+    required_degraded_behavior: off
+    safe_state: off
+    diagnostic_requirements: TBD
+    open_load_detection_required: TBD
+    current_measurement_required: TBD
+    retry_policy_required: TBD
+    external_fuse_required: TBD
+    connector_requirement_status: TBD
+    wire_requirement_status: TBD
+    data_source: config/vehicles/e30_gen1.yaml comment
+    evidence_status: unknown
+    measurement_required: false
+    notes: Reserve HS15 channel.
+
+  - load_id: E30LD-031
+    load_key: spare_ch14
+    functional_name: Spare future load — DCC Ch14
+    presence: Confirmed
+    physical_location: TBD
+    load_technology: TBD
+    load_classification: TBD
+    dcc_switched: true
+    dcc_output_key: null
+    dcc_channel: 14
+    dcc_channel_class: HS15
+    nominal_supply_voltage_v: 12
+    nominal_current_a: null
+    max_continuous_current_a: null
+    startup_inrush_current_a: null
+    startup_duration_s: null
+    stall_current_a: null
+    pwm_required: TBD
+    pwm_frequency_range_hz: null
+    reverse_current_behavior: TBD
+    regenerative_behavior: TBD
+    switching_frequency: TBD
+    operating_duty_cycle: TBD
+    max_continuous_operating_time: TBD
+    simultaneous_operation_group: null
+    criticality: TBD
+    required_degraded_behavior: off
+    safe_state: off
+    diagnostic_requirements: TBD
+    open_load_detection_required: TBD
+    current_measurement_required: TBD
+    retry_policy_required: TBD
+    external_fuse_required: TBD
+    connector_requirement_status: TBD
+    wire_requirement_status: TBD
+    data_source: config/vehicles/e30_gen1.yaml comment
+    evidence_status: unknown
+    measurement_required: false
+    notes: Reserve HS15 channel.
+
+  - load_id: E30LD-032
+    load_key: spare_ch17
+    functional_name: Spare future load — DCC Ch17
+    presence: Confirmed
+    physical_location: TBD
+    load_technology: TBD
+    load_classification: TBD
+    dcc_switched: true
+    dcc_output_key: null
+    dcc_channel: 17
+    dcc_channel_class: HS05
+    nominal_supply_voltage_v: 12
+    nominal_current_a: null
+    max_continuous_current_a: null
+    startup_inrush_current_a: null
+    startup_duration_s: null
+    stall_current_a: null
+    pwm_required: TBD
+    pwm_frequency_range_hz: null
+    reverse_current_behavior: TBD
+    regenerative_behavior: TBD
+    switching_frequency: TBD
+    operating_duty_cycle: TBD
+    max_continuous_operating_time: TBD
+    simultaneous_operation_group: null
+    criticality: TBD
+    required_degraded_behavior: off
+    safe_state: off
+    diagnostic_requirements: TBD
+    open_load_detection_required: TBD
+    current_measurement_required: TBD
+    retry_policy_required: TBD
+    external_fuse_required: TBD
+    connector_requirement_status: TBD
+    wire_requirement_status: TBD
+    data_source: config/vehicles/e30_gen1.yaml comment
+    evidence_status: unknown
+    measurement_required: false
+    notes: Reserve HS05 channel.
+
+  - load_id: E30LD-033
+    load_key: spare_ch18
+    functional_name: Spare future load — DCC Ch18
+    presence: Confirmed
+    physical_location: TBD
+    load_technology: TBD
+    load_classification: TBD
+    dcc_switched: true
+    dcc_output_key: null
+    dcc_channel: 18
+    dcc_channel_class: HS05
+    nominal_supply_voltage_v: 12
+    nominal_current_a: null
+    max_continuous_current_a: null
+    startup_inrush_current_a: null
+    startup_duration_s: null
+    stall_current_a: null
+    pwm_required: TBD
+    pwm_frequency_range_hz: null
+    reverse_current_behavior: TBD
+    regenerative_behavior: TBD
+    switching_frequency: TBD
+    operating_duty_cycle: TBD
+    max_continuous_operating_time: TBD
+    simultaneous_operation_group: null
+    criticality: TBD
+    required_degraded_behavior: off
+    safe_state: off
+    diagnostic_requirements: TBD
+    open_load_detection_required: TBD
+    current_measurement_required: TBD
+    retry_policy_required: TBD
+    external_fuse_required: TBD
+    connector_requirement_status: TBD
+    wire_requirement_status: TBD
+    data_source: config/vehicles/e30_gen1.yaml comment
+    evidence_status: unknown
+    measurement_required: false
+    notes: Reserve HS05 channel.
+
+  - load_id: E30LD-034
+    load_key: spare_ch19
+    functional_name: Spare future load — DCC Ch19
+    presence: Confirmed
+    physical_location: TBD
+    load_technology: TBD
+    load_classification: TBD
+    dcc_switched: true
+    dcc_output_key: null
+    dcc_channel: 19
+    dcc_channel_class: HS05
+    nominal_supply_voltage_v: 12
+    nominal_current_a: null
+    max_continuous_current_a: null
+    startup_inrush_current_a: null
+    startup_duration_s: null
+    stall_current_a: null
+    pwm_required: TBD
+    pwm_frequency_range_hz: null
+    reverse_current_behavior: TBD
+    regenerative_behavior: TBD
+    switching_frequency: TBD
+    operating_duty_cycle: TBD
+    max_continuous_operating_time: TBD
+    simultaneous_operation_group: null
+    criticality: TBD
+    required_degraded_behavior: off
+    safe_state: off
+    diagnostic_requirements: TBD
+    open_load_detection_required: TBD
+    current_measurement_required: TBD
+    retry_policy_required: TBD
+    external_fuse_required: TBD
+    connector_requirement_status: TBD
+    wire_requirement_status: TBD
+    data_source: config/vehicles/e30_gen1.yaml comment
+    evidence_status: unknown
+    measurement_required: false
+    notes: Reserve HS05 channel.
+
+  - load_id: E30LD-035
+    load_key: spare_ch20
+    functional_name: Spare future load — DCC Ch20
+    presence: Confirmed
+    physical_location: TBD
+    load_technology: TBD
+    load_classification: TBD
+    dcc_switched: true
+    dcc_output_key: null
+    dcc_channel: 20
+    dcc_channel_class: HS05
+    nominal_supply_voltage_v: 12
+    nominal_current_a: null
+    max_continuous_current_a: null
+    startup_inrush_current_a: null
+    startup_duration_s: null
+    stall_current_a: null
+    pwm_required: TBD
+    pwm_frequency_range_hz: null
+    reverse_current_behavior: TBD
+    regenerative_behavior: TBD
+    switching_frequency: TBD
+    operating_duty_cycle: TBD
+    max_continuous_operating_time: TBD
+    simultaneous_operation_group: null
+    criticality: TBD
+    required_degraded_behavior: off
+    safe_state: off
+    diagnostic_requirements: TBD
+    open_load_detection_required: TBD
+    current_measurement_required: TBD
+    retry_policy_required: TBD
+    external_fuse_required: TBD
+    connector_requirement_status: TBD
+    wire_requirement_status: TBD
+    data_source: config/vehicles/e30_gen1.yaml comment
+    evidence_status: unknown
+    measurement_required: false
+    notes: Reserve HS05 channel.
+
+  - load_id: E30LD-036
+    load_key: spare_ch21
+    functional_name: Spare future load — DCC Ch21
+    presence: Confirmed
+    physical_location: TBD
+    load_technology: TBD
+    load_classification: TBD
+    dcc_switched: true
+    dcc_output_key: null
+    dcc_channel: 21
+    dcc_channel_class: HS05
+    nominal_supply_voltage_v: 12
+    nominal_current_a: null
+    max_continuous_current_a: null
+    startup_inrush_current_a: null
+    startup_duration_s: null
+    stall_current_a: null
+    pwm_required: TBD
+    pwm_frequency_range_hz: null
+    reverse_current_behavior: TBD
+    regenerative_behavior: TBD
+    switching_frequency: TBD
+    operating_duty_cycle: TBD
+    max_continuous_operating_time: TBD
+    simultaneous_operation_group: null
+    criticality: TBD
+    required_degraded_behavior: off
+    safe_state: off
+    diagnostic_requirements: TBD
+    open_load_detection_required: TBD
+    current_measurement_required: TBD
+    retry_policy_required: TBD
+    external_fuse_required: TBD
+    connector_requirement_status: TBD
+    wire_requirement_status: TBD
+    data_source: config/vehicles/e30_gen1.yaml comment
+    evidence_status: unknown
+    measurement_required: false
+    notes: Reserve HS05 channel.
+
+  - load_id: E30LD-037
+    load_key: spare_ch22
+    functional_name: Spare future load — DCC Ch22
+    presence: Confirmed
+    physical_location: TBD
+    load_technology: TBD
+    load_classification: TBD
+    dcc_switched: true
+    dcc_output_key: null
+    dcc_channel: 22
+    dcc_channel_class: HS05
+    nominal_supply_voltage_v: 12
+    nominal_current_a: null
+    max_continuous_current_a: null
+    startup_inrush_current_a: null
+    startup_duration_s: null
+    stall_current_a: null
+    pwm_required: TBD
+    pwm_frequency_range_hz: null
+    reverse_current_behavior: TBD
+    regenerative_behavior: TBD
+    switching_frequency: TBD
+    operating_duty_cycle: TBD
+    max_continuous_operating_time: TBD
+    simultaneous_operation_group: null
+    criticality: TBD
+    required_degraded_behavior: off
+    safe_state: off
+    diagnostic_requirements: TBD
+    open_load_detection_required: TBD
+    current_measurement_required: TBD
+    retry_policy_required: TBD
+    external_fuse_required: TBD
+    connector_requirement_status: TBD
+    wire_requirement_status: TBD
+    data_source: config/vehicles/e30_gen1.yaml comment
+    evidence_status: unknown
+    measurement_required: false
+    notes: Reserve HS05 channel.
