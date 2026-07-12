@@ -22,9 +22,11 @@ Requirement → Candidate list → Datasheet review → Electrical analysis
 
 ## 4. Qualification record location
 
-`hardware/qualification/` — one record per qualified or provisional component.
+`hardware/qualification/<category>/` — one record per qualified or provisional component.
 
-Template: `docs/templates/Qualification_Report_Template.md`.
+Methodology: [docs/Component_Qualification/](Component_Qualification/README.md)
+
+Template: [docs/Component_Qualification/Qualification_Report_Template.md](Component_Qualification/Qualification_Report_Template.md).
 
 ## 5. Provisional components
 
@@ -52,3 +54,4 @@ Conceptual BOM (not qualification substitute): `docs/007_Component_Selection.md`
 | Version | Date | Change |
 |---------|------|--------|
 | 1.0 | 2026-07-12 | WP-001 foundation |
+| 2.0 | 2026-07-12 | WP-002 link to Component_Qualification/ |

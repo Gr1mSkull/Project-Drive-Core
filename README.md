@@ -23,6 +23,7 @@
 | HB | [Engineering foundation](docs/PROJECT_PHILOSOPHY.md) | Philosophy, workflow, SRS, ADR |
 | SRS | [System Requirements](docs/SRS/README.md) | Volumes 1–3 (structure) |
 | ADR | [Architecture decisions](docs/ADR/README.md) | ADR + EDL index |
+| CQ | [Component Qualification](docs/Component_Qualification/README.md) | WP-002 qualification framework |
 
 ## AI context
 

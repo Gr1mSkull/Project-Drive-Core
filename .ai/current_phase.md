@@ -11,7 +11,8 @@
 | 3 ECU + UI (003, 006) | ✅ v0.1 |
 | 4 Validation (008) | ✅ v0.1 |
 | 5 Implementation scaffold | ✅ v0.1 (`firmware/shared`, tools, web/ui) |
-| **WP-001 Foundation Pack** | 🔄 In review |
+| **WP-001 Foundation Pack** | ✅ In review |
+| **WP-002 Qualification Framework** | ✅ In review |
 
 ## SRS
 

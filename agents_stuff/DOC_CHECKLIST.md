@@ -14,7 +14,8 @@
 | — | docs/templates/ | ✅ | WP-001 templates |
 | — | .ai/ | ✅ | AI context |
 | — | .cursor/rules/00-10 | ✅ | WP-001 rules |
-| — | hardware/qualification/ | ✅ | Qualification folder |
+| — | docs/Component_Qualification/ | ✅ | WP-002 qualification framework |
+| — | hardware/qualification/* (15 categories) | ✅ | WP-002 category READMEs |
 | — | docs/handbook/ | ✅ | Archive v1.0 zip |
 | — | CONCEPT_GEN1_SUMMARY.md | ✅ | Сжатое ТЗ |
 | 000 | 000_Project_Vision.md | ✅ | |
