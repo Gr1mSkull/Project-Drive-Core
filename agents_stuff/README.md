@@ -4,7 +4,14 @@
 
 Официальные документы — в `docs/`. Здесь: чеклисты, карта модулей, ссылки, заметки сессий, план структуры кода.
 
-**Обязательные правила для агента в Cursor:** [`.cursor/rules/drivecore-engineering.mdc`](../.cursor/rules/drivecore-engineering.mdc) (`alwaysApply: true`).
+**Обязательные правила для агента в Cursor:**
+
+| Файл | Назначение |
+|------|------------|
+| [`.cursor/rules/drivecore-engineering.mdc`](../.cursor/rules/drivecore-engineering.mdc) | Инженерные правила, границы решений, workflow |
+| [`.cursor/rules/drivecore-engineering-skills.mdc`](../.cursor/rules/drivecore-engineering-skills.mdc) | Mindset и профессиональные навыки |
+
+Оба с `alwaysApply: true`.
 
 ## Файлы
 
