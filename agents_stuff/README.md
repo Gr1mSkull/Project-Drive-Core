@@ -4,6 +4,8 @@
 
 Официальные документы — в `docs/`. Здесь: чеклисты, карта модулей, ссылки, заметки сессий, план структуры кода.
 
+**Обязательные правила для агента в Cursor:** [`.cursor/rules/drivecore-engineering.mdc`](../.cursor/rules/drivecore-engineering.mdc) (`alwaysApply: true`).
+
 ## Файлы
 
 | Файл | Назначение |
