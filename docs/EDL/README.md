@@ -153,3 +153,164 @@ Logic Board + Power Board + Radio Board в одном корпусе.
 
 ### Последствия
 Gen2 меняет только Power Board; DevKit → DCC по той же логике.
+
+---
+
+## EDL-008: Одна шина CAN FD в Gen1
+
+**Дата:** 2026-07-08  
+**Статус:** accepted
+
+### Контекст
+Два CAN (ECU + Body) vs одна общая шина.
+
+### Решение
+**Одна** линейная CAN FD: DCC — ECU — Button Box.
+
+### Альтернативы
+Две шины — избыточно для 3 узлов; усложняет жгут.
+
+### Последствия
+Второй трансивер на Logic Board — задел Gen2. См. `docs/004`, `docs/001`.
+
+---
+
+## EDL-009: DriveCore Protocol (именованные сообщения)
+
+**Дата:** 2026-07-08  
+**Статус:** accepted
+
+### Контекст
+Избежать «магических» CAN ID без документации.
+
+### Решение
+DCP v0.1: CAN ID = f(MessageClass, DeviceType, Instance); payload с `proto_ver` + `msg_type`.
+
+### Альтернативы
+Произвольные ID — не масштабируется на ABS, телеметрию и т.д.
+
+### Последствия
+Единый стандарт для всех модулей; позже codegen из `.dcmsg`.
+
+---
+
+## EDL-010: Бинарный SPI, JSON только для браузера
+
+**Дата:** 2026-07-08  
+**Статус:** accepted
+
+### Контекст
+Обмен STM32 ↔ ESP32.
+
+### Решение
+DCPI: бинарные кадры + CRC. JSON только REST/WebSocket для планшета.
+
+### Альтернативы
+JSON на SPI — лишняя нагрузка на STM32.
+
+### Последствия
+`STATE_PUSH` 50 ms; ESP32 агрегирует JSON для UI.
+
+---
+
+## EDL-011: Интерфейс Logic ↔ Power (J_LP)
+
+**Дата:** 2026-07-08  
+**Статус:** accepted
+
+### Контекст
+Как Logic Board управляет 22 силовыми каналами на Power Board без прямого GPIO на каждый PROFET.
+
+### Решение
+**30-pin board-to-board J_LP:**
+- SPI (Logic = master, 10 MHz max): команды on/off, PWM, diag
+- Аппаратные линии: `nKILL_HW`, `nENABLE_GLOBAL`, `FAULT_N`
+- Аналог: MUX ISENSE (4 линии + 3-bit select), VBATT_SENSE, NTC
+- 4× PWM от таймеров STM32
+
+Fail-safe: SPI timeout > 100 ms или `nENABLE_GLOBAL`=LOW → все выходы OFF.
+
+### Альтернативы
+- Прямой GPIO на каждый IN (22+ проводов) — не помещается в B2B, хуже EMI.
+- Только I²C на Power — медленнее для PWM и diag burst.
+- Отдельный MCU на Power — лишняя точка отказа.
+
+### Последствия
+- Распиновка зафиксирована в `docs/002` §5.1.
+- Power Board: 3× shift register + ADG708 MUX.
+- SPI1 (Power) и SPI2 (Radio) разделены на STM32.
+- Тепловой NTC и BOARD_ID — идентификация ревизии Power при Gen2 swap.
+
+---
+
+## EDL-014: DevKit gate перед установкой в автомобиль
+
+**Дата:** 2026-07-08  
+**Статус:** accepted
+
+### Контекст
+DCC Gen1 коммутирует до 170 A суммарно. Ошибка прошивки или силовой части на треке — недопустима.
+
+### Решение
+**Обязательный gate:** DCC Gen1 не устанавливается в E30, пока не пройдены Phase A–D на DevKit и Phase E (критичные пункты E1, E2, E7) на полной плате.
+
+Исключения только по явной записи в журнале с обоснованием (не для трека).
+
+### Альтернативы
+- Сразу в машину — быстрее, но риск пожара / отказа на треке.
+- Только симуляция — не проверяет PROFET и тепло.
+
+### Последствия
+- `008` описывает фазы A–F и чеклисты.
+- Roadmap: DevKit до DCC Gen1 в машине.
+- CI (будущее): автоматизация Phase B на стенде.
+
+---
+
+## EDL-012: ECU Gen1 — симулятор и сторонний ECU допустимы
+
+**Дата:** 2026-07-08  
+**Статус:** accepted
+
+### Контекст
+DriveCore ECU (собственная плата + engine control) — Фаза 2. E30 Gen1 нужен CAN-телеметрией раньше.
+
+### Решение
+До готовности DriveCore ECU:
+1. **`tools/can_sim`** эмулирует ENGINE_TELEM + COOLING_REQ на стенде.
+2. **Сторонний ECU** (Megasquirt, EMU, Link) с маппингом на DCP — допустим в машине.
+3. DCC rules и Web UI работают с любым источником, публикующим DCP ECU messages.
+
+### Альтернативы
+- Ждать ECU перед интеграцией E30 — задержка всего проекта.
+- Проприетарный CAN без DCP — ломает единый протокол.
+
+### Последствия
+- `003` описывает outline железа ECU, не блокирует E30.
+- `config/ecu/` — позже, когда будет своя плата.
+- Engine control algorithms — только `firmware/ecu/` Фаза 2.
+
+---
+
+## EDL-013: Web UI auth — PIN + Bearer, опасные API по режиму
+
+**Дата:** 2026-07-08  
+**Статус:** accepted
+
+### Контекст
+Service и Wiring режимы могут включать силовые выходы и менять конфиг. Race должен быть без трения.
+
+### Решение
+- Wi-Fi: WPA2-PSK уникальный per-device.
+- **6-digit PIN** → `POST /auth/login` → Bearer token (TTL 8 h).
+- Race / Logger read — без auth.
+- `POST /outputs`, `/config`, `/ota` — требуют token + `X-DriveCore-Mode`.
+- Wiring дополнительно: `X-DriveCore-Confirm: 1`.
+
+### Альтернативы
+- Без auth на AP — любой в радиусе Wi-Fi управляет машиной.
+- OAuth / certificates — избыточно для Gen1 гаражного UI.
+
+### Последствия
+- PIN hash в NVS ESP32; factory reset через USB/кнопку.
+- Реализация в `firmware/dcc/radio` + `web/ui` setup wizard.

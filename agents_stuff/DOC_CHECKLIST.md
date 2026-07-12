@@ -1,6 +1,6 @@
 # Doc checklist
 
-Проверка полноты документации Gen1. Обновлено: 2026-07-07.
+Проверка полноты документации Gen1. Обновлено: 2026-07-08.
 
 ## Официальные документы (`docs/`)
 
@@ -10,15 +10,26 @@
 | — | CONCEPT_GEN1_SUMMARY.md | ✅ | Сжатое ТЗ |
 | 000 | 000_Project_Vision.md | ✅ | |
 | 001 | 001_System_Architecture.md | ✅ | |
-| 002 | 002_DCC_Hardware.md | ✅ | Тепловая модель — TBD |
-| 003 | 003_ECU_Architecture.md | ✅ | Детали железа ECU — Фаза 2 |
-| 004 | 004_Communication_Protocol.md | ✅ | CAN ID / бинарный SPI — TBD |
-| 005 | 005_Configuration_Model.md | ✅ | Schema / бинарный runtime — TBD |
-| 006 | 006_Web_Interface.md | ✅ | Auth, макеты UI — TBD |
-| 007 | 007_Component_Selection.md | ✅ | |
-| 008 | 008_Testing_and_Validation.md | ✅ | |
+| 002 | 002_DCC_Hardware.md | ✅ | **v0.1** — тепловая модель, J_LP/J_EXP |
+| 003 | 003_ECU_Architecture.md | ✅ | **v0.1** — CAN, sensors, firmware outline |
+| 004 | 004_Communication_Protocol.md | ✅ | **DCP v0.1** |
+| 005 | 005_Configuration_Model.md | ✅ | **schema v0.1** |
+| 006 | 006_Web_Interface.md | ✅ | **v0.1** — auth, REST, screens |
+| 007 | 007_Component_Selection.md | ✅ | **v0.1** — BOM per channel |
+| 008 | 008_Testing_and_Validation.md | ✅ | **v0.1** — DevKit, фазы A–F |
 | 009 | 009_Roadmap.md | ✅ | |
-| EDL | EDL/README.md | ✅ | 7 записей; новые — по мере решений |
+| — | config/vehicles/e30_gen1.yaml | ✅ | Профиль E30 |
+| — | firmware/shared/ | ✅ | DCP headers + CRC |
+| — | tools/config_compiler/ | ✅ | YAML → DCFG |
+| — | tools/can_sim/ | ✅ | CAN simulator CLI |
+| — | web/ui/ | ✅ | Минимальный UI |
+| — | hardware/devkit/ | ✅ | KiCad scaffold |
+| — | agents_stuff/dcpi_structs_v0.1.md | ✅ | Конспект SPI |
+| — | agents_stuff/config_binary_v0.1.md | ✅ | Конспект binary config |
+| — | agents_stuff/ecu_can_messages_v0.1.md | ✅ | ECU CAN конспект |
+| — | agents_stuff/web_ui_routes_v0.1.md | ✅ | REST/WS конспект |
+| — | agents_stuff/devkit_bench_v0.1.md | ✅ | Стенд конспект |
+| — | agents_stuff/DOC_PROGRESS.md | ✅ | Этапы заполнения |
 
 ## Источник концепции
 
@@ -29,10 +40,10 @@
 
 | Артефакт | Когда |
 |----------|-------|
-| `firmware/` дерево исходников | Фаза 0, после протокола |
-| `web/` статика UI | После DevKit |
+| `firmware/` дерево исходников | ✅ shared; logic/radio — TBD |
+| `web/` статика UI | ✅ web/ui минимальный |
 | `config/schema/` YAML schema | После 004/005 детализации |
-| `hardware/` KiCad | После тепловой модели |
+| `hardware/` KiCad | ✅ devkit scaffold; полная схема TBD |
 | CAN DBC / `.dcmsg` spec | Этап протокола |
 
 ## Быстрая проверка «всё на месте»

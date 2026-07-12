@@ -47,22 +47,35 @@
 7. ECU
 8. Gen2
 
+## Заполнение документации (по этапам)
+
+| Этап | Документы | Статус |
+|------|-----------|--------|
+| **1. Архитектура** | 001, 004, 005, EDL 008–010 | ✅ v0.1 |
+| **2. Аппаратура** | 002, 007, EDL 011 | ✅ v0.1 |
+| **3. ECU + UI** | 003, 006, EDL 012–013 | ✅ v0.1 |
+| **4. Валидация** | 008, EDL 014 | ✅ v0.1 |
+| **5. Реализация** | firmware/shared, tools/, web/ui, hardware/devkit | ✅ scaffold v0.1 |
+
+Прогресс: `agents_stuff/DOC_PROGRESS.md`
+
 ## Документация
 
 | ID | Документ | Статус |
 |----|----------|--------|
-| 000 | Project Vision | ✅ концепция |
-| 001 | System Architecture | ✅ концепция |
-| 002 | DCC Hardware | ✅ концепция (тепловая модель TBD) |
-| 003 | ECU Architecture | ✅ концепция (железо — Фаза 2) |
-| 004 | Communication Protocol | ✅ концепция (CAN/SPI spec TBD) |
-| 005 | Configuration Model | ✅ концепция (schema TBD) |
-| 006 | Web Interface | ✅ концепция |
-| 007 | Component Selection | ✅ |
-| 008 | Testing and Validation | ✅ концепция |
+| 000 | Project Vision | ✅ |
+| 001 | System Architecture | ✅ **v0.1** |
+| 002 | DCC Hardware | ✅ **v0.1** |
+| 003 | ECU Architecture | ✅ **v0.1** |
+| 004 | Communication Protocol | ✅ **DCP v0.1** |
+| 005 | Configuration Model | ✅ **schema v0.1** + e30_gen1.yaml |
+| 006 | Web Interface | ✅ **v0.1** |
+| 007 | Component Selection | ✅ **v0.1** |
+| 008 | Testing and Validation | ✅ **v0.1** |
 | 009 | Roadmap | ✅ |
-| EDL | Engineering Decision Log | ✅ начальный (7 записей) |
-| — | agents_stuff/ | ✅ конспекты для агентов |
+| EDL | Engineering Decision Log | ✅ 14 записей |
+| — | agents_stuff/ | ✅ |
+| — | config/vehicles/e30_gen1.yaml | ✅ |
 
 ## Будущее: single source of truth для CAN
 
