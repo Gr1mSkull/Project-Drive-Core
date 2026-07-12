@@ -10,9 +10,10 @@ Central index for DriveCore component qualification methodology, policies, templ
 
 ## Document map
 
-| Document | Content |
-|----------|---------|
-| [Qualification_Methodology.md](Qualification_Methodology.md) | End-to-end methodology |
+| Document | Authority |
+|----------|-----------|
+| [COMPONENT_QUALIFICATION_PROCESS.md](../COMPONENT_QUALIFICATION_PROCESS.md) | **Overview** — navigation only |
+| [Qualification_Methodology.md](Qualification_Methodology.md) | **Normative** — execution methodology |
 | [Qualification_Workflow.md](Qualification_Workflow.md) | Process stages |
 | [Qualification_Status_Definitions.md](Qualification_Status_Definitions.md) | Status enum and transitions |
 | [Qualification_Checklist.md](Qualification_Checklist.md) | Per-component review checklist |
@@ -30,6 +31,12 @@ Central index for DriveCore component qualification methodology, policies, templ
 
 Category folders: [hardware/qualification/](../../hardware/qualification/README.md)
 
+Report path template:
+
+```
+hardware/qualification/{category}/{manufacturer}_{mpn}_qualification.md
+```
+
 ## Related
 
 - [docs/COMPONENT_QUALIFICATION_PROCESS.md](../COMPONENT_QUALIFICATION_PROCESS.md)
@@ -41,3 +48,4 @@ Category folders: [hardware/qualification/](../../hardware/qualification/README.
 | Version | Date | Change |
 |---------|------|--------|
 | 1.0 | 2026-07-12 | WP-002 framework |
+| 1.1 | 2026-07-12 | CR-001 document authority and path template |

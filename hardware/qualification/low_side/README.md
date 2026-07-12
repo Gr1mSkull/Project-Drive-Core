@@ -57,4 +57,4 @@ None. No MPNs under evaluation in this category.
 ## Related Documents
 
 - [hardware/qualification/README.md](../README.md)
-- [docs/Component_Qualification/](../../docs/Component_Qualification/)
+- [docs/Component_Qualification/](../../../docs/Component_Qualification/)

@@ -1,6 +1,6 @@
 # DriveCore Component Qualification
 
-**Work Package:** WP-002 · **Status:** Proposed
+**Work Package:** WP-002 · **Change Request:** CR-001 · **Status:** Proposed
 
 Infrastructure for qualifying every electronic component before BOM approval.
 
@@ -10,12 +10,13 @@ Infrastructure for qualifying every electronic component before BOM approval.
 
 ## Process documentation
 
-| Document | Location |
-|----------|----------|
-| Overview | [docs/COMPONENT_QUALIFICATION_PROCESS.md](../docs/COMPONENT_QUALIFICATION_PROCESS.md) |
-| Methodology & policies | [docs/Component_Qualification/](../docs/Component_Qualification/README.md) |
-| Report template | [docs/Component_Qualification/Qualification_Report_Template.md](../docs/Component_Qualification/Qualification_Report_Template.md) |
-| Decision matrix | [docs/Component_Qualification/Engineering_Decision_Matrix_Template.md](../docs/Component_Qualification/Engineering_Decision_Matrix_Template.md) |
+| Role | Document | Link |
+|------|----------|------|
+| **Overview** (navigation) | Component Qualification Process | [COMPONENT_QUALIFICATION_PROCESS.md](../../docs/COMPONENT_QUALIFICATION_PROCESS.md) |
+| **Normative methodology** | Qualification Methodology | [Qualification_Methodology.md](../../docs/Component_Qualification/Qualification_Methodology.md) |
+| Policies & templates | Component Qualification folder | [Component_Qualification/](../../docs/Component_Qualification/README.md) |
+| Report template | Qualification Report Template | [Qualification_Report_Template.md](../../docs/Component_Qualification/Qualification_Report_Template.md) |
+| Decision matrix | Engineering Decision Matrix | [Engineering_Decision_Matrix_Template.md](../../docs/Component_Qualification/Engineering_Decision_Matrix_Template.md) |
 
 ## Category index
 
@@ -39,15 +40,17 @@ Infrastructure for qualifying every electronic component before BOM approval.
 
 ## Record naming
 
-Completed reports (per category or root):
+Completed reports:
 
 ```
-hardware/qualification/<category>/<Manufacturer>_<MPN>_qualification.md
+hardware/qualification/{category}/{manufacturer}_{mpn}_qualification.md
 ```
+
+Example (illustrative only): `hardware/qualification/high_side/Infineon_BTS50085-1TMA_qualification.md`
 
 ## Qualification status
 
-See [docs/Component_Qualification/Qualification_Status_Definitions.md](../docs/Component_Qualification/Qualification_Status_Definitions.md).
+See [Qualification_Status_Definitions.md](../../docs/Component_Qualification/Qualification_Status_Definitions.md).
 
 ## Current state
 
@@ -56,7 +59,7 @@ See [docs/Component_Qualification/Qualification_Status_Definitions.md](../docs/C
 | Qualified records | 0 |
 | Under review | 0 |
 
-Conceptual reference only (not qualification): `docs/007_Component_Selection.md`.
+Conceptual reference only (not qualification): [007_Component_Selection.md](../../docs/007_Component_Selection.md).
 
 ## Revision history
 
@@ -64,3 +67,4 @@ Conceptual reference only (not qualification): `docs/007_Component_Selection.md`
 |---------|------|--------|
 | 1.0 | 2026-07-12 | WP-001 root folder |
 | 2.0 | 2026-07-12 | WP-002 category structure |
+| 2.1 | 2026-07-12 | CR-001 link and path template fixes |

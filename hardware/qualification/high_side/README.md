@@ -53,10 +53,10 @@ None. No MPNs under evaluation in this category.
 
 - Map each DCC output channel (Ch01–Ch22, HB01–HB02) to a channel class and load profile from E30 config
 - Define bench validation fixtures for inrush, PWM dimming, and fault injection per channel class
-- Complete qualification reports per [Qualification_Report_Template.md](../../docs/Component_Qualification/Qualification_Report_Template.md)
+- Complete qualification reports per [Qualification_Report_Template.md](../../../docs/Component_Qualification/Qualification_Report_Template.md)
 - Cross-reference thermal validation with Power Board layout and enclosure conduction path
 
 ## Related Documents
 
 - [hardware/qualification/README.md](../README.md)
-- [docs/Component_Qualification/](../../docs/Component_Qualification/)
+- [docs/Component_Qualification/](../../../docs/Component_Qualification/)
