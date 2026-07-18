@@ -9,6 +9,7 @@ Standard templates for DriveCore engineering artifacts (WP-001).
 | [Qualification_Report_Template.md](Qualification_Report_Template.md) | → [Component_Qualification/](../Component_Qualification/Qualification_Report_Template.md) |
 | [Architecture_Review_Template.md](Architecture_Review_Template.md) | Architecture review meetings |
 | [Work_Package_Template.md](Work_Package_Template.md) | Task packages for Implementation Engineer |
+| [Load_Profile_Template.md](Load_Profile_Template.md) | Vehicle load inventory records (WP-003) |
 
 ## Usage
 
