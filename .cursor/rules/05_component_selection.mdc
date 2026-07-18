@@ -33,6 +33,6 @@ Use abstract class (HS05, HS15, HS30, HS60) until qualified for defined conditio
 
 Do not add components in WP/documentation tasks unless task authorizes it.
 
-Process: `docs/COMPONENT_QUALIFICATION_PROCESS.md`, `hardware/qualification/README.md`.
+Report path: `hardware/qualification/{category}/{manufacturer}_{mpn}_qualification.md`
 
 Approved BOM reference (when qualified): `docs/007` — status per document, not frozen by this rule pack.
