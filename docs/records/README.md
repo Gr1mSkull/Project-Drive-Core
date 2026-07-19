@@ -1,9 +1,9 @@
 # DriveCore Engineering Records
 
 **Document ID:** DOC-REC-001  
-**Version:** 1.0  
+**Version:** 1.0.1  
 **Status:** Proposed  
-**Change Request:** CR-002-R1
+**Change Request:** CR-002-R1 / CR-002-R2
 
 ## Purpose
 
@@ -29,8 +29,20 @@ Do not fabricate example evidence records.
 | Level | Where recorded |
 |-------|----------------|
 | 0 | Completion report statement only |
-| 1 | Lightweight Impact Note in WP or Completion Report |
+| 1 | Lightweight Impact Note in WP or Completion Report (default — see below) |
 | 2 | Full CIA file in `change_impact/` |
+
+## Level 1 Lightweight Impact Note retention
+
+- Level 1 Lightweight Impact Notes remain in the **Work Package or Completion Report** by default.
+- Do **not** create a separate archived record for every Level 1 change.
+- A separate record may be created only when the note:
+  - applies to multiple Work Packages or pull requests;
+  - is referenced by verification evidence;
+  - is referenced by an ADR or EDL;
+  - must remain independently discoverable after the originating task is closed.
+
+Do not create a dedicated Level 1 directory unless a future Change Request authorizes it.
 
 ## Related
 
@@ -42,3 +54,4 @@ Do not fabricate example evidence records.
 | Version | Date | Change |
 |---------|------|--------|
 | 1.0 | 2026-07-19 | CR-002-R1 canonical record storage |
+| 1.0.1 | 2026-07-19 | CR-002-R2 Level 1 retention policy |

@@ -1,9 +1,9 @@
 # DriveCore Traceability
 
 **Document ID:** DOC-TRACE-001  
-**Version:** 1.0  
+**Version:** 1.1  
 **Status:** Proposed  
-**Change Request:** CR-002 / CR-002-R1
+**Change Request:** CR-002 / CR-002-R1 / CR-002-R2
 
 ## Purpose
 

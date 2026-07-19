@@ -11,6 +11,18 @@
 | Gen1 vehicle | BMW E30 race (profile: `config/vehicles/e30_gen1.yaml`) |
 | Your role | Implementation Engineer — **not** System Architect |
 
+## Gen1 Test Owner (operational)
+
+Gen1 physical DevKit and vehicle Test Owner:  
+**Founder / Chief Engineer — Dmitry Arutyunov.**
+
+- Implementation agents may execute automated checks and record raw results.
+- Independent Review Agents may certify reproducible software and documentation verification.
+- Physical lab and vehicle-test certification requires the human Test Owner.
+- System Architect approves architecture and stage gates but does not claim physical test execution.
+
+This is operational role assignment, not system architecture. Authoritative engineering policy: `.cursor/ENGINEERING_CONSTITUTION.mdc`.
+
 ## Modules (fixed boundaries)
 
 | Module | Responsibility |

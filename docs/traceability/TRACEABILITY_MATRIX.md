@@ -1,11 +1,11 @@
 # DriveCore Traceability Matrix
 
 **Document ID:** DOC-TRACE-MAT-001  
-**Version:** 1.1  
+**Version:** 1.1.1  
 **Status:** Proposed  
-**Change Request:** CR-002 / CR-002-R1
+**Change Request:** CR-002 / CR-002-R1 / CR-002-R2
 
-Controlled **scaffold**. Do not invent historical links. Empty cells use `TBD` / `OPEN ISSUE` / `NOT VERIFIED`.
+Controlled **scaffold**. Do not invent historical links.
 
 Authoritative policy: `.cursor/ENGINEERING_CONSTITUTION.mdc` §6.
 
@@ -20,7 +20,8 @@ Authoritative policy: `.cursor/ENGINEERING_CONSTITUTION.mdc` §6.
 
 | Requirement ID | Requirement Source | Architecture / Interface Reference | Implementation Artifact | Configuration / Data Artifact | Verification Method | Evidence Reference | Status | Notes |
 | -------------- | ------------------ | ---------------------------------- | ----------------------- | ----------------------------- | ------------------- | ------------------ | ------ | ----- |
-| TBD | TBD | TBD | TBD | TBD | TBD | TBD | NOT VERIFIED | Scaffold placeholder — replace with atomic IDs when SRS/WP imports them |
+
+<!-- Add rows only when atomic Requirement IDs are formally imported. -->
 
 ## Requirement Families Pending Atomic Import
 
@@ -54,3 +55,4 @@ Authoritative policy: `.cursor/ENGINEERING_CONSTITUTION.mdc` §6.
 |---------|------|--------|
 | 1.0 | 2026-07-19 | CR-002 initial scaffold |
 | 1.1 | 2026-07-19 | CR-002-R1 — atomic IDs only; families section; config column |
+| 1.1.1 | 2026-07-19 | CR-002-R2 — remove TBD placeholder row from primary matrix |
