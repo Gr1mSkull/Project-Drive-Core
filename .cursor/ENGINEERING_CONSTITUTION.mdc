@@ -6,12 +6,14 @@ alwaysApply: true
 # DriveCore Engineering Constitution
 
 **Document ID:** DC-CONST-001  
-**Version:** 1.0  
+**Version:** 1.1  
 **Status:** Proposed  
-**Work Package:** WP-006
+**Work Package:** WP-006 · **Change Request:** CR-002
 
 > **Single source of truth** for DriveCore engineering policy, AI behaviour, and implementation discipline.  
 > Numbered files in `.cursor/rules/00`–`10` are **wrappers** pointing here — not independent policy.
+
+**Document status authority:** Implementation Engineers may draft and integrate **Proposed** policy. Only the System Architect may set statuses `Approved`, `Verified`, `Approved for DevKit`, or `Approved for Prototype`. Review completion and repository merge do **not** automatically change approval status. This constitution remains **Proposed** until the System Architect explicitly approves it.
 
 ---
 
@@ -103,13 +105,14 @@ Extended: `docs/ENGINEERING_VALUES.md`.
 ### System Architect
 
 - Defines architecture, engineering policy, and component selection authority.
-- Approves ADR/EDL-level decisions.
+- Approves ADR/EDL-level decisions and **engineering-policy document status**.
 - Resolves **ARCHITECTURAL DECISION REQUIRED** reports.
 
 ### Reviewer
 
 - Accepts or rejects deliverables per review sequence (§18).
-- Does not substitute for System Architect on architecture decisions.
+- Does not substitute for System Architect on architecture decisions or policy approval.
+- Independent Engineering Review and Critical Review shall not be performed by the same person or agent that implemented the change (§18).
 
 ---
 
@@ -161,6 +164,60 @@ Operational context (non-normative): `.ai/project_context.md`.
 - Claim unrun tests as passed.
 - Continue past assigned task without new authorization.
 
+### Evidence-backed validation
+
+No engineering validation claim is complete without **reproducible evidence**.
+
+Where applicable, record: validation ID; date; repository commit SHA; tested hardware revision; tested firmware version; active configuration and configuration hash; exact command, procedure, or measurement method; test equipment; input conditions; expected result; actual result; status (`PASS` / `FAIL` / `PARTIAL` / `NOT VERIFIED`); evidence location; known limitations.
+
+Statements such as “tests pass”, “build works”, “interface is validated”, or “hardware is verified” are prohibited unless supported by reproducible evidence. A command shown without its actual result is not evidence. Unexecuted tests shall be reported as `NOT VERIFIED`. Do not fabricate logs, measurements, screenshots, or execution results.
+
+Template: `docs/templates/Verification_Evidence_Template.md`.
+
+### Change impact analysis
+
+Before modifying any normative shared artifact, perform a **Change Impact Analysis** (CIA). Applies to: communication protocols; shared firmware structures; persistent data formats; configuration schemas and binary formats; public APIs; hardware interfaces; connector pinouts; power-channel definitions; safety behaviour; boot and update mechanisms; cross-module requirements; shared libraries used by multiple modules.
+
+The analysis shall identify: reason; affected modules, requirements, interfaces, implementation artifacts, tests, and documentation; backward-compatibility risk; migration requirements; rollback method; required ADR or architectural approval; unresolved questions.
+
+A shared interface shall never be changed as an undocumented local implementation detail. If impact cannot be determined: **STOP** → `ARCHITECTURAL DECISION REQUIRED`.
+
+Template: `docs/templates/Change_Impact_Analysis_Template.md`.
+
+### Requirement–implementation–test traceability
+
+Mandatory chain:
+
+```
+Requirement ID → Architecture or interface reference → Implementation artifact → Verification method → Verification result
+```
+
+Rules:
+
+- Every implemented engineering function shall reference at least one requirement or explicitly approved technical task.
+- Every safety-relevant requirement shall have a defined verification method.
+- Every verified requirement shall reference validation evidence.
+- Untested requirements remain `NOT VERIFIED`.
+- Implementation without a requirement or approved task is **orphan implementation** and is prohibited unless explicitly approved.
+- Tests without a requirement reference shall be identified as support, infrastructure, regression, or exploratory tests.
+- A test name alone is not sufficient traceability.
+
+Scaffold: `docs/traceability/TRACEABILITY_MATRIX.md`. Do not invent requirement links; use `TBD`, `OPEN ISSUE`, or `NOT VERIFIED` where evidence is missing.
+
+### Numeric engineering discipline
+
+Every normative engineering quantity shall define where applicable: physical unit; valid range; nominal / min / max; tolerance or uncertainty; source; digital representation; scaling; offset; resolution; signed/unsigned; overflow / underflow / saturation behaviour; invalid-value and unavailable-value representation.
+
+Bare numeric constants without unit, context, or source are prohibited in normative requirements, safety-relevant firmware, protocol definitions, hardware calculations, configuration schemas, and qualification reports. Prefer unit-bearing names (`current_limit_A`, `timeout_ms`, `temperature_degC`, `voltage_mV`, `speed_rpm`). Do not automatically rename existing interfaces without approval.
+
+Magic numbers representing engineering limits, protocol values, timeouts, scaling factors, or safety behaviour are prohibited in implementation; such values shall reference a named constant, configuration parameter, requirement, or interface definition.
+
+### Baseline and revision identity
+
+Every testable DriveCore system state shall be uniquely identifiable. Record where applicable: repository commit SHA; firmware semantic version or build ID per processor; bootloader version; hardware board name and revision; BOM and assembly revision; protocol version; configuration schema and compiled format versions; active vehicle configuration identifier and hash/checksum; component qualification revision; test equipment identifier; test fixture revision.
+
+Validation without sufficient revision identity is **non-reproducible** and shall not support claims of `Verified`, `Approved for Prototype`, `Approved for Vehicle`, or `Qualified`. Project-wide version-numbering scheme, if undefined, is **ARCHITECTURAL DECISION REQUIRED** — do not invent one in Implementation work.
+
 Refs: `docs/001`, `docs/003`, `docs/006`, `docs/EDL/`.
 
 ---
@@ -203,10 +260,13 @@ Mandatory behaviour for AI Implementation Engineers:
 | Never invent | No fabricated measurements, ratings, or test results |
 | Never hide uncertainty | State unknowns explicitly |
 | Never claim validation not performed | Unrun tests = NOT VERIFIED |
+| Never claim validation without evidence | Reproducible evidence per §6; no fabricated artifacts |
 | Always distinguish | Facts · Assumptions · Recommendations · Unknowns |
 | Evidence insufficient | **STOP** — generate escalation report (§11) |
 | Scope discipline | One work package at a time; stop after completion report |
 | No silent architecture | Implied design changes are forbidden |
+| No self-certified Critical Review | Implementer may perform Implementation Review only (§18) |
+| No silent status promotion | Do not mark documents Approved/Verified without Architect instruction |
 
 Suggestions in completion reports are **recommendations only** — do not implement unless System Architect approves.
 
@@ -292,11 +352,11 @@ Include: context, conflict, options considered (if any), impact, recommended arc
 Read → Implement → Validate → Report → Stop
 ```
 
-**Before editing:** Read work package; inspect docs/SRS/ADR/EDL/`.ai/`; identify contradictions; confirm no unauthorized architecture decision.
+**Before editing:** Read work package; inspect docs/SRS/ADR/EDL/`.ai/`; identify contradictions; confirm no unauthorized architecture decision. If the change touches a normative shared artifact (§6 Change impact analysis), complete a CIA before editing.
 
-**During:** Stay in scope; preserve architecture; update affected docs; do not invent validation.
+**During:** Stay in scope; preserve architecture; update affected docs; do not invent validation; maintain requirement/task traceability; avoid orphan implementation.
 
-**After:** Run formatting, validation, tests; inspect diff; deliver completion report (§20); **stop** — wait for review.
+**After:** Run formatting, validation, tests; record reproducible evidence (§6); inspect diff; deliver completion report (§20); **stop** — wait for review.
 
 ### Scope
 
@@ -321,7 +381,8 @@ See `docs/ENGINEERING_WORKFLOW.md`.
 | Decisions | `docs/ADR/`, `docs/EDL/` | Architectural decisions |
 | DCC / Vehicle | `docs/DCC/`, `docs/Vehicle_Integration/` | Module and load policy |
 | Qualification | `docs/Component_Qualification/` | Normative qualification methodology |
-| Templates | `docs/templates/` | ADR, Requirement, WP, etc. |
+| Traceability | `docs/traceability/` | Requirement–implementation–test matrix scaffold |
+| Templates | `docs/templates/` | ADR, Requirement, WP, CIA, evidence, review handoff |
 | Agent context | `.ai/`, `agents_stuff/` | Operational notes — **not official spec** |
 
 ### Requirements language
@@ -329,6 +390,17 @@ See `docs/ENGINEERING_WORKFLOW.md`.
 - Atomic, testable requirements use **shall**.
 - Avoid vague criteria without measurable definition.
 - Use TBD / TBC / ASSUMPTION / OPEN ISSUE for unknowns.
+- Do not mark unknown data as `N/A`. Use `TBD`, `UNKNOWN`, or `NOT RECORDED` as appropriate. Reserve `N/A` only when the field does not apply.
+
+### Document status governance
+
+| Actor | Authority |
+|-------|-----------|
+| Implementation Engineer | Draft and integrate **Proposed** policy and deliverables |
+| System Architect | Approve engineering policy; set Approved / Verified / Approved for DevKit / Approved for Prototype |
+| Reviewer | Recommend accept/reject; review does not equal approval |
+
+Repository merge does **not** automatically change document approval status. Approval status changes shall be explicit and traceable.
 
 ### ADR / EDL
 
@@ -372,6 +444,10 @@ Imports at top of file (no inline imports unless documented circular dependency)
 
 Layout: `firmware/shared`, `firmware/dcc/logic`, `firmware/dcc/radio` per project layout docs.
 
+### Numeric and identity discipline (firmware)
+
+Apply §6 numeric engineering discipline and baseline/revision identity. Engineering limits, protocol values, timeouts, scaling factors, and safety behaviour shall not appear as undocumented magic numbers. Firmware builds used in validation shall carry an identifiable version or build ID.
+
 ---
 
 ## 15. Hardware Rules
@@ -399,6 +475,10 @@ Modular boards, replaceable Radio, BOARD_ID for Power revision detection.
 Component records in `hardware/qualification/{category}/{manufacturer}_{mpn}_qualification.md` before approved BOM.
 
 Process: `docs/Component_Qualification/Qualification_Methodology.md` (normative).
+
+### Revision identity (hardware)
+
+Hardware board name, hardware revision, BOM revision, and assembly revision shall be recordable for any validation claim (§6 Baseline and revision identity). Validation of an unidentified hardware revision is prohibited.
 
 ---
 
@@ -431,6 +511,16 @@ Presence ≠ full health. States per `docs/004`: BOOT, INIT, RUN, DEGRADED, FAUL
 ### Single source of truth
 
 Protocol constants in `firmware/shared/`. EDL-008 (one bus), EDL-009 (DCP), EDL-010 (binary SPI).
+
+### Interface compatibility and versioning
+
+Every persistent or cross-module interface shall have an explicit version. Applies to: CAN / DCP / DCPI messages; configuration YAML schemas; compiled configuration binaries; REST and WebSocket contracts; stored logs; calibration data; firmware and bootloader metadata; hardware identification data.
+
+Each interface definition shall specify where applicable: interface name; current version; version representation; compatibility expectations; producer; consumer; field layout and meaning; valid ranges; error behaviour; unsupported-version behaviour; migration strategy.
+
+Breaking changes require: explicit version increment; Change Impact Analysis (§6); affected-component list; migration or compatibility strategy; updated tests; architectural approval where required.
+
+Silent reinterpretation of an existing field is prohibited. Do not change meaning, unit, scaling, sign, offset, byte order, timeout, or safety reaction of an existing field while retaining the same interface version. Compatibility shall be explicit, not assumed.
 
 ---
 
@@ -473,11 +563,23 @@ DevKit before vehicle (EDL-014). Fail-operational tests per `docs/008`.
 
 ### Mandatory internal review sequence
 
-| Stage | Purpose | Mindset |
-|-------|---------|---------|
-| **1. Implementation Review** | Self-check: scope, diff, validation honesty | Confirm task completion |
-| **2. Engineering Review** | Peer/architect check: requirements, traceability, docs | Confirm engineering quality |
-| **3. Critical Review** | Actively search for weaknesses — **not** confirm success | Challenge assumptions, find gaps |
+| Stage | Purpose | Mindset | Who may perform |
+|-------|---------|---------|-----------------|
+| **1. Implementation Review** | Self-check: scope, diff, validation honesty | Confirm task completion | Implementer |
+| **2. Engineering Review** | Peer/architect check: requirements, traceability, docs | Confirm engineering quality | Independent human or assigned review agent — **not** the implementer |
+| **3. Critical Review** | Actively search for weaknesses — **not** confirm success | Challenge assumptions, find gaps | Independent human or assigned review agent — **not** the implementer |
+
+The implementer shall not classify its own review as independent Engineering Review or Critical Review.
+
+### High-impact Review Handoff Package
+
+For high-impact changes (safety behaviour; power-channel control; kill or isolation; hardware interfaces; connector pinouts; communication protocols; shared binary structures; persistent configuration formats; bootloaders; OTA / firmware update; shared libraries; component qualification decisions; hardware power-stage design), create a Review Handoff Package before Critical Review.
+
+The package shall include: task scope; requirement references; files changed; architecture references; changed assumptions; interface changes; CIA reference; validation performed; evidence locations; known weaknesses; unresolved questions; areas requiring adversarial review; rollback considerations.
+
+Template: `docs/templates/Review_Handoff_Package_Template.md`.
+
+A review agent performing Critical Review shall not modify implementation during that review unless explicitly assigned a separate corrective task.
 
 ### Review checklist
 
@@ -485,15 +587,17 @@ DevKit before vehicle (EDL-014). Fail-operational tests per `docs/008`.
 |------|--------|
 | Requirements | Diff matches stated task scope only |
 | Architecture | No ADR-level change without approval |
-| Tests | Executed tests reported honestly; unrun = NOT VERIFIED |
+| Tests | Executed tests reported honestly with evidence; unrun = NOT VERIFIED |
+| Traceability | Requirement → implementation → verification chain present or marked TBD |
 | Documentation | Affected docs updated; constitution hierarchy respected |
+| Status authority | No unauthorized approval-status changes |
 | Risks | Assumptions, regressions, open questions listed |
 
 ### Document statuses (authorized use only)
 
 Concept · Proposed · Under Review · Approved for DevKit · Approved for Prototype · Verified · Deprecated
 
-Do not mark Approved or Verified without explicit instruction.
+Do not mark Approved or Verified without explicit System Architect instruction. Review completion and merge do not equal approval (§13 Document status governance).
 
 ### Outcomes
 
@@ -510,14 +614,17 @@ A task is complete **only if:**
 | Criterion | Required |
 |-----------|----------|
 | Documentation updated | Affected docs reflect changes |
-| Traceability preserved | Requirement IDs, WP/CR references intact |
+| Traceability preserved | Requirement IDs, WP/CR references intact; chain per §6 |
 | Cross-references verified | Links resolve; pointers consistent |
 | No duplicated information | Policy not copied outside constitution |
 | No unresolved contradictions | Conflicts escalated, not hidden |
 | Architecture preserved | No unauthorized ADR-level changes |
-| Validation completed | Honest report — NOT VERIFIED where applicable |
+| Change impact addressed | CIA completed for shared normative artifacts |
+| Validation completed | Honest report with reproducible evidence or NOT VERIFIED |
+| Revision identity recorded | Sufficient baseline identity for any Verified claim |
 | Completion report generated | All mandatory sections present |
 | No unauthorized engineering decisions | Escalations documented |
+| No unauthorized status promotion | Approval statuses unchanged without Architect |
 
 Then: **Stop.** Wait for review. No further work without new task.
 
@@ -530,14 +637,16 @@ At task end, provide:
 1. Task Summary  
 2. Files Created  
 3. Files Modified  
-4. Validation Performed  
+4. Validation Performed — include exact commands/procedures and **actual results**; reference evidence IDs or locations  
 5. Acceptance Criteria (PASS / FAIL / PARTIAL / NOT VERIFIED)  
 6. Open Questions  
 7. Risks and Observations (or Architectural Decisions Required)  
 8. Out-of-Scope Recommendations (or Improvement Suggestions — do not implement)  
 9. Final Status: Ready for Review · Blocked · Partially Complete · Failed Validation  
 
-Work packages may specify additional sections (e.g. Architect Review Package for WP-006).
+Where applicable, also reference: Change Impact Analysis ID; Verification Evidence IDs; Review Handoff Package ID; commit SHA and revision identity used for validation.
+
+Work packages may specify additional sections (e.g. Architect Review Package).
 
 Template: `docs/templates/Work_Package_Template.md`.
 
@@ -561,6 +670,18 @@ The following practices are **prohibited:**
 | Undocumented engineering decisions | Violates traceability (§3) |
 | Inferring current from part numbers | Component selection anti-pattern |
 | Claiming tests passed without execution | AI behaviour violation (§8) |
+| Claiming validation without evidence | Evidence-backed validation (§6) |
+| Testing an unidentified hardware or firmware revision | Baseline identity (§6) |
+| Changing a shared interface without impact analysis | CIA required (§6) |
+| Silently changing interface field meaning | Interface versioning (§16) |
+| Changing an interface without version handling | Interface versioning (§16) |
+| Implementing functions without requirement or task traceability | Orphan implementation (§6) |
+| Marking unknown data as `N/A` | Documentation language (§13) |
+| Using unitless engineering constants | Numeric discipline (§6) |
+| Hiding magic numbers in safety-relevant code | Firmware / numeric discipline (§6, §14) |
+| Treating implementer self-review as independent Critical Review | Review independence (§18) |
+| Changing document approval status without authority | Status governance (§13) |
+| Using a merged commit as proof of engineering approval | Status governance (§13) |
 | Continuing past assigned task | Workflow violation (§12) |
 | JSON on SPI between STM32 and ESP32 | Protocol violation (§16) |
 | Hardcoding vehicle behaviour in firmware | Configuration principle (§1) |
@@ -586,3 +707,4 @@ Implementation Engineer may **suggest** improvements; System Architect **approve
 | Version | Date | Change |
 |---------|------|--------|
 | 1.0 | 2026-07-12 | WP-006 — consolidate rules 00–10 into single constitution |
+| 1.1 | 2026-07-19 | CR-002 — evidence, CIA, traceability, interface versioning, numeric discipline, revision identity, independent critical review, status governance |
