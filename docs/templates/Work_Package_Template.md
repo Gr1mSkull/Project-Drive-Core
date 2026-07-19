@@ -82,10 +82,12 @@ Do NOT make architectural decisions. If required, stop and report **ARCHITECTURA
 
 | Control | Artifact |
 |---------|----------|
-| Change Impact Analysis | `docs/templates/Change_Impact_Analysis_Template.md` |
-| Verification Evidence | `docs/templates/Verification_Evidence_Template.md` |
-| Review Handoff Package | `docs/templates/Review_Handoff_Package_Template.md` (high-impact) |
-| Traceability | `docs/traceability/TRACEABILITY_MATRIX.md` |
+| Impact classification | Level 0 / 1 / 2 before editing (constitution §6) |
+| Level 1 Lightweight Impact Note | In this WP or Completion Report |
+| Level 2 Full CIA | Template → `docs/records/change_impact/CIA-YYYY-NNN_<short-title>.md` |
+| Verification Evidence | Template → `docs/records/verification/VE-YYYY-NNN_<short-title>.md` |
+| Review Handoff Package | Template → `docs/records/review_handoffs/RHP-YYYY-NNN_<short-title>.md` |
+| Traceability | `docs/traceability/TRACEABILITY_MATRIX.md` (atomic IDs only) |
 
 ---
 
@@ -101,4 +103,6 @@ Do NOT make architectural decisions. If required, stop and report **ARCHITECTURA
 8. Out-of-Scope Recommendations  
 9. Final Status: Ready for Review \| Blocked \| Partially Complete \| Failed Validation  
 
-After completion **STOP**. Wait for review. Implementer self-review is Implementation Review only — not independent Critical Review.
+Include: `Impact classification: Level N — …`
+
+After completion **STOP**. Wait for review. Implementer self-review is Implementation Review only — not independent Critical Review. Implementer does not certify own high-impact verification.

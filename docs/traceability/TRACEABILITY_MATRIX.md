@@ -1,22 +1,34 @@
 # DriveCore Traceability Matrix
 
 **Document ID:** DOC-TRACE-MAT-001  
-**Version:** 1.0  
+**Version:** 1.1  
 **Status:** Proposed  
-**Change Request:** CR-002
+**Change Request:** CR-002 / CR-002-R1
 
 Controlled **scaffold**. Do not invent historical links. Empty cells use `TBD` / `OPEN ISSUE` / `NOT VERIFIED`.
 
 Authoritative policy: `.cursor/ENGINEERING_CONSTITUTION.mdc` §6.
 
-## Matrix
+**Rules:**
 
-| Requirement ID | Requirement Source | Architecture / Interface Reference | Implementation Artifact | Verification Method | Evidence Reference | Status | Notes |
-| -------------- | ------------------ | ---------------------------------- | ----------------------- | ------------------- | ------------------ | ------ | ----- |
-| TBD | TBD | TBD | TBD | TBD | TBD | NOT VERIFIED | Scaffold — populate per approved WP/CR |
-| DC-DCC-PWR-* | `docs/DCC/Power_Channel_Requirements.md` | `docs/DCC/Power_Channel_Architecture.md` | TBD | TBD | TBD | NOT VERIFIED | WP-004 — implementation pending |
-| DC-DCC-ARCH-* | `docs/DCC/DCC_Internal_Architecture.md` | `docs/DCC/DCC_Module_Map.md` | TBD | TBD | TBD | NOT VERIFIED | WP-005 — firmware mapping pending |
-| E30LD-* | `docs/Vehicle_Integration/E30_Gen1_Load_Inventory.md` | `config/vehicles/e30_gen1_loads.yaml` | TBD | Measurement plan | TBD | NOT VERIFIED | WP-003 — measurements pending |
+- Primary matrix rows shall use **atomic** Requirement IDs only.
+- Wildcard requirement families belong in § Requirement Families Pending Atomic Import — not in the primary matrix.
+- Do not invent atomic requirements or verification links.
+- Incomplete entries remain `NOT VERIFIED`.
+
+## Primary matrix (atomic Requirement IDs)
+
+| Requirement ID | Requirement Source | Architecture / Interface Reference | Implementation Artifact | Configuration / Data Artifact | Verification Method | Evidence Reference | Status | Notes |
+| -------------- | ------------------ | ---------------------------------- | ----------------------- | ----------------------------- | ------------------- | ------------------ | ------ | ----- |
+| TBD | TBD | TBD | TBD | TBD | TBD | TBD | NOT VERIFIED | Scaffold placeholder — replace with atomic IDs when SRS/WP imports them |
+
+## Requirement Families Pending Atomic Import
+
+| Requirement family | Source document | Responsible future WP | Current status | Notes |
+| ------------------ | --------------- | --------------------- | -------------- | ----- |
+| DC-DCC-PWR-* | `docs/DCC/Power_Channel_Requirements.md` | Future SRS / requirements import WP | NOT VERIFIED | Atomic IDs exist in source doc; not yet imported as matrix rows |
+| DC-DCC-ARCH-* | `docs/DCC/DCC_Internal_Architecture.md` | Future SRS / requirements import WP | NOT VERIFIED | Atomic IDs exist in source doc; firmware mapping pending |
+| E30LD-* | `docs/Vehicle_Integration/E30_Gen1_Load_Inventory.md` | Future measurement / SRS import WP | NOT VERIFIED | Load inventory IDs; measurements pending. Data artifact: `config/vehicles/e30_gen1_loads.yaml` (not an architecture interface) |
 
 ## Status values
 
@@ -24,18 +36,21 @@ Authoritative policy: `.cursor/ENGINEERING_CONSTITUTION.mdc` §6.
 |--------|---------|
 | NOT VERIFIED | No executed verification with evidence |
 | PARTIAL | Some evidence exists; incomplete |
-| PASS | Verified with reproducible evidence |
+| PASS | Verified with reproducible evidence (Independent Reviewer / Test Owner certification) |
 | FAIL | Verification executed; failed |
 | OPEN ISSUE | Traceability or requirement gap |
 
 ## How to extend
 
-1. Add a row when a requirement is implemented or a WP/CR creates a new requirement ID.
-2. Link Evidence Reference to a filled `Verification_Evidence_Template` instance or evidence path.
-3. Do not mark PASS without revision identity and actual results (constitution §6).
+1. Add a primary-matrix row only for an **atomic** Requirement ID.
+2. Place Architecture / Interface Reference only when an approved architecture or interface definition justifies it.
+3. Use Configuration / Data Artifact for YAML, load inventories, and similar non-interface data.
+4. Link Evidence Reference to `docs/records/verification/VE-YYYY-NNN_<short-title>.md`.
+5. Do not mark PASS without revision identity, actual results, and appropriate verification authority (constitution §4 / §6).
 
 ## Revision history
 
 | Version | Date | Change |
 |---------|------|--------|
 | 1.0 | 2026-07-19 | CR-002 initial scaffold |
+| 1.1 | 2026-07-19 | CR-002-R1 — atomic IDs only; families section; config column |

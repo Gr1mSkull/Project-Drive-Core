@@ -1,12 +1,19 @@
 # Review Handoff Package Template
 
 **Document ID:** TPL-RHP-001  
-**Version:** 1.0  
+**Version:** 1.1  
 **Status:** Proposed  
-**Change Request:** CR-002
+**Change Request:** CR-002 / CR-002-R1
 
-Authoritative policy: `.cursor/ENGINEERING_CONSTITUTION.mdc` §18 (Independent Critical Review).  
-Use for high-impact changes before Engineering Review / Critical Review.
+Authoritative policy: `.cursor/ENGINEERING_CONSTITUTION.mdc` §18.
+
+**Storage convention (filled records only):**
+
+```text
+docs/records/review_handoffs/RHP-YYYY-NNN_<short-title>.md
+```
+
+Templates remain in `docs/templates/`.
 
 The implementer shall not classify self-review as independent Engineering or Critical Review.
 
@@ -21,8 +28,10 @@ The implementer shall not classify self-review as independent Engineering or Cri
 | **Related Requirements** | |
 | **Related Architecture** | |
 | **Related WP / CR** | |
+| **Impact Level** | 1 \| 2 (Level 0 does not require RHP) |
 | **Date** | YYYY-MM-DD |
-| **Implementer** | |
+| **Implementer (name/agent)** | |
+| **Implementer role** | Implementation Engineer |
 
 ### Changed Files
 
@@ -30,8 +39,8 @@ The implementer shall not classify self-review as independent Engineering or Cri
 
 ### Changed Interfaces
 
-| Interface | From version | To version | CIA ID |
-|-----------|--------------|------------|--------|
+| Interface | From version | To version | CIA / Impact note |
+|-----------|--------------|------------|-------------------|
 | | | | |
 
 ### Changed Assumptions
@@ -42,7 +51,8 @@ The implementer shall not classify self-review as independent Engineering or Cri
 
 | Field | Value |
 |-------|-------|
-| **CIA reference** | CIA-YYYY-NNN or path |
+| **Impact classification** | Level 1 note \| Level 2 CIA-YYYY-NNN |
+| **CIA / note path** | `docs/records/change_impact/...` or WP section |
 | **ADR Required** | YES / NO / TBD |
 
 ### Validation Summary
@@ -51,9 +61,9 @@ The implementer shall not classify self-review as independent Engineering or Cri
 
 ### Evidence References
 
-| Evidence ID | Result | Path |
-|-------------|--------|------|
-| | | |
+| Evidence ID | Raw result | Path | Certified? |
+|-------------|------------|------|------------|
+| | | `docs/records/verification/...` | YES / NO / TBD |
 
 ### Known Weaknesses
 
@@ -83,8 +93,11 @@ Areas requiring adversarial review (do not confirm success — search for weakne
 |-------|-------|
 | **Implementer Self-Review Status** | Complete \| Incomplete |
 | **Independent Review Status** | Not started \| In progress \| Complete |
-| **Independent Reviewer** | (must differ from implementer) |
+| **Independent Reviewer (name/agent)** | (must differ from implementer) |
+| **Independent Reviewer role** | Independent Reviewer \| Test Owner |
+| **Independent review date** | YYYY-MM-DD or TBD |
 | **Final Review Outcome** | Accepted \| Revision required \| Blocked |
+| **Architecture / policy approval** | Separate — System Architect only; N/A unless required |
 
 ---
 
@@ -93,3 +106,4 @@ Areas requiring adversarial review (do not confirm success — search for weakne
 | Version | Date | Change |
 |---------|------|--------|
 | 1.0 | 2026-07-19 | CR-002 initial template |
+| 1.1 | 2026-07-19 | CR-002-R1 records path; role/date fields |

@@ -12,12 +12,13 @@ Standard templates for DriveCore engineering artifacts.
 | [Architecture_Review_Template.md](Architecture_Review_Template.md) | Architecture review meetings |
 | [Work_Package_Template.md](Work_Package_Template.md) | Task packages for Implementation Engineer |
 | [Load_Profile_Template.md](Load_Profile_Template.md) | Vehicle load inventory records (WP-003) |
-| [Change_Impact_Analysis_Template.md](Change_Impact_Analysis_Template.md) | Shared-artifact change impact (CR-002) |
-| [Verification_Evidence_Template.md](Verification_Evidence_Template.md) | Reproducible validation evidence (CR-002) |
-| [Review_Handoff_Package_Template.md](Review_Handoff_Package_Template.md) | High-impact independent review (CR-002) |
+| [Change_Impact_Analysis_Template.md](Change_Impact_Analysis_Template.md) | Level 2 Full CIA (CR-002 / R1) |
+| [Verification_Evidence_Template.md](Verification_Evidence_Template.md) | Reproducible validation evidence (CR-002 / R1) |
+| [Review_Handoff_Package_Template.md](Review_Handoff_Package_Template.md) | High-impact independent review (CR-002 / R1) |
 
-Traceability scaffold: [../traceability/](../traceability/).
+Traceability scaffold: [../traceability/](../traceability/).  
+Filled records: [../records/](../records/).
 
 ## Usage
 
-Copy template to target location; fill all mandatory sections; preserve revision history table. Do not invent missing data.
+Copy template into the canonical `docs/records/...` path; fill all mandatory sections; preserve revision history table. Do not invent missing data. Do not leave filled records under `docs/templates/`.

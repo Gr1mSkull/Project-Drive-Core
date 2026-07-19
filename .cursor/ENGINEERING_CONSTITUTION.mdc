@@ -6,9 +6,9 @@ alwaysApply: true
 # DriveCore Engineering Constitution
 
 **Document ID:** DC-CONST-001  
-**Version:** 1.1  
+**Version:** 1.1.1  
 **Status:** Proposed  
-**Work Package:** WP-006 · **Change Request:** CR-002
+**Work Package:** WP-006 · **Change Request:** CR-002 / CR-002-R1
 
 > **Single source of truth** for DriveCore engineering policy, AI behaviour, and implementation discipline.  
 > Numbered files in `.cursor/rules/00`–`10` are **wrappers** pointing here — not independent policy.
@@ -106,13 +106,20 @@ Extended: `docs/ENGINEERING_VALUES.md`.
 
 - Defines architecture, engineering policy, and component selection authority.
 - Approves ADR/EDL-level decisions and **engineering-policy document status**.
+- Approves architecture-related document status including `Approved for DevKit` and `Approved for Prototype`.
 - Resolves **ARCHITECTURAL DECISION REQUIRED** reports.
 
-### Reviewer
+### Independent Reviewer / Test Owner
+
+- Performs independent Engineering Review and Critical Review (§18) — not the implementer of the change.
+- May record verification outcomes supported by reproducible evidence: `PASS`, `FAIL`, `PARTIAL`, `NOT VERIFIED`.
+- May record verification evidence review outcome and requirement verification status.
+- Does **not** approve engineering policy, architecture, ADR/EDL, or architecture-related document status.
+
+### Reviewer (general)
 
 - Accepts or rejects deliverables per review sequence (§18).
 - Does not substitute for System Architect on architecture decisions or policy approval.
-- Independent Engineering Review and Critical Review shall not be performed by the same person or agent that implemented the change (§18).
 
 ---
 
@@ -172,17 +179,24 @@ Where applicable, record: validation ID; date; repository commit SHA; tested har
 
 Statements such as “tests pass”, “build works”, “interface is validated”, or “hardware is verified” are prohibited unless supported by reproducible evidence. A command shown without its actual result is not evidence. Unexecuted tests shall be reported as `NOT VERIFIED`. Do not fabricate logs, measurements, screenshots, or execution results.
 
-Template: `docs/templates/Verification_Evidence_Template.md`.
+Template: `docs/templates/Verification_Evidence_Template.md`.  
+Filled records: `docs/records/verification/`.
 
-### Change impact analysis
+The implementer may record raw test results. The implementer shall **not** independently certify its own high-impact work as verified. Independent Reviewer or Test Owner records verification certification (§4).
 
-Before modifying any normative shared artifact, perform a **Change Impact Analysis** (CIA). Applies to: communication protocols; shared firmware structures; persistent data formats; configuration schemas and binary formats; public APIs; hardware interfaces; connector pinouts; power-channel definitions; safety behaviour; boot and update mechanisms; cross-module requirements; shared libraries used by multiple modules.
+### Change impact analysis (proportional)
 
-The analysis shall identify: reason; affected modules, requirements, interfaces, implementation artifacts, tests, and documentation; backward-compatibility risk; migration requirements; rollback method; required ADR or architectural approval; unresolved questions.
+The implementer shall **classify impact before editing**. When classification is uncertain, escalate — do not select a lower level.
+
+| Level | Name | When | Required artifact |
+|-------|------|------|-------------------|
+| **0** | No CIA | Non-semantic editorial only: spelling, formatting, broken-link repair, wording clarification that does not change requirements or behaviour, navigation updates | Completion report states: `Impact classification: Level 0 — Non-semantic editorial change` |
+| **1** | Lightweight Impact Note | Bounded changes that do **not** affect safety behaviour, shared interfaces, persistent formats, hardware compatibility, or cross-module behaviour | Note in Work Package or Completion Report identifying: reason; affected files; affected requirements; expected behavioural impact; tests or checks required; compatibility impact |
+| **2** | Full Change Impact Analysis | Changes affecting: safety behaviour; hardware interfaces; connector pinouts; power-channel behaviour; communication protocols; shared binary structures; configuration schemas or persistent formats; bootloader or update mechanisms; cross-module requirements; shared libraries with multiple consumers; backward or forward compatibility | Full CIA using `docs/templates/Change_Impact_Analysis_Template.md`; store filled records under `docs/records/change_impact/` |
+
+Level 2 analysis shall identify: reason; affected modules, requirements, interfaces, implementation artifacts, tests, and documentation; backward-compatibility risk; migration requirements; rollback method; required ADR or architectural approval; unresolved questions.
 
 A shared interface shall never be changed as an undocumented local implementation detail. If impact cannot be determined: **STOP** → `ARCHITECTURAL DECISION REQUIRED`.
-
-Template: `docs/templates/Change_Impact_Analysis_Template.md`.
 
 ### Requirement–implementation–test traceability
 
@@ -202,7 +216,9 @@ Rules:
 - Tests without a requirement reference shall be identified as support, infrastructure, regression, or exploratory tests.
 - A test name alone is not sufficient traceability.
 
-Scaffold: `docs/traceability/TRACEABILITY_MATRIX.md`. Do not invent requirement links; use `TBD`, `OPEN ISSUE`, or `NOT VERIFIED` where evidence is missing.
+Scaffold: `docs/traceability/TRACEABILITY_MATRIX.md`. The primary matrix shall contain only **atomic** Requirement IDs — not wildcard families. Do not invent requirement links; use `TBD`, `OPEN ISSUE`, or `NOT VERIFIED` where evidence is missing.
+
+Filled verification evidence records: `docs/records/verification/`.
 
 ### Numeric engineering discipline
 
@@ -352,7 +368,7 @@ Include: context, conflict, options considered (if any), impact, recommended arc
 Read → Implement → Validate → Report → Stop
 ```
 
-**Before editing:** Read work package; inspect docs/SRS/ADR/EDL/`.ai/`; identify contradictions; confirm no unauthorized architecture decision. If the change touches a normative shared artifact (§6 Change impact analysis), complete a CIA before editing.
+**Before editing:** Read work package; inspect docs/SRS/ADR/EDL/`.ai/`; identify contradictions; confirm no unauthorized architecture decision. Classify change impact Level 0 / 1 / 2 (§6) before editing; complete the required impact artifact for that level.
 
 **During:** Stay in scope; preserve architecture; update affected docs; do not invent validation; maintain requirement/task traceability; avoid orphan implementation.
 
@@ -382,6 +398,7 @@ See `docs/ENGINEERING_WORKFLOW.md`.
 | DCC / Vehicle | `docs/DCC/`, `docs/Vehicle_Integration/` | Module and load policy |
 | Qualification | `docs/Component_Qualification/` | Normative qualification methodology |
 | Traceability | `docs/traceability/` | Requirement–implementation–test matrix scaffold |
+| Engineering records | `docs/records/` | Filled CIA, verification evidence, review handoffs |
 | Templates | `docs/templates/` | ADR, Requirement, WP, CIA, evidence, review handoff |
 | Agent context | `.ai/`, `agents_stuff/` | Operational notes — **not official spec** |
 
@@ -394,13 +411,26 @@ See `docs/ENGINEERING_WORKFLOW.md`.
 
 ### Document status governance
 
-| Actor | Authority |
-|-------|-----------|
-| Implementation Engineer | Draft and integrate **Proposed** policy and deliverables |
-| System Architect | Approve engineering policy; set Approved / Verified / Approved for DevKit / Approved for Prototype |
-| Reviewer | Recommend accept/reject; review does not equal approval |
+**Approval authority** (System Architect only):
 
-Repository merge does **not** automatically change document approval status. Approval status changes shall be explicit and traceable.
+- Engineering policy approval
+- Architecture and ADR/EDL approval
+- Architecture-related document approval
+- Statuses: `Approved for DevKit`, `Approved for Prototype`, and architecture-related Approved statuses
+
+**Verification authority** (Independent Reviewer or Test Owner):
+
+- Record `PASS` / `FAIL` / `PARTIAL` / `NOT VERIFIED` when supported by reproducible evidence
+- Record verification evidence review outcome and requirement verification status
+
+**Implementation Engineer:**
+
+- Draft and integrate **Proposed** policy and deliverables
+- Record raw test results
+- Shall **not** approve policy or architecture
+- Shall **not** independently certify own high-impact work as verified
+
+Repository merge does **not** equal engineering approval. Review completion does **not** equal architecture approval. Approval and verification status changes shall be explicit, traceable, and identify person or agent, role, date, and evidence reference.
 
 ### ADR / EDL
 
@@ -577,7 +607,8 @@ For high-impact changes (safety behaviour; power-channel control; kill or isolat
 
 The package shall include: task scope; requirement references; files changed; architecture references; changed assumptions; interface changes; CIA reference; validation performed; evidence locations; known weaknesses; unresolved questions; areas requiring adversarial review; rollback considerations.
 
-Template: `docs/templates/Review_Handoff_Package_Template.md`.
+Template: `docs/templates/Review_Handoff_Package_Template.md`.  
+Filled records: `docs/records/review_handoffs/`.
 
 A review agent performing Critical Review shall not modify implementation during that review unless explicitly assigned a separate corrective task.
 
@@ -597,7 +628,7 @@ A review agent performing Critical Review shall not modify implementation during
 
 Concept · Proposed · Under Review · Approved for DevKit · Approved for Prototype · Verified · Deprecated
 
-Do not mark Approved or Verified without explicit System Architect instruction. Review completion and merge do not equal approval (§13 Document status governance).
+Architecture-related document statuses (`Approved for DevKit`, `Approved for Prototype`, architecture Approved / Verified) require System Architect instruction. Requirement verification outcomes (`PASS` / `FAIL` / `PARTIAL` / `NOT VERIFIED`) are recorded by Independent Reviewer or Test Owner per §13. Review completion and merge do not equal architecture or policy approval.
 
 ### Outcomes
 
@@ -619,12 +650,12 @@ A task is complete **only if:**
 | No duplicated information | Policy not copied outside constitution |
 | No unresolved contradictions | Conflicts escalated, not hidden |
 | Architecture preserved | No unauthorized ADR-level changes |
-| Change impact addressed | CIA completed for shared normative artifacts |
+| Change impact addressed | Impact Level 0/1/2 classified; required artifact completed |
 | Validation completed | Honest report with reproducible evidence or NOT VERIFIED |
 | Revision identity recorded | Sufficient baseline identity for any Verified claim |
-| Completion report generated | All mandatory sections present |
+| Completion report generated | All mandatory sections present; impact classification stated |
 | No unauthorized engineering decisions | Escalations documented |
-| No unauthorized status promotion | Approval statuses unchanged without Architect |
+| No unauthorized status promotion | Architecture/policy approval unchanged without Architect; verification certification not self-assigned for high-impact work |
 
 Then: **Stop.** Wait for review. No further work without new task.
 
@@ -644,11 +675,12 @@ At task end, provide:
 8. Out-of-Scope Recommendations (or Improvement Suggestions — do not implement)  
 9. Final Status: Ready for Review · Blocked · Partially Complete · Failed Validation  
 
-Where applicable, also reference: Change Impact Analysis ID; Verification Evidence IDs; Review Handoff Package ID; commit SHA and revision identity used for validation.
+Where applicable, also reference: impact classification (Level 0 / 1 / 2); Change Impact Analysis ID or Lightweight Impact Note; Verification Evidence IDs; Review Handoff Package ID; commit SHA and revision identity used for validation.
 
 Work packages may specify additional sections (e.g. Architect Review Package).
 
-Template: `docs/templates/Work_Package_Template.md`.
+Template: `docs/templates/Work_Package_Template.md`.  
+Filled records: `docs/records/`.
 
 ---
 
@@ -708,3 +740,4 @@ Implementation Engineer may **suggest** improvements; System Architect **approve
 |---------|------|--------|
 | 1.0 | 2026-07-12 | WP-006 — consolidate rules 00–10 into single constitution |
 | 1.1 | 2026-07-19 | CR-002 — evidence, CIA, traceability, interface versioning, numeric discipline, revision identity, independent critical review, status governance |
+| 1.1.1 | 2026-07-19 | CR-002-R1 — proportional CIA Levels 0–2; separate approval vs verification authority; records paths; atomic traceability |

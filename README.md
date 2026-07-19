@@ -25,6 +25,7 @@
 | ADR | [Architecture decisions](docs/ADR/README.md) | ADR + EDL index |
 | CQ | [Component Qualification](docs/Component_Qualification/README.md) | WP-002 qualification framework |
 | TR | [Traceability](docs/traceability/README.md) | Requirement–implementation–test scaffold (CR-002) |
+| REC | [Engineering records](docs/records/README.md) | Filled CIA / VE / RHP records (CR-002-R1) |
 
 ## AI context
 
