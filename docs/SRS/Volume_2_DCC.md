@@ -1,11 +1,11 @@
 # SRS — Volume 2: DCC Requirements
 
 **Document ID:** SRS-V2  
-**Version:** 0.1 (structure only)  
+**Version:** 0.2  
 **Status:** Proposed  
-**Work Package:** WP-001
+**Work Package:** WP-001 · **Update:** WP-007
 
-> **Note:** Chapter structure only. Requirements added per approved work packages.
+> **Note:** Chapter structure with selective population. Full requirement text lives in linked normative sources where noted.
 
 ## Document control
 
@@ -110,10 +110,29 @@
 
 ## 8. Verification
 
-### 8.1 DevKit requirements  
-<!-- REQ-DCC-V-DK-NNN, link docs/008 -->
+### 8.1 DevKit requirements
 
-### 8.2 Test traceability  
+**Normative DevKit requirements (Proposed):**
+
+```text
+docs/DevKit/DevKit_System_Requirements.md
+```
+
+| Field | Value |
+|-------|-------|
+| Atomic identifier range | `REQ-DCC-V-DK-001` … `REQ-DCC-V-DK-118` |
+| Status | Proposed — requires Architecture Review |
+| Scope | Gen1 DevKit verification platform: boundary, fidelity, bench safety, kill/enable, representative power capability, RT/Service, CAN/sim, configuration, testability, revision identity, maintainability |
+| Verification plan | `docs/DevKit/DevKit_Verification_Plan.md` (Gates DK-A…DK-D) |
+| Relationship to EDL-014 | DevKit gates support but do **not** replace Phase E on full DCC Gen1; vehicle install still gated by EDL-014 |
+| System validation overview | `docs/008_Testing_and_Validation.md` |
+| Traceability | Primary matrix rows in `docs/traceability/TRACEABILITY_MATRIX.md` — status `NOT VERIFIED` |
+
+Do not duplicate full requirement text in this SRS volume.
+
+### 8.2 Test traceability
+
+See `docs/traceability/TRACEABILITY_MATRIX.md` and `docs/DevKit/DevKit_Verification_Plan.md`.
 
 ---
 
@@ -122,3 +141,4 @@
 | Version | Date | Change |
 |---------|------|--------|
 | 0.1 | 2026-07-12 | WP-001 chapter structure only |
+| 0.2 | 2026-07-19 | WP-007 — §8.1 DevKit requirements pointer and ID range |
