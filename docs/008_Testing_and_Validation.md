@@ -1,8 +1,8 @@
 # 008 — Testing and Validation
 
-**Version:** Gen1 v0.1.1  
-**Status:** этап 4 — strategy overview (WP-007)  
-**Work Package update:** WP-007
+**Version:** Gen1 v0.1.2  
+**Status:** этап 4 — strategy overview (WP-007 / R1)  
+**Work Package update:** WP-007 / WP-007-R1
 
 > **Test before track.** Ни одна новая функция не попадает в автомобиль без проверки на стенде.
 
@@ -29,6 +29,7 @@ DevKit bring-up → Protocol → Power channels → Integration → DCC Gen1 →
 | Topic | Normative / controlled source |
 |-------|-------------------------------|
 | DevKit system requirements | [`docs/DevKit/DevKit_System_Requirements.md`](DevKit/DevKit_System_Requirements.md) |
+| DevKit verification governance (`DK-GOV-*`) | [`docs/DevKit/DevKit_Verification_Governance.md`](DevKit/DevKit_Verification_Governance.md) |
 | DevKit verification plan (Phase A–D / DK-A…DK-D) | [`docs/DevKit/DevKit_Verification_Plan.md`](DevKit/DevKit_Verification_Plan.md) |
 | DevKit interfaces | [`docs/DevKit/DevKit_Interface_Matrix.md`](DevKit/DevKit_Interface_Matrix.md) |
 | Gap / candidate audit | [`docs/DevKit/DevKit_Current_State_Gap_Assessment.md`](DevKit/DevKit_Current_State_Gap_Assessment.md) |
@@ -175,3 +176,4 @@ When firmware trees exist, modules (Power Manager, VCM, CAN, Rules, Config, DCPI
 |---------|------|--------|
 | 0.1 | 2026-07-12 | Initial Phase A–F DevKit-oriented procedures |
 | 0.1.1 | 2026-07-19 | WP-007 — strategy/navigation; detailed A–D normative cases moved to DevKit verification plan |
+| 0.1.2 | 2026-07-19 | WP-007-R1 — link verification governance document |

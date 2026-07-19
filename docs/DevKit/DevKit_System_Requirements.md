@@ -1,49 +1,30 @@
 # DevKit System Requirements — Gen1
 
 **Document ID:** DOC-DK-REQ-001  
-**Version:** 1.0  
+**Version:** 1.1.1  
 **Status:** Proposed  
-**Work Package:** WP-007  
+**Work Package:** WP-007 / WP-007-R1  
 **Date:** 2026-07-19  
-**Canonical related ADR:** ADR-015  
-**Related standard:** STD-REV-001  
-**Related gate policy:** EDL-014  
+**Governance:** [DevKit_Verification_Governance.md](DevKit_Verification_Governance.md)  
+**Verification plan:** [DevKit_Verification_Plan.md](DevKit_Verification_Plan.md)  
 
-> Normative atomic requirements for the Gen1 DevKit verification platform.  
-> This document is **Proposed** and requires Architecture Review.  
-> It does **not** define schematic, PCB, BOM, enclosure model, or exact MPNs.
+> Normative **system** requirements for the Gen1 DevKit.  
+> Governance/evidence-claim rules live in `DK-GOV-*` (not in this ID range).
 
-## 1. Purpose
+## 1. Taxonomy (WP-007-R1)
 
-Define verification-ready requirements answering what the DevKit must accomplish and how satisfaction will be verified.
+| Class | Count |
+|-------|-------|
+| Active system requirements | 93 |
+| Withdrawn — moved to DK-GOV-* | 25 |
+| Governance rules | 25 |
+| Blocked active system requirements | 1 |
 
-## 2. Authority and hierarchy
+Withdrawn IDs are preserved and **not reused**.
 
-| Priority | Source |
-|----------|--------|
-| 1 | `.cursor/ENGINEERING_CONSTITUTION.mdc` |
-| 2 | Accepted ADR/EDL (incl. EDL-014, EDL-007, EDL-011, ADR-015) |
-| 3 | Approved STD-REV-001 |
-| 4 | This requirements baseline (after acceptance) |
-| 5 | Approved architecture docs (`docs/001`–`008`, `docs/DCC/*`) |
-| 6 | Proposed conceptual docs (WP-004/005 families) |
-| 7 | Operational notes / `agents_stuff/` |
+## 2. Active system requirements
 
-Conflicts are recorded in `DevKit_Current_State_Gap_Assessment.md`. Unresolved fidelity questions are escalated as `ARCHITECTURAL DECISION REQUIRED`.
-
-## 3. Identifier scheme
-
-```text
-REQ-DCC-V-DK-NNN
-```
-
-This baseline defines **118** atomic requirements: `REQ-DCC-V-DK-001` … `REQ-DCC-V-DK-118`.
-
-Verification cases: `docs/DevKit/DevKit_Verification_Plan.md`.
-
-## 4. Requirements
-
-### 4.A — Purpose and system boundary
+### 2.A — Purpose and system boundary
 
 #### REQ-DCC-V-DK-001
 
@@ -58,32 +39,6 @@ Verification cases: `docs/DevKit/DevKit_Verification_Plan.md`.
 | Status | Proposed |
 | Notes | — |
 
-#### REQ-DCC-V-DK-002
-
-| Field | Content |
-|-------|---------|
-| Requirement ID | `REQ-DCC-V-DK-002` |
-| Requirement | The DevKit SHALL NOT be treated as a reduced production DCC Gen1 product acceptance unit. |
-| Source | WP-007 objective; EDL-014 |
-| Rationale | Prevents substituting DevKit evidence for Gen1 acceptance. |
-| Verification method | Inspection |
-| Verification reference | `VER-DCC-DK-A-001` |
-| Status | Proposed |
-| Notes | — |
-
-#### REQ-DCC-V-DK-003
-
-| Field | Content |
-|-------|---------|
-| Requirement ID | `REQ-DCC-V-DK-003` |
-| Requirement | Successful completion of DevKit gates DK-A through DK-D SHALL NOT authorize installation of DCC Gen1 into a vehicle. |
-| Source | EDL-014 |
-| Rationale | Vehicle install requires Phase E critical tests on full DCC Gen1. |
-| Verification method | Inspection |
-| Verification reference | `VER-DCC-DK-D-020` |
-| Status | Proposed |
-| Notes | — |
-
 #### REQ-DCC-V-DK-004
 
 | Field | Content |
@@ -93,7 +48,7 @@ Verification cases: `docs/DevKit/DevKit_Verification_Plan.md`.
 | Source | EDL-007; docs/001; docs/008 concept |
 | Rationale | Three-domain representation required for meaningful gate testing. |
 | Verification method | Inspection / Analysis |
-| Verification reference | `VER-DCC-DK-A-001`, `VER-DCC-DK-A-010` |
+| Verification reference | `VER-DCC-DK-A-001` |
 | Status | Proposed |
 | Notes | — |
 
@@ -110,19 +65,6 @@ Verification cases: `docs/DevKit/DevKit_Verification_Plan.md`.
 | Status | Proposed |
 | Notes | Exact production exclusions for Power population remain subject to ADR-DK-004. |
 
-#### REQ-DCC-V-DK-006
-
-| Field | Content |
-|-------|---------|
-| Requirement ID | `REQ-DCC-V-DK-006` |
-| Requirement | DevKit verification results SHALL be used only for laboratory validation and shall not be claimed as vehicle or track acceptance evidence. |
-| Source | EDL-014; constitution §10 safety |
-| Rationale | Track/vehicle claims require Gen1 evidence. |
-| Verification method | Inspection |
-| Verification reference | `VER-DCC-DK-D-020` |
-| Status | Proposed |
-| Notes | — |
-
 #### REQ-DCC-V-DK-007
 
 | Field | Content |
@@ -136,20 +78,7 @@ Verification cases: `docs/DevKit/DevKit_Verification_Plan.md`.
 | Status | Proposed |
 | Notes | Unattended-operation prohibition — see REQ-DCC-V-DK-030. |
 
-#### REQ-DCC-V-DK-008
-
-| Field | Content |
-|-------|---------|
-| Requirement ID | `REQ-DCC-V-DK-008` |
-| Requirement | Exceptions to the EDL-014 DevKit gate SHALL be recorded in a controlled engineering record and SHALL NOT be valid for track use. |
-| Source | EDL-014 |
-| Rationale | Preserves gate integrity. |
-| Verification method | Inspection |
-| Verification reference | `VER-DCC-DK-D-020` |
-| Status | Proposed |
-| Notes | — |
-
-### 4.B — Architecture fidelity
+### 2.B — Architecture fidelity
 
 #### REQ-DCC-V-DK-009
 
@@ -160,7 +89,7 @@ Verification cases: `docs/DevKit/DevKit_Verification_Plan.md`.
 | Source | docs/001; constitution STM32 ownership; EDL-002 |
 | Rationale | Fail-operational and RT independence. |
 | Verification method | Test |
-| Verification reference | `VER-DCC-DK-A-010`, `VER-DCC-DK-D-012` |
+| Verification reference | `VER-DCC-DK-A-010` |
 | Status | Proposed |
 | Notes | — |
 
@@ -173,7 +102,7 @@ Verification cases: `docs/DevKit/DevKit_Verification_Plan.md`.
 | Source | EDL-002; constitution |
 | Rationale | Service failure isolation. |
 | Verification method | Test |
-| Verification reference | `VER-DCC-DK-B-014`, `VER-DCC-DK-D-012` |
+| Verification reference | `VER-DCC-DK-A-005`, `VER-DCC-DK-D-012` |
 | Status | Proposed |
 | Notes | — |
 
@@ -186,7 +115,7 @@ Verification cases: `docs/DevKit/DevKit_Verification_Plan.md`.
 | Source | EDL-011; docs/002 §5 |
 | Rationale | Production interface compatibility for Power swap path. |
 | Verification method | Test / Inspection |
-| Verification reference | `VER-DCC-DK-A-008` |
+| Verification reference | `VER-DCC-DK-A-007`, `VER-DCC-DK-A-008` |
 | Status | Proposed |
 | Notes | Pin-level reuse vs adapter is ADR-DK-001. |
 
@@ -199,7 +128,7 @@ Verification cases: `docs/DevKit/DevKit_Verification_Plan.md`.
 | Source | EDL-010; docs/004 |
 | Rationale | Service-layer communication fidelity. |
 | Verification method | Test |
-| Verification reference | `VER-DCC-DK-A-009`, `VER-DCC-DK-B-006` |
+| Verification reference | `VER-DCC-DK-A-007`, `VER-DCC-DK-A-009`, `VER-DCC-DK-B-006` |
 | Status | Proposed |
 | Notes | — |
 
@@ -212,7 +141,7 @@ Verification cases: `docs/DevKit/DevKit_Verification_Plan.md`.
 | Source | constitution; docs/005 |
 | Rationale | Configuration-over-code. |
 | Verification method | Analysis / Test |
-| Verification reference | `VER-DCC-DK-D-003`, `VER-DCC-DK-D-005` |
+| Verification reference | `VER-DCC-DK-D-003` |
 | Status | Proposed |
 | Notes | — |
 
@@ -228,32 +157,6 @@ Verification cases: `docs/DevKit/DevKit_Verification_Plan.md`.
 | Verification reference | `VER-DCC-DK-C-001` |
 | Status | Proposed |
 | Notes | Exact class set: ADR-DK-004. |
-
-#### REQ-DCC-V-DK-015
-
-| Field | Content |
-|-------|---------|
-| Requirement ID | `REQ-DCC-V-DK-015` |
-| Requirement | Firmware and configuration equivalence rules between DevKit and DCC Gen1 SHALL follow an Accepted architectural decision defining whether identity means same physical boards, same interfaces, same source tree, same feature set, and/or same compiled binary. |
-| Source | docs/008 same-binary claim (candidate); docs/007 G431 alt (conflict) |
-| Rationale | Prevents silent reinterpretation of 'identical'/'same binary'. |
-| Verification method | Inspection |
-| Verification reference | `VER-DCC-DK-A-001` |
-| Status | Blocked |
-| Notes | ARCHITECTURAL DECISION REQUIRED — ADR-DK-001, ADR-DK-003. |
-
-#### REQ-DCC-V-DK-016
-
-| Field | Content |
-|-------|---------|
-| Requirement ID | `REQ-DCC-V-DK-016` |
-| Requirement | Every DevKit verification record SHALL identify the tested system using the composite baseline fields required by STD-REV-001 / ADR-015. |
-| Source | ADR-015; STD-REV-001 |
-| Rationale | Reproducible evidence. |
-| Verification method | Inspection |
-| Verification reference | `VER-DCC-DK-A-015`, `VER-DCC-DK-D-019` |
-| Status | Proposed |
-| Notes | — |
 
 #### REQ-DCC-V-DK-017
 
@@ -277,11 +180,11 @@ Verification cases: `docs/DevKit/DevKit_Verification_Plan.md`.
 | Source | constitution; docs/008 §11 |
 | Rationale | Safety ownership. |
 | Verification method | Test |
-| Verification reference | `VER-DCC-DK-D-012`, `VER-DCC-DK-D-013` |
+| Verification reference | `VER-DCC-DK-D-012` |
 | Status | Proposed |
 | Notes | — |
 
-### 4.C — Power input and bench safety
+### 2.C — Power input and bench safety
 
 #### REQ-DCC-V-DK-019
 
@@ -292,7 +195,7 @@ Verification cases: `docs/DevKit/DevKit_Verification_Plan.md`.
 | Source | docs/008 §3 (candidate intent); safety standard |
 | Rationale | Controlled first power. |
 | Verification method | Inspection / Demonstration |
-| Verification reference | `VER-DCC-DK-A-002`, `VER-DCC-DK-A-003` |
+| Verification reference | `VER-DCC-DK-A-002`, `VER-DCC-DK-A-007` |
 | Status | Proposed |
 | Notes | — |
 
@@ -344,7 +247,7 @@ Verification cases: `docs/DevKit/DevKit_Verification_Plan.md`.
 | Source | docs/008 A1/A7 intent; power-channel safe OFF |
 | Rationale | Default safe state. |
 | Verification method | Test |
-| Verification reference | `VER-DCC-DK-A-003`, `VER-DCC-DK-A-014` |
+| Verification reference | `VER-DCC-DK-A-003`, `VER-DCC-DK-A-016` |
 | Status | Proposed |
 | Notes | — |
 
@@ -383,7 +286,7 @@ Verification cases: `docs/DevKit/DevKit_Verification_Plan.md`.
 | Source | docs/008 §3.3 |
 | Rationale | Safe load handling. |
 | Verification method | Demonstration |
-| Verification reference | `VER-DCC-DK-C-001` |
+| Verification reference | `VER-DCC-DK-C-002` |
 | Status | Proposed |
 | Notes | — |
 
@@ -396,35 +299,9 @@ Verification cases: `docs/DevKit/DevKit_Verification_Plan.md`.
 | Source | safety; docs/008 kill/fuse intent |
 | Rationale | Fault interruption. |
 | Verification method | Inspection / Test |
-| Verification reference | `VER-DCC-DK-A-012` |
+| Verification reference | `VER-DCC-DK-A-002` |
 | Status | Proposed |
 | Notes | — |
-
-#### REQ-DCC-V-DK-028
-
-| Field | Content |
-|-------|---------|
-| Requirement ID | `REQ-DCC-V-DK-028` |
-| Requirement | Normative DevKit input operating voltage range SHALL be defined with unit, limits, and tolerance (TBD-DK-001) before Gate DK-A exit for power tests requiring that range. |
-| Source | numeric discipline |
-| Rationale | Threshold control. |
-| Verification method | Analysis |
-| Verification reference | `VER-DCC-DK-A-003` |
-| Status | Proposed |
-| Notes | Candidate 13.8 V in docs/008 is not automatically normative. |
-
-#### REQ-DCC-V-DK-029
-
-| Field | Content |
-|-------|---------|
-| Requirement ID | `REQ-DCC-V-DK-029` |
-| Requirement | Maximum simultaneous DevKit load current SHALL be defined (TBD-DK-003) before Gate DK-C exit for multi-channel load tests. |
-| Source | docs/008 30 A continuous candidate |
-| Rationale | Prevents unsafe overload claims. |
-| Verification method | Analysis |
-| Verification reference | `VER-DCC-DK-C-001` |
-| Status | Proposed |
-| Notes | ADR-DK-006. |
 
 #### REQ-DCC-V-DK-030
 
@@ -435,11 +312,11 @@ Verification cases: `docs/DevKit/DevKit_Verification_Plan.md`.
 | Source | docs/008 §3.3 intent |
 | Rationale | Fire/thermal risk. |
 | Verification method | Inspection / Demonstration |
-| Verification reference | `VER-DCC-DK-A-003`, `VER-DCC-DK-C-001` |
+| Verification reference | `VER-DCC-DK-A-003` |
 | Status | Proposed |
 | Notes | — |
 
-### 4.D — Kill and global enable
+### 2.D — Kill and global enable
 
 #### REQ-DCC-V-DK-031
 
@@ -489,7 +366,7 @@ Verification cases: `docs/DevKit/DevKit_Verification_Plan.md`.
 | Source | docs/008 / fault handling intent |
 | Rationale | No auto-restart hazard. |
 | Verification method | Test |
-| Verification reference | `VER-DCC-DK-A-012` |
+| Verification reference | `VER-DCC-DK-A-014` |
 | Status | Proposed |
 | Notes | Exact sequence TBD if not yet specified — TBD-DK-021. |
 
@@ -528,7 +405,7 @@ Verification cases: `docs/DevKit/DevKit_Verification_Plan.md`.
 | Source | constitution; EDL-013 dangerous API model |
 | Rationale | No software bypass of kill. |
 | Verification method | Test |
-| Verification reference | `VER-DCC-DK-A-012`, `VER-DCC-DK-B-013` |
+| Verification reference | `VER-DCC-DK-A-012`, `VER-DCC-DK-B-012`, `VER-DCC-DK-B-013` |
 | Status | Proposed |
 | Notes | — |
 
@@ -545,7 +422,7 @@ Verification cases: `docs/DevKit/DevKit_Verification_Plan.md`.
 | Status | Proposed |
 | Notes | Candidate <200 ms not automatically normative. |
 
-### 4.E — Representative power-channel capability
+### 2.E — Representative power-channel capability
 
 #### REQ-DCC-V-DK-039
 
@@ -595,7 +472,7 @@ Verification cases: `docs/DevKit/DevKit_Verification_Plan.md`.
 | Source | docs/008 HB1 candidate; BD class Proposed |
 | Rationale | H-bridge representation by capability. |
 | Verification method | Test |
-| Verification reference | `VER-DCC-DK-C-010`, `VER-DCC-DK-C-011` |
+| Verification reference | `VER-DCC-DK-C-010` |
 | Status | Proposed |
 | Notes | Does not require specific H-bridge MPN. |
 
@@ -686,7 +563,7 @@ Verification cases: `docs/DevKit/DevKit_Verification_Plan.md`.
 | Source | DC-DCC-PWR; docs/008 C5 ≤3 candidate |
 | Rationale | Retry/latch. |
 | Verification method | Test |
-| Verification reference | `VER-DCC-DK-C-005`, `VER-DCC-DK-C-012` |
+| Verification reference | `VER-DCC-DK-C-014` |
 | Status | Proposed |
 | Notes | — |
 
@@ -699,7 +576,7 @@ Verification cases: `docs/DevKit/DevKit_Verification_Plan.md`.
 | Source | DC-DCC-PWR safe OFF |
 | Rationale | Safe OFF timing. |
 | Verification method | Test |
-| Verification reference | `VER-DCC-DK-C-002` |
+| Verification reference | `VER-DCC-DK-A-016`, `VER-DCC-DK-C-002` |
 | Status | Proposed |
 | Notes | — |
 
@@ -712,33 +589,7 @@ Verification cases: `docs/DevKit/DevKit_Verification_Plan.md`.
 | Source | docs/004; DC-DCC-PWR diagnostics |
 | Rationale | Diagnostic readout. |
 | Verification method | Test |
-| Verification reference | `VER-DCC-DK-C-004`, `VER-DCC-DK-B-009` |
-| Status | Proposed |
-| Notes | — |
-
-#### REQ-DCC-V-DK-052
-
-| Field | Content |
-|-------|---------|
-| Requirement ID | `REQ-DCC-V-DK-052` |
-| Requirement | The DevKit SHALL NOT claim verification coverage for channel classes that are not physically represented; such classes SHALL be deferred to external load-bank and/or DCC Gen1 Phase E evidence. |
-| Source | docs/008 no-HS60 statement (candidate intent); DC-DCC-PWR-108 |
-| Rationale | Honest coverage boundary. |
-| Verification method | Inspection / Analysis |
-| Verification reference | `VER-DCC-DK-C-001` |
-| Status | Proposed |
-| Notes | Whether any high-current class is mandatory on DevKit: ADR-DK-005. |
-
-#### REQ-DCC-V-DK-053
-
-| Field | Content |
-|-------|---------|
-| Requirement ID | `REQ-DCC-V-DK-053` |
-| Requirement | Normative DevKit requirements SHALL describe channel capability and behaviour and SHALL NOT require a specific smart-switch or H-bridge manufacturer part number unless an Accepted ADR/EDL mandates that exact part. |
-| Source | WP-007 §8.1; EDL-003 technology only |
-| Rationale | Component independence. |
-| Verification method | Inspection |
-| Verification reference | `VER-DCC-DK-A-001` |
+| Verification reference | `VER-DCC-DK-B-009`, `VER-DCC-DK-C-004` |
 | Status | Proposed |
 | Notes | — |
 
@@ -751,7 +602,7 @@ Verification cases: `docs/DevKit/DevKit_Verification_Plan.md`.
 | Source | docs/008 HB intent; safety |
 | Rationale | Bridge shoot-through / conflict prevention. |
 | Verification method | Test |
-| Verification reference | `VER-DCC-DK-C-011` |
+| Verification reference | `VER-DCC-DK-C-010`, `VER-DCC-DK-C-011` |
 | Status | Proposed |
 | Notes | — |
 
@@ -764,11 +615,11 @@ Verification cases: `docs/DevKit/DevKit_Verification_Plan.md`.
 | Source | docs/008 motor stall candidate |
 | Rationale | Stall response. |
 | Verification method | Test |
-| Verification reference | `VER-DCC-DK-C-010` |
+| Verification reference | `VER-DCC-DK-C-013` |
 | Status | Proposed |
 | Notes | May be BLOCKED pending fixture. |
 
-### 4.F — Logic and Real-Time domain
+### 2.F — Logic and Real-Time domain
 
 #### REQ-DCC-V-DK-056
 
@@ -831,7 +682,7 @@ Verification cases: `docs/DevKit/DevKit_Verification_Plan.md`.
 | Source | fault handling / startup docs |
 | Rationale | Safe reset. |
 | Verification method | Test |
-| Verification reference | `VER-DCC-DK-A-014` |
+| Verification reference | `VER-DCC-DK-A-014`, `VER-DCC-DK-D-017` |
 | Status | Proposed |
 | Notes | — |
 
@@ -844,7 +695,7 @@ Verification cases: `docs/DevKit/DevKit_Verification_Plan.md`.
 | Source | docs/001; docs/005 |
 | Rationale | Power-channel control. |
 | Verification method | Test |
-| Verification reference | `VER-DCC-DK-D-003`, `VER-DCC-DK-D-005` |
+| Verification reference | `VER-DCC-DK-D-003` |
 | Status | Proposed |
 | Notes | — |
 
@@ -883,7 +734,7 @@ Verification cases: `docs/DevKit/DevKit_Verification_Plan.md`.
 | Source | DCC fault/diagnostics docs |
 | Rationale | Persistent diagnostics. |
 | Verification method | Test |
-| Verification reference | `VER-DCC-DK-D-017` |
+| Verification reference | `VER-DCC-DK-D-016` |
 | Status | Proposed |
 | Notes | — |
 
@@ -900,7 +751,7 @@ Verification cases: `docs/DevKit/DevKit_Verification_Plan.md`.
 | Status | Proposed |
 | Notes | — |
 
-### 4.G — Radio and Service domain
+### 2.G — Radio and Service domain
 
 #### REQ-DCC-V-DK-066
 
@@ -924,7 +775,7 @@ Verification cases: `docs/DevKit/DevKit_Verification_Plan.md`.
 | Source | EDL-010; docs/004 |
 | Rationale | DCPI. |
 | Verification method | Test |
-| Verification reference | `VER-DCC-DK-B-006`, `VER-DCC-DK-B-007` |
+| Verification reference | `VER-DCC-DK-A-009`, `VER-DCC-DK-B-006` |
 | Status | Proposed |
 | Notes | — |
 
@@ -937,7 +788,7 @@ Verification cases: `docs/DevKit/DevKit_Verification_Plan.md`.
 | Source | docs/005; docs/008 B7 |
 | Rationale | Config delivery. |
 | Verification method | Test |
-| Verification reference | `VER-DCC-DK-B-007`, `VER-DCC-DK-D-015` |
+| Verification reference | `VER-DCC-DK-B-007` |
 | Status | Proposed |
 | Notes | — |
 
@@ -1006,20 +857,7 @@ Verification cases: `docs/DevKit/DevKit_Verification_Plan.md`.
 | Status | Proposed |
 | Notes | — |
 
-#### REQ-DCC-V-DK-074
-
-| Field | Content |
-|-------|---------|
-| Requirement ID | `REQ-DCC-V-DK-074` |
-| Requirement | OTA update capability SHALL be included in mandatory DevKit gate verification only if an Accepted architectural decision requires OTA for EDL-014 DevKit gate completion; otherwise OTA cases SHALL be optional or deferred. |
-| Source | docs/008 B14 candidate; ADR-DK-008 |
-| Rationale | Do not invent OTA as mandatory. |
-| Verification method | Inspection / Test |
-| Verification reference | `VER-DCC-DK-B-014` |
-| Status | Blocked |
-| Notes | ARCHITECTURAL DECISION REQUIRED — ADR-DK-008. |
-
-### 4.H — CAN and external node simulation
+### 2.H — CAN and external node simulation
 
 #### REQ-DCC-V-DK-075
 
@@ -1056,7 +894,7 @@ Verification cases: `docs/DevKit/DevKit_Verification_Plan.md`.
 | Source | EDL-012; docs/008 B2 |
 | Rationale | ECU simulation. |
 | Verification method | Test |
-| Verification reference | `VER-DCC-DK-B-002` |
+| Verification reference | `VER-DCC-DK-B-002`, `VER-DCC-DK-D-004` |
 | Status | Proposed |
 | Notes | — |
 
@@ -1069,7 +907,7 @@ Verification cases: `docs/DevKit/DevKit_Verification_Plan.md`.
 | Source | docs/004; docs/008 B4 |
 | Rationale | Button Box simulation. |
 | Verification method | Test |
-| Verification reference | `VER-DCC-DK-B-004` |
+| Verification reference | `VER-DCC-DK-B-004`, `VER-DCC-DK-D-006` |
 | Status | Proposed |
 | Notes | — |
 
@@ -1082,7 +920,7 @@ Verification cases: `docs/DevKit/DevKit_Verification_Plan.md`.
 | Source | docs/004 heartbeat/LOST; docs/008 B3 >500 ms candidate |
 | Rationale | Stale-node. |
 | Verification method | Test |
-| Verification reference | `VER-DCC-DK-B-003` |
+| Verification reference | `VER-DCC-DK-B-003`, `VER-DCC-DK-D-014` |
 | Status | Proposed |
 | Notes | — |
 
@@ -1112,20 +950,7 @@ Verification cases: `docs/DevKit/DevKit_Verification_Plan.md`.
 | Status | Proposed |
 | Notes | — |
 
-#### REQ-DCC-V-DK-082
-
-| Field | Content |
-|-------|---------|
-| Requirement ID | `REQ-DCC-V-DK-082` |
-| Requirement | DevKit verification SHALL NOT redefine DCP payload layouts or encoded protocol version mappings. |
-| Source | ADR-015; docs/004 |
-| Rationale | Interface freeze. |
-| Verification method | Inspection |
-| Verification reference | `VER-DCC-DK-A-001` |
-| Status | Proposed |
-| Notes | — |
-
-### 4.I — Configuration
+### 2.I — Configuration
 
 #### REQ-DCC-V-DK-083
 
@@ -1136,7 +961,7 @@ Verification cases: `docs/DevKit/DevKit_Verification_Plan.md`.
 | Source | docs/005; config/vehicles/devkit.yaml present |
 | Rationale | DevKit profile. |
 | Verification method | Inspection |
-| Verification reference | `VER-DCC-DK-B-007`, `VER-DCC-DK-D-015` |
+| Verification reference | `VER-DCC-DK-B-007` |
 | Status | Proposed |
 | Notes | Schema field hardware.profile not in docs/005 — ADR-DK-009 related. |
 
@@ -1214,50 +1039,11 @@ Verification cases: `docs/DevKit/DevKit_Verification_Plan.md`.
 | Source | ADR-015; firmware shared DCFG_VERSION |
 | Rationale | DCFG identity. |
 | Verification method | Inspection / Test |
-| Verification reference | `VER-DCC-DK-B-007` |
+| Verification reference | `VER-DCC-DK-B-007`, `VER-DCC-DK-B-015` |
 | Status | Proposed |
 | Notes | CRC coverage open — interface CR. |
 
-#### REQ-DCC-V-DK-090
-
-| Field | Content |
-|-------|---------|
-| Requirement ID | `REQ-DCC-V-DK-090` |
-| Requirement | Active configuration identity (configuration ID, schema version, and content hash when available) SHALL be recorded in verification evidence per STD-REV-001. |
-| Source | STD-REV-001 §8 |
-| Rationale | Config baseline recording. |
-| Verification method | Inspection |
-| Verification reference | `VER-DCC-DK-D-019` |
-| Status | Proposed |
-| Notes | SHA-256 hashing NOT IMPLEMENTED — record NOT RECORDED/TBD until available. |
-
-#### REQ-DCC-V-DK-091
-
-| Field | Content |
-|-------|---------|
-| Requirement ID | `REQ-DCC-V-DK-091` |
-| Requirement | Configuration hot-reload outside Service/Wiring modes SHALL NOT be assumed permitted unless an Accepted architectural decision allows it. |
-| Source | docs/008 D10 candidate; EDL-013 mode auth |
-| Rationale | Hot reload policy. |
-| Verification method | Inspection / Test |
-| Verification reference | `VER-DCC-DK-D-015` |
-| Status | Blocked |
-| Notes | ARCHITECTURAL DECISION REQUIRED — ADR-DK-009. |
-
-#### REQ-DCC-V-DK-092
-
-| Field | Content |
-|-------|---------|
-| Requirement ID | `REQ-DCC-V-DK-092` |
-| Requirement | DevKit verification SHALL NOT invent encoded-version mappings for DCP/DCPI/DCFG constants. |
-| Source | ADR-015 |
-| Rationale | Encoding discipline. |
-| Verification method | Inspection |
-| Verification reference | `VER-DCC-DK-A-001` |
-| Status | Proposed |
-| Notes | — |
-
-### 4.J — Testability and observability
+### 2.J — Testability and observability
 
 #### REQ-DCC-V-DK-093
 
@@ -1320,7 +1106,7 @@ Verification cases: `docs/DevKit/DevKit_Verification_Plan.md`.
 | Source | docs/004; DC-DCC-PWR |
 | Rationale | Logic/fault observation. |
 | Verification method | Test |
-| Verification reference | `VER-DCC-DK-C-004`, `VER-DCC-DK-B-009` |
+| Verification reference | `VER-DCC-DK-B-009` |
 | Status | Proposed |
 | Notes | — |
 
@@ -1346,7 +1132,7 @@ Verification cases: `docs/DevKit/DevKit_Verification_Plan.md`.
 | Source | docs/004 DCPI CRC |
 | Rationale | DCPI fault observation. |
 | Verification method | Test |
-| Verification reference | `VER-DCC-DK-B-008` |
+| Verification reference | `VER-DCC-DK-A-009`, `VER-DCC-DK-B-008` |
 | Status | Proposed |
 | Notes | — |
 
@@ -1372,7 +1158,7 @@ Verification cases: `docs/DevKit/DevKit_Verification_Plan.md`.
 | Source | verification plan need |
 | Rationale | Deterministic reset. |
 | Verification method | Test |
-| Verification reference | `VER-DCC-DK-A-014` |
+| Verification reference | `VER-DCC-DK-A-014`, `VER-DCC-DK-D-017` |
 | Status | Proposed |
 | Notes | — |
 
@@ -1389,139 +1175,7 @@ Verification cases: `docs/DevKit/DevKit_Verification_Plan.md`.
 | Status | Proposed |
 | Notes | — |
 
-### 4.K — Evidence and revision identity
-
-#### REQ-DCC-V-DK-103
-
-| Field | Content |
-|-------|---------|
-| Requirement ID | `REQ-DCC-V-DK-103` |
-| Requirement | Every executed DevKit verification case that supports gate exit SHALL record a composite system baseline per STD-REV-001 applicable fields. |
-| Source | ADR-015; STD-REV-001 |
-| Rationale | Baseline. |
-| Verification method | Inspection |
-| Verification reference | `VER-DCC-DK-D-019` |
-| Status | Proposed |
-| Notes | — |
-
-#### REQ-DCC-V-DK-104
-
-| Field | Content |
-|-------|---------|
-| Requirement ID | `REQ-DCC-V-DK-104` |
-| Requirement | Firmware identity for each programmed processor SHALL be recorded (module ID, SemVer when available, commit SHA, cleanliness). |
-| Source | STD-REV-001 §4 |
-| Rationale | Firmware identity. |
-| Verification method | Inspection |
-| Verification reference | `VER-DCC-DK-A-015` |
-| Status | Proposed |
-| Notes | Build metadata NOT IMPLEMENTED — use available IDs; dirty builds cannot certify high-assurance claims. |
-
-#### REQ-DCC-V-DK-105
-
-| Field | Content |
-|-------|---------|
-| Requirement ID | `REQ-DCC-V-DK-105` |
-| Requirement | Bootloader identity SHALL be recorded when a distinct bootloader is present; otherwise evidence SHALL mark bootloader N/A with rationale. |
-| Source | STD-REV-001 §5 |
-| Rationale | Bootloader identity. |
-| Verification method | Inspection |
-| Verification reference | `VER-DCC-DK-A-015` |
-| Status | Proposed |
-| Notes | — |
-
-#### REQ-DCC-V-DK-106
-
-| Field | Content |
-|-------|---------|
-| Requirement ID | `REQ-DCC-V-DK-106` |
-| Requirement | Hardware board ID, hardware revision, BOM revision, and assembly revision SHALL be recorded for boards under test; missing fields render certification NOT VERIFIED or PARTIAL. |
-| Source | STD-REV-001 §6 |
-| Rationale | Hardware identity. |
-| Verification method | Inspection |
-| Verification reference | `VER-DCC-DK-A-015` |
-| Status | Proposed |
-| Notes | — |
-
-#### REQ-DCC-V-DK-107
-
-| Field | Content |
-|-------|---------|
-| Requirement ID | `REQ-DCC-V-DK-107` |
-| Requirement | Configuration ID and schema version SHALL be recorded; configuration SHA-256 SHALL be recorded when hashing is implemented, otherwise NOT RECORDED. |
-| Source | STD-REV-001 §8 |
-| Rationale | Config identity. |
-| Verification method | Inspection |
-| Verification reference | `VER-DCC-DK-D-019` |
-| Status | Proposed |
-| Notes | — |
-
-#### REQ-DCC-V-DK-108
-
-| Field | Content |
-|-------|---------|
-| Requirement ID | `REQ-DCC-V-DK-108` |
-| Requirement | Applicable protocol/schema versions SHALL be recorded as semantic versions and/or legacy encoded values without inventing mappings. |
-| Source | STD-REV-001 §7; ADR-015 |
-| Rationale | Protocol versions. |
-| Verification method | Inspection |
-| Verification reference | `VER-DCC-DK-D-019` |
-| Status | Proposed |
-| Notes | — |
-
-#### REQ-DCC-V-DK-109
-
-| Field | Content |
-|-------|---------|
-| Requirement ID | `REQ-DCC-V-DK-109` |
-| Requirement | Test equipment identifiers and fixture revision SHALL be recorded for measurement-dependent cases. |
-| Source | STD-REV-001 §10 |
-| Rationale | Test equipment identity. |
-| Verification method | Inspection |
-| Verification reference | `VER-DCC-DK-D-019` |
-| Status | Proposed |
-| Notes | — |
-
-#### REQ-DCC-V-DK-110
-
-| Field | Content |
-|-------|---------|
-| Requirement ID | `REQ-DCC-V-DK-110` |
-| Requirement | Verification evidence SHALL be stored under the repository records convention when filled (docs/records/verification/), using the Verification Evidence template. |
-| Source | CR-002; docs/records |
-| Rationale | Evidence storage. |
-| Verification method | Inspection |
-| Verification reference | `VER-DCC-DK-D-019` |
-| Status | Proposed |
-| Notes | — |
-
-#### REQ-DCC-V-DK-111
-
-| Field | Content |
-|-------|---------|
-| Requirement ID | `REQ-DCC-V-DK-111` |
-| Requirement | Raw tester results SHALL be distinguishable from Independent Reviewer / Test Owner certification outcomes. |
-| Source | constitution §4/§13; VE template |
-| Rationale | Raw vs certified. |
-| Verification method | Inspection |
-| Verification reference | `VER-DCC-DK-D-019` |
-| Status | Proposed |
-| Notes | — |
-
-#### REQ-DCC-V-DK-112
-
-| Field | Content |
-|-------|---------|
-| Requirement ID | `REQ-DCC-V-DK-112` |
-| Requirement | Physical laboratory certification for DevKit gates SHALL require the human Gen1 Test Owner defined in operational project context; Implementation agents may record raw automated results only. |
-| Source | .ai/project_context.md; constitution |
-| Rationale | Physical Test Owner authority. |
-| Verification method | Inspection |
-| Verification reference | `VER-DCC-DK-D-019` |
-| Status | Proposed |
-| Notes | — |
-
-### 4.L — Maintainability and reuse
+### 2.L — Maintainability and reuse
 
 #### REQ-DCC-V-DK-113
 
@@ -1545,7 +1199,7 @@ Verification cases: `docs/DevKit/DevKit_Verification_Plan.md`.
 | Source | EDL-007; docs/008 identical claim |
 | Rationale | Reusable Logic/Radio. |
 | Verification method | Analysis |
-| Verification reference | `VER-DCC-DK-A-001` |
+| Verification reference | `VER-DCC-DK-A-017` |
 | Status | Blocked |
 | Notes | ARCHITECTURAL DECISION REQUIRED — ADR-DK-001, ADR-DK-002. |
 
@@ -1584,7 +1238,7 @@ Verification cases: `docs/DevKit/DevKit_Verification_Plan.md`.
 | Source | verification plan |
 | Rationale | Repeatable setup. |
 | Verification method | Demonstration |
-| Verification reference | `VER-DCC-DK-A-001`, `VER-DCC-DK-D-019` |
+| Verification reference | `VER-DCC-DK-A-006`, `VER-DCC-DK-A-007`, `VER-DCC-DK-D-019` |
 | Status | Proposed |
 | Notes | — |
 
@@ -1597,68 +1251,54 @@ Verification cases: `docs/DevKit/DevKit_Verification_Plan.md`.
 | Source | RHP/rollback discipline |
 | Rationale | Rollback/recovery. |
 | Verification method | Inspection / Demonstration |
-| Verification reference | `VER-DCC-DK-B-007`, `VER-DCC-DK-D-015` |
+| Verification reference | `VER-DCC-DK-B-007` |
 | Status | Proposed |
 | Notes | — |
 
-## 5. Threshold Resolution Register
+## 3. Withdrawn requirements (moved to governance)
 
-Unresolved numeric/procedure thresholds. Do not treat `docs/008` candidates as normative until closed.
+| Withdrawn ID | Status | Moved to |
+|--------------|--------|----------|
+| `REQ-DCC-V-DK-002` | Withdrawn — moved to DK-GOV-001 | `DK-GOV-001` — Non-substitution of DevKit for product acceptance |
+| `REQ-DCC-V-DK-003` | Withdrawn — moved to DK-GOV-002 | `DK-GOV-002` — Gate completion does not authorize vehicle install |
+| `REQ-DCC-V-DK-006` | Withdrawn — moved to DK-GOV-003 | `DK-GOV-003` — Evidence-use limitation |
+| `REQ-DCC-V-DK-008` | Withdrawn — moved to DK-GOV-004 | `DK-GOV-004` — EDL-014 exceptions recording |
+| `REQ-DCC-V-DK-015` | Withdrawn — moved to DK-GOV-009 | `DK-GOV-009` — Equivalence claims require Accepted ADR |
+| `REQ-DCC-V-DK-016` | Withdrawn — moved to DK-GOV-012 | `DK-GOV-012` — Composite baseline on verification records |
+| `REQ-DCC-V-DK-028` | Withdrawn — moved to DK-GOV-024 | `DK-GOV-024` — Voltage range freeze before power-test gate exit |
+| `REQ-DCC-V-DK-029` | Withdrawn — moved to DK-GOV-025 | `DK-GOV-025` — Simultaneous load current freeze before multi-load DK-C |
+| `REQ-DCC-V-DK-052` | Withdrawn — moved to DK-GOV-005 | `DK-GOV-005` — No coverage claims for unrepresented classes |
+| `REQ-DCC-V-DK-053` | Withdrawn — moved to DK-GOV-006 | `DK-GOV-006` — MPN prohibition in normative DevKit requirements |
+| `REQ-DCC-V-DK-074` | Withdrawn — moved to DK-GOV-010 | `DK-GOV-010` — OTA gate-scope decision dependency |
+| `REQ-DCC-V-DK-082` | Withdrawn — moved to DK-GOV-007 | `DK-GOV-007` — No protocol layout redefinition during DevKit verification |
+| `REQ-DCC-V-DK-090` | Withdrawn — moved to DK-GOV-013 | `DK-GOV-013` — Configuration identity in evidence |
+| `REQ-DCC-V-DK-091` | Withdrawn — moved to DK-GOV-011 | `DK-GOV-011` — Hot-reload assumption prohibition |
+| `REQ-DCC-V-DK-092` | Withdrawn — moved to DK-GOV-008 | `DK-GOV-008` — No invented encoded-version mappings |
+| `REQ-DCC-V-DK-103` | Withdrawn — moved to DK-GOV-014 | `DK-GOV-014` — Baseline required for gate-exit cases |
+| `REQ-DCC-V-DK-104` | Withdrawn — moved to DK-GOV-015 | `DK-GOV-015` — Firmware identity recording |
+| `REQ-DCC-V-DK-105` | Withdrawn — moved to DK-GOV-016 | `DK-GOV-016` — Bootloader identity recording |
+| `REQ-DCC-V-DK-106` | Withdrawn — moved to DK-GOV-017 | `DK-GOV-017` — Hardware identity recording |
+| `REQ-DCC-V-DK-107` | Withdrawn — moved to DK-GOV-018 | `DK-GOV-018` — Configuration ID/schema/hash recording |
+| `REQ-DCC-V-DK-108` | Withdrawn — moved to DK-GOV-019 | `DK-GOV-019` — Protocol version recording without invented mapping |
+| `REQ-DCC-V-DK-109` | Withdrawn — moved to DK-GOV-020 | `DK-GOV-020` — Test equipment and fixture identity recording |
+| `REQ-DCC-V-DK-110` | Withdrawn — moved to DK-GOV-021 | `DK-GOV-021` — Evidence storage convention |
+| `REQ-DCC-V-DK-111` | Withdrawn — moved to DK-GOV-022 | `DK-GOV-022` — Raw result vs certification separation |
+| `REQ-DCC-V-DK-112` | Withdrawn — moved to DK-GOV-023 | `DK-GOV-023` — Physical Test Owner authority |
 
-| TBD ID | Parameter | Unit | Current candidate | Candidate source | Evidence needed | Blocks | Owner role | Closure task | Status |
-|--------|-----------|------|-------------------|------------------|-----------------|--------|------------|--------------|--------|
-| TBD-DK-001 | DevKit input operating voltage range | V | 13.8 V nominal (single-point) | docs/008 §3 / A1 | Architecture decision + measurement plan | REQ-DCC-V-DK-028, Gate DK-A power tests | System Architect / Test Owner | Threshold CR / WP | Open |
-| TBD-DK-002 | Approved maximum DevKit input / protection current | A | 30 A fuse / continuous | docs/008 §2.3 / §3.3 | Architecture decision + thermal/electrical analysis | REQ-DCC-V-DK-020/029, ADR-DK-006 | System Architect | ADR-DK-006 | Open |
-| TBD-DK-003 | Maximum simultaneous load current | A | 30 A continuous | docs/008 §3.3 | Architecture decision | REQ-DCC-V-DK-029, Gate DK-C | System Architect | ADR-DK-006 | Open |
-| TBD-DK-004 | Kill response time (assert → outputs de-energized) | ms | “immediately” (vague — rejected) | docs/008 A7 | Architecture decision + measurement | REQ-DCC-V-DK-036, VER-DCC-DK-A-012 | System Architect / Test Owner | Threshold CR | Open |
-| TBD-DK-005 | Watchdog response time to safe outputs | ms | <200 ms | docs/008 A6 | Architecture decision + measurement | REQ-DCC-V-DK-038, VER-DCC-DK-A-011 | System Architect / Test Owner | Threshold CR | Open |
-| TBD-DK-006 | External node lost/stale timeout | ms | >500 ms | docs/008 B3 | Protocol/architecture freeze | REQ-DCC-V-DK-079, VER-DCC-DK-B-003 | System Architect | docs/004 alignment CR | Open |
-| TBD-DK-007 | Logic↔Power control-loss timeout | ms | >100 ms | EDL-011 | Confirm whether EDL-011 value is normative for DevKit evidence | REQ-DCC-V-DK-035 | System Architect | Interface confirmation | Open |
-| TBD-DK-008 | PWM frequency range for DevKit PWM cases | Hz | not frozen | docs/008 / WP-004 TBD | Architecture + channel class decision | REQ-DCC-V-DK-040, VER-DCC-DK-C-003 | System Architect | Power-channel WP | Open |
-| TBD-DK-009 | Current-measurement accuracy | % or A | not defined | docs/008 Phase C | Instrument + sense design qualification | REQ-DCC-V-DK-043/095 | Hardware Engineer / Test Owner | Fixture WP | Open |
-| TBD-DK-010 | Temperature-measurement accuracy | °C | not defined | docs/008 thermal notes | Sensor qualification | REQ-DCC-V-DK-048/096 | Hardware Engineer | Qualification | Open |
-| TBD-DK-011 | Overcurrent threshold tolerance | % or A | not defined | docs/008 C2 / WP-004 TBD | Protection requirements freeze | REQ-DCC-V-DK-044 | System Architect | Power-channel WP | Open |
-| TBD-DK-012 | Undervoltage test threshold | V | <10.5 V | docs/008 C4 | Architecture decision + measurement | REQ-DCC-V-DK-047, VER-DCC-DK-C-008 | System Architect | Threshold CR | Open |
-| TBD-DK-013 | Fault retry delay | ms | ≤3 retries (count only) | docs/008 C5 | Protection policy freeze | REQ-DCC-V-DK-049 | System Architect | Power-channel WP | Open |
-| TBD-DK-014 | Commanded safe-OFF de-energize time | ms | not defined | WP-004 safe OFF TBD | Architecture decision | REQ-DCC-V-DK-050 | System Architect | Power-channel WP | Open |
-| TBD-DK-015 | CAN waveform acceptance criteria | measurable metrics | “waveform clean” (vague — rejected) | docs/008 B5 | Signal-integrity criteria definition | VER-DCC-DK-B-005 | Test Owner / Architect | Threshold CR | Open |
-| TBD-DK-016 | WebSocket duration and allowed loss | s / frames | 20 Hz ≥15 s without drop | docs/008 B11 | UI contract + measurement method | VER-DCC-DK-B-011 | System Architect / Test Owner | docs/006 alignment | Open |
-| TBD-DK-017 | Power-rail tolerances (e.g. 5 V / 3.3 V) | % or V | ±5 % | docs/008 A1 | Electrical design + measurement | REQ-DCC-V-DK-094 | Hardware Engineer | DevKit electrical architecture WP | Open |
-| TBD-DK-018 | Thermal test duration | s or min | not defined for DevKit | docs/008 Phase E has Gen1 numbers | Test plan decision (DevKit vs Gen1 scope) | REQ-DCC-V-DK-096, ADR-DK-011 | System Architect / Test Owner | ADR-DK-011 | Open |
-| TBD-DK-019 | Maximum safe surface/device temperature for DevKit tests | °C | Gen1 candidates e.g. 85 °C (not DevKit-frozen) | docs/008 / docs/002 | Safety + thermal analysis | REQ-DCC-V-DK-096, ADR-DK-011 | System Architect | ADR-DK-011 | Open |
-| TBD-DK-020 | BOARD_ID bit encoding → revision map | map | pins exist; encoding TBD | EDL-011; ADR-015 OQ-3 | Architecture decision (no new HW mechanism) | REQ-DCC-V-DK-017 | System Architect | Hardware identity WP | Open |
-| TBD-DK-021 | Post-kill explicit re-enable sequence definition | procedure | partial intent in docs | fault/startup docs | Architecture / safety procedure | REQ-DCC-V-DK-034 | System Architect | Safety procedure WP | Open |
-| TBD-DK-022 | Bidirectional stall response criteria and fixture | A / ms / procedure | motor stall candidate in docs/008 | docs/008 | Fixture + requirement freeze | REQ-DCC-V-DK-055, VER-DCC-DK-C-010 | Test Owner / Architect | Fixture WP | Open |
+Full governance text: [DevKit_Verification_Governance.md](DevKit_Verification_Governance.md).
 
-## 6. Architectural decisions required (summary)
+## 4. Threshold Resolution Register
 
-| ID | Question |
-|----|----------|
-| ADR-DK-001 | Same physical Logic Board vs same electrical/firmware interfaces? |
-| ADR-DK-002 | Same physical Radio Board vs equivalent Service interfaces? |
-| ADR-DK-003 | Same compiled RT binary mandatory vs same source/feature set? |
-| ADR-DK-004 | Which representative power-channel classes must DevKit contain? |
-| ADR-DK-005 | Is a high-current class required on DevKit or only external/Gen1? |
-| ADR-DK-006 | Approved maximum DevKit input/simultaneous current? |
-| ADR-DK-007 | Approved kill and watchdog response-time limits (with TBD-DK-004/005)? |
-| ADR-DK-008 | Is OTA part of mandatory DevKit gate? |
-| ADR-DK-009 | Is configuration hot reload permitted outside Service/Wiring modes? |
-| ADR-DK-010 | Which fault injections are mandatory and how performed safely? |
-| ADR-DK-011 | DevKit vs DCC Gen1 electrical/thermal environmental test split? |
-| ADR-DK-012 | Which enclosure/connector candidates remain valid (WAGO vs screw, etc.)? |
+Unresolved thresholds remain `TBD-DK-001`…`TBD-DK-022` as established in WP-007. **Not resolved in R1.** See prior register content in git history / Architect Review Package; still authoritative as open.
 
-Full options/consequences: Architect Review Package in WP-007 completion report.
+## 5. Architectural decisions required
 
-## 7. Coverage summary
-
-| Status | Count |
-|--------|-------|
-| Blocked | 4 |
-| Proposed | 114 |
-| **Total** | **118** |
+`ADR-DK-001`…`ADR-DK-012` remain open. **Not resolved in R1.**
 
 ## Revision history
 
 | Version | Date | Change |
 |---------|------|--------|
-| 1.0 | 2026-07-19 | WP-007 initial Proposed DevKit requirements baseline |
+| 1.0 | 2026-07-19 | WP-007 initial Proposed baseline |
+| 1.1 | 2026-07-19 | WP-007-R1 — taxonomy split; governance moved to DK-GOV-* |
+| 1.1.1 | 2026-07-19 | WP-007-R1 mapping corrections for A-006/A-007 and restored case IDs |

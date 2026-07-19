@@ -1,9 +1,9 @@
 # SRS — Volume 2: DCC Requirements
 
 **Document ID:** SRS-V2  
-**Version:** 0.2  
+**Version:** 0.2.1  
 **Status:** Proposed  
-**Work Package:** WP-001 · **Update:** WP-007
+**Work Package:** WP-001 · **Update:** WP-007 / WP-007-R1
 
 > **Note:** Chapter structure with selective population. Full requirement text lives in linked normative sources where noted.
 
@@ -120,13 +120,14 @@ docs/DevKit/DevKit_System_Requirements.md
 
 | Field | Value |
 |-------|-------|
-| Atomic identifier range | `REQ-DCC-V-DK-001` … `REQ-DCC-V-DK-118` |
+| Active system identifier range | `REQ-DCC-V-DK-*` (93 active after WP-007-R1; withdrawn IDs preserved) |
+| Governance rules | `DK-GOV-*` in `docs/DevKit/DevKit_Verification_Governance.md` |
 | Status | Proposed — requires Architecture Review |
-| Scope | Gen1 DevKit verification platform: boundary, fidelity, bench safety, kill/enable, representative power capability, RT/Service, CAN/sim, configuration, testability, revision identity, maintainability |
+| Scope | Gen1 DevKit **system** properties/behaviours/testability; governance/evidence-claim rules separated |
 | Verification plan | `docs/DevKit/DevKit_Verification_Plan.md` (Gates DK-A…DK-D) |
 | Relationship to EDL-014 | DevKit gates support but do **not** replace Phase E on full DCC Gen1; vehicle install still gated by EDL-014 |
 | System validation overview | `docs/008_Testing_and_Validation.md` |
-| Traceability | Primary matrix rows in `docs/traceability/TRACEABILITY_MATRIX.md` — status `NOT VERIFIED` |
+| Traceability | Active system + governance subsections in `docs/traceability/TRACEABILITY_MATRIX.md` — status `NOT VERIFIED` |
 
 Do not duplicate full requirement text in this SRS volume.
 
@@ -142,3 +143,4 @@ See `docs/traceability/TRACEABILITY_MATRIX.md` and `docs/DevKit/DevKit_Verificat
 |---------|------|--------|
 | 0.1 | 2026-07-12 | WP-001 chapter structure only |
 | 0.2 | 2026-07-19 | WP-007 — §8.1 DevKit requirements pointer and ID range |
+| 0.2.1 | 2026-07-19 | WP-007-R1 — active vs governance split noted |

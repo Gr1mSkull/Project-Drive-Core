@@ -1,9 +1,9 @@
 # DevKit Interface Matrix — Gen1
 
 **Document ID:** DOC-DK-IF-001  
-**Version:** 1.0  
+**Version:** 1.0.1  
 **Status:** Proposed  
-**Work Package:** WP-007  
+**Work Package:** WP-007 / WP-007-R1  
 **Date:** 2026-07-19
 
 > Interface inventory for verification planning.  
@@ -45,3 +45,4 @@
 | Version | Date | Change |
 |---------|------|--------|
 | 1.0 | 2026-07-19 | WP-007 initial Proposed interface matrix |
+| 1.0.1 | 2026-07-19 | WP-007-R1 — metadata only; no new pinouts |

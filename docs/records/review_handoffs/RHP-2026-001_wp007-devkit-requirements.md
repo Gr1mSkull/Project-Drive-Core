@@ -11,6 +11,7 @@
 | **Date** | 2026-07-19 |
 | **Implementer (name/agent)** | Implementation Engineer (cloud agent) |
 | **Implementer role** | Implementation Engineer |
+| **Revision** | WP-007-R1 corrections applied |
 
 ### Changed Files
 
@@ -47,12 +48,23 @@ Documentation validation per WP-007 §22 executed (see completion report). No ph
 |-------------|------------|------|------------|
 | — | N/A | No VE created in WP-007 | NO |
 
+### Review findings addressed (WP-007-R1)
+
+* Separated governance/evidence-claim rules (`DK-GOV-*`) from system `REQ-DCC-V-DK-*` (25 withdrawn IDs preserved; 93 active system requirements).
+* Normalized verification cases to method-specific schemas; removed irrelevant energized boilerplate from inspection cases.
+* Split compound cases: `C-010` direction vs `C-013` stall; control-loss `C-012` vs retry/latch `C-014`.
+* Restored case ID meanings after R1 draft errors: `A-004` RT programming; `B-001` HEARTBEAT; `B-002` ECU telem; added `A-006` baseline identity inspection; `A-007` interface/docs integrity; `D-020` superseded by `G-*`.
+* Explicit gate classifications (MANDATORY / CONDITIONAL_MANDATORY / DEFERRED_EXCLUDED / OPTIONAL).
+* Gate outcomes PASS/FAIL/BLOCKED/NOT ASSESSED; no PARTIAL PASS; incomplete applicable baseline identity cannot PASS.
+* Blocked-case dependency table added; vague pass criteria removed or blocked on TBD.
+
 ### Known Weaknesses
 
-* Many thresholds remain TBD; several verification cases BLOCKED.
+* Many thresholds remain TBD; several verification cases BLOCKED (visible in dependency table).
 * Configuration schema lacks `hardware.profile`.
 * Firmware/hardware implementation absent — requirements cannot yet be demonstrated on target.
 * WP-004 power-channel family still Proposed; DevKit references capability without importing all DC-DCC-PWR rows.
+* ADR-DK-001…012 and TBD-DK-001…022 intentionally unresolved in R1.
 
 ### Known Risks
 
@@ -95,3 +107,5 @@ Revert WP-007 PR; restore prior docs/008 detailed tables from git history if nee
 | Version | Date | Change |
 |---------|------|--------|
 | 1.0 | 2026-07-19 | WP-007 initial RHP |
+| 1.1 | 2026-07-19 | WP-007-R1 — review corrections recorded |
+| 1.1.1 | 2026-07-19 | WP-007-R1 — case ID restorations and taxonomy report finalized |

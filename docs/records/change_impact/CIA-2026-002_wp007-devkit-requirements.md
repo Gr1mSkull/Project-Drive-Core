@@ -9,7 +9,7 @@
 | **Author role** | Implementation Engineer |
 | **Date** | 2026-07-19 |
 | **Status** | Under Review |
-| **Related WP / CR** | WP-007; related ADR-015 / STD-REV-001 / EDL-014 |
+| **Related WP / CR** | WP-007 / WP-007-R1; related ADR-015 / STD-REV-001 / EDL-014 |
 
 ### Reason for Change
 
@@ -132,3 +132,4 @@ ADR-DK-001…012; TBD-DK-001…022; DCFG CRC coverage and encoded-version mappin
 | Version | Date | Change |
 |---------|------|--------|
 | 1.0 | 2026-07-19 | WP-007 initial CIA |
+| 1.0.1 | 2026-07-19 | WP-007-R1 — Level 1 corrections (taxonomy, cases, gates); scope unchanged |

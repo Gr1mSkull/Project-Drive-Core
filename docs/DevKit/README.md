@@ -1,9 +1,9 @@
 # DriveCore Gen1 DevKit — Document Set
 
 **Document ID:** DOC-DK-INDEX-001  
-**Version:** 1.0  
+**Version:** 1.1.1  
 **Status:** Proposed  
-**Work Package:** WP-007  
+**Work Package:** WP-007 / WP-007-R1  
 **Date:** 2026-07-19
 
 ```text
@@ -22,9 +22,10 @@ It does **not** define the final circuit, PCB, component set, enclosure, or BOM.
 
 | Document | Authority role | Status |
 |----------|----------------|--------|
-| [DevKit_System_Requirements.md](DevKit_System_Requirements.md) | Normative atomic requirements (`REQ-DCC-V-DK-NNN`) | Proposed |
+| [DevKit_System_Requirements.md](DevKit_System_Requirements.md) | Normative **system** requirements (`REQ-DCC-V-DK-NNN`) | Proposed |
+| [DevKit_Verification_Governance.md](DevKit_Verification_Governance.md) | Evidence/claim/gate process rules (`DK-GOV-NNN`) | Proposed |
 | [DevKit_Interface_Matrix.md](DevKit_Interface_Matrix.md) | Interface boundaries and testability | Proposed |
-| [DevKit_Verification_Plan.md](DevKit_Verification_Plan.md) | Phase A–D cases and gates DK-A…DK-D | Proposed |
+| [DevKit_Verification_Plan.md](DevKit_Verification_Plan.md) | Phase A–D + governance inspection; gates DK-A…DK-D | Proposed |
 | [DevKit_Current_State_Gap_Assessment.md](DevKit_Current_State_Gap_Assessment.md) | Audit of existing claims vs baseline | Proposed |
 | This README | Navigation and authority statement | Proposed |
 
@@ -55,7 +56,7 @@ After WP-007, `docs/008` is **not** a competing normative source for detailed De
 
 ## Relationship to ADR-015 / STD-REV-001
 
-Every DevKit gate evidence package shall record a **composite system baseline** per Approved `STD-REV-001` (ADR-015 Accepted). Incomplete identity ⇒ certification `NOT VERIFIED` or `PARTIAL`.
+Every DevKit gate evidence package shall record a **composite system baseline** per Approved `STD-REV-001` (ADR-015 Accepted). Incomplete applicable identity ⇒ gate outcome `BLOCKED` or `NOT ASSESSED` (not `PASS`).
 
 ## Related records
 
@@ -70,8 +71,9 @@ Every DevKit gate evidence package shall record a **composite system baseline** 
 
 | Item | Status |
 |------|--------|
-| Requirements baseline | Proposed — Architecture Review required |
-| Verification plan | Proposed — no cases executed |
+| Requirements baseline | Proposed — Architecture Review required (R1 taxonomy split applied) |
+| Governance rules | Proposed (`DK-GOV-*`) |
+| Verification plan | Proposed — no cases executed; method-specific schemas in R1 |
 | Hardware design | Not approved by WP-007 |
 | Firmware bring-up | NOT IMPLEMENTED |
 | Physical verification | NOT VERIFIED |
@@ -88,3 +90,5 @@ See requirements §6 and Architect Review Package:
 | Version | Date | Change |
 |---------|------|--------|
 | 1.0 | 2026-07-19 | WP-007 DevKit document set |
+| 1.1 | 2026-07-19 | WP-007-R1 — governance document; taxonomy/gate corrections |
+| 1.1.1 | 2026-07-19 | WP-007-R1 — identity gate language aligned (no PARTIAL PASS) |

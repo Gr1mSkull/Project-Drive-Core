@@ -1,9 +1,9 @@
 # DevKit Current-State Gap Assessment — Gen1
 
 **Document ID:** DOC-DK-GAP-001  
-**Version:** 1.0  
+**Version:** 1.0.1  
 **Status:** Proposed  
-**Work Package:** WP-007  
+**Work Package:** WP-007 / WP-007-R1  
 **Date:** 2026-07-19
 
 Audit of existing DevKit-related claims against WP-007 authority rules. Classifications:
@@ -94,3 +94,4 @@ Note: some rows carry dual tags (e.g. CONFLICT/TBD); counts reflect primary seve
 | Version | Date | Change |
 |---------|------|--------|
 | 1.0 | 2026-07-19 | WP-007 initial gap assessment |
+| 1.0.1 | 2026-07-19 | WP-007-R1 — note governance split; no ADR/TBD resolutions |

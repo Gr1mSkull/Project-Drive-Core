@@ -1,6 +1,6 @@
 # DriveCore — Current Phase
 
-**Updated:** WP-007 Gen1 DevKit requirements baseline (2026-07-19)
+**Updated:** WP-007-R1 DevKit taxonomy/verification corrections (2026-07-19)
 
 ## Documentation
 
@@ -9,16 +9,16 @@
 | 1 Architecture (001, 004, 005) | ✅ v0.1 |
 | 2 Hardware (002, 007) | ✅ v0.1 |
 | 3 ECU + UI (003, 006) | ✅ v0.1 |
-| 4 Validation (008) | ✅ v0.1.1 strategy overview (WP-007) |
+| 4 Validation (008) | ✅ v0.1.2 strategy overview (WP-007/R1) |
 | 5 Implementation scaffold | ✅ v0.1 (`firmware/shared`, tools, web/ui) |
 | WP-001…WP-006 / CR-001 / CR-002 / ADR-015 | ✅ on `main` (see git history) |
-| **WP-007 DevKit requirements + verification plan** | 🔄 Proposed — Architecture Review |
+| **WP-007 DevKit requirements + verification plan** | 🔄 Proposed — R1 corrections; Architecture Review |
 
 ## DevKit (WP-007)
 
 | Item | Status |
 |------|--------|
-| Requirements `REQ-DCC-V-DK-001…118` | Proposed |
+| Active system `REQ-DCC-V-DK-*` (93) + `DK-GOV-*` (25) | Proposed (R1 taxonomy) |
 | Verification plan DK-A…DK-D | Proposed (NOT EXECUTED) |
 | Hardware design approved | **No** |
 | Firmware bring-up complete | **No** (NOT IMPLEMENTED) |
