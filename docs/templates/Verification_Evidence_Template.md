@@ -1,11 +1,13 @@
 # Verification Evidence Template
 
 **Document ID:** TPL-VE-001  
-**Version:** 1.1  
+**Version:** 1.1.2  
 **Status:** Proposed  
-**Change Request:** CR-002 / CR-002-R1
+**Change Request:** CR-002 / CR-002-R1 · **ADR:** ADR-015
 
 Authoritative policy: `.cursor/ENGINEERING_CONSTITUTION.mdc` §6 (Evidence-backed validation), §4 / §13 (verification authority).
+
+**Revision identity (normative field meanings):** [`docs/standards/REVISION_IDENTITY_STANDARD.md`](../standards/REVISION_IDENTITY_STANDARD.md) (ADR-015) — composite system baseline. Do not treat project version, firmware version, protocol version, hardware revision, or configuration identity as interchangeable. Encoded wire values are not semantic `MAJOR.MINOR` unless the interface specification defines the mapping.
 
 **Storage convention (filled records only):**
 
@@ -38,15 +40,17 @@ Templates remain in `docs/templates/`.
 | **Date** | YYYY-MM-DD |
 | **Tester (name/agent)** | |
 | **Tester role** | Implementation Engineer \| Test Owner \| other |
-| **Commit SHA** | |
-| **Hardware Revision** | |
-| **Firmware Version** | |
-| **Bootloader Version** | |
-| **Configuration ID** | |
-| **Configuration Hash** | |
-| **Protocol Version** | |
+| **Commit SHA** | Full repository commit (immutable) |
+| **Hardware Revision** | Board ID + HW / BOM / assembly rev (+ serial if available) — STD-REV-001 §6 |
+| **Firmware Version** | Per module: SemVer + SHA / cleanliness — STD-REV-001 §4 |
+| **Bootloader Version** | Separate from application firmware — STD-REV-001 §5 |
+| **Configuration ID** | Stable profile ID (e.g. `e30_gen1`, `devkit`) — STD-REV-001 §8 |
+| **Configuration Hash** | Full lowercase SHA-256 hex (not CRC) — STD-REV-001 §8 |
+| **Protocol Version** | Each applicable contract `MAJOR.MINOR` — STD-REV-001 §7 |
+| **DCFG Format Version** | Compiled format version when config blob used — STD-REV-001 §9 |
 | **Test Equipment** | |
 | **Test Environment** | |
+| **System Baseline Reference** | Embedded fields above and/or controlled baseline reference — STD-REV-001 §10 |
 
 ### Procedure
 
@@ -105,3 +109,5 @@ Exact command, procedure, or measurement method:
 |---------|------|--------|
 | 1.0 | 2026-07-19 | CR-002 initial template |
 | 1.1 | 2026-07-19 | CR-002-R1 records path; separate tester vs certifier |
+| 1.1.1 | 2026-07-19 | Reference revision-identity standard; baseline fields |
+| 1.1.2 | 2026-07-19 | ADR-015-R1 — canonical ADR-015; encoded-version caution |

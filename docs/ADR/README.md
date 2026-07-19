@@ -12,6 +12,8 @@ DriveCore records architectural decisions in two linked locations:
 - New ADR-level decisions shall use `docs/templates/ADR_Template.md`.
 - Legacy **EDL** entries remain authoritative; they may be migrated to `ADR-NNN` files without changing substance.
 - Supersede — do not delete — prior ADRs.
+- Normative detail that follows an accepted ADR may live under [`docs/standards/`](../standards/README.md); the ADR remains the rationale source.
+- Canonical ADR identifiers use the `ADR-NNN` form. Originating decision-request or Change Request aliases are not second active ADR IDs.
 
 ## Index (EDL → ADR equivalent)
 
@@ -34,6 +36,20 @@ DriveCore records architectural decisions in two linked locations:
 
 ## New ADR files
 
-None yet. Next ADR: `ADR-015-*.md` or continue EDL numbering per architect direction.
+| Canonical ADR ID | Title | Status | Originating request (alias) |
+|------------------|-------|--------|-----------------------------|
+| [ADR-015](ADR-015-platform-revision-identity.md) | DriveCore Platform Revision Identity and System Baseline | Accepted | ADR-CR002-001 (CR-002) |
 
-**OPEN ISSUE:** Unified numbering (ADR vs EDL) — await System Architect decision.
+Normative standard: [`docs/standards/REVISION_IDENTITY_STANDARD.md`](../standards/REVISION_IDENTITY_STANDARD.md) (STD-REV-001 — Approved).
+
+Next sequential ADR: `ADR-016-*.md`.
+
+Historical EDL numbering is unchanged. General EDL↔ADR migration numbering remains outside ADR-015 scope.
+
+## Revision history
+
+| Version | Date | Change |
+|---------|------|--------|
+| 1.0 | 2026-07-12 | WP-001 ADR/EDL index |
+| 1.1 | 2026-07-19 | ADR-015 revision identity formalization |
+| 1.1.1 | 2026-07-19 | ADR-015-R1 — canonical ID ADR-015; Accepted |
