@@ -1,9 +1,9 @@
 # DriveCore Traceability Matrix
 
 **Document ID:** DOC-TRACE-MAT-001  
-**Version:** 1.3.3  
+**Version:** 1.3.4  
 **Status:** Proposed  
-**Work Package:** WP-007 / WP-007-R3
+**Work Package:** WP-007 / WP-007-R4
 
 Authoritative policy: `.cursor/ENGINEERING_CONSTITUTION.mdc` §6.
 
@@ -185,6 +185,7 @@ Blocked cases (approx): 26
 * All DevKit statuses remain `NOT VERIFIED`. No Verification Evidence records created in WP-007 / R1 / R2.
 * Governance rules are verified by document/process inspection only and are **not** counted toward implementation coverage.
 * Threshold dependencies (`TBD-DK-*`) are references to the authoritative register in `docs/DevKit/DevKit_System_Requirements.md` §4 — not requirement replacements.
+* WP-007-R4: Method:Test cases enforce semantic placeholder policy (unjustified placeholders remaining = 0).
 * EDL-014 meaning unchanged.
 
 ## Revision history
@@ -197,3 +198,4 @@ Blocked cases (approx): 26
 | 1.3.1 | 2026-07-19 | WP-007-R1 regenerated after case ID restorations |
 | 1.3.2 | 2026-07-19 | WP-007-R2 — TBD register authority note (no status changes) |
 | 1.3.3 | 2026-07-19 | WP-007-R3 — D-015 split verification refs |
+| 1.3.4 | 2026-07-19 | WP-007-R4 — placeholder audit note (no requirement status changes) |

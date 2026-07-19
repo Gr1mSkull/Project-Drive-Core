@@ -1,9 +1,9 @@
 # DevKit Verification Plan — Gen1
 
 **Document ID:** DOC-DK-VER-001  
-**Version:** 1.1.3  
+**Version:** 1.1.4  
 **Status:** Proposed  
-**Work Package:** WP-007 / WP-007-R3  
+**Work Package:** WP-007 / WP-007-R4  
 **Date:** 2026-07-19  
 
 System requirements: [`DevKit_System_Requirements.md`](DevKit_System_Requirements.md)  
@@ -26,6 +26,13 @@ Inspection and Analysis cases may use `N/A — reason` where the field genuinely
 Prefer `N/A — reason` over a bare dash.
 
 A mandatory or conditional Test case that is not `BLOCKED` shall be fully reproducible from this document without requiring the operator to design the test.
+
+### 1.2 Semantic placeholder enforcement (WP-007-R4)
+
+A case being generally `BLOCKED` does **not** by itself justify unrelated placeholders.
+An open numeric threshold (`TBD-DK-*`) does **not** justify omitting topology, equipment, stimulus, or measurement definitions.
+Every remaining bare `—` / `As required` in a Test field shall correspond to an exact item named in `Blocked by`.
+Prefer completing the field; use `N/A — reason` when genuinely not applicable.
 
 ## 2. Classifications and gate outcomes
 
@@ -294,21 +301,22 @@ See governance §2–§4. Outcomes: PASS / FAIL / BLOCKED / NOT ASSESSED. Incomp
 | Classification | `MANDATORY` |
 | Objective | Induce watchdog fault and measure time to outputs de-energized. |
 | Status | `BLOCKED` |
-| Blocked by | ADR: ADR-DK-007; TBD: TBD-DK-005; fixture: Safe WDT injection method; impl: — |
-| Preconditions | Method to safely hang/starve WDT without uncontrolled hazards; outputs may be briefly commanded ON on a low-risk channel if needed to prove de-energize |
-| Topology | DevKit powered; optional low-risk load on one channel only |
-| Equipment | As required; models not mandated |
-| Hazards | Unexpected channel behaviour during fault inject |
-| Test configuration | — |
-| Stimuli | Documented WDT starve/hang injection |
-| Procedure | 1. Optionally command one low-risk channel ON and confirm ON 2. Inject WDT fault at t0 3. Measure time until that channel and all represented channels are OFF 4. Record reset/recovery behaviour |
-| Measurements | t_off_ms from t0; output states |
-| Expected result | All represented outputs OFF within TBD-DK-005 |
-| Pass criterion | t_off_ms ≤ approved TBD-DK-005 for all represented channels. If TBD-DK-005 open: BLOCKED. |
-| Abort criterion | Channel remains ON beyond abort timeout set by lab safety plan |
-| Evidence | timing capture; log |
+| Blocked by | ADR: ADR-DK-007; TBD: TBD-DK-005 (response-time acceptance); fixture: Safe WDT injection method; impl: RT watchdog path that de-energizes outputs |
+| Preconditions | Safe WDT injection method available (debugger halt, test hook, or documented starve method); outputs may be briefly ON on one low-risk channel to prove de-energize; kill accessible |
+| Topology | Bench PSU → DevKit; optional CH_LR → safe load; DMM on represented outputs; debugger/WDT inject interface on RT |
+| Equipment | Lab PSU; DMM; optional safe load; SWD/debugger or documented WDT inject tool; timing log/host |
+| Hazards | Uncontrolled hang — supervised; kill ready |
+| Test configuration | CFG-DK-WDT-01: optional single low-risk channel authorized ON for proof; others OFF |
+| Stimuli | If needed, command CH_LR ON; at t0 inject WDT fault (halt/starve per fixture method) |
+| Procedure | 1. Record baseline 2. Optionally ON CH_LR 3. Inject WDT at t0 4. Sample all represented outputs until OFF 5. Record t_off_ms and fault indication 6. Recover per documented reset sequence |
+| Measurements | t_off_ms; Vout_chN; fault/WDT indication |
+| Expected result | All represented outputs OFF; t_off within TBD-DK-005 when approved |
+| Pass criterion | All represented outputs OFF with t_off_ms ≤ approved TBD-DK-005. If TBD-DK-005 or WDT fixture/ADR-DK-007 open: BLOCKED. |
+| Abort criterion | Inability to regain control; smoke; sustained ON after inject |
+| Evidence | timing log; inject method note; output table |
 | Test owner (raw) | Implementation Engineer / lab operator |
 | Certification owner | Independent Reviewer / Test Owner |
+
 
 #### VER-DCC-DK-A-012 — Kill assertion de-energizes outputs; Service/UI cannot bypass
 
@@ -320,23 +328,24 @@ See governance §2–§4. Outcomes: PASS / FAIL / BLOCKED / NOT ASSESSED. Incomp
 | Method | Test |
 | Gate | DK-A |
 | Classification | `MANDATORY` |
-| Objective | Assert hardware kill; measure de-energize time; attempt Service/UI bypass. |
+| Objective | Assert kill; confirm outputs de-energize within approved time; Service/UI cannot re-energize while asserted. |
 | Status | `BLOCKED` |
-| Blocked by | ADR: ADR-DK-007; TBD: TBD-DK-004; fixture: —; impl: — |
-| Preconditions | Kill input accessible; Service path available for negative test |
-| Topology | Kill switch → IF-DK-KILL; optional low-risk load |
-| Equipment | As required; models not mandated |
-| Hazards | High current if kill fails |
-| Test configuration | — |
-| Stimuli | Assert kill at t0; while asserted, send Service/REST/UI output-ON commands |
-| Procedure | 1. Optionally turn one low-risk channel ON 2. Assert kill at t0 3. Measure time to all represented outputs OFF 4. While kill asserted, send ≥3 unauthorized/authorized Service ON commands 5. Confirm outputs remain OFF 6. De-assert kill; confirm outputs remain OFF until explicit re-enable (see A-14) |
-| Measurements | t_off_ms; bypass_command_results; output states |
-| Expected result | Outputs OFF within TBD-DK-004; bypass commands do not energize |
-| Pass criterion | t_off_ms ≤ approved TBD-DK-004 AND zero successful energizations from Service/UI while kill asserted. If TBD-DK-004 open: BLOCKED. |
-| Abort criterion | Any output remains ON after kill beyond lab abort limit |
-| Evidence | timing log; API/command log; output table |
+| Blocked by | ADR: ADR-DK-007; TBD: TBD-DK-004 (kill response-time acceptance); fixture: kill switch or nKILL_HW assert method on IF-DK-KILL; impl: kill de-energize path independent of Service |
+| Preconditions | Kill path accessible; optional low-risk channel for ON→OFF proof; Service command path available for bypass attempt |
+| Topology | Kill switch/fixture → IF-DK-KILL; Bench PSU → DevKit; DMM on represented outputs; Service/UI host |
+| Equipment | Kill switch or jumper fixture; lab PSU; DMM; Service/HTTP or diagnostic command client; optional safe load |
+| Hazards | Unexpected enable — supervised |
+| Test configuration | CFG-DK-KILL-01 authorizing at most one low-risk channel CH_LR |
+| Stimuli | Command CH_LR ON if used; assert kill at t0; while asserted send Service/UI enable for CH_LR |
+| Procedure | 1. Optionally ON CH_LR 2. Assert kill at t0 3. Measure t_off_ms to all outputs OFF 4. Send Service/UI enable attempts for ≥5 s 5. Confirm still OFF 6. Leave kill asserted until commands stop |
+| Measurements | t_off_ms; Vout_chN; kill state; Service command results |
+| Expected result | Outputs OFF within TBD-DK-004 when approved; zero successful Service/UI energizations under kill |
+| Pass criterion | t_off_ms ≤ approved TBD-DK-004 AND zero successful energizations from Service/UI while kill asserted AND all represented channels OFF. If TBD-DK-004 or ADR-DK-007 open: BLOCKED. |
+| Abort criterion | Channel ON under kill; smoke |
+| Evidence | timing log; command log; output table |
 | Test owner (raw) | Implementation Engineer / lab operator |
 | Certification owner | Independent Reviewer / Test Owner |
+
 
 #### VER-DCC-DK-A-013 — Global enable observability
 
@@ -368,23 +377,24 @@ See governance §2–§4. Outcomes: PASS / FAIL / BLOCKED / NOT ASSESSED. Incomp
 | Method | Test |
 | Gate | DK-A |
 | Classification | `MANDATORY` |
-| Objective | After kill clear/reset, outputs remain OFF until documented re-enable sequence. |
+| Objective | After kill de-assert and after reset, outputs remain OFF until the documented re-enable sequence. |
 | Status | `BLOCKED` |
-| Blocked by | ADR: —; TBD: TBD-DK-021; fixture: —; impl: — |
-| Preconditions | Kill and reset paths available |
-| Topology | As A-12 |
-| Equipment | As required; models not mandated |
-| Hazards | Case-specific electrical/thermal as applicable |
-| Test configuration | — |
-| Stimuli | Kill assert/deassert; safe reset command/power cycle as documented |
-| Procedure | 1. Assert kill; confirm OFF 2. De-assert kill 3. Confirm outputs still OFF 4. Perform safe reset 5. Confirm outputs OFF and state known 6. Execute documented re-enable sequence 7. Only then allow a single low-risk ON command to prove re-enable works 8. Command OFF |
-| Measurements | states after each step |
-| Expected result | No auto re-energize; re-enable required |
-| Pass criterion | After kill de-assert and after reset, all represented outputs remain OFF until the documented re-enable sequence is completed; one controlled ON succeeds only after that sequence. If re-enable sequence undefined (TBD-DK-021): BLOCKED. |
-| Abort criterion | Auto ON without re-enable |
-| Evidence | step log; output table |
+| Blocked by | ADR: —; TBD: TBD-DK-021 (post-kill explicit re-enable sequence definition); fixture: kill switch/fixture; impl: documented re-enable sequence in software/procedure |
+| Preconditions | Kill path available (A-012 method); reset method available (power cycle or RT reset); diagnostic host |
+| Topology | Kill → IF-DK-KILL; PSU → DevKit; DMM on represented outputs |
+| Equipment | Kill fixture; lab PSU; DMM; diagnostic/command host |
+| Hazards | Unexpected enable after kill clear |
+| Test configuration | CFG-DK-KILL-01; no auto-enable mask |
+| Stimuli | Assert kill; de-assert kill; attempt command ON before re-enable sequence; perform documented re-enable sequence (when defined); then authorized ON; separately: power-cycle reset and confirm OFF |
+| Procedure | 1. Assert kill; confirm OFF 2. De-assert kill 3. Attempt ON without re-enable sequence — expect remain OFF 4. Execute TBD-DK-021 sequence when defined 5. Confirm one controlled ON succeeds only after sequence 6. Power-cycle; confirm all OFF until authorized enable |
+| Measurements | Vout_chN; kill state; mode; command results |
+| Expected result | OFF after kill clear until re-enable sequence; OFF after reset until authorized enable |
+| Pass criterion | After kill de-assert and after reset, all represented outputs remain OFF until documented re-enable sequence completes; one controlled ON succeeds only after that sequence. If TBD-DK-021 open: BLOCKED. |
+| Abort criterion | Spurious ON; smoke |
+| Evidence | sequence log; output table |
 | Test owner (raw) | Implementation Engineer / lab operator |
 | Certification owner | Independent Reviewer / Test Owner |
+
 
 #### VER-DCC-DK-A-015 — BOARD_ID / hardware revision observability when implemented
 
@@ -396,24 +406,25 @@ See governance §2–§4. Outcomes: PASS / FAIL / BLOCKED / NOT ASSESSED. Incomp
 | Method | Test |
 | Gate | DK-A |
 | Classification | `CONDITIONAL_MANDATORY` |
-| Objective | If BOARD_ID sensing is implemented, record observed value; mapping may remain TBD. |
+| Objective | When BOARD_ID sensing is implemented, read and record raw BOARD_ID and mapping status. |
 | Status | `BLOCKED` |
-| Notes | Condition: BOARD_ID readout feature present in tested baseline. If not implemented: DEFERRED_EXCLUDED with statement. |
-| Blocked by | ADR: —; TBD: TBD-DK-020; fixture: —; impl: BOARD_ID readout |
-| Preconditions | — |
-| Topology | — |
-| Equipment | As required; models not mandated |
-| Hazards | Case-specific electrical/thermal as applicable |
-| Test configuration | — |
-| Stimuli | — |
-| Procedure | 1. Determine if BOARD_ID readout exists in tested build 2. If no: mark DEFERRED_EXCLUDED for this baseline 3. If yes: read BOARD_ID; record raw value; record mapping status TBD-DK-020 |
-| Measurements | — |
-| Expected result | — |
-| Pass criterion | If feature present: raw BOARD_ID recorded. Mapping not required for this case PASS. If feature absent: case classified DEFERRED_EXCLUDED (not PASS). |
-| Abort criterion | Unsafe current/temperature/smoke; stop and safe-OFF |
-| Evidence | diag readout |
+| Notes | Condition: BOARD_ID sensing included in tested baseline. Else DEFERRED_EXCLUDED. |
+| Blocked by | ADR: —; TBD: TBD-DK-020 (encoding→revision map acceptance); fixture: N/A — uses on-board BOARD_ID sense path; impl: BOARD_ID readout path in RT/diagnostics |
+| Preconditions | Determine whether BOARD_ID readout exists in tested build; Power domain present with BOARD_ID circuit |
+| Topology | DevKit powered; diagnostic/host path to BOARD_ID sense (via J_LP / ADC / documented API) |
+| Equipment | Lab PSU; diagnostic host or debugger capable of reading BOARD_ID value |
+| Hazards | N/A — read-only identity |
+| Test configuration | N/A — identity read; no output-enable configuration required |
+| Stimuli | Issue BOARD_ID read command / diagnostic query |
+| Procedure | 1. If readout absent: mark DEFERRED_EXCLUDED for this baseline 2. If present: power DevKit 3. Read raw BOARD_ID 4. Record value 5. Record mapping status vs TBD-DK-020 (mapped revision or unmapped) |
+| Measurements | BOARD_ID_raw; mapping_status; revision_interpreted_or_UNMAPPED |
+| Expected result | Raw value recorded; interpretation only if TBD-DK-020 map approved |
+| Pass criterion | Raw BOARD_ID recorded AND mapping applied only when TBD-DK-020 approved (otherwise mapping_status=UNMAPPED accepted for recording, but revision-claim PASS blocked). If readout impl missing when sensing claimed: BLOCKED. |
+| Abort criterion | N/A — read-only |
+| Evidence | diagnostic snapshot; identity sheet |
 | Test owner (raw) | Implementation Engineer / lab operator |
 | Certification owner | Independent Reviewer / Test Owner |
+
 
 #### VER-DCC-DK-A-016 — Default OFF across all represented channels after reset
 
@@ -425,23 +436,24 @@ See governance §2–§4. Outcomes: PASS / FAIL / BLOCKED / NOT ASSESSED. Incomp
 | Method | Test |
 | Gate | DK-A |
 | Classification | `MANDATORY` |
-| Objective | After reset, every represented channel is OFF. |
+| Objective | After reset, every represented channel is OFF; quantitative commanded-OFF timing uses TBD-DK-014 when that step is included. |
 | Status | `BLOCKED` |
-| Blocked by | ADR: —; TBD: TBD-DK-014; fixture: —; impl: — |
-| Preconditions | Represented channel inventory signed (C-001 or interim list) |
-| Topology | — |
-| Equipment | As required; models not mandated |
-| Hazards | Case-specific electrical/thermal as applicable |
-| Test configuration | — |
-| Stimuli | — |
-| Procedure | 1. Reset to known state 2. For each represented channel measure output and read diagnostic state |
-| Measurements | per-channel Vout and state |
-| Expected result | — |
-| Pass criterion | 100% of represented channels OFF by measurement and diagnostics. Timing to OFF after command uses TBD-DK-014 when commanding OFF in related cases. |
-| Abort criterion | Unsafe current/temperature/smoke; stop and safe-OFF |
-| Evidence | channel table |
+| Blocked by | ADR: —; TBD: TBD-DK-014 (blocks quantitative commanded-OFF timing if OFF-command timing step is certified); fixture: N/A for default-OFF survey; impl: RT default-OFF behaviour on represented channels |
+| Preconditions | Represented channel list from C-001 or interim inventory; RT programmed; no loads required for voltage OFF survey (optional loads remain disconnected) |
+| Topology | Bench PSU → DevKit; DMM probing each represented channel output terminal to GND; diagnostic host |
+| Equipment | Lab PSU; DMM; diagnostic host |
+| Hazards | Unexpected enable — no loads attached for this survey |
+| Test configuration | Default/safe config with no auto-enable mask |
+| Stimuli | Power-cycle or RT reset; optionally command ON then OFF on one channel to exercise TBD-DK-014 timing (separate quantitative step) |
+| Procedure | 1. Reset/power-cycle 2. Wait READY 3. For each represented channel: measure Vout and read diag 4. Confirm OFF per C-002 observation convention 5. Optional: command ON/OFF on one channel and record t_off_ms for TBD-DK-014 |
+| Measurements | Vout_chN; diag_state_chN; optional t_off_ms |
+| Expected result | 100% of represented channels OFF after reset; optional t_off recorded |
+| Pass criterion | 100% of represented channels OFF by measurement and diagnostics after reset. If certifying commanded OFF timing: t_off_ms ≤ TBD-DK-014 when approved; if TBD-DK-014 open, timing step remains blocked and overall case stays BLOCKED when timing is in scope for the run. Default-OFF survey still requires impl default-OFF path. |
+| Abort criterion | Any channel ON after reset; smoke |
+| Evidence | post-reset measurement table |
 | Test owner (raw) | Implementation Engineer / lab operator |
 | Certification owner | Independent Reviewer / Test Owner |
+
 
 #### VER-DCC-DK-A-017 — Logic/Radio reuse constraint documentation (blocked fidelity)
 
@@ -518,7 +530,7 @@ See governance §2–§4. Outcomes: PASS / FAIL / BLOCKED / NOT ASSESSED. Incomp
 | Test owner (raw) | Implementation Engineer / lab operator |
 | Certification owner | Independent Reviewer / Test Owner |
 
-### VER-DCC-DK-B-003 — Stale/lost ECU node handling
+#### VER-DCC-DK-B-003 — Stale/lost ECU node handling
 
 | Field | Content |
 |-------|---------|
@@ -530,21 +542,22 @@ See governance §2–§4. Outcomes: PASS / FAIL / BLOCKED / NOT ASSESSED. Incomp
 | Classification | `MANDATORY` |
 | Objective | Stop ECU sim and observe lost/stale indication after approved timeout. |
 | Status | `BLOCKED` |
-| Blocked by | ADR: —; TBD: TBD-DK-006; fixture: —; impl: — |
-| Preconditions | — |
-| Topology | — |
-| Equipment | As required; models not mandated |
-| Hazards | Case-specific electrical/thermal as applicable |
-| Test configuration | — |
-| Stimuli | Stop ENGINE_TELEM at t0 after valid stream |
-| Procedure | 1. Establish valid telem 2. Stop sim at t0 3. Poll DCC ecu status until LOST/stale or timeout window ends |
-| Measurements | t_lost_ms |
-| Expected result | — |
-| Pass criterion | Lost/stale indication true at t_lost_ms where approved TBD-DK-006 ≤ t_lost_ms ≤ TBD-DK-006 + documented tolerance. If TBD-DK-006 open: BLOCKED. |
-| Abort criterion | Unsafe current/temperature/smoke; stop and safe-OFF |
-| Evidence | timeline log |
+| Blocked by | ADR: —; TBD: TBD-DK-006 (lost/stale timeout acceptance); fixture: ECU simulator with clean stop/silent; impl: ECU node status / LOST path in RT |
+| Preconditions | B-002 path available; ECU simulator streaming valid telem; diagnostic status readable |
+| Topology | ECU sim ↔ IF-DK-CAN ↔ DevKit; CAN sniffer tap; diagnostic host |
+| Equipment | ECU simulator; CAN FD sniffer; lab PSU; diagnostic host |
+| Hazards | N/A — communication/status case; outputs remain uncommanded ON |
+| Test configuration | CFG-DK-SAFE-01 or CFG-DK-ECU-TELEM-01 with ECU telem consumption enabled; outputs OFF |
+| Stimuli | Establish valid ENGINE_TELEM stream; at t0 stop simulator (silent ECU node) |
+| Procedure | 1. Start sniffer 2. Establish valid telem 3. Stop sim at t0 4. Poll DCC ecu status until LOST/stale 5. Record t_lost_ms 6. Confirm DevKit HEARTBEAT continues |
+| Measurements | t_lost_ms; ecu_status; HEARTBEAT continuity |
+| Expected result | LOST/stale indication; bus remains valid (DevKit traffic continues) |
+| Pass criterion | Lost/stale indication true with t_lost_ms in approved TBD-DK-006 window (+ documented tolerance). If TBD-DK-006 open: BLOCKED. |
+| Abort criterion | Bus shorting; unintended output enable |
+| Evidence | timeline log; sniffer |
 | Test owner (raw) | Implementation Engineer / lab operator |
 | Certification owner | Independent Reviewer / Test Owner |
+
 
 #### VER-DCC-DK-B-004 — Button Box event simulation
 
@@ -584,23 +597,24 @@ See governance §2–§4. Outcomes: PASS / FAIL / BLOCKED / NOT ASSESSED. Incomp
 | Method | Test |
 | Gate | DK-B |
 | Classification | `MANDATORY` |
-| Objective | Confirm termination installation and record waveform metrics against TBD-DK-015. |
+| Objective | Confirm termination installation and record waveform metrics against TBD-DK-015 when approved. |
 | Status | `BLOCKED` |
-| Blocked by | ADR: —; TBD: TBD-DK-015; fixture: —; impl: — |
-| Preconditions | — |
-| Topology | — |
-| Equipment | As required; models not mandated |
-| Hazards | Case-specific electrical/thermal as applicable |
-| Test configuration | — |
-| Stimuli | — |
-| Procedure | 1. Inspect termination resistors presence/location per topology 2. Capture differential CAN waveform during HEARTBEAT 3. Measure metrics required by TBD-DK-015 when defined |
-| Measurements | — |
-| Expected result | — |
-| Pass criterion | Termination inspection PASS AND waveform metrics meet approved TBD-DK-015. If TBD-DK-015 open: BLOCKED (inspection alone cannot PASS integrity claim). |
-| Abort criterion | Unsafe current/temperature/smoke; stop and safe-OFF |
-| Evidence | photo of terminators; scope capture |
+| Blocked by | ADR: —; TBD: TBD-DK-015 (waveform acceptance metrics); fixture: CAN differential probe / scope; impl: N/A for termination presence (physical); DevKit CAN transceiver operating |
+| Preconditions | Linear CAN topology for bench; termination resistors installed per intended topology; HEARTBEAT or traffic available (B-001) |
+| Topology | DevKit CAN_H/CAN_L with termination at documented ends; scope differential probe across CAN_H–CAN_L; sniffer optional |
+| Equipment | Oscilloscope with differential CAN probe (or two single-ended probes); lab PSU; optional CAN sniffer |
+| Hazards | N/A — signal measurement |
+| Test configuration | N/A — bus traffic from DevKit HEARTBEAT; outputs OFF |
+| Stimuli | Energize DevKit to operable; capture CAN differential waveform during HEARTBEAT |
+| Procedure | 1. Inspect termination resistors presence/location; photograph/record 2. Probe CAN_H/CAN_L 3. Capture ≥10 HEARTBEAT frames 4. Measure metrics required by TBD-DK-015 when defined (e.g. differential amplitude, recessive/dominant levels) 5. Export captures |
+| Measurements | termination_present (checklist); Vdiff_dom; Vdiff_rec; other TBD-DK-015 metrics when defined |
+| Expected result | Termination present per topology; waveform metrics meet TBD-DK-015 when approved |
+| Pass criterion | Termination inspection PASS AND waveform metrics meet approved TBD-DK-015. If TBD-DK-015 open: termination evidence may be recorded; integrity acceptance remains BLOCKED. |
+| Abort criterion | N/A |
+| Evidence | photos; scope captures; metric table |
 | Test owner (raw) | Implementation Engineer / lab operator |
 | Certification owner | Independent Reviewer / Test Owner |
+
 
 #### VER-DCC-DK-B-006 — DCPI sustained valid transfer
 
@@ -753,24 +767,25 @@ See governance §2–§4. Outcomes: PASS / FAIL / BLOCKED / NOT ASSESSED. Incomp
 | Method | Test |
 | Gate | DK-B |
 | Classification | `CONDITIONAL_MANDATORY` |
-| Objective | Subscribe telemetry and measure loss against TBD-DK-016. |
+| Objective | Subscribe telemetry and measure loss against TBD-DK-016 when approved. |
 | Status | `BLOCKED` |
-| Notes | Condition: WS in baseline scope. |
-| Blocked by | ADR: —; TBD: TBD-DK-016; fixture: —; impl: — |
-| Preconditions | — |
-| Topology | — |
-| Equipment | As required; models not mandated |
-| Hazards | Case-specific electrical/thermal as applicable |
-| Test configuration | — |
-| Stimuli | — |
-| Procedure | 1. Subscribe 2. Run duration 3. Compute loss |
-| Measurements | — |
-| Expected result | — |
-| Pass criterion | Meets approved TBD-DK-016. If open: BLOCKED. |
-| Abort criterion | Unsafe current/temperature/smoke; stop and safe-OFF |
-| Evidence | WS capture stats |
+| Notes | Condition: WebSocket telemetry in tested gate scope. Else DEFERRED_EXCLUDED. |
+| Blocked by | ADR: —; TBD: TBD-DK-016 (duration and allowed loss); fixture: N/A — host WS client; impl: Service WebSocket telemetry path |
+| Preconditions | Service Wi-Fi/WS available; host on DevKit network; RT providing telemetry source data |
+| Topology | Host WebSocket client ↔ Service WS endpoint (docs/006); DevKit powered |
+| Equipment | Host with WebSocket client (script or browser tooling); lab PSU; packet/frame counter in client |
+| Hazards | N/A — telemetry subscribe |
+| Test configuration | N/A — subscribe-only; no output commands |
+| Stimuli | Open WS telemetry subscription; collect for duration D (D from TBD-DK-016 when approved; provisional collect ≥15 s for evidence even if acceptance blocked) |
+| Procedure | 1. Associate host 2. Open WS telemetry 3. Count frames/messages and gaps for duration D 4. Compute loss metrics per TBD-DK-016 definition when approved 5. Close subscription |
+| Measurements | duration_s; frame_count; gap_count; loss_metric |
+| Expected result | Continuous telemetry stream meeting TBD-DK-016 when approved |
+| Pass criterion | Meets approved TBD-DK-016. If open: record duration/frame_count/gaps; case remains BLOCKED. |
+| Abort criterion | N/A |
+| Evidence | client log CSV; subscription parameters |
 | Test owner (raw) | Implementation Engineer / lab operator |
 | Certification owner | Independent Reviewer / Test Owner |
+
 
 #### VER-DCC-DK-B-012 — Unauthorized outputs API rejected
 
@@ -904,23 +919,24 @@ See governance §2–§4. Outcomes: PASS / FAIL / BLOCKED / NOT ASSESSED. Incomp
 | Method | Test |
 | Gate | DK-C |
 | Classification | `MANDATORY` |
-| Objective | Command a represented HS channel ON then OFF with safe load. |
+| Objective | Command a represented HS channel ON then OFF with a safe load; separate qualitative ON/OFF from quantitative OFF-time. |
 | Status | `BLOCKED` |
-| Blocked by | ADR: —; TBD: TBD-DK-014; fixture: —; impl: — |
-| Preconditions | Load connected only while channel commanded OFF (REQ-026) |
-| Topology | Selected HS channel → safe load; meter/shunt in series |
-| Equipment | As required; models not mandated |
-| Hazards | Load heating |
-| Test configuration | Wiring/test mode authorized |
-| Stimuli | ON command; wait; OFF command |
-| Procedure | 1. Connect load while OFF 2. Command ON 3. Measure V/I and diag ON 4. Command OFF at t0 5. Measure t_off |
-| Measurements | I_load; Vout; t_off_ms; diag state |
-| Expected result | — |
-| Pass criterion | Diag+electrical ON while commanded ON; after OFF, channel OFF with t_off_ms ≤ TBD-DK-014 when approved. If TBD-DK-014 open: BLOCKED. |
-| Abort criterion | Uncontrolled current |
-| Evidence | scope/meter log |
+| Blocked by | ADR: —; TBD: TBD-DK-014 (blocks quantitative t_off_ms criterion only); fixture: safe resistive load sized for CH_HS continuous verification current; impl: HS channel command + diagnostic path; electrical OFF observation convention not recorded as a closed threshold (use procedure convention below — do not invent a new TBD-DK ID) |
+| Preconditions | Represented HS channel CH_HS selected; load connected only while channel commanded OFF (REQ-026); kill accessible; C-001 inventory lists CH_HS as Represented |
+| Topology | Bench PSU → DevKit; CH_HS → safe resistive load; DMM or shunt measuring Vout (load+ to GND) and I_load in series; diagnostic host for channel state |
+| Equipment | Lab PSU; DMM; current shunt or clamp; safe resistive load; diagnostic/command host |
+| Hazards | Load heating — supervised; abort on smoke/uncontrolled current |
+| Test configuration | CFG-DK-HS-ONOFF-01 authorizing CH_HS only; all other represented channels disabled |
+| Stimuli | Command CH_HS ON; hold ≥5 s; command CH_HS OFF at t0 |
+| Procedure | 1. Connect safe load while CH_HS OFF 2. Record Vin and ambient 3. Command ON 4. Measure Vout and I_load; read diagnostic state ON 5. Command OFF at t0 6. Sample Vout/I/diag until OFF 7. Record t_off_ms from t0 to electrical+diagnostic OFF |
+| Measurements | Vin_V; Vout_V; I_load_A; diag_state; t_off_ms |
+| Expected result | While ON: diagnostic state ON AND Vout indicates energized load (Vout ≈ Vin minus switch drop under load) AND I_load > 0. While OFF: diagnostic state OFF AND electrical OFF per observation convention: Vout ≤ 1.0 V relative to ground OR Vout ≤ 5% of Vin (verification observation convention only — not an approved product freeze) AND I_load ≈ 0. Quantitative t_off_ms acceptance remains TBD-DK-014. |
+| Pass criterion | (Qualitative) ON: diag ON + Vout energized + I_load > 0; OFF: diag OFF + electrical OFF per observation convention. (Quantitative) t_off_ms ≤ approved TBD-DK-014. If TBD-DK-014 open: qualitative evidence may be recorded but case status remains BLOCKED (no full PASS). |
+| Abort criterion | Uncontrolled current; smoke; load overtemperature |
+| Evidence | measurement table; load identity; config identity; scope/meter log |
 | Test owner (raw) | Implementation Engineer / lab operator |
 | Certification owner | Independent Reviewer / Test Owner |
+
 
 #### VER-DCC-DK-C-003 — PWM channel behaviour
 
@@ -932,24 +948,25 @@ See governance §2–§4. Outcomes: PASS / FAIL / BLOCKED / NOT ASSESSED. Incomp
 | Method | Test |
 | Gate | DK-C |
 | Classification | `CONDITIONAL_MANDATORY` |
-| Objective | PWM output within approved frequency range. |
+| Objective | Command PWM on a represented PWM channel and measure frequency/duty; acceptance vs approved frequency range blocked by TBD-DK-008. |
 | Status | `BLOCKED` |
-| Notes | Condition: PWM-capable channel represented and in DK-C scope. |
-| Blocked by | ADR: —; TBD: TBD-DK-008; fixture: —; impl: — |
-| Preconditions | — |
-| Topology | — |
-| Equipment | As required; models not mandated |
-| Hazards | Case-specific electrical/thermal as applicable |
-| Test configuration | — |
-| Stimuli | — |
-| Procedure | 1. Command PWM 50% 2. Measure frequency/duty |
-| Measurements | f_Hz; duty_% |
-| Expected result | — |
-| Pass criterion | Measured frequency within TBD-DK-008 at commanded duty 50%. If TBD open: BLOCKED. |
-| Abort criterion | Unsafe current/temperature/smoke; stop and safe-OFF |
-| Evidence | scope capture |
+| Notes | Condition: PWM-capable channel physically represented and in DK-C scope. Else DEFERRED_EXCLUDED. Stimulus duty points below are verification stimuli, not approved product operating requirements. |
+| Blocked by | ADR: —; TBD: TBD-DK-008 (blocks frequency-range acceptance only); fixture: safe load or measurement-only probe on CH_PWM; impl: PWM command path on represented channel |
+| Preconditions | CH_PWM represented; kill accessible; scope/logic analyser available; load connected only while OFF if a load is used |
+| Topology | Bench PSU → DevKit; CH_PWM output → (a) safe load OR (b) measurement-only high-impedance probe to GND; oscilloscope or logic analyser on CH_PWM switched node (and GND reference) |
+| Equipment | Lab PSU; oscilloscope or logic analyser (≥10× expected PWM frequency sample capability); optional safe load; diagnostic/command host |
+| Hazards | Load heating if loaded; probe ground loops |
+| Test configuration | CFG-DK-PWM-01 authorizing CH_PWM PWM commands; record commanded frequency setpoint if config defines one |
+| Stimuli | Verification stimulus duty points (not product requirements): 0%, 25%, 50%, 75%, 100% duty, each held ≥2 s; use commanded frequency from CFG-DK-PWM-01 if present, else firmware default (record actual) |
+| Procedure | 1. Connect probe (and load if used) while OFF 2. For each duty point: command duty; capture ≥20 PWM periods 3. Measure frequency and duty from waveform 4. Record values without inventing tolerance 5. Return to 0%/OFF |
+| Measurements | f_Hz; duty_meas_%; duty_cmd_%; waveform capture ID per point |
+| Expected result | Output waveform is PWM (periodic pulsed drive) at each non-zero duty; at 0% output remains OFF per C-002 OFF convention; measured duty tracks commanded duty directionally (record measured duty; do not certify numeric duty tolerance unless an approved tolerance exists) |
+| Pass criterion | Waveforms captured for all five stimulus points AND measured frequency within approved TBD-DK-008 when closed. If TBD-DK-008 open: record f_Hz/duty_meas; case remains BLOCKED for frequency acceptance. |
+| Abort criterion | Uncontrolled current; smoke; shoot-through suspicion |
+| Evidence | scope captures; measurement table; config identity |
 | Test owner (raw) | Implementation Engineer / lab operator |
 | Certification owner | Independent Reviewer / Test Owner |
+
 
 #### VER-DCC-DK-C-004 — Current observation path cross-check
 
@@ -1078,23 +1095,24 @@ See governance §2–§4. Outcomes: PASS / FAIL / BLOCKED / NOT ASSESSED. Incomp
 | Method | Test |
 | Gate | DK-C |
 | Classification | `MANDATORY` |
-| Objective | Reduce supply to approved UV threshold and observe defined behaviour. |
+| Objective | Apply a controlled supply undervoltage and observe output/diagnostic reaction per approved TBD-DK-012 table when closed. |
 | Status | `BLOCKED` |
-| Blocked by | ADR: —; TBD: TBD-DK-012; fixture: —; impl: — |
-| Preconditions | — |
-| Topology | — |
-| Equipment | As required; models not mandated |
-| Hazards | Case-specific electrical/thermal as applicable |
-| Test configuration | — |
-| Stimuli | — |
-| Procedure | 1. Set Vin to UV procedure 2. Observe lockout/fault |
-| Measurements | — |
-| Expected result | — |
-| Pass criterion | When Vin is reduced to the approved undervoltage stimulus in TBD-DK-012, observed output/diagnostic states equal the approved reaction table in TBD-DK-012 (including timing if specified). If TBD-DK-012 open: BLOCKED. |
-| Abort criterion | Unsafe current/temperature/smoke; stop and safe-OFF |
-| Evidence | PSU log; fault |
+| Blocked by | ADR: —; TBD: TBD-DK-012 (UV threshold, reaction table, recovery threshold); fixture: programmable PSU capable of controlled ramp/step; impl: UV detection/reaction path on DevKit |
+| Preconditions | A-003 bring-up path available; programmable PSU; optional low-risk represented channel may be ON only if reaction table requires observing an ON→OFF transition; kill accessible |
+| Topology | Programmable PSU → IF-DK-PWR-IN; DMM/logger on Vin at power-entry sense point (IF-DK-VBATT-SENSE or entry TP); diagnostic host; optional CH_UV → safe load if ON-state observation required by reaction table |
+| Equipment | Programmable lab PSU with voltage programming; DMM or data logger on Vin; diagnostic/command host; optional safe load |
+| Hazards | Brown-out instability — supervised; abort on smoke/uncontrolled behaviour |
+| Test configuration | CFG-DK-UV-01: either all outputs OFF, or single low-risk CH_UV authorized ON if needed to observe UV reaction on an energized channel (record choice) |
+| Stimuli | 1) Start at nominal Vin candidate 13.8 V (docs/008 candidate — not normative; actual start value recorded) 2) Controlled step or ramp to UV stimulus voltage defined by TBD-DK-012 when approved 3) Hold ≥5 s 4) Recover to nominal per TBD-DK-012 recovery threshold when approved |
+| Procedure | 1. Energize at recorded nominal Vin; note output/diag states 2. If CFG requires CH_UV ON, command ON and confirm 3. Apply UV stimulus (ramp rate or step recorded) measuring Vin at entry sense point 4. Observe diagnostic UV/fault flags and all represented output states 5. Hold 6. Recover Vin to nominal 7. Observe recovery behaviour per table 8. Export Vin and state timelines |
+| Measurements | Vin_V timeline; output states; diagnostic UV/fault flags; timestamps |
+| Expected result | Per approved TBD-DK-012 reaction table (outputs/diagnostics at UV and after recovery). Until closed: procedure is ready; no qualitative PASS. |
+| Pass criterion | Observed states equal approved TBD-DK-012 reaction table including timing if specified. If TBD-DK-012 open: BLOCKED. |
+| Abort criterion | Smoke; uncontrolled current; loss of safe control |
+| Evidence | Vin CSV; diagnostic timeline; config identity; PSU program record |
 | Test owner (raw) | Implementation Engineer / lab operator |
 | Certification owner | Independent Reviewer / Test Owner |
+
 
 #### VER-DCC-DK-C-009 — Thermal observation path
 
@@ -1106,24 +1124,25 @@ See governance §2–§4. Outcomes: PASS / FAIL / BLOCKED / NOT ASSESSED. Incomp
 | Method | Test |
 | Gate | DK-C |
 | Classification | `CONDITIONAL_MANDATORY` |
-| Objective | Record temperature sense during loaded run. |
+| Objective | Record temperature and electrical data under a controlled load profile for thermal observation. |
 | Status | `BLOCKED` |
-| Notes | Condition: thermal observation required for represented protection. |
-| Blocked by | ADR: ADR-DK-011; TBD: TBD-DK-010, TBD-DK-018, TBD-DK-019; fixture: —; impl: — |
-| Preconditions | — |
-| Topology | — |
-| Equipment | As required; models not mandated |
-| Hazards | Case-specific electrical/thermal as applicable |
-| Test configuration | — |
-| Stimuli | — |
-| Procedure | 1. Run load 2. Log temperature |
-| Measurements | — |
-| Expected result | — |
-| Pass criterion | Temperature samples recorded at ≥1 Hz for approved duration. Absolute limit PASS only if TBD-DK-019 approved. |
-| Abort criterion | Unsafe current/temperature/smoke; stop and safe-OFF |
-| Evidence | temp CSV |
+| Notes | Condition: thermal observation required for represented channel protection in tested scope. Else DEFERRED_EXCLUDED. |
+| Blocked by | ADR: ADR-DK-011; TBD: TBD-DK-010, TBD-DK-018, TBD-DK-019; fixture: controlled load and temperature-measurement fixture not defined; impl: on-board or external temperature observation path for Power domain |
+| Preconditions | Represented channel CH_TH selected; kill accessible; temperature sensor path identified (on-board NTC/IF-DK-TEMP or external meter at documented point) |
+| Topology | Bench PSU → DevKit; CH_TH → controlled load (when fixture defined); temperature sensor at documented measurement point; DMM/shunt for V/I; diagnostic host |
+| Equipment | Lab PSU; controlled load (when fixture defined); temperature meter or logged sensor; DMM/shunt; diagnostic host; stopwatch/logger |
+| Hazards | Thermal burn / load overheating — abort if temperature rises uncontrollably or exceeds provisional operator-safe stop (operator judgment until TBD-DK-019 approved) |
+| Test configuration | CFG-DK-THERM-01 authorizing CH_TH only; load profile: steady ON into controlled load for duration D (D from TBD-DK-018 when approved) |
+| Stimuli | Command CH_TH ON at t0; hold for duration D; command OFF |
+| Procedure | 1. Record ambient temperature T_amb 2. Confirm sensor point 3. Command ON 4. Sample temperature at ≥1 Hz for duration D 5. Concurrently sample V/I at ≥1 Hz 6. Command OFF 7. Continue sampling ≥30 s cooldown 8. Export dataset |
+| Measurements | T_amb_C; T_sensor_C timeline; Vout; I_load; timestamps; sample_interval_s |
+| Expected result | Complete dataset: ambient, temperature timeline, V/I timeline for ON and cooldown. Absolute limit / accuracy PASS only after TBD-DK-010/018/019 and ADR-DK-011 closure. |
+| Pass criterion | Dataset complete at ≥1 Hz for approved TBD-DK-018 duration AND temperature accuracy/limit criteria meet TBD-DK-010/019 when approved. If ADR/TBD/fixture open: BLOCKED. |
+| Abort criterion | Smoke; uncontrolled current; temperature rise judged unsafe by operator before TBD-DK-019 exists |
+| Evidence | temp/electrical CSV; fixture definition note; config identity |
 | Test owner (raw) | Implementation Engineer / lab operator |
 | Certification owner | Independent Reviewer / Test Owner |
+
 
 #### VER-DCC-DK-C-010 — Bidirectional forward and reverse direction
 
@@ -1817,28 +1836,28 @@ See governance §2–§4. Outcomes: PASS / FAIL / BLOCKED / NOT ASSESSED. Incomp
 ## 5. Blocked-case dependency summary
 
 > TBD meanings: authoritative register in [`DevKit_System_Requirements.md`](DevKit_System_Requirements.md) §4. Exact IDs only.
-> Placeholder policy: bare `—` / `As required` in Test fields allowed only for BLOCKED cases with missing definition listed in Blocked by (WP-007-R3).
+> Placeholder policy (R3/R4): bare `—` / `As required` only when the missing item is named in `Blocked by`. Numeric TBDs do not conceal undefined topology/equipment.
 
 | Verification ID | Gate | Classification | Blocking ADR | Blocking TBD | Fixture dependency | Implementation dependency | Resulting gate effect |
 |-----------------|------|----------------|--------------|--------------|--------------------|---------------------------|-----------------------|
 | `VER-DCC-DK-A-003` | DK-A | MANDATORY | ADR-DK-006 | TBD-DK-001, TBD-DK-017 | Documented rail test points | Programmed RT image capable of default OFF | Gate DK-A cannot PASS while this MANDATORY case is BLOCKED |
 | `VER-DCC-DK-A-008` | DK-A | MANDATORY | ADR-DK-001 | TBD-DK-007 | J_LP connection access | RT+Power firmware supporting J_LP | Gate DK-A cannot PASS while this MANDATORY case is BLOCKED |
-| `VER-DCC-DK-A-011` | DK-A | MANDATORY | ADR-DK-007 | TBD-DK-005 | Safe WDT injection method | — | Gate DK-A cannot PASS while this MANDATORY case is BLOCKED |
-| `VER-DCC-DK-A-012` | DK-A | MANDATORY | ADR-DK-007 | TBD-DK-004 | — | — | Gate DK-A cannot PASS while this MANDATORY case is BLOCKED |
-| `VER-DCC-DK-A-014` | DK-A | MANDATORY | — | TBD-DK-021 | — | — | Gate DK-A cannot PASS while this MANDATORY case is BLOCKED |
-| `VER-DCC-DK-A-015` | DK-A | CONDITIONAL_MANDATORY | — | TBD-DK-020 | — | BOARD_ID readout | Blocks DK-A PASS only when condition applies; else DEFERRED_EXCLUDED |
-| `VER-DCC-DK-A-016` | DK-A | MANDATORY | — | TBD-DK-014 | — | — | Gate DK-A cannot PASS while this MANDATORY case is BLOCKED |
-| `VER-DCC-DK-B-003` | DK-B | MANDATORY | — | TBD-DK-006 | — | — | Gate DK-B cannot PASS while this MANDATORY case is BLOCKED |
-| `VER-DCC-DK-B-005` | DK-B | MANDATORY | — | TBD-DK-015 | — | — | Gate DK-B cannot PASS while this MANDATORY case is BLOCKED |
-| `VER-DCC-DK-B-011` | DK-B | CONDITIONAL_MANDATORY | — | TBD-DK-016 | — | — | Blocks DK-B PASS only when condition applies; else DEFERRED_EXCLUDED |
-| `VER-DCC-DK-C-002` | DK-C | MANDATORY | — | TBD-DK-014 | — | — | Gate DK-C cannot PASS while this MANDATORY case is BLOCKED |
-| `VER-DCC-DK-C-003` | DK-C | CONDITIONAL_MANDATORY | — | TBD-DK-008 | — | — | Blocks DK-C PASS only when condition applies; else DEFERRED_EXCLUDED |
+| `VER-DCC-DK-A-011` | DK-A | MANDATORY | ADR-DK-007 | TBD-DK-005 (response-time acceptance) | Safe WDT injection method | RT watchdog path that de-energizes outputs | Gate DK-A cannot PASS while this MANDATORY case is BLOCKED |
+| `VER-DCC-DK-A-012` | DK-A | MANDATORY | ADR-DK-007 | TBD-DK-004 (kill response-time acceptance) | kill switch or nKILL_HW assert method on IF-DK-KILL | kill de-energize path independent of Service | Gate DK-A cannot PASS while this MANDATORY case is BLOCKED |
+| `VER-DCC-DK-A-014` | DK-A | MANDATORY | — | TBD-DK-021 (post-kill explicit re-enable sequence definition) | kill switch/fixture | documented re-enable sequence in software/procedure | Gate DK-A cannot PASS while this MANDATORY case is BLOCKED |
+| `VER-DCC-DK-A-015` | DK-A | CONDITIONAL_MANDATORY | — | TBD-DK-020 (encoding→revision map acceptance) | N/A — uses on-board BOARD_ID sense path | BOARD_ID readout path in RT/diagnostics | Blocks DK-A PASS only when condition applies; else DEFERRED_EXCLUDED |
+| `VER-DCC-DK-A-016` | DK-A | MANDATORY | — | TBD-DK-014 (blocks quantitative commanded-OFF timing if OFF-command timing step is certified) | N/A for default-OFF survey | RT default-OFF behaviour on represented channels | Gate DK-A cannot PASS while this MANDATORY case is BLOCKED |
+| `VER-DCC-DK-B-003` | DK-B | MANDATORY | — | TBD-DK-006 (lost/stale timeout acceptance) | ECU simulator with clean stop/silent | ECU node status / LOST path in RT | Gate DK-B cannot PASS while this MANDATORY case is BLOCKED |
+| `VER-DCC-DK-B-005` | DK-B | MANDATORY | — | TBD-DK-015 (waveform acceptance metrics) | CAN differential probe / scope | N/A for termination presence (physical) | Gate DK-B cannot PASS while this MANDATORY case is BLOCKED |
+| `VER-DCC-DK-B-011` | DK-B | CONDITIONAL_MANDATORY | — | TBD-DK-016 (duration and allowed loss) | N/A — host WS client | Service WebSocket telemetry path | Blocks DK-B PASS only when condition applies; else DEFERRED_EXCLUDED |
+| `VER-DCC-DK-C-002` | DK-C | MANDATORY | — | TBD-DK-014 (blocks quantitative t_off_ms criterion only) | safe resistive load sized for CH_HS continuous verification current | HS channel command + diagnostic path | Gate DK-C cannot PASS while this MANDATORY case is BLOCKED |
+| `VER-DCC-DK-C-003` | DK-C | CONDITIONAL_MANDATORY | — | TBD-DK-008 (blocks frequency-range acceptance only) | safe load or measurement-only probe on CH_PWM | PWM command path on represented channel | Blocks DK-C PASS only when condition applies; else DEFERRED_EXCLUDED |
 | `VER-DCC-DK-C-004` | DK-C | MANDATORY | — | TBD-DK-009 | calibrated shunt or clamp meter | diagnostic current observation path on selected channel | Gate DK-C cannot PASS while this MANDATORY case is BLOCKED |
 | `VER-DCC-DK-C-005` | DK-C | MANDATORY | ADR-DK-010 | TBD-DK-011 | overcurrent fixture | overcurrent protect path | Gate DK-C cannot PASS while this MANDATORY case is BLOCKED |
 | `VER-DCC-DK-C-006` | DK-C | MANDATORY | ADR-DK-010 | — | safe short fixture | short protect path | Gate DK-C cannot PASS while this MANDATORY case is BLOCKED |
 | `VER-DCC-DK-C-007` | DK-C | CONDITIONAL_MANDATORY | — | — | open-load / disconnected-load fixture | open-load diagnostic claimed on channel + firmware support | Blocks DK-C PASS only when condition applies; else DEFERRED_EXCLUDED |
-| `VER-DCC-DK-C-008` | DK-C | MANDATORY | — | TBD-DK-012 | — | — | Gate DK-C cannot PASS while this MANDATORY case is BLOCKED |
-| `VER-DCC-DK-C-009` | DK-C | CONDITIONAL_MANDATORY | ADR-DK-011 | TBD-DK-010, TBD-DK-018, TBD-DK-019 | — | — | Blocks DK-C PASS only when condition applies; else DEFERRED_EXCLUDED |
+| `VER-DCC-DK-C-008` | DK-C | MANDATORY | — | TBD-DK-012 (UV threshold, reaction table, recovery threshold) | programmable PSU capable of controlled ramp/step | UV detection/reaction path on DevKit | Gate DK-C cannot PASS while this MANDATORY case is BLOCKED |
+| `VER-DCC-DK-C-009` | DK-C | CONDITIONAL_MANDATORY | ADR-DK-011 | TBD-DK-010, TBD-DK-018, TBD-DK-019 | controlled load and temperature-measurement fixture not defined | on-board or external temperature observation path for Power domain | Blocks DK-C PASS only when condition applies; else DEFERRED_EXCLUDED |
 | `VER-DCC-DK-C-012` | DK-C | MANDATORY | — | TBD-DK-007 | controllable J_LP/SPI disconnect | RT+Power timeout handler | Gate DK-C cannot PASS while this MANDATORY case is BLOCKED |
 | `VER-DCC-DK-C-013` | DK-C | CONDITIONAL_MANDATORY | — | TBD-DK-022 | stall/locked-rotor fixture | stall detect/protect path | Blocks DK-C PASS only when condition applies; else DEFERRED_EXCLUDED |
 | `VER-DCC-DK-C-014` | DK-C | MANDATORY | — | TBD-DK-013 | recoverable fault injection method | retry/latch policy | Gate DK-C cannot PASS while this MANDATORY case is BLOCKED |
@@ -1927,3 +1946,4 @@ See governance §2–§4. Outcomes: PASS / FAIL / BLOCKED / NOT ASSESSED. Incomp
 | 1.1.1 | 2026-07-19 | WP-007-R1 corrections — restore A-004/B-001/B-002 meanings; add A-006/A-007; D-020 supersession; schema fixes |
 | 1.1.2 | 2026-07-19 | WP-007-R2 — TBD register references; A-006 identity-only blockers; blocked matrix exact IDs |
 | 1.1.3 | 2026-07-19 | WP-007-R3 — Test-case completeness audit; D-015 split; placeholder policy |
+| 1.1.4 | 2026-07-19 | WP-007-R4 — semantic placeholder enforcement; C-002/003/008/009 and related Test cases completed |

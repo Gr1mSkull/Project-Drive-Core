@@ -137,3 +137,4 @@ DCFG CRC coverage and encoded-version mappings remain outside WP-007 (ADR-015 co
 | 1.0.1 | 2026-07-19 | WP-007-R1 — Level 1 corrections (taxonomy, cases, gates); scope unchanged |
 | 1.0.2 | 2026-07-19 | WP-007-R2 — Level 1: TBD register restored; CIA references register (no TBD/ADR closures) |
 | 1.0.3 | 2026-07-19 | WP-007-R3 — Level 1: Test-case completeness; D-015 split; counts aligned (no ADR/TBD closures) |
+| 1.0.4 | 2026-07-19 | WP-007-R4 — Level 1: semantic placeholder enforcement on Method:Test cases (no ADR/TBD closures) |
