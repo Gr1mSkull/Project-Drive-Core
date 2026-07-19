@@ -1,9 +1,9 @@
 # DevKit Verification Plan — Gen1
 
 **Document ID:** DOC-DK-VER-001  
-**Version:** 1.1.2  
+**Version:** 1.1.3  
 **Status:** Proposed  
-**Work Package:** WP-007 / WP-007-R1  
+**Work Package:** WP-007 / WP-007-R3  
 **Date:** 2026-07-19  
 
 System requirements: [`DevKit_System_Requirements.md`](DevKit_System_Requirements.md)  
@@ -12,11 +12,20 @@ Identity: ADR-015 / STD-REV-001 · Gate policy: EDL-014
 
 > **TBD authority:** The Threshold Resolution Register in [`DevKit_System_Requirements.md`](DevKit_System_Requirements.md) §4 is the authoritative source for `TBD-DK-*` identifiers. This plan references those IDs; it does not redefine them.
 
-> No case is marked PASS. No physical tests were executed in WP-007 / R1.
+> No case is marked PASS. No physical tests were executed in WP-007 / R1 / R2 / R3.
 
 ## 1. Methods and schemas
 
 Each case uses a method-specific field set (Inspection / Analysis / Demonstration / Test). Shared safety preamble: supervised energization; kill accessible; loads connected only when channel OFF; abort on smoke/uncontrolled current. This preamble does **not** replace case procedures.
+
+### 1.1 Placeholder policy (WP-007-R3)
+
+For `Method: Test` cases, `—`, `As required`, or equivalent generic placeholder is permitted **only** when the case is `BLOCKED` and the missing definition is explicitly listed in `Blocked by`.
+
+Inspection and Analysis cases may use `N/A — reason` where the field genuinely does not apply.
+Prefer `N/A — reason` over a bare dash.
+
+A mandatory or conditional Test case that is not `BLOCKED` shall be fully reproducible from this document without requiring the operator to design the test.
 
 ## 2. Classifications and gate outcomes
 
@@ -162,7 +171,7 @@ See governance §2–§4. Outcomes: PASS / FAIL / BLOCKED / NOT ASSESSED. Incomp
 | Test owner (raw) | Implementation Engineer / lab operator |
 | Certification owner | Independent Reviewer / Test Owner |
 
-### VER-DCC-DK-A-005 — Service-domain programming
+#### VER-DCC-DK-A-005 — Service-domain programming
 
 | Field | Content |
 |-------|---------|
@@ -172,22 +181,23 @@ See governance §2–§4. Outcomes: PASS / FAIL / BLOCKED / NOT ASSESSED. Incomp
 | Method | Test |
 | Gate | DK-A |
 | Classification | `MANDATORY` |
-| Objective | Program Service domain via documented interface. |
+| Objective | Program Service domain via documented interface and verify image identity. |
 | Status | `NOT EXECUTED` |
-| Preconditions | Documented Service programming path available |
-| Topology | Host ↔ Service programming interface (USB or documented alt) |
-| Equipment | Host tools per Service programming guide |
-| Hazards | Case-specific electrical/thermal as applicable |
-| Test configuration | — |
-| Stimuli | Program/verify Service firmware image from known commit |
-| Procedure | 1. Record image identity 2. Program and verify 3. Capture tool log |
-| Measurements | program/verify result |
-| Expected result | Verify success |
-| Pass criterion | Tool reports verify OK for recorded Service image identity. |
-| Abort criterion | Repeated verify failure |
-| Evidence | Host log; image identity |
+| Preconditions | Documented Service programming path available; PSU off or programming-safe state; no channel loads connected |
+| Topology | Host programmer ↔ IF-DK-USB (or documented Service program port) ↔ Service MCU/module |
+| Equipment | Host with Service programming toolchain; USB (or documented) adapter |
+| Hazards | Incorrect image; accidental domain energization |
+| Test configuration | N/A — programming image only; no output-enable configuration applied |
+| Stimuli | Program/verify Service firmware image with recorded commit SHA / artifact ID |
+| Procedure | 1. Record Service image identity 2. Connect adapter in programming-safe state 3. Erase/program/verify per Service programming guide 4. Capture tool log 5. Confirm RT outputs remain uncommanded OFF if Power domain present |
+| Measurements | program/verify result (pass/fail); image identity fields |
+| Expected result | Tool verify success for recorded identity; no represented channel ON |
+| Pass criterion | Tool reports verify success for the recorded Service image identity AND every represented channel remains OFF. |
+| Abort criterion | Unexpected channel ON; verify failure after two documented retries |
+| Evidence | Host programming log; image identity record |
 | Test owner (raw) | Implementation Engineer / lab operator |
 | Certification owner | Independent Reviewer / Test Owner |
+
 
 #### VER-DCC-DK-A-008 — Logic-to-Power interface bring-up and no spurious output enable
 
@@ -256,20 +266,21 @@ See governance §2–§4. Outcomes: PASS / FAIL / BLOCKED / NOT ASSESSED. Incomp
 | Classification | `MANDATORY` |
 | Objective | Observe RT startup reaches documented operable state with outputs OFF. |
 | Status | `NOT EXECUTED` |
-| Preconditions | RT programmed; safe power |
-| Topology | DevKit powered; no loads |
-| Equipment | As required; models not mandated |
-| Hazards | Case-specific electrical/thermal as applicable |
-| Test configuration | — |
-| Stimuli | Power cycle RT domain |
-| Procedure | 1. Power cycle 2. Record time to documented READY/operable indication 3. Read diagnostic mode/state 4. Measure represented outputs |
-| Measurements | t_ready_ms; state_enum; Vout_chN |
-| Expected result | Operable/READY reached; outputs OFF |
+| Preconditions | RT programmed (A-004); A-002 unpowered inspection complete; no loads connected |
+| Topology | Bench PSU → IF-DK-PWR-IN; DevKit Logic (+Power if present); DMM on represented channel outputs; diagnostic/status path |
+| Equipment | Lab PSU; DMM; diagnostic host or local status indicator as documented |
+| Hazards | Unexpected output enable during startup |
+| Test configuration | Default/safe config with all outputs disabled |
+| Stimuli | Power cycle RT domain (apply Vin, wait, remove, re-apply) once |
+| Procedure | 1. Record baseline identity 2. Energize 3. Record time to documented READY/operable indication 4. Read diagnostic mode/state 5. Measure each represented channel Vout 6. Confirm diagnostic output mask OFF 7. De-energize |
+| Measurements | t_ready_ms; state_enum; Vout_chN for each represented channel |
+| Expected result | Operable/READY reached; all represented outputs electrically and diagnostically OFF |
 | Pass criterion | Documented READY/operable state observed AND every represented channel OFF electrically and in diagnostics. |
-| Abort criterion | Output ON during startup |
-| Evidence | state log; measurement table |
+| Abort criterion | Any represented channel ON during startup; smoke; unexpected overcurrent |
+| Evidence | state log; measurement table; identity sheet |
 | Test owner (raw) | Implementation Engineer / lab operator |
 | Certification owner | Independent Reviewer / Test Owner |
+
 
 #### VER-DCC-DK-A-011 — Watchdog fault forces safe outputs OFF within approved time
 
@@ -545,22 +556,23 @@ See governance §2–§4. Outcomes: PASS / FAIL / BLOCKED / NOT ASSESSED. Incomp
 | Method | Test |
 | Gate | DK-B |
 | Classification | `MANDATORY` |
-| Objective | Inject a Button Box DCP event and observe configured response. |
+| Objective | Inject a Button Box DCP event and observe the configured diagnostic/event reception path. |
 | Status | `NOT EXECUTED` |
-| Preconditions | — |
-| Topology | — |
-| Equipment | As required; models not mandated |
-| Hazards | Case-specific electrical/thermal as applicable |
-| Test configuration | Test profile CFG-DK-BB-01 mapping a specific control_id to a low-risk output or logged event |
-| Stimuli | Single Button Box EVENT with control_id=CFG-DK-BB-01.id |
-| Procedure | 1. Load CFG-DK-BB-01 2. Confirm target output OFF 3. Inject event 4. Observe expected output or event log entry within 1 s |
-| Measurements | — |
-| Expected result | — |
-| Pass criterion | Expected effect defined in CFG-DK-BB-01 expected-results table occurs exactly once and is logged with timestamp. |
-| Abort criterion | Unsafe current/temperature/smoke; stop and safe-OFF |
-| Evidence | sim frame; event log; output state |
+| Preconditions | DK-A bring-up complete; CAN path available (B-001); Button Box simulator tool available |
+| Topology | Button Box simulator ↔ IF-DK-CAN ↔ DevKit; CAN sniffer tap |
+| Equipment | Button Box / DCP event simulator; CAN FD sniffer; PSU |
+| Hazards | Unintended output enable if config maps event to a channel — use config with diagnostic-only mapping for this Phase B case |
+| Test configuration | CFG-DK-BB-01: maps control_id `BB_EVT_1` (Button Box instance per docs/004 when defined) to diagnostic event `EVT_BB_1` only; no power-channel enable |
+| Stimuli | Transmit one Button Box event frame for control_id `BB_EVT_1` at t0; repeat once after 500 ms |
+| Procedure | 1. Start sniffer 2. Apply CFG-DK-BB-01 3. Inject BB_EVT_1 4. Confirm DevKit diagnostic/API/event log shows EVT_BB_1 with timestamp 5. Inject second event; confirm second log entry 6. Confirm no represented channel ON |
+| Measurements | event_rx_count; event_id; timestamps; channel output states |
+| Expected result | Two EVT_BB_1 receptions logged; outputs remain OFF |
+| Pass criterion | event_rx_count ≥ 2 for BB_EVT_1/EVT_BB_1 AND all represented channels OFF. If Button Box DCP ID/layout undefined in Accepted protocol baseline: Status BLOCKED (do not invent ID). |
+| Abort criterion | Any channel ON |
+| Evidence | sniffer capture; event log; config identity |
 | Test owner (raw) | Implementation Engineer / lab operator |
 | Certification owner | Independent Reviewer / Test Owner |
+
 
 #### VER-DCC-DK-B-005 — CAN termination presence inspection and waveform metrics
 
@@ -600,22 +612,23 @@ See governance §2–§4. Outcomes: PASS / FAIL / BLOCKED / NOT ASSESSED. Incomp
 | Method | Test |
 | Gate | DK-B |
 | Classification | `MANDATORY` |
-| Objective | Sustain valid DCPI transfers for a defined duration. |
+| Objective | Sustain valid DCPI transfers beyond basic bring-up (A-009). |
 | Status | `NOT EXECUTED` |
-| Preconditions | — |
-| Topology | — |
-| Equipment | As required; models not mandated |
-| Hazards | Case-specific electrical/thermal as applicable |
-| Test configuration | — |
-| Stimuli | Valid DCPI traffic for 60 s |
-| Procedure | 1. Link up 2. Run 60 s 3. Count CRC errors |
-| Measurements | duration_s; crc_error_count; frames |
-| Expected result | — |
-| Pass criterion | duration ≥ 60 s AND crc_error_count == 0 for valid traffic AND frames ≥ 100. |
-| Abort criterion | Unsafe current/temperature/smoke; stop and safe-OFF |
-| Evidence | transfer log |
+| Preconditions | A-009 path available or equivalent DCPI link up; RT and Service programmed |
+| Topology | Logic ↔ Radio via IF-DK-DCPI; optional SPI capture |
+| Equipment | Optional SPI/logic analyzer; Service/RT logs; PSU |
+| Hazards | N/A — no output-enable config applied during this case |
+| Test configuration | N/A — state/ping exchange only; no CONFIG apply of output enables |
+| Stimuli | Continuous valid DCPI state/ping frames for ≥60 s at the documented link rate (or ≥1 Hz if rate TBD — record actual rate) |
+| Procedure | 1. Establish DCPI link 2. Exchange valid frames for ≥60 s 3. Record accept count and error counters at t=0, 30 s, 60 s 4. Confirm outputs remain OFF 5. Stop and export logs |
+| Measurements | valid_accept_count; error_counter; duration_s; output states |
+| Expected result | Sustained acceptance without cumulative unexplained errors; outputs OFF |
+| Pass criterion | duration_s ≥ 60 AND valid_accept_count ≥ 60 AND error_counter does not indicate accepted corrupt frames AND all represented outputs OFF. |
+| Abort criterion | Link hard-fault with undefined recovery; any output ON |
+| Evidence | DCPI log; counters snapshot |
 | Test owner (raw) | Implementation Engineer / lab operator |
 | Certification owner | Independent Reviewer / Test Owner |
+
 
 #### VER-DCC-DK-B-007 — Configuration transfer apply and recovery docs
 
@@ -623,26 +636,27 @@ See governance §2–§4. Outcomes: PASS / FAIL / BLOCKED / NOT ASSESSED. Incomp
 |-------|---------|
 | Verification ID | `VER-DCC-DK-B-007` |
 | Title | Configuration transfer apply and recovery docs |
-| Linked IDs | `REQ-DCC-V-DK-068`, `REQ-DCC-V-DK-083`, `REQ-DCC-V-DK-089`, `REQ-DCC-V-DK-118` |
+| Linked IDs | `REQ-DCC-V-DK-068`, `REQ-DCC-V-DK-083`, `REQ-DCC-V-DK-118` |
 | Method | Test |
 | Gate | DK-B |
 | Classification | `MANDATORY` |
-| Objective | Deliver valid DevKit DCFG/profile and confirm apply ack; confirm recovery doc exists. |
+| Objective | Transfer a valid safe configuration via Service path and confirm apply ack; confirm recovery/rollback doc exists. |
 | Status | `NOT EXECUTED` |
-| Preconditions | — |
-| Topology | — |
-| Equipment | As required; models not mandated |
-| Hazards | Case-specific electrical/thermal as applicable |
-| Test configuration | CFG-DK-VALID-01 compiled to DCFG with format version field present |
-| Stimuli | — |
-| Procedure | 1. Inspect recovery/rollback doc exists 2. Transfer CFG-DK-VALID-01 3. Observe apply ACK 4. Read back active config ID |
-| Measurements | — |
-| Expected result | — |
-| Pass criterion | Apply ACK success AND active configuration_id == CFG-DK-VALID-01 AND DCFG version field present AND recovery procedure document path recorded. |
-| Abort criterion | Unsafe current/temperature/smoke; stop and safe-OFF |
-| Evidence | transfer log; doc path |
+| Preconditions | Service programmed; DCPI or documented config path available; recovery/rollback procedure document available for inspection |
+| Topology | Host/Service ↔ IF-DK-CFG / DCPI ↔ RT; DevKit powered; outputs uncommanded |
+| Equipment | Config transfer host tool; PSU; logs |
+| Hazards | Mis-applied enable mask — use safe config only |
+| Test configuration | CFG-DK-SAFE-01: all represented channels disabled/OFF; recorded config ID + schema version (+ hash when available) |
+| Stimuli | Transfer CFG-DK-SAFE-01; request apply in authorized mode (boot or Service/Wiring mode as documented) |
+| Procedure | 1. Record firmware identity 2. Transfer CFG-DK-SAFE-01 3. Observe apply ack/reject 4. Read back active config identity 5. Confirm all outputs OFF 6. Inspect recovery/rollback document exists and names failure-apply steps (REQ-118) |
+| Measurements | apply_result; active_config_id; output states |
+| Expected result | Apply accepted; active identity matches CFG-DK-SAFE-01; outputs OFF; recovery doc present |
+| Pass criterion | apply_result = accepted AND active_config_id matches CFG-DK-SAFE-01 AND all represented outputs OFF AND recovery/rollback document path recorded. |
+| Abort criterion | Any channel ON after apply |
+| Evidence | transfer log; config identity; recovery doc citation |
 | Test owner (raw) | Implementation Engineer / lab operator |
 | Certification owner | Independent Reviewer / Test Owner |
+
 
 #### VER-DCC-DK-B-008 — DCPI corrupted frame rejection during config path
 
@@ -650,26 +664,27 @@ See governance §2–§4. Outcomes: PASS / FAIL / BLOCKED / NOT ASSESSED. Incomp
 |-------|---------|
 | Verification ID | `VER-DCC-DK-B-008` |
 | Title | DCPI corrupted frame rejection during config path |
-| Linked IDs | `REQ-DCC-V-DK-099` |
+| Linked IDs | `REQ-DCC-V-DK-099`, `REQ-DCC-V-DK-085` |
 | Method | Test |
 | Gate | DK-B |
 | Classification | `MANDATORY` |
-| Objective | Reject corrupted DCPI config frames. |
+| Objective | Reject corrupted DCPI config-path frames without unsafe apply. |
 | Status | `NOT EXECUTED` |
-| Preconditions | — |
-| Topology | — |
-| Equipment | As required; models not mandated |
-| Hazards | Case-specific electrical/thermal as applicable |
-| Test configuration | — |
-| Stimuli | CONFIG frame with inverted CRC |
-| Procedure | 1. Note active config 2. Send corrupted CONFIG 3. Confirm reject 4. Confirm active config unchanged 5. Confirm outputs unchanged |
-| Measurements | — |
-| Expected result | — |
-| Pass criterion | Corrupted CONFIG rejected AND active configuration_id unchanged AND no represented output changes state. |
-| Abort criterion | Unsafe current/temperature/smoke; stop and safe-OFF |
-| Evidence | DCPI log |
+| Preconditions | B-007 path available or equivalent config transfer path; outputs OFF |
+| Topology | Host/Service ↔ IF-DK-DCPI ↔ RT; optional SPI capture |
+| Equipment | Frame injector or modified transfer tool capable of CRC bit-flip; logs; PSU |
+| Hazards | Accidental valid apply of enable mask — keep payload as disabled-outputs config or non-enable fragment |
+| Test configuration | Target payload = CFG-DK-SAFE-01 bytes; corruption = flip ≥1 bit after CRC compute on ≥5 frames |
+| Stimuli | Send ≥5 corrupted-CRC config frames; then send ≥1 valid CFG-DK-SAFE-01 frame |
+| Procedure | 1. Note active config identity 2. Inject corrupted frames 3. Confirm each rejected (no apply ack; error counter/flag) 4. Confirm no channel ON 5. Send valid frame; confirm accept 6. Export evidence |
+| Measurements | corrupt_reject_count; valid_accept; error_counter_or_flag; output states |
+| Expected result | Corrupt rejected; valid accepted; outputs OFF throughout |
+| Pass criterion | corrupt_reject_count ≥ 5 with zero successful apply of corrupted payload AND subsequent valid apply succeeds AND all represented outputs OFF throughout. |
+| Abort criterion | Corrupted frame accepted; any output ON |
+| Evidence | DCPI/config log; counters |
 | Test owner (raw) | Implementation Engineer / lab operator |
 | Certification owner | Independent Reviewer / Test Owner |
+
 
 #### VER-DCC-DK-B-009 — Diagnostic event visibility via Service path
 
@@ -677,26 +692,27 @@ See governance §2–§4. Outcomes: PASS / FAIL / BLOCKED / NOT ASSESSED. Incomp
 |-------|---------|
 | Verification ID | `VER-DCC-DK-B-009` |
 | Title | Diagnostic event visibility via Service path |
-| Linked IDs | `REQ-DCC-V-DK-051`, `REQ-DCC-V-DK-069`, `REQ-DCC-V-DK-097` |
+| Linked IDs | `REQ-DCC-V-DK-069`, `REQ-DCC-V-DK-051`, `REQ-DCC-V-DK-097` |
 | Method | Test |
 | Gate | DK-B |
 | Classification | `MANDATORY` |
-| Objective | Generate a known fault/event and observe it on Service diagnostics. |
+| Objective | A generated diagnostic event is visible via the Service diagnostic path. |
 | Status | `NOT EXECUTED` |
-| Preconditions | — |
-| Topology | — |
-| Equipment | As required; models not mandated |
-| Hazards | Case-specific electrical/thermal as applicable |
-| Test configuration | — |
-| Stimuli | Documented test fault or OUTPUT_TEST generating EVENT |
-| Procedure | 1. Clear/observe baseline 2. Inject event 3. Read Service diagnostic/logger API or UI feed |
-| Measurements | — |
-| Expected result | — |
-| Pass criterion | Event with expected type/code appears on Service path with timestamp within 2 s of injection. |
-| Abort criterion | Unsafe current/temperature/smoke; stop and safe-OFF |
-| Evidence | event record |
+| Preconditions | Service running; RT operable; documented event-generation method available (test API, controlled fault, or Button Box diagnostic event) |
+| Topology | RT → DCPI/Service → REST/diagnostic API or log; host client |
+| Equipment | Host HTTP/diagnostic client; PSU; optional CAN/BB simulator if used as event source |
+| Hazards | Use non-destructive event source only |
+| Test configuration | CFG-DK-SAFE-01 (outputs OFF); event source = BB_EVT_1→EVT_BB_1 from CFG-DK-BB-01 or documented test-event inject |
+| Stimuli | Generate one diagnostic event E1 at t0 |
+| Procedure | 1. Clear/observe baseline event list 2. Inject E1 3. Query Service diagnostic/events API or equivalent 4. Confirm E1 present with type and timestamp 5. Confirm outputs OFF |
+| Measurements | event_visible (yes/no); event_type; timestamp; output states |
+| Expected result | E1 visible on Service path; outputs OFF |
+| Pass criterion | E1 visible with type+timestamp via Service diagnostic path within 5 s of injection AND all represented outputs OFF. |
+| Abort criterion | Any channel ON |
+| Evidence | API/log capture; config identity |
 | Test owner (raw) | Implementation Engineer / lab operator |
 | Certification owner | Independent Reviewer / Test Owner |
+
 
 #### VER-DCC-DK-B-010 — REST status identity/health fields
 
@@ -708,23 +724,24 @@ See governance §2–§4. Outcomes: PASS / FAIL / BLOCKED / NOT ASSESSED. Incomp
 | Method | Test |
 | Gate | DK-B |
 | Classification | `CONDITIONAL_MANDATORY` |
-| Objective | GET /status returns required identity/health fields when REST is in baseline scope. |
+| Objective | REST status endpoint returns required identity/health fields when REST is in gate scope. |
 | Status | `NOT EXECUTED` |
-| Notes | Condition: REST included in tested DevKit Service baseline. Else DEFERRED_EXCLUDED. |
-| Preconditions | — |
-| Topology | — |
-| Equipment | As required; models not mandated |
-| Hazards | Case-specific electrical/thermal as applicable |
-| Test configuration | — |
-| Stimuli | — |
-| Procedure | 1. Determine REST in scope 2. GET /status 3. Validate required fields per docs/006 list cited in record |
-| Measurements | — |
-| Expected result | — |
-| Pass criterion | HTTP 200 AND each required field present and non-empty per cited docs/006 list. If REST out of scope: DEFERRED_EXCLUDED. |
-| Abort criterion | Unsafe current/temperature/smoke; stop and safe-OFF |
-| Evidence | HTTP response body |
+| Notes | Condition: REST API represented in tested DevKit baseline. Else DEFERRED_EXCLUDED. |
+| Preconditions | Service Wi-Fi/REST available; host on DevKit network |
+| Topology | Host HTTP client ↔ Service REST `/api/v1/` (docs/006) |
+| Equipment | Host with curl or equivalent HTTP client; PSU |
+| Hazards | N/A — read-only status |
+| Test configuration | N/A — status read; no output commands |
+| Stimuli | GET documented status/health resource (e.g. `/api/v1/status` or equivalent per docs/006) |
+| Procedure | 1. Associate host to Service network 2. GET status 3. Record JSON fields present 4. Compare to required field list: health/state, firmware identity fields available, config identity when available |
+| Measurements | HTTP status code; field presence checklist |
+| Expected result | HTTP 200; required fields present (values may be NOT RECORDED where unimplemented, but keys present or explicitly documented absent) |
+| Pass criterion | HTTP 200 AND checklist of required status/health keys satisfied per docs/006 DevKit-applicable subset recorded in the test record. If REST not in baseline: DEFERRED_EXCLUDED. |
+| Abort criterion | N/A — read-only |
+| Evidence | response JSON; field checklist |
 | Test owner (raw) | Implementation Engineer / lab operator |
 | Certification owner | Independent Reviewer / Test Owner |
+
 
 #### VER-DCC-DK-B-011 — WebSocket telemetry availability and loss metrics
 
@@ -765,23 +782,24 @@ See governance §2–§4. Outcomes: PASS / FAIL / BLOCKED / NOT ASSESSED. Incomp
 | Method | Test |
 | Gate | DK-B |
 | Classification | `CONDITIONAL_MANDATORY` |
-| Objective | POST outputs without auth rejected when auth model applies. |
+| Objective | Unauthorized REST attempt to command outputs is rejected and does not energize channels. |
 | Status | `NOT EXECUTED` |
-| Notes | Condition: REST auth model in baseline (EDL-013). |
-| Preconditions | — |
-| Topology | — |
-| Equipment | As required; models not mandated |
-| Hazards | Case-specific electrical/thermal as applicable |
-| Test configuration | — |
-| Stimuli | — |
-| Procedure | 1. Ensure no token 2. POST /outputs enable 3. Expect 401/403 per docs/006 |
-| Measurements | — |
-| Expected result | — |
-| Pass criterion | Request denied with documented unauthorized status AND no output state change. |
-| Abort criterion | Unsafe current/temperature/smoke; stop and safe-OFF |
-| Evidence | HTTP log; output state |
+| Notes | Condition: REST outputs API exists in tested baseline. Else DEFERRED_EXCLUDED. |
+| Preconditions | Service REST available; kill not asserted; represented channels OFF |
+| Topology | Host HTTP client ↔ Service REST; DMM on one low-risk represented channel |
+| Equipment | HTTP client; DMM; PSU |
+| Hazards | Accidental authorized enable — use unauthorized/unauthenticated request only |
+| Test configuration | CFG-DK-SAFE-01; no valid auth token / intentionally unauthorized session |
+| Stimuli | POST/PUT to documented outputs enable endpoint for channel CH_X without authorization |
+| Procedure | 1. Measure CH_X OFF 2. Send unauthorized enable request 3. Record HTTP status 4. Measure CH_X 5. Confirm diagnostic state OFF |
+| Measurements | HTTP status; Vout_CH_X; diagnostic enable state |
+| Expected result | Request rejected (4xx/401/403 as documented); channel remains OFF |
+| Pass criterion | HTTP status in documented unauthorized set AND CH_X remains OFF electrically and in diagnostics. |
+| Abort criterion | Channel ON |
+| Evidence | HTTP log; measurement |
 | Test owner (raw) | Implementation Engineer / lab operator |
 | Certification owner | Independent Reviewer / Test Owner |
+
 
 #### VER-DCC-DK-B-013 — Service commands cannot bypass asserted kill
 
@@ -789,26 +807,27 @@ See governance §2–§4. Outcomes: PASS / FAIL / BLOCKED / NOT ASSESSED. Incomp
 |-------|---------|
 | Verification ID | `VER-DCC-DK-B-013` |
 | Title | Service commands cannot bypass asserted kill |
-| Linked IDs | `REQ-DCC-V-DK-037` |
+| Linked IDs | `REQ-DCC-V-DK-037`, `REQ-DCC-V-DK-033` |
 | Method | Test |
 | Gate | DK-B |
 | Classification | `MANDATORY` |
-| Objective | With kill asserted, Service ON commands fail to energize outputs. |
+| Objective | With kill asserted, Service/UI output commands cannot energize represented channels. |
 | Status | `NOT EXECUTED` |
-| Preconditions | — |
-| Topology | — |
-| Equipment | As required; models not mandated |
-| Hazards | Case-specific electrical/thermal as applicable |
-| Test configuration | — |
-| Stimuli | — |
-| Procedure | 1. Assert kill 2. Send authenticated ON if possible 3. Measure outputs |
-| Measurements | — |
-| Expected result | — |
-| Pass criterion | All represented outputs remain OFF during ≥3 ON attempts. |
-| Abort criterion | Unsafe current/temperature/smoke; stop and safe-OFF |
-| Evidence | command log; measurements |
+| Preconditions | Kill path available (A-012 method); Service command path available; optional low-risk channel |
+| Topology | Kill switch → IF-DK-KILL; Host/Service command path; DMM on represented channels |
+| Equipment | Kill switch/fixture; HTTP or Service command client; DMM; PSU |
+| Hazards | Kill path failure — keep loads minimal/safe |
+| Test configuration | CFG-DK-SAFE-01 or config authorizing CH_X only for this negative test |
+| Stimuli | Assert kill at t0; while asserted, send Service/UI enable for CH_X |
+| Procedure | 1. Assert kill; confirm outputs OFF 2. Send Service enable CH_X 3. Measure all represented outputs for ≥5 s 4. Confirm rejection/ignored command in logs 5. De-assert kill only after commands stopped; confirm still OFF until explicit re-enable sequence |
+| Measurements | Vout_chN; command result; kill state |
+| Expected result | No channel ON while kill asserted |
+| Pass criterion | Zero successful energizations from Service/UI while kill asserted AND all represented channels OFF. |
+| Abort criterion | Any channel ON under kill |
+| Evidence | command log; measurement table |
 | Test owner (raw) | Implementation Engineer / lab operator |
 | Certification owner | Independent Reviewer / Test Owner |
+
 
 #### VER-DCC-DK-B-014 — OTA gate-scope classification check
 
@@ -944,21 +963,22 @@ See governance §2–§4. Outcomes: PASS / FAIL / BLOCKED / NOT ASSESSED. Incomp
 | Classification | `MANDATORY` |
 | Objective | Compare physical current measurement to diagnostic current readout. |
 | Status | `BLOCKED` |
-| Blocked by | ADR: —; TBD: TBD-DK-009; fixture: —; impl: — |
-| Preconditions | — |
-| Topology | — |
-| Equipment | As required; models not mandated |
-| Hazards | Case-specific electrical/thermal as applicable |
-| Test configuration | — |
-| Stimuli | — |
-| Procedure | 1. Command ON into known load 2. Measure shunt/clamp current 3. Read diag current 4. Compute error |
-| Measurements | — |
-| Expected result | — |
-| Pass criterion | |I_diag - I_meter| within approved TBD-DK-009. If open: record both values; case BLOCKED for accuracy PASS. |
-| Abort criterion | Unsafe current/temperature/smoke; stop and safe-OFF |
-| Evidence | measurement table |
+| Blocked by | ADR: —; TBD: TBD-DK-009; fixture: calibrated shunt or clamp meter; impl: diagnostic current observation path on selected channel |
+| Preconditions | Represented HS channel CH_I with current sense; safe known load; C-002 path available |
+| Topology | CH_I → known resistive load; series shunt or clamp; diagnostic readout path |
+| Equipment | Calibrated shunt or clamp meter; DMM; PSU; diagnostic host |
+| Hazards | Load heating |
+| Test configuration | CFG-DK-ISENSE-01 authorizing CH_I ON into the known load |
+| Stimuli | Command CH_I ON for ≥5 s at steady load |
+| Procedure | 1. Connect known load while OFF 2. Command ON 3. Measure I_meter at shunt/clamp 4. Read I_diag from diagnostic path 5. Compute abs(I_diag - I_meter) 6. Command OFF |
+| Measurements | I_meter_A; I_diag_A; abs_error_A |
+| Expected result | Error within approved TBD-DK-009 when closed |
+| Pass criterion | abs(I_diag - I_meter) within approved TBD-DK-009. If TBD-DK-009 open: record both values; case remains BLOCKED (no qualitative accuracy PASS). |
+| Abort criterion | Uncontrolled current; smoke |
+| Evidence | measurement table; instrument identity |
 | Test owner (raw) | Implementation Engineer / lab operator |
 | Certification owner | Independent Reviewer / Test Owner |
+
 
 #### VER-DCC-DK-C-005 — Overcurrent reaction
 
@@ -972,21 +992,22 @@ See governance §2–§4. Outcomes: PASS / FAIL / BLOCKED / NOT ASSESSED. Incomp
 | Classification | `MANDATORY` |
 | Objective | Controlled overcurrent causes protect/OFF and observable fault. |
 | Status | `BLOCKED` |
-| Blocked by | ADR: ADR-DK-010; TBD: TBD-DK-011; fixture: overcurrent fixture; impl: — |
-| Preconditions | — |
-| Topology | — |
-| Equipment | As required; models not mandated |
-| Hazards | Case-specific electrical/thermal as applicable |
-| Test configuration | — |
-| Stimuli | — |
-| Procedure | 1. Arm fixture 2. Command ON 3. Apply overcurrent 4. Capture t_protect and fault flag |
-| Measurements | — |
-| Expected result | — |
-| Pass criterion | Channel enters protected/OFF AND fault OVERCURRENT (or documented code) true AND t_protect within approved limit when defined. |
-| Abort criterion | Fixture unsafe |
-| Evidence | fault log; timing |
+| Blocked by | ADR: ADR-DK-010; TBD: TBD-DK-011; fixture: overcurrent fixture; impl: overcurrent protect path |
+| Preconditions | Safe overcurrent fixture rated for test; kill accessible; single channel CH_OC |
+| Topology | CH_OC → overcurrent fixture; current probe; diagnostic path |
+| Equipment | Overcurrent fixture; current probe; PSU; diagnostic host |
+| Hazards | Thermal/fire — supervised; abort on smoke |
+| Test configuration | CFG-DK-OC-01 authorizing CH_OC only |
+| Stimuli | Command CH_OC ON into overcurrent fixture at t0 |
+| Procedure | 1. Arm fixture 2. Command ON at t0 3. Capture I(t) and fault flags until OFF/protect 4. Record t_protect_ms and peak current 5. Confirm latched/held safe state per policy 6. Clear per documented sequence |
+| Measurements | I_peak_A; t_protect_ms; fault_code; output state |
+| Expected result | Protect/OFF with fault; tolerance per TBD-DK-011 when approved |
+| Pass criterion | Protect/OFF with observable fault AND timing/current meet approved TBD-DK-011. If TBD or fixture/ADR-DK-010 open: BLOCKED. |
+| Abort criterion | Uncontrolled current beyond fixture rating; smoke |
+| Evidence | waveform; fault log |
 | Test owner (raw) | Implementation Engineer / lab operator |
 | Certification owner | Independent Reviewer / Test Owner |
+
 
 #### VER-DCC-DK-C-006 — Short-circuit reaction
 
@@ -998,23 +1019,24 @@ See governance §2–§4. Outcomes: PASS / FAIL / BLOCKED / NOT ASSESSED. Incomp
 | Method | Test |
 | Gate | DK-C |
 | Classification | `MANDATORY` |
-| Objective | Controlled short causes safe protected state and fault. |
+| Objective | Safe short-circuit fixture produces protect/OFF and fault indication. |
 | Status | `BLOCKED` |
-| Blocked by | ADR: ADR-DK-010; TBD: —; fixture: safe short fixture; impl: — |
-| Preconditions | — |
-| Topology | — |
-| Equipment | As required; models not mandated |
-| Hazards | Case-specific electrical/thermal as applicable |
-| Test configuration | — |
-| Stimuli | — |
-| Procedure | 1. Verify fixture approved 2. Apply short under procedure 3. Record response |
-| Measurements | — |
-| Expected result | — |
-| Pass criterion | Protected/OFF + short fault indication; no persistent hazardous current. |
-| Abort criterion | Uncontrolled fault energy |
-| Evidence | log |
+| Blocked by | ADR: ADR-DK-010; TBD: —; fixture: safe short fixture; impl: short protect path |
+| Preconditions | Safe short fixture; kill accessible; CH_SC selected |
+| Topology | CH_SC → safe short fixture; current probe; diagnostic path |
+| Equipment | Safe short fixture; current probe; PSU; diagnostic host |
+| Hazards | High current pulse — fixture-limited only |
+| Test configuration | CFG-DK-SC-01 authorizing CH_SC only |
+| Stimuli | Command CH_SC ON into short fixture at t0 |
+| Procedure | 1. Verify fixture safe 2. Command ON at t0 3. Capture protect/OFF and fault 4. Confirm channel remains safe until clear 5. Clear per doc |
+| Measurements | I_peak_A; t_protect_ms; fault_code |
+| Expected result | Protect/OFF with fault; no fixture/DUT damage procedure beyond abort rules |
+| Pass criterion | Channel enters protect/OFF with observable fault AND no continued commanded drive into short. If fixture/ADR-DK-010 open: BLOCKED. |
+| Abort criterion | Fixture failure; smoke; sustained uncontrolled current |
+| Evidence | waveform; fault log |
 | Test owner (raw) | Implementation Engineer / lab operator |
 | Certification owner | Independent Reviewer / Test Owner |
+
 
 #### VER-DCC-DK-C-007 — Open-load indication where supported
 
@@ -1026,23 +1048,25 @@ See governance §2–§4. Outcomes: PASS / FAIL / BLOCKED / NOT ASSESSED. Incomp
 | Method | Test |
 | Gate | DK-C |
 | Classification | `CONDITIONAL_MANDATORY` |
-| Objective | Open-load fault visible if implementation claims support. |
-| Status | `NOT EXECUTED` |
-| Notes | Condition: selected channel claims open-load detection. |
-| Preconditions | — |
-| Topology | — |
-| Equipment | As required; models not mandated |
-| Hazards | Case-specific electrical/thermal as applicable |
-| Test configuration | — |
-| Stimuli | — |
-| Procedure | 1. Check claim 2. If no: DEFERRED_EXCLUDED 3. If yes: open load and read fault |
-| Measurements | — |
-| Expected result | — |
-| Pass criterion | If claimed: open-load fault true within documented latency. If not claimed: DEFERRED_EXCLUDED. |
-| Abort criterion | Unsafe current/temperature/smoke; stop and safe-OFF |
-| Evidence | diag |
+| Objective | Confirm open-load indication on a channel that claims that diagnostic. |
+| Status | `BLOCKED` |
+| Notes | Condition: selected implementation claims open-load diagnostic on the tested channel. Else DEFERRED_EXCLUDED. |
+| Blocked by | ADR: —; TBD: —; fixture: open-load / disconnected-load fixture; impl: open-load diagnostic claimed on channel + firmware support |
+| Preconditions | Channel CH_OL selected with claimed open-load diagnostic; C-002 path available |
+| Topology | CH_OL output open (no load) or open-load fixture; diagnostic path |
+| Equipment | Open-load fixture or safe open connection; diagnostic host; PSU |
+| Hazards | Do not short; supervised |
+| Test configuration | CFG-DK-OL-01 authorizing CH_OL ON for diagnostic probe |
+| Stimuli | Command CH_OL ON with load open at t0 |
+| Procedure | 1. Confirm open connection 2. Command ON 3. Observe open-load indication within documented window 4. Command OFF 5. Export diag log |
+| Measurements | open_load_flag; timestamps; Vout |
+| Expected result | Open-load indication asserted while commanded ON into open load |
+| Pass criterion | open_load_flag true while ON into open load per implementation claim. If claim absent: DEFERRED_EXCLUDED. If claim present but fixture/impl missing: BLOCKED. |
+| Abort criterion | Uncontrolled current; smoke |
+| Evidence | diagnostic log; fixture note |
 | Test owner (raw) | Implementation Engineer / lab operator |
 | Certification owner | Independent Reviewer / Test Owner |
+
 
 #### VER-DCC-DK-C-008 — Undervoltage behaviour
 
@@ -1113,22 +1137,23 @@ See governance §2–§4. Outcomes: PASS / FAIL / BLOCKED / NOT ASSESSED. Incomp
 | Classification | `CONDITIONAL_MANDATORY` |
 | Objective | Command forward then reverse; confirm direction; no conflicting drive. |
 | Status | `NOT EXECUTED` |
-| Supersession | Supersedes stall portion of prior compound C-010 |
-| Notes | Condition: bidirectional channel represented. Stall is separate case C-013. |
-| Preconditions | — |
-| Topology | BD channel → safe motor/load |
-| Equipment | As required; models not mandated |
-| Hazards | Case-specific electrical/thermal as applicable |
-| Test configuration | — |
-| Stimuli | — |
-| Procedure | 1. Command forward 2 s 2. Coast/OFF per config 3. Command reverse 2 s 4. Attempt conflicting drive command sequence 5. Confirm prevention |
-| Measurements | direction indicator or back-EMF/current signature; fault flags |
-| Expected result | — |
+| Supersession | Stall portion split to C-013 |
+| Notes | Condition: bidirectional channel physically represented. Else DEFERRED_EXCLUDED. |
+| Preconditions | BD channel CH_BD represented; safe motor/load connected while OFF; kill accessible |
+| Topology | CH_BD → safe bidirectional load/motor; current probe; diagnostic path |
+| Equipment | Safe motor/load; current probe or shunt; PSU; command host |
+| Hazards | Shoot-through; mechanical hazard — use low voltage/current safe load |
+| Test configuration | CFG-DK-BD-DIR-01 authorizing CH_BD forward/reverse commands |
+| Stimuli | Forward command 2 s; OFF/coast per config; reverse command 2 s; then conflicting simultaneous forward+reverse command attempt |
+| Procedure | 1. Connect load while OFF 2. Command forward 2 s; record direction signature (current/back-EMF/diag) 3. OFF/coast 4. Command reverse 2 s; record signature 5. Issue conflicting command sequence 6. Confirm prevention/fault 7. OFF |
+| Measurements | direction indicator or current signature; fault flags; V/I |
+| Expected result | Forward and reverse signatures distinct; conflicting command rejected/faulted without simultaneous opposing drive |
 | Pass criterion | Forward command produces forward direction signature; reverse produces reverse; conflicting command does not produce simultaneous opposing drive (fault or rejection recorded). |
-| Abort criterion | Shoot-through suspicion |
-| Evidence | video/log; current waveform |
+| Abort criterion | Shoot-through suspicion; smoke; uncontrolled current |
+| Evidence | current waveform; logs; video optional |
 | Test owner (raw) | Implementation Engineer / lab operator |
 | Certification owner | Independent Reviewer / Test Owner |
+
 
 #### VER-DCC-DK-C-011 — Conflicting bridge command prevention (dedicated)
 
@@ -1142,21 +1167,22 @@ See governance §2–§4. Outcomes: PASS / FAIL / BLOCKED / NOT ASSESSED. Incomp
 | Classification | `CONDITIONAL_MANDATORY` |
 | Objective | Attempt simultaneous opposing drive; confirm prevention. |
 | Status | `NOT EXECUTED` |
-| Notes | Condition: BD represented. May be combined evidence with C-010 but separate status. |
-| Preconditions | — |
-| Topology | — |
-| Equipment | As required; models not mandated |
-| Hazards | Case-specific electrical/thermal as applicable |
-| Test configuration | — |
-| Stimuli | — |
-| Procedure | 1. Issue conflicting commands via test API 2. Observe driver enables/fault |
-| Measurements | — |
-| Expected result | — |
+| Notes | Condition: BD represented. May share evidence with C-010 but has separate status. |
+| Preconditions | CH_BD represented; safe load; test API or dual-command path available |
+| Topology | CH_BD → safe load; logic/enable capture if available; diagnostic path |
+| Equipment | Command host; optional logic analyzer on bridge enables; PSU |
+| Hazards | Shoot-through |
+| Test configuration | CFG-DK-BD-DIR-01 |
+| Stimuli | Issue simultaneous opposing drive commands (forward+reverse) via test API at t0 |
+| Procedure | 1. Ensure OFF 2. Issue conflicting commands 3. Observe driver enables/fault for ≥2 s 4. Confirm no simultaneous opposing enable 5. Clear fault per doc |
+| Measurements | enable_line states or diag fault; I_load |
+| Expected result | Rejection/fault; no simultaneous opposing enable |
 | Pass criterion | No simultaneous opposing enable measured; rejection/fault recorded. |
-| Abort criterion | Unsafe current/temperature/smoke; stop and safe-OFF |
-| Evidence | logic capture |
+| Abort criterion | Shoot-through suspicion; smoke |
+| Evidence | logic capture or diag log |
 | Test owner (raw) | Implementation Engineer / lab operator |
 | Certification owner | Independent Reviewer / Test Owner |
+
 
 #### VER-DCC-DK-C-012 — Logic-to-Power control-loss safe OFF
 
@@ -1259,20 +1285,21 @@ See governance §2–§4. Outcomes: PASS / FAIL / BLOCKED / NOT ASSESSED. Incomp
 | Classification | `MANDATORY` |
 | Objective | Execute a defined VCM transition sequence with required and disallowed transitions. |
 | Status | `NOT EXECUTED` |
-| Preconditions | — |
-| Topology | — |
-| Equipment | As required; models not mandated |
-| Hazards | Case-specific electrical/thermal as applicable |
-| Test configuration | CFG-DK-VCM-01 defining modes OFF → READY → ENGINE_RUN (names per profile) |
-| Stimuli | Documented input events/telemetry for each transition |
-| Procedure | 1. Reset to OFF 2. Apply event E1 expecting OFF→READY; record mode+timestamp 3. Apply event E2 expecting READY→ENGINE_RUN 4. Apply disallowed event E_bad expecting no transition 5. Export event log fields: mode_from, mode_to, reason, timestamp |
-| Measurements | — |
-| Expected result | — |
+| Preconditions | RT programmed; CFG-DK-VCM-01 available; diagnostic/event log export available |
+| Topology | DevKit powered; Service/diagnostic host; no loads required for mode-only steps |
+| Equipment | Config/diagnostic host; PSU; event log capture |
+| Hazards | Mode rules enabling outputs — keep output enables disabled in this config except where mode table requires |
+| Test configuration | CFG-DK-VCM-01 defining modes OFF → READY → ENGINE_RUN (names per profile) and disallowed transition E_bad |
+| Stimuli | Documented input events/telemetry E1 (OFF→READY), E2 (READY→ENGINE_RUN), E_bad (disallowed) |
+| Procedure | 1. Reset to OFF 2. Apply E1; record mode+timestamp 3. Apply E2; record 4. Apply E_bad; confirm no mode change 5. Export event log fields mode_from, mode_to, reason, timestamp |
+| Measurements | mode timeline; event log fields |
+| Expected result | Sequence [OFF→READY, READY→ENGINE_RUN]; E_bad ignored |
 | Pass criterion | Observed sequence equals [OFF→READY, READY→ENGINE_RUN]; E_bad produces zero mode change; each required transition appears in event log with mode_from/mode_to/timestamp. |
-| Abort criterion | Unsafe current/temperature/smoke; stop and safe-OFF |
-| Evidence | event log JSON; mode timeline |
+| Abort criterion | Unexpected channel ON; smoke |
+| Evidence | event log JSON; mode timeline; config identity |
 | Test owner (raw) | Implementation Engineer / lab operator |
 | Certification owner | Independent Reviewer / Test Owner |
+
 
 #### VER-DCC-DK-D-003 — Configuration-driven behaviour with two config variants
 
@@ -1339,22 +1366,24 @@ See governance §2–§4. Outcomes: PASS / FAIL / BLOCKED / NOT ASSESSED. Incomp
 | Method | Test |
 | Gate | DK-D |
 | Classification | `MANDATORY` |
-| Objective | Execute one documented rule from CFG-DK-RULE-01. |
-| Status | `NOT EXECUTED` |
-| Preconditions | — |
-| Topology | — |
-| Equipment | As required; models not mandated |
-| Hazards | Case-specific electrical/thermal as applicable |
-| Test configuration | CFG-DK-RULE-01 with threshold T_on from config (not invented) |
-| Stimuli | Simulated coolant_temp from T_on-5 to T_on+5 |
-| Procedure | 1. Load config 2. Ramp temp 3. Observe fan/output at crossings |
-| Measurements | — |
-| Expected result | — |
-| Pass criterion | Output turns ON when temp crosses configured T_on upward; turns OFF per configured off rule; thresholds used equal config values. |
-| Abort criterion | Unsafe current/temperature/smoke; stop and safe-OFF |
-| Evidence | telemetry; output log |
+| Objective | Execute one documented cooling/load rule and prove thresholds come from configuration. |
+| Status | `BLOCKED` |
+| Blocked by | ADR: —; TBD: —; fixture: safe load on CH_COOL; impl: VCM rule engine + CFG-DK-RULE-01 artifact buildable/loadable on DevKit; ECU/telem injector |
+| Preconditions | D-002/D-004 paths available or equivalent; CH_COOL represented; safe load available |
+| Topology | ECU/telem injector ↔ CAN ↔ DevKit; CH_COOL → safe load; DMM/shunt; diagnostic host |
+| Equipment | Telem injector (ECU sim); CAN sniffer; DMM or current shunt; PSU; config tool |
+| Hazards | Unexpected multi-channel enable — authorize only CH_COOL |
+| Test configuration | CFG-DK-RULE-01 identity recorded (config ID/schema/hash when available). Rule R_COOL: when `coolant_temp` ≥ `T_on` enable CH_COOL; when `coolant_temp` ≤ `T_off` disable CH_COOL. Values `T_on` and `T_off` SHALL be read from the loaded configuration record (not hardcoded in the procedure). Expected transition table: (temp=`T_on`-5 → CH_COOL OFF); (temp=`T_on`+5 → CH_COOL ON); (temp=`T_off`-1 → CH_COOL OFF). |
+| Stimuli | Inject ENGINE_TELEM (or documented coolant_temp signal) sequence: hold `T_on`-5 for 5 s; step to `T_on`+5 for 10 s; step to `T_off`-1 for 10 s. Period P as in injector script (record actual). |
+| Procedure | 1. Load CFG-DK-RULE-01; export `T_on`,`T_off` from active config 2. Connect safe load to CH_COOL while OFF 3. Inject temp=`T_on`-5; observe CH_COOL OFF 4. Step to `T_on`+5; measure t_on_ms from step to ON 5. Step to `T_off`-1; measure t_off_ms to OFF 6. Verify thresholds used equal exported config values 7. Export scenario log |
+| Measurements | coolant_temp timeline; CH_COOL V/I or diag state; t_on_ms; t_off_ms; config `T_on`/`T_off` |
+| Expected result | Transitions match CFG-DK-RULE-01 expected transition table; thresholds equal config |
+| Pass criterion | CH_COOL OFF at `T_on`-5; ON after crossing `T_on`+5; OFF after `T_off`-1; exported `T_on`/`T_off` equal values used in the stimulus plan; scenario log contains timestamps, temps, output states. If CFG-DK-RULE-01 cannot be built/loaded: remain BLOCKED. |
+| Abort criterion | Unintended channel ON; smoke; uncontrolled current |
+| Evidence | config export; scenario log JSON; sniffer; output samples |
 | Test owner (raw) | Implementation Engineer / lab operator |
 | Certification owner | Independent Reviewer / Test Owner |
+
 
 #### VER-DCC-DK-D-006 — Button Box integration scenario
 
@@ -1366,22 +1395,24 @@ See governance §2–§4. Outcomes: PASS / FAIL / BLOCKED / NOT ASSESSED. Incomp
 | Method | Test |
 | Gate | DK-D |
 | Classification | `MANDATORY` |
-| Objective | Integrated Button Box event changes output per CFG-DK-BB-02. |
-| Status | `NOT EXECUTED` |
-| Preconditions | — |
-| Topology | — |
-| Equipment | As required; models not mandated |
-| Hazards | Case-specific electrical/thermal as applicable |
-| Test configuration | CFG-DK-BB-02 |
-| Stimuli | Long-press/event as defined in CFG-DK-BB-02 |
-| Procedure | 1. Apply config 2. Inject event 3. Compare to expected-results table |
-| Measurements | — |
-| Expected result | — |
-| Pass criterion | Actual outputs/events equal CFG-DK-BB-02 expected-results table row for that event. |
-| Abort criterion | Unsafe current/temperature/smoke; stop and safe-OFF |
-| Evidence | logs |
+| Objective | Integrated Button Box event changes a represented output per an explicit expected-results table. |
+| Status | `BLOCKED` |
+| Blocked by | ADR: —; TBD: —; fixture: Button Box DCP simulator; impl: CFG-DK-BB-02 artifact + RT mapping of BB event to channel; DCP Button Box message ID defined in Accepted protocol baseline |
+| Preconditions | B-004 path available; CH_BB represented; safe load |
+| Topology | Button Box simulator ↔ IF-DK-CAN ↔ DevKit; sniffer tap; CH_BB → safe load; DMM |
+| Equipment | BB/DCP simulator; CAN sniffer; DMM; PSU; config tool |
+| Hazards | Unexpected enable — single-channel authorization only |
+| Test configuration | CFG-DK-BB-02 with explicit expected-results table embedded in the config package / accompanying test record: Event `BB_EVT_TOGGLE_1` (control_id recorded); Initial CH_BB=OFF; After first event → CH_BB=ON; After second event → CH_BB=OFF. Debounce: ignore duplicate events within 100 ms if config defines debounce; else record actual. |
+| Stimuli | From BB simulator: send `BB_EVT_TOGGLE_1` at t1; wait ≥500 ms; send second `BB_EVT_TOGGLE_1` at t2 |
+| Procedure | 1. Load CFG-DK-BB-02; confirm expected-results table present in evidence pack 2. Set initial CH_BB OFF 3. Start sniffer 4. Inject first event; observe CH_BB ON 5. Inject second event; observe CH_BB OFF 6. Compare to expected-results table 7. Export CAN + output log |
+| Measurements | event timestamps; CH_BB state before/after each event; CAN frames |
+| Expected result | Per CFG-DK-BB-02 expected-results table (OFF→ON→OFF) |
+| Pass criterion | Actual CH_BB states equal CFG-DK-BB-02 expected-results table for both events AND sniffer shows both BB frames AND no other represented channel changes state. If DCP ID or CFG-DK-BB-02 unavailable: BLOCKED. |
+| Abort criterion | Unintended multi-channel enable; smoke |
+| Evidence | CFG-DK-BB-02 expected-results table copy; sniffer; output log |
 | Test owner (raw) | Implementation Engineer / lab operator |
 | Certification owner | Independent Reviewer / Test Owner |
+
 
 #### VER-DCC-DK-D-012 — Service restart isolation for fail-operational output
 
@@ -1393,22 +1424,23 @@ See governance §2–§4. Outcomes: PASS / FAIL / BLOCKED / NOT ASSESSED. Incomp
 | Method | Test |
 | Gate | DK-D |
 | Classification | `MANDATORY` |
-| Objective | Service restart does not force RT fail-operational output OFF. |
+| Objective | Service restart does not force an RT fail-operational represented output OFF. |
 | Status | `NOT EXECUTED` |
-| Preconditions | — |
-| Topology | — |
-| Equipment | As required; models not mandated |
-| Hazards | Case-specific electrical/thermal as applicable |
-| Test configuration | — |
-| Stimuli | — |
-| Procedure | 1. Enable fail-op output via RT path 2. Confirm ON 3. Restart Service (power cycle Radio or reboot cmd) 4. Monitor output during restart window 10 s |
-| Measurements | — |
-| Expected result | — |
-| Pass criterion | Fail-operational output remains ON continuously (sample ≥10 Hz) during Service restart window; no OFF pulse longer than approved glitch limit if defined, else no OFF sample. |
-| Abort criterion | Unsafe current/temperature/smoke; stop and safe-OFF |
-| Evidence | output sample log |
+| Preconditions | Fail-operational function F_FO mapped to represented channel CH_FO; RT path can hold CH_FO ON without Service; Service restart method documented (Radio power-cycle or Service reboot command) |
+| Topology | DevKit Logic+Power (+Radio); CH_FO → safe load; DMM/shunt sampling CH_FO; Service restart actuator |
+| Equipment | DMM or data-logger sampling Vout/I at ≥10 Hz; PSU; Service reboot method; safe load |
+| Hazards | Loss of cooling/load during test — use low-risk CH_FO only |
+| Test configuration | CFG-DK-FO-01: rule/state that holds CH_FO ON from RT/VCM without Service dependency |
+| Stimuli | Place CH_FO ON via RT path; at t0 restart Service (Radio power-cycle or documented reboot); observe for restart window 10 s |
+| Procedure | 1. Apply CFG-DK-FO-01 2. Command/establish CH_FO ON via RT; confirm ON 3. Start sampling ≥10 Hz 4. Restart Service at t0 5. Sample continuously for 10 s 6. Record Service down/up indications 7. Confirm CH_FO still ON at end |
+| Measurements | Vout_CH_FO or I_CH_FO samples at ≥10 Hz for 10 s; Service state timeline |
+| Expected result | CH_FO remains ON; Service may restart independently |
+| Pass criterion | Over the 10 s window at ≥10 Hz sampling, zero samples indicate CH_FO OFF (criterion = zero observed OFF samples). Instrument limitation: OFF pulses shorter than one sample period (≤100 ms at 10 Hz) may be undetected — record sample rate and instrument model. No separate approved glitch TBD is used; if a future TBD defines a glitch limit it shall supersede this criterion via register update. |
+| Abort criterion | Uncontrolled current; smoke; inability to confirm RT ownership of CH_FO |
+| Evidence | sample CSV; Service restart log; config identity |
 | Test owner (raw) | Implementation Engineer / lab operator |
 | Certification owner | Independent Reviewer / Test Owner |
+
 
 #### VER-DCC-DK-D-013 — Tablet disconnect isolation
 
@@ -1420,22 +1452,23 @@ See governance §2–§4. Outcomes: PASS / FAIL / BLOCKED / NOT ASSESSED. Incomp
 | Method | Test |
 | Gate | DK-D |
 | Classification | `MANDATORY` |
-| Objective | Browser/Tablet disconnect does not stop fail-operational output. |
+| Objective | Browser/Tablet disconnect does not stop fail-operational RT output. |
 | Status | `NOT EXECUTED` |
-| Preconditions | — |
-| Topology | — |
-| Equipment | As required; models not mandated |
-| Hazards | Case-specific electrical/thermal as applicable |
-| Test configuration | — |
-| Stimuli | — |
-| Procedure | 1. Enable fail-op output 2. Disconnect WS/client 3. Monitor 10 s |
-| Measurements | — |
-| Expected result | — |
-| Pass criterion | Output remains ON with no OFF sample over 10 s at ≥10 Hz sampling. |
-| Abort criterion | Unsafe current/temperature/smoke; stop and safe-OFF |
-| Evidence | sample log |
+| Preconditions | Active Tablet/WebSocket (or REST long-poll) client connected; CH_FO ON via RT fail-operational path (CFG-DK-FO-01); Service may remain up |
+| Topology | Tablet/browser client ↔ Service Wi-Fi/WS; DevKit RT+Power; CH_FO → safe load; DMM sampling |
+| Equipment | Tablet or browser client; DMM/data-logger ≥10 Hz; PSU; safe load |
+| Hazards | Low-risk channel only |
+| Test configuration | CFG-DK-FO-01; client subscribed to telemetry/status |
+| Stimuli | Disconnect client: close WebSocket / disable Wi-Fi on client / navigate away — record method used |
+| Procedure | 1. Establish client connection; confirm telemetry flowing 2. Confirm CH_FO ON 3. Start ≥10 Hz sampling 4. Disconnect client at t0 5. Sample 10 s 6. Record Service health (may stay up) and RT mode 7. Confirm CH_FO ON |
+| Measurements | Vout/I samples; client connection state; Service health; RT mode |
+| Expected result | CH_FO remains ON; RT continues; Service may show client lost without forcing outputs OFF |
+| Pass criterion | Zero CH_FO OFF samples over 10 s at ≥10 Hz AND RT remains in operable mode executing F_FO AND client shows disconnected. |
+| Abort criterion | CH_FO OFF due to disconnect; smoke |
+| Evidence | sample CSV; client disconnect note; Service/RT state snapshot |
 | Test owner (raw) | Implementation Engineer / lab operator |
 | Certification owner | Independent Reviewer / Test Owner |
+
 
 #### VER-DCC-DK-D-014 — CAN node loss integration reaction
 
@@ -1447,50 +1480,162 @@ See governance §2–§4. Outcomes: PASS / FAIL / BLOCKED / NOT ASSESSED. Incomp
 | Method | Test |
 | Gate | DK-D |
 | Classification | `MANDATORY` |
-| Objective | Losing simulated ECU yields defined reaction without bus damage. |
+| Objective | Losing simulated ECU yields defined stale/LOST reaction without damaging the bus. |
 | Status | `BLOCKED` |
-| Blocked by | ADR: —; TBD: TBD-DK-006; fixture: —; impl: — |
-| Preconditions | — |
-| Topology | — |
-| Equipment | As required; models not mandated |
-| Hazards | Case-specific electrical/thermal as applicable |
-| Test configuration | — |
-| Stimuli | — |
-| Procedure | 1. Establish telem 2. Disconnect sim 3. Observe status and rule inhibits |
-| Measurements | — |
-| Expected result | — |
-| Pass criterion | Lost/stale per TBD-DK-006 AND ENGINE_RUN entry inhibited if required by CFG; no bus hardware damage procedure used beyond disconnect. |
-| Abort criterion | Unsafe current/temperature/smoke; stop and safe-OFF |
-| Evidence | timeline |
+| Blocked by | ADR: —; TBD: TBD-DK-006; fixture: ECU simulator with clean disconnect; impl: stale/LOST handling + VCM inhibit rules in CFG-DK-SCEN-ECU-01 |
+| Preconditions | B-002/B-003 paths available; CFG-DK-SCEN-ECU-01 loaded; initial VCM state READY or ENGINE_RUN per config |
+| Topology | ECU sim ↔ linear CAN ↔ DevKit; sniffer tap; optional CH_COOL load; termination per B-005 intent |
+| Equipment | ECU simulator; CAN sniffer; PSU; diagnostic host |
+| Hazards | Rule-driven enables — low-risk channels only |
+| Test configuration | CFG-DK-SCEN-ECU-01: ENGINE_TELEM period P; on LOST/stale after TBD-DK-006 inhibit new CH_COOL enable and/or required safe action recorded in config |
+| Stimuli | Stream ENGINE_TELEM for ≥10 s; at t_stop stop simulator (silent bus from ECU node); do not short CAN_H/CAN_L |
+| Procedure | 1. Start sniffer 2. Establish telem; note VCM state 3. Stop ECU sim at t_stop 4. Poll status until LOST/stale 5. Confirm expected inhibit/output behaviour per CFG 6. Confirm sniffer still sees DevKit HEARTBEAT (bus remains valid) 7. Export timeline |
+| Measurements | t_lost_ms; VCM/status; CH_COOL state; HEARTBEAT continuity |
+| Expected result | LOST/stale per TBD-DK-006; configured inhibit; bus still carries DevKit traffic |
+| Pass criterion | Lost/stale indication within approved TBD-DK-006 window AND configured output inhibition/unchanged behaviour met AND DevKit HEARTBEAT continues (bus not destroyed). If TBD-DK-006 open: BLOCKED. |
+| Abort criterion | Bus shorting; smoke; unintended multi-channel enable |
+| Evidence | timeline log; sniffer; config identity |
 | Test owner (raw) | Implementation Engineer / lab operator |
 | Certification owner | Independent Reviewer / Test Owner |
 
-#### VER-DCC-DK-D-015 — Configuration apply, reject, atomicity; hot-reload policy
+
+#### VER-DCC-DK-D-015 — Valid configuration apply (authorized path)
 
 | Field | Content |
 |-------|---------|
 | Verification ID | `VER-DCC-DK-D-015` |
-| Title | Configuration apply, reject, atomicity; hot-reload policy |
-| Linked IDs | `REQ-DCC-V-DK-084`, `REQ-DCC-V-DK-085`, `REQ-DCC-V-DK-087`, `REQ-DCC-V-DK-088` |
+| Title | Valid configuration apply (authorized path) |
+| Linked IDs | `REQ-DCC-V-DK-084`, `REQ-DCC-V-DK-087` |
 | Method | Test |
 | Gate | DK-D |
 | Classification | `MANDATORY` |
-| Objective | Valid apply; invalid reject without partial unsafe enables; atomicity. |
+| Objective | Apply a valid safe configuration via the authorized boot-time or Service/Wiring-mode path. |
+| Status | `NOT EXECUTED` |
+| Supersession | Hot-reload and reject/atomicity portions split to D-007, D-008, D-011, D-018 |
+| Preconditions | Config transfer path available (B-007); authorized apply mode available (boot or Service/Wiring as documented) |
+| Topology | Host/Service ↔ IF-DK-CFG/DCPI ↔ RT; outputs uncommanded; DMM on represented channels |
+| Equipment | Config transfer tool; PSU; DMM; logs |
+| Hazards | Mis-enable — valid config must be safe |
+| Test configuration | CFG-DK-SAFE-01 (all channels disabled); record config ID/schema/hash |
+| Stimuli | Transfer and apply CFG-DK-SAFE-01 in authorized mode |
+| Procedure | 1. Record firmware identity 2. Transfer CFG-DK-SAFE-01 3. Apply in authorized mode 4. Confirm apply ack 5. Read back active config identity 6. Measure all represented outputs OFF |
+| Measurements | apply_result; active_config_id; Vout_chN |
+| Expected result | Apply accepted; identity matches; outputs OFF |
+| Pass criterion | apply_result=accepted AND active_config_id matches CFG-DK-SAFE-01 AND all represented outputs OFF. |
+| Abort criterion | Any channel ON |
+| Evidence | apply log; config identity; output table |
+| Test owner (raw) | Implementation Engineer / lab operator |
+| Certification owner | Independent Reviewer / Test Owner |
+
+
+
+#### VER-DCC-DK-D-007 — Invalid configuration capacity/schema rejection
+
+| Field | Content |
+|-------|---------|
+| Verification ID | `VER-DCC-DK-D-007` |
+| Title | Invalid configuration capacity/schema rejection |
+| Linked IDs | `REQ-DCC-V-DK-085`, `REQ-DCC-V-DK-088` |
+| Method | Test |
+| Gate | DK-D |
+| Classification | `MANDATORY` |
+| Objective | Reject a configuration that exceeds channel capacity or fails schema checks without energizing outputs. |
+| Status | `NOT EXECUTED` |
+| Preconditions | D-015 valid-apply path available; ability to craft invalid config (oversize channel count or invalid schema field) |
+| Topology | Host/Service ↔ config path ↔ RT; DMM on represented channels |
+| Equipment | Config transfer tool; PSU; DMM |
+| Hazards | None if reject works — monitor outputs |
+| Test configuration | CFG-DK-INVALID-CAP-01: deliberately exceeds represented channel capacity or violates schema (document exact violation in test record) |
+| Stimuli | Attempt apply of CFG-DK-INVALID-CAP-01 in authorized mode |
+| Procedure | 1. Note baseline outputs OFF and active config 2. Transfer/apply invalid config 3. Confirm reject (no apply ack) 4. Confirm active config unchanged or safe 5. Measure outputs remain OFF |
+| Measurements | apply_result; active_config_id; Vout_chN |
+| Expected result | Rejected; no new channel ON |
+| Pass criterion | apply_result=rejected AND no represented channel newly ON AND prior safe active config retained or system remains in documented safe config state. |
+| Abort criterion | Any channel ON due to rejected apply |
+| Evidence | apply/reject log; output table |
+| Test owner (raw) | Implementation Engineer / lab operator |
+| Certification owner | Independent Reviewer / Test Owner |
+
+#### VER-DCC-DK-D-008 — Corrupt configuration payload rejection
+
+| Field | Content |
+|-------|---------|
+| Verification ID | `VER-DCC-DK-D-008` |
+| Title | Corrupt configuration payload rejection |
+| Linked IDs | `REQ-DCC-V-DK-085`, `REQ-DCC-V-DK-099` |
+| Method | Test |
+| Gate | DK-D |
+| Classification | `MANDATORY` |
+| Objective | Reject truncated/corrupt configuration payloads without partial unsafe enable. |
+| Status | `NOT EXECUTED` |
+| Preconditions | Config path available; corrupt-payload injection method available |
+| Topology | Host/Service ↔ DCPI/config path ↔ RT; DMM on outputs |
+| Equipment | Transfer tool with truncation/bit-flip capability; PSU; DMM |
+| Hazards | Partial apply |
+| Test configuration | Base payload CFG-DK-SAFE-01; create truncated and CRC-corrupted variants (≥1 each) |
+| Stimuli | Apply truncated payload; apply CRC-corrupted payload |
+| Procedure | 1. Baseline OFF 2. Send truncated payload; expect reject 3. Send corrupted payload; expect reject 4. Confirm no channel ON 5. Optionally apply valid CFG-DK-SAFE-01 to confirm path recovery |
+| Measurements | reject counts; output states |
+| Expected result | Both invalid payloads rejected; outputs OFF |
+| Pass criterion | Truncated and corrupted payloads rejected AND zero represented channels newly ON. |
+| Abort criterion | Partial enable observed |
+| Evidence | transfer log; output table |
+| Test owner (raw) | Implementation Engineer / lab operator |
+| Certification owner | Independent Reviewer / Test Owner |
+
+#### VER-DCC-DK-D-011 — Configuration hot-reload authorization policy
+
+| Field | Content |
+|-------|---------|
+| Verification ID | `VER-DCC-DK-D-011` |
+| Title | Configuration hot-reload authorization policy |
+| Linked IDs | `REQ-DCC-V-DK-084` |
+| Method | Test |
+| Gate | DK-D |
+| Classification | `CONDITIONAL_MANDATORY` |
+| Objective | Determine whether hot-reload outside Service/Wiring modes is authorized; execute only if ADR-DK-009 accepts it. |
 | Status | `BLOCKED` |
-| Notes | Hot-reload permission governed by DK-GOV-011; this case tests apply/reject mechanics. Hot-reload outside Service mode remains blocked until ADR-DK-009. |
-| Blocked by | ADR: ADR-DK-009; TBD: —; fixture: —; impl: — |
-| Preconditions | — |
-| Topology | — |
-| Equipment | As required; models not mandated |
-| Hazards | Case-specific electrical/thermal as applicable |
-| Test configuration | — |
-| Stimuli | — |
-| Procedure | 1. Apply valid 2. Apply invalid oversize capacity 3. Confirm reject and outputs safe 4. Apply truncated/corrupt payload 5. Confirm no partial enable |
-| Measurements | — |
-| Expected result | — |
-| Pass criterion | Valid apply success; invalid/corrupt rejected; no represented channel newly ON due to rejected apply. |
-| Abort criterion | Unsafe current/temperature/smoke; stop and safe-OFF |
-| Evidence | apply logs |
+| Notes | Governed by DK-GOV-011 and ADR-DK-009. Condition: ADR-DK-009 Accepted allowing hot-reload in scope. Else DEFERRED_EXCLUDED from gate (do not claim hot-reload verified). |
+| Blocked by | ADR: ADR-DK-009; TBD: —; fixture: —; impl: hot-reload path if authorized; governance: DK-GOV-011 |
+| Preconditions | D-015 path available; system in non-Service/Wiring mode if testing negative authorization |
+| Topology | Host/Service ↔ config path ↔ RT |
+| Equipment | Config tool; PSU; logs |
+| Hazards | Unexpected mode change |
+| Test configuration | CFG-DK-SAFE-01 variant B differing only in non-safety annotation/field |
+| Stimuli | Attempt apply while not in authorized mode (negative) OR in authorized hot-reload mode if ADR accepts |
+| Procedure | 1. Record ADR-DK-009 status 2. If not Accepted for hot-reload: mark DEFERRED_EXCLUDED / keep BLOCKED — do not invent permission 3. If Accepted: execute authorized hot-reload apply and confirm success without unsafe enable |
+| Measurements | apply_result; mode; output states |
+| Expected result | Per ADR-DK-009 decision |
+| Pass criterion | Only if ADR-DK-009 Accepted: hot-reload apply behaves per ADR; outputs remain safe. Otherwise case shall not be certified PASS. |
+| Abort criterion | Unsafe enable |
+| Evidence | ADR citation; apply log |
+| Test owner (raw) | Implementation Engineer / lab operator |
+| Certification owner | Independent Reviewer / Test Owner |
+
+#### VER-DCC-DK-D-018 — Configuration apply atomicity (no partial unsafe enable)
+
+| Field | Content |
+|-------|---------|
+| Verification ID | `VER-DCC-DK-D-018` |
+| Title | Configuration apply atomicity (no partial unsafe enable) |
+| Linked IDs | `REQ-DCC-V-DK-087`, `REQ-DCC-V-DK-088` |
+| Method | Test |
+| Gate | DK-D |
+| Classification | `MANDATORY` |
+| Objective | Interrupted or failed apply does not leave a partial unsafe enable mask. |
+| Status | `NOT EXECUTED` |
+| Preconditions | Config path available; method to interrupt transfer (disconnect Service/DCPI mid-apply) or force fail apply |
+| Topology | Host/Service ↔ config path ↔ RT; DMM on all represented channels |
+| Equipment | Config tool; controllable link interrupt; DMM; PSU |
+| Hazards | Partial enable |
+| Test configuration | CFG-DK-PARTIAL-01: multi-channel enable mask that would turn ON ≥2 channels if fully applied; use only with interrupt/fail before completion |
+| Stimuli | Start apply of CFG-DK-PARTIAL-01; interrupt mid-transfer OR inject fail; observe end state |
+| Procedure | 1. Baseline all OFF with CFG-DK-SAFE-01 2. Start apply PARTIAL-01 3. Interrupt/fail before completion 4. Wait settle 5. Measure all channels 6. Confirm active config not a partial unsafe mask (SAFE retained or documented fail state with all OFF) |
+| Measurements | Vout_chN; active_config_id; apply_result |
+| Expected result | No subset of PARTIAL-01 enables active; outputs OFF |
+| Pass criterion | Zero represented channels ON after interrupted/failed apply AND active config is not a partially applied enable mask. |
+| Abort criterion | Any channel ON after failed apply |
+| Evidence | apply log; output table |
 | Test owner (raw) | Implementation Engineer / lab operator |
 | Certification owner | Independent Reviewer / Test Owner |
 
@@ -1504,22 +1649,23 @@ See governance §2–§4. Outcomes: PASS / FAIL / BLOCKED / NOT ASSESSED. Incomp
 | Method | Test |
 | Gate | DK-D |
 | Classification | `MANDATORY` |
-| Objective | Safety-relevant fault is logged; persistence per case definition. |
+| Objective | Safety-relevant fault is logged; persistence behaviour is explicit. |
 | Status | `NOT EXECUTED` |
-| Preconditions | — |
-| Topology | — |
-| Equipment | As required; models not mandated |
-| Hazards | Case-specific electrical/thermal as applicable |
-| Test configuration | — |
-| Stimuli | — |
-| Procedure | 1. Inject fault F 2. Read log contains F 3. If persistence required: reset and confirm F still present; else document volatile-only |
-| Measurements | — |
-| Expected result | — |
-| Pass criterion | Fault F present in log with type+timestamp before reset; after reset present iff case marked persistent, else absence documented as volatile-only limitation. |
-| Abort criterion | Unsafe current/temperature/smoke; stop and safe-OFF |
-| Evidence | logs before/after |
+| Preconditions | Documented fault-injection or diagnostic event F_SAFE available that does not require unresolved ADR-DK-010 destructive fixtures (prefer software/test-event inject); log export path available |
+| Topology | DevKit powered; diagnostic/log host; no destructive loads required |
+| Equipment | Diagnostic host; PSU; optional non-destructive event injector |
+| Hazards | Prefer non-destructive F_SAFE |
+| Test configuration | CFG-DK-SAFE-01; test record declares persistence_required = YES or NO for this run |
+| Stimuli | Inject fault/event F_SAFE at t0 |
+| Procedure | 1. Clear or note log baseline 2. Inject F_SAFE 3. Read log contains F_SAFE with type+timestamp 4. If persistence_required=YES: power-cycle/reset; confirm F_SAFE still present 5. If NO: reset; confirm absence and document volatile-only |
+| Measurements | log entries before/after reset; timestamps |
+| Expected result | F_SAFE logged; persistence matches declared requirement |
+| Pass criterion | F_SAFE present with type+timestamp before reset; after reset present iff persistence_required=YES, else absence documented as volatile-only. |
+| Abort criterion | Destructive fault escalation; smoke |
+| Evidence | logs before/after; persistence declaration |
 | Test owner (raw) | Implementation Engineer / lab operator |
 | Certification owner | Independent Reviewer / Test Owner |
+
 
 #### VER-DCC-DK-D-017 — Restart recovery to safe defaults
 
@@ -1533,20 +1679,21 @@ See governance §2–§4. Outcomes: PASS / FAIL / BLOCKED / NOT ASSESSED. Incomp
 | Classification | `MANDATORY` |
 | Objective | Power cycle recovers to outputs OFF until authorized re-enable/config. |
 | Status | `NOT EXECUTED` |
-| Preconditions | — |
-| Topology | — |
-| Equipment | As required; models not mandated |
-| Hazards | Case-specific electrical/thermal as applicable |
-| Test configuration | — |
-| Stimuli | — |
-| Procedure | 1. Power cycle 2. Measure outputs 3. Confirm config re-apply rules |
-| Measurements | — |
-| Expected result | — |
+| Preconditions | Represented channels exist; optional prior ON on low-risk channel to prove transition to OFF after cycle |
+| Topology | Bench PSU → DevKit; DMM on all represented channel outputs |
+| Equipment | Lab PSU; DMM; diagnostic host |
+| Hazards | Unexpected residual enable |
+| Test configuration | After recovery, active config shall be absent or CFG-DK-SAFE-01 only — no auto-enable mask |
+| Stimuli | Full power cycle (remove Vin ≥5 s; re-apply) |
+| Procedure | 1. Optionally command one low-risk channel ON 2. Power cycle 3. Wait READY/operable 4. Measure all represented outputs 5. Confirm diagnostic enables OFF 6. Confirm authorized config re-apply required before ON |
+| Measurements | Vout_chN; diagnostic enable mask; mode |
+| Expected result | All outputs OFF until explicit authorized enable/config apply |
 | Pass criterion | All represented outputs OFF after recovery until explicit authorized enable/config apply. |
-| Abort criterion | Unsafe current/temperature/smoke; stop and safe-OFF |
-| Evidence | post-reset table |
+| Abort criterion | Any channel ON after recovery without authorization; smoke |
+| Evidence | post-reset measurement table; identity sheet |
 | Test owner (raw) | Implementation Engineer / lab operator |
 | Certification owner | Independent Reviewer / Test Owner |
+
 
 #### VER-DCC-DK-D-019 — Gate evidence package baseline completeness inspection
 
@@ -1669,35 +1816,37 @@ See governance §2–§4. Outcomes: PASS / FAIL / BLOCKED / NOT ASSESSED. Incomp
 
 ## 5. Blocked-case dependency summary
 
-> TBD meanings: authoritative register in [`DevKit_System_Requirements.md`](DevKit_System_Requirements.md) §4. Exact IDs only (no unjustified ranges).
+> TBD meanings: authoritative register in [`DevKit_System_Requirements.md`](DevKit_System_Requirements.md) §4. Exact IDs only.
+> Placeholder policy: bare `—` / `As required` in Test fields allowed only for BLOCKED cases with missing definition listed in Blocked by (WP-007-R3).
 
 | Verification ID | Gate | Classification | Blocking ADR | Blocking TBD | Fixture dependency | Implementation dependency | Resulting gate effect |
 |-----------------|------|----------------|--------------|--------------|--------------------|---------------------------|-----------------------|
-| `VER-DCC-DK-A-003` | DK-A | MANDATORY | ADR-DK-006 | TBD-DK-001; TBD-DK-017 | Documented rail test points | Programmed RT image capable of default OFF | Gate DK-A cannot PASS while this MANDATORY case is BLOCKED |
-| `VER-DCC-DK-A-006` | DK-A | MANDATORY | ADR-015 process (interim identity procedure escalation) | — (no TBD-DK-* electrical threshold) | — | Runtime semantic firmware metadata may be absent | Gate DK-A cannot PASS while this MANDATORY case is BLOCKED; blockers are identity/provenance process only (STD-REV-001 / DK-GOV-012/014/015) |
+| `VER-DCC-DK-A-003` | DK-A | MANDATORY | ADR-DK-006 | TBD-DK-001, TBD-DK-017 | Documented rail test points | Programmed RT image capable of default OFF | Gate DK-A cannot PASS while this MANDATORY case is BLOCKED |
 | `VER-DCC-DK-A-008` | DK-A | MANDATORY | ADR-DK-001 | TBD-DK-007 | J_LP connection access | RT+Power firmware supporting J_LP | Gate DK-A cannot PASS while this MANDATORY case is BLOCKED |
 | `VER-DCC-DK-A-011` | DK-A | MANDATORY | ADR-DK-007 | TBD-DK-005 | Safe WDT injection method | — | Gate DK-A cannot PASS while this MANDATORY case is BLOCKED |
 | `VER-DCC-DK-A-012` | DK-A | MANDATORY | ADR-DK-007 | TBD-DK-004 | — | — | Gate DK-A cannot PASS while this MANDATORY case is BLOCKED |
-| `VER-DCC-DK-A-014` | DK-A | MANDATORY | — | TBD-DK-021 | — | Documented re-enable sequence | Gate DK-A cannot PASS while this MANDATORY case is BLOCKED |
-| `VER-DCC-DK-A-015` | DK-A | CONDITIONAL_MANDATORY | — | TBD-DK-020 | — | BOARD_ID readout when sensing included | Blocks DK-A PASS only when BOARD_ID sensing is included in tested baseline; else DEFERRED_EXCLUDED |
+| `VER-DCC-DK-A-014` | DK-A | MANDATORY | — | TBD-DK-021 | — | — | Gate DK-A cannot PASS while this MANDATORY case is BLOCKED |
+| `VER-DCC-DK-A-015` | DK-A | CONDITIONAL_MANDATORY | — | TBD-DK-020 | — | BOARD_ID readout | Blocks DK-A PASS only when condition applies; else DEFERRED_EXCLUDED |
 | `VER-DCC-DK-A-016` | DK-A | MANDATORY | — | TBD-DK-014 | — | — | Gate DK-A cannot PASS while this MANDATORY case is BLOCKED |
-| `VER-DCC-DK-B-003` | DK-B | MANDATORY | — | TBD-DK-006 | — | ECU sim stop / status path | Gate DK-B cannot PASS while this MANDATORY case is BLOCKED |
-| `VER-DCC-DK-B-005` | DK-B | MANDATORY | — | TBD-DK-015 | CAN waveform capture | — | Gate DK-B cannot PASS while this MANDATORY case is BLOCKED |
-| `VER-DCC-DK-B-011` | DK-B | CONDITIONAL_MANDATORY | — | TBD-DK-016 | — | WebSocket telemetry path | Blocks DK-B PASS only when WebSocket telemetry is in tested gate scope |
-| `VER-DCC-DK-B-014` | DK-B | CONDITIONAL_MANDATORY | ADR-DK-008 | — | — | OTA capability if gate-required | Blocks DK-B PASS only when ADR-DK-008 makes OTA gate-required; else DEFERRED_EXCLUDED / not mandatory |
-| `VER-DCC-DK-C-002` | DK-C | MANDATORY | — | TBD-DK-014 | Safe load for HS channel | — | Gate DK-C cannot PASS while this MANDATORY case is BLOCKED |
-| `VER-DCC-DK-C-003` | DK-C | CONDITIONAL_MANDATORY | — | TBD-DK-008 | — | PWM channel representation | Blocks DK-C PASS only when PWM channel is represented |
-| `VER-DCC-DK-C-004` | DK-C | MANDATORY | — | TBD-DK-009 | Reference meter/shunt | Current observation path | Gate DK-C cannot PASS while this MANDATORY case is BLOCKED |
-| `VER-DCC-DK-C-005` | DK-C | MANDATORY | ADR-DK-010 | TBD-DK-011 | Overcurrent fixture | — | Gate DK-C cannot PASS while this MANDATORY case is BLOCKED |
-| `VER-DCC-DK-C-006` | DK-C | MANDATORY | ADR-DK-010 | — | Safe short fixture | — | Gate DK-C cannot PASS while this MANDATORY case is BLOCKED |
-| `VER-DCC-DK-C-008` | DK-C | MANDATORY | — | TBD-DK-012 | UV supply fixture | — | Gate DK-C cannot PASS while this MANDATORY case is BLOCKED |
-| `VER-DCC-DK-C-009` | DK-C | CONDITIONAL_MANDATORY | ADR-DK-011 | TBD-DK-010; TBD-DK-018; TBD-DK-019 | Thermal observation path | — | Blocks DK-C PASS only when thermal cases are in tested scope |
-| `VER-DCC-DK-C-012` | DK-C | MANDATORY | — | TBD-DK-007 | Controllable J_LP/SPI disconnect | RT+Power timeout handler | Gate DK-C cannot PASS while this MANDATORY case is BLOCKED |
-| `VER-DCC-DK-C-013` | DK-C | CONDITIONAL_MANDATORY | — | TBD-DK-022 | Stall/locked-rotor fixture | Stall detect/protect path | Blocks DK-C PASS only when BD channel represented and stall verification in baseline |
-| `VER-DCC-DK-C-014` | DK-C | MANDATORY | — | TBD-DK-013 | Recoverable fault injection method | Retry/latch policy | Gate DK-C cannot PASS while this MANDATORY case is BLOCKED |
-| `VER-DCC-DK-D-004` | DK-D | MANDATORY | — | TBD-DK-006 | ECU simulator | VCM telem / rule path | Gate DK-D cannot PASS while this MANDATORY case is BLOCKED |
-| `VER-DCC-DK-D-014` | DK-D | MANDATORY | — | TBD-DK-006 | — | Node-loss handling | Gate DK-D cannot PASS while this MANDATORY case is BLOCKED |
-| `VER-DCC-DK-D-015` | DK-D | MANDATORY | ADR-DK-009 | — | — | Config apply/reject path; hot-reload policy | Gate DK-D cannot PASS while this MANDATORY case is BLOCKED |
+| `VER-DCC-DK-B-003` | DK-B | MANDATORY | — | TBD-DK-006 | — | — | Gate DK-B cannot PASS while this MANDATORY case is BLOCKED |
+| `VER-DCC-DK-B-005` | DK-B | MANDATORY | — | TBD-DK-015 | — | — | Gate DK-B cannot PASS while this MANDATORY case is BLOCKED |
+| `VER-DCC-DK-B-011` | DK-B | CONDITIONAL_MANDATORY | — | TBD-DK-016 | — | — | Blocks DK-B PASS only when condition applies; else DEFERRED_EXCLUDED |
+| `VER-DCC-DK-C-002` | DK-C | MANDATORY | — | TBD-DK-014 | — | — | Gate DK-C cannot PASS while this MANDATORY case is BLOCKED |
+| `VER-DCC-DK-C-003` | DK-C | CONDITIONAL_MANDATORY | — | TBD-DK-008 | — | — | Blocks DK-C PASS only when condition applies; else DEFERRED_EXCLUDED |
+| `VER-DCC-DK-C-004` | DK-C | MANDATORY | — | TBD-DK-009 | calibrated shunt or clamp meter | diagnostic current observation path on selected channel | Gate DK-C cannot PASS while this MANDATORY case is BLOCKED |
+| `VER-DCC-DK-C-005` | DK-C | MANDATORY | ADR-DK-010 | TBD-DK-011 | overcurrent fixture | overcurrent protect path | Gate DK-C cannot PASS while this MANDATORY case is BLOCKED |
+| `VER-DCC-DK-C-006` | DK-C | MANDATORY | ADR-DK-010 | — | safe short fixture | short protect path | Gate DK-C cannot PASS while this MANDATORY case is BLOCKED |
+| `VER-DCC-DK-C-007` | DK-C | CONDITIONAL_MANDATORY | — | — | open-load / disconnected-load fixture | open-load diagnostic claimed on channel + firmware support | Blocks DK-C PASS only when condition applies; else DEFERRED_EXCLUDED |
+| `VER-DCC-DK-C-008` | DK-C | MANDATORY | — | TBD-DK-012 | — | — | Gate DK-C cannot PASS while this MANDATORY case is BLOCKED |
+| `VER-DCC-DK-C-009` | DK-C | CONDITIONAL_MANDATORY | ADR-DK-011 | TBD-DK-010, TBD-DK-018, TBD-DK-019 | — | — | Blocks DK-C PASS only when condition applies; else DEFERRED_EXCLUDED |
+| `VER-DCC-DK-C-012` | DK-C | MANDATORY | — | TBD-DK-007 | controllable J_LP/SPI disconnect | RT+Power timeout handler | Gate DK-C cannot PASS while this MANDATORY case is BLOCKED |
+| `VER-DCC-DK-C-013` | DK-C | CONDITIONAL_MANDATORY | — | TBD-DK-022 | stall/locked-rotor fixture | stall detect/protect path | Blocks DK-C PASS only when condition applies; else DEFERRED_EXCLUDED |
+| `VER-DCC-DK-C-014` | DK-C | MANDATORY | — | TBD-DK-013 | recoverable fault injection method | retry/latch policy | Gate DK-C cannot PASS while this MANDATORY case is BLOCKED |
+| `VER-DCC-DK-D-004` | DK-D | MANDATORY | — | TBD-DK-006 | ECU simulator | VCM telem path | Gate DK-D cannot PASS while this MANDATORY case is BLOCKED |
+| `VER-DCC-DK-D-005` | DK-D | MANDATORY | — | — | safe load on CH_COOL | VCM rule engine + CFG-DK-RULE-01 artifact buildable/loadable on DevKit | Gate DK-D cannot PASS while this MANDATORY case is BLOCKED |
+| `VER-DCC-DK-D-006` | DK-D | MANDATORY | — | — | Button Box DCP simulator | CFG-DK-BB-02 artifact + RT mapping of BB event to channel | Gate DK-D cannot PASS while this MANDATORY case is BLOCKED |
+| `VER-DCC-DK-D-011` | DK-D | CONDITIONAL_MANDATORY | ADR-DK-009 | — | — | hot-reload path if authorized | Blocks DK-D PASS only when condition applies; else DEFERRED_EXCLUDED |
+| `VER-DCC-DK-D-014` | DK-D | MANDATORY | — | TBD-DK-006 | ECU simulator with clean disconnect | stale/LOST handling + VCM inhibit rules in CFG-DK-SCEN-ECU-01 | Gate DK-D cannot PASS while this MANDATORY case is BLOCKED |
 
 
 ## 6. Gates DK-A…DK-D
@@ -1740,7 +1889,8 @@ See governance §2–§4. Outcomes: PASS / FAIL / BLOCKED / NOT ASSESSED. Incomp
 
 ### Gate DK-D
 
-- **MANDATORY:** `VER-DCC-DK-D-002`, `VER-DCC-DK-D-003`, `VER-DCC-DK-D-004`, `VER-DCC-DK-D-005`, `VER-DCC-DK-D-006`, `VER-DCC-DK-D-012`, `VER-DCC-DK-D-013`, `VER-DCC-DK-D-014`, `VER-DCC-DK-D-015`, `VER-DCC-DK-D-016`, `VER-DCC-DK-D-017`, `VER-DCC-DK-D-019`, `VER-DCC-DK-G-003` (D-020 superseded by G-001/G-003 — do not separately certify)
+- **MANDATORY:** `VER-DCC-DK-D-002`, `VER-DCC-DK-D-003`, `VER-DCC-DK-D-004`, `VER-DCC-DK-D-005`, `VER-DCC-DK-D-006`, `VER-DCC-DK-D-007`, `VER-DCC-DK-D-008`, `VER-DCC-DK-D-012`, `VER-DCC-DK-D-013`, `VER-DCC-DK-D-014`, `VER-DCC-DK-D-015`, `VER-DCC-DK-D-016`, `VER-DCC-DK-D-017`, `VER-DCC-DK-D-018`, `VER-DCC-DK-D-019`, `VER-DCC-DK-G-003` (D-020 superseded by G-001/G-003 — do not separately certify)
+- **CONDITIONAL_MANDATORY:** `VER-DCC-DK-D-011` (ADR-DK-009 hot-reload)
 
 | Field | Content |
 |-------|---------|
@@ -1760,10 +1910,13 @@ See governance §2–§4. Outcomes: PASS / FAIL / BLOCKED / NOT ASSESSED. Incomp
 
 | Set | Count |
 |-----|-------|
-| System cases A–D | 59 |
+| System cases A–D | 63 |
 | Governance cases G | 4 |
-| Total cases | 63 |
-| BLOCKED | (see §5 table) |
+| Total cases | 67 |
+| Method: Test | 51 |
+| Test BLOCKED | 26 |
+| Test NOT EXECUTED (complete setup) | 25 |
+
 
 ## Revision history
 
@@ -1773,3 +1926,4 @@ See governance §2–§4. Outcomes: PASS / FAIL / BLOCKED / NOT ASSESSED. Incomp
 | 1.1 | 2026-07-19 | WP-007-R1 — method schemas; splits; gate classifications; identity rule |
 | 1.1.1 | 2026-07-19 | WP-007-R1 corrections — restore A-004/B-001/B-002 meanings; add A-006/A-007; D-020 supersession; schema fixes |
 | 1.1.2 | 2026-07-19 | WP-007-R2 — TBD register references; A-006 identity-only blockers; blocked matrix exact IDs |
+| 1.1.3 | 2026-07-19 | WP-007-R3 — Test-case completeness audit; D-015 split; placeholder policy |

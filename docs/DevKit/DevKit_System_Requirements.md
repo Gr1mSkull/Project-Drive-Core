@@ -1,7 +1,7 @@
 # DevKit System Requirements — Gen1
 
 **Document ID:** DOC-DK-REQ-001  
-**Version:** 1.1.2  
+**Version:** 1.1.3  
 **Status:** Proposed  
 **Work Package:** WP-007 / WP-007-R1  
 **Date:** 2026-07-19  
@@ -974,7 +974,7 @@ Withdrawn IDs are preserved and **not reused**.
 | Source | docs/005 |
 | Rationale | Validation before apply. |
 | Verification method | Test |
-| Verification reference | `VER-DCC-DK-D-015` |
+| Verification reference | `VER-DCC-DK-D-015`, `VER-DCC-DK-D-011` |
 | Status | Proposed |
 | Notes | — |
 
@@ -987,7 +987,7 @@ Withdrawn IDs are preserved and **not reused**.
 | Source | DC-DCC-PWR-104 intent; docs/005 |
 | Rationale | Hardware-capacity validation. |
 | Verification method | Test |
-| Verification reference | `VER-DCC-DK-D-015` |
+| Verification reference | `VER-DCC-DK-D-007`, `VER-DCC-DK-D-008` |
 | Status | Proposed |
 | Notes | Capacity declaration mechanism TBD if schema incomplete. |
 
@@ -1013,7 +1013,7 @@ Withdrawn IDs are preserved and **not reused**.
 | Source | docs/005 atomic apply intent |
 | Rationale | Invalid rejection. |
 | Verification method | Test |
-| Verification reference | `VER-DCC-DK-D-015` |
+| Verification reference | `VER-DCC-DK-D-015`, `VER-DCC-DK-D-018` |
 | Status | Proposed |
 | Notes | — |
 
@@ -1026,7 +1026,7 @@ Withdrawn IDs are preserved and **not reused**.
 | Source | docs/005 |
 | Rationale | Atomic apply. |
 | Verification method | Test |
-| Verification reference | `VER-DCC-DK-D-015` |
+| Verification reference | `VER-DCC-DK-D-007`, `VER-DCC-DK-D-018` |
 | Status | Proposed |
 | Notes | If semantics undefined: escalate. |
 
@@ -1756,3 +1756,4 @@ Threshold numeric values associated with ADR-DK-006 / ADR-DK-007 / ADR-DK-011 ar
 | 1.1 | 2026-07-19 | WP-007-R1 — taxonomy split; governance moved to DK-GOV-* |
 | 1.1.1 | 2026-07-19 | WP-007-R1 mapping corrections for A-006/A-007 and restored case IDs |
 | 1.1.2 | 2026-07-19 | WP-007-R2 — restore authoritative Threshold Resolution Register (TBD-DK-001…022) |
+| 1.1.3 | 2026-07-19 | WP-007-R3 — verification references for D-015 split cases |

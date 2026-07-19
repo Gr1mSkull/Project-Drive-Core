@@ -11,7 +11,7 @@
 | **Date** | 2026-07-19 |
 | **Implementer (name/agent)** | Implementation Engineer (cloud agent) |
 | **Implementer role** | Implementation Engineer |
-| **Revision** | WP-007-R2 — threshold register restored; dependency integrity |
+| **Revision** | WP-007-R3 — Test-case completeness audit |
 
 ### Changed Files
 
@@ -57,6 +57,7 @@ Documentation validation per WP-007 §22 executed (see completion report). No ph
 * Explicit gate classifications (MANDATORY / CONDITIONAL_MANDATORY / DEFERRED_EXCLUDED / OPTIONAL).
 * Gate outcomes PASS/FAIL/BLOCKED/NOT ASSESSED; no PARTIAL PASS; incomplete applicable baseline identity cannot PASS.
 * Blocked-case dependency table added; vague pass criteria removed or blocked on TBD.
+* **R3:** Completed Method:Test field audit; placeholder policy; split D-015 into D-015/D-007/D-008/D-018/D-011; D-005/D-006 blocked on config/impl fixtures with full procedures defined.
 * **R2:** Restored authoritative Threshold Resolution Register (`TBD-DK-001`…`TBD-DK-022`) in System Requirements §4; removed git-history placeholder; corrected `VER-DCC-DK-A-006` to identity-only blockers; exact TBD IDs in blocked matrix (no unjustified ranges).
 
 ### Known Weaknesses
@@ -111,3 +112,4 @@ Revert WP-007 PR; restore prior docs/008 detailed tables from git history if nee
 | 1.1 | 2026-07-19 | WP-007-R1 — review corrections recorded |
 | 1.1.1 | 2026-07-19 | WP-007-R1 — case ID restorations and taxonomy report finalized |
 | 1.1.2 | 2026-07-19 | WP-007-R2 — threshold register restore and dependency integrity |
+| 1.1.3 | 2026-07-19 | WP-007-R3 — verification-case completeness audit |

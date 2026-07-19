@@ -1,9 +1,9 @@
 # DriveCore Traceability Matrix
 
 **Document ID:** DOC-TRACE-MAT-001  
-**Version:** 1.3.2  
+**Version:** 1.3.3  
 **Status:** Proposed  
-**Work Package:** WP-007 / WP-007-R2
+**Work Package:** WP-007 / WP-007-R3
 
 Authoritative policy: `.cursor/ENGINEERING_CONSTITUTION.mdc` §6.
 
@@ -18,8 +18,8 @@ Governance inspection coverage: mapped via VER-DCC-DK-G-*
 Implementation coverage (active system): 0 %
 Evidence coverage: 0 %
 Verified DevKit requirements: 0
-Verification cases (system + governance): 63
-Blocked cases (approx): 24
+Verification cases (system + governance): 67
+Blocked cases (approx): 26
 ```
 
 ## Primary matrix — active system requirements
@@ -97,11 +97,11 @@ Blocked cases (approx): 24
 | REQ-DCC-V-DK-080 | docs/DevKit/DevKit_System_Requirements.md | EDL-007; ADR-015; docs/001 | TBD | config/vehicles/devkit.yaml (scaffold) | Test: `VER-DCC-DK-D-014` | TBD | NOT VERIFIED | WP-007-R1 active |
 | REQ-DCC-V-DK-081 | docs/DevKit/DevKit_System_Requirements.md | EDL-008; EDL-012; docs/004 | TBD | config/vehicles/devkit.yaml (scaffold) | Demonstration: `VER-DCC-DK-B-001` | TBD | NOT VERIFIED | WP-007-R1 active |
 | REQ-DCC-V-DK-083 | docs/DevKit/DevKit_System_Requirements.md | docs/005 | TBD | config/vehicles/devkit.yaml (scaffold) | Inspection: `VER-DCC-DK-B-007` | TBD | NOT VERIFIED | WP-007-R1 active |
-| REQ-DCC-V-DK-084 | docs/DevKit/DevKit_System_Requirements.md | docs/005 | TBD | config/vehicles/devkit.yaml (scaffold) | Test: `VER-DCC-DK-D-015` | TBD | NOT VERIFIED | WP-007-R1 active |
-| REQ-DCC-V-DK-085 | docs/DevKit/DevKit_System_Requirements.md | docs/DCC/Power_Channel_Requirements.md (Proposed) | TBD | config/vehicles/devkit.yaml (scaffold) | Test: `VER-DCC-DK-D-015` | TBD | NOT VERIFIED | WP-007-R1 active |
+| REQ-DCC-V-DK-084 | docs/DevKit/DevKit_System_Requirements.md | docs/005 | TBD | config/vehicles/devkit.yaml (scaffold) | Test: `VER-DCC-DK-D-015`, `VER-DCC-DK-D-011` | TBD | NOT VERIFIED | WP-007-R1 active |
+| REQ-DCC-V-DK-085 | docs/DevKit/DevKit_System_Requirements.md | docs/DCC/Power_Channel_Requirements.md (Proposed) | TBD | config/vehicles/devkit.yaml (scaffold) | Test: `VER-DCC-DK-D-007`, `VER-DCC-DK-D-008` | TBD | NOT VERIFIED | WP-007-R1 active |
 | REQ-DCC-V-DK-086 | docs/DevKit/DevKit_System_Requirements.md | EDL-007; ADR-015; docs/001 | TBD | config/vehicles/devkit.yaml (scaffold) | Analysis / Test: `VER-DCC-DK-D-003`, `VER-DCC-DK-D-005` | TBD | NOT VERIFIED | WP-007-R1 active |
-| REQ-DCC-V-DK-087 | docs/DevKit/DevKit_System_Requirements.md | docs/005 | TBD | config/vehicles/devkit.yaml (scaffold) | Test: `VER-DCC-DK-D-015` | TBD | NOT VERIFIED | WP-007-R1 active |
-| REQ-DCC-V-DK-088 | docs/DevKit/DevKit_System_Requirements.md | docs/005 | TBD | config/vehicles/devkit.yaml (scaffold) | Test: `VER-DCC-DK-D-015` | TBD | NOT VERIFIED | WP-007-R1 active |
+| REQ-DCC-V-DK-087 | docs/DevKit/DevKit_System_Requirements.md | docs/005 | TBD | config/vehicles/devkit.yaml (scaffold) | Test: `VER-DCC-DK-D-015`, `VER-DCC-DK-D-018` | TBD | NOT VERIFIED | WP-007-R1 active |
+| REQ-DCC-V-DK-088 | docs/DevKit/DevKit_System_Requirements.md | docs/005 | TBD | config/vehicles/devkit.yaml (scaffold) | Test: `VER-DCC-DK-D-007`, `VER-DCC-DK-D-018` | TBD | NOT VERIFIED | WP-007-R1 active |
 | REQ-DCC-V-DK-089 | docs/DevKit/DevKit_System_Requirements.md | EDL-007; ADR-015; docs/001 | TBD | config/vehicles/devkit.yaml (scaffold) | Inspection / Test: `VER-DCC-DK-B-007`, `VER-DCC-DK-B-015` | TBD | NOT VERIFIED | WP-007-R1 active |
 | REQ-DCC-V-DK-093 | docs/DevKit/DevKit_System_Requirements.md | EDL-007; ADR-015; docs/001 | TBD | config/vehicles/devkit.yaml (scaffold) | Inspection: `VER-DCC-DK-A-002` | TBD | NOT VERIFIED | WP-007-R1 active |
 | REQ-DCC-V-DK-094 | docs/DevKit/DevKit_System_Requirements.md | EDL-008; EDL-012; docs/004 | TBD | config/vehicles/devkit.yaml (scaffold) | Test: `VER-DCC-DK-A-003` | TBD | NOT VERIFIED | WP-007-R1 active |
@@ -196,3 +196,4 @@ Blocked cases (approx): 24
 | 1.3 | 2026-07-19 | WP-007-R1 taxonomy split |
 | 1.3.1 | 2026-07-19 | WP-007-R1 regenerated after case ID restorations |
 | 1.3.2 | 2026-07-19 | WP-007-R2 — TBD register authority note (no status changes) |
+| 1.3.3 | 2026-07-19 | WP-007-R3 — D-015 split verification refs |
