@@ -1,14 +1,15 @@
 # DevKit Interface Matrix — Gen1
 
 **Document ID:** DOC-DK-IF-001  
-**Version:** 1.0.1  
+**Version:** 1.0.2  
 **Status:** Proposed  
-**Work Package:** WP-007 / WP-007-R1  
+**Work Package:** WP-007 / WP-007-R2  
 **Date:** 2026-07-19
 
 > Interface inventory for verification planning.  
 > **Does not create new pinouts.** References existing authoritative pinouts where available (`docs/002`, EDL-011).  
-> Production fidelity for Logic/Radio physical identity remains ADR-DK-001/002.
+> Production fidelity for Logic/Radio physical identity remains ADR-DK-001/002.  
+> `TBD-DK-*` identifiers referenced below are defined only in [`DevKit_System_Requirements.md`](DevKit_System_Requirements.md) §4 (authoritative Threshold Resolution Register).
 
 ## Interfaces
 
@@ -46,3 +47,4 @@
 |---------|------|--------|
 | 1.0 | 2026-07-19 | WP-007 initial Proposed interface matrix |
 | 1.0.1 | 2026-07-19 | WP-007-R1 — metadata only; no new pinouts |
+| 1.0.2 | 2026-07-19 | WP-007-R2 — TBD authority pointer to System Requirements §4 |

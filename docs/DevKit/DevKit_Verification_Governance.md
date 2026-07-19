@@ -1,9 +1,9 @@
 # DevKit Verification Governance — Gen1
 
 **Document ID:** DOC-DK-GOV-001  
-**Version:** 1.0  
+**Version:** 1.0.1  
 **Status:** Proposed  
-**Work Package:** WP-007-R1  
+**Work Package:** WP-007 / WP-007-R2  
 **Date:** 2026-07-19  
 
 > Process, evidence-use, and claim-control rules for DevKit verification.  
@@ -11,6 +11,14 @@
 > Identifier scheme: `DK-GOV-NNN`.
 
 Related: ADR-015 / STD-REV-001; EDL-014; constitution §4/§13.
+
+```text
+The Threshold Resolution Register in
+docs/DevKit/DevKit_System_Requirements.md
+is the authoritative source for TBD-DK identifiers.
+```
+
+This governance document references `TBD-DK-*` / `ADR-DK-*` identifiers; it does not redefine threshold parameters.
 
 ## 1. Rules
 
@@ -249,20 +257,22 @@ Related: ADR-015 / STD-REV-001; EDL-014; constitution §4/§13.
 | Field | Content |
 |-------|---------|
 | Rule ID | `DK-GOV-024` |
-| Rule | Normative DevKit input operating voltage range SHALL be approved (unit, limits, tolerance) before Gate DK-A exit for power tests requiring that range; until then related cases remain BLOCKED. |
+| Rule | Normative DevKit input operating voltage range SHALL be approved before Gate DK-A exit for power tests requiring that range; until then related cases remain BLOCKED. The unresolved quantity is `TBD-DK-001` as defined in the Threshold Resolution Register. |
 | Originating requirement ID | `REQ-DCC-V-DK-028` (Withdrawn — moved) |
 | Verification | Document/process inspection (`VER-DCC-DK-G-*`) |
 | Implementation coverage | Not applicable |
+| Threshold reference | `TBD-DK-001` (authoritative definition in System Requirements §4) |
 
 ### DK-GOV-025 — Simultaneous load current freeze before multi-load DK-C
 
 | Field | Content |
 |-------|---------|
 | Rule ID | `DK-GOV-025` |
-| Rule | Maximum simultaneous DevKit load current SHALL be approved before Gate DK-C exit for multi-channel load tests; until then related cases remain BLOCKED. |
+| Rule | Maximum simultaneous DevKit load current SHALL be approved before Gate DK-C exit for multi-channel load tests; until then related cases remain BLOCKED. The unresolved quantity is `TBD-DK-003` as defined in the Threshold Resolution Register. |
 | Originating requirement ID | `REQ-DCC-V-DK-029` (Withdrawn — moved) |
 | Verification | Document/process inspection (`VER-DCC-DK-G-*`) |
 | Implementation coverage | Not applicable |
+| Threshold reference | `TBD-DK-003` (authoritative definition in System Requirements §4) |
 
 ## 2. Gate outcome model
 
@@ -304,3 +314,4 @@ A MANDATORY case that is `BLOCKED`, `NOT EXECUTED`, `PARTIAL`, `NOT VERIFIED`, o
 | Version | Date | Change |
 |---------|------|--------|
 | 1.0 | 2026-07-19 | WP-007-R1 — initial governance rules from withdrawn REQ-DCC-V-DK-* |
+| 1.0.1 | 2026-07-19 | WP-007-R2 — TBD authority pointer; GOV-024/025 reference register IDs |

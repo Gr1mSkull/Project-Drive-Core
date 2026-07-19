@@ -103,7 +103,9 @@ Documentation validation checklist in WP-007 §22 — executed in completion rep
 
 ### Open Questions
 
-ADR-DK-001…012; TBD-DK-001…022; DCFG CRC coverage and encoded-version mappings remain outside WP-007 (ADR-015 conditions).
+`ADR-DK-001` through `ADR-DK-012` remain open.  
+`TBD-DK-001` through `TBD-DK-022` remain Open — authoritative definitions are in `docs/DevKit/DevKit_System_Requirements.md` §4 (Threshold Resolution Register). This CIA does not redefine TBD parameters.  
+DCFG CRC coverage and encoded-version mappings remain outside WP-007 (ADR-015 conditions).
 
 ### Approvals (architecture / policy)
 
@@ -133,3 +135,4 @@ ADR-DK-001…012; TBD-DK-001…022; DCFG CRC coverage and encoded-version mappin
 |---------|------|--------|
 | 1.0 | 2026-07-19 | WP-007 initial CIA |
 | 1.0.1 | 2026-07-19 | WP-007-R1 — Level 1 corrections (taxonomy, cases, gates); scope unchanged |
+| 1.0.2 | 2026-07-19 | WP-007-R2 — Level 1: TBD register restored; CIA references register (no TBD/ADR closures) |

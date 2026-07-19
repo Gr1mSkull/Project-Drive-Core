@@ -1,7 +1,7 @@
 # DevKit Verification Plan — Gen1
 
 **Document ID:** DOC-DK-VER-001  
-**Version:** 1.1.1  
+**Version:** 1.1.2  
 **Status:** Proposed  
 **Work Package:** WP-007 / WP-007-R1  
 **Date:** 2026-07-19  
@@ -9,6 +9,8 @@
 System requirements: [`DevKit_System_Requirements.md`](DevKit_System_Requirements.md)  
 Governance: [`DevKit_Verification_Governance.md`](DevKit_Verification_Governance.md)  
 Identity: ADR-015 / STD-REV-001 · Gate policy: EDL-014
+
+> **TBD authority:** The Threshold Resolution Register in [`DevKit_System_Requirements.md`](DevKit_System_Requirements.md) §4 is the authoritative source for `TBD-DK-*` identifiers. This plan references those IDs; it does not redefine them.
 
 > No case is marked PASS. No physical tests were executed in WP-007 / R1.
 
@@ -131,7 +133,7 @@ See governance §2–§4. Outcomes: PASS / FAIL / BLOCKED / NOT ASSESSED. Incomp
 | Classification | `MANDATORY` |
 | Objective | Confirm every applicable STD-REV-001 identity field is recorded so setup is repeatable from baseline identity (system testability); evidence-claim rules remain DK-GOV-*. |
 | Status | `BLOCKED` |
-| Blocked by | TBD-DK-001…004; interim identity procedure escalation if semantic firmware metadata unimplemented |
+| Blocked by | Architectural/process escalation: interim revision-identity procedure required where runtime metadata is not implemented (ADR-015 / STD-REV-001; DK-GOV-012, DK-GOV-014, DK-GOV-015). Not blocked by electrical operating thresholds (TBD-DK-001, TBD-DK-002, TBD-DK-003, TBD-DK-017). |
 | Artifacts inspected | Baseline identity record for the candidate DevKit artifact set; STD-REV-001 applicable field checklist; build/provenance notes if semantic firmware metadata absent |
 | Checklist | Every applicable Logic/Power/Radio/firmware/configuration identity field listed; each field valued, justified N/A, or marked UNKNOWN/NOT RECORDED/TBD; no certification claim with applicable UNKNOWN/NOT RECORDED/TBD (DK-GOV-014…016); if semantic firmware metadata unimplemented, escalate for reviewed interim procedure rather than invent |
 | Pass criterion | Every applicable field valued or justified N/A; zero applicable UNKNOWN/NOT RECORDED/TBD remain for a PASS claim. Missing applicable identity ⇒ gate outcome BLOCKED or NOT ASSESSED (not PASS). |
@@ -1310,7 +1312,8 @@ See governance §2–§4. Outcomes: PASS / FAIL / BLOCKED / NOT ASSESSED. Incomp
 | Gate | DK-D |
 | Classification | `MANDATORY` |
 | Objective | Execute a scripted ECU DCP scenario and confirm VCM/output/event response including stale-node handling where applicable. |
-| Status | `NOT EXECUTED` |
+| Status | `BLOCKED` |
+| Blocked by | ADR: —; TBD: TBD-DK-006; fixture: ECU simulator; impl: VCM telem path |
 | Preconditions | B-002 path available; VCM profile loaded |
 | Topology | ECU sim ↔ CAN ↔ DevKit; sniffer tap; optional low-risk load |
 | Equipment | ECU sim; sniffer; logs |
@@ -1666,32 +1669,36 @@ See governance §2–§4. Outcomes: PASS / FAIL / BLOCKED / NOT ASSESSED. Incomp
 
 ## 5. Blocked-case dependency summary
 
-| Verification ID | Gate | Classification | Blocking ADR | Blocking TBD | Fixture dependency | Resulting gate effect |
-|-----------------|------|----------------|--------------|--------------|--------------------|-----------------------|
-| `VER-DCC-DK-A-006` | DK-A | MANDATORY | — | TBD-DK-001…004 | — | Gate DK-A cannot PASS while this MANDATORY case is BLOCKED |
-| `VER-DCC-DK-A-003` | DK-A | MANDATORY | ADR-DK-006 | TBD-DK-001, TBD-DK-017 | Documented rail test points | Gate DK-A cannot PASS while this MANDATORY case is BLOCKED |
-| `VER-DCC-DK-A-008` | DK-A | MANDATORY | ADR-DK-001 | TBD-DK-007 | J_LP connection access | Gate DK-A cannot PASS while this MANDATORY case is BLOCKED |
-| `VER-DCC-DK-A-011` | DK-A | MANDATORY | ADR-DK-007 | TBD-DK-005 | Safe WDT injection method | Gate DK-A cannot PASS while this MANDATORY case is BLOCKED |
-| `VER-DCC-DK-A-012` | DK-A | MANDATORY | ADR-DK-007 | TBD-DK-004 | — | Gate DK-A cannot PASS while this MANDATORY case is BLOCKED |
-| `VER-DCC-DK-A-014` | DK-A | MANDATORY | — | TBD-DK-021 | — | Gate DK-A cannot PASS while this MANDATORY case is BLOCKED |
-| `VER-DCC-DK-A-015` | DK-A | CONDITIONAL_MANDATORY | — | TBD-DK-020 | — | Blocks DK-A PASS only when BOARD_ID sensing is included in tested baseline; else DEFERRED_EXCLUDED (not counted verified) |
-| `VER-DCC-DK-A-016` | DK-A | MANDATORY | — | TBD-DK-014 | — | Gate DK-A cannot PASS while this MANDATORY case is BLOCKED |
-| `VER-DCC-DK-B-003` | DK-B | MANDATORY | — | TBD-DK-006 | — | Gate DK-B cannot PASS while this MANDATORY case is BLOCKED |
-| `VER-DCC-DK-B-005` | DK-B | MANDATORY | — | TBD-DK-015 | — | Gate DK-B cannot PASS while this MANDATORY case is BLOCKED |
-| `VER-DCC-DK-B-011` | DK-B | CONDITIONAL_MANDATORY | — | TBD-DK-016 | — | Gate DK-B cannot PASS while this CONDITIONAL_MANDATORY case is BLOCKED |
-| `VER-DCC-DK-B-014` | DK-B | CONDITIONAL_MANDATORY | ADR-DK-008 | — | — | Gate DK-B cannot PASS while this CONDITIONAL_MANDATORY case is BLOCKED |
-| `VER-DCC-DK-C-002` | DK-C | MANDATORY | — | TBD-DK-014 | — | Gate DK-C cannot PASS while this MANDATORY case is BLOCKED |
-| `VER-DCC-DK-C-003` | DK-C | CONDITIONAL_MANDATORY | — | TBD-DK-008 | — | Gate DK-C cannot PASS while this CONDITIONAL_MANDATORY case is BLOCKED |
-| `VER-DCC-DK-C-004` | DK-C | MANDATORY | — | TBD-DK-009 | — | Gate DK-C cannot PASS while this MANDATORY case is BLOCKED |
-| `VER-DCC-DK-C-005` | DK-C | MANDATORY | ADR-DK-010 | TBD-DK-011 | overcurrent fixture | Gate DK-C cannot PASS while this MANDATORY case is BLOCKED |
-| `VER-DCC-DK-C-006` | DK-C | MANDATORY | ADR-DK-010 | — | safe short fixture | Gate DK-C cannot PASS while this MANDATORY case is BLOCKED |
-| `VER-DCC-DK-C-008` | DK-C | MANDATORY | — | TBD-DK-012 | — | Gate DK-C cannot PASS while this MANDATORY case is BLOCKED |
-| `VER-DCC-DK-C-009` | DK-C | CONDITIONAL_MANDATORY | ADR-DK-011 | TBD-DK-010, TBD-DK-018, TBD-DK-019 | — | Gate DK-C cannot PASS while this CONDITIONAL_MANDATORY case is BLOCKED |
-| `VER-DCC-DK-C-012` | DK-C | MANDATORY | — | TBD-DK-007 | — | Gate DK-C cannot PASS while this MANDATORY case is BLOCKED |
-| `VER-DCC-DK-C-013` | DK-C | CONDITIONAL_MANDATORY | — | TBD-DK-022 | stall fixture | Gate DK-C cannot PASS while this CONDITIONAL_MANDATORY case is BLOCKED |
-| `VER-DCC-DK-C-014` | DK-C | MANDATORY | — | TBD-DK-013 | — | Gate DK-C cannot PASS while this MANDATORY case is BLOCKED |
-| `VER-DCC-DK-D-014` | DK-D | MANDATORY | — | TBD-DK-006 | — | Gate DK-D cannot PASS while this MANDATORY case is BLOCKED |
-| `VER-DCC-DK-D-015` | DK-D | MANDATORY | ADR-DK-009 | — | — | Gate DK-D cannot PASS while this MANDATORY case is BLOCKED |
+> TBD meanings: authoritative register in [`DevKit_System_Requirements.md`](DevKit_System_Requirements.md) §4. Exact IDs only (no unjustified ranges).
+
+| Verification ID | Gate | Classification | Blocking ADR | Blocking TBD | Fixture dependency | Implementation dependency | Resulting gate effect |
+|-----------------|------|----------------|--------------|--------------|--------------------|---------------------------|-----------------------|
+| `VER-DCC-DK-A-003` | DK-A | MANDATORY | ADR-DK-006 | TBD-DK-001; TBD-DK-017 | Documented rail test points | Programmed RT image capable of default OFF | Gate DK-A cannot PASS while this MANDATORY case is BLOCKED |
+| `VER-DCC-DK-A-006` | DK-A | MANDATORY | ADR-015 process (interim identity procedure escalation) | — (no TBD-DK-* electrical threshold) | — | Runtime semantic firmware metadata may be absent | Gate DK-A cannot PASS while this MANDATORY case is BLOCKED; blockers are identity/provenance process only (STD-REV-001 / DK-GOV-012/014/015) |
+| `VER-DCC-DK-A-008` | DK-A | MANDATORY | ADR-DK-001 | TBD-DK-007 | J_LP connection access | RT+Power firmware supporting J_LP | Gate DK-A cannot PASS while this MANDATORY case is BLOCKED |
+| `VER-DCC-DK-A-011` | DK-A | MANDATORY | ADR-DK-007 | TBD-DK-005 | Safe WDT injection method | — | Gate DK-A cannot PASS while this MANDATORY case is BLOCKED |
+| `VER-DCC-DK-A-012` | DK-A | MANDATORY | ADR-DK-007 | TBD-DK-004 | — | — | Gate DK-A cannot PASS while this MANDATORY case is BLOCKED |
+| `VER-DCC-DK-A-014` | DK-A | MANDATORY | — | TBD-DK-021 | — | Documented re-enable sequence | Gate DK-A cannot PASS while this MANDATORY case is BLOCKED |
+| `VER-DCC-DK-A-015` | DK-A | CONDITIONAL_MANDATORY | — | TBD-DK-020 | — | BOARD_ID readout when sensing included | Blocks DK-A PASS only when BOARD_ID sensing is included in tested baseline; else DEFERRED_EXCLUDED |
+| `VER-DCC-DK-A-016` | DK-A | MANDATORY | — | TBD-DK-014 | — | — | Gate DK-A cannot PASS while this MANDATORY case is BLOCKED |
+| `VER-DCC-DK-B-003` | DK-B | MANDATORY | — | TBD-DK-006 | — | ECU sim stop / status path | Gate DK-B cannot PASS while this MANDATORY case is BLOCKED |
+| `VER-DCC-DK-B-005` | DK-B | MANDATORY | — | TBD-DK-015 | CAN waveform capture | — | Gate DK-B cannot PASS while this MANDATORY case is BLOCKED |
+| `VER-DCC-DK-B-011` | DK-B | CONDITIONAL_MANDATORY | — | TBD-DK-016 | — | WebSocket telemetry path | Blocks DK-B PASS only when WebSocket telemetry is in tested gate scope |
+| `VER-DCC-DK-B-014` | DK-B | CONDITIONAL_MANDATORY | ADR-DK-008 | — | — | OTA capability if gate-required | Blocks DK-B PASS only when ADR-DK-008 makes OTA gate-required; else DEFERRED_EXCLUDED / not mandatory |
+| `VER-DCC-DK-C-002` | DK-C | MANDATORY | — | TBD-DK-014 | Safe load for HS channel | — | Gate DK-C cannot PASS while this MANDATORY case is BLOCKED |
+| `VER-DCC-DK-C-003` | DK-C | CONDITIONAL_MANDATORY | — | TBD-DK-008 | — | PWM channel representation | Blocks DK-C PASS only when PWM channel is represented |
+| `VER-DCC-DK-C-004` | DK-C | MANDATORY | — | TBD-DK-009 | Reference meter/shunt | Current observation path | Gate DK-C cannot PASS while this MANDATORY case is BLOCKED |
+| `VER-DCC-DK-C-005` | DK-C | MANDATORY | ADR-DK-010 | TBD-DK-011 | Overcurrent fixture | — | Gate DK-C cannot PASS while this MANDATORY case is BLOCKED |
+| `VER-DCC-DK-C-006` | DK-C | MANDATORY | ADR-DK-010 | — | Safe short fixture | — | Gate DK-C cannot PASS while this MANDATORY case is BLOCKED |
+| `VER-DCC-DK-C-008` | DK-C | MANDATORY | — | TBD-DK-012 | UV supply fixture | — | Gate DK-C cannot PASS while this MANDATORY case is BLOCKED |
+| `VER-DCC-DK-C-009` | DK-C | CONDITIONAL_MANDATORY | ADR-DK-011 | TBD-DK-010; TBD-DK-018; TBD-DK-019 | Thermal observation path | — | Blocks DK-C PASS only when thermal cases are in tested scope |
+| `VER-DCC-DK-C-012` | DK-C | MANDATORY | — | TBD-DK-007 | Controllable J_LP/SPI disconnect | RT+Power timeout handler | Gate DK-C cannot PASS while this MANDATORY case is BLOCKED |
+| `VER-DCC-DK-C-013` | DK-C | CONDITIONAL_MANDATORY | — | TBD-DK-022 | Stall/locked-rotor fixture | Stall detect/protect path | Blocks DK-C PASS only when BD channel represented and stall verification in baseline |
+| `VER-DCC-DK-C-014` | DK-C | MANDATORY | — | TBD-DK-013 | Recoverable fault injection method | Retry/latch policy | Gate DK-C cannot PASS while this MANDATORY case is BLOCKED |
+| `VER-DCC-DK-D-004` | DK-D | MANDATORY | — | TBD-DK-006 | ECU simulator | VCM telem / rule path | Gate DK-D cannot PASS while this MANDATORY case is BLOCKED |
+| `VER-DCC-DK-D-014` | DK-D | MANDATORY | — | TBD-DK-006 | — | Node-loss handling | Gate DK-D cannot PASS while this MANDATORY case is BLOCKED |
+| `VER-DCC-DK-D-015` | DK-D | MANDATORY | ADR-DK-009 | — | — | Config apply/reject path; hot-reload policy | Gate DK-D cannot PASS while this MANDATORY case is BLOCKED |
+
 
 ## 6. Gates DK-A…DK-D
 
@@ -1765,3 +1772,4 @@ See governance §2–§4. Outcomes: PASS / FAIL / BLOCKED / NOT ASSESSED. Incomp
 | 1.0 | 2026-07-19 | WP-007 initial plan |
 | 1.1 | 2026-07-19 | WP-007-R1 — method schemas; splits; gate classifications; identity rule |
 | 1.1.1 | 2026-07-19 | WP-007-R1 corrections — restore A-004/B-001/B-002 meanings; add A-006/A-007; D-020 supersession; schema fixes |
+| 1.1.2 | 2026-07-19 | WP-007-R2 — TBD register references; A-006 identity-only blockers; blocked matrix exact IDs |

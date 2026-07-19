@@ -11,7 +11,7 @@
 | **Date** | 2026-07-19 |
 | **Implementer (name/agent)** | Implementation Engineer (cloud agent) |
 | **Implementer role** | Implementation Engineer |
-| **Revision** | WP-007-R1 corrections applied |
+| **Revision** | WP-007-R2 — threshold register restored; dependency integrity |
 
 ### Changed Files
 
@@ -57,6 +57,7 @@ Documentation validation per WP-007 §22 executed (see completion report). No ph
 * Explicit gate classifications (MANDATORY / CONDITIONAL_MANDATORY / DEFERRED_EXCLUDED / OPTIONAL).
 * Gate outcomes PASS/FAIL/BLOCKED/NOT ASSESSED; no PARTIAL PASS; incomplete applicable baseline identity cannot PASS.
 * Blocked-case dependency table added; vague pass criteria removed or blocked on TBD.
+* **R2:** Restored authoritative Threshold Resolution Register (`TBD-DK-001`…`TBD-DK-022`) in System Requirements §4; removed git-history placeholder; corrected `VER-DCC-DK-A-006` to identity-only blockers; exact TBD IDs in blocked matrix (no unjustified ranges).
 
 ### Known Weaknesses
 
@@ -64,7 +65,7 @@ Documentation validation per WP-007 §22 executed (see completion report). No ph
 * Configuration schema lacks `hardware.profile`.
 * Firmware/hardware implementation absent — requirements cannot yet be demonstrated on target.
 * WP-004 power-channel family still Proposed; DevKit references capability without importing all DC-DCC-PWR rows.
-* ADR-DK-001…012 and TBD-DK-001…022 intentionally unresolved in R1.
+* ADR-DK-001…012 and TBD-DK-001…022 intentionally unresolved in R1/R2 (register restored in R2; values not closed).
 
 ### Known Risks
 
@@ -74,7 +75,7 @@ Documentation validation per WP-007 §22 executed (see completion report). No ph
 
 ### Open Questions
 
-ADR-DK-001…012; TBD-DK-001…022; DCFG CRC coverage; encoded-version mappings.
+`ADR-DK-001`…`ADR-DK-012`; `TBD-DK-001`…`TBD-DK-022` (definitions: System Requirements §4 register); DCFG CRC coverage; encoded-version mappings.
 
 ### Critical Review Focus Areas
 
@@ -109,3 +110,4 @@ Revert WP-007 PR; restore prior docs/008 detailed tables from git history if nee
 | 1.0 | 2026-07-19 | WP-007 initial RHP |
 | 1.1 | 2026-07-19 | WP-007-R1 — review corrections recorded |
 | 1.1.1 | 2026-07-19 | WP-007-R1 — case ID restorations and taxonomy report finalized |
+| 1.1.2 | 2026-07-19 | WP-007-R2 — threshold register restore and dependency integrity |

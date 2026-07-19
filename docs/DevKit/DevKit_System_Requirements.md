@@ -1,7 +1,7 @@
 # DevKit System Requirements — Gen1
 
 **Document ID:** DOC-DK-REQ-001  
-**Version:** 1.1.1  
+**Version:** 1.1.2  
 **Status:** Proposed  
 **Work Package:** WP-007 / WP-007-R1  
 **Date:** 2026-07-19  
@@ -1289,11 +1289,464 @@ Full governance text: [DevKit_Verification_Governance.md](DevKit_Verification_Go
 
 ## 4. Threshold Resolution Register
 
-Unresolved thresholds remain `TBD-DK-001`…`TBD-DK-022` as established in WP-007. **Not resolved in R1.** See prior register content in git history / Architect Review Package; still authoritative as open.
+```text
+The Threshold Resolution Register in
+docs/DevKit/DevKit_System_Requirements.md
+is the authoritative source for TBD-DK identifiers.
+```
+
+Other DevKit documents, CIA, and RHP **shall reference** this register and **shall not** redefine TBD-DK meanings.
+
+Unresolved numeric/procedure thresholds. Candidates from `docs/008` or other sources are **not** normative until closed.
+**Status of all entries: Open.** No `TBD-DK-*` value is resolved in WP-007 / R1 / R2.
+
+### 4.1 Summary
+
+| TBD ID | Parameter | Unit | Status | Gates affected |
+|--------|-----------|------|--------|----------------|
+| `TBD-DK-001` | DevKit input operating voltage range | V | Open | DK-A; DK-C (UV path with TBD-DK-012) |
+| `TBD-DK-002` | Approved maximum DevKit input / protection current | A | Open | DK-A |
+| `TBD-DK-003` | Maximum simultaneous load current | A | Open | DK-C |
+| `TBD-DK-004` | Kill response time (assert → outputs de-energized) | ms | Open | DK-A |
+| `TBD-DK-005` | Watchdog response time to safe outputs | ms | Open | DK-A |
+| `TBD-DK-006` | External node lost/stale timeout | ms | Open | DK-B; DK-D |
+| `TBD-DK-007` | Logic↔Power control-loss timeout | ms | Open | DK-A; DK-C |
+| `TBD-DK-008` | PWM frequency range for DevKit PWM cases | Hz | Open | DK-C |
+| `TBD-DK-009` | Current-measurement accuracy | % or A | Open | DK-C |
+| `TBD-DK-010` | Temperature-measurement accuracy | °C | Open | DK-C |
+| `TBD-DK-011` | Overcurrent threshold tolerance | % or A | Open | DK-C |
+| `TBD-DK-012` | Undervoltage test threshold and approved reaction table | V (plus reaction table N/A numeric) | Open | DK-C |
+| `TBD-DK-013` | Fault retry delay and retry-count policy | ms (and count) | Open | DK-C |
+| `TBD-DK-014` | Commanded safe-OFF de-energize time | ms | Open | DK-A; DK-C |
+| `TBD-DK-015` | CAN waveform acceptance criteria | measurable metrics (N/A single unit) | Open | DK-B |
+| `TBD-DK-016` | WebSocket telemetry duration and allowed loss | s / frames | Open | DK-B |
+| `TBD-DK-017` | Power-rail tolerances (e.g. 5 V / 3.3 V) | % or V | Open | DK-A |
+| `TBD-DK-018` | Thermal test duration (DevKit scope) | s or min | Open | DK-C |
+| `TBD-DK-019` | Maximum safe surface/device temperature for DevKit tests | °C | Open | DK-C |
+| `TBD-DK-020` | BOARD_ID bit encoding → revision map | N/A (map) | Open | DK-A |
+| `TBD-DK-021` | Post-kill explicit re-enable sequence definition | N/A (procedure) | Open | DK-A |
+| `TBD-DK-022` | Bidirectional stall response criteria and fixture definition | A / ms / procedure | Open | DK-C |
+
+### 4.2 Controlled definitions
+
+#### TBD-DK-001
+
+| Field | Content |
+|-------|---------|
+| TBD ID | `TBD-DK-001` |
+| Parameter | DevKit input operating voltage range |
+| Unit | V |
+| Current candidate | 13.8 V nominal (single-point) |
+| Candidate source | docs/008 §3 / A1 |
+| Evidence required | Architecture decision + measurement plan |
+| Requirements blocked | REQ-DCC-V-DK-047; DK-GOV-024 (from withdrawn REQ-028) |
+| Verification cases blocked | VER-DCC-DK-A-003 |
+| Gates affected | DK-A; DK-C (UV path with TBD-DK-012) |
+| Owner role | System Architect / Test Owner |
+| Closure artifact | Threshold CR / WP |
+| Status | Open |
+| Notes | Candidate is not normative. DK-GOV-024 freezes approval before DK-A power-test exit. |
+
+#### TBD-DK-002
+
+| Field | Content |
+|-------|---------|
+| TBD ID | `TBD-DK-002` |
+| Parameter | Approved maximum DevKit input / protection current |
+| Unit | A |
+| Current candidate | 30 A fuse / continuous |
+| Candidate source | docs/008 §2.3 / §3.3 |
+| Evidence required | Architecture decision + thermal/electrical analysis |
+| Requirements blocked | REQ-DCC-V-DK-020; DK-GOV-025 related (withdrawn REQ-029); ADR-DK-006 |
+| Verification cases blocked | — (blocks protection sizing claims; energization cases when current limit required) |
+| Gates affected | DK-A |
+| Owner role | System Architect |
+| Closure artifact | ADR-DK-006 |
+| Status | Open |
+| Notes | Pairs with ADR-DK-006. Continuous vs fuse rating not distinguished in candidate. |
+
+#### TBD-DK-003
+
+| Field | Content |
+|-------|---------|
+| TBD ID | `TBD-DK-003` |
+| Parameter | Maximum simultaneous load current |
+| Unit | A |
+| Current candidate | 30 A continuous |
+| Candidate source | docs/008 §3.3 |
+| Evidence required | Architecture decision |
+| Requirements blocked | DK-GOV-025 (from withdrawn REQ-029); ADR-DK-006 |
+| Verification cases blocked | — (no Phase C case IDs yet cite this ID; multi-channel simultaneous-load claims blocked) |
+| Gates affected | DK-C |
+| Owner role | System Architect |
+| Closure artifact | ADR-DK-006 |
+| Status | Open |
+| Notes | No active REQ-DCC-V-DK-* text cites this ID after R1 taxonomy move of REQ-029. |
+
+#### TBD-DK-004
+
+| Field | Content |
+|-------|---------|
+| TBD ID | `TBD-DK-004` |
+| Parameter | Kill response time (assert → outputs de-energized) |
+| Unit | ms |
+| Current candidate | “immediately” (vague — rejected as criterion) |
+| Candidate source | docs/008 A7 |
+| Evidence required | Architecture decision + measurement |
+| Requirements blocked | REQ-DCC-V-DK-036 |
+| Verification cases blocked | VER-DCC-DK-A-012 |
+| Gates affected | DK-A |
+| Owner role | System Architect / Test Owner |
+| Closure artifact | Threshold CR; ADR-DK-007 |
+| Status | Open |
+| Notes | Must become a measurable limit; vague wording rejected. |
+
+#### TBD-DK-005
+
+| Field | Content |
+|-------|---------|
+| TBD ID | `TBD-DK-005` |
+| Parameter | Watchdog response time to safe outputs |
+| Unit | ms |
+| Current candidate | <200 ms |
+| Candidate source | docs/008 A6 |
+| Evidence required | Architecture decision + measurement |
+| Requirements blocked | REQ-DCC-V-DK-038 |
+| Verification cases blocked | VER-DCC-DK-A-011 |
+| Gates affected | DK-A |
+| Owner role | System Architect / Test Owner |
+| Closure artifact | Threshold CR; ADR-DK-007 |
+| Status | Open |
+| Notes | Candidate not approved for DevKit evidence until ADR-DK-007 / threshold CR. |
+
+#### TBD-DK-006
+
+| Field | Content |
+|-------|---------|
+| TBD ID | `TBD-DK-006` |
+| Parameter | External node lost/stale timeout |
+| Unit | ms |
+| Current candidate | >500 ms |
+| Candidate source | docs/008 B3 |
+| Evidence required | Protocol/architecture freeze |
+| Requirements blocked | REQ-DCC-V-DK-079 |
+| Verification cases blocked | VER-DCC-DK-B-003; VER-DCC-DK-D-004; VER-DCC-DK-D-014 |
+| Gates affected | DK-B; DK-D |
+| Owner role | System Architect |
+| Closure artifact | docs/004 alignment CR |
+| Status | Open |
+| Notes | Align with DCP stale/LOST handling when frozen. |
+
+#### TBD-DK-007
+
+| Field | Content |
+|-------|---------|
+| TBD ID | `TBD-DK-007` |
+| Parameter | Logic↔Power control-loss timeout |
+| Unit | ms |
+| Current candidate | >100 ms |
+| Candidate source | EDL-011 |
+| Evidence required | Confirm whether EDL-011 value is normative for DevKit evidence |
+| Requirements blocked | REQ-DCC-V-DK-035 |
+| Verification cases blocked | VER-DCC-DK-A-008; VER-DCC-DK-C-012 |
+| Gates affected | DK-A; DK-C |
+| Owner role | System Architect |
+| Closure artifact | Interface confirmation / ADR if needed |
+| Status | Open |
+| Notes | EDL-011 states >100 ms; DevKit evidence freeze still open. |
+
+#### TBD-DK-008
+
+| Field | Content |
+|-------|---------|
+| TBD ID | `TBD-DK-008` |
+| Parameter | PWM frequency range for DevKit PWM cases |
+| Unit | Hz |
+| Current candidate | not frozen |
+| Candidate source | docs/008 / WP-004 TBD |
+| Evidence required | Architecture + channel class decision |
+| Requirements blocked | REQ-DCC-V-DK-040 |
+| Verification cases blocked | VER-DCC-DK-C-003 |
+| Gates affected | DK-C |
+| Owner role | System Architect |
+| Closure artifact | Power-channel WP |
+| Status | Open |
+| Notes | Conditional on PWM channel representation. |
+
+#### TBD-DK-009
+
+| Field | Content |
+|-------|---------|
+| TBD ID | `TBD-DK-009` |
+| Parameter | Current-measurement accuracy |
+| Unit | % or A |
+| Current candidate | not defined |
+| Candidate source | docs/008 Phase C |
+| Evidence required | Instrument + sense design qualification |
+| Requirements blocked | REQ-DCC-V-DK-043; REQ-DCC-V-DK-095 |
+| Verification cases blocked | VER-DCC-DK-C-004 |
+| Gates affected | DK-C |
+| Owner role | Hardware Engineer / Test Owner |
+| Closure artifact | Fixture WP / qualification |
+| Status | Open |
+| Notes | Accuracy claim blocked until closed; raw dual measurements may still be recorded. |
+
+#### TBD-DK-010
+
+| Field | Content |
+|-------|---------|
+| TBD ID | `TBD-DK-010` |
+| Parameter | Temperature-measurement accuracy |
+| Unit | °C |
+| Current candidate | not defined |
+| Candidate source | docs/008 thermal notes |
+| Evidence required | Sensor qualification |
+| Requirements blocked | REQ-DCC-V-DK-048; REQ-DCC-V-DK-096 |
+| Verification cases blocked | VER-DCC-DK-C-009 |
+| Gates affected | DK-C |
+| Owner role | Hardware Engineer |
+| Closure artifact | Qualification record |
+| Status | Open |
+| Notes | Used with TBD-DK-018/019 and ADR-DK-011 for thermal cases. |
+
+#### TBD-DK-011
+
+| Field | Content |
+|-------|---------|
+| TBD ID | `TBD-DK-011` |
+| Parameter | Overcurrent threshold tolerance |
+| Unit | % or A |
+| Current candidate | not defined |
+| Candidate source | docs/008 C2 / WP-004 TBD |
+| Evidence required | Protection requirements freeze |
+| Requirements blocked | REQ-DCC-V-DK-044 |
+| Verification cases blocked | VER-DCC-DK-C-005 |
+| Gates affected | DK-C |
+| Owner role | System Architect |
+| Closure artifact | Power-channel WP; ADR-DK-010 |
+| Status | Open |
+| Notes | Fault-injection method also gated by ADR-DK-010. |
+
+#### TBD-DK-012
+
+| Field | Content |
+|-------|---------|
+| TBD ID | `TBD-DK-012` |
+| Parameter | Undervoltage test threshold and approved reaction table |
+| Unit | V (plus reaction table N/A numeric) |
+| Current candidate | <10.5 V |
+| Candidate source | docs/008 C4 |
+| Evidence required | Architecture decision + measurement |
+| Requirements blocked | REQ-DCC-V-DK-047 |
+| Verification cases blocked | VER-DCC-DK-C-008 |
+| Gates affected | DK-C |
+| Owner role | System Architect |
+| Closure artifact | Threshold CR |
+| Status | Open |
+| Notes | REQ-047 also cites TBD-DK-001 for supply context; UV stimulus/reaction is this ID. |
+
+#### TBD-DK-013
+
+| Field | Content |
+|-------|---------|
+| TBD ID | `TBD-DK-013` |
+| Parameter | Fault retry delay and retry-count policy |
+| Unit | ms (and count) |
+| Current candidate | ≤3 retries (count only; delay not frozen) |
+| Candidate source | docs/008 C5 |
+| Evidence required | Protection policy freeze |
+| Requirements blocked | REQ-DCC-V-DK-049 |
+| Verification cases blocked | VER-DCC-DK-C-014 |
+| Gates affected | DK-C |
+| Owner role | System Architect |
+| Closure artifact | Power-channel WP |
+| Status | Open |
+| Notes | Pass criteria need both count and delay when approved. |
+
+#### TBD-DK-014
+
+| Field | Content |
+|-------|---------|
+| TBD ID | `TBD-DK-014` |
+| Parameter | Commanded safe-OFF de-energize time |
+| Unit | ms |
+| Current candidate | not defined |
+| Candidate source | WP-004 safe OFF TBD |
+| Evidence required | Architecture decision |
+| Requirements blocked | REQ-DCC-V-DK-050 |
+| Verification cases blocked | VER-DCC-DK-A-016; VER-DCC-DK-C-002 |
+| Gates affected | DK-A; DK-C |
+| Owner role | System Architect |
+| Closure artifact | Power-channel WP |
+| Status | Open |
+| Notes | Used for commanded OFF timing on represented channels. |
+
+#### TBD-DK-015
+
+| Field | Content |
+|-------|---------|
+| TBD ID | `TBD-DK-015` |
+| Parameter | CAN waveform acceptance criteria |
+| Unit | measurable metrics (N/A single unit) |
+| Current candidate | “waveform clean” (vague — rejected as criterion) |
+| Candidate source | docs/008 B5 |
+| Evidence required | Signal-integrity criteria definition |
+| Requirements blocked | REQ-DCC-V-DK-076 |
+| Verification cases blocked | VER-DCC-DK-B-005 |
+| Gates affected | DK-B |
+| Owner role | Test Owner / System Architect |
+| Closure artifact | Threshold CR |
+| Status | Open |
+| Notes | Must define measurable metrics (e.g. amplitude, edges); qualitative wording rejected. |
+
+#### TBD-DK-016
+
+| Field | Content |
+|-------|---------|
+| TBD ID | `TBD-DK-016` |
+| Parameter | WebSocket telemetry duration and allowed loss |
+| Unit | s / frames |
+| Current candidate | 20 Hz ≥15 s without drop |
+| Candidate source | docs/008 B11 |
+| Evidence required | UI contract + measurement method |
+| Requirements blocked | REQ-DCC-V-DK-071 |
+| Verification cases blocked | VER-DCC-DK-B-011 |
+| Gates affected | DK-B |
+| Owner role | System Architect / Test Owner |
+| Closure artifact | docs/006 alignment |
+| Status | Open |
+| Notes | Conditional on WebSocket telemetry in gate scope. |
+
+#### TBD-DK-017
+
+| Field | Content |
+|-------|---------|
+| TBD ID | `TBD-DK-017` |
+| Parameter | Power-rail tolerances (e.g. 5 V / 3.3 V) |
+| Unit | % or V |
+| Current candidate | ±5 % |
+| Candidate source | docs/008 A1 |
+| Evidence required | Electrical design + measurement |
+| Requirements blocked | REQ-DCC-V-DK-094 |
+| Verification cases blocked | VER-DCC-DK-A-003 |
+| Gates affected | DK-A |
+| Owner role | Hardware Engineer |
+| Closure artifact | DevKit electrical architecture WP |
+| Status | Open |
+| Notes | Per-rail list must be explicit when closed. |
+
+#### TBD-DK-018
+
+| Field | Content |
+|-------|---------|
+| TBD ID | `TBD-DK-018` |
+| Parameter | Thermal test duration (DevKit scope) |
+| Unit | s or min |
+| Current candidate | not defined for DevKit |
+| Candidate source | docs/008 Phase E has Gen1 numbers |
+| Evidence required | Test plan decision (DevKit vs Gen1 scope) |
+| Requirements blocked | REQ-DCC-V-DK-096 |
+| Verification cases blocked | VER-DCC-DK-C-009 |
+| Gates affected | DK-C |
+| Owner role | System Architect / Test Owner |
+| Closure artifact | ADR-DK-011 |
+| Status | Open |
+| Notes | Do not import Gen1 Phase E durations without ADR-DK-011. |
+
+#### TBD-DK-019
+
+| Field | Content |
+|-------|---------|
+| TBD ID | `TBD-DK-019` |
+| Parameter | Maximum safe surface/device temperature for DevKit tests |
+| Unit | °C |
+| Current candidate | Gen1 candidates e.g. 85 °C (not DevKit-frozen) |
+| Candidate source | docs/008 / docs/002 |
+| Evidence required | Safety + thermal analysis |
+| Requirements blocked | REQ-DCC-V-DK-096 |
+| Verification cases blocked | VER-DCC-DK-C-009 |
+| Gates affected | DK-C |
+| Owner role | System Architect |
+| Closure artifact | ADR-DK-011 |
+| Status | Open |
+| Notes | Candidate not approved for DevKit gate evidence. |
+
+#### TBD-DK-020
+
+| Field | Content |
+|-------|---------|
+| TBD ID | `TBD-DK-020` |
+| Parameter | BOARD_ID bit encoding → revision map |
+| Unit | N/A (map) |
+| Current candidate | pins exist; encoding not defined |
+| Candidate source | EDL-011; ADR-015 OQ-3 |
+| Evidence required | Architecture decision (no new HW mechanism) |
+| Requirements blocked | REQ-DCC-V-DK-017 |
+| Verification cases blocked | VER-DCC-DK-A-015 |
+| Gates affected | DK-A |
+| Owner role | System Architect |
+| Closure artifact | Hardware identity WP |
+| Status | Open |
+| Notes | Conditional when BOARD_ID sensing included in baseline. |
+
+#### TBD-DK-021
+
+| Field | Content |
+|-------|---------|
+| TBD ID | `TBD-DK-021` |
+| Parameter | Post-kill explicit re-enable sequence definition |
+| Unit | N/A (procedure) |
+| Current candidate | partial intent in fault/startup docs |
+| Candidate source | fault/startup documentation (repository) |
+| Evidence required | Architecture / safety procedure |
+| Requirements blocked | REQ-DCC-V-DK-034 |
+| Verification cases blocked | VER-DCC-DK-A-014 |
+| Gates affected | DK-A |
+| Owner role | System Architect |
+| Closure artifact | Safety procedure WP |
+| Status | Open |
+| Notes | Sequence must be explicit and testable. |
+
+#### TBD-DK-022
+
+| Field | Content |
+|-------|---------|
+| TBD ID | `TBD-DK-022` |
+| Parameter | Bidirectional stall response criteria and fixture definition |
+| Unit | A / ms / procedure |
+| Current candidate | motor stall candidate in docs/008 |
+| Candidate source | docs/008 |
+| Evidence required | Fixture + requirement freeze |
+| Requirements blocked | REQ-DCC-V-DK-055 |
+| Verification cases blocked | VER-DCC-DK-C-013 |
+| Gates affected | DK-C |
+| Owner role | Test Owner / System Architect |
+| Closure artifact | Fixture WP |
+| Status | Open |
+| Notes | Split from former compound C-010; direction case C-010 does not use this ID. |
+
 
 ## 5. Architectural decisions required
 
-`ADR-DK-001`…`ADR-DK-012` remain open. **Not resolved in R1.**
+`ADR-DK-001`…`ADR-DK-012` remain **open**. **Not resolved in R2.**
+
+| ID | Question |
+|----|----------|
+| ADR-DK-001 | Same physical Logic Board vs same electrical/firmware interfaces? |
+| ADR-DK-002 | Same physical Radio Board vs equivalent Service interfaces? |
+| ADR-DK-003 | Same compiled RT binary mandatory vs same source/feature set? |
+| ADR-DK-004 | Which representative power-channel classes must DevKit contain? |
+| ADR-DK-005 | Is a high-current class required on DevKit or only external/Gen1? |
+| ADR-DK-006 | Approved maximum DevKit input/simultaneous current? |
+| ADR-DK-007 | Approved kill and watchdog response-time limits (with TBD-DK-004 / TBD-DK-005)? |
+| ADR-DK-008 | Is OTA part of mandatory DevKit gate? |
+| ADR-DK-009 | Is configuration hot reload permitted outside Service/Wiring modes? |
+| ADR-DK-010 | Which fault injections are mandatory and how performed safely? |
+| ADR-DK-011 | DevKit vs DCC Gen1 electrical/thermal environmental test split? |
+| ADR-DK-012 | Which enclosure/connector candidates remain valid (WAGO vs screw, etc.)? |
+
+Threshold numeric values associated with ADR-DK-006 / ADR-DK-007 / ADR-DK-011 are defined only in §4 (`TBD-DK-*`).
+
 
 ## Revision history
 
@@ -1302,3 +1755,4 @@ Unresolved thresholds remain `TBD-DK-001`…`TBD-DK-022` as established in WP-00
 | 1.0 | 2026-07-19 | WP-007 initial Proposed baseline |
 | 1.1 | 2026-07-19 | WP-007-R1 — taxonomy split; governance moved to DK-GOV-* |
 | 1.1.1 | 2026-07-19 | WP-007-R1 mapping corrections for A-006/A-007 and restored case IDs |
+| 1.1.2 | 2026-07-19 | WP-007-R2 — restore authoritative Threshold Resolution Register (TBD-DK-001…022) |

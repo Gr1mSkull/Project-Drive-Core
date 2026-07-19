@@ -1,9 +1,9 @@
 # DevKit Current-State Gap Assessment — Gen1
 
 **Document ID:** DOC-DK-GAP-001  
-**Version:** 1.0.1  
+**Version:** 1.0.2  
 **Status:** Proposed  
-**Work Package:** WP-007 / WP-007-R1  
+**Work Package:** WP-007 / WP-007-R2  
 **Date:** 2026-07-19
 
 Audit of existing DevKit-related claims against WP-007 authority rules. Classifications:
@@ -30,7 +30,7 @@ Audit of existing DevKit-related claims against WP-007 authority rules. Classifi
 | USB-C role | docs/008 | CANDIDATE | Gen1 Logic intent | — | Keep candidate | Electrical architecture WP | P2 |
 | Hammond enclosure | docs/008; docs/007 | CANDIDATE | — | — | ADR-DK-012 | Architecture decision | P2 |
 | BOOT/USER/KILL buttons | docs/008 | CANDIDATE | Kill testability required | Button implementation not frozen | Require kill testability; UI buttons candidate | Electrical architecture WP | P1 |
-| 13.8 V / 30 A bench limits | docs/008 | TBD | Candidates only | Not authoritative freeze | TBD-DK-001/002/003; ADR-DK-006 | Threshold CR | P0 |
+| 13.8 V / 30 A bench limits | docs/008 | TBD | Candidates only | Not authoritative freeze | TBD-DK-001, TBD-DK-002, TBD-DK-003 (register §4); ADR-DK-006 | Threshold CR | P0 |
 | Exact lamp wattages / loads | docs/008 | CANDIDATE | — | hardware README / yaml partial mismatch | Treat as example loads | Fixture WP | P2 |
 | `hardware.profile: devkit` | docs/008; devkit.yaml | CONFLICT / PARTIAL | File present | Not in docs/005 schema | Schema decision | Config schema CR | P1 |
 | Phase A–D procedures in docs/008 | docs/008 §5–8 | PARTIAL | Strategy accepted via EDL-014 | Vague pass criteria; duplicate vs WP-007 plan | Navigate to DevKit_Verification_Plan | WP-007 (done) | P0 |
@@ -95,3 +95,4 @@ Note: some rows carry dual tags (e.g. CONFLICT/TBD); counts reflect primary seve
 |---------|------|--------|
 | 1.0 | 2026-07-19 | WP-007 initial gap assessment |
 | 1.0.1 | 2026-07-19 | WP-007-R1 — note governance split; no ADR/TBD resolutions |
+| 1.0.2 | 2026-07-19 | WP-007-R2 — TBD references point to restored register (no value closures) |
