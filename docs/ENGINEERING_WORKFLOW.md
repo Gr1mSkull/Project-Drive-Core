@@ -27,7 +27,7 @@ Implementation Engineer executes approved packages only.
 Read → Implement → Validate → Report → Stop
 ```
 
-Defined in `.cursor/rules/03_task_execution.mdc`.
+Defined in `.cursor/ENGINEERING_CONSTITUTION.mdc` §12.
 
 ## 5. Documentation stages (Gen1 completed scaffold)
 

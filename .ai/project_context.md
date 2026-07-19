@@ -41,4 +41,5 @@
 
 ## Rules
 
-`.cursor/rules/00`–`10` — always applied.
+**Authoritative:** `.cursor/ENGINEERING_CONSTITUTION.mdc` (always applied).  
+Numbered `.cursor/rules/00`–`10` are wrappers pointing to constitution sections.
