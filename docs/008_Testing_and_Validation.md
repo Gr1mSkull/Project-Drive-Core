@@ -21,7 +21,7 @@ DevKit bring-up → Protocol → Power channels → Integration → DCC Gen1 →
 
 См. EDL-014 (обязательный DevKit gate).
 
-**Revision identity (normative):** every DevKit, bench, qualification, or vehicle-test record shall identify the tested system per [`docs/standards/REVISION_IDENTITY_STANDARD.md`](standards/REVISION_IDENTITY_STANDARD.md) (ADR-CR002-001 / ADR-015). Do not certify verification against unidentified firmware, hardware, protocol, or configuration. Incomplete identity → certification remains `NOT VERIFIED` or `PARTIAL`.
+**Revision identity (normative):** every DevKit, bench, qualification, or vehicle-test record shall identify the tested system per [`docs/standards/REVISION_IDENTITY_STANDARD.md`](standards/REVISION_IDENTITY_STANDARD.md) (**ADR-015**). Do not certify verification against unidentified firmware, hardware, protocol, or configuration. Incomplete identity → certification remains `NOT VERIFIED` or `PARTIAL`.
 
 ## 2. DriveCore DevKit — спецификация
 

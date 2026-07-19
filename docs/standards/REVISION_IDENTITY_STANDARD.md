@@ -1,15 +1,18 @@
 # DriveCore Revision Identity Standard
 
 **Document ID:** STD-REV-001  
-**Version:** 1.0  
-**Status:** Proposed  
-**Decision ID:** ADR-CR002-001  
+**Version:** 1.0.1  
+**Status:** Approved  
+**Canonical ADR ID:** ADR-015  
+**Originating Decision Request:** ADR-CR002-001  
+**Originating Change Request:** CR-002  
 **ADR:** [ADR-015-platform-revision-identity.md](../ADR/ADR-015-platform-revision-identity.md)  
 **Date:** 2026-07-19  
 **Related CIA:** [CIA-2026-001](../records/change_impact/CIA-2026-001_revision-identity-baseline.md)
 
 > Normative source for revision identity fields, formats, compatibility rules, and verification baseline requirements.  
-> Authoritative rationale: ADR-CR002-001. Engineering policy: `.cursor/ENGINEERING_CONSTITUTION.mdc` §6.
+> Authoritative rationale: **ADR-015**. Engineering policy: `.cursor/ENGINEERING_CONSTITUTION.mdc` §6.  
+> Approval of this standard does **not** mean runtime mechanisms are implemented or verified.
 
 ---
 
@@ -193,11 +196,26 @@ Applicable contracts include, where present:
 * Firmware metadata structures
 * Hardware identification structures
 
-### 7.1 Version format
+### 7.1 Semantic version vs encoded representation
+
+Three distinct concepts shall be kept separate:
+
+| Concept | Meaning |
+|---------|---------|
+| Human-readable semantic contract version | Normative `MAJOR.MINOR` for the interface |
+| Encoded wire or binary-format value | Compact numeric/byte representation on the wire or in a binary header |
+| Mapping | Explicit rule relating the encoded value to the semantic version |
 
 ```text
-MAJOR.MINOR
+An encoded numeric value shall not be interpreted as MAJOR.MINOR
+unless the interface specification explicitly defines the encoding.
 ```
+
+The normative human-readable version uses `MAJOR.MINOR`.
+
+A protocol or binary format may use a compact encoded representation, but its bit/byte encoding and mapping to `MAJOR.MINOR` shall be defined by that interface specification.
+
+Existing raw values remain **legacy encodings** until such mapping is approved.
 
 * `MAJOR` — breaking or incompatible change
 * `MINOR` — backward-compatible additive change
@@ -212,16 +230,30 @@ MAJOR.MINOR
 * Silent reinterpretation is prohibited.
 * Compatibility shall be explicit and testable.
 
-**Current repository anchors (do not invent new values here):**
+For every applicable interface, future specifications shall define:
+
+* semantic version;
+* encoded representation;
+* byte width;
+* byte order where applicable;
+* mapping rule;
+* unsupported-version reaction;
+* compatibility rule.
+
+### 7.3 Current repository anchors
+
+Do not invent new values or mappings here.
 
 | Contract | Current documented / coded identity | Status |
 |----------|-------------------------------------|--------|
-| DCP | Doc v0.1; `DCP_PROTO_VER = 0x01` | PARTIAL |
-| DCPI | `DCPI_PROTO_VER = 0x01`; CRC-16/CCITT on frames | PARTIAL |
-| DCFG format | `DCFG_VERSION = 0x0001` | PARTIAL |
-| YAML schema | `config_version: "0.1"` in vehicle profiles | PARTIAL |
+| DCP | Doc title v0.1; encoded `DCP_PROTO_VER = 0x01` — legacy encoded value; semantic mapping TBD | PARTIAL |
+| DCPI | Encoded `DCPI_PROTO_VER = 0x01`; CRC-16/CCITT on frames — legacy encoded value; semantic mapping TBD | PARTIAL |
+| DCFG format | Encoded `DCFG_VERSION = 0x0001` — legacy encoded value; semantic mapping TBD | PARTIAL |
+| YAML schema | Human-readable `config_version: "0.1"` in vehicle profiles | PARTIAL |
 | REST | Base path `/api/v1/` | PARTIAL |
 | WebSocket telemetry schema | No explicit schema version field found | NOT IMPLEMENTED |
+
+Do **not** state or imply `0x01 = 0.1`, `0x01 = 1.0`, `0x0001 = 0.1`, or `0x0001 = 1.0` unless an approved interface specification explicitly defines that mapping.
 
 Do not change existing protocol constants or payload layouts under this standard alone.
 
@@ -258,11 +290,13 @@ The compiled DCFG artifact shall define:
 
 | Field | Purpose |
 |-------|---------|
-| DCFG format version | Binary layout version (`MAJOR.MINOR` / coded equivalent such as `0x0001`) |
+| DCFG format version | Human-readable semantic format version (`MAJOR.MINOR`); encoded wire/binary value separate per §7 |
 | Source configuration schema version | Schema that produced the blob |
 | Configuration ID or reference | Link to active profile |
 | Content identity hash or linkage | SHA-256 identity (§8) |
 | Integrity CRC | Accidental corruption detection |
+
+`DCFG_VERSION = 0x0001` is a **legacy encoded value with interface-specific semantic mapping TBD**. It shall not be interpreted as `0.1` or `1.0` unless an approved DCFG interface specification defines that mapping.
 
 ### 9.1 Hash vs CRC
 
@@ -277,16 +311,19 @@ Repository already defines CRC-16/CCITT-FALSE (`poly 0x1021`, `init 0xFFFF`) in 
 
 Do **not** select a new CRC algorithm in this standard.
 
-**OPEN ISSUE / TBD:** CRC coverage byte range is inconsistent across sources:
-
-* Compiler (`tools/config_compiler/compiler.py`) computes CRC over `blob[8:]`.
-* Informal note in `agents_stuff/config_binary_v0.1.md` describes CRC over payload after the full header.
+**OPEN ISSUE / TBD — preserved:**
 
 ```text
-TBD — CRC algorithm family is CRC-16/CCITT-FALSE; exact coverage requires an interface decision.
+CRC-16/CCITT-FALSE algorithm family is known.
+Exact DCFG CRC coverage remains TBD.
 ```
 
-Do not modify the config compiler or binary format under this standard alone.
+Two current interpretations (neither selected by ADR-015 or this standard):
+
+* Compiler implementation (`tools/config_compiler/compiler.py`): CRC over `blob[8:]`.
+* Informal note (`agents_stuff/config_binary_v0.1.md`): CRC over payload after the full header.
+
+A separate interface Change Request shall resolve coverage after ADR-015 is merged. Do not modify the config compiler, shared headers, informal notes, or `docs/005` under this standard alone.
 
 ---
 
@@ -390,7 +427,7 @@ Use `N/A` only when a field does not apply. Unknown applicable fields: `TBD`, `U
 
 | Document | Role |
 |----------|------|
-| [ADR-015 / ADR-CR002-001](../ADR/ADR-015-platform-revision-identity.md) | Decision and rationale |
+| [ADR-015](../ADR/ADR-015-platform-revision-identity.md) | Decision and rationale (canonical ID); originating request ADR-CR002-001 |
 | `.cursor/ENGINEERING_CONSTITUTION.mdc` §6 | Policy requirement for baseline identity |
 | `docs/002_DCC_Hardware.md` | BOARD_ID / board revisions |
 | `docs/004_Communication_Protocol.md` | DCP / DCPI / HEARTBEAT |
@@ -404,4 +441,5 @@ Use `N/A` only when a field does not apply. Unknown applicable fields: `TBD`, `U
 
 | Version | Date | Change |
 |---------|------|--------|
-| 1.0 | 2026-07-19 | ADR-CR002-001 — initial Proposed standard |
+| 1.0 | 2026-07-19 | Initial Proposed standard (originating request ADR-CR002-001) |
+| 1.0.1 | 2026-07-19 | ADR-015-R1 — Approved; canonical ADR-015; semantic vs encoded version rules |

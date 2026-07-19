@@ -1,9 +1,9 @@
 # DriveCore Traceability
 
 **Document ID:** DOC-TRACE-001  
-**Version:** 1.1.1  
+**Version:** 1.1.2  
 **Status:** Proposed  
-**Change Request:** CR-002 / CR-002-R1 / CR-002-R2 · **ADR:** ADR-CR002-001
+**Change Request:** CR-002 / CR-002-R1 / CR-002-R2 · **ADR:** ADR-015
 
 ## Purpose
 
@@ -44,7 +44,7 @@ Requirement ID
 
 - `docs/SRS/` — system requirements (structure)
 - `docs/ADR/`, `docs/EDL/` — architectural decisions
-- [`docs/standards/REVISION_IDENTITY_STANDARD.md`](../standards/REVISION_IDENTITY_STANDARD.md) — composite baseline for verification evidence (ADR-CR002-001)
+- [`docs/standards/REVISION_IDENTITY_STANDARD.md`](../standards/REVISION_IDENTITY_STANDARD.md) — composite baseline for verification evidence (ADR-015)
 - `docs/records/` — filled engineering records
 - `.cursor/ENGINEERING_CONSTITUTION.mdc` — authoritative policy
 
@@ -54,4 +54,5 @@ Requirement ID
 |---------|------|--------|
 | 1.0 | 2026-07-19 | CR-002 scaffold |
 | 1.1 | 2026-07-19 | CR-002-R1 atomic IDs; records links |
-| 1.1.1 | 2026-07-19 | ADR-CR002-001 — link revision-identity standard |
+| 1.1.1 | 2026-07-19 | Link revision-identity standard (ADR-015) |
+| 1.1.2 | 2026-07-19 | ADR-015-R1 — canonical ADR-015 reference |

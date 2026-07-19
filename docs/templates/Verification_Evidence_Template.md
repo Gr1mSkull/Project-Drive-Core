@@ -1,13 +1,13 @@
 # Verification Evidence Template
 
 **Document ID:** TPL-VE-001  
-**Version:** 1.1.1  
+**Version:** 1.1.2  
 **Status:** Proposed  
-**Change Request:** CR-002 / CR-002-R1 · **ADR:** ADR-CR002-001
+**Change Request:** CR-002 / CR-002-R1 · **ADR:** ADR-015
 
 Authoritative policy: `.cursor/ENGINEERING_CONSTITUTION.mdc` §6 (Evidence-backed validation), §4 / §13 (verification authority).
 
-**Revision identity (normative field meanings):** [`docs/standards/REVISION_IDENTITY_STANDARD.md`](../standards/REVISION_IDENTITY_STANDARD.md) — composite system baseline. Do not treat project version, firmware version, protocol version, hardware revision, or configuration identity as interchangeable.
+**Revision identity (normative field meanings):** [`docs/standards/REVISION_IDENTITY_STANDARD.md`](../standards/REVISION_IDENTITY_STANDARD.md) (ADR-015) — composite system baseline. Do not treat project version, firmware version, protocol version, hardware revision, or configuration identity as interchangeable. Encoded wire values are not semantic `MAJOR.MINOR` unless the interface specification defines the mapping.
 
 **Storage convention (filled records only):**
 
@@ -109,4 +109,5 @@ Exact command, procedure, or measurement method:
 |---------|------|--------|
 | 1.0 | 2026-07-19 | CR-002 initial template |
 | 1.1 | 2026-07-19 | CR-002-R1 records path; separate tester vs certifier |
-| 1.1.1 | 2026-07-19 | ADR-CR002-001 — reference revision-identity standard; baseline fields |
+| 1.1.1 | 2026-07-19 | Reference revision-identity standard; baseline fields |
+| 1.1.2 | 2026-07-19 | ADR-015-R1 — canonical ADR-015; encoded-version caution |

@@ -13,6 +13,7 @@ DriveCore records architectural decisions in two linked locations:
 - Legacy **EDL** entries remain authoritative; they may be migrated to `ADR-NNN` files without changing substance.
 - Supersede — do not delete — prior ADRs.
 - Normative detail that follows an accepted ADR may live under [`docs/standards/`](../standards/README.md); the ADR remains the rationale source.
+- Canonical ADR identifiers use the `ADR-NNN` form. Originating decision-request or Change Request aliases are not second active ADR IDs.
 
 ## Index (EDL → ADR equivalent)
 
@@ -35,19 +36,20 @@ DriveCore records architectural decisions in two linked locations:
 
 ## New ADR files
 
-| File ID | Decision ID | Title | Status |
-|---------|-------------|-------|--------|
-| [ADR-015](ADR-015-platform-revision-identity.md) | ADR-CR002-001 | DriveCore Platform Revision Identity and System Baseline | Proposed |
+| Canonical ADR ID | Title | Status | Originating request (alias) |
+|------------------|-------|--------|-----------------------------|
+| [ADR-015](ADR-015-platform-revision-identity.md) | DriveCore Platform Revision Identity and System Baseline | Accepted | ADR-CR002-001 (CR-002) |
 
-Normative standard: [`docs/standards/REVISION_IDENTITY_STANDARD.md`](../standards/REVISION_IDENTITY_STANDARD.md).
+Normative standard: [`docs/standards/REVISION_IDENTITY_STANDARD.md`](../standards/REVISION_IDENTITY_STANDARD.md) (STD-REV-001 — Approved).
 
-Next sequential file ID: `ADR-016-*.md`.
+Next sequential ADR: `ADR-016-*.md`.
 
-**OPEN ISSUE:** Unified numbering (ADR vs EDL vs CR-derived Decision IDs) — await System Architect decision. Until then, File ID uses `ADR-NNN`; Decision ID may additionally reference the authorizing CR (e.g. ADR-CR002-001).
+Historical EDL numbering is unchanged. General EDL↔ADR migration numbering remains outside ADR-015 scope.
 
 ## Revision history
 
 | Version | Date | Change |
 |---------|------|--------|
 | 1.0 | 2026-07-12 | WP-001 ADR/EDL index |
-| 1.1 | 2026-07-19 | ADR-CR002-001 / ADR-015 revision identity |
+| 1.1 | 2026-07-19 | ADR-015 revision identity formalization |
+| 1.1.1 | 2026-07-19 | ADR-015-R1 — canonical ID ADR-015; Accepted |

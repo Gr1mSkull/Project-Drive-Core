@@ -8,8 +8,8 @@
 | **Author** | Implementation Engineer (cloud agent) |
 | **Author role** | Implementation Engineer |
 | **Date** | 2026-07-19 |
-| **Status** | Under Review |
-| **Related WP / CR** | ADR-CR002-001 (follows CR-002 / CR-002-R1 / CR-002-R2) |
+| **Status** | Accepted |
+| **Related WP / CR** | ADR-015 (Originating Decision Request: ADR-CR002-001; Originating Change Request: CR-002 / CR-002-R1 / CR-002-R2) |
 
 ### Reason for Change
 
@@ -18,7 +18,7 @@ Constitution §6 requires uniquely identifiable testable system states and flags
 ### Current Behaviour
 
 * Partial identity fragments exist (protocol constants, HEARTBEAT `fw_version`, YAML `config_version` / profile, hardware prose revisions, `BOARD_ID` pins, VE template fields).
-* No accepted revision-identity ADR or normative standard.
+* Prior to this change: no accepted revision-identity ADR or normative standard (now ADR-015 Accepted; STD-REV-001 Approved — documentation only).
 * No firmware/bootloader build-metadata generation.
 * No configuration SHA-256 content identity.
 * DCFG CRC-16/CCITT-FALSE exists; coverage inconsistent across sources.
@@ -26,7 +26,7 @@ Constitution §6 requires uniquely identifiable testable system states and flags
 
 ### Proposed Behaviour
 
-* ADR-CR002-001 (File ADR-015) records the decision: composite baseline of independent artifact identities.
+* ADR-015 records the decision: composite baseline of independent artifact identities (`ADR-CR002-001` retained only as originating decision request / legacy alias).
 * `docs/standards/REVISION_IDENTITY_STANDARD.md` is the normative source for fields, formats, compatibility, and evidence rules.
 * Supporting docs reference the standard without duplicating full rules.
 * Implementation of build metadata, hashing, and wire/format changes is **out of scope** for this change.
@@ -125,7 +125,7 @@ Indirect safety benefit later: prevents certification of unidentified hardware/f
 
 ### Open Questions
 
-See ADR §15 (OQ-1 … OQ-6). Not reopened beyond task scope.
+See ADR-015 §15 (OQ-1 … OQ-6). Encoded-version mappings and DCFG CRC coverage remain separate interface decisions. Not reopened beyond task scope.
 
 ### Approvals (architecture / policy)
 
@@ -133,10 +133,12 @@ See ADR §15 (OQ-1 … OQ-6). Not reopened beyond task scope.
 |-------|-------|
 | **ADR Required** | YES |
 | **Architect Approval Required** | YES |
-| **ADR / EDL reference** | ADR-CR002-001 / ADR-015; related EDL-007, EDL-009, EDL-010, EDL-011, EDL-014 |
-| **Architect approver (name/agent)** | TBD |
+| **ADR / EDL reference** | ADR-015; related EDL-007, EDL-009, EDL-010, EDL-011, EDL-014 |
+| **Architect approver (name/agent)** | System Architect |
 | **Architect role** | System Architect |
-| **Architect approval date** | TBD |
+| **Architect approval date** | 2026-07-19 |
+| **Architecture review date** | 2026-07-19 |
+| **Conditions** | Encoded-version mappings and DCFG CRC coverage remain separate interface decisions. Approval is not implementation verification. |
 
 ### Review acknowledgment (not architecture approval)
 
@@ -153,4 +155,5 @@ See ADR §15 (OQ-1 … OQ-6). Not reopened beyond task scope.
 
 | Version | Date | Change |
 |---------|------|--------|
-| 1.0 | 2026-07-19 | Initial CIA for ADR-CR002-001 |
+| 1.0 | 2026-07-19 | Initial CIA for ADR-015 formalization |
+| 1.0.1 | 2026-07-19 | ADR-015-R1 — Status Accepted; canonical ADR-015 |
