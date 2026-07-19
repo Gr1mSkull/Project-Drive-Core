@@ -1,11 +1,13 @@
 # Review Handoff Package Template
 
 **Document ID:** TPL-RHP-001  
-**Version:** 1.1  
+**Version:** 1.1.1  
 **Status:** Proposed  
-**Change Request:** CR-002 / CR-002-R1
+**Change Request:** CR-002 / CR-002-R1 · **ADR:** ADR-CR002-001
 
 Authoritative policy: `.cursor/ENGINEERING_CONSTITUTION.mdc` §18.
+
+When interfaces or identity-bearing artifacts change, versions shall follow [`docs/standards/REVISION_IDENTITY_STANDARD.md`](../standards/REVISION_IDENTITY_STANDARD.md) (ADR-CR002-001).
 
 **Storage convention (filled records only):**
 
@@ -107,3 +109,4 @@ Areas requiring adversarial review (do not confirm success — search for weakne
 |---------|------|--------|
 | 1.0 | 2026-07-19 | CR-002 initial template |
 | 1.1 | 2026-07-19 | CR-002-R1 records path; role/date fields |
+| 1.1.1 | 2026-07-19 | ADR-CR002-001 — reference revision-identity standard |

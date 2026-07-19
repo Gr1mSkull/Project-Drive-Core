@@ -12,6 +12,7 @@ DriveCore records architectural decisions in two linked locations:
 - New ADR-level decisions shall use `docs/templates/ADR_Template.md`.
 - Legacy **EDL** entries remain authoritative; they may be migrated to `ADR-NNN` files without changing substance.
 - Supersede — do not delete — prior ADRs.
+- Normative detail that follows an accepted ADR may live under [`docs/standards/`](../standards/README.md); the ADR remains the rationale source.
 
 ## Index (EDL → ADR equivalent)
 
@@ -34,6 +35,19 @@ DriveCore records architectural decisions in two linked locations:
 
 ## New ADR files
 
-None yet. Next ADR: `ADR-015-*.md` or continue EDL numbering per architect direction.
+| File ID | Decision ID | Title | Status |
+|---------|-------------|-------|--------|
+| [ADR-015](ADR-015-platform-revision-identity.md) | ADR-CR002-001 | DriveCore Platform Revision Identity and System Baseline | Proposed |
 
-**OPEN ISSUE:** Unified numbering (ADR vs EDL) — await System Architect decision.
+Normative standard: [`docs/standards/REVISION_IDENTITY_STANDARD.md`](../standards/REVISION_IDENTITY_STANDARD.md).
+
+Next sequential file ID: `ADR-016-*.md`.
+
+**OPEN ISSUE:** Unified numbering (ADR vs EDL vs CR-derived Decision IDs) — await System Architect decision. Until then, File ID uses `ADR-NNN`; Decision ID may additionally reference the authorizing CR (e.g. ADR-CR002-001).
+
+## Revision history
+
+| Version | Date | Change |
+|---------|------|--------|
+| 1.0 | 2026-07-12 | WP-001 ADR/EDL index |
+| 1.1 | 2026-07-19 | ADR-CR002-001 / ADR-015 revision identity |

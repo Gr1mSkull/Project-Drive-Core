@@ -23,6 +23,7 @@
 | HB | [Engineering foundation](docs/PROJECT_PHILOSOPHY.md) | Philosophy, workflow, SRS, ADR |
 | SRS | [System Requirements](docs/SRS/README.md) | Volumes 1–3 (structure) |
 | ADR | [Architecture decisions](docs/ADR/README.md) | ADR + EDL index |
+| STD | [Engineering standards](docs/standards/README.md) | Normative standards (revision identity — ADR-CR002-001) |
 | CQ | [Component Qualification](docs/Component_Qualification/README.md) | WP-002 qualification framework |
 | TR | [Traceability](docs/traceability/README.md) | Requirement–implementation–test scaffold (CR-002) |
 | REC | [Engineering records](docs/records/README.md) | Filled CIA / VE / RHP records (CR-002-R1) |
