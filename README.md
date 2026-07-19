@@ -24,11 +24,14 @@
 | SRS | [System Requirements](docs/SRS/README.md) | Volumes 1–3 (structure) |
 | ADR | [Architecture decisions](docs/ADR/README.md) | ADR + EDL index |
 | CQ | [Component Qualification](docs/Component_Qualification/README.md) | WP-002 qualification framework |
+| TR | [Traceability](docs/traceability/README.md) | Requirement–implementation–test scaffold (CR-002) |
+| REC | [Engineering records](docs/records/README.md) | Filled CIA / VE / RHP records (CR-002-R1) |
 
 ## AI context
 
+- [`.cursor/ENGINEERING_CONSTITUTION.mdc`](.cursor/ENGINEERING_CONSTITUTION.mdc) — **authoritative** engineering policy
+- [`.cursor/rules/`](.cursor/rules/) — wrappers to constitution (`00`–`10`)
 - [`.ai/`](.ai/) — operational context for assistants
-- [`.cursor/rules/`](.cursor/rules/) — WP-001 engineering rules (`00`–`10`)
 
 ## Ключевой принцип
 
