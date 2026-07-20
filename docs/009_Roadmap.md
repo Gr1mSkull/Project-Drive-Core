@@ -8,6 +8,18 @@
 - Модель конфигурации
 - Bootloader / OTA pipeline
 
+### WP-007 status (2026-07-19)
+
+| Item | Status |
+|------|--------|
+| DevKit requirements baseline (`REQ-DCC-V-DK-*`) | **Proposed** — Architecture Review required |
+| DevKit verification plan (DK-A…DK-D) | **Proposed** — no physical execution |
+| DevKit hardware design | **Not approved** (WP-007 does not authorize schematics/PCB/BOM) |
+| DevKit built / verified | **No** — NOT IMPLEMENTED / NOT VERIFIED |
+| Blocking decisions | ADR-DK-001…012; thresholds TBD-DK-001…022 |
+
+**Next expected engineering stage after WP-007 review:** resolve blocking ADRs → DevKit electrical / representative power-channel architecture → fixture/load-bank requirements → (only then) PCB/firmware bring-up WPs.
+
 ## Фаза 1 — Первый автомобиль (E30)
 
 - DCC Gen1 (Logic + Power + Radio)
