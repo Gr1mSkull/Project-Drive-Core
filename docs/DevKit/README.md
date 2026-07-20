@@ -1,7 +1,7 @@
 # DriveCore Gen1 DevKit — Document Set
 
 **Document ID:** DOC-DK-INDEX-001  
-**Version:** 1.4  
+**Version:** 1.6  
 **Status:** Accepted  
 **Work Package:** WP-007 / WP-008 (Accepted) / WP-009 (Accepted)  
 **Date:** 2026-07-20
