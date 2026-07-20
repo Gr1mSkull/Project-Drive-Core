@@ -1298,7 +1298,7 @@ is the authoritative source for TBD-DK identifiers.
 Other DevKit documents, CIA, and RHP **shall reference** this register and **shall not** redefine TBD-DK meanings.
 
 Unresolved numeric/procedure thresholds. Candidates from `docs/008` or other sources are **not** normative until closed.
-**Status of all entries: Open.** No `TBD-DK-*` value is resolved in WP-007 / R1 / R2 / WP-009. WP-009 adds analysis references and proposed closure methods only.
+**Status of all entries: Open.** WP-009 Architecture Review (2026-07-20) Accepted analysis methods and procedural contracts; numeric values remain Open.
 
 ### 4.1 Summary
 
@@ -1363,8 +1363,8 @@ Unresolved numeric/procedure thresholds. Candidates from `docs/008` or other sou
 | Owner role | System Architect |
 | Closure artifact | Architect threshold decision; [`DevKit_Current_Envelope_Analysis.md`](DevKit_Current_Envelope_Analysis.md); [`DevKit_Threshold_Closure_Matrix.md`](DevKit_Threshold_Closure_Matrix.md) |
 | Status | Open |
-| Acceptance readiness | **BOUND_ESTABLISHED_VALUE_OPEN** (WP-009-R1) — C2 calculation architecture; **no ampere ceiling authorized** |
-| Notes | Pairs with Accepted ADR-021. Tuple decomposition (002A/B/C) recommended — register CR pending. Candidate 30 A not approved. Electrical architecture WP calculates first ceiling. |
+| Architecture Review (WP-009) | **Methods Accepted** — limit stack; continuous/protection/transient/fault distinction; C2 calculation architecture. **Numeric Open** — no ampere ceiling approved. |
+| Notes | Pairs with Accepted ADR-021. Tuple decomposition (002A/B/C) recommended — register CR pending. Candidate 30 A not approved. |
 
 #### TBD-DK-003
 
@@ -1382,8 +1382,8 @@ Unresolved numeric/procedure thresholds. Candidates from `docs/008` or other sou
 | Owner role | System Architect |
 | Closure artifact | [`DevKit_Current_Envelope_Analysis.md`](DevKit_Current_Envelope_Analysis.md) §4.3–§4.4, §7; [`DevKit_Threshold_Measurement_Plan.md`](DevKit_Threshold_Measurement_Plan.md) §2.2 |
 | Status | Open |
-| Acceptance readiness | **READY_FOR_ACCEPTANCE** (WP-009-R1) — profile-based closure model only; numeric **NOT READY** |
-| Notes | Profile/overlap model; instantaneous/avg/RMS distinguished. Invalid ΣD_n ≤ 1 removed. Numeric Open. |
+| Architecture Review (WP-009) | **Methods Accepted** — profile/overlap closure model; instantaneous/avg/RMS/transient-overlap; unknown overlap → concurrent. **Numeric Open** — every numeric simultaneous limit. |
+| Notes | Profile/overlap model Accepted. Invalid ΣD_n ≤ 1 removed. Numeric Open. |
 
 #### TBD-DK-004
 
@@ -1401,8 +1401,8 @@ Unresolved numeric/procedure thresholds. Candidates from `docs/008` or other sou
 | Owner role | System Architect / Test Owner |
 | Closure artifact | [`DevKit_Safety_Timing_Analysis.md`](DevKit_Safety_Timing_Analysis.md) §3.1; [`DevKit_Threshold_Measurement_Plan.md`](DevKit_Threshold_Measurement_Plan.md) §3.1 |
 | Status | Open |
-| Acceptance readiness | **BLOCKED_BY_MEASUREMENT** (WP-009) |
-| Notes | Kill budget model established. EDL-011 >100 ms shall NOT apply to kill. Numeric Open. |
+| Architecture Review (WP-009) | **Methods Accepted** — hardware-kill budget; normalized start/end events; measurement method. **Numeric Open** — response limit. |
+| Notes | Kill budget Accepted. EDL-011 >100 ms shall NOT apply to kill. Numeric Open. |
 
 #### TBD-DK-005
 
@@ -1420,7 +1420,7 @@ Unresolved numeric/procedure thresholds. Candidates from `docs/008` or other sou
 | Owner role | System Architect / Test Owner |
 | Closure artifact | [`DevKit_Safety_Timing_Analysis.md`](DevKit_Safety_Timing_Analysis.md) §3.2; [`DevKit_Threshold_Measurement_Plan.md`](DevKit_Threshold_Measurement_Plan.md) §3.2 |
 | Status | Open |
-| Acceptance readiness | **BLOCKED_BY_COMPONENT_SELECTION** + **BLOCKED_BY_MEASUREMENT** (WP-009) |
+| Architecture Review (WP-009) | **Methods Accepted** — watchdog budget; measurement method. **Numeric Open** — expiry, handler, total limit. |
 | Notes | Candidate <200 ms not approved. Watchdog class separate from kill. Numeric Open. |
 
 #### TBD-DK-006
@@ -1457,8 +1457,8 @@ Unresolved numeric/procedure thresholds. Candidates from `docs/008` or other sou
 | Owner role | System Architect |
 | Closure artifact | [`DevKit_Safety_Timing_Analysis.md`](DevKit_Safety_Timing_Analysis.md) §4; [`DevKit_Threshold_Measurement_Plan.md`](DevKit_Threshold_Measurement_Plan.md) §3.3 |
 | Status | Open |
-| Acceptance readiness | **BLOCKED_BY_EDL_CLARIFICATION** (WP-009-R1) — closure method only; no numeric direction |
-| Notes | EDL-011 text ambiguous (readings A/B/C documented). Do not infer >100 ms or ≤100 ms. Budget retained. Numeric Open. |
+| Architecture Review (WP-009) | **Methods Accepted** — control-loss budget; message-period/missed-frame method; measurement method. **Numeric Open**; **BLOCKED_BY_EDL_CLARIFICATION**. No >100 ms or ≤100 ms bound approved. |
+| Notes | EDL-011 clarification required (readings A/B/C/D). EDL file unchanged. Numeric Open. |
 
 #### TBD-DK-008
 
@@ -1585,7 +1585,7 @@ Unresolved numeric/procedure thresholds. Candidates from `docs/008` or other sou
 | Owner role | System Architect |
 | Closure artifact | [`DevKit_Safety_Timing_Analysis.md`](DevKit_Safety_Timing_Analysis.md) §3.4; [`DevKit_Threshold_Measurement_Plan.md`](DevKit_Threshold_Measurement_Plan.md) §3.4 |
 | Status | Open |
-| Acceptance readiness | **BOUND_ESTABLISHED_VALUE_OPEN** (WP-009) |
+| Architecture Review (WP-009) | **Methods Accepted** — commanded-OFF budget; start/end definition; measurement method. **Numeric Open** — response limit. |
 | Notes | Separate from kill and control-loss. Numeric Open. |
 
 #### TBD-DK-015
@@ -1715,8 +1715,8 @@ Unresolved numeric/procedure thresholds. Candidates from `docs/008` or other sou
 | Owner role | System Architect |
 | Closure artifact | [`DevKit_Safety_Timing_Analysis.md`](DevKit_Safety_Timing_Analysis.md) §7; [`DevKit_Threshold_Measurement_Plan.md`](DevKit_Threshold_Measurement_Plan.md) §3.5 |
 | Status | Open |
-| Acceptance readiness | **READY_FOR_ACCEPTANCE** (WP-009-R1) — procedure/state machine + command epoch |
-| Notes | Procedural threshold. Ack/fault-clear both required before READY_FOR_ENABLE; reset ≠ ack. Kill release alone shall not re-energize. |
+| Architecture Review (WP-009) | **Procedure Accepted** — deterministic state-machine contract; command epoch; kill-release lockout; ack + fault-clear required; Service/Tablet not sole authority. **Implementation/evidence Open**. |
+| Notes | Procedure accepted by WP-009 Architecture Review; implementation and verification closure remain Open. |
 
 #### TBD-DK-022
 
@@ -1759,7 +1759,7 @@ Crosswalk: [`DevKit_P0_Decision_Crosswalk.md`](DevKit_P0_Decision_Crosswalk.md).
 | ADR-DK-011 | — | DevKit vs DCC Gen1 electrical/thermal environmental test split? | Open request |
 | ADR-DK-012 | — | Which enclosure/connector candidates remain valid (WAGO vs screw, etc.)? | Open request |
 
-Threshold numeric values associated with ADR-DK-006 / ADR-DK-007 / ADR-DK-011 are defined only in §4 (`TBD-DK-*`) and remain Open. WP-009 threshold analysis adds closure methods and acceptance-readiness — see [`DevKit_Threshold_Closure_Matrix.md`](DevKit_Threshold_Closure_Matrix.md).
+Threshold numeric values associated with ADR-DK-006 / ADR-DK-007 / ADR-DK-011 are defined only in §4 (`TBD-DK-*`) and remain Open. WP-009 **Accepted** (2026-07-20): threshold analysis methods Accepted; numeric values Open; see [`DevKit_Threshold_Closure_Matrix.md`](DevKit_Threshold_Closure_Matrix.md).
 
 
 ## Revision history
@@ -1776,3 +1776,4 @@ Threshold numeric values associated with ADR-DK-006 / ADR-DK-007 / ADR-DK-011 ar
 | 1.4 | 2026-07-20 | Architecture Review — ADR-016…023 Accepted; WP-008 Accepted; PR #12 approved for merge; TBD Status Open unchanged |
 | 1.5 | 2026-07-20 | WP-009 — threshold analysis references and acceptance-readiness fields; Status Open unchanged |
 | 1.5.1 | 2026-07-20 | WP-009-R1 — EDL clarification block; symbolic scenarios; profile-based TBD-DK-003; no ampere bands |
+| 1.5.2 | 2026-07-20 | WP-009 Architecture Review — methods Accepted; numeric Open; TBD Status Open unchanged |

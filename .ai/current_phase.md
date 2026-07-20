@@ -1,6 +1,6 @@
 # DriveCore — Current Phase
 
-**Updated:** WP-009 Proposed — DevKit threshold analysis package (2026-07-20)
+**Updated:** WP-009 Accepted — DevKit threshold analysis (2026-07-20)
 
 ## Documentation
 
@@ -14,7 +14,7 @@
 | WP-001…WP-006 / CR-001 / CR-002 / ADR-015 | ✅ on `main` (see git history) |
 | **WP-007 DevKit requirements + verification plan** | ✅ Accepted (2026-07-20) — evidence NOT VERIFIED |
 | **WP-008 DevKit P0 architecture decisions** | ✅ Accepted (2026-07-20) — ADR-016…023 |
-| **WP-009 DevKit threshold analysis** | 📋 Proposed — Ready for Architecture Review |
+| **WP-009 DevKit threshold analysis** | ✅ Accepted (2026-07-20) — methods Accepted; numeric Open |
 
 ## DevKit (WP-007 / WP-008 / WP-009)
 
@@ -23,29 +23,25 @@
 | Active system `REQ-DCC-V-DK-*` (93) + `DK-GOV-*` (25) | **Accepted** (structure); NOT VERIFIED (evidence) |
 | Verification plan DK-A…DK-D | **Accepted** structure (cases NOT EXECUTED / BLOCKED) |
 | P0 ADRs ADR-016…023 | **Accepted** |
-| Threshold analysis package | **Proposed** (WP-009) — TBDs remain **Open** |
+| Threshold analysis methods | **Accepted** (WP-009) |
+| Threshold numeric values | **Open** (TBD-DK-001…022) |
+| TBD-DK-007 | **BLOCKED_BY_EDL_CLARIFICATION** |
 | Hardware design approved | **No** |
 | Firmware bring-up complete | **No** (NOT IMPLEMENTED) |
 | Physical verification | **NOT VERIFIED** |
 | Remaining open requests | ADR-DK-008, 009, 011, 012 |
-| Thresholds | TBD-DK-001…022 **Open** — WP-009 closure methods proposed |
 
-## SRS
+## Next authorized work
 
-`docs/SRS/Volume_2_DCC.md` §8.1 points to `docs/DevKit/DevKit_System_Requirements.md`. Other SRS chapters remain largely structural.
+**Functional DevKit electrical architecture** — authorized by WP-009 Architecture Review.  
+Not authorized: conductor/connector/fuse/PCB sizing, thermal freeze, firmware, fixtures.
 
-## Next expected work (after WP-009 Architecture Review)
-
-1. Architect threshold acceptance (subset)  
-2. DevKit electrical architecture WP (functional; Scenario C2 recommended)  
-3. Test fixture and load-bank requirements  
-4. Component qualification as authorized  
-5. PCB design and firmware bring-up (only after electrical architecture approval)
+Follow-on: EDL-011 clarification CR · fixture/load-bank requirements · component qualification (as separately authorized).
 
 ## Active branch
 
-`cursor/wp009-devkit-threshold-analysis-3bb9`
+`cursor/wp009-devkit-threshold-analysis-3bb9` (PR #13 approved for merge)
 
 ## Do not start without approval
 
-PCB/schematics · component BOM selection · firmware feature work · marking thresholds Resolved · marking requirements Verified · fixture construction · claiming physical validation
+Final sizing/freeze · PCB/schematics · component BOM · firmware · fixture construction · marking thresholds Resolved · marking requirements Verified

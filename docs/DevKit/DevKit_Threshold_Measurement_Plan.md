@@ -1,12 +1,14 @@
 # DevKit Threshold Measurement Plan — WP-009
 
 **Document ID:** DOC-DK-MEAS-001  
-**Version:** 1.0  
-**Status:** Proposed — requires Architecture Review  
-**Work Package:** WP-009 / WP-009-R1  
+**Version:** 1.2  
+**Status:** Accepted — Architecture Review  
+**Review date:** 2026-07-20  
+**Approver role:** System Architect  
+**Work Package:** WP-009 / WP-009-R1 (Accepted)  
 **Date:** 2026-07-20
 
-> Measurement **plan** only — not evidence. No VE records. No physical validation claimed.
+> Measurement **plan** structure Accepted by Architecture Review (2026-07-20). Not evidence. No VE records. No physical validation claimed.
 
 ## 1. General requirements
 
@@ -179,3 +181,4 @@ Statistics: report **maximum observed**, mean, σ, outliers removed with justifi
 |---------|------|--------|
 | 1.0 | 2026-07-20 | WP-009 initial measurement plan |
 | 1.1 | 2026-07-20 | WP-009-R1 — remove EDL-011 lower-bound pass check; clarify numeric block |
+| 1.2 | 2026-07-20 | Architecture Review — measurement plan structure Accepted |

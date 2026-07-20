@@ -1,14 +1,16 @@
 # DevKit Safety Timing Analysis — WP-009
 
 **Document ID:** DOC-DK-TIME-001  
-**Version:** 1.0  
-**Status:** Proposed — requires Architecture Review  
-**Work Package:** WP-009 / WP-009-R1  
+**Version:** 1.2  
+**Status:** Accepted — Architecture Review  
+**Review date:** 2026-07-20  
+**Approver role:** System Architect  
+**Work Package:** WP-009 / WP-009-R1 (Accepted)  
 **Date:** 2026-07-20  
 **Author role:** Implementation Engineer (threshold analysis)
 
 > Converts Accepted ADR-022 timing policy into worst-case budgets, hazard ordering analysis, EDL-011 interpretation, and post-kill re-enable proposal.  
-> **No millisecond value is Approved by this document.**
+> **Architecture Review Accepted (2026-07-20).** Budget structures and measurement methods Accepted. **No millisecond value is Approved.**
 
 ## 1. Scope
 
@@ -411,9 +413,22 @@ approved_limit ≥ measured_worst_case + measurement_uncertainty + design_margin
 | TBD-DK-014 | REQ-DCC-V-DK-037 | VER-DCC-DK-A-014; VER-DCC-DK-C-* |
 | TBD-DK-021 | REQ-DCC-V-DK-021, 031–034 | VER-DCC-DK-A-014 |
 
-## 11. Revision history
+## 11. Architecture Review acceptance (2026-07-20)
+
+| Field | Value |
+|-------|-------|
+| **Status** | Accepted — Architecture Review |
+| **Review date** | 2026-07-20 |
+| **Approver role** | System Architect |
+| **PR** | #13 approved for merge |
+
+Accepted: timing budget structures, normalized path segments, measurement plan structure, TBD-DK-021 procedural contract, EDL-011 ambiguity documentation.  
+Not Accepted: numeric ms limits; EDL-011 numeric direction (BLOCKED_BY_EDL_CLARIFICATION).
+
+## 12. Revision history
 
 | Version | Date | Change |
 |---------|------|--------|
 | 1.0 | 2026-07-20 | WP-009 initial safety timing analysis |
 | 1.1 | 2026-07-20 | WP-009-R1 — EDL-011 ambiguity; normalized timing segments; FSM clarifications |
+| 1.2 | 2026-07-20 | Architecture Review — methods Accepted; numeric Open |

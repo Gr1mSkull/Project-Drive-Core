@@ -8,7 +8,7 @@
 | **Author** | Implementation Engineer (cloud agent) |
 | **Author role** | Implementation Engineer |
 | **Date** | 2026-07-20 |
-| **Status** | Draft — Under Architecture Review |
+| **Status** | Accepted (Architecture Review 2026-07-20; PR #13 approved for merge) |
 | **Related WP / CR** | WP-009 / WP-009-R1; depends on WP-008 Accepted (`8bc5710`+); ADR-021/022 Accepted |
 
 ### Reason for Change
@@ -22,13 +22,15 @@ Accepted ADR-021 and ADR-022 established current-envelope and timing **architect
 * No threshold analysis package; no measurement plan; no closure matrix.
 * Verification evidence **NOT VERIFIED**; cases **NOT EXECUTED / BLOCKED**.
 
-### Proposed Behaviour
+### Accepted Behaviour (Architecture Review 2026-07-20)
 
-* Four analysis documents: current envelope, safety timing, closure matrix, measurement plan.
-* Proposed Threshold Decision Records embedded in analysis (not Approved).
-* TBD register §4 updated with analysis references, closure methods, readiness — **Status remains Open**.
-* Traceability and DevKit indexes gain WP-009 navigation.
-* **No** numeric threshold Approved; **no** VE records; **no** hardware/firmware/PCB work.
+* Four **Accepted** analysis documents: current envelope, safety timing, closure matrix, measurement plan.
+* Threshold **methods** Accepted for TBD-DK-002…005, 007, 014, 021; **numeric values remain Open**.
+* TBD-DK-003 profile/overlap model Accepted; TBD-DK-021 procedural contract Accepted.
+* TBD-DK-007 **BLOCKED_BY_EDL_CLARIFICATION** — no >100 ms or ≤100 ms bound approved.
+* **No ampere ceiling** or **ms threshold** Approved.
+* Functional DevKit electrical architecture WP **authorized** (scope in closure matrix §7).
+* Traceability updated; evidence **NOT VERIFIED**; no VE records; no hw/fw/PCB.
 
 ### Affected Requirements
 
@@ -91,36 +93,35 @@ Revert WP-009 PR; WP-008 baseline unchanged.
 
 ### Validation Required
 
-WP-009 §30 documentation validation; Architecture Review of proposed thresholds; **no** physical validation in this WP.
+WP-009 §30 and WP-009-R1 §9 validation; Architecture Review **Accepted** 2026-07-20; **no** physical validation.
 
 ### Open Questions
 
-* Architect accept Scenario **C2 calculation architecture** (no ampere ceiling from WP-009)?
-* Accept TBD-DK-003 profile/overlap closure model?
-* Accept TBD-DK-021 state-machine + command epoch procedure?
-* Authorize EDL-011 clarification CR with question A/B/C/D?
+* EDL-011 clarification CR — which reading A/B/C/D applies?
 * Decompose TBD-DK-002 register in follow-on CR?
+* Timing of fixture WP vs functional electrical architecture?
 
 ### WP-009-R1 Lightweight Impact Note (Level 1)
 
 | Correction | Change |
 |------------|--------|
 | EDL-011 interpretation | Removed unsupported `>100 ms` lower bound; TBD-DK-007 → **BLOCKED_BY_EDL_CLARIFICATION** |
-| Current scenarios | Removed 3–8 / 8–15 / 15–25 A bands; symbolic C1–C3 only |
+| Current scenarios | Removed ampere bands; symbolic C1–C3 only |
 | Simultaneous load | Removed invalid `ΣD_n ≤ 1`; added instantaneous/avg/RMS + overlap table |
-| Post-kill FSM | Command epoch; ack ≠ reset; flexible ack/fault-clear order |
-| Timing ordering | Normalized path segments; no unqualified cross-path comparisons |
+| Post-kill FSM | Command epoch; ack ≠ reset |
+| Timing ordering | Normalized path segments |
 
 ### Approvals (architecture / policy)
 
 | Field | Value |
 |-------|-------|
 | **ADR Required** | NO — analysis under Accepted ADR-021/022 |
-| **Architect Approval Required** | YES — for threshold values/procedures |
-| **ADR / EDL reference** | ADR-021, ADR-022 Accepted; EDL-011 unchanged |
-| **Architect approver (name/agent)** | TBD |
+| **Architect Approval Required** | YES — **Granted** (methods/procedures) |
+| **ADR / EDL reference** | ADR-021, ADR-022 Accepted; EDL-011 unchanged; clarification required |
+| **Architect approver (name/agent)** | System Architect |
 | **Architect role** | System Architect |
-| **Architect approval date** | TBD |
+| **Architect approval date** | 2026-07-20 |
+| **Authorized next WP** | Functional DevKit electrical architecture (see closure matrix §7) |
 
 ### Review acknowledgment (not architecture approval)
 
@@ -136,4 +137,5 @@ WP-009 §30 documentation validation; Architecture Review of proposed thresholds
 | Version | Date | Change |
 |---------|------|--------|
 | 1.0 | 2026-07-20 | WP-009 initial CIA |
-| 1.1 | 2026-07-20 | WP-009-R1 Level 1 corrections — EDL ambiguity; symbolic scenarios; profile model |
+| 1.1 | 2026-07-20 | WP-009-R1 Level 1 corrections |
+| 1.2 | 2026-07-20 | Architecture Review — WP-009 Accepted; methods Accepted; numeric Open; PR #13 approved for merge |

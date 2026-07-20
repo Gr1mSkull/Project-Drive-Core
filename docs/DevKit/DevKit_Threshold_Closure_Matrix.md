@@ -1,12 +1,14 @@
 # DevKit Threshold Closure Matrix — WP-009
 
 **Document ID:** DOC-DK-TBD-MAT-001  
-**Version:** 1.1  
-**Status:** Proposed — requires Architecture Review  
-**Work Package:** WP-009 / WP-009-R1  
+**Version:** 1.2  
+**Status:** Accepted — Architecture Review  
+**Review date:** 2026-07-20  
+**Approver role:** System Architect  
+**Work Package:** WP-009 / WP-009-R1 (Accepted)  
 **Date:** 2026-07-20
 
-> Authoritative closure disposition for analyzed thresholds. **Status in register remains Open** until System Architect acceptance.
+> Authoritative closure disposition for analyzed thresholds. **Register Status remains Open** for numeric values; analysis methods Accepted by Architecture Review (2026-07-20).
 
 ## 1. Disposition legend
 
@@ -20,19 +22,148 @@
 | BLOCKED_BY_MEASUREMENT | Needs physical bench evidence |
 | BLOCKED_BY_HAZARD_DECISION | Needs hazard/risk decision beyond WP-009 |
 
-## 2. Primary thresholds (WP-009 scope)
+## 2. Primary thresholds — Architecture Review decisions (2026-07-20)
 
-| TBD | Proposed disposition | Candidate value/range | Bound | Evidence available | Missing evidence | Architecture dependency | Component dependency | Fixture dependency | Measurement dependency | Gate blocked | Next artifact |
-|-----|---------------------|----------------------|-------|-------------------|------------------|------------------------|---------------------|-------------------|------------------------|--------------|---------------|
-| TBD-DK-002 | BOUND_ESTABLISHED_VALUE_OPEN | Symbolic C2 calculation architecture; tuple 002A/B/C recommended | `I_certified_cont ≤ min(stack)` | ADR-021; limit-stack model | Electrical design inputs; measurement | ADR-019/021 | Fuse, connector, switch | P3 loads | Input + channel traces | DK-A sizing claims | Architect decision; electrical architecture WP calculates first ceiling |
-| TBD-DK-003 | READY_FOR_ACCEPTANCE | Profile/overlap closure model only; no universal scalar | Instantaneous / avg / RMS per profile | ADR-021; overlap table §4.4 | Overlap profiles; P4 measurement | ADR-019/021 | Per-channel limits | Multi-load fixture | Simultaneous capture | DK-C multi-load | Architect accepts profile model; numeric later |
-| TBD-DK-004 | BLOCKED_BY_MEASUREMENT | None authorized | Kill budget §3.1 | ADR-022 path model | HW path; load model; scope traces | ADR-016/022 | Kill switch, smart switch | Kill inject | Oscilloscope timing | DK-A A-012 | Accept budget + measurement method only |
-| TBD-DK-005 | BLOCKED_BY_COMPONENT_SELECTION | None authorized | Watchdog budget §3.2 | ADR-022 class model | WD period; FW handler | ADR-022 | MCU WD config | Fault inject | Timing measurement | DK-A A-011 | Accept budget + measurement method only |
-| TBD-DK-007 | BLOCKED_BY_EDL_CLARIFICATION | **No numeric direction** | EDL-011 ambiguous | Budget §3.3; readings A/B/C | EDL clarification answer; DCPI period | EDL-011; ADR-022 | SPI/timeout HW | Comm loss stim | SPI timeout capture | DK-A A-008; DK-C C-012 | Accept closure method only after EDL CR |
-| TBD-DK-014 | BOUND_ESTABLISHED_VALUE_OPEN | None authorized | Command OFF budget §3.4 | Command path model | FW schedule; switch disable | ADR-022 | Switch driver | Channel load | OFF timing | DK-A A-014; DK-C | Accept budget + measurement method only |
-| TBD-DK-021 | READY_FOR_ACCEPTANCE | Deterministic procedural/state-machine contract | Procedural + command epoch | ADR-022 recovery rules | FW implementation | ADR-022 | Kill/enable chain | Kill release test | Sequence log | DK-A A-014 | Architect procedure acceptance |
+| TBD | Register Status | Methods Accepted | Numeric Open | Blocker |
+|-----|-----------------|------------------|--------------|---------|
+| TBD-DK-002 | Open | Limit stack; continuous/protection/transient/fault distinction; C2 calculation architecture | Certified continuous; protection rating; transient/fault envelope | Electrical architecture + measurement |
+| TBD-DK-003 | Open | Profile/overlap model; instantaneous/avg/RMS/transient-overlap; unknown overlap → concurrent | All numeric simultaneous limits | Overlap profiles + P4 measurement |
+| TBD-DK-004 | Open | Hardware-kill budget; normalized start/end; measurement method | Numeric response limit | Measurement |
+| TBD-DK-005 | Open | Watchdog budget; measurement method | WD expiry; handler; total numeric limit | Component + measurement |
+| TBD-DK-007 | Open | Control-loss budget; message-period/missed-frame method; measurement method | All numeric ms values | **BLOCKED_BY_EDL_CLARIFICATION** |
+| TBD-DK-014 | Open | Commanded-OFF budget; start/end definition; measurement method | Numeric response limit | FW + component + measurement |
+| TBD-DK-021 | Open | Procedural state-machine contract (see §3) | Implementation + verification evidence | FW implementation |
 
-## 3. Related thresholds (inspected)
+### Exact acceptance records
+
+#### TBD-DK-002
+
+```text
+Accepted:
+- limit-stack model;
+- distinction between continuous, protection, transient and fault currents;
+- Scenario C2 calculation architecture.
+
+Retained Open:
+- certified continuous current;
+- protection rating;
+- transient/fault envelope.
+
+No ampere ceiling is approved.
+```
+
+#### TBD-DK-003
+
+```text
+Accepted:
+- profile-based simultaneous-current closure model;
+- explicit channel-overlap profiles;
+- separate instantaneous, continuous/average, RMS/thermal,
+  and transient-overlap quantities;
+- unknown overlap treated conservatively as concurrent.
+
+Retained Open:
+- every numeric simultaneous-current limit.
+```
+
+#### TBD-DK-004
+
+```text
+Accepted:
+- hardware-kill budget structure;
+- normalized start/end events;
+- measurement method.
+
+Retained Open:
+- numeric response limit.
+```
+
+#### TBD-DK-005
+
+```text
+Accepted:
+- watchdog budget structure;
+- measurement method.
+
+Retained Open:
+- watchdog expiry;
+- handler contribution;
+- total numeric response limit.
+```
+
+#### TBD-DK-007
+
+```text
+Accepted:
+- control-loss budget;
+- message-period / missed-frame analysis method;
+- measurement method.
+
+Status:
+- Open;
+- BLOCKED_BY_EDL_CLARIFICATION.
+
+No >100 ms or ≤100 ms bound is approved.
+```
+
+#### TBD-DK-014
+
+```text
+Accepted:
+- commanded-OFF budget;
+- start/end definition;
+- measurement method.
+
+Retained Open:
+- numeric response limit.
+```
+
+#### TBD-DK-021
+
+```text
+Accepted:
+- deterministic post-kill state-machine contract;
+- kill-release lockout;
+- operator acknowledgement requirement;
+- applicable fault-clear requirement;
+- command epoch / generation invalidation;
+- explicit new per-function enable commands;
+- prohibition of Service/Tablet as sole authority.
+
+Status:
+- procedural contract Accepted;
+- implementation and evidence remain absent.
+```
+
+## 3. TBD-DK-021 register note
+
+`Status: Open` retained in authoritative register. Additional note:
+
+```text
+Procedure accepted by WP-009 Architecture Review;
+implementation and verification closure remain Open.
+```
+
+## 4. EDL-011 clarification follow-up
+
+```text
+EDL-011 clarification required.
+```
+
+Proposed clarification question (no answer selected):
+
+```text
+Does EDL-011 intend:
+
+A. a nominal communication-loss detection timeout of 100 ms;
+B. a maximum elapsed communication-loss interval before outputs are OFF;
+C. a minimum filtering interval before declaring communication loss;
+D. another explicitly defined timing contract?
+```
+
+Do not modify `docs/EDL/` until clarification CR completes.
+
+## 5. Related thresholds (inspected)
 
 | TBD | Proposed disposition | Candidate value/range | Bound | Evidence available | Missing evidence | Architecture dependency | Component dependency | Fixture dependency | Measurement dependency | Gate blocked | Next artifact |
 |-----|---------------------|----------------------|-------|-------------------|------------------|------------------------|---------------------|-------------------|------------------------|--------------|---------------|
@@ -43,7 +174,7 @@
 | TBD-DK-019 | BLOCKED_BY_HAZARD_DECISION | Surface max **CANDIDATE** | Operator safety | REQ thermal | Touch hazard policy | ADR-DK-011 seq | Thermal paths | Enclosure | IR/TC | DK-C | Hazard decision |
 | TBD-DK-022 | BLOCKED_BY_COMPONENT_SELECTION | Stall A/ms **CANDIDATE** | P5 fault class | REQ-042/054/055 | H-bridge + fixture | ADR-019 bidirectional | H-bridge MPN | Stall fixture | Stall capture | DK-C C-010–013 | Component + fixture WP |
 
-## 4. Closure stage separation
+## 6. Closure stage separation
 
 For each primary TBD:
 
@@ -54,25 +185,49 @@ For each primary TBD:
 | Candidate value proposed | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | Procedure only |
 | Numeric value acceptable now | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | Procedure only |
 | Numeric value requires hardware | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | FW impl |
-| Procedure acceptable now | ❌ | ✅ (profile model) | ❌ | ❌ | ❌ | ❌ | ✅ (proposed) |
+| Procedure acceptable now | ✅ (002–007, 014 methods; 003 profile; 021 procedure) | ✅ | ❌ | ❌ | ❌ | ❌ | ✅ |
 | Evidence remains NOT VERIFIED | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 
-## 5. Thresholds ready for Architect review
+## 7. Authorized next work boundary
 
-### Ready for acceptance
+Architecture Review authorizes the next Work Package:
 
-- **TBD-DK-003** — profile/overlap closure model (numeric Open)
-- **TBD-DK-021** — post-kill re-enable state machine + command epoch
+```text
+Functional DevKit electrical architecture
+```
 
-### Closure method only (numeric blocked)
+**Authorized scope:**
 
-- **TBD-DK-002** — limit stack + C2 calculation architecture
-- **TBD-DK-004**, **TBD-DK-005**, **TBD-DK-014** — budgets + measurement methods
-- **TBD-DK-007** — budget + measurement method; **BLOCKED_BY_EDL_CLARIFICATION** for any numeric direction
+- functional block decomposition;
+- Logic / Power / Radio boundaries;
+- base DevKit versus external load-bank separation;
+- power-entry functional chain;
+- protection-layer responsibilities;
+- safe-state signal topology;
+- measurement points;
+- test points;
+- interface and isolation requirements;
+- representative channel-class allocation;
+- symbolic current and timing parameters.
 
-## 6. Revision history
+**Not authorized:**
+
+- final conductor sizing;
+- final connector sizing;
+- final fuse rating;
+- final PCB copper sizing;
+- final switch current rating;
+- thermal freeze;
+- watchdog-period freeze;
+- timing component freeze;
+- PCB layout;
+- firmware implementation;
+- fixture construction.
+
+## 8. Revision history
 
 | Version | Date | Change |
 |---------|------|--------|
 | 1.0 | 2026-07-20 | WP-009 initial closure matrix |
 | 1.1 | 2026-07-20 | WP-009-R1 — EDL clarification block; removed ampere/timing bands; profile model for TBD-DK-003 |
+| 1.2 | 2026-07-20 | Architecture Review — methods Accepted; numeric values Open; authorized functional electrical architecture WP |

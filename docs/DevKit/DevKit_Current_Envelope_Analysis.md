@@ -1,14 +1,16 @@
 # DevKit Current Envelope Analysis — WP-009
 
 **Document ID:** DOC-DK-ENV-001  
-**Version:** 1.0  
-**Status:** Proposed — requires Architecture Review  
-**Work Package:** WP-009 / WP-009-R1  
+**Version:** 1.2  
+**Status:** Accepted — Architecture Review  
+**Review date:** 2026-07-20  
+**Approver role:** System Architect  
+**Work Package:** WP-009 / WP-009-R1 (Accepted)  
 **Date:** 2026-07-20  
 **Author role:** Implementation Engineer (threshold analysis)
 
-> Converts Accepted ADR-021 architecture into explicit current-envelope definitions, calculation models, operating profiles, and candidate scenarios.  
-> **No numeric limit is Approved by this document.** All `TBD-DK-*` entries remain **Open** until System Architect acceptance.
+> Converts Accepted ADR-021 architecture into explicit current-envelope definitions, calculation models, operating profiles, and symbolic scenarios.  
+> **Architecture Review Accepted (2026-07-20).** Analytical structure and closure methods Accepted. **No numeric limit is Approved.** All `TBD-DK-*` numeric values remain **Open**.
 
 ## 1. Scope and authority
 
@@ -476,9 +478,22 @@ Status remains Open.
 | TBD-DK-002 | REQ-DCC-V-DK-020; DK-GOV-024/025 | VER-DCC-DK-A-002 |
 | TBD-DK-003 | DK-GOV-025 | VER-DCC-DK-C-002, C-005, C-006 (multi-load notes) |
 
-## 11. Revision history
+## 11. Architecture Review acceptance (2026-07-20)
+
+| Field | Value |
+|-------|-------|
+| **Status** | Accepted — Architecture Review |
+| **Review date** | 2026-07-20 |
+| **Approver role** | System Architect |
+| **PR** | #13 approved for merge |
+
+Accepted: analytical structure, limit stack, profiles P0–P6, symbolic C1–C3, C2 calculation architecture, profile/overlap simultaneous model.  
+Not Accepted: numeric current limits, physical measurements, ampere ceiling.
+
+## 12. Revision history
 
 | Version | Date | Change |
 |---------|------|--------|
 | 1.0 | 2026-07-20 | WP-009 initial current envelope analysis |
 | 1.1 | 2026-07-20 | WP-009-R1 — symbolic scenarios; corrected simultaneous model; no ampere bands |
+| 1.2 | 2026-07-20 | Architecture Review — methods Accepted; numeric Open |

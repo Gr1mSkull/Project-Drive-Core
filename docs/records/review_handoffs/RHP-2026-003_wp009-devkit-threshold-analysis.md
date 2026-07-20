@@ -48,7 +48,7 @@
 
 ### Validation Summary
 
-WP-009 §30 and WP-009-R1 §9 validation executed. WP-009-R1 Level 1 corrections applied. No physical tests. No VE records. TBDs remain Open.
+WP-009 and WP-009-R1 validation complete. Architecture Review Accepted 2026-07-20. No physical tests. No VE records. TBD numeric values Open. Requirements NOT VERIFIED.
 
 ### Evidence References
 
@@ -93,12 +93,13 @@ Revert WP-009 PR; WP-008 and register Open status preserved.
 | **Independent Reviewer (name/agent)** | TBD |
 | **Independent Reviewer role** | Independent Reviewer |
 | **Independent review date** | TBD |
-| **Final Review Outcome** | Pending Architecture Review |
-| **Architecture / policy approval** | System Architect — threshold acceptance TBD |
+| **Final Review Outcome** | Accepted |
+| **Architecture / policy approval** | System Architect — WP-009 Accepted 2026-07-20; threshold methods Accepted; numeric Open; PR #13 approved for merge |
 
 ## Revision history
 
 | Version | Date | Change |
 |---------|------|--------|
 | 1.0 | 2026-07-20 | WP-009 initial RHP |
-| 1.1 | 2026-07-20 | WP-009-R1 — assumptions/weaknesses updated for EDL block and symbolic scenarios |
+| 1.1 | 2026-07-20 | WP-009-R1 — assumptions/weaknesses updated |
+| 1.2 | 2026-07-20 | Architecture Review Accepted — WP-009 methods Accepted; PR #13 approved for merge |
