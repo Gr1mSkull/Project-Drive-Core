@@ -1,7 +1,7 @@
 # DevKit Load and Fault Profile Catalog — WP-014
 
 **Document ID:** DOC-DK-LFPC-001  
-**Version:** 1.0  
+**Version:** 1.1  
 **Status:** Proposed — Architecture Review pending  
 **Work Package:** WP-014  
 **Date:** 2026-07-20
@@ -38,9 +38,9 @@ P0–P6 meaning unchanged from Accepted WP-009/WP-012.
 | **P3** | PWM representative | BASE + PWM ch | AUTH_BASE | PWM | Draw | CH-HS-PWM | I_RMS, f | No default | Switching | Channel | f_PWM Open | De-energize | ED-IN-010 | C-004 area |
 | **P4** | Fault / protection | BASE + fault AUTH | AUTH_BASE+FAULT | SHORT/OPEN/OVER | Fault | PROTECTED | Fault MPs | Yes (armed) | Pulse | P2–P5 | FAULT_* states | ENERGY_REMOVAL→LOCKOUT | Bounds Open | C-005/006 |
 | **P5** | Control-loss / KILL / enable | BASE as needed | AUTH_BASE | as profile | — | Safety | KILL/ENABLE MPs | Stimulus | — | P5 | Dedicated | ENERGY_REMOVAL | TBD-DK-007 | A-012/014; C-012 |
-| **P6** | External envelope | EXT domains | AUTH_EXT_* | EXT load/module | Ext | CH-HC-EXTERNAL / ext | Ext MPs only | Bounded | Ext | Ext + back-feed | EXTERNAL_ARMED | Independent EXT removal | OI-FIX-001; OI-GND-001 | ADR-020 HC |
+| **P6** | External envelope | EXT domains only (not simultaneous with BASE while OI-GND-001 Open) | AUTH_EXT_* | EXT load/module | Ext | CH-HC-EXTERNAL / ext | Ext MPs only | Bounded | Ext | Ext + back-feed | EXTERNAL_ENERGY_ARMED (auth only; physical EXT energization blocked for combined BASE/EXT while OI-GND-001 Open) | Independent EXT removal | OI-FIX-001; OI-GND-001 | ADR-020 HC |
 
-P6 remains **outside** base `I_certified_cont` certification (PWR-A-001/002).
+P6 remains **outside** base `I_certified_cont` certification (PWR-A-001/002). Combined BASE/EXT execution of P6 while OI-GND-001 Open: **BLOCKED_BY_ARCHITECTURE**. `EXTERNAL_ENERGY_ARMED` does not energize EXT paths by itself.
 
 ## 3. Fault-injection capability catalog
 
@@ -85,3 +85,4 @@ Do not equate source stall energy with bridge thermal loss.
 | Version | Date | Change |
 |---------|------|--------|
 | 1.0 | 2026-07-20 | WP-014 initial load and fault profile catalog — Proposed |
+| 1.1 | 2026-07-20 | WP-014-R1 — P6 EXTERNAL_ENERGY_ARMED name; OI-GND combined block |

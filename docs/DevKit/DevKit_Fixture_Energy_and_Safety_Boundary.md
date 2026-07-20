@@ -1,7 +1,7 @@
 # DevKit Fixture Energy and Safety Boundary — WP-014
 
 **Document ID:** DOC-DK-FESB-001  
-**Version:** 1.0  
+**Version:** 1.1  
 **Status:** Proposed — Architecture Review pending  
 **Work Package:** WP-014  
 **Date:** 2026-07-20
@@ -37,6 +37,8 @@ OI-GND-001 remains Open.
 | Measurement points identify the applicable energy envelope | **PROPOSED_CONSTRAINT** (WP-014) | WP-012 MP discipline |
 | Verification evidence identifies the applicable envelope | ACCEPTED_CONSTRAINT (governance) | DK-GOV / ADR-020 |
 | Fixture failure shall not silently combine energy sources | **PROPOSED_CONSTRAINT** (WP-014) | — |
+| EXTERNAL_ENERGY_ARMED is authorization only — not physical EXT energization | **PROPOSED_CONSTRAINT** (WP-014-R1) | DOC-DK-FFA-001 §5.1 |
+| Simultaneous BASE+EXT energization prohibited while OI-GND-001 Open | **PROPOSED_CONSTRAINT** (WP-014-R1) | OI-GND-001 |
 
 ## 3. Evidence scopes (distinct)
 
@@ -49,6 +51,18 @@ Combined-interface evidence
 ```
 
 **Combined-interface testing shall not imply combined electrical certification.**
+
+While **OI-GND-001** remains Open: combined-interface evidence **may be defined** but **cannot be executed**. Simultaneous BASE-SOURCE and EXT-SOURCE energization is **prohibited**. Combined BASE/EXT test profiles are **BLOCKED_BY_ARCHITECTURE**.
+
+## 3.1 EXTERNAL_ENERGY_ARMED vs physical EXT energization (WP-014-R1)
+
+```text
+EXTERNAL_ENERGY_ARMED = authorization/precondition only
+Physical EXT energization = separate, blocked while OI-GND-001 Open
+  when BASE-SOURCE is also energized
+```
+
+No authority state implies a common reference or galvanic isolation. Isolation is **not selected** (OI-GND-001 Open). Galvanic isolation remains one future option only if Architect selects it later.
 
 ## 4. Ground and reference boundary
 
@@ -122,6 +136,25 @@ numeric limit Open
 
 Do **not** claim instantaneous energy removal. Inductive and capacitive stored energy require controlled discharge or confirmed safe decay before RECOVERY_VALIDATION exit where the profile depends on it.
 
+### 6.1 Load-bank stuck-on (WP-014-R1)
+
+Failure to remove the commanded load shall:
+
+```text
+- revoke AUTH_LOAD_BANK;
+- inhibit or remove the energy source feeding the affected load path;
+- enter ENERGY_REMOVAL;
+- prevent re-energization;
+- enter POST_FAULT_LOCKOUT after energy removal;
+- require deliberate recovery validation.
+```
+
+```text
+Revoking AUTH_LOAD_BANK alone is not evidence that the load path is de-energized.
+```
+
+Physical disconnect topology is **not** selected by this document.
+
 ## 7. Traceability
 
 ADR-020/021 · PWR-A-001…005/009 · OI-GND-001 · OI-FIX-001 · WP-012 envelopes · REQ-DCC-V-FX-*.
@@ -131,3 +164,4 @@ ADR-020/021 · PWR-A-001…005/009 · OI-GND-001 · OI-FIX-001 · WP-012 envelop
 | Version | Date | Change |
 |---------|------|--------|
 | 1.0 | 2026-07-20 | WP-014 initial fixture energy and safety boundary — Proposed |
+| 1.1 | 2026-07-20 | WP-014-R1 — EXTERNAL_ENERGY_ARMED auth-only; OI-GND combined block; load-bank stuck-on |

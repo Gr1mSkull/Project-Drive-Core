@@ -1,6 +1,6 @@
 # DriveCore — Current Phase
 
-**Updated:** WP-014 Proposed — fixture and load-bank requirements (2026-07-20)
+**Updated:** WP-014-R1 — fixture/load-bank requirements corrections (2026-07-20)
 
 ## Documentation
 
@@ -13,7 +13,7 @@
 | 5 Implementation scaffold | ✅ v0.1 (`firmware/shared`, tools, web/ui) |
 | WP-001…WP-006 / CR-001 / CR-002 / ADR-015 | ✅ on `main` (see git history) |
 | **WP-007…WP-013 DevKit packages** | ✅ Accepted (2026-07-20) — evidence NOT VERIFIED |
-| **WP-014 fixture and load-bank requirements** | ⏳ Proposed — Architecture Review pending |
+| **WP-014 fixture and load-bank requirements** | ⏳ Proposed — WP-014-R1 applied; Ready for Final Architecture Review |
 
 ## DevKit (WP-007 … WP-014)
 

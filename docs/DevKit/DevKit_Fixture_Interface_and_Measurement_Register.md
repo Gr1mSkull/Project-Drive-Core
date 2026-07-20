@@ -1,7 +1,7 @@
 # DevKit Fixture Interface and Measurement Register — WP-014
 
 **Document ID:** DOC-DK-FIMR-001  
-**Version:** 1.0  
+**Version:** 1.1  
 **Status:** Proposed — Architecture Review pending  
 **Work Package:** WP-014  
 **Date:** 2026-07-20
@@ -48,7 +48,7 @@ Carry-forward DevKit MPs (MP-IN-V, MP-IN-I, MP-KILL-*, MP-GLOBAL-ENABLE, MP-CH-*
 |-----------|-----------|--------|-----------|--------------|-----------|--------|-------------|-------------------|---------|-----------|----------|
 | IF-FX-BASE-SOURCE | Source→DUT | In | AUTH_BASE | Off | N/A | Base | FX-MP-ENTRY-* | P0/P1 | — | Required | Open |
 | IF-FX-EXT-SOURCE | Ext→module/DUT path | In | AUTH_EXT | Off | To base prohibited | Ext | FX-MP-EXT-* | Ext removal | OI-GND-001 | Required | Open |
-| IF-FX-LOAD-BANK | DUT→sink | Out absorb | AUTH_LOAD_BANK | Inactive | Not a source | Ext/Base load | FX-MP-LB-* | Remove AUTH | OI-GND-001 | Required | Open |
+| IF-FX-LOAD-BANK | DUT→sink | Out absorb | AUTH_LOAD_BANK | Inactive | Not a source | Ext/Base load | FX-MP-LB-* | Revoke AUTH_LOAD_BANK; remove/inhibit upstream energy; confirm safe state; lock out restart | OI-GND-001 | Required | Open |
 | IF-FX-EXT-POWER | Fixture↔module | Ext | AUTH_EXT_POWER | Off | To base prohibited | Ext | Module MPs | Independent | OI-GND-001 | Required | Open |
 | IF-FX-DUT-POWER | Fixture↔DUT power | Base | AUTH_BASE | Off | — | Base | Entry/ch | Disconnect | — | Required | Open |
 | IF-FX-DUT-LOGIC | Fixture↔Logic | Signal | — | Safe | — | Aux | Comm | — | — | Required | Open |
@@ -56,7 +56,7 @@ Carry-forward DevKit MPs (MP-IN-V, MP-IN-I, MP-KILL-*, MP-GLOBAL-ENABLE, MP-CH-*
 | IF-FX-DUT-ENABLE | Fixture↔nENABLE | Signal | AUTH_DUT_ENABLE | Inactive | — | Safety | FX-MP-NEN | Distinct | — | Required | Open |
 | IF-FX-DUT-COMM | Service/SPI/etc | Signal | None hazardous | — | — | Service | — | No energy AUTH | — | — | Open |
 | IF-FX-FAULT-INJECTION | Fixture→DUT path | Conditional | AUTH_FAULT | Inhibited | Contained | Fault | FX-MP-FAULT | Bound+backup | — | Required | Open |
-| IF-FX-MEASUREMENT | Sense | No power | — | High-Z/safe | No energy path | Declared | All FX-MP | Isolation TBD | OI-GND-001 | — | Open |
+| IF-FX-MEASUREMENT | Sense | No power | — | High-Z/safe | No energy path | Declared | All FX-MP | Measurement-path protection and reference method Open; no isolation topology selected | OI-GND-001 | — | Open |
 | IF-FX-E-STOP | Operator→fixture | Safety | Overrides | Asserted safe | — | Emergency | FX-MP-ESTOP | Removal | — | — | Open |
 | IF-FX-SERVICE | UI/service | Signal | Request only | No AUTH | — | Service | — | No direct energy | — | — | Open |
 
@@ -65,3 +65,4 @@ Carry-forward DevKit MPs (MP-IN-V, MP-IN-I, MP-KILL-*, MP-GLOBAL-ENABLE, MP-CH-*
 | Version | Date | Change |
 |---------|------|--------|
 | 1.0 | 2026-07-20 | WP-014 initial fixture interface and measurement register — Proposed |
+| 1.1 | 2026-07-20 | WP-014-R1 — load-bank fault containment; measurement isolation wording |

@@ -26,7 +26,7 @@ Compare protection architecture classes for reverse-polarity, input transient, r
 | P4 | Channel-local protection | Input replaceable device alone |
 | P5 | Functional safe-state control | Hardware energy limiting |
 
-PWR-A-017 (PROPOSED_CONSTRAINT): PSU limit is not sole protection.  
+PWR-A-017 (**ACCEPTED_CONSTRAINT** — WP-012 protection framework + WP-014 Architecture Review disposition): PSU current limiting is not the sole protection layer. No component, fuse, current, or clearing time approved. 
 PWR-A-016: Fuse nominal ≠ continuous certification.
 
 ## 3. Reverse-polarity classes

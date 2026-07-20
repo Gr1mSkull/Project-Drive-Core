@@ -1,7 +1,7 @@
 # DevKit Fixture Dependency and Readiness Matrix — WP-014
 
 **Document ID:** DOC-DK-FDRM-001  
-**Version:** 1.0  
+**Version:** 1.1  
 **Status:** Proposed — Architecture Review pending  
 **Work Package:** WP-014  
 **Date:** 2026-07-20
@@ -11,10 +11,12 @@
 | Fixture capability | Architecture dependency | Numeric dependency | Component-class dependency | Fixture-design dependency | Ground/reference dependency | Measurement dependency | Construction dependency | Blocks | Recommended next WP |
 |--------------------|-------------------------|--------------------|----------------------------|---------------------------|-----------------------------|-------------------------|-------------------------|--------|---------------------|
 | Base source control | ADR-021 | TBD-DK-001/002 | — | Design | — | ENTRY MPs | Construction | Energize tests | Fixture prelim design |
-| External source control | ADR-020; OI-FIX-001 | Ext ratings Open | — | Design | OI-GND-001 | EXT MPs | Construction | HC discovery | Fixture prelim + OI-GND |
+| External source control | ADR-020; OI-FIX-001; REQ-DCC-V-FX-005 | Ext ratings Open | — | Design | OI-GND-001 — simultaneous BASE+EXT blocked while Open | EXT MPs | Construction | HC discovery; combined BASE/EXT | Fixture prelim + OI-GND |
 | Load-bank control | ADR-020/021 | Sink ratings Open | — | Design | OI-GND-001 | LB MPs | Construction | Load cases | Fixture prelim design |
 | Ext power-module IF | ADR-020; OI-FIX-001 | Module ratings Open | WP-013 classes | Design | OI-GND-001 | Module MPs | Construction | HC path | Fixture prelim design |
-| Fixture E-stop | WP-014 Proposed | Timing Open | — | Design | — | ESTOP MP | Construction | All hazardous | Fixture prelim design |
+| Fixture E-stop (requirements) | WP-014 Proposed | Timing Open | — | — | — | ESTOP MP | — | All hazardous AUTH | Architecture Review |
+| Fixture E-stop (preliminary design) | REQ-DCC-V-FX-071; H-FX-008 | Timing Open | — | **BLOCKED_BY_ARCHITECTURE** (fault-tolerance / residual-risk allocation) | — | Integrity check Open | Construction | Physical E-stop verification | Architect + fixture prelim design |
+| Fixture E-stop (physical verification) | Design Accepted | Timing Open | — | Design complete | — | Calibrated | Constructed fixture | Physical verification | NOT_READY |
 | DUT physical KILL test | PWR-A-004; ADR-022 | TBD-DK-004 area | — | Design | — | KILL MPs | Construction | A-012/014 | Fixture prelim design |
 | nENABLE_GLOBAL test | PWR-A-005 | — | — | Design | — | NEN MP | Construction | Enable cases | Fixture prelim design |
 | Watchdog stimulus | ADR-022 | TBD-DK-005 | — | Design | — | — | Construction | A-011 | Fixture prelim design |
@@ -50,3 +52,4 @@
 | Version | Date | Change |
 |---------|------|--------|
 | 1.0 | 2026-07-20 | WP-014 initial fixture dependency and readiness matrix — Proposed |
+| 1.1 | 2026-07-20 | WP-014-R1 — E-stop readiness split; EXTERNAL_ENERGY_ARMED / OI-GND block |

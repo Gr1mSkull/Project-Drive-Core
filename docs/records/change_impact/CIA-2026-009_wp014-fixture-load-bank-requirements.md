@@ -3,35 +3,23 @@
 | Field | Value |
 |-------|-------|
 | **Change ID** | CIA-2026-009 |
-| **Impact Level** | 2 — Full CIA |
-| **Title** | WP-014 Gen1 DevKit Fixture and Load-Bank Requirements |
+| **Impact Level** | 2 (original WP-014); **R1 = Level 1** — Architecture consistency correction |
+| **Title** | WP-014 Gen1 DevKit Fixture and Load-Bank Requirements (+ WP-014-R1) |
 | **Author** | Implementation Engineer (cloud agent) |
 | **Author role** | Implementation Engineer |
 | **Date** | 2026-07-20 |
-| **Status** | Draft — Under Architecture Review |
-| **Related WP / CR** | WP-014; depends on WP-013 Accepted (`ee462fb`+); ADR-016…023 Accepted |
+| **Status** | Draft — Ready for Final Architecture Review (after R1) |
+| **Related WP / CR** | WP-014 / WP-014-R1; depends on WP-013 Accepted (`ee462fb`+); ADR-016…023 Accepted |
 
 ### Reason for Change
 
-Accepted DevKit architecture, sizing, and class-evaluation packages lack controlled laboratory fixture and load-bank requirements. Future fixture design, procurement, construction, and physical verification require explicit energy domains, authorities, states, load/fault catalogs, measurement boundaries, and interlocks without selecting hardware or approving numerics.
+Accepted DevKit architecture, sizing, and class-evaluation packages lack controlled laboratory fixture and load-bank requirements. WP-014-R1 applies Level 1 architecture-consistency corrections from Architecture Review of PR #18 head `4c34431`.
 
-### Impact Level Rationale (Level 2)
+### Impact Level Rationale
 
-WP-014 defines requirements that will later constrain laboratory energy sources, fixture input protection, external load banks, fixture E-stop, controlled energization, fault-injection mechanisms, measurement boundaries, instrumentation interfaces, representative loads, external power modules, base versus external verification evidence, operator safety, fixture wiring, future fixture component qualification, future procurement, fixture construction, and physical verification.
+**WP-014 (Level 2):** Fixture requirements constrain future laboratory energy, E-stop, load banks, fault injection, measurement, evidence scopes, and construction gates.
 
-### Current Behaviour
-
-* ADR-020/021/023 define external vs base and fault-injection principles; no fixture requirements package.
-* OI-FIX-001/002, OI-SC-001, OI-GND-001 Open.
-* VER-DCC-DK-* fixture-dependent cases BLOCKED.
-* No REQ-DCC-V-FX-* identifiers existed.
-
-### Proposed Behaviour
-
-* Proposed fixture functional architecture, energy/safety boundary, FX requirements, load/fault catalog, interface/measurement register, hazard/interlock register, verification capability matrix, dependency/readiness matrix.
-* Distinct fixture E-stop vs DUT KILL vs nENABLE_GLOBAL.
-* P0–P6 mapped without numeric currents.
-* All FX requirements remain PROPOSED until Architecture Review.
+**WP-014-R1 (Level 1):** Documentation consistency only — external-energy state semantics, isolation wording, load-bank stuck-on, E-stop integrity disposition, PWR-A-017/018 acceptance, reproducible validation.
 
 ### Scope exclusions (mandatory)
 
@@ -50,59 +38,26 @@ No VE created.
 
 | ID | Impact |
 |----|--------|
-| REQ-DCC-V-FX-001…070 (new) | Proposed — NOT VERIFIED |
-| REQ-DCC-V-DK-* (consumers) | Fixture capability mapping — NOT VERIFIED unchanged |
-| DK-GOV-* | Evidence envelope tagging alignment — NOT VERIFIED unchanged |
-| VER-DCC-DK-A/C-* fixture-blocked | Mapping — remain NOT EXECUTED / BLOCKED |
-| TBD-DK-001…022 | Remain Open |
+| REQ-DCC-V-FX-001…071 (incl. FX-005, FX-071 new in R1) | **PROPOSED** — NOT VERIFIED |
+| REQ-DCC-V-DK-* | Mapping only — NOT VERIFIED unchanged |
+| VER-DCC-DK-* fixture-blocked | NOT EXECUTED / BLOCKED |
 | TBD-DK-007 | BLOCKED_BY_EDL_CLARIFICATION retained |
-
-### Affected Verification Cases
-
-Fixture-dependent cases (examples A-011/012/014; C-002…014) gain capability mapping only. Status remains **NOT EXECUTED / BLOCKED**. No PASS.
-
-### Affected Interfaces / Energy Domains
-
-IF-FX-*; BASE-SOURCE; EXT-SOURCE; EXT-LOAD-BANK; EXT-POWER-MODULE; FIXTURE-AUX; DUT KILL/ENABLE.
+| PWR-A-017/018 | **ACCEPTED_CONSTRAINT** (R1 Architect disposition) |
+| PWR-A-021…024 | Remain **PROPOSED_CONSTRAINT** |
 
 ### Safety Impact
 
-| Area | Impact |
-|------|--------|
-| Fixture E-stop | Proposed requirements |
-| DUT KILL | Preserved independent |
-| nENABLE_GLOBAL | Preserved distinct |
-| Back-feed | Mandatory prohibit |
-| OI-GND-001 | Remains Open — no isolation claim |
-| Numerics | All Open |
+EXTERNAL_ENERGY_ARMED = authorization only; simultaneous BASE+EXT blocked while OI-GND-001 Open; load-bank stuck-on requires upstream energy inhibit/remove; E-stop path failure design BLOCKED_BY_ARCHITECTURE; no isolation topology selected.
 
-### Traceability Impact
+### Non-impact
 
-`TRACEABILITY_MATRIX.md` adds REQ-DCC-V-FX-* section; statuses NOT VERIFIED; no VE.
-
-### Downstream Impact
-
-| Stage | Impact of WP-014 alone |
-|-------|------------------------|
-| Fixture preliminary design | Constrained if Architect accepts WP-014 |
-| Fixture procurement | Not authorized |
-| Fixture construction | Not authorized |
-| Physical verification | Not authorized |
-| DevKit MPN / BOM / schematic / PCB | Not authorized |
-
-### Non-impact (explicit)
-
-No current hardware, firmware, or configuration implementation change. No EDL file change. No Accepted ADR content change. No numeric threshold Resolved. No component class becomes an MPN.
+No EDL/ADR content change. No hardware/firmware/config implementation. No schematic/PCB/BOM. No numeric approval. No VE.
 
 ### Rollback
 
 Revert WP-014 PR; WP-013 Accepted baseline (`ee462fb`) preserved.
 
-### Unresolved Decisions
-
-OI-GND-001 · OI-PROT-001/002 · OI-FIX-001/002 · OI-SC-001 · OI-COMP/SENSE/BI · ADR-DK-011/012 · TBD-DK-007 numeric · all FX still PROPOSED.
-
-### Validation performed (WP-014 — reproducible)
+### Validation performed (WP-014-R1 — reproducible)
 
 #### V1 — Baseline ancestry
 
@@ -114,7 +69,7 @@ git merge-base --is-ancestor ee462fb3660dc0929b5c1a5b64d87b7655fdc357 HEAD
 |-------|-------|
 | stdout | *(empty)* |
 | exit status | `0` |
-| result | **PASS** — WP-013 acceptance commit is ancestor |
+| result | **PASS** |
 
 #### V2 — Forbidden paths
 
@@ -126,7 +81,7 @@ git diff --name-only main...HEAD -- docs/EDL docs/ADR hardware firmware config
 |-------|-------|
 | stdout | *(empty)* |
 | exit status | `0` |
-| result | **PASS** — no forbidden paths |
+| result | **PASS** |
 
 #### V3 — MPN / ratings / numeric approval patterns
 
@@ -140,7 +95,7 @@ rg -i 'MPN:|preferred manufacturer|BOM entry|approved (current|voltage|timing|te
 |-------|-------|
 | stdout | *(empty — rg no-match)* |
 | exit status | `1` |
-| result | **PASS** — no selection/approval patterns |
+| result | **PASS** |
 
 #### V4 — TBD-DK-007 / OI-GND retention
 
@@ -151,42 +106,142 @@ rg 'OI-GND-001' docs/DevKit/DevKit_Fixture_Energy_and_Safety_Boundary.md
 
 | Field | Value |
 |-------|-------|
-| exit status | `0` (both) |
-| result | **PASS** — blocker and Open GND retained |
-
-#### V5 — Deliverables present
-
-Eight DevKit fixture docs + CIA-2026-009 + RHP-2026-008.
-
+| stdout (blocked) | matches in ED-IN and sizing matrix retaining **BLOCKED_BY_EDL_CLARIFICATION** |
+| stdout (GND) | multiple OI-GND-001 Open / no-isolation-selected lines |
+| exit status | `0` / `0` |
 | result | **PASS** |
 
-#### V6 — Markdown relative links (WP-014 set)
+#### V5 — Deliverable existence
 
-```text
-OK: 11 files, 61 relative links verified
-exit status 0
+```bash
+python3 <<'PY'
+import os, sys
+files = [
+  "docs/DevKit/DevKit_Fixture_and_Load_Bank_Requirements.md",
+  "docs/DevKit/DevKit_Fixture_Functional_Architecture.md",
+  "docs/DevKit/DevKit_Fixture_Energy_and_Safety_Boundary.md",
+  "docs/DevKit/DevKit_Load_and_Fault_Profile_Catalog.md",
+  "docs/DevKit/DevKit_Fixture_Interface_and_Measurement_Register.md",
+  "docs/DevKit/DevKit_Fixture_Verification_Capability_Matrix.md",
+  "docs/DevKit/DevKit_Fixture_Hazard_and_Interlock_Register.md",
+  "docs/DevKit/DevKit_Fixture_Dependency_and_Readiness_Matrix.md",
+  "docs/records/change_impact/CIA-2026-009_wp014-fixture-load-bank-requirements.md",
+  "docs/records/review_handoffs/RHP-2026-008_wp014-fixture-load-bank-requirements.md",
+]
+missing = [f for f in files if not os.path.isfile(f)]
+for f in files:
+    print(("PRESENT" if os.path.isfile(f) else "MISSING"), f)
+sys.exit(1 if missing else 0)
+PY
 ```
 
+| Field | Value |
+|-------|-------|
+| stdout | `PRESENT` for all 10 paths |
+| exit status | `0` |
 | result | **PASS** |
 
-#### V7 — Requirement Verified / case PASS / VE
+#### V6 — Markdown relative links
 
-| Check | Result |
-|-------|--------|
-| Requirement Verified claims in WP-014 package | Spot-check — no Verified claims (**PASS** for absence) |
-| Verification case PASS | No PASS introduced (**PASS** for absence) |
-| VE records created | **PASS** — no WP-014 VE created |
-| Physical tests | **NOT EXECUTED** |
+```bash
+python3 <<'PY'
+import re, os, sys
+root = "docs/DevKit"
+files = [
+    "DevKit_Fixture_and_Load_Bank_Requirements.md",
+    "DevKit_Fixture_Functional_Architecture.md",
+    "DevKit_Fixture_Energy_and_Safety_Boundary.md",
+    "DevKit_Load_and_Fault_Profile_Catalog.md",
+    "DevKit_Fixture_Interface_and_Measurement_Register.md",
+    "DevKit_Fixture_Verification_Capability_Matrix.md",
+    "DevKit_Fixture_Hazard_and_Interlock_Register.md",
+    "DevKit_Fixture_Dependency_and_Readiness_Matrix.md",
+    "README.md",
+]
+extra = [
+    ("docs/records/change_impact", "CIA-2026-009_wp014-fixture-load-bank-requirements.md"),
+    ("docs/records/review_handoffs", "RHP-2026-008_wp014-fixture-load-bank-requirements.md"),
+]
+errors = []
+checked = 0
+for f in files:
+    text = open(os.path.join(root, f), encoding="utf-8").read()
+    for m in re.finditer(r'\[[^\]]*\]\(([^)]+)\)', text):
+        target = m.group(1).split('#')[0]
+        if not target or target.startswith('http'):
+            continue
+        checked += 1
+        path = os.path.normpath(os.path.join(root, target))
+        if not os.path.exists(path):
+            errors.append((f, target, path))
+for d, f in extra:
+    text = open(os.path.join(d, f), encoding="utf-8").read()
+    for m in re.finditer(r'\[[^\]]*\]\(([^)]+)\)', text):
+        target = m.group(1).split('#')[0]
+        if not target or target.startswith('http'):
+            continue
+        checked += 1
+        path = os.path.normpath(os.path.join(d, target))
+        if not os.path.exists(path):
+            errors.append((f, target, path))
+if errors:
+    for f, t, p in errors:
+        print(f"MISSING {f} -> {t} ({p})")
+    sys.exit(1)
+print(f"OK: {len(files)+len(extra)} files, {checked} relative links verified")
+PY
+```
 
-### Validation Required
+| Field | Value |
+|-------|-------|
+| stdout | `OK: 11 files, 61 relative links verified` |
+| exit status | `0` |
+| result | **PASS** |
 
-Architecture Review. No physical tests.
+#### V7a — No VE directory changes
+
+```bash
+git diff --name-only main...HEAD -- docs/records/verification
+```
+
+| Field | Value |
+|-------|-------|
+| stdout | *(empty)* |
+| exit status | `0` |
+| result | **PASS** — no changed file under VE directory |
+
+#### V7b — No requirement status VERIFIED
+
+```bash
+rg -n '^\| Status \| VERIFIED' docs/DevKit/DevKit_Fixture_and_Load_Bank_Requirements.md
+rg -n 'REQ-DCC-V-FX' docs/traceability/TRACEABILITY_MATRIX.md | rg '\| VERIFIED \|' | rg -v 'NOT VERIFIED'
+```
+
+| Field | Value |
+|-------|-------|
+| stdout (Status VERIFIED) | *(empty — rg no-match)* |
+| exit status | `1` / `1` |
+| result | **PASS** — no FX requirement Status VERIFIED; traceability FX rows remain NOT VERIFIED |
+
+#### V7c — No verification case PASS
+
+```bash
+rg -n '\| PASS \|' docs/DevKit/DevKit_Fixture_Verification_Capability_Matrix.md docs/DevKit/DevKit_Fixture_and_Load_Bank_Requirements.md docs/traceability/TRACEABILITY_MATRIX.md
+```
+
+| Field | Value |
+|-------|-------|
+| stdout | *(empty — rg no-match)* |
+| exit status | `1` |
+| result | **PASS** — no case status cell PASS (explanatory “no PASS” phrases are not `| PASS |` cells) |
+
+Physical tests: **NOT EXECUTED**.
 
 ### Approvals
 
 | Field | Value |
 |-------|-------|
-| **ADR Required** | NO (may drive future ADR-DK) |
+| **ADR Required** | NO |
 | **Architect Approval Required** | YES |
 | **Architect approver** | TBD |
 | **Architect approval date** | TBD |
@@ -197,3 +252,4 @@ Architecture Review. No physical tests.
 |---------|------|--------|
 | 1.0 | 2026-07-20 | WP-014 initial CIA — Draft |
 | 1.1 | 2026-07-20 | Reproducible validation evidence; Level 2 rationale expanded |
+| 1.2 | 2026-07-20 | WP-014-R1 — Level 1 corrections; full V1–V7 reproducible evidence; PWR-A-017/018 Accepted |

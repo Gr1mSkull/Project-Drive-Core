@@ -1,7 +1,7 @@
 # DevKit Fixture and Load-Bank Requirements — WP-014
 
 **Document ID:** DOC-DK-FLBR-001  
-**Version:** 1.0  
+**Version:** 1.1  
 **Status:** Proposed — Architecture Review pending  
 **Work Package:** WP-014  
 **Date:** 2026-07-20
@@ -70,6 +70,15 @@ Radio/Tablet may **request**; fixture safety layer **decides**.
 | Requirement ID | `REQ-DCC-V-FX-004` |
 | Statement | Invalid fixture configuration shall inhibit hazardous energy and shall not execute the invalid configuration. |
 | Status | PROPOSED |
+
+#### REQ-DCC-V-FX-005
+
+| Field | Value |
+|-------|-------|
+| Requirement ID | `REQ-DCC-V-FX-005` |
+| Statement | EXTERNAL_ENERGY_ARMED is an authorization/precondition state only. It shall not by itself energize EXT-SOURCE, EXT-POWER-MODULE, or any combined BASE/EXT path. While OI-GND-001 remains Open: simultaneous BASE-SOURCE and EXT-SOURCE energization is prohibited; combined BASE/EXT test profiles are BLOCKED_BY_ARCHITECTURE; transition from BASE_ENERGIZED to an externally energized condition is prohibited; EXTERNAL_ENERGY_ARMED reachable from BASE_ENERGIZED shall record only an inactive external authorization request with actual external energization blocked; combined-interface evidence may be defined but shall not be executed; no authority state shall imply a common reference or galvanic isolation. |
+| Status | PROPOSED |
+| Trace | DOC-DK-FFA-001 §5.1; OI-GND-001 |
 
 ### 4.2 Safety authorities
 
@@ -140,7 +149,7 @@ Radio/Tablet may **request**; fixture safety layer **decides**.
 | Requirement ID | `REQ-DCC-V-FX-021` |
 | Statement | Source-current limitation shall be treated as one protection layer (P0) and shall not be the sole protection layer for DevKit verification. |
 | Status | PROPOSED |
-| Trace | PWR-A-017 (PROPOSED_CONSTRAINT); WP-012 P0–P5 |
+| Trace | PWR-A-017 (ACCEPTED_CONSTRAINT); WP-012 P0–P5 |
 
 #### REQ-DCC-V-FX-022
 
@@ -207,8 +216,9 @@ Radio/Tablet may **request**; fixture safety layer **decides**.
 | Field | Value |
 |-------|-------|
 | Requirement ID | `REQ-DCC-V-FX-032` |
-| Statement | EXT-LOAD-BANK shall absorb energy under AUTH_LOAD_BANK; shall not be described or used as an energy source; shall provide commanded load removal, thermal protection requirements (limits Open), failure-to-remove-load response (safe minimum: remove AUTH and enter ENERGY_REMOVAL), measurement boundary, and external-load-bank evidence scope. |
+| Statement | EXT-LOAD-BANK shall absorb energy under AUTH_LOAD_BANK; shall not be described or used as an energy source; shall provide commanded load removal, thermal protection requirements (limits Open), failure-to-remove-load response per REQ-DCC-V-FX-032 safe minimum below, measurement boundary, and external-load-bank evidence scope. |
 | Status | PROPOSED |
+| Safe minimum (stuck-on) | Failure to remove the commanded load shall: revoke AUTH_LOAD_BANK; inhibit or remove the energy source feeding the affected load path; enter ENERGY_REMOVAL; prevent re-energization; enter POST_FAULT_LOCKOUT after energy removal; require deliberate recovery validation. Revoking AUTH_LOAD_BANK alone is not evidence that the load path is de-energized. Physical disconnect topology not selected. |
 
 #### REQ-DCC-V-FX-033
 
@@ -333,6 +343,15 @@ Radio/Tablet may **request**; fixture safety layer **decides**.
 | Statement | The fixture shall define functional interfaces IF-FX-BASE-SOURCE, IF-FX-EXT-SOURCE, IF-FX-LOAD-BANK, IF-FX-EXT-POWER, IF-FX-DUT-POWER, IF-FX-DUT-LOGIC, IF-FX-DUT-KILL, IF-FX-DUT-ENABLE, IF-FX-DUT-COMM, IF-FX-FAULT-INJECTION, IF-FX-MEASUREMENT, IF-FX-E-STOP, IF-FX-SERVICE with safe defaults and prohibited back-feed. Physical connectors/pinouts remain Open. |
 | Status | PROPOSED |
 
+#### REQ-DCC-V-FX-071
+
+| Field | Value |
+|-------|-------|
+| Requirement ID | `REQ-DCC-V-FX-071` |
+| Statement | Fixture preliminary design shall explicitly define: E-stop path integrity assumptions; response to an E-stop path fault; pre-energization integrity checking; diagnostic and proof-test requirements; residual single-point hazards; independent energy-removal allocation where required; recovery and maintenance conditions. Hazardous-energy authorization shall remain inhibited when required E-stop path integrity is unconfirmed. This requirement does not select a dual-path or redundant topology. Existing Proposed E-stop requirements do not demonstrate safe behaviour after the E-stop mechanism itself has failed. Design disposition: BLOCKED_BY_ARCHITECTURE until E-stop fault-tolerance, testability and residual-risk allocation are Accepted. |
+| Status | PROPOSED |
+| Readiness | E-stop requirements: REQUIREMENT_DEFINED · E-stop preliminary design: BLOCKED_BY_ARCHITECTURE · E-stop physical verification: NOT_READY |
+
 ## 5. Interlock principles (normative summary)
 
 1. Hazardous energy defaults inhibited.  
@@ -360,3 +379,4 @@ REQ-DCC-V-DK-* · VER-DCC-DK-* · ADR-019…023 · TBD-DK-* · ED-IN-* · OI-* �
 | Version | Date | Change |
 |---------|------|--------|
 | 1.0 | 2026-07-20 | WP-014 initial fixture and load-bank requirements — Proposed |
+| 1.1 | 2026-07-20 | WP-014-R1 — FX-005 EXTERNAL_ENERGY_ARMED; FX-032 stuck-on; FX-071 E-stop integrity; PWR-A-017 Accepted |

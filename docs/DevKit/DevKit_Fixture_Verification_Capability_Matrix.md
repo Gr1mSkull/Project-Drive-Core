@@ -1,7 +1,7 @@
 # DevKit Fixture Verification Capability Matrix — WP-014
 
 **Document ID:** DOC-DK-FVCM-001  
-**Version:** 1.0  
+**Version:** 1.1  
 **Status:** Proposed — Architecture Review pending  
 **Work Package:** WP-014  
 **Date:** 2026-07-20
@@ -33,8 +33,10 @@ Capability mapping only — no PASS, no VE, cases remain NOT EXECUTED / BLOCKED.
 | ADR-023 methods | Fault governance | Catalog §3 | Declared | Fault MPs | Default inhibit | Bounds | PARTIAL | Per envelope |
 | DK-GOV evidence rules | Envelope-tagged VE | — | Declared | Envelope ID | — | — | REQUIREMENT_DEFINED | Per scope |
 | REQ-DCC-V-FX-010…015 | E-stop/KILL/AUTH | — | All fixture | ESTOP/KILL/AUTH | Principles § | — | REQUIREMENT_DEFINED | Fixture safety |
+| REQ-DCC-V-FX-071 | E-stop path integrity (design allocation) | — | All fixture | ESTOP integrity | AUTH inhibit if unconfirmed | Fault-tolerance allocation Open | BLOCKED_BY_ARCHITECTURE (prelim design) | Fixture design |
+| REQ-DCC-V-FX-005 / P6 | EXTERNAL_ENERGY_ARMED auth-only; EXT energize | EXT classes | External | EXT | Back-feed; no simultaneous BASE+EXT while OI-GND Open | OI-GND-001 | BLOCKED_BY_ARCHITECTURE | External-* (defined only) |
 | REQ-DCC-V-FX-030…034 | Ext domains | EXT classes | External | EXT | Back-feed | OI-GND-001 | BLOCKED_BY_ARCHITECTURE | External-* |
-| P0–P6 profiles | Profile map | Per catalog | Per P | Per profile | State model | Numerics Open | PARTIAL | Per envelope |
+| P0–P6 profiles | Profile map | Per catalog | Per P | Per profile | State model | Numerics Open; P6 combined BLOCKED | PARTIAL | Per envelope |
 
 ## 2. Readiness legend
 
@@ -49,3 +51,4 @@ No case PASS. No requirement Verified. No VE created.
 | Version | Date | Change |
 |---------|------|--------|
 | 1.0 | 2026-07-20 | WP-014 initial fixture verification capability matrix — Proposed |
+| 1.1 | 2026-07-20 | WP-014-R1 — FX-005/071 readiness; E-stop design blocked |

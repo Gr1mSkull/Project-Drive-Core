@@ -1,7 +1,7 @@
 # DevKit Power-Path Assumption Register — WP-012
 
 **Document ID:** DOC-DK-PPAR-001  
-**Version:** 1.5  
+**Version:** 1.6  
 **Status:** Accepted — Architecture Review  
 **Work Package:** WP-012  
 **Date:** 2026-07-20
@@ -25,7 +25,7 @@ Assumptions and constraints for power-path sizing. **Not** approved design input
 |----|--------------------------|--------|-----------|--------|-----------|---------------|-------|------------------|
 | **PWR-A-001** | Base and external energy envelopes are distinct | ADR-020/021; WP-010 | Accepted ADR | ACCEPTED_CONSTRAINT | Prevents HC scope creep into base cert | Base rating inflated by fixture | System Architect | WP-010 FEA; P6 profile |
 | **PWR-A-002** | External ratings do not increase `I_certified_cont` | ADR-020; WP-009 L12 | Accepted ADR | ACCEPTED_CONSTRAINT | Load-bank limit separate from P3 | Silent base envelope expansion | System Architect | Closure matrix |
-| **PWR-A-003** | Back-feed into base distribution is prohibited | WP-010; OI-GND-001 | Accepted architecture | ACCEPTED_CONSTRAINT | Safety / damage prevention | Uncontrolled energization | System Architect | Fixture WP + isolation proof |
+| **PWR-A-003** | Back-feed into base distribution is prohibited | WP-010; OI-GND-001 | Accepted architecture | ACCEPTED_CONSTRAINT | Safety / damage prevention | Uncontrolled energization | System Architect | Accepted fixture interconnection decision + back-feed-prevention evidence + ground/reference disposition under OI-GND-001 |
 | **PWR-A-004** | Physical KILL has direct hardware-effective disable path | ADR-022; WP-010-R1 | Accepted ADR | ACCEPTED_CONSTRAINT | Kill not Logic-only | Kill latency / failure | Implementation Engineer | Schematic + timing meas |
 | **PWR-A-005** | `nENABLE_GLOBAL` defaults inactive (outputs OFF) | EDL-011 semantics; WP-011 Option D | Accepted interpretation | ACCEPTED_CONSTRAINT | Fail-safe default | Outputs ON at power-up | Implementation Engineer | Power-controller qual |
 | **PWR-A-006** | Radio has no direct output-enable authority | WP-010 §3.2; safety standard | Accepted architecture | ACCEPTED_CONSTRAINT | ESP32/Radio non-safety | Unauthorized enable | System Architect | Interface matrix |
@@ -39,8 +39,8 @@ Assumptions and constraints for power-path sizing. **Not** approved design input
 | **PWR-A-014** | Historical 30 A references are non-normative | docs/008; devkit.yaml | WP-009 disposition | HISTORICAL_ONLY | Candidate only | Silent numeric freeze | Implementation Engineer | Threshold acceptance |
 | **PWR-A-015** | Unknown channel overlap treated as concurrent | WP-009-R1; budget model | Accepted method | ACCEPTED_CONSTRAINT | Conservative sizing | Undersized input path | Test Engineer | P4 overlap profiles |
 | **PWR-A-016** | Fuse nominal ≠ continuous certification | ADR-021; WP-009 L4 | Accepted ADR | ACCEPTED_CONSTRAINT | Protection vs continuous distinct | Using fuse as continuous rating | Implementation Engineer | Protection study |
-| **PWR-A-017** | PSU limit is not sole protection | WP-012 protection framework §3 princ. 1 | WP-012 (first formalized) | **PROPOSED_CONSTRAINT** | Layer coordination | Single-point reliance | Test Engineer | Architecture Review acceptance |
-| **PWR-A-018** | Software OFF ≠ hardware protection | WP-012 protection framework §3 princ. 7 | WP-012 (first formalized) | **PROPOSED_CONSTRAINT** | No exact Accepted ADR/EDL citation for this wording — parallel safety-layer intent only | SC sustained by SW only | FW Architect | Architecture Review acceptance |
+| **PWR-A-017** | PSU current limiting is not the sole protection layer | WP-012 protection framework §3 princ. 1 | WP-012 protection framework + explicit WP-014 Architecture Review disposition | **ACCEPTED_CONSTRAINT** | Layer coordination | Single-point reliance | System Architect | WP-014 Architecture Review (non-numeric; no topology/fuse/current/time approved) |
+| **PWR-A-018** | Software-commanded OFF is not hardware fault containment | WP-012 protection framework §3 princ. 7 | WP-012 protection framework + explicit WP-014 Architecture Review disposition | **ACCEPTED_CONSTRAINT** | Software OFF ≠ hardware protection | SC sustained by SW only | System Architect | WP-014 Architecture Review (non-numeric; no topology/component approved) |
 | **PWR-A-019** | ED-IN entries are dependency references only | WP-011 R6 | Accepted WP-011 | ACCEPTED_CONSTRAINT | No silent input freeze | Treating register as Approved BOM input | System Architect | ED-IN register |
 | **PWR-A-020** | Evaluation classes are not procurement shortlist | WP-011 | Accepted WP-011 | ACCEPTED_CONSTRAINT | Qualification discipline | Premature MPN order | Component Engineer | Qualification WP |
 | **PWR-A-021** | Fixture E-stop is independent of DUT physical KILL and `nENABLE_GLOBAL` | WP-014 FESB | WP-014 (first formalized) | **PROPOSED_CONSTRAINT** | Distinct safety authorities | Merged authorities hide failures | System Architect | Architecture Review WP-014 |
@@ -52,11 +52,11 @@ Assumptions and constraints for power-path sizing. **Not** approved design input
 
 Assumptions in this register shall **not** be converted to requirements or numeric thresholds without Controlled Architect acceptance and traceability update.
 
-**WP-012-R1 rule:** Constraints first introduced by WP-012 remain **PROPOSED_CONSTRAINT** until explicit Architecture Review acceptance. Implementation Engineer cannot self-approve.
+**WP-012-R1 rule:** Constraints first introduced by a WP remain **PROPOSED_CONSTRAINT** until explicit Architecture Review acceptance. Implementation Engineer cannot self-approve.
 
 **WP-013 note:** Class recommendations do not alter PWR-A statuses. PWR-A-020 (evaluation classes ≠ procurement shortlist) remains **ACCEPTED_CONSTRAINT**.
 
-**WP-014 note:** PWR-A-021…024 are **PROPOSED_CONSTRAINT** until Architecture Review. PWR-A-001/002/003/004/005/006/009 remain as prior Accepted/Open statuses. WP-014 shall not cite itself as prior Accepted authority.
+**WP-014 / WP-014-R1 note:** PWR-A-017 and PWR-A-018 are **ACCEPTED_CONSTRAINT** by explicit Architecture Review disposition (non-numeric; no component, topology, fuse, current, or clearing time approved; no verification claim). PWR-A-021…024 remain **PROPOSED_CONSTRAINT** until final WP-014 acceptance. PWR-A-003 closure artifact no longer requires an unconditional isolation proof — isolation proof is a possible future artifact only if Architect selects galvanic isolation under OI-GND-001.
 
 ## 4. Revision history
 
@@ -67,3 +67,4 @@ Assumptions in this register shall **not** be converted to requirements or numer
 | 1.3 | 2026-07-20 | Architecture Review Accepted — PR #16 merged (`9c5c7e7` / `fe700d4`) |
 | 1.4 | 2026-07-20 | WP-013 — note that class recommendations do not change PWR-A statuses |
 | 1.5 | 2026-07-20 | WP-014 — PWR-A-021…024 PROPOSED_CONSTRAINT (fixture authorities / sink / UI) |
+| 1.6 | 2026-07-20 | WP-014-R1 — PWR-A-017/018 ACCEPTED_CONSTRAINT; PWR-A-003 closure artifact (no isolation proof mandate) |
