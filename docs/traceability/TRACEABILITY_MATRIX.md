@@ -30,17 +30,17 @@ Blocked cases (approx): 26
 | REQ-DCC-V-DK-004 | docs/DevKit/DevKit_System_Requirements.md | EDL-014; docs/DevKit/README.md | TBD | config/vehicles/devkit.yaml (scaffold) | Inspection / Analysis: `VER-DCC-DK-A-001` | TBD | NOT VERIFIED | WP-007-R1 active |
 | REQ-DCC-V-DK-005 | docs/DevKit/DevKit_System_Requirements.md | EDL-014; docs/DevKit/README.md | TBD | config/vehicles/devkit.yaml (scaffold) | Inspection: `VER-DCC-DK-A-001` | TBD | NOT VERIFIED | WP-007-R1 active |
 | REQ-DCC-V-DK-007 | docs/DevKit/DevKit_System_Requirements.md | EDL-014; docs/DevKit/README.md | TBD | config/vehicles/devkit.yaml (scaffold) | Demonstration: `VER-DCC-DK-A-003` | TBD | NOT VERIFIED | WP-007-R1 active |
-| REQ-DCC-V-DK-009 | docs/DevKit/DevKit_System_Requirements.md | EDL-002; EDL-010; docs/004; docs/006 | TBD | config/vehicles/devkit.yaml (scaffold) | Test: `VER-DCC-DK-A-010` | TBD | NOT VERIFIED | WP-007-R1 active |
-| REQ-DCC-V-DK-010 | docs/DevKit/DevKit_System_Requirements.md | EDL-002; EDL-010; docs/004; docs/006 | TBD | config/vehicles/devkit.yaml (scaffold) | Test: `VER-DCC-DK-A-005`, `VER-DCC-DK-D-012` | TBD | NOT VERIFIED | WP-007-R1 active |
-| REQ-DCC-V-DK-011 | docs/DevKit/DevKit_System_Requirements.md | EDL-011; constitution safety | TBD | config/vehicles/devkit.yaml (scaffold) | Test / Inspection: `VER-DCC-DK-A-007`, `VER-DCC-DK-A-008` | TBD | NOT VERIFIED | WP-007-R1 active |
-| REQ-DCC-V-DK-012 | docs/DevKit/DevKit_System_Requirements.md | EDL-007; ADR-015; docs/001 | TBD | config/vehicles/devkit.yaml (scaffold) | Test: `VER-DCC-DK-A-007`, `VER-DCC-DK-A-009`, `VER-DCC-DK-B-006` | TBD | NOT VERIFIED | WP-007-R1 active |
-| REQ-DCC-V-DK-013 | docs/DevKit/DevKit_System_Requirements.md | docs/005 | TBD | config/vehicles/devkit.yaml (scaffold) | Analysis / Test: `VER-DCC-DK-D-003` | TBD | NOT VERIFIED | WP-007-R1 active |
-| REQ-DCC-V-DK-014 | docs/DevKit/DevKit_System_Requirements.md | docs/DCC/Power_Channel_Requirements.md (Proposed) | TBD | config/vehicles/devkit.yaml (scaffold) | Analysis / Test: `VER-DCC-DK-C-001` | TBD | NOT VERIFIED | WP-007-R1 active |
+| REQ-DCC-V-DK-009 | docs/DevKit/DevKit_System_Requirements.md | EDL-002; EDL-010; docs/004; docs/006; Proposed ADR-016 | TBD | config/vehicles/devkit.yaml (scaffold) | Test: `VER-DCC-DK-A-010` | TBD | NOT VERIFIED | WP-007-R1 active |
+| REQ-DCC-V-DK-010 | docs/DevKit/DevKit_System_Requirements.md | EDL-002; EDL-010; docs/004; docs/006; Proposed ADR-017 | TBD | config/vehicles/devkit.yaml (scaffold) | Test: `VER-DCC-DK-A-005`, `VER-DCC-DK-D-012` | TBD | NOT VERIFIED | WP-007-R1 active |
+| REQ-DCC-V-DK-011 | docs/DevKit/DevKit_System_Requirements.md | EDL-011; constitution safety; Proposed ADR-016 | TBD | config/vehicles/devkit.yaml (scaffold) | Test / Inspection: `VER-DCC-DK-A-007`, `VER-DCC-DK-A-008` | TBD | NOT VERIFIED | WP-007-R1 active |
+| REQ-DCC-V-DK-012 | docs/DevKit/DevKit_System_Requirements.md | EDL-007; ADR-015; docs/001; Proposed ADR-016/017 | TBD | config/vehicles/devkit.yaml (scaffold) | Test: `VER-DCC-DK-A-007`, `VER-DCC-DK-A-009`, `VER-DCC-DK-B-006` | TBD | NOT VERIFIED | WP-007-R1 active |
+| REQ-DCC-V-DK-013 | docs/DevKit/DevKit_System_Requirements.md | docs/005; Proposed ADR-018 | TBD | config/vehicles/devkit.yaml (scaffold) | Analysis / Test: `VER-DCC-DK-D-003` | TBD | NOT VERIFIED | WP-007-R1 active |
+| REQ-DCC-V-DK-014 | docs/DevKit/DevKit_System_Requirements.md | docs/DCC/Power_Channel_Requirements.md (Proposed); Proposed ADR-019 | TBD | config/vehicles/devkit.yaml (scaffold) | Analysis / Test: `VER-DCC-DK-C-001` | TBD | NOT VERIFIED | WP-007-R1 active |
 | REQ-DCC-V-DK-017 | docs/DevKit/DevKit_System_Requirements.md | EDL-011; constitution safety | TBD | config/vehicles/devkit.yaml (scaffold) | Test / Inspection: `VER-DCC-DK-A-015` | TBD | NOT VERIFIED | WP-007-R1 active |
 | REQ-DCC-V-DK-018 | docs/DevKit/DevKit_System_Requirements.md | EDL-007; ADR-015; docs/001 | TBD | config/vehicles/devkit.yaml (scaffold) | Test: `VER-DCC-DK-D-012` | TBD | NOT VERIFIED | WP-007-R1 active |
 | REQ-DCC-V-DK-019 | docs/DevKit/DevKit_System_Requirements.md | EDL-011; constitution safety | TBD | config/vehicles/devkit.yaml (scaffold) | Inspection / Demonstration: `VER-DCC-DK-A-002`, `VER-DCC-DK-A-007` | TBD | NOT VERIFIED | WP-007-R1 active |
-| REQ-DCC-V-DK-020 | docs/DevKit/DevKit_System_Requirements.md | EDL-008; EDL-012; docs/004 | TBD | config/vehicles/devkit.yaml (scaffold) | Inspection / Analysis: `VER-DCC-DK-A-002` | TBD | NOT VERIFIED | WP-007-R1 active |
-| REQ-DCC-V-DK-021 | docs/DevKit/DevKit_System_Requirements.md | EDL-011; constitution safety | TBD | config/vehicles/devkit.yaml (scaffold) | Test: `VER-DCC-DK-A-012` | TBD | NOT VERIFIED | WP-007-R1 active |
+| REQ-DCC-V-DK-020 | docs/DevKit/DevKit_System_Requirements.md | EDL-008; EDL-012; docs/004; Proposed ADR-021 (TBD-DK-002 Open) | TBD | config/vehicles/devkit.yaml (scaffold) | Inspection / Analysis: `VER-DCC-DK-A-002` | TBD | NOT VERIFIED | WP-007-R1 active |
+| REQ-DCC-V-DK-021 | docs/DevKit/DevKit_System_Requirements.md | EDL-011; constitution safety; Proposed ADR-022 | TBD | config/vehicles/devkit.yaml (scaffold) | Test: `VER-DCC-DK-A-012` | TBD | NOT VERIFIED | WP-007-R1 active |
 | REQ-DCC-V-DK-022 | docs/DevKit/DevKit_System_Requirements.md | EDL-007; ADR-015; docs/001 | TBD | config/vehicles/devkit.yaml (scaffold) | Inspection: `VER-DCC-DK-A-002` | TBD | NOT VERIFIED | WP-007-R1 active |
 | REQ-DCC-V-DK-023 | docs/DevKit/DevKit_System_Requirements.md | docs/DCC/Power_Channel_Requirements.md (Proposed) | TBD | config/vehicles/devkit.yaml (scaffold) | Test: `VER-DCC-DK-A-003`, `VER-DCC-DK-A-016` | TBD | NOT VERIFIED | WP-007-R1 active |
 | REQ-DCC-V-DK-024 | docs/DevKit/DevKit_System_Requirements.md | EDL-011; constitution safety | TBD | config/vehicles/devkit.yaml (scaffold) | Inspection: `VER-DCC-DK-A-002` | TBD | NOT VERIFIED | WP-007-R1 active |
@@ -52,17 +52,17 @@ Blocked cases (approx): 26
 | REQ-DCC-V-DK-032 | docs/DevKit/DevKit_System_Requirements.md | EDL-011; constitution safety | TBD | config/vehicles/devkit.yaml (scaffold) | Test / Demonstration: `VER-DCC-DK-A-013` | TBD | NOT VERIFIED | WP-007-R1 active |
 | REQ-DCC-V-DK-033 | docs/DevKit/DevKit_System_Requirements.md | EDL-011; constitution safety | TBD | config/vehicles/devkit.yaml (scaffold) | Test: `VER-DCC-DK-A-012` | TBD | NOT VERIFIED | WP-007-R1 active |
 | REQ-DCC-V-DK-034 | docs/DevKit/DevKit_System_Requirements.md | EDL-007; ADR-015; docs/001 | TBD | config/vehicles/devkit.yaml (scaffold) | Test: `VER-DCC-DK-A-014` | TBD | NOT VERIFIED | WP-007-R1 active |
-| REQ-DCC-V-DK-035 | docs/DevKit/DevKit_System_Requirements.md | EDL-011; constitution safety | TBD | config/vehicles/devkit.yaml (scaffold) | Test: `VER-DCC-DK-A-008`, `VER-DCC-DK-C-012` | TBD | NOT VERIFIED | WP-007-R1 active |
-| REQ-DCC-V-DK-036 | docs/DevKit/DevKit_System_Requirements.md | EDL-007; ADR-015; docs/001 | TBD | config/vehicles/devkit.yaml (scaffold) | Test: `VER-DCC-DK-A-012` | TBD | NOT VERIFIED | WP-007-R1 active |
+| REQ-DCC-V-DK-035 | docs/DevKit/DevKit_System_Requirements.md | EDL-011; constitution safety; Proposed ADR-022 | TBD | config/vehicles/devkit.yaml (scaffold) | Test: `VER-DCC-DK-A-008`, `VER-DCC-DK-C-012` | TBD | NOT VERIFIED | WP-007-R1 active |
+| REQ-DCC-V-DK-036 | docs/DevKit/DevKit_System_Requirements.md | EDL-007; ADR-015; docs/001; Proposed ADR-022 | TBD | config/vehicles/devkit.yaml (scaffold) | Test: `VER-DCC-DK-A-012` | TBD | NOT VERIFIED | WP-007-R1 active |
 | REQ-DCC-V-DK-037 | docs/DevKit/DevKit_System_Requirements.md | EDL-007; ADR-015; docs/001 | TBD | config/vehicles/devkit.yaml (scaffold) | Test: `VER-DCC-DK-A-012`, `VER-DCC-DK-B-012`, `VER-DCC-DK-B-013` | TBD | NOT VERIFIED | WP-007-R1 active |
-| REQ-DCC-V-DK-038 | docs/DevKit/DevKit_System_Requirements.md | EDL-008; EDL-012; docs/004 | TBD | config/vehicles/devkit.yaml (scaffold) | Test: `VER-DCC-DK-A-011` | TBD | NOT VERIFIED | WP-007-R1 active |
+| REQ-DCC-V-DK-038 | docs/DevKit/DevKit_System_Requirements.md | EDL-008; EDL-012; docs/004; Proposed ADR-022 | TBD | config/vehicles/devkit.yaml (scaffold) | Test: `VER-DCC-DK-A-011` | TBD | NOT VERIFIED | WP-007-R1 active |
 | REQ-DCC-V-DK-039 | docs/DevKit/DevKit_System_Requirements.md | docs/DCC/Power_Channel_Requirements.md (Proposed) | TBD | config/vehicles/devkit.yaml (scaffold) | Test: `VER-DCC-DK-C-001`, `VER-DCC-DK-C-002` | TBD | NOT VERIFIED | WP-007-R1 active |
 | REQ-DCC-V-DK-040 | docs/DevKit/DevKit_System_Requirements.md | docs/DCC/Power_Channel_Requirements.md (Proposed) | TBD | config/vehicles/devkit.yaml (scaffold) | Test: `VER-DCC-DK-C-003` | TBD | NOT VERIFIED | WP-007-R1 active |
 | REQ-DCC-V-DK-041 | docs/DevKit/DevKit_System_Requirements.md | docs/DCC/Power_Channel_Requirements.md (Proposed) | TBD | config/vehicles/devkit.yaml (scaffold) | Test: `VER-DCC-DK-C-001` | TBD | NOT VERIFIED | WP-007-R1 active |
-| REQ-DCC-V-DK-042 | docs/DevKit/DevKit_System_Requirements.md | EDL-008; EDL-012; docs/004 | TBD | config/vehicles/devkit.yaml (scaffold) | Test: `VER-DCC-DK-C-010` | TBD | NOT VERIFIED | WP-007-R1 active |
+| REQ-DCC-V-DK-042 | docs/DevKit/DevKit_System_Requirements.md | EDL-008; EDL-012; docs/004; Proposed ADR-019 | TBD | config/vehicles/devkit.yaml (scaffold) | Test: `VER-DCC-DK-C-010` | TBD | NOT VERIFIED | WP-007-R1 active |
 | REQ-DCC-V-DK-043 | docs/DevKit/DevKit_System_Requirements.md | docs/DCC/Power_Channel_Requirements.md (Proposed) | TBD | config/vehicles/devkit.yaml (scaffold) | Test: `VER-DCC-DK-C-004` | TBD | NOT VERIFIED | WP-007-R1 active |
-| REQ-DCC-V-DK-044 | docs/DevKit/DevKit_System_Requirements.md | docs/DCC/Power_Channel_Requirements.md (Proposed) | TBD | config/vehicles/devkit.yaml (scaffold) | Test: `VER-DCC-DK-C-005` | TBD | NOT VERIFIED | WP-007-R1 active |
-| REQ-DCC-V-DK-045 | docs/DevKit/DevKit_System_Requirements.md | docs/DCC/Power_Channel_Requirements.md (Proposed) | TBD | config/vehicles/devkit.yaml (scaffold) | Test: `VER-DCC-DK-C-006` | TBD | NOT VERIFIED | WP-007-R1 active |
+| REQ-DCC-V-DK-044 | docs/DevKit/DevKit_System_Requirements.md | docs/DCC/Power_Channel_Requirements.md (Proposed); Proposed ADR-023 | TBD | config/vehicles/devkit.yaml (scaffold) | Test: `VER-DCC-DK-C-005` | TBD | NOT VERIFIED | WP-007-R1 active |
+| REQ-DCC-V-DK-045 | docs/DevKit/DevKit_System_Requirements.md | docs/DCC/Power_Channel_Requirements.md (Proposed); Proposed ADR-023 | TBD | config/vehicles/devkit.yaml (scaffold) | Test: `VER-DCC-DK-C-006` | TBD | NOT VERIFIED | WP-007-R1 active |
 | REQ-DCC-V-DK-046 | docs/DevKit/DevKit_System_Requirements.md | docs/DCC/Power_Channel_Requirements.md (Proposed) | TBD | config/vehicles/devkit.yaml (scaffold) | Test: `VER-DCC-DK-C-007` | TBD | NOT VERIFIED | WP-007-R1 active |
 | REQ-DCC-V-DK-047 | docs/DevKit/DevKit_System_Requirements.md | EDL-008; EDL-012; docs/004 | TBD | config/vehicles/devkit.yaml (scaffold) | Test: `VER-DCC-DK-C-008` | TBD | NOT VERIFIED | WP-007-R1 active |
 | REQ-DCC-V-DK-048 | docs/DevKit/DevKit_System_Requirements.md | EDL-011; constitution safety | TBD | config/vehicles/devkit.yaml (scaffold) | Test: `VER-DCC-DK-C-009` | TBD | NOT VERIFIED | WP-007-R1 active |
@@ -182,9 +182,10 @@ Blocked cases (approx): 26
 
 ## Notes
 
-* All DevKit statuses remain `NOT VERIFIED`. No Verification Evidence records created in WP-007 / R1 / R2.
+* All DevKit statuses remain `NOT VERIFIED`. No Verification Evidence records created in WP-007 / R1 / R2 / WP-008.
 * Governance rules are verified by document/process inspection only and are **not** counted toward implementation coverage.
-* Threshold dependencies (`TBD-DK-*`) are references to the authoritative register in `docs/DevKit/DevKit_System_Requirements.md` §4 — not requirement replacements.
+* Threshold dependencies (`TBD-DK-*`) are references to the authoritative register in `docs/DevKit/DevKit_System_Requirements.md` §4 — not requirement replacements. **Status Open** unchanged by WP-008.
+* Proposed ADR-016…023 may appear in Architecture / Interface Reference columns; Proposed ≠ Accepted and does **not** resolve requirements.
 * WP-007-R4: Method:Test cases enforce semantic placeholder policy (unjustified placeholders remaining = 0).
 * EDL-014 meaning unchanged.
 
@@ -200,3 +201,4 @@ Blocked cases (approx): 26
 | 1.3.3 | 2026-07-19 | WP-007-R3 — D-015 split verification refs |
 | 1.3.4 | 2026-07-19 | WP-007-R4 — placeholder audit note (no requirement status changes) |
 | 1.4 | 2026-07-20 | Architecture Review — WP-007 traceability baseline ACCEPTED; requirement rows remain NOT VERIFIED |
+| 1.5 | 2026-07-20 | WP-008 — add Proposed ADR-016…023 architecture references; statuses remain NOT VERIFIED |

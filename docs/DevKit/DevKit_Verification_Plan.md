@@ -8,11 +8,12 @@
 
 System requirements: [`DevKit_System_Requirements.md`](DevKit_System_Requirements.md)  
 Governance: [`DevKit_Verification_Governance.md`](DevKit_Verification_Governance.md)  
-Identity: ADR-015 / STD-REV-001 · Gate policy: EDL-014
+Identity: ADR-015 / STD-REV-001 · Gate policy: EDL-014  
+P0 architecture decisions: Proposed ADR-016…023 — [`DevKit_P0_Decision_Crosswalk.md`](DevKit_P0_Decision_Crosswalk.md) (WP-008; **not Accepted**)
 
 > **TBD authority:** The Threshold Resolution Register in [`DevKit_System_Requirements.md`](DevKit_System_Requirements.md) §4 is the authoritative source for `TBD-DK-*` identifiers. This plan references those IDs; it does not redefine them.
 
-> No case is marked PASS. No physical tests were executed in WP-007 / R1 / R2 / R3.
+> No case is marked PASS. No physical tests were executed in WP-007 / R1 / R2 / R3 / WP-008.
 
 ## 1. Methods and schemas
 
@@ -1948,3 +1949,4 @@ See governance §2–§4. Outcomes: PASS / FAIL / BLOCKED / NOT ASSESSED. Incomp
 | 1.1.3 | 2026-07-19 | WP-007-R3 — Test-case completeness audit; D-015 split; placeholder policy |
 | 1.1.4 | 2026-07-19 | WP-007-R4 — semantic placeholder enforcement; C-002/003/008/009 and related Test cases completed |
 | 1.2 | 2026-07-20 | Architecture Review — ACCEPTED; PR #11 approved for merge (requirements structure, governance, verification-plan structure, traceability baseline) |
+| 1.2.1 | 2026-07-20 | WP-008 — link Proposed ADR-016…023 crosswalk; no case status/PASS changes |

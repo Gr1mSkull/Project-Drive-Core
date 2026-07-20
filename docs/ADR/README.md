@@ -39,10 +39,22 @@ DriveCore records architectural decisions in two linked locations:
 | Canonical ADR ID | Title | Status | Originating request (alias) |
 |------------------|-------|--------|-----------------------------|
 | [ADR-015](ADR-015-platform-revision-identity.md) | DriveCore Platform Revision Identity and System Baseline | Accepted | ADR-CR002-001 (CR-002) |
+| [ADR-016](ADR-016-devkit-logic-board-fidelity.md) | DevKit Logic Board Fidelity and Reuse | Proposed | ADR-DK-001 |
+| [ADR-017](ADR-017-devkit-radio-board-fidelity.md) | DevKit Radio Board Fidelity and Reuse | Proposed | ADR-DK-002 |
+| [ADR-018](ADR-018-devkit-firmware-equivalence.md) | DevKit Firmware Equivalence | Proposed | ADR-DK-003 |
+| [ADR-019](ADR-019-devkit-represented-power-capabilities.md) | DevKit Represented Power Capabilities | Proposed | ADR-DK-004 |
+| [ADR-020](ADR-020-devkit-high-current-verification-scope.md) | DevKit Highest-Current Verification Scope | Proposed | ADR-DK-005 |
+| [ADR-021](ADR-021-devkit-input-current-architecture.md) | DevKit Input and Simultaneous-Current Architecture | Proposed | ADR-DK-006 |
+| [ADR-022](ADR-022-devkit-kill-watchdog-timing-policy.md) | DevKit Kill and Watchdog Timing Policy | Proposed | ADR-DK-007 |
+| [ADR-023](ADR-023-devkit-fault-injection-scope.md) | DevKit Fault Injection Scope and Fixture Boundary | Proposed | ADR-DK-010 |
 
 Normative standard: [`docs/standards/REVISION_IDENTITY_STANDARD.md`](../standards/REVISION_IDENTITY_STANDARD.md) (STD-REV-001 — Approved).
 
-Next sequential ADR: `ADR-016-*.md`.
+DevKit P0 crosswalk: [`docs/DevKit/DevKit_P0_Decision_Crosswalk.md`](../DevKit/DevKit_P0_Decision_Crosswalk.md) (WP-008).
+
+Next sequential ADR: `ADR-024-*.md`.
+
+Remaining open DevKit decision **requests** (no canonical ADR in WP-008): ADR-DK-008, ADR-DK-009, ADR-DK-011, ADR-DK-012.
 
 Historical EDL numbering is unchanged. General EDL↔ADR migration numbering remains outside ADR-015 scope.
 
@@ -53,3 +65,4 @@ Historical EDL numbering is unchanged. General EDL↔ADR migration numbering rem
 | 1.0 | 2026-07-12 | WP-001 ADR/EDL index |
 | 1.1 | 2026-07-19 | ADR-015 revision identity formalization |
 | 1.1.1 | 2026-07-19 | ADR-015-R1 — canonical ID ADR-015; Accepted |
+| 1.2 | 2026-07-20 | WP-008 — Proposed ADR-016…023 DevKit P0 package |

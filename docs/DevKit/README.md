@@ -27,6 +27,7 @@ It does **not** define the final circuit, PCB, component set, enclosure, or BOM.
 | [DevKit_Interface_Matrix.md](DevKit_Interface_Matrix.md) | Interface boundaries and testability | Accepted |
 | [DevKit_Verification_Plan.md](DevKit_Verification_Plan.md) | Phase A–D + governance inspection; gates DK-A…DK-D | Accepted |
 | [DevKit_Current_State_Gap_Assessment.md](DevKit_Current_State_Gap_Assessment.md) | Audit of existing claims vs baseline | Accepted |
+| [DevKit_P0_Decision_Crosswalk.md](DevKit_P0_Decision_Crosswalk.md) | WP-008 P0 Proposed ADR-016…023 crosswalk | Proposed |
 | This README | Navigation and authority statement | Accepted |
 
 ## Relationship to EDL-014
@@ -44,7 +45,7 @@ WP-007 normalizes Phase A–D into gates **DK-A…DK-D**. Passing those gates:
 | Topic | Statement |
 |-------|-----------|
 | Architecture family | Same three-board DCC concept (Logic + Power + Radio) — EDL-007 |
-| Production fidelity | Exact “identical board / same binary” rules are **ARCHITECTURAL DECISION REQUIRED** (ADR-DK-001…003) |
+| Production fidelity | Exact “identical board / same binary” rules: Proposed ADR-016…018 (originating ADR-DK-001…003) — **not Accepted** until Architecture Review |
 | Power domain | Representative capability for laboratory verification; not full production channel population by default |
 | Acceptance | DevKit ≠ DCC Gen1 product acceptance |
 
@@ -62,8 +63,11 @@ Every DevKit gate evidence package shall record a **composite system baseline** 
 
 | Record | Path |
 |--------|------|
-| CIA | [`docs/records/change_impact/CIA-2026-002_wp007-devkit-requirements.md`](../records/change_impact/CIA-2026-002_wp007-devkit-requirements.md) |
-| Review Handoff | [`docs/records/review_handoffs/RHP-2026-001_wp007-devkit-requirements.md`](../records/review_handoffs/RHP-2026-001_wp007-devkit-requirements.md) |
+| CIA (WP-007) | [`docs/records/change_impact/CIA-2026-002_wp007-devkit-requirements.md`](../records/change_impact/CIA-2026-002_wp007-devkit-requirements.md) |
+| CIA (WP-008) | [`docs/records/change_impact/CIA-2026-003_wp008-devkit-p0-adrs.md`](../records/change_impact/CIA-2026-003_wp008-devkit-p0-adrs.md) |
+| Review Handoff (WP-007) | [`docs/records/review_handoffs/RHP-2026-001_wp007-devkit-requirements.md`](../records/review_handoffs/RHP-2026-001_wp007-devkit-requirements.md) |
+| Review Handoff (WP-008) | [`docs/records/review_handoffs/RHP-2026-002_wp008-devkit-p0-adrs.md`](../records/review_handoffs/RHP-2026-002_wp008-devkit-p0-adrs.md) |
+| P0 ADR package | [`docs/ADR/README.md`](../ADR/README.md) — ADR-016…023 Proposed |
 | Traceability | [`docs/traceability/TRACEABILITY_MATRIX.md`](../traceability/TRACEABILITY_MATRIX.md) |
 | SRS pointer | [`docs/SRS/Volume_2_DCC.md`](../SRS/Volume_2_DCC.md) §8.1 |
 
@@ -81,9 +85,13 @@ Every DevKit gate evidence package shall record a **composite system baseline** 
 
 ## Known blocking decisions
 
-See requirements §6 and Architect Review Package:
+P0 decision **requests** ADR-DK-001…007 and ADR-DK-010 now have canonical **Proposed** ADRs ADR-016…023 (WP-008). They remain **not Accepted**.
 
-`ADR-DK-001` … `ADR-DK-012`, plus open thresholds `TBD-DK-001` … `TBD-DK-022`.
+Still open without WP-008 ADR files: `ADR-DK-008`, `ADR-DK-009`, `ADR-DK-011`, `ADR-DK-012`.
+
+Open thresholds: `TBD-DK-001` … `TBD-DK-022` (Status Open — WP-008 does not resolve numerics).
+
+Hardware design remains **not** approved.
 
 ## Revision history
 
@@ -93,3 +101,4 @@ See requirements §6 and Architect Review Package:
 | 1.1 | 2026-07-19 | WP-007-R1 — governance document; taxonomy/gate corrections |
 | 1.1.1 | 2026-07-19 | WP-007-R1 — identity gate language aligned (no PARTIAL PASS) |
 | 1.2 | 2026-07-20 | Architecture Review — ACCEPTED; PR #11 approved for merge (requirements structure, governance, verification-plan structure, traceability baseline) |
+| 1.3 | 2026-07-20 | WP-008 — P0 Proposed ADR package navigation (ADR-016…023); CIA-2026-003 / RHP-2026-002 |

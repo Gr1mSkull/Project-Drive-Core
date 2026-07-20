@@ -8,7 +8,8 @@
 
 > Interface inventory for verification planning.  
 > **Does not create new pinouts.** References existing authoritative pinouts where available (`docs/002`, EDL-011).  
-> Production fidelity for Logic/Radio physical identity remains ADR-DK-001/002.  
+> Production fidelity for Logic/Radio physical identity: originating ADR-DK-001/002 → **Proposed** [ADR-016](../ADR/ADR-016-devkit-logic-board-fidelity.md) / [ADR-017](../ADR/ADR-017-devkit-radio-board-fidelity.md) (not Accepted).  
+> Fault-injection / current envelope: Proposed [ADR-021](../ADR/ADR-021-devkit-input-current-architecture.md) / [ADR-023](../ADR/ADR-023-devkit-fault-injection-scope.md).  
 > `TBD-DK-*` identifiers referenced below are defined only in [`DevKit_System_Requirements.md`](DevKit_System_Requirements.md) §4 (authoritative Threshold Resolution Register).
 
 ## Interfaces
@@ -19,8 +20,8 @@
 | IF-DK-GND | Bench ground ↔ DevKit ground reference | Safety bonding and measurement reference | Power | Bidirectional | docs/008 bench intent; REQ-DCC-V-DK-025 | Representative | Yes | A | Continuity / bond check | Open ground (unsafe — inspection only) | Measurement invalid; do not energize if open | N/A | Proposed |
 | IF-DK-KILL | Kill control → Logic/Power kill path | Independent emergency de-energize | Digital | Input | EDL-011 `nKILL_HW`; docs/002; REQ-DCC-V-DK-031 | Same intent | Yes | A | Logic/diag + output current | Assert kill | Outputs de-energized; timing TBD-DK-004 | N/A | Approved source (EDL-011) / Proposed DevKit testability |
 | IF-DK-GENABLE | Global enable path | Global output enable interlock | Digital | Bidirectional / sense | EDL-011 `nENABLE_GLOBAL`; REQ-DCC-V-DK-032 | Same intent | Yes | A | Diagnostic/measurement path | Force disable | Outputs inhibited | N/A | Approved source / Proposed observability |
-| IF-DK-JLP | Logic ↔ Power (J_LP) | Commands, PWM, sense, BOARD_ID, kill/enable | SPI + digital + analog | Bidirectional | EDL-011; docs/002 §5 | Same interface intent; physical reuse TBD ADR-DK-001 | Yes | A/C | SPI traffic, sense lines, BOARD_ID | SPI timeout / disconnect | Safe de-energize per EDL-011 timeout intent (TBD-DK-007) | Interface rev per docs/002 | Approved source |
-| IF-DK-DCPI | Logic ↔ Radio | Binary state/config/diag exchange | SPI (DCPI) | Bidirectional | EDL-010; docs/004 | Same protocol intent; physical Radio board TBD ADR-DK-002 | No (fail-operational) | A/B | DCPI frames / CRC | Corrupt CRC; disconnect Radio | RT continues fail-op functions; Service degraded | `DCPI_PROTO_VER` legacy encoded; mapping TBD | Approved source |
+| IF-DK-JLP | Logic ↔ Power (J_LP) | Commands, PWM, sense, BOARD_ID, kill/enable | SPI + digital + analog | Bidirectional | EDL-011; docs/002 §5 | Same interface intent; physical reuse per Proposed ADR-016 | Yes | A/C | SPI traffic, sense lines, BOARD_ID | SPI timeout / disconnect | Safe de-energize per EDL-011 timeout intent (TBD-DK-007) | Interface rev per docs/002 | Approved source |
+| IF-DK-DCPI | Logic ↔ Radio | Binary state/config/diag exchange | SPI (DCPI) | Bidirectional | EDL-010; docs/004 | Same protocol intent; physical Radio board per Proposed ADR-017 | No (fail-operational) | A/B | DCPI frames / CRC | Corrupt CRC; disconnect Radio | RT continues fail-op functions; Service degraded | `DCPI_PROTO_VER` legacy encoded; mapping TBD | Approved source |
 | IF-DK-CAN | DCC ↔ ECU sim / Button Box sim / sniffer | DCP Gen1 bus | CAN FD | Bidirectional | EDL-008; docs/004 | Same bus intent | TBD (depends on function) | B/D | Sniffer | Stop node; disconnect | Stale/LOST handling TBD-DK-006 | DCP legacy encoded + doc v0.1 | Approved source |
 | IF-DK-USB | Host ↔ Logic/Radio programming path | Firmware load / serial as provided | USB | Bidirectional | docs/002 / docs/008 USB-C candidate | Representative (connector family candidate — not mandated here) | No | A | Host enumeration | Unplug during idle | Programming fails safely | N/A | Proposed / Candidate connector |
 | IF-DK-SWD | Debugger ↔ Real-Time MCU | Program/debug | Debug | Bidirectional | docs/002 SWD intent; REQ-DCC-V-DK-056 | Representative | No | A | Debugger session | Break/halt under no-load | Outputs remain safe OFF if not commanded | Firmware identity per STD-REV-001 | Proposed |
@@ -49,3 +50,4 @@
 | 1.0.1 | 2026-07-19 | WP-007-R1 — metadata only; no new pinouts |
 | 1.0.2 | 2026-07-19 | WP-007-R2 — TBD authority pointer to System Requirements §4 |
 | 1.1 | 2026-07-20 | Architecture Review — ACCEPTED; PR #11 approved for merge (requirements structure, governance, verification-plan structure, traceability baseline) |
+| 1.1.1 | 2026-07-20 | WP-008 — Proposed ADR-016/017/021/023 references; no pinouts added |

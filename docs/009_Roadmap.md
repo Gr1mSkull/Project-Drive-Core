@@ -8,17 +8,18 @@
 - Модель конфигурации
 - Bootloader / OTA pipeline
 
-### WP-007 status (2026-07-19)
+### WP-007 / WP-008 status (2026-07-20)
 
 | Item | Status |
 |------|--------|
-| DevKit requirements baseline (`REQ-DCC-V-DK-*`) | **Proposed** — Architecture Review required |
-| DevKit verification plan (DK-A…DK-D) | **Proposed** — no physical execution |
-| DevKit hardware design | **Not approved** (WP-007 does not authorize schematics/PCB/BOM) |
+| DevKit requirements baseline (`REQ-DCC-V-DK-*`) | **Accepted** (WP-007 / PR #11) — evidence NOT VERIFIED |
+| DevKit verification plan (DK-A…DK-D) | **Accepted** structure — cases NOT EXECUTED / BLOCKED |
+| DevKit P0 ADRs (ADR-016…023) | **Proposed** (WP-008) — Architecture Review required |
+| DevKit hardware design | **Not approved** |
 | DevKit built / verified | **No** — NOT IMPLEMENTED / NOT VERIFIED |
-| Blocking decisions | ADR-DK-001…012; thresholds TBD-DK-001…022 |
+| Blocking decisions | Proposed ADR-016…023 pending acceptance; ADR-DK-008/009/011/012 still open requests; thresholds TBD-DK-001…022 Open |
 
-**Next expected engineering stage after WP-007 review:** resolve blocking ADRs → DevKit electrical / representative power-channel architecture → fixture/load-bank requirements → (only then) PCB/firmware bring-up WPs.
+**Next expected engineering stage after WP-008 Architecture Review:** accept/correct P0 ADRs → threshold-analysis WP (currents/timings) → DevKit electrical architecture → fixture/load-bank requirements → component qualification → (only then) PCB/firmware bring-up WPs.
 
 ## Фаза 1 — Первый автомобиль (E30)
 
