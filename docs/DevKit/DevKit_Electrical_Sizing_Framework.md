@@ -1,8 +1,8 @@
 # DevKit Electrical Sizing Framework — WP-012
 
 **Document ID:** DOC-DK-ESF-001  
-**Version:** 1.1  
-**Status:** Ready for Final Architecture Review  
+**Version:** 1.2  
+**Status:** Ready for Final Architecture Acceptance  
 **Work Package:** WP-012  
 **Date:** 2026-07-20  
 **Author role:** Implementation Engineer
@@ -75,7 +75,7 @@ Supporting tracks (parallel, any stage): operating profiles P0–P6 · ED-IN dep
 | [A] Symbolic architecture | Accepted REQ; WP-009…011 | Methods; symbolic constraints | Implementation Engineer | Architect | WP-012 package | Provisional input prep | Numeric Approved |
 | [B] Provisional numeric input | Closed symbolic model; Architect authorization | **Provisional** labelled inputs | System Architect | Architect | Acceptance record | Candidate calc | Certified threshold |
 | [C] Candidate calculation | Provisional or symbolic inputs | **Candidate** labelled results | Implementation Engineer | Architect | Calculation record | Qualification | Numeric freeze |
-| [D] Qualification / protection / thermal | Class direction; fault model | Study reports (symbolic) | Component / IE | Architect | CR-001 / framework | Schematic prep | MPN Approved |
+| [D] Qualification / protection / thermal | Class direction; fault model | Study reports (symbolic) | Component / IE | Architect | CR-001 / framework | Schematic prep | MPN selected or approved without completed qualification and explicit Architect authorization |
 | [E] Schematic / PCB | Provisional baseline + qual | Design files (future) | Implementation Engineer | Architect | Design review | Measurement | **NOT AUTHORIZED in WP-012** |
 | [F] Measurement | Fixture; MP-* | Raw traces | Test Engineer | Architect | Measurement plan | Threshold acceptance | PASS without VE |
 | [G] Certified threshold | Measurement + model | Architect freeze | System Architect | Architect | Accepted CR | Verification | Silent approval |
@@ -86,6 +86,18 @@ Supporting tracks (parallel, any stage): operating profiles P0–P6 · ED-IN dep
 1. Return from [D] or [E] to [B]/[C] is **expected** when component data, layout, or measurement invalidates prior assumptions.
 2. Provisional baseline **does not** replace certified threshold or VE.
 3. External-energy envelope (P6) calculations shall **not** feed base-envelope [B]/[G] without explicit Architect scope separation (PWR-A-001/002).
+
+### 2.5 Component qualification authority (Stage [D])
+
+| Statement | Detail |
+|-----------|--------|
+| WP-012 selects **no MPN** | Evaluation classes only — no part numbers |
+| Future qualification WP | A future **Architect-authorized** qualification WP may qualify a **concrete MPN** under CR-001 |
+| Qualification ≠ procurement | Completed qualification **does not** silently authorize procurement |
+| Qualification ≠ schematic | Completed qualification **does not** silently authorize schematic capture or PCB layout |
+| Prohibited claim | MPN selected or approved **without** completed qualification **and** explicit Architect authorization for the intended use |
+
+Stage [E] schematic/PCB remains gated on provisional baseline + qualification gates + explicit Architect authorization — unchanged from §2.3.
 
 ## 3. Sizing readiness status model
 
@@ -271,3 +283,4 @@ See [`DevKit_Current_and_Power_Budget_Model.md`](DevKit_Current_and_Power_Budget
 |---------|------|--------|
 | 1.0 | 2026-07-20 | WP-012 initial electrical sizing framework — Proposed |
 | 1.1 | 2026-07-20 | WP-012-R1 — staged iterative closure; provisional baseline path; measurement-boundary cross-ref |
+| 1.2 | 2026-07-20 | WP-012-R2 — Stage [D] qualification authority; MPN/procurement/schematic separation |

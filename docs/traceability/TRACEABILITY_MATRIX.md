@@ -194,7 +194,7 @@ Blocked cases (approx): 26
 * WP-010 (2026-07-20): Functional electrical architecture **Accepted** — WP-010-R1 Accepted; architecture refs in DevKit FEA package; **no** threshold Resolved; **no** requirement Verified; evidence NOT VERIFIED; WP-011 authorized.
 * WP-010 Architecture Review (2026-07-20): PR #14 merged (`c98ce56`); functional decomposition Accepted; sizing/schematic/PCB NOT AUTHORIZED.
 * WP-011 Architecture Review (2026-07-20): EDL-011 clarification + component-class framework **Accepted** — WP-011-R1 Accepted; PR #15 merged (`07c550c`); EDL files unchanged; TBD-DK-007 **BLOCKED_BY_EDL_CLARIFICATION** (not Resolved); NOT VERIFIED unchanged.
-* WP-012 (2026-07-20): Electrical sizing architecture framework **Proposed**; WP-012-R1 **Ready for Final Architecture Review**; sizing methods Proposed; numeric Open; NOT VERIFIED unchanged; TBD-DK-007 BLOCKED retained.
+* WP-012 (2026-07-20): Electrical sizing architecture framework **Proposed**; WP-012-R2 **Ready for Final Architecture Acceptance**; signed net `I_CH_IN_n` convention; Stage [D] qualification authority clarified; sizing methods Proposed; numeric Open; NOT VERIFIED unchanged; TBD-DK-007 BLOCKED retained.
 * WP-007-R4: Method:Test cases enforce semantic placeholder policy (unjustified placeholders remaining = 0).
 * EDL-014 meaning unchanged.
 

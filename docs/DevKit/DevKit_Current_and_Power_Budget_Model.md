@@ -1,8 +1,8 @@
 # DevKit Current and Power Budget Model — WP-012
 
 **Document ID:** DOC-DK-CPBM-001  
-**Version:** 1.1  
-**Status:** Ready for Final Architecture Review  
+**Version:** 1.2  
+**Status:** Ready for Final Architecture Acceptance  
 **Work Package:** WP-012  
 **Date:** 2026-07-20
 
@@ -21,8 +21,8 @@ Currents measured at **different electrical boundaries shall not be directly sum
 | Class | Symbol (template) | Boundary | Definition |
 |-------|-------------------|----------|------------|
 | **Channel load / output current** | `I_LOAD_n(t)` | Load / output terminal | Current delivered to or drawn by the attached load at channel *n* output |
-| **Channel source-referred input contribution** | `I_CH_IN_n(t)` | Referred to DevKit input source | Incremental input-side contribution attributable to channel *n*, including switch conduction, driver, sense burden, and channel losses — **not** equal to `I_LOAD_n` when conversion, PWM, or bidirectional paths exist |
-| **Domain source-referred input contribution** | `I_DOM_IN_x(t)` | Referred to DevKit input source | Incremental input-side contribution of domain *x* ∈ {LOGIC, RADIO, POWER_CTRL} including rail conversion losses |
+| **Channel source-referred input contribution** | `I_CH_IN_n(t)` | Referred to DevKit input source | **Signed net** incremental input-side contribution attributable to channel *n* — see §2.2 |
+| **Domain source-referred input contribution** | `I_DOM_IN_x(t)` | Referred to DevKit input source | **Signed net** incremental input-side contribution of domain *x* ∈ {LOGIC, RADIO, POWER_CTRL} |
 | **Measured DevKit entry current** | `I_ENTRY_MEAS(t)` | Input entry MP (WP-010) | Current measured at the certified DevKit input measurement boundary |
 
 **Legacy alias note:** `I_INPUT_INST(t)` in WP-009 maps to **`I_ENTRY_MEAS(t)`** when the measurement point is the DevKit entry MP.
@@ -46,11 +46,38 @@ Currents measured at **different electrical boundaries shall not be directly sum
 | `P_CH_IN_n` / `P_DOM_IN_x` | Power form of source-referred contributions | Entry-referred |
 | `E_TRANSIENT` / `E_FAULT` | Bounded energy integrals | Declared fault/load window |
 
-**Prohibited:** unqualified "maximum current"; direct summation of `I_LOAD_n` at output boundaries with domain rail currents; inclusion of P6 / external-envelope currents in base `I_BASE_IN_INST` (PWR-A-001/002).
+**Prohibited:** unqualified "maximum current"; direct summation of `I_LOAD_n` at output boundaries with domain rail currents; inclusion of P6 / external-envelope currents in base `I_BASE_IN_INST` (PWR-A-001/002); **double-counting** the same energy in `I_CH_IN_n` / `I_DOM_IN_x` and in unallocated storage terms (§2.2 R3).
+
+### 2.2 Sign convention and double-counting rules (normative)
+
+**Sign convention (entry reference):**
+
+```text
+I > 0  →  net draw FROM the source INTO the DevKit at the entry reference
+I < 0  →  net return FROM the DevKit TOWARD the source at the entry reference
+```
+
+Applies to `I_ENTRY_MEAS`, `I_DOM_IN_x`, `I_CH_IN_n`, and `I_STORAGE_NET`.
+
+**Allocation rules:**
+
+| Rule | Statement |
+|------|-----------|
+| **R1** | `I_CH_IN_n(t)` is the **signed net** source-referred contribution of channel *n*. It shall include channel-attributable conduction, driver/sense burden, switching loss equivalent, conversion effects, and **net** bidirectional/regenerative exchange referred to the entry — not gross `I_LOAD_n` alone. |
+| **R2** | `I_DOM_IN_x(t)` is the **signed net** source-referred contribution of domain *x*, including rail conversion losses. |
+| **R3** | Reactive energy, returned energy, or storage exchange **already attributed** to a channel in `I_CH_IN_n` or to a domain in `I_DOM_IN_x` shall **not** be counted again in `I_STORAGE_NET`. |
+| **R4** | `I_STORAGE_NET(t)` is used **only** for explicitly **unallocated shared storage paths** (e.g. bulk input capacitance, shared intermediate energy storage not owned by a declared channel/domain partition). If no such path is declared, `I_STORAGE_NET(t) = 0`. |
+| **R5** | Do not use separate `I_REACTIVE_NET` / `I_RETURN_NET` alongside fully allocated `I_CH_IN_n` terms for the same physical exchange. Legacy separate terms are replaced by **`I_STORAGE_NET`** for unallocated paths only. |
+
+**Bidirectional channels:** regen or reverse power flow appears as **negative** `I_CH_IN_n` when net energy returns toward the source; it is **not** duplicated in `I_STORAGE_NET` unless an unallocated shared element is explicitly modelled.
 
 ## 3. Source-referred aggregation rules (symbolic)
 
-Entry measurement relates to source-referred contributions through **power balance**, not naive current addition at unrelated nodes:
+Entry measurement relates to source-referred contributions through **power balance** at a **single reference**, not naive current addition at unrelated nodes:
+
+```text
+P_ENTRY(t) = V_IN(t) × I_ENTRY_MEAS(t)
+```
 
 ```text
 P_ENTRY(t) ≈
@@ -58,10 +85,10 @@ P_ENTRY(t) ≈
 + P_DOM_IN_RADIO(t)
 + P_DOM_IN_PWR(t)
 + Σ P_CH_IN_n(t)
-+ P_LOSS_UNALLOCATED(t)
++ P_STORAGE_UNALLOCATED(t)
 ```
 
-Current form (only when each term is defined at entry reference):
+Signed current form at entry reference:
 
 ```text
 I_ENTRY_MEAS(t) ≈
@@ -69,33 +96,31 @@ I_ENTRY_MEAS(t) ≈
 + I_DOM_IN_RADIO(t)
 + I_DOM_IN_PWR(t)
 + Σ I_CH_IN_n(t)
-+ I_REACTIVE_NET(t)
-+ I_RETURN_NET(t)
++ I_STORAGE_NET(t)
 ```
 
 Where:
 
 | Term | Meaning |
 |------|---------|
-| `η_conv_x` | Domain rail conversion efficiency (Open — component-dependent) |
-| PWM terms | Switching/average decomposition — peak ≠ average without declared duty |
-| `I_REACTIVE_NET(t)` | Reactive or storage-element exchange referred to entry — may be non-zero |
-| `I_RETURN_NET(t)` | Energy returned toward source (bidirectional / regen paths) — subtractive in balance |
+| `η_conv_x` | Domain rail conversion efficiency (Open — component-dependent) — used inside referral transform to derive signed `I_DOM_IN_x`, not as a post-sum factor |
+| PWM / loss terms | Absorbed into signed net `I_CH_IN_n` or `I_DOM_IN_x` — peak ≠ average without declared duty |
+| `I_STORAGE_NET(t)` | **Unallocated shared storage/reactive path only** (§2.2 R4) — zero unless explicitly declared |
+| `P_STORAGE_UNALLOCATED(t)` | `V_IN(t) × I_STORAGE_NET(t)` when the storage path is referenced at entry |
 
-**Bidirectional channels:** `I_LOAD_n` sign and direction matter; `I_CH_IN_n` captures net source-referred draw. Shoot-through and cross-conduction appear in `P_CH_IN_n`, not as load current alone.
-
-**External-energy envelope (P6):** `I_EXT_*` quantities are **excluded** from `I_BASE_IN_INST` and `I_certified_cont` unless Architect explicitly scopes a separate external certification path (ADR-020).
+**External-energy envelope (P6):** `I_EXT_*` quantities are **excluded** from `I_BASE_IN_INST`, `I_STORAGE_NET`, and `I_certified_cont` unless Architect explicitly scopes a separate external certification path (ADR-020).
 
 ### 3.1 Mapping from load current to source-referred contribution (template)
 
 For each channel *n* — **candidate analytical forms** requiring declared assumptions; not normative until validated:
 
 ```text
-P_CH_IN_n(t) =
-  f( I_LOAD_n(t), V_LOAD_n(t), V_IN(t), η_n, D_n(t), f_PWM, topology_n, direction_n )
+I_CH_IN_n(t) = signed_net_source_referred(
+  I_LOAD_n(t), V_LOAD_n(t), V_IN(t), η_n, D_n(t), f_PWM, topology_n, direction_n
+)
 ```
 
-Do not assume `I_CH_IN_n = I_LOAD_n` without efficiency, voltage conversion, and PWM/bidirectional proof.
+Positive `I_CH_IN_n` = net draw from source; negative = net return toward source. Do not assume `I_CH_IN_n = I_LOAD_n` without efficiency, voltage conversion, PWM, and bidirectional netting proof.
 
 ## 4. Current quantity definitions (by class)
 
@@ -123,15 +148,15 @@ I_BASE_IN_INST(t) =
 + Σ I_CH_IN_n(t)
 ```
 
-**Does not include:** external-envelope (P6) contributions; quantities measured only at load terminals without referral transform.
+All terms are **signed net** contributions (§2.2). **Does not include:** `I_STORAGE_NET` (reconciled in §5.2); external-envelope (P6) contributions; quantities measured only at load terminals without referral transform.
 
 ### 5.2 Consistency check with measurement
 
 ```text
-I_ENTRY_MEAS(t)  ≟  I_BASE_IN_INST(t) + I_REACTIVE_NET(t) + I_RETURN_NET(t)
+I_ENTRY_MEAS(t)  ≟  I_BASE_IN_INST(t) + I_STORAGE_NET(t)
 ```
 
-Mismatch shall be resolved by explicit loss/reactive/return terms — not by forcing equal boundary currents.
+Where `I_STORAGE_NET` is zero unless an unallocated shared storage path is explicitly declared (§2.2 R4). **Do not** add channel/domain return or reactive components to `I_STORAGE_NET` if they are already netted in `I_CH_IN_n` / `I_DOM_IN_x` (§2.2 R3).
 
 ### 5.3 Profile statistics (entry-referred)
 
@@ -251,8 +276,9 @@ See [`DevKit_Electrical_Sizing_Framework.md`](DevKit_Electrical_Sizing_Framework
 | Fuse nominal = continuous certification | ADR-021; protection framework |
 | PSU limit = sole protection | Protection framework P0/P2 |
 | docs/008 30 A / devkit.yaml limits normative | Historical/candidate only |
-| Direct sum of `I_LOAD_n` as entry current | Boundary violation — use `I_CH_IN_n` referral |
+| Direct sum of `I_LOAD_n` as entry current | Boundary violation — use signed `I_CH_IN_n` referral |
 | `I_CH_IN_n = I_LOAD_n` without η/PWM/BI proof | Ignores conversion and topology |
+| Double-count in `I_CH_IN_n` and `I_STORAGE_NET` | Violates §2.2 R3 |
 | Datasheet RθJA as board truth | Thermal framework |
 
 ## 10. Revision history
@@ -261,3 +287,4 @@ See [`DevKit_Electrical_Sizing_Framework.md`](DevKit_Electrical_Sizing_Framework
 |---------|------|--------|
 | 1.0 | 2026-07-20 | WP-012 initial current and power budget model — Proposed |
 | 1.1 | 2026-07-20 | WP-012-R1 — measurement boundaries; source-referred aggregation; external envelope exclusion |
+| 1.2 | 2026-07-20 | WP-012-R2 — sign convention; signed `I_CH_IN_n`; `I_STORAGE_NET` unallocated-only; anti double-count |

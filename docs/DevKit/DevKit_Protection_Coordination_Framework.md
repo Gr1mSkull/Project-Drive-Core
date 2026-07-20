@@ -1,8 +1,8 @@
 # DevKit Protection Coordination Framework — WP-012
 
 **Document ID:** DOC-DK-PCF-001  
-**Version:** 1.1  
-**Status:** Ready for Final Architecture Review  
+**Version:** 1.2  
+**Status:** Ready for Final Architecture Acceptance  
 **Work Package:** WP-012  
 **Date:** 2026-07-20
 

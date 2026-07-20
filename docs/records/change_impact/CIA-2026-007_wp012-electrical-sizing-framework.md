@@ -46,20 +46,138 @@ Documentation-only review corrections (2026-07-20):
 
 **Impact Level (R1):** Level 1 — documentation correction only.
 
-### Validation performed (WP-012-R1)
+### WP-012-R2 corrections (Level 1)
+
+Documentation-only review corrections (2026-07-20):
+
+* Signed net source-referred convention: positive = draw from source; `I_CH_IN_n` signed net; `I_STORAGE_NET` unallocated-only; anti double-count (§2.2).
+* Stage [D] prohibition clarified — MPN selection/approval without qualification + Architect authorization prohibited; qualification ≠ procurement/schematic.
+* Reproducible validation commands with stdout and exit status (below).
+
+**Impact Level (R2):** Level 1 — documentation correction only.
+
+### Validation performed (WP-012-R2 — reproducible)
+
+#### V1 — Changed-path scope (forbidden paths)
+
+```bash
+git diff --name-only main...HEAD -- docs/EDL docs/ADR hardware firmware config
+```
+
+| Field | Value |
+|-------|-------|
+| stdout | *(empty)* |
+| exit status | `0` |
+| result | **PASS** — no forbidden paths in PR diff |
+
+#### V2 — Numeric approval patterns
+
+```bash
+rg -i 'approved (current|voltage|timing|temperature)' \
+  docs/DevKit/DevKit_Electrical_Sizing_Framework.md \
+  docs/DevKit/DevKit_Current_and_Power_Budget_Model.md \
+  docs/DevKit/DevKit_Thermal_Sizing_Framework.md \
+  docs/DevKit/DevKit_Protection_Coordination_Framework.md \
+  docs/DevKit/DevKit_Power_Path_Assumption_Register.md \
+  docs/DevKit/DevKit_Sizing_Dependency_and_Closure_Matrix.md
+```
+
+| Field | Value |
+|-------|-------|
+| stdout | *(empty — rg no-match)* |
+| exit status | `1` (ripgrep convention when no matches) |
+| result | **PASS** — no forbidden numeric-approval phrases |
+
+#### V3 — MPN / manufacturer / BOM patterns
+
+```bash
+rg -i 'MPN:|selected component|BOM entry' \
+  docs/DevKit/DevKit_Electrical_Sizing_Framework.md \
+  docs/DevKit/DevKit_Current_and_Power_Budget_Model.md \
+  docs/DevKit/DevKit_Protection_Coordination_Framework.md
+```
+
+| Field | Value |
+|-------|-------|
+| stdout | *(empty — rg no-match)* |
+| exit status | `1` |
+| result | **PASS** — no MPN/BOM selection patterns |
+
+#### V4 — TBD-DK-007 status preservation
+
+```bash
+rg 'BLOCKED_BY_EDL_CLARIFICATION' \
+  docs/DevKit/DevKit_Sizing_Dependency_and_Closure_Matrix.md \
+  docs/DevKit/DevKit_Electrical_Design_Input_Register.md
+```
+
+| Field | Value |
+|-------|-------|
+| stdout | `docs/DevKit/DevKit_Electrical_Design_Input_Register.md:\| **Numeric threshold** \| **Open** — TBD-DK-007 register **BLOCKED_BY_EDL_CLARIFICATION** (not Resolved) \|` ; `docs/DevKit/DevKit_Sizing_Dependency_and_Closure_Matrix.md:\| **TBD-DK-007** control-loss \| Register \| Open; **BLOCKED_BY_EDL_CLARIFICATION** \| ...` |
+| exit status | `0` |
+| result | **PASS** — blocker label retained |
+
+#### V5 — Fault-class count (§5 table only)
+
+```bash
+awk '/^## 5\. Fault class analysis/,/^## 6\./' \
+  docs/DevKit/DevKit_Protection_Coordination_Framework.md \
+  | rg '^\| [A-Za-z]' | rg -v '^\| Fault class \|' | wc -l
+```
+
+| Field | Value |
+|-------|-------|
+| stdout | `16` |
+| exit status | `0` |
+| result | **PASS** — 16 fault-class data rows |
+
+#### V6 — Markdown internal links (WP-012 DevKit set)
+
+```bash
+python3 <<'PY'
+import re, os, sys
+root = "docs/DevKit"
+files = [
+    "DevKit_Electrical_Sizing_Framework.md",
+    "DevKit_Current_and_Power_Budget_Model.md",
+    "DevKit_Thermal_Sizing_Framework.md",
+    "DevKit_Protection_Coordination_Framework.md",
+    "DevKit_Power_Path_Assumption_Register.md",
+    "DevKit_Sizing_Dependency_and_Closure_Matrix.md",
+]
+errors = []
+checked = 0
+for f in files:
+    text = open(os.path.join(root, f), encoding="utf-8").read()
+    for m in re.finditer(r'\[[^\]]*\]\(([^)]+)\)', text):
+        target = m.group(1).split('#')[0]
+        if not target or target.startswith('http'):
+            continue
+        checked += 1
+        path = os.path.normpath(os.path.join(root, target))
+        if not os.path.exists(path):
+            errors.append((f, target))
+if errors:
+    for f, t in errors:
+        print(f"MISSING {f} -> {t}")
+    sys.exit(1)
+print(f"OK: {len(files)} files, {checked} relative links verified")
+PY
+```
+
+| Field | Value |
+|-------|-------|
+| stdout | `OK: 6 files, 14 relative links verified` |
+| exit status | `0` |
+| result | **PASS** |
+
+#### V7 — Requirement Verified / verification PASS / VE records
 
 | Check | Command / method | Result |
 |-------|------------------|--------|
-| Changed-path scope | `git diff --name-only main...HEAD -- docs/EDL docs/ADR hardware firmware config` | **PASS** — empty (no forbidden paths) |
-| Markdown internal links | `rg -o '\[[^\]]+\]\(([^)]+)\)' docs/DevKit/DevKit_Electrical_Sizing_Framework.md \| while read -r l; do ...` manual spot-check of WP-012 cross-doc links | **PASS** — relative DevKit links resolve |
-| Numeric approval patterns | `rg -i 'approved (current\|voltage\|timing\|temperature)' docs/DevKit/DevKit_*Sizing* docs/DevKit/DevKit_Current* docs/DevKit/DevKit_Thermal* docs/DevKit/DevKit_Protection* docs/DevKit/DevKit_Power* docs/DevKit/DevKit_Sizing*` | **PASS** — no matches |
-| MPN/manufacturer/BOM | `rg -i 'MPN:\|manufacturer\|BOM entry' docs/DevKit/DevKit_*Sizing* ...` | **PASS** — no matches |
-| TBD-DK-007 status | manual review closure matrix + ED-IN §4.1 | **PASS** — BLOCKED_BY_EDL_CLARIFICATION retained |
-| Requirement Verified | `rg 'Verified' docs/DevKit/DevKit_Electrical_Sizing_Framework.md` | **PASS** — NOT VERIFIED / not Verified claims only |
-| Verification PASS | `rg 'PASS' docs/DevKit/DevKit_*.md` (WP-012 set) | **PASS** — no case PASS claims |
-| VE records | `ls docs/records/verification_evidence/VE-* 2>/dev/null \| rg WP-012` | **NOT EXECUTED** — no VE directory pattern matched; no VE created |
-| Fault class count | `rg -c '^\|' docs/DevKit/DevKit_Protection_Coordination_Framework.md` table rows §5 | **PASS** — 16 data rows |
-| CIA/RHP/PR consistency | manual review | **PASS** — 16 fault classes; iterative lifecycle |
+| Requirement Verified claims | Not automated — spot-check only | **NOT EXECUTED** as automated gate |
+| Verification case PASS | Not automated — spot-check only | **NOT EXECUTED** as automated gate |
+| VE records created | `test ! -e docs/records/verification_evidence` or glob absent for WP-012 | **PASS** — no VE directory/records for WP-012 |
 
 ### Affected Requirements
 
@@ -155,3 +273,4 @@ See RHP-2026-006.
 |---------|------|--------|
 | 1.0 | 2026-07-20 | WP-012 initial CIA — Draft |
 | 1.1 | 2026-07-20 | WP-012-R1 — Level 1 corrections; validation evidence expanded |
+| 1.2 | 2026-07-20 | WP-012-R2 — sign convention; Stage [D] authority; reproducible validation |
