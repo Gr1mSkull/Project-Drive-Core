@@ -1,8 +1,8 @@
 # DevKit Sizing Dependency and Closure Matrix — WP-012
 
 **Document ID:** DOC-DK-SDCM-001  
-**Version:** 1.0  
-**Status:** Proposed — requires Architecture Review  
+**Version:** 1.1  
+**Status:** Ready for Final Architecture Review  
 **Work Package:** WP-012  
 **Date:** 2026-07-20
 
@@ -69,3 +69,4 @@ Readiness legend: **READY_FOR_CLASS_COMPARISON** · **PARTIAL** · **NOT_READY**
 | Version | Date | Change |
 |---------|------|--------|
 | 1.0 | 2026-07-20 | WP-012 initial sizing dependency and closure matrix — Proposed |
+| 1.1 | 2026-07-20 | WP-012-R1 — cross-ref staged closure model |

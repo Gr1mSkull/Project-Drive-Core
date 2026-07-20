@@ -1,8 +1,8 @@
 # DevKit Protection Coordination Framework — WP-012
 
 **Document ID:** DOC-DK-PCF-001  
-**Version:** 1.0  
-**Status:** Proposed — requires Architecture Review  
+**Version:** 1.1  
+**Status:** Ready for Final Architecture Review  
 **Work Package:** WP-012  
 **Date:** 2026-07-20
 
@@ -67,7 +67,9 @@ E_FAULT ≈ V_nom × I_FAULT_PEAK × T_FAULT_CLEAR
 
 **No protection curves defined numerically in WP-012.**
 
-## 5. Fault class analysis
+## 5. Fault class analysis (16 classes)
+
+Table population: **16 fault classes** (§5.1).
 
 | Fault class | Origin | Energy source | First layer | Backup layer | Safe minimum outcome | Diagnostic req | Latch/retry | Calculation needed | Component data | Measurement | Residual risk |
 |-------------|--------|---------------|-------------|--------------|---------------------|----------------|-------------|-------------------|------------------|-------------|---------------|
@@ -114,3 +116,4 @@ E_FAULT ≈ V_nom × I_FAULT_PEAK × T_FAULT_CLEAR
 | Version | Date | Change |
 |---------|------|--------|
 | 1.0 | 2026-07-20 | WP-012 initial protection coordination framework — Proposed |
+| 1.1 | 2026-07-20 | WP-012-R1 — explicit 16-class population count |

@@ -1,6 +1,6 @@
 # DriveCore — Current Phase
 
-**Updated:** WP-012 Proposed — electrical sizing architecture framework (2026-07-20)
+**Updated:** WP-012 Ready for Final Architecture Review — WP-012-R1 (2026-07-20)
 
 ## Documentation
 
@@ -17,7 +17,7 @@
 | **WP-009 DevKit threshold analysis** | ✅ Accepted (2026-07-20) — methods Accepted; numeric Open |
 | **WP-010 DevKit functional electrical architecture** | ✅ Accepted (2026-07-20) — WP-010-R1 Accepted |
 | **WP-011 EDL-011 + component-class prep** | ✅ Accepted (2026-07-20) — WP-011-R1 Accepted |
-| **WP-012 electrical sizing architecture framework** | ⏳ Proposed — Architecture Review pending |
+| **WP-012 electrical sizing architecture framework** | ⏳ Ready for Final Architecture Review — WP-012-R1 |
 
 ## DevKit (WP-007 … WP-012)
 
@@ -31,7 +31,7 @@
 | Functional electrical architecture | **Accepted** (WP-010 / WP-010-R1) |
 | TBD-DK-007 | **BLOCKED_BY_EDL_CLARIFICATION** — not Resolved; numeric Open; verification Not Verified |
 | Component-class qualification prep | **Accepted** (WP-011) |
-| Electrical sizing framework | **Proposed** (WP-012) — methods Proposed; numeric Open |
+| Electrical sizing framework | **Ready for Final Architecture Review** (WP-012-R1) |
 | Hardware design approved | **No** — NOT IMPLEMENTED |
 | Detailed electrical sizing | **NOT COMPLETED** — framework only |
 | Schematics / PCB | **NOT AUTHORIZED** |

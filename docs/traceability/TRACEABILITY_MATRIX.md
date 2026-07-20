@@ -1,7 +1,7 @@
 # DriveCore Traceability Matrix
 
 **Document ID:** DOC-TRACE-MAT-001  
-**Version:** 1.6.1  
+**Version:** 1.6.2  
 **Status:** Accepted  
 **Work Package:** WP-007 (Accepted); WP-010 architecture refs
 
@@ -194,7 +194,7 @@ Blocked cases (approx): 26
 * WP-010 (2026-07-20): Functional electrical architecture **Accepted** — WP-010-R1 Accepted; architecture refs in DevKit FEA package; **no** threshold Resolved; **no** requirement Verified; evidence NOT VERIFIED; WP-011 authorized.
 * WP-010 Architecture Review (2026-07-20): PR #14 merged (`c98ce56`); functional decomposition Accepted; sizing/schematic/PCB NOT AUTHORIZED.
 * WP-011 Architecture Review (2026-07-20): EDL-011 clarification + component-class framework **Accepted** — WP-011-R1 Accepted; PR #15 merged (`07c550c`); EDL files unchanged; TBD-DK-007 **BLOCKED_BY_EDL_CLARIFICATION** (not Resolved); NOT VERIFIED unchanged.
-* WP-012 (2026-07-20): Electrical sizing architecture framework **Proposed**; sizing methods Proposed; numeric Open; NOT VERIFIED unchanged; TBD-DK-007 BLOCKED retained.
+* WP-012 (2026-07-20): Electrical sizing architecture framework **Proposed**; WP-012-R1 **Ready for Final Architecture Review**; sizing methods Proposed; numeric Open; NOT VERIFIED unchanged; TBD-DK-007 BLOCKED retained.
 * WP-007-R4: Method:Test cases enforce semantic placeholder policy (unjustified placeholders remaining = 0).
 * EDL-014 meaning unchanged.
 
@@ -219,3 +219,4 @@ Blocked cases (approx): 26
 | 1.5.9 | 2026-07-20 | WP-011-R1 — disposition separation; evaluation-class terminology; NOT VERIFIED retained |
 | 1.6.0 | 2026-07-20 | WP-011 Architecture Review Accepted — TBD-DK-007 BLOCKED retained; NOT VERIFIED retained |
 | 1.6.1 | 2026-07-20 | WP-012 — electrical sizing framework refs; NOT VERIFIED retained |
+| 1.6.2 | 2026-07-20 | WP-012-R1 — iterative closure; measurement boundaries; NOT VERIFIED retained |

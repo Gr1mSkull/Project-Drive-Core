@@ -1,8 +1,8 @@
 # DevKit Thermal Sizing Framework — WP-012
 
 **Document ID:** DOC-DK-TSF-001  
-**Version:** 1.0  
-**Status:** Proposed — requires Architecture Review  
+**Version:** 1.1  
+**Status:** Ready for Final Architecture Review  
 **Work Package:** WP-012  
 **Date:** 2026-07-20
 
@@ -88,13 +88,26 @@ R_TH_EFFECTIVE = f(R_th_junction, R_th_board, R_th_enclosure, airflow, coupling)
 
 **Prohibited:** universal application of datasheet junction-to-ambient (`RθJA`) as board-level truth without board-specific validation.
 
-### 6.1 Current derating (symbolic — WP-009 carry-forward)
+### 6.1 Continuous-current vs temperature (general dependency)
+
+Unconditional methodology — **normative as functional relationship only**:
 
 ```text
-I_PCB_cont(T) = I_PCB_cont(T_ref) × sqrt((T_max - T)/(T_max - T_ref))
+I_continuous_allow(T_amb, T_limit, R_TH_EFFECTIVE, P_loss_model) =
+  g( thermal budget at T_limit )
 ```
 
-Exact form requires copper geometry — **BLOCKED_BY_PCB_DESIGN** until layout exists.
+Where `g` decreases allowable continuous capability as ambient temperature rises, dissipation increases, or effective thermal resistance worsens. **Exact form is Open** until geometry, material, airflow, and loss model exist.
+
+#### Candidate analytical form (non-normative — WP-009 carry-forward)
+
+The following **sqrt derating** expression may be used as a **candidate** only when explicitly labelled, with declared `T_ref`, `T_max`, copper geometry, and validation plan:
+
+```text
+I_PCB_cont(T) = I_PCB_cont(T_ref) × sqrt((T_max - T)/(T_max - T_ref))   — CANDIDATE ONLY
+```
+
+**Not normative in WP-012-R1.** Requires future measurement or simulation validation before any design use. Blocked until PCB layout exists (**BLOCKED_BY_PCB_DESIGN**).
 
 ## 7. Thermal observation
 
@@ -122,3 +135,4 @@ Exact form requires copper geometry — **BLOCKED_BY_PCB_DESIGN** until layout e
 | Version | Date | Change |
 |---------|------|--------|
 | 1.0 | 2026-07-20 | WP-012 initial thermal sizing framework — Proposed |
+| 1.1 | 2026-07-20 | WP-012-R1 — sqrt derating demoted to candidate form; general g() retained |

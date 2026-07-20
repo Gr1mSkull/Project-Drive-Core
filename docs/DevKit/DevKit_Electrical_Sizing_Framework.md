@@ -1,8 +1,8 @@
 # DevKit Electrical Sizing Framework — WP-012
 
 **Document ID:** DOC-DK-ESF-001  
-**Version:** 1.0  
-**Status:** Proposed — requires Architecture Review  
+**Version:** 1.1  
+**Status:** Ready for Final Architecture Review  
 **Work Package:** WP-012  
 **Date:** 2026-07-20  
 **Author role:** Implementation Engineer
@@ -18,45 +18,74 @@ Define the controlled engineering flow, sizing domains, readiness states, and re
 
 **Authority hierarchy:** Engineering Constitution → Accepted EDL → Accepted ADR-016…023 → Accepted WP-007 governance → Accepted WP-009 methods → Accepted WP-010 functional architecture → Accepted WP-011 qualification methodology → **this Proposed framework** → historical/candidate sources (`docs/002`, `docs/008`, yaml).
 
-## 2. Sizing lifecycle
+## 2. Staged and iterative closure model
+
+WP-012 defines a **staged, iterative** sizing process — not a single linear pipeline. Stages may repeat until closure criteria are met. WP-012-R1 does **not** approve any numeric value.
+
+### 2.1 Mandatory value-state separation
+
+These states are **not equivalent** and shall not be collapsed:
 
 ```text
-Accepted requirement (REQ-DCC-V-DK-*)
-  → functional capability (ADR-019 / WP-010 alias)
-  → operating profile (P0…P6)
-  → electrical design input (ED-IN-*)
-  → symbolic sizing model (this framework)
-  → evaluation-class requirements (WP-011)
-  → preliminary calculation (future WP — symbolic only)
-  → component qualification (CR-001 path)
-  → protection coordination
-  → thermal evaluation
-  → schematic implementation (future WP — NOT AUTHORIZED)
-  → PCB implementation (future WP — NOT AUTHORIZED)
-  → physical measurement
-  → threshold acceptance (Architect)
-  → verification evidence (VE)
+Provisional numeric design input
+Architect-approved design baseline
+Candidate calculation
+Verified physical value
+Certified threshold
+Verification evidence
 ```
 
-### 2.1 Stage governance
+| State | Meaning | Who may set | WP-012-R1 status |
+|-------|---------|-------------|------------------|
+| **Provisional numeric design input** | Working number for calculation exploration; labelled provisional | Architect authorization only (future WP) | **Not approved in WP-012-R1** |
+| **Architect-approved design baseline** | Controlled baseline permitting qualification / schematic / PCB prep | System Architect acceptance record | **Permitted future state** — not created here |
+| **Candidate calculation** | Output of symbolic or provisional-input calculation; labelled candidate | Implementation Engineer | Method only — no numeric Approved |
+| **Verified physical value** | Measured on instrumented DUT under declared profile | Test Engineer + VE path | NOT VERIFIED |
+| **Certified threshold** | Architect-frozen TBD-DK-* or design limit | System Architect | All Open |
+| **Verification evidence** | Certified VE record | Test Engineer | No VE in WP-012 |
+
+**Future authorization:** An Architect may accept a **provisional design baseline** before component qualification, schematic capture, and PCB layout — provided it is explicitly labelled provisional, traceable, and distinct from certified threshold. WP-012 defines the methodology only.
+
+### 2.2 Closure stages (iterative)
+
+```text
+[A] Symbolic architecture
+      ↕ iterate
+[B] Provisional numeric design input (Architect — future)
+      ↕ iterate
+[C] Candidate calculation
+      ↕ iterate with qualification / protection / thermal
+[D] Component qualification · protection coordination · thermal evaluation
+      ↕ iterate — may return to [B]/[C] when inputs change
+[E] Schematic · PCB (NOT AUTHORIZED until Architect provisional baseline + gates)
+      ↕ iterate with measurement feedback
+[F] Physical measurement
+      ↕
+[G] Certified threshold acceptance (Architect)
+      ↕
+[H] Verification evidence (VE)
+```
+
+Supporting tracks (parallel, any stage): operating profiles P0–P6 · ED-IN dependencies · evaluation-class comparison · fixture definition.
+
+### 2.3 Stage governance
 
 | Stage | Required inputs | Permitted outputs | Responsible role | Review authority | Evidence required | Downstream dependency | Prohibited claims |
 |-------|-----------------|-------------------|------------------|------------------|-------------------|----------------------|-------------------|
-| Requirement | Accepted SRS / DevKit REQ | Capability mapping | System Architect | Architecture Review | Traceability | Profile definition | Verified without VE |
-| Functional capability | ADR-019; WP-010 aliases | Capability-to-domain map | Implementation Engineer | Architect | WP-010 package | ED-IN identification | Physical channel count frozen |
-| Operating profile | P0…P6 definition | Profile record (no numeric I) | Test Engineer | Architect | WP-009 profiles | Symbolic budget | Certified continuous current |
-| Design input | TBD-DK-*; ED-IN-* | Dependency reference | System Architect | Architect | ED-IN register | Symbolic model | Approved design input |
-| Symbolic sizing model | This framework | Equations, inequalities (symbolic) | Implementation Engineer | Architect | WP-012 package | Class comparison | Numeric limit Approved |
-| Evaluation class | WP-011 matrix | Class readiness table | Component Engineer | Architect | Qualification framework | Preliminary calc | MPN selected |
-| Preliminary calculation | Closed symbolic inputs | Candidate calculation (labelled) | Implementation Engineer | Architect | Calculation record | Qualification | Numeric freeze |
-| Component qualification | Class direction; datasheet | Qualification report | Component Engineer | Architect | CR-001 report | Schematic auth | Continuous rating Approved |
-| Protection coordination | Fault classes; layers P0–P5 | Coordination study (symbolic) | Implementation Engineer | Architect | Protection framework | Schematic | Fuse value selected |
-| Thermal evaluation | Loss model; R_th assumptions | Thermal study (symbolic) | Implementation Engineer | Architect | Thermal framework | PCB constraints | T_max Approved |
-| Schematic | Qualified components | Schematic (future) | Implementation Engineer | Architect | Design review | PCB | **NOT AUTHORIZED in WP-012** |
-| PCB | Schematic; constraints | Layout (future) | Implementation Engineer | Architect | DRC/thermal sim | Measurement | **NOT AUTHORIZED in WP-012** |
-| Measurement | Fixture; MP-* | Raw traces | Test Engineer | Architect | Measurement plan | Threshold acceptance | PASS without VE |
-| Threshold acceptance | Measurement + model | Architect freeze | System Architect | Architect | Accepted CR | Verification | Silent numeric approval |
-| Verification evidence | Certified threshold | VE record | Test Engineer | Architect | VE | Gate PASS | Requirement Verified without VE |
+| [A] Symbolic architecture | Accepted REQ; WP-009…011 | Methods; symbolic constraints | Implementation Engineer | Architect | WP-012 package | Provisional input prep | Numeric Approved |
+| [B] Provisional numeric input | Closed symbolic model; Architect authorization | **Provisional** labelled inputs | System Architect | Architect | Acceptance record | Candidate calc | Certified threshold |
+| [C] Candidate calculation | Provisional or symbolic inputs | **Candidate** labelled results | Implementation Engineer | Architect | Calculation record | Qualification | Numeric freeze |
+| [D] Qualification / protection / thermal | Class direction; fault model | Study reports (symbolic) | Component / IE | Architect | CR-001 / framework | Schematic prep | MPN Approved |
+| [E] Schematic / PCB | Provisional baseline + qual | Design files (future) | Implementation Engineer | Architect | Design review | Measurement | **NOT AUTHORIZED in WP-012** |
+| [F] Measurement | Fixture; MP-* | Raw traces | Test Engineer | Architect | Measurement plan | Threshold acceptance | PASS without VE |
+| [G] Certified threshold | Measurement + model | Architect freeze | System Architect | Architect | Accepted CR | Verification | Silent approval |
+| [H] Verification evidence | Certified threshold | VE record | Test Engineer | Architect | VE | Gate PASS | Requirement Verified without VE |
+
+### 2.4 Iteration rules
+
+1. Return from [D] or [E] to [B]/[C] is **expected** when component data, layout, or measurement invalidates prior assumptions.
+2. Provisional baseline **does not** replace certified threshold or VE.
+3. External-energy envelope (P6) calculations shall **not** feed base-envelope [B]/[G] without explicit Architect scope separation (PWR-A-001/002).
 
 ## 3. Sizing readiness status model
 
@@ -79,12 +108,16 @@ Every sizing parameter shall receive one readiness state:
 
 ### 3.1 Non-equivalent concepts (mandatory separation)
 
+Extends §2.1 value-state separation:
+
 ```text
-Sizing method accepted          ≠  numeric value approved
-Symbolic inequality accepted    ≠  candidate calculation produced
+Sizing method accepted          ≠  provisional numeric design input
+Provisional design input        ≠  Architect-approved design baseline
+Architect-approved baseline     ≠  certified threshold
+Candidate calculation           ≠  verified physical value
+Verified physical value         ≠  certified threshold
+Certified threshold             ≠  verification evidence
 Input assumption documented     ≠  approved design input
-Candidate calculation produced  ≠  numeric value approved
-Numeric value approved          ≠  physical value verified
 ```
 
 ## 4. Sizing domains
@@ -129,7 +162,7 @@ Numeric value approved          ≠  physical value verified
 | Service unavailable | Fail-operational current | ADR-017 | METHOD_ACCEPTABLE |
 | Independent rail behaviour | Rail isolation | WP-010 power domains | METHOD_ACCEPTABLE |
 | Rail conversion losses | `P_CONV_RADIO` | OI-RAIL-001 | INPUTS_INCOMPLETE |
-| Base budget impact | Δ`I_BASE_INST` | Budget model | METHOD_ACCEPTABLE |
+| Base budget impact | Entry-referred domain sum | Budget model §4 | METHOD_ACCEPTABLE |
 
 **Constraint (PWR-A-006):** Radio has no direct output-enable authority.
 
@@ -237,3 +270,4 @@ See [`DevKit_Current_and_Power_Budget_Model.md`](DevKit_Current_and_Power_Budget
 | Version | Date | Change |
 |---------|------|--------|
 | 1.0 | 2026-07-20 | WP-012 initial electrical sizing framework — Proposed |
+| 1.1 | 2026-07-20 | WP-012-R1 — staged iterative closure; provisional baseline path; measurement-boundary cross-ref |

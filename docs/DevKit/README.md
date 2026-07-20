@@ -1,8 +1,8 @@
 # DriveCore Gen1 DevKit — Document Set
 
 **Document ID:** DOC-DK-INDEX-001  
-**Version:** 1.12  
-**Status:** Accepted (index); WP-012 **Proposed**  
+**Version:** 1.13  
+**Status:** Accepted (index); WP-012 **Ready for Final Architecture Review**  
 **Work Package:** WP-007 / WP-008 (Accepted) / WP-009 (Accepted) / WP-010 (Accepted) / WP-011 (Accepted) / WP-012 (Proposed)  
 **Date:** 2026-07-20
 
@@ -44,12 +44,12 @@ It does **not** define the final circuit, PCB, component set, enclosure, or BOM.
 | [DevKit_Component_Class_Qualification_Framework.md](DevKit_Component_Class_Qualification_Framework.md) | WP-011 component-class qualification criteria | Accepted |
 | [DevKit_Component_Class_Matrix.md](DevKit_Component_Class_Matrix.md) | WP-011 evaluation component classes (no MPN) | Accepted |
 | [DevKit_Electrical_Design_Input_Register.md](DevKit_Electrical_Design_Input_Register.md) | WP-011 electrical design inputs (ED-IN-*) | Accepted |
-| [DevKit_Electrical_Sizing_Framework.md](DevKit_Electrical_Sizing_Framework.md) | WP-012 sizing lifecycle, domains, readiness states | Proposed |
-| [DevKit_Current_and_Power_Budget_Model.md](DevKit_Current_and_Power_Budget_Model.md) | WP-012 current/power quantities and P0–P6 integration | Proposed |
-| [DevKit_Thermal_Sizing_Framework.md](DevKit_Thermal_Sizing_Framework.md) | WP-012 thermal methodology | Proposed |
-| [DevKit_Protection_Coordination_Framework.md](DevKit_Protection_Coordination_Framework.md) | WP-012 protection layers P0–P5 and fault classes | Proposed |
-| [DevKit_Power_Path_Assumption_Register.md](DevKit_Power_Path_Assumption_Register.md) | WP-012 PWR-A assumptions and constraints | Proposed |
-| [DevKit_Sizing_Dependency_and_Closure_Matrix.md](DevKit_Sizing_Dependency_and_Closure_Matrix.md) | WP-012 sizing blockers and closure | Proposed |
+| [DevKit_Electrical_Sizing_Framework.md](DevKit_Electrical_Sizing_Framework.md) | WP-012 sizing lifecycle, domains, readiness states | Ready for Final Architecture Review |
+| [DevKit_Current_and_Power_Budget_Model.md](DevKit_Current_and_Power_Budget_Model.md) | WP-012 current/power quantities and P0–P6 integration | Ready for Final Architecture Review |
+| [DevKit_Thermal_Sizing_Framework.md](DevKit_Thermal_Sizing_Framework.md) | WP-012 thermal methodology | Ready for Final Architecture Review |
+| [DevKit_Protection_Coordination_Framework.md](DevKit_Protection_Coordination_Framework.md) | WP-012 protection layers P0–P5; 16 fault classes | Ready for Final Architecture Review |
+| [DevKit_Power_Path_Assumption_Register.md](DevKit_Power_Path_Assumption_Register.md) | WP-012 PWR-A assumptions incl. PROPOSED_CONSTRAINT | Ready for Final Architecture Review |
+| [DevKit_Sizing_Dependency_and_Closure_Matrix.md](DevKit_Sizing_Dependency_and_Closure_Matrix.md) | WP-012 sizing blockers and closure | Ready for Final Architecture Review |
 | This README | Navigation and authority statement | Accepted |
 
 ## Relationship to EDL-014
@@ -111,7 +111,7 @@ Every DevKit gate evidence package shall record a **composite system baseline** 
 | WP-009 threshold analysis | **Accepted** (2026-07-20) — methods Accepted; numeric values **Open** |
 | WP-010 functional electrical architecture | **Accepted** (2026-07-20) — WP-010-R1 Accepted |
 | WP-011 EDL-011 + component-class prep | **Accepted** (2026-07-20) — WP-011-R1 Accepted |
-| WP-012 electrical sizing architecture framework | **Proposed** — Architecture Review pending |
+| WP-012 electrical sizing architecture framework | **Ready for Final Architecture Review** — WP-012-R1 applied |
 | Hardware design | **NOT IMPLEMENTED** — detailed sizing/schematic/PCB **NOT AUTHORIZED** |
 | Firmware bring-up | NOT IMPLEMENTED |
 | Physical verification | NOT VERIFIED |
@@ -125,7 +125,7 @@ Still open decision **requests** (no Accepted ADR yet): `ADR-DK-008`, `ADR-DK-00
 
 Open thresholds: `TBD-DK-001` … `TBD-DK-022` (Status Open — WP-009 methods Accepted; numeric values not Approved). `TBD-DK-007` remains **BLOCKED_BY_EDL_CLARIFICATION** — not Resolved.
 
-**Next step:** Architecture Review of WP-012 (electrical sizing architecture framework).
+**Next step:** Final Architecture Review of WP-012 (WP-012-R1 corrections applied).
 
 **Not authorized:** MPN selection · BOM · schematics · PCB · numeric threshold approval · EDL file edit · final electrical sizing completion.
 
@@ -147,3 +147,4 @@ Open thresholds: `TBD-DK-001` … `TBD-DK-022` (Status Open — WP-009 methods A
 | 1.10 | 2026-07-20 | WP-011-R1 — review corrections; Ready for Final Architecture Review |
 | 1.11 | 2026-07-20 | Architecture Review — WP-011 Accepted; PR #15 merged (`07c550c`); TBD-DK-007 BLOCKED unchanged |
 | 1.12 | 2026-07-20 | WP-012 — electrical sizing architecture framework (Proposed) |
+| 1.13 | 2026-07-20 | WP-012-R1 — iterative closure; measurement boundaries; Ready for Final Architecture Review |

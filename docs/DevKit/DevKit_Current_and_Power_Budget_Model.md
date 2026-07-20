@@ -1,8 +1,8 @@
 # DevKit Current and Power Budget Model — WP-012
 
 **Document ID:** DOC-DK-CPBM-001  
-**Version:** 1.0  
-**Status:** Proposed — requires Architecture Review  
+**Version:** 1.1  
+**Status:** Ready for Final Architecture Review  
 **Work Package:** WP-012  
 **Date:** 2026-07-20
 
@@ -14,35 +14,90 @@ Symbolic budget model only — no numeric current, voltage or power values Appro
 
 Define current and power quantity vocabulary, measurement boundaries, domain budget relationships, and operating-profile integration for DevKit sizing. Extends Accepted WP-009 envelope analysis without approving numerics.
 
-## 2. Defined quantities
+## 2. Measurement boundaries and quantity taxonomy
 
-| Symbol | Definition | Time basis | Domain |
-|--------|------------|------------|--------|
-| `V_IN(t)` | Input voltage at DevKit entry measurement boundary | Instantaneous | Input |
-| `I_INPUT_INST(t)` | Instantaneous input current at entry MP | Instantaneous | Input |
-| `I_INPUT_AVG` | Time-averaged input over profile window `T` | `(1/T)∫I dt` | Input |
-| `I_INPUT_RMS` | RMS input over profile window | `sqrt((1/T)∫I² dt)` | Input / thermal |
-| `I_INPUT_PEAK` | Peak input over profile window | `max I_INPUT_INST(t)` | Input |
-| `I_LOGIC(t)` | Logic-board domain input current contribution | Instantaneous | Logic |
-| `I_RADIO(t)` | Radio-board domain input current contribution | Instantaneous | Radio |
-| `I_POWER_CTRL(t)` | Power-controller auxiliary load | Instantaneous | Power-control |
-| `I_CHANNEL_n(t)` | nth representative channel current | Instantaneous | Channel |
-| `I_BASE_INST(t)` | Sum of domain and channel contributions | See §4 | Base envelope |
-| `I_PROFILE_PEAK` | Peak of `I_BASE_INST` over approved profile | Profile max | Base |
-| `I_PROFILE_AVG` | Average of `I_BASE_INST` over profile | Profile avg | Base |
-| `I_PROFILE_RMS` | RMS of `I_BASE_INST` over profile | Profile RMS | Base / thermal |
-| `I_certified_cont` | Certified base continuous envelope (TBD-DK-002) | Steady / bounded | Base — **Open** |
-| `I_simultaneous` | Concurrent channel sum under certified profile (TBD-DK-003) | Profile-defined | Base — **Open** |
-| `P_INPUT(t)` | `V_IN(t) × I_INPUT_INST(t)` | Instantaneous | Input |
-| `P_DOMAIN` | Useful + loss power in a domain | Steady or averaged | Per domain |
-| `P_CHANNEL` | Channel dissipation sum | See §7 | Channel |
-| `P_LOSS` | Aggregate loss term | Symbolic sum | Thermal input |
-| `E_TRANSIENT` | `∫ P dt` over bounded transient | Energy | Protection |
-| `E_FAULT` | `∫ V(t)×I(t) dt` over fault interval | Energy | Protection |
+Currents measured at **different electrical boundaries shall not be directly summed**. WP-012 defines four distinct quantity classes:
 
-**Prohibited:** unqualified "maximum current" — every use shall specify peak / transient / continuous / average / RMS / fault class.
+| Class | Symbol (template) | Boundary | Definition |
+|-------|-------------------|----------|------------|
+| **Channel load / output current** | `I_LOAD_n(t)` | Load / output terminal | Current delivered to or drawn by the attached load at channel *n* output |
+| **Channel source-referred input contribution** | `I_CH_IN_n(t)` | Referred to DevKit input source | Incremental input-side contribution attributable to channel *n*, including switch conduction, driver, sense burden, and channel losses — **not** equal to `I_LOAD_n` when conversion, PWM, or bidirectional paths exist |
+| **Domain source-referred input contribution** | `I_DOM_IN_x(t)` | Referred to DevKit input source | Incremental input-side contribution of domain *x* ∈ {LOGIC, RADIO, POWER_CTRL} including rail conversion losses |
+| **Measured DevKit entry current** | `I_ENTRY_MEAS(t)` | Input entry MP (WP-010) | Current measured at the certified DevKit input measurement boundary |
 
-## 3. Current quantity definitions
+**Legacy alias note:** `I_INPUT_INST(t)` in WP-009 maps to **`I_ENTRY_MEAS(t)`** when the measurement point is the DevKit entry MP.
+
+### 2.1 Defined quantities (extended)
+
+| Symbol | Definition | Boundary |
+|--------|------------|----------|
+| `V_IN(t)` | Input voltage at entry MP | Entry |
+| `I_ENTRY_MEAS(t)` | Measured entry current | Entry |
+| `I_ENTRY_AVG` / `I_ENTRY_RMS` / `I_ENTRY_PEAK` | Entry statistics over profile window | Entry |
+| `I_LOAD_n(t)` | Channel *n* load/output current | Channel output |
+| `I_CH_IN_n(t)` | Channel *n* source-referred input contribution | Referred to entry |
+| `I_DOM_IN_LOGIC(t)` | Logic domain source-referred contribution | Referred to entry |
+| `I_DOM_IN_RADIO(t)` | Radio domain source-referred contribution | Referred to entry |
+| `I_DOM_IN_PWR(t)` | Power-control domain source-referred contribution | Referred to entry |
+| `I_BASE_IN_INST(t)` | Sum of **source-referred** base-envelope contributions | Referred to entry — see §4 |
+| `I_certified_cont` | Certified base continuous envelope (TBD-DK-002) | Entry — **Open** |
+| `I_simultaneous` | Concurrent profile constraint (TBD-DK-003) | Entry-referred — **Open** |
+| `P_ENTRY(t)` | `V_IN(t) × I_ENTRY_MEAS(t)` | Entry |
+| `P_CH_IN_n` / `P_DOM_IN_x` | Power form of source-referred contributions | Entry-referred |
+| `E_TRANSIENT` / `E_FAULT` | Bounded energy integrals | Declared fault/load window |
+
+**Prohibited:** unqualified "maximum current"; direct summation of `I_LOAD_n` at output boundaries with domain rail currents; inclusion of P6 / external-envelope currents in base `I_BASE_IN_INST` (PWR-A-001/002).
+
+## 3. Source-referred aggregation rules (symbolic)
+
+Entry measurement relates to source-referred contributions through **power balance**, not naive current addition at unrelated nodes:
+
+```text
+P_ENTRY(t) ≈
+  P_DOM_IN_LOGIC(t)
++ P_DOM_IN_RADIO(t)
++ P_DOM_IN_PWR(t)
++ Σ P_CH_IN_n(t)
++ P_LOSS_UNALLOCATED(t)
+```
+
+Current form (only when each term is defined at entry reference):
+
+```text
+I_ENTRY_MEAS(t) ≈
+  I_DOM_IN_LOGIC(t)
++ I_DOM_IN_RADIO(t)
++ I_DOM_IN_PWR(t)
++ Σ I_CH_IN_n(t)
++ I_REACTIVE_NET(t)
++ I_RETURN_NET(t)
+```
+
+Where:
+
+| Term | Meaning |
+|------|---------|
+| `η_conv_x` | Domain rail conversion efficiency (Open — component-dependent) |
+| PWM terms | Switching/average decomposition — peak ≠ average without declared duty |
+| `I_REACTIVE_NET(t)` | Reactive or storage-element exchange referred to entry — may be non-zero |
+| `I_RETURN_NET(t)` | Energy returned toward source (bidirectional / regen paths) — subtractive in balance |
+
+**Bidirectional channels:** `I_LOAD_n` sign and direction matter; `I_CH_IN_n` captures net source-referred draw. Shoot-through and cross-conduction appear in `P_CH_IN_n`, not as load current alone.
+
+**External-energy envelope (P6):** `I_EXT_*` quantities are **excluded** from `I_BASE_IN_INST` and `I_certified_cont` unless Architect explicitly scopes a separate external certification path (ADR-020).
+
+### 3.1 Mapping from load current to source-referred contribution (template)
+
+For each channel *n* — **candidate analytical forms** requiring declared assumptions; not normative until validated:
+
+```text
+P_CH_IN_n(t) =
+  f( I_LOAD_n(t), V_LOAD_n(t), V_IN(t), η_n, D_n(t), f_PWM, topology_n, direction_n )
+```
+
+Do not assume `I_CH_IN_n = I_LOAD_n` without efficiency, voltage conversion, and PWM/bidirectional proof.
+
+## 4. Current quantity definitions (by class)
 
 For each quantity class:
 
@@ -50,46 +105,47 @@ For each quantity class:
 |-------|-------------------|-------------|-------------------|------------|---------------|-----------|--------------|-------------|--------|-----------------|--------------|
 | **Instantaneous peak** | Entry MP; channel MP | Short capture (instrument-defined) | Active profile | As commanded | Nominal unless stated | None | Max hold | Instrument + load | Load uncertainty | OCP trip timing | Not thermal equivalent alone |
 | **Time-bounded transient** | Entry or channel | Declared `t_transient` | P2/P5 | Inrush / fault | As test plan | Bounded integral | Peak within window | Source + DUT | Transient conservatism | Clearing coordination | `E_TRANSIENT` |
-| **Steady continuous** | Entry MP | ≥ thermal soak minimum (Open) | P3 | Steady ON | T_amb declared | Mean over soak | Not peak | Measurement | Temperature derating | `I_certified_cont` | `I_PCB_cont(T)` |
+| **Steady continuous** | Entry MP (`I_ENTRY_MEAS`) | ≥ thermal soak minimum (Open) | P3 | Steady ON | T_amb declared | Mean over soak | Not peak | Measurement | Temperature derating | `I_certified_cont` | Thermal derating — see thermal framework §6 |
 | **Profile average** | Entry MP | Profile duration `T` | P0–P6 | Per profile table | Per profile | `(1/T)∫I dt` | Separate peak term | Profile + instrument | Load uncertainty | Budget check | Average loss |
 | **RMS / thermal equivalent** | Entry or channel | Profile `T` | P3/P4 PWM | PWM duty | T_amb | RMS formula | Peak separate | Duty + waveform | Temp derating | Heating estimate | Primary thermal input |
 | **Fault current** | Channel / entry | Fault interval | P5 | Fault injection | Controlled | Not averaged as continuous | Peak fault | High uncertainty | Fault conservatism | Layer P4/P2 | `E_FAULT` |
 | **Prospective SC** | DUT terminals | Fault inception | P5 | SC fixture | Controlled | N/A | First cycle peak | Source impedance | Fault conservatism | Interrupt rating | Energy limit |
 
-## 4. Domain current budget
+## 5. Source-referred base budget (symbolic)
 
-### 4.1 Instantaneous base current
-
-```text
-I_BASE_INST(t) =
-  I_LOGIC(t)
-+ I_RADIO(t)
-+ I_POWER_CTRL(t)
-+ Σ I_CHANNEL_n(t)
-```
-
-### 4.2 Profile peak
+### 5.1 Instantaneous base input-referred sum
 
 ```text
-I_BASE_PROFILE_PEAK =
-  max over t in approved profile [ I_BASE_INST(t) ]
+I_BASE_IN_INST(t) =
+  I_DOM_IN_LOGIC(t)
++ I_DOM_IN_RADIO(t)
++ I_DOM_IN_PWR(t)
++ Σ I_CH_IN_n(t)
 ```
 
-### 4.3 Profile average
+**Does not include:** external-envelope (P6) contributions; quantities measured only at load terminals without referral transform.
+
+### 5.2 Consistency check with measurement
 
 ```text
-I_BASE_PROFILE_AVG =
-  (1 / T) × ∫ I_BASE_INST(t) dt
+I_ENTRY_MEAS(t)  ≟  I_BASE_IN_INST(t) + I_REACTIVE_NET(t) + I_RETURN_NET(t)
 ```
 
-### 4.4 Profile RMS (thermal-relevant)
+Mismatch shall be resolved by explicit loss/reactive/return terms — not by forcing equal boundary currents.
+
+### 5.3 Profile statistics (entry-referred)
 
 ```text
-I_BASE_PROFILE_RMS =
-  sqrt( (1 / T) × ∫ I_BASE_INST(t)^2 dt )
+I_BASE_IN_PROFILE_PEAK = max over t in approved profile [ I_BASE_IN_INST(t) ]
+
+I_BASE_IN_PROFILE_AVG  = (1 / T) × ∫ I_BASE_IN_INST(t) dt
+
+I_BASE_IN_PROFILE_RMS  = sqrt( (1 / T) × ∫ I_BASE_IN_INST(t)^2 dt )
 ```
 
-### 4.5 Duty factors (independent bounds)
+Profile peak/average/RMS for **`I_ENTRY_MEAS`** use the same window at the entry MP and shall reconcile with §5.2.
+
+### 5.4 Duty factors (independent bounds)
 
 ```text
 0 ≤ D_n(t) ≤ 1   for each channel n
@@ -100,10 +156,10 @@ I_BASE_PROFILE_RMS =
 Average approximation (average only — not peak):
 
 ```text
-I_avg ≈ I_logic_radio_avg + Σ (I_channel_n_on × D_n)
+I_avg ≈ I_dom_avg + Σ (I_CH_IN_n_on × D_n)    (average only — not peak)
 ```
 
-## 5. Certified continuous coordination (symbolic)
+## 6. Certified continuous coordination (symbolic)
 
 From WP-009 limit stack — numeric terms **Open**:
 
@@ -122,7 +178,7 @@ I_certified_cont ≤ minimum(
 I_simultaneous ≤ I_certified_cont   (coordination — not independent of entry limit)
 ```
 
-## 6. Operating profiles P0–P6 (sizing integration)
+## 7. Operating profiles P0–P6 (sizing integration)
 
 | Profile | Purpose | Energized domains | Permitted capabilities | Concurrent channels | Load type | Duration | Duty | Thermal | Protection | Fault energy | Required ED-IN | Blockers | Future verification |
 |---------|---------|-------------------|------------------------|---------------------|-----------|----------|------|---------|------------|--------------|----------------|----------|---------------------|
@@ -136,15 +192,15 @@ I_simultaneous ≤ I_certified_cont   (coordination — not independent of entry
 
 Numeric currents: **not assigned** in any profile.
 
-## 7. Electrical power model
+## 8. Electrical power model
 
-### 7.1 Input power
+### 8.1 Input power
 
 ```text
-P_INPUT(t) = V_IN(t) × I_INPUT_INST(t)
+P_ENTRY(t) = V_IN(t) × I_ENTRY_MEAS(t)
 ```
 
-### 7.2 Domain power
+### 8.2 Domain power (source-referred)
 
 ```text
 P_DOMAIN =
@@ -155,7 +211,7 @@ P_DOMAIN =
 + P_SENSE_LOSS
 ```
 
-### 7.3 Switching channel power (symbolic)
+### 8.3 Switching channel power (symbolic)
 
 ```text
 P_CHANNEL =
@@ -168,7 +224,7 @@ P_CHANNEL =
 
 Device-specific loss equations may appear in future qualification reports as **alternative evaluation methods** — not normative in WP-012.
 
-## 8. Engineering margin categories
+## 9. Engineering margin categories
 
 See [`DevKit_Electrical_Sizing_Framework.md`](DevKit_Electrical_Sizing_Framework.md) — margin percentages **not assigned** in WP-012.
 
@@ -186,7 +242,7 @@ See [`DevKit_Electrical_Sizing_Framework.md`](DevKit_Electrical_Sizing_Framework
 
 **Prohibited:** hidden double-counting of margins (DK-GOV-025 alignment).
 
-## 9. Unsupported assumptions (rejected)
+## 10. Unsupported assumptions (rejected)
 
 | Assumption | Rejection rationale |
 |------------|---------------------|
@@ -195,7 +251,8 @@ See [`DevKit_Electrical_Sizing_Framework.md`](DevKit_Electrical_Sizing_Framework
 | Fuse nominal = continuous certification | ADR-021; protection framework |
 | PSU limit = sole protection | Protection framework P0/P2 |
 | docs/008 30 A / devkit.yaml limits normative | Historical/candidate only |
-| Headline switch `I_D` = DevKit continuous | WP-011 forbidden assumption |
+| Direct sum of `I_LOAD_n` as entry current | Boundary violation — use `I_CH_IN_n` referral |
+| `I_CH_IN_n = I_LOAD_n` without η/PWM/BI proof | Ignores conversion and topology |
 | Datasheet RθJA as board truth | Thermal framework |
 
 ## 10. Revision history
@@ -203,3 +260,4 @@ See [`DevKit_Electrical_Sizing_Framework.md`](DevKit_Electrical_Sizing_Framework
 | Version | Date | Change |
 |---------|------|--------|
 | 1.0 | 2026-07-20 | WP-012 initial current and power budget model — Proposed |
+| 1.1 | 2026-07-20 | WP-012-R1 — measurement boundaries; source-referred aggregation; external envelope exclusion |

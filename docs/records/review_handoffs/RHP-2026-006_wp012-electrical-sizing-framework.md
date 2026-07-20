@@ -7,7 +7,7 @@
 | **Related Requirements** | REQ-DCC-V-DK-002, 003, 011, 035, 039–055, 093–097; DK-GOV-009, 024, 025; TBD-DK-001…022 |
 | **Related Architecture** | ADR-019…023; WP-009…WP-011 Accepted |
 | **Related WP / CR** | WP-012 (depends on WP-011 / `c36d329`+) |
-| **Impact Level** | 2 |
+| **Impact Level** | 2 (initial); **Level 1** (WP-012-R1) |
 | **Date** | 2026-07-20 |
 | **Implementer (name/agent)** | Implementation Engineer (cloud agent) |
 | **Implementer role** | Implementation Engineer |
@@ -27,10 +27,11 @@
 
 ### Changed Assumptions
 
-* Sizing lifecycle and readiness states defined — numeric values remain Open.
-* P0–P6 profiles integrated for sizing — no numeric currents assigned.
-* Protection layers P0–P5 distinct — not interchangeable.
-* PWR-A register documents constraints — not converted to requirements.
+* Staged **iterative** closure model — provisional design baseline path defined (not approved).
+* Measurement boundaries: load current vs source-referred vs entry-measured — no cross-boundary sum.
+* **PROPOSED_CONSTRAINT** for WP-012-first constraints (PWR-A-017/018).
+* P0–P6 profiles integrated — no numeric currents assigned.
+* Protection layers P0–P5 distinct — **16 fault classes** in table.
 * ED-IN entries remain dependency references (WP-011 R6 preserved).
 * TBD-DK-007 remains **BLOCKED_BY_EDL_CLARIFICATION** — not Resolved.
 
@@ -44,7 +45,35 @@
 
 ### Validation Summary
 
-WP-012 documentation validation complete. No physical tests. No VE records. EDL/ADR unchanged. TBD numeric values Open. Requirements NOT VERIFIED.
+WP-012-R1 documentation validation complete. Commands and results recorded in CIA-2026-007 §WP-012-R1 validation table. No physical tests. No VE records. EDL/ADR unchanged. TBD numeric values Open. Requirements NOT VERIFIED.
+
+### Validation evidence (WP-012-R1 — exact commands)
+
+```bash
+# Scope — forbidden paths
+git diff --name-only main...HEAD -- docs/EDL docs/ADR hardware firmware config
+# (empty output — PASS)
+
+# Numeric approval patterns
+rg -i 'approved (current|voltage|timing|temperature)' docs/DevKit/DevKit_Electrical_Sizing_Framework.md docs/DevKit/DevKit_Current_and_Power_Budget_Model.md docs/DevKit/DevKit_Thermal_Sizing_Framework.md docs/DevKit/DevKit_Protection_Coordination_Framework.md docs/DevKit/DevKit_Power_Path_Assumption_Register.md docs/DevKit/DevKit_Sizing_Dependency_and_Closure_Matrix.md
+# (no matches — PASS)
+
+# MPN / BOM patterns
+rg -i 'MPN:|selected component|BOM entry' docs/DevKit/DevKit_Electrical_Sizing_Framework.md docs/DevKit/DevKit_Current_and_Power_Budget_Model.md docs/DevKit/DevKit_Protection_Coordination_Framework.md
+# (no matches — PASS)
+
+# TBD-DK-007 preservation
+rg 'BLOCKED_BY_EDL_CLARIFICATION' docs/DevKit/DevKit_Sizing_Dependency_and_Closure_Matrix.md docs/DevKit/DevKit_Electrical_Design_Input_Register.md
+# (matches present — PASS)
+
+# Fault class count (data rows in §5 table)
+rg '^\| [A-Za-z]' docs/DevKit/DevKit_Protection_Coordination_Framework.md | head -20
+# (16 fault rows — PASS)
+
+# Requirement / verification status — no Verified/PASS claims in WP-012 set
+rg 'NOT VERIFIED|NOT EXECUTED|BLOCKED' docs/DevKit/DevKit_Electrical_Sizing_Framework.md
+# (expected disposition language — PASS)
+```
 
 ### Evidence References
 
@@ -66,8 +95,8 @@ WP-012 documentation validation complete. No physical tests. No VE records. EDL/
 
 ### Open Questions
 
-1. Accept sizing lifecycle and readiness status model?
-2. Accept current/power quantity definitions and profile integration?
+1. Accept staged iterative closure model (incl. provisional baseline path)?
+2. Accept measurement-boundary quantity definitions (`I_LOAD` / `I_CH_IN` / `I_DOM_IN` / `I_ENTRY_MEAS`)?
 3. Accept thermal and protection methodologies?
 4. Accept PWR-A assumption register governance?
 5. Which next WP authorized: component-class qualification vs symbolic preliminary calculation?
@@ -108,7 +137,7 @@ Revert WP-012 PR; WP-011 baseline preserved.
 | **Independent Reviewer (name/agent)** | TBD |
 | **Independent Reviewer role** | Independent Reviewer |
 | **Independent review date** | TBD |
-| **Final Review Outcome** | TBD — Architecture Review pending |
+| **Final Review Outcome** | **Ready for Final Architecture Review** — WP-012-R1 applied |
 | **Architecture / policy approval** | Separate — System Architect only |
 
 ## Revision history
@@ -116,3 +145,4 @@ Revert WP-012 PR; WP-011 baseline preserved.
 | Version | Date | Change |
 |---------|------|--------|
 | 1.0 | 2026-07-20 | WP-012 initial RHP — Draft |
+| 1.1 | 2026-07-20 | WP-012-R1 — iterative lifecycle; 16 fault classes; validation evidence |

@@ -1,8 +1,8 @@
 # DevKit Power-Path Assumption Register — WP-012
 
 **Document ID:** DOC-DK-PPAR-001  
-**Version:** 1.0  
-**Status:** Proposed — requires Architecture Review  
+**Version:** 1.1  
+**Status:** Ready for Final Architecture Review  
 **Work Package:** WP-012  
 **Date:** 2026-07-20
 
@@ -12,7 +12,8 @@ Assumptions and constraints for power-path sizing. **Not** approved design input
 
 | Status | Meaning |
 |--------|---------|
-| **ACCEPTED_CONSTRAINT** | Architecturally Accepted boundary — not a numeric value |
+| **ACCEPTED_CONSTRAINT** | Architecturally Accepted boundary — not a numeric value; exact Accepted source cited |
+| **PROPOSED_CONSTRAINT** | First introduced by WP-012 — **Proposed** until Architecture Review acceptance; WP-012 shall not self-approve |
 | **OPEN_ASSUMPTION** | Documented assumption; closure required |
 | **BLOCKED** | Cannot proceed without listed artifact |
 | **REJECTED** | Shall not be used as normative basis |
@@ -38,8 +39,8 @@ Assumptions and constraints for power-path sizing. **Not** approved design input
 | **PWR-A-014** | Historical 30 A references are non-normative | docs/008; devkit.yaml | WP-009 disposition | HISTORICAL_ONLY | Candidate only | Silent numeric freeze | Implementation Engineer | Threshold acceptance |
 | **PWR-A-015** | Unknown channel overlap treated as concurrent | WP-009-R1; budget model | Accepted method | ACCEPTED_CONSTRAINT | Conservative sizing | Undersized input path | Test Engineer | P4 overlap profiles |
 | **PWR-A-016** | Fuse nominal ≠ continuous certification | ADR-021; WP-009 L4 | Accepted ADR | ACCEPTED_CONSTRAINT | Protection vs continuous distinct | Using fuse as continuous rating | Implementation Engineer | Protection study |
-| **PWR-A-017** | PSU limit is not sole protection | Protection framework P0/P2 | WP-012 | ACCEPTED_CONSTRAINT | Layer coordination | Single-point reliance | Test Engineer | Fixture + procedure |
-| **PWR-A-018** | Software OFF ≠ hardware protection | Safety standard; P5 layer | Accepted policy | ACCEPTED_CONSTRAINT | Fail-operational vs protection | SC sustained by SW only | FW Architect | HW protection proof |
+| **PWR-A-017** | PSU limit is not sole protection | WP-012 protection framework §3 princ. 1 | WP-012 (first formalized) | **PROPOSED_CONSTRAINT** | Layer coordination | Single-point reliance | Test Engineer | Architecture Review acceptance |
+| **PWR-A-018** | Software OFF ≠ hardware protection | WP-012 protection framework §3 princ. 7 | WP-012 (first formalized) | **PROPOSED_CONSTRAINT** | No exact Accepted ADR/EDL citation for this wording — parallel safety-layer intent only | SC sustained by SW only | FW Architect | Architecture Review acceptance |
 | **PWR-A-019** | ED-IN entries are dependency references only | WP-011 R6 | Accepted WP-011 | ACCEPTED_CONSTRAINT | No silent input freeze | Treating register as Approved BOM input | System Architect | ED-IN register |
 | **PWR-A-020** | Evaluation classes are not procurement shortlist | WP-011 | Accepted WP-011 | ACCEPTED_CONSTRAINT | Qualification discipline | Premature MPN order | Component Engineer | Qualification WP |
 
@@ -47,8 +48,11 @@ Assumptions and constraints for power-path sizing. **Not** approved design input
 
 Assumptions in this register shall **not** be converted to requirements or numeric thresholds without Controlled Architect acceptance and traceability update.
 
+**WP-012-R1 rule:** Constraints first introduced by WP-012 remain **PROPOSED_CONSTRAINT** until explicit Architecture Review acceptance. Implementation Engineer cannot self-approve.
+
 ## 4. Revision history
 
 | Version | Date | Change |
 |---------|------|--------|
 | 1.0 | 2026-07-20 | WP-012 initial power-path assumption register — Proposed |
+| 1.1 | 2026-07-20 | WP-012-R1 — PROPOSED_CONSTRAINT status; PWR-A-017/018 disposition |
