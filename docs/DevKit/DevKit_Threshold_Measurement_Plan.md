@@ -3,7 +3,7 @@
 **Document ID:** DOC-DK-MEAS-001  
 **Version:** 1.0  
 **Status:** Proposed — requires Architecture Review  
-**Work Package:** WP-009  
+**Work Package:** WP-009 / WP-009-R1  
 **Date:** 2026-07-20
 
 > Measurement **plan** only — not evidence. No VE records. No physical validation claimed.
@@ -133,7 +133,7 @@ Statistics: report **maximum observed**, mean, σ, outliers removed with justifi
 | Observation | SPI CS/SCK activity; `nENABLE_GLOBAL`; outputs |
 | Message period | Record `T_msg`, missed-frame policy |
 | Repetitions | ≥30 |
-| Pass criterion | `t_worst + uncertainty + margin ≤ TBD-DK-007` AND `>100 ms` lower bound check |
+| Pass criterion | `t_worst + uncertainty + margin ≤ TBD-DK-007` when Architect approves numeric freeze — **numeric pass criterion blocked until EDL-011 clarification** |
 | Abort | Outputs remain ON beyond fail-safe expectation |
 | Role | Test Owner |
 
@@ -178,3 +178,4 @@ Statistics: report **maximum observed**, mean, σ, outliers removed with justifi
 | Version | Date | Change |
 |---------|------|--------|
 | 1.0 | 2026-07-20 | WP-009 initial measurement plan |
+| 1.1 | 2026-07-20 | WP-009-R1 — remove EDL-011 lower-bound pass check; clarify numeric block |

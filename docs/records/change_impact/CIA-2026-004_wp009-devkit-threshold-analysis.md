@@ -9,7 +9,7 @@
 | **Author role** | Implementation Engineer |
 | **Date** | 2026-07-20 |
 | **Status** | Draft — Under Architecture Review |
-| **Related WP / CR** | WP-009; depends on WP-008 Accepted (`8bc5710`+); ADR-021/022 Accepted |
+| **Related WP / CR** | WP-009 / WP-009-R1; depends on WP-008 Accepted (`8bc5710`+); ADR-021/022 Accepted |
 
 ### Reason for Change
 
@@ -95,11 +95,21 @@ WP-009 §30 documentation validation; Architecture Review of proposed thresholds
 
 ### Open Questions
 
-* Architect accept Scenario C2 provisional ceiling (8–15 A study band)?
-* Accept TBD-DK-007 lower bound >100 ms conditionally?
-* Accept TBD-DK-021 state-machine procedure?
+* Architect accept Scenario **C2 calculation architecture** (no ampere ceiling from WP-009)?
+* Accept TBD-DK-003 profile/overlap closure model?
+* Accept TBD-DK-021 state-machine + command epoch procedure?
+* Authorize EDL-011 clarification CR with question A/B/C/D?
 * Decompose TBD-DK-002 register in follow-on CR?
-* EDL-011 clarification CR required?
+
+### WP-009-R1 Lightweight Impact Note (Level 1)
+
+| Correction | Change |
+|------------|--------|
+| EDL-011 interpretation | Removed unsupported `>100 ms` lower bound; TBD-DK-007 → **BLOCKED_BY_EDL_CLARIFICATION** |
+| Current scenarios | Removed 3–8 / 8–15 / 15–25 A bands; symbolic C1–C3 only |
+| Simultaneous load | Removed invalid `ΣD_n ≤ 1`; added instantaneous/avg/RMS + overlap table |
+| Post-kill FSM | Command epoch; ack ≠ reset; flexible ack/fault-clear order |
+| Timing ordering | Normalized path segments; no unqualified cross-path comparisons |
 
 ### Approvals (architecture / policy)
 
@@ -126,3 +136,4 @@ WP-009 §30 documentation validation; Architecture Review of proposed thresholds
 | Version | Date | Change |
 |---------|------|--------|
 | 1.0 | 2026-07-20 | WP-009 initial CIA |
+| 1.1 | 2026-07-20 | WP-009-R1 Level 1 corrections — EDL ambiguity; symbolic scenarios; profile model |

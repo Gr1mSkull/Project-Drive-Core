@@ -30,7 +30,7 @@ Audit of existing DevKit-related claims against WP-007 authority rules. Classifi
 | USB-C role | docs/008 | CANDIDATE | Gen1 Logic intent | — | Keep candidate | Electrical architecture WP | P2 |
 | Hammond enclosure | docs/008; docs/007 | CANDIDATE | — | — | ADR-DK-012 | Architecture decision | P2 |
 | BOOT/USER/KILL buttons | docs/008 | CANDIDATE | Kill testability required | Button implementation not frozen | Require kill testability; UI buttons candidate | Electrical architecture WP | P1 |
-| 13.8 V / 30 A bench limits | docs/008 | TBD | Candidates only | Not authoritative freeze | **WP-009** analysis — Scenario C2 band; TBD-DK-002/003 Open | Architect threshold review | P0 |
+| 13.8 V / 30 A bench limits | docs/008 | TBD | Candidates only | Not authoritative freeze | **WP-009-R1** — symbolic C1–C3; no ampere ceiling; TBD-DK-002/003 Open | Architect threshold review | P0 |
 | Exact lamp wattages / loads | docs/008 | CANDIDATE | — | hardware README / yaml partial mismatch | Treat as example loads | Fixture WP | P2 |
 | Kill / watchdog numeric limits | docs/008 A6/A7 | TBD | Candidates only | Vague “immediately” | TBD-DK-004/005/007/014/021 Open; **Accepted ADR-022** | Threshold WP | P0 |
 | `hardware.profile: devkit` | docs/008; devkit.yaml | CONFLICT / PARTIAL | File present | Not in docs/005 schema | Schema decision | Config schema CR | P1 |

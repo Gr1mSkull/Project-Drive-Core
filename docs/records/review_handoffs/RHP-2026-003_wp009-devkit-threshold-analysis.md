@@ -6,7 +6,7 @@
 | **Change Scope** | WP-009 DevKit current envelope and safety timing threshold analysis package |
 | **Related Requirements** | REQ-DCC-V-DK-020, 021, 031–038, 044, 045, 049, 058; DK-GOV-024, 025 |
 | **Related Architecture** | ADR-019, 020, 021, 022, 023 Accepted; EDL-011; WP-008 Accepted |
-| **Related WP / CR** | WP-009 (depends on WP-008 / `8bc5710`+) |
+| **Related WP / CR** | WP-009 / WP-009-R1 (depends on WP-008 / `8bc5710`+) |
 | **Impact Level** | 2 |
 | **Date** | 2026-07-20 |
 | **Implementer (name/agent)** | Implementation Engineer (cloud agent) |
@@ -31,11 +31,12 @@
 ### Changed Assumptions
 
 * Current limit stack (15 layers) is explicit; 30 A fuse ≠ continuous current.
-* Scenario **C2** recommended for electrical architecture — not Approved.
-* TBD-DK-007 lower bound >100 ms from EDL-011 — conditional acceptance proposed.
-* TBD-DK-021 is primarily procedural (state machine) — acceptance proposed.
+* Scenario **C2** is a calculation architecture pattern — **no ampere ceiling authorized by WP-009**.
+* TBD-DK-007 **BLOCKED_BY_EDL_CLARIFICATION** — no numeric direction from EDL-011.
+* TBD-DK-003 profile/overlap closure model proposed; numeric simultaneous current NOT READY.
+* TBD-DK-021 procedural contract includes command epoch; reset ≠ operator ack.
 * Kill/watchdog/control-loss/commanded OFF remain separate paths.
-* EDL-011 `>100 ms` not copied to kill or watchdog.
+* EDL-011 `>100 ms` not copied to kill or watchdog; not treated as TBD-DK-007 bound.
 
 ### Change Impact Analysis
 
@@ -47,7 +48,7 @@
 
 ### Validation Summary
 
-WP-009 §30 documentation validation executed in Completion Report. No physical tests. No VE records. TBDs remain Open. Requirements NOT VERIFIED. Cases NOT EXECUTED / BLOCKED.
+WP-009 §30 and WP-009-R1 §9 validation executed. WP-009-R1 Level 1 corrections applied. No physical tests. No VE records. TBDs remain Open.
 
 ### Evidence References
 
@@ -57,15 +58,15 @@ WP-009 §30 documentation validation executed in Completion Report. No physical 
 
 ### Known Weaknesses
 
-* Study bands (8–15 A, 1–50 ms) are illustrative — may be misread as Approved if review discipline fails.
 * Load decay terms unknown without load model and hardware.
-* EDL-011 ambiguity only partially resolved — clarification CR may be needed.
+* EDL-011 ambiguity documented but unresolved — clarification CR required before TBD-DK-007 numeric direction.
+* Overlap profiles are template-only until electrical architecture defines channels.
 
 ### Known Risks
 
-* Accepting provisional ceiling without protection coordination could undersize protection.
-* Conditional >100 ms acceptance for TBD-DK-007 may be confused with Approved numeric freeze.
-* Simultaneous-load policy without P4 measurement could overstate capability.
+* Premature numeric freeze before EDL clarification could misalign with EDL-011 intent.
+* Simultaneous-load policy without approved overlap profiles could overstate capability.
+* Command epoch concept requires firmware normative definition in future WP.
 
 ### Open Questions
 
@@ -73,11 +74,11 @@ See Architect Review Package in Completion Report.
 
 ### Critical Review Focus Areas
 
-* Whether Scenario C2 study band is appropriate provisional ceiling
-* Whether TBD-DK-021 procedure is sufficient without ack timeout numeric
-* Whether EDL-011 interpretation is correct
+* Whether C2 symbolic architecture is sufficient without ampere provisional ceiling
+* Whether TBD-DK-003 profile/overlap model is complete
+* Whether EDL-011 clarification question A/B/C/D is correct
 * Whether any numeric value slipped through as Approved
-* Whether fuse/continuous separation is maintained throughout
+* Whether fuse/continuous separation and overlap conservatism are maintained
 
 ### Rollback Considerations
 
@@ -100,3 +101,4 @@ Revert WP-009 PR; WP-008 and register Open status preserved.
 | Version | Date | Change |
 |---------|------|--------|
 | 1.0 | 2026-07-20 | WP-009 initial RHP |
+| 1.1 | 2026-07-20 | WP-009-R1 — assumptions/weaknesses updated for EDL block and symbolic scenarios |

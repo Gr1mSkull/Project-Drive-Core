@@ -3,7 +3,7 @@
 **Document ID:** DOC-DK-ENV-001  
 **Version:** 1.0  
 **Status:** Proposed — requires Architecture Review  
-**Work Package:** WP-009  
+**Work Package:** WP-009 / WP-009-R1  
 **Date:** 2026-07-20  
 **Author role:** Implementation Engineer (threshold analysis)
 
@@ -222,20 +222,76 @@ I_certified_cont = min(
 
 Until hardware exists, each term is **UNKNOWN** or **BOUNDED BY ASSUMPTION** (documented in closure matrix).
 
-### 4.3 Simultaneous bound (template)
+### 4.3 Simultaneous and concurrent current model
+
+Per-channel duty factor (independent bounds):
 
 ```text
-I_simultaneous = Σ I_channel_n × D_n
-where Σ D_n ≤ 1 for overlapping interval Δt
-and each I_channel_n ≤ I_channel_n_cont
+0 ≤ D_n(t) ≤ 1
 ```
 
-For ADR-019 minimum set, **default architecture assumption** (not approved numeric):
+Instantaneous input current:
 
-- One medium-current representative channel at full duty **OR**
-- Multiple lower-duty channels only if thermal and protection study supports the sum
+```text
+I_inst(t) =
+I_logic_radio(t)
++ Σ I_channel_n(t)
+```
 
-### 4.4 Thermal current derating (symbolic)
+Profile peak (within window `T`):
+
+```text
+I_profile_peak =
+max over t in [0, T] [ I_inst(t) ]
+```
+
+Profile average:
+
+```text
+I_profile_avg =
+(1 / T) × ∫ I_inst(t) dt
+```
+
+Thermal / RMS quantity where applicable:
+
+```text
+I_profile_rms =
+sqrt( (1 / T) × ∫ I_inst(t)^2 dt )
+```
+
+For controlled periodic channels, duty-factor approximation for **average** current only:
+
+```text
+I_avg ≈ I_logic_radio_avg + Σ (I_channel_n_on × D_n)
+```
+
+**Do not** use duty-factor sums for instantaneous peak unless switching overlap is explicitly controlled in the approved profile.
+
+**Invalid constraint (removed in WP-009-R1):** `Σ D_n ≤ 1` — not valid unless a separate power-allocation policy explicitly enforces it.
+
+Each `I_channel_n(t)` shall respect `I_channel_n_cont` when defined.
+
+### 4.4 Channel overlap profile table (controlled)
+
+| Profile ID | Channel | ON current | Duty `D_n` | Overlap class | May overlap with | Max overlap duration | Quantity affected |
+|------------|---------|------------|------------|---------------|------------------|----------------------|-------------------|
+| EXAMPLE-P4-A | CH-MED | TBD | TBD | concurrent by design | CH-LOW | TBD | instantaneous / average |
+| EXAMPLE-P4-B | CH-LOW | TBD | TBD | never concurrent | — | 0 | average only |
+| *TBD* | *TBD* | TBD | TBD | unknown | *TBD* | TBD | analyze as concurrent |
+
+**Overlap class vocabulary:**
+
+```text
+never concurrent
+concurrent by design
+concurrent transiently
+concurrency prohibited
+unknown
+```
+
+**Unknown overlap shall be analyzed conservatively as concurrent** until an approved profile defines otherwise.
+
+### 4.5 Thermal current derating (symbolic)
 
 ```text
 I_PCB_cont(T) = I_PCB_cont(T_ref) × sqrt((T_max - T)/(T_max - T_ref))
@@ -243,68 +299,82 @@ I_PCB_cont(T) = I_PCB_cont(T_ref) × sqrt((T_max - T)/(T_max - T_ref))
 
 Exact form requires copper geometry — **BLOCKED_BY_ELECTRICAL_ARCHITECTURE**.
 
-## 5. Candidate scenarios C1–C3
+## 5. Candidate scenarios C1–C3 (symbolic)
 
-### Scenario C1 — Conservative low-energy base
+> **WP-009-R1:** Numeric ampere bands removed. Scenarios are **architecture patterns** only. **No provisional ampere ceiling is authorized by WP-009.**
 
-| Aspect | Assessment |
-|--------|------------|
-| Description | Minimal certified continuous envelope: Logic/Radio + one low/medium channel at modest current |
-| Illustrative band (NOT APPROVED) | `I_certified_cont` candidate study band **3–8 A** |
-| Coverage unlocked | DK-A bring-up; partial DK-C single-channel |
-| Electrical implications | Smallest entry conductor/connector class; lowest PCB copper |
-| Thermal implications | Lowest risk; may not represent medium-channel thermal behaviour |
-| Fixture implications | Simple resistive loads |
-| Protection implications | Lower fault energy; fuse may still be sized above continuous per Option D |
-| Operator risk | Lowest |
-| Schedule impact | Fastest to first power |
-| Redesign risk | Low if external bank used for HC |
-| Evidence needed | Electrical architecture table; protection coordination; measurement |
-| **Recommendation** | Suitable for **P1/P2 early bring-up provisional ceiling** only — not recommended as final P3 envelope |
+### Scenario C1 — Bring-up envelope
 
-### Scenario C2 — Functional multi-capability base (RECOMMENDED for detailed electrical design)
+```text
+I_C1 =
+I_logic
++ I_radio
++ I_sensing_rail_margin
++ (no energized power load)
+```
+
+One explicitly low-energy channel may be included only when the operating profile (P1/P2) permits it.
 
 | Aspect | Assessment |
 |--------|------------|
-| Description | Envelope sufficient for ADR-019 mandatory capabilities with **one active medium-class channel** plus Logic/Radio overhead; limited simultaneous support for lower channels |
-| Illustrative band (NOT APPROVED) | `I_certified_cont` candidate study band **8–15 A**; `I_simultaneous` **≤ I_certified_cont** with explicit 2-channel low-duty cases only after analysis |
-| Coverage unlocked | DK-A input/protection; core DK-C single-channel; staged multi-channel |
-| Electrical implications | Medium entry connector class; coordinated protection > continuous |
-| Thermal implications | Requires channel + entry thermal model |
-| Fixture implications | Standard bench loads; bank for HC |
-| Protection implications | `I_protection_rating` > `I_certified_cont` (Option D) |
-| Operator risk | Moderate — requires clear labeling vs P6 |
-| Schedule impact | Balanced |
-| Redesign risk | Moderate — aligned with ADR-021 Option B |
-| Evidence needed | Full limit stack table; PCB/feeder assumptions; measurement plan execution |
-| **Recommendation** | **Recommended scenario architecture** for downstream electrical architecture WP |
+| Purpose | P1 controlled first power; Logic/Radio/sense rails |
+| Coverage | DK-A bring-up |
+| Electrical implications | Minimal entry energy |
+| **Recommendation** | Use for **P1/P2** only — not P3 certified envelope |
 
-### Scenario C3 — Higher base envelope
+### Scenario C2 — Functional single-channel envelope (RECOMMENDED architecture pattern)
+
+```text
+I_C2 =
+I_logic_radio_max
++ max(I_representative_channel_cont)
++ I_auxiliary_margin
+```
+
+Limited concurrent low-power channels permitted **only** through an explicit overlap profile (§4.4).
 
 | Aspect | Assessment |
 |--------|------------|
-| Description | Larger on-board envelope to reduce external bank reliance |
-| Illustrative band (NOT APPROVED) | `I_certified_cont` candidate study band **15–25 A** (still **≠** historical 30 A approval) |
-| Coverage unlocked | Broader on-board simultaneous testing |
-| Electrical implications | Heavier entry; closer to historical 30 A candidate — **not justified without thermal/protection evidence** |
-| Thermal implications | High — PCB and connector derating critical |
-| Fixture implications | Higher energy fault tests on-board |
-| Protection implications | Risk of equating fuse to continuous if not disciplined |
-| Operator risk | Higher |
-| Schedule impact | Slower (design + qualification) |
-| Redesign risk | High if wrong |
-| Evidence needed | Full qualification stack; likely overlaps ADR-020 external path anyway |
-| **Recommendation** | **Not recommended** as base envelope; conflicts with ADR-021 safety rationale unless Architect explicitly directs |
+| Purpose | ADR-019 mandatory capabilities with one active representative power channel |
+| Coverage | DK-A input/protection; core DK-C single-channel |
+| Electrical implications | Entry sized from calculated stack — not from WP-009 bands |
+| **Recommendation** | **Select C2 architecture** for downstream electrical analysis |
+
+**No provisional ampere ceiling is authorized by WP-009.** The electrical architecture WP shall calculate the first candidate current ceiling from:
+
+- selected representative channel classes;
+- actual load assumptions;
+- connector and conductor candidates;
+- PCB distribution concept;
+- protection coordination;
+- thermal assumptions;
+- operating profiles.
+
+### Scenario C3 — Multi-channel base envelope
+
+```text
+I_C3 =
+I_logic_radio_max
++ max over approved concurrent profiles (
+    Σ I_channel_n_profile
+  )
+```
+
+| Aspect | Assessment |
+|--------|------------|
+| Purpose | Multi-channel concurrent operation within approved overlap profiles |
+| Coverage | DK-C simultaneous-load verification (P4) |
+| **Recommendation** | **Not automatically recommended** — requires explicit overlap profiles and thermal/protection study |
 
 ### Scenario comparison summary
 
-| Criterion | C1 | C2 (recommended) | C3 |
-|-----------|----|--------------------|-----|
-| ADR-021 alignment | Strong | **Strongest** | Weak |
-| ADR-019 coverage | Partial | **Full staged** | Full |
-| Operator safety | Strong | **Strong** | Acceptable |
-| External bank reliance | High | **Moderate** | Low |
-| Evidence burden | Low | **Medium** | High |
+| Criterion | C1 | C2 (recommended pattern) | C3 |
+|-----------|----|--------------------------|-----|
+| ADR-021 alignment | Strong | **Strongest** | Conditional |
+| ADR-019 coverage | Partial | **Full staged** | Full (if profiles approved) |
+| Operator safety | Strong | **Strong** | Requires overlap discipline |
+| External bank reliance | High | **Moderate** | Lower |
+| Numeric authorization | **None** | **None** | **None** |
 
 ## 6. TBD-DK-002 disposition
 
@@ -327,18 +397,17 @@ Historical register text conflates **protection rating** and **continuous input*
 | Acceptance status | **BOUND_ESTABLISHED_VALUE_OPEN** |
 | Architecture direction | Option B + D (ADR-021 Accepted) |
 | Calculation model | Section 4 — **established** |
-| Recommended scenario | **C2** |
-| Candidate numeric approval | **None** — illustrative bands are study aids only |
+| Recommended scenario pattern | **C2** (not an ampere range) |
+| Candidate numeric approval | **None** |
 | Exact blockers | Electrical architecture (conductor/connector/PCB); component qualification; physical measurement |
-| Closure artifact | Architect threshold decision on tuple; then electrical architecture WP |
+| Closure artifact | Architect threshold decision on tuple; electrical architecture WP calculates first ceiling |
 
 ### 6.3 Proposed Threshold Decision Record — TBD-DK-002
 
 ```text
 PROPOSED (not Approved):
-- Accept closure method: limit stack + Scenario C2 architecture
-- Accept provisional design ceiling for electrical architecture: study band 8–15 A continuous
-  (Architect must confirm or reject; NOT normative until accepted)
+- Accept closure method: limit stack + Scenario C2 calculation architecture
+- Reject provisional ampere ceiling from WP-009 — electrical architecture WP derives first candidate
 - Defer numeric fuse rating until protection coordination complete
 - Recommend register decomposition CR for 002A/B/C
 Status remains Open.
@@ -348,22 +417,22 @@ Status remains Open.
 
 | Field | Value |
 |-------|-------|
-| Acceptance status | **BOUND_ESTABLISHED_VALUE_OPEN** |
-| Independence | Defined separately from single-channel limit, fuse rating, external bank, PSC |
-| Profile requirement | **Yes** — P3 vs P4 profiles required; one number insufficient without profile context |
-| Default policy (architecture) | Multi-channel simultaneous tests only within certified `I_simultaneous`; default **one active medium channel** until proven otherwise |
-| Upper-bound method | `I_simultaneous ≤ I_certified_cont`; sum of channel currents with explicit duty factors |
-| Blockers | Channel continuous limits unknown; thermal simultaneous model; measurement under P4 |
-| Closure artifact | Architect acceptance of simultaneous policy + numeric freeze after electrical design |
+| Acceptance status | **READY_FOR_ACCEPTANCE** (profile-based closure model only) |
+| Controlled meaning | Profile-based simultaneous-current envelope — **not necessarily one universal scalar** |
+| Minimum separable quantities | Maximum instantaneous concurrent input; maximum continuous concurrent input; approved channel-overlap profiles; maximum transient overlap duration |
+| Register decomposition | Recommend future CR if needed — **do not create canonical IDs in WP-009-R1** |
+| Numeric simultaneous current | **NOT READY** |
+| Blockers | Overlap profile approval; P4 measurement; thermal simultaneous model |
+| Closure artifact | Architect acceptance of profile/overlap model; numeric freeze after electrical design |
 
 ### Proposed Threshold Decision Record — TBD-DK-003
 
 ```text
 PROPOSED (not Approved):
-- Accept profile-based simultaneous model (P4)
-- Accept inequality I_simultaneous ≤ I_certified_cont
-- Reject implicit diversity factors
-- Numeric amperes remain Open pending C2 electrical design + P4 measurement
+- Accept profile-based simultaneous model (P4) and overlap table (§4.4)
+- Accept instantaneous / average / RMS distinction
+- Reject implicit diversity factors and invalid ΣD_n ≤ 1 constraint
+- Numeric amperes remain Open pending electrical design + P4 measurement
 Status remains Open.
 ```
 
@@ -387,7 +456,9 @@ Status remains Open.
 - Protection-layer responsibility matrix
 - Identity / test-point requirements
 
-### Must wait for threshold acceptance or provisional ceiling
+### Must wait for Architect threshold acceptance or electrical-architecture-calculated ceiling
+
+> WP-009 does **not** authorize a provisional ampere ceiling. First numeric candidate comes from electrical architecture WP inputs.
 
 - Conductor sizing
 - Connector sizing
@@ -410,3 +481,4 @@ Status remains Open.
 | Version | Date | Change |
 |---------|------|--------|
 | 1.0 | 2026-07-20 | WP-009 initial current envelope analysis |
+| 1.1 | 2026-07-20 | WP-009-R1 — symbolic scenarios; corrected simultaneous model; no ampere bands |
