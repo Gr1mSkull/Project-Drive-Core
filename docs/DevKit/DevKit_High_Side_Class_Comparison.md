@@ -106,7 +106,7 @@ Compare high-side switching evaluation classes against Accepted ADR-019 / WP-010
 | One HS class must implement every capability alias on every physical channel | **Rejected** — WP-010 role mapping |
 | Any HS class automatically satisfies open-load | **Rejected** — PWR-A-010 conditional |
 | Fuse / integrated limit = `I_certified_cont` | **Rejected** — PWR-A-016 |
-| Software OFF = hardware protection | **Rejected** — aligns PWR-A-018 (PROPOSED_CONSTRAINT) |
+| Software OFF = hardware protection | **Rejected** — aligns PWR-A-018 (**ACCEPTED_CONSTRAINT**; WP-012 + WP-014 Architecture Review disposition; no topology/component approved) |
 | Historical part numbers are candidates | **Rejected** — HISTORICAL / NON-NORMATIVE CONTEXT only |
 | Class recommendation = MPN authorization | **Rejected** — WP-012 Stage [D]/[E] gates |
 | HS-INT-BASIC rejected solely because another instance must provide SENSE/PROTECTED | **Rejected** — that mapping is Allowed under WP-010 |

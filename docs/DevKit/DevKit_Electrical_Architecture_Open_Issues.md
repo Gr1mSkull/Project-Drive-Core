@@ -1,7 +1,7 @@
 # DevKit Electrical Architecture Open Issues — WP-010
 
 **Document ID:** DOC-DK-OI-001  
-**Version:** 1.1  
+**Version:** 1.5  
 **Status:** Accepted — Architecture Review  
 **Review date:** 2026-07-20  
 **Approver role:** System Architect  
@@ -24,7 +24,7 @@
 | **OI-PROT-001** | Input reverse-polarity method | Architecture not decided | docs/002 preview only | ARCHITECTURE_OPEN | System Architect | Architecture decision | Component WP |
 | **OI-PROT-002** | Transient-protection method | Not selected | — | COMPONENT_OPEN | Component Engineer | Qualification | Schematic WP |
 | **OI-RAIL-001** | Rail voltages and current budgets | All rails symbolic | TBD-DK-017 | SIZING_OPEN | Implementation Engineer | Load analysis | Sizing WP |
-| **OI-GND-001** | Ground/reference between base and external envelope | Safety-critical unknown | ADR-020/021 | ARCHITECTURE_OPEN | System Architect | Isolation analysis + fixture design | Fixture WP |
+| **OI-GND-001** | Ground/reference between base and external envelope | Safety-critical unknown; WP-014 retains Open (no isolation claim) | ADR-020/021; WP-014 FESB | ARCHITECTURE_OPEN | System Architect | Architect decision + fixture design | EXT interconnection |
 | **OI-KILL-001** | KILL input conditioning detail | No hardware design | ADR-022 | IMPLEMENTATION_OPEN | Implementation Engineer | Timing measurement | Schematic WP |
 | **OI-WD-001** | Watchdog implementation period | TBD-DK-005 Open | ADR-022 | THRESHOLD_OPEN | FW Architect | FW design + measurement | FW BSP WP |
 | **OI-EDL-011** | EDL-011 clarification for control-loss | Semantic ambiguity | EDL-011 | EDL_CLARIFICATION | System Architect | EDL CR acceptance | TBD-DK-007 numeric |
@@ -33,9 +33,9 @@
 | **OI-DECAY-001** | Load-decay models | Unknown loads | WP-009 | SIZING_OPEN | Test Engineer | Load characterization | Timing verification |
 | **OI-CONN-001** | Connector/enclosure decision | ADR-DK-012 Open | ADR-DK-012 request | ARCHITECTURE_OPEN | System Architect | ADR-DK-012 acceptance | Schematic WP |
 | **OI-ENV-001** | Thermal/environment split | ADR-DK-011 Open | ADR-DK-011 | ARCHITECTURE_OPEN | System Architect | ADR-DK-011 | Qualification scope |
-| **OI-FIX-001** | External fixture interface (EXT-SOURCE / EXT-LOAD-BANK / EXT-POWER-MODULE) | Not designed | ADR-020 | FIXTURE_OPEN | Test Engineer | Fixture requirements WP | HC discovery |
-| **OI-FIX-002** | Stall-test fixture boundary | TBD-DK-022 Open | ADR-023 | FIXTURE_OPEN | Test Engineer | Fixture spec | VER-DCC-DK-C-011 |
-| **OI-SC-001** | Short-circuit injection method | TBD-DK-011 Open | ADR-023 | FIXTURE_OPEN | Test Engineer | Safe injection design | DK-C SC cases |
+| **OI-FIX-001** | External fixture interface (EXT-SOURCE / EXT-LOAD-BANK / EXT-POWER-MODULE) | Requirements Proposed (WP-014); design not started | ADR-020; WP-014 | FIXTURE_OPEN | Test Engineer | Fixture prelim design after WP-014 Accepted | HC discovery |
+| **OI-FIX-002** | Stall-test fixture boundary | TBD-DK-022 Open; WP-014 maps requirement | ADR-023; WP-014 | FIXTURE_OPEN | Test Engineer | Fixture prelim design | VER-DCC-DK-C-011 |
+| **OI-SC-001** | Short-circuit injection method | TBD-DK-011 Open; WP-014 fault catalog maps capability | ADR-023; WP-014 | FIXTURE_OPEN | Test Engineer | Safe injection design | DK-C SC cases |
 | **OI-EPOCH-001** | Command epoch normative definition | Procedural only | TBD-DK-021 | IMPLEMENTATION_OPEN | FW Architect | FW specification | Post-kill verification |
 | **OI-CONFIG-001** | Configuration-retention policy (if any) | No Accepted policy | REQ-DCC-V-DK config rules | ARCHITECTURE_OPEN | System Architect | Config governance CR | Config invalid cases |
 | **OI-BI-001** | BI shoot-through prevention topology | Functional only | ADR-019 | COMPONENT_OPEN | Component Engineer | Switch topology selection | Schematic WP |
@@ -73,7 +73,8 @@ Base and external envelopes are functionally separated and protected against bac
 | Preliminary component-class qualification | OI-COMP-001, OI-COMP-002, OI-BI-001, OI-SENSE-001 — WP-012 evaluation readiness |
 | Electrical sizing framework (WP-012) | OI-CUR-001…003, OI-PCB-001, OI-RAIL-001, OI-UV-001 |
 | Component-class comparison (WP-013) | OI-COMP-001, OI-COMP-002, OI-BI-001, OI-SENSE-001, OI-PROT-001/002 — recommendations **Proposed** |
-| Fixture/load-bank requirements | OI-GND-001, OI-FIX-001, OI-FIX-002, OI-SC-001 |
+| Fixture/load-bank requirements (WP-014 Proposed) | OI-GND-001, OI-FIX-001, OI-FIX-002, OI-SC-001 — statuses remain Open |
+| Fixture preliminary design (after WP-014 Accepted) | OI-FIX-001/002, OI-SC-001 (design); OI-GND-001 (Architect) |
 | Schematic WP | OI-PROT-001/002, OI-KILL-001, OI-CONN-001, OI-CHAN-001 |
 | PCB constraints/layout WP | OI-PCB-001 |
 | FW BSP planning | OI-WD-001, OI-EPOCH-001, OI-CONFIG-001 |
@@ -87,3 +88,4 @@ Base and external envelopes are functionally separated and protected against bac
 | 1.2 | 2026-07-20 | Architecture Review Accepted — PR #14 merged (`c98ce56`) |
 | 1.3 | 2026-07-20 | WP-012 — downstream mapping for sizing framework |
 | 1.4 | 2026-07-20 | WP-013 — downstream mapping for class comparison (OI statuses unchanged) |
+| 1.5 | 2026-07-20 | WP-014 — fixture OI consumers updated; all listed OI remain Open |

@@ -1,7 +1,7 @@
 # DevKit Protection Class Comparison — WP-013
 
 **Document ID:** DOC-DK-PCC-001  
-**Version:** 1.2  
+**Version:** 1.3  
 **Status:** Accepted — Architecture Review  
 **Work Package:** WP-013 / WP-013-R1  
 **Date:** 2026-07-20
@@ -26,7 +26,7 @@ Compare protection architecture classes for reverse-polarity, input transient, r
 | P4 | Channel-local protection | Input replaceable device alone |
 | P5 | Functional safe-state control | Hardware energy limiting |
 
-PWR-A-017 (PROPOSED_CONSTRAINT): PSU limit is not sole protection.  
+PWR-A-017 (**ACCEPTED_CONSTRAINT** — WP-012 protection framework + WP-014 Architecture Review disposition): PSU current limiting is not the sole protection layer. No component, fuse, current, or clearing time approved. 
 PWR-A-016: Fuse nominal ≠ continuous certification.
 
 ## 3. Reverse-polarity classes
@@ -102,14 +102,14 @@ E_FAULT =
 ∫ V(t) × I(t) dt
 ```
 
-Conservative bound form (conditional):
+Bounded candidate form (conditional):
 
 ```text
 E_FAULT_BOUND =
 V_BOUND × I_BOUND × T_BOUND
 ```
 
-Conservative **only when** `|V(t)| ≤ V_BOUND`, `|I(t)| ≤ I_BOUND`, and fault duration ≤ `T_BOUND` over the declared boundary/interval. If bounds are not established: **BLOCKED_BY_INPUT**.
+Conservative **only when** `|V(t)| ≤ V_BOUND`, `|I(t)| ≤ I_BOUND`, and fault duration ≤ `T_BOUND` over the declared boundary/interval. If bounds are not established: **BLOCKED_BY_INPUT**. This is a **candidate analytical form**, **non-normative**, and **not conservative unless every input is a proven bound**.
 
 **Prohibited:** presenting `V_nom × I_FAULT_PEAK × T_FAULT_CLEAR` as a conservative bound without proven upper-bound justification.
 
@@ -128,3 +128,4 @@ WP-012 protection framework · ADR-021/023 · OI-PROT-001/002 · ED-IN-008/009/0
 | 1.0 | 2026-07-20 | WP-013 initial protection class comparison — Proposed |
 | 1.1 | 2026-07-20 | WP-013-R1 — fault-energy bound form; OI-PROT-001/002 remain Open |
 | 1.2 | 2026-07-20 | Architecture Review Accepted — PR #17 merged (`d1698a0` / `23bdb07`); methodology Accepted; final classes/topology Open; TBD-DK-007 BLOCKED unchanged |
+| 1.3 | 2026-07-20 | WP-014-R2 — fault-energy candidate/non-normative label; no isolation implied |

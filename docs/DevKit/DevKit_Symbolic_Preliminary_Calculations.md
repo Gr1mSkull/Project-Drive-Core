@@ -1,7 +1,7 @@
 # DevKit Symbolic Preliminary Calculations — WP-013
 
 **Document ID:** DOC-DK-SPC-001  
-**Version:** 1.2  
+**Version:** 1.3  
 **Status:** Accepted — Architecture Review  
 **Work Package:** WP-013 / WP-013-R1  
 **Date:** 2026-07-20
@@ -202,7 +202,7 @@ May be described as **conservative only when** all of the following hold over th
 fault duration ≤ T_BOUND
 ```
 
-If those conditions are **not** established, status is **BLOCKED_BY_INPUT**.
+If those conditions are **not** established, status is **BLOCKED_BY_INPUT**. This is a **candidate analytical form**, **non-normative**, and **not conservative unless every input is a proven bound**.
 
 **Prohibited:** calling `V_nom × I_FAULT_PEAK × T_FAULT_CLEAR` a conservative bound without proven upper-bound justification.
 
@@ -333,3 +333,4 @@ WP-012 CPBM / Thermal / Protection · ADR-019…023 · ED-IN-* · TBD-DK-* · PW
 | 1.0 | 2026-07-20 | WP-013 initial symbolic preliminary calculations — Proposed |
 | 1.1 | 2026-07-20 | WP-013-R1 — conduction duty discipline; event-based switching; separated stall/bridge energies; thermal-state retry; fault-energy bound |
 | 1.2 | 2026-07-20 | Architecture Review Accepted — PR #17 merged (`d1698a0` / `23bdb07`); methodology Accepted; final classes/topology Open; TBD-DK-007 BLOCKED unchanged |
+| 1.3 | 2026-07-20 | WP-014-R2 — fault-energy candidate/non-normative label |

@@ -161,22 +161,41 @@ This acceptance update does not rewrite the BOM or select a component.
 
 | Artifact | Document | Status |
 |----------|----------|--------|
-| Qualification report | [`DevKit_Component_Class_Qualification_Report.md`](DevKit_Component_Class_Qualification_Report.md) | Proposed |
-| High-side comparison | [`DevKit_High_Side_Class_Comparison.md`](DevKit_High_Side_Class_Comparison.md) | Proposed |
-| Current-observation comparison | [`DevKit_Current_Observation_Class_Comparison.md`](DevKit_Current_Observation_Class_Comparison.md) | Proposed |
-| Protection comparison | [`DevKit_Protection_Class_Comparison.md`](DevKit_Protection_Class_Comparison.md) | Proposed |
-| Bidirectional comparison | [`DevKit_Bidirectional_Class_Comparison.md`](DevKit_Bidirectional_Class_Comparison.md) | Proposed |
-| Symbolic preliminary calculations | [`DevKit_Symbolic_Preliminary_Calculations.md`](DevKit_Symbolic_Preliminary_Calculations.md) | Proposed |
-| Class recommendation matrix | [`DevKit_Class_Recommendation_and_Readiness_Matrix.md`](DevKit_Class_Recommendation_and_Readiness_Matrix.md) | Proposed |
+| Qualification report | [`DevKit_Component_Class_Qualification_Report.md`](DevKit_Component_Class_Qualification_Report.md) | **Accepted** (methodology) |
+| High-side comparison | [`DevKit_High_Side_Class_Comparison.md`](DevKit_High_Side_Class_Comparison.md) | **Accepted** (evaluation) |
+| Current-observation comparison | [`DevKit_Current_Observation_Class_Comparison.md`](DevKit_Current_Observation_Class_Comparison.md) | **Accepted** (evaluation) |
+| Protection comparison | [`DevKit_Protection_Class_Comparison.md`](DevKit_Protection_Class_Comparison.md) | **Accepted** (evaluation) |
+| Bidirectional comparison | [`DevKit_Bidirectional_Class_Comparison.md`](DevKit_Bidirectional_Class_Comparison.md) | **Accepted** (evaluation) |
+| Symbolic preliminary calculations | [`DevKit_Symbolic_Preliminary_Calculations.md`](DevKit_Symbolic_Preliminary_Calculations.md) | **Accepted** (methodology) |
+| Class recommendation matrix | [`DevKit_Class_Recommendation_and_Readiness_Matrix.md`](DevKit_Class_Recommendation_and_Readiness_Matrix.md) | **Accepted** (directions); final classes Open |
 
 **Not authorized by WP-013:** MPN selection · manufacturer preference · BOM · numeric freeze · schematic · PCB · VE.
 
-## 12. Related records
+## 12. WP-014 fixture and load-bank requirements mapping
+
+| Artifact | Document | Status |
+|----------|----------|--------|
+| Fixture requirements | [`DevKit_Fixture_and_Load_Bank_Requirements.md`](DevKit_Fixture_and_Load_Bank_Requirements.md) | **Proposed** |
+| Functional architecture | [`DevKit_Fixture_Functional_Architecture.md`](DevKit_Fixture_Functional_Architecture.md) | **Proposed** |
+| Energy/safety boundary | [`DevKit_Fixture_Energy_and_Safety_Boundary.md`](DevKit_Fixture_Energy_and_Safety_Boundary.md) | **Proposed** |
+| Load/fault catalog | [`DevKit_Load_and_Fault_Profile_Catalog.md`](DevKit_Load_and_Fault_Profile_Catalog.md) | **Proposed** |
+| Interface/measurement | [`DevKit_Fixture_Interface_and_Measurement_Register.md`](DevKit_Fixture_Interface_and_Measurement_Register.md) | **Proposed** |
+| Verification capability | [`DevKit_Fixture_Verification_Capability_Matrix.md`](DevKit_Fixture_Verification_Capability_Matrix.md) | **Proposed** |
+| Hazard/interlock | [`DevKit_Fixture_Hazard_and_Interlock_Register.md`](DevKit_Fixture_Hazard_and_Interlock_Register.md) | **Proposed** |
+| Dependency/readiness | [`DevKit_Fixture_Dependency_and_Readiness_Matrix.md`](DevKit_Fixture_Dependency_and_Readiness_Matrix.md) | **Proposed** |
+
+**ADR-023 / ADR-020 fixture consumers:** fault-injection authority, external envelope separation, and evidence scopes map to REQ-DCC-V-FX-* (Proposed).
+
+**Not authorized by WP-014:** fixture MPN · BOM · ratings · schematics · PCB · harness · procurement · construction · energization · VE · numeric freeze.
+
+## 13. Related records
 
 | Record | Path |
 |--------|------|
-| CIA | [`docs/records/change_impact/CIA-2026-003_wp008-devkit-p0-adrs.md`](../records/change_impact/CIA-2026-003_wp008-devkit-p0-adrs.md) |
-| RHP | [`docs/records/review_handoffs/RHP-2026-002_wp008-devkit-p0-adrs.md`](../records/review_handoffs/RHP-2026-002_wp008-devkit-p0-adrs.md) |
+| CIA (WP-008) | [`docs/records/change_impact/CIA-2026-003_wp008-devkit-p0-adrs.md`](../records/change_impact/CIA-2026-003_wp008-devkit-p0-adrs.md) |
+| RHP (WP-008) | [`docs/records/review_handoffs/RHP-2026-002_wp008-devkit-p0-adrs.md`](../records/review_handoffs/RHP-2026-002_wp008-devkit-p0-adrs.md) |
+| CIA (WP-014) | [`docs/records/change_impact/CIA-2026-009_wp014-fixture-load-bank-requirements.md`](../records/change_impact/CIA-2026-009_wp014-fixture-load-bank-requirements.md) |
+| RHP (WP-014) | [`docs/records/review_handoffs/RHP-2026-008_wp014-fixture-load-bank-requirements.md`](../records/review_handoffs/RHP-2026-008_wp014-fixture-load-bank-requirements.md) |
 | ADR index | [`docs/ADR/README.md`](../ADR/README.md) |
 
 ## Revision history
@@ -194,3 +213,4 @@ This acceptance update does not rewrite the BOM or select a component.
 | 1.8 | 2026-07-20 | WP-011 Architecture Review — EDL-011 + component-class prep Accepted; TBD-DK-007 BLOCKED retained |
 | 1.9 | 2026-07-20 | WP-012 — electrical sizing architecture framework (Proposed) |
 | 1.10 | 2026-07-20 | WP-012 Accepted status alignment; WP-013 class qualification mapping (Proposed) |
+| 1.11 | 2026-07-20 | WP-013 Accepted status; WP-014 fixture/load-bank mapping (Proposed) |

@@ -1,7 +1,7 @@
 # DevKit Protection Coordination Framework — WP-012
 
 **Document ID:** DOC-DK-PCF-001  
-**Version:** 1.3  
+**Version:** 1.5  
 **Status:** Accepted — Architecture Review  
 **Work Package:** WP-012  
 **Date:** 2026-07-20
@@ -27,13 +27,13 @@ Define distinct protection layers, fault classes, coordination principles, and s
 
 ## 3. Coordination principles
 
-1. Bench PSU current limit is **not** the sole protection layer.
+1. Bench PSU current limit is **not** the sole protection layer. (**PWR-A-017** — **ACCEPTED_CONSTRAINT** via WP-012 protection framework + explicit WP-014 Architecture Review disposition; no component/fuse/current/clearing time approved.)
 2. Fuse **nominal rating** is **not** continuous-current certification (`I_protection_rating` ≠ `I_certified_cont`).
 3. **Interrupt rating** is **not** current rating.
 4. Channel protection shall act before unacceptable upstream damage where selective containment is required.
 5. Upstream protection shall remove energy where local containment fails.
 6. Hardware KILL does **not** replace overcurrent protection.
-7. Software shutdown does **not** replace hardware fault containment.
+7. Software shutdown does **not** replace hardware fault containment. (**PWR-A-018** — **ACCEPTED_CONSTRAINT** via WP-012 protection framework + explicit WP-014 Architecture Review disposition; no topology/component approved.)
 8. External-bank protection does **not** extend base DevKit rating.
 9. Protection timing shall coordinate with conductor and component withstand.
 10. Retry behaviour shall not create uncontrolled thermal accumulation.
@@ -59,11 +59,22 @@ E_FAULT
 E_FAULT = ∫ V(t) × I(t) dt
 ```
 
-Conservative approximation when justified:
+A bounded candidate expression may be used only as:
 
 ```text
-E_FAULT ≈ V_nom × I_FAULT_PEAK × T_FAULT_CLEAR
+E_FAULT_BOUND = V_BOUND × I_BOUND × T_BOUND
 ```
+
+and only when `V_BOUND`, `I_BOUND`, and `T_BOUND` are each demonstrated bounds over the applicable fault interval.
+
+```text
+If V_BOUND, I_BOUND, or T_BOUND is unavailable or unsupported,
+the bounded fault-energy calculation is BLOCKED_BY_INPUT.
+```
+
+`V_nom`, `I_nom`, typical current, and expected clearing time shall **not** be used as conservative bounds without separate proof.
+
+Any retained engineering approximation is a **candidate analytical form**, **non-normative**, and **not conservative unless every input is a proven bound** (aligns Accepted WP-013-R1 and Proposed WP-014).
 
 **No protection curves defined numerically in WP-012.**
 
@@ -86,7 +97,7 @@ Table population: **16 fault classes** (§5.1).
 | BI shoot-through | Bridge overlap | Source | P4 topology | P5 disable | No cross-conduction | Direction fault | Open | Dead-time | Bridge class | OI-BI-001 | Thermal runaway |
 | BI stalled load | Mechanical stall | Source | P4 current limit | P5 / fixture | Bounded stall current | Stall detect | TBD-DK-022 | Stall I, duration | BI class | Fixture | Heat damage |
 | Thermal overload | Excess loss | Electrical | P4 thermal | P5 global | Channel/system OFF | Thermal fault | Open | P_LOSS, R_th | Thermal qual | DK-C thermal | Fire |
-| External-bank back-feed | Wrong fixture | External | Fixture interlock | P2 isolation | No base energization | Interlock status | Open | Isolation proof | Fixture design | OI-GND-001 | Base damage |
+| External-bank back-feed | Wrong fixture | External | Fixture back-feed-prevention function | External/upstream hazardous-energy removal | No uncontrolled energization of base distribution | Interlock status | Open | Fixture interconnection + back-feed-protection characteristics; base/external V–I; accepted OI-GND-001 disposition + back-feed-prevention verification | Fixture design | OI-GND-001 | Base damage |
 | External-bank misconnection | Wiring error | External | P1/P6 interlock | Operator abort | No energy | Fixture check | Open | Procedure | Fixture qual | Phase E | Hazard |
 | Measurement-ground fault | Scope/fixture GND | External | Fixture GND policy | Abort | No hazardous current | Procedure | Open | GND model | OI-GND-001 | Fixture WP | Measurement hazard |
 
@@ -118,3 +129,5 @@ Table population: **16 fault classes** (§5.1).
 | 1.0 | 2026-07-20 | WP-012 initial protection coordination framework — Proposed |
 | 1.1 | 2026-07-20 | WP-012-R1 — explicit 16-class population count |
 | 1.3 | 2026-07-20 | Architecture Review Accepted — PR #16 merged (`9c5c7e7` / `fe700d4`); 16 fault classes retained |
+| 1.4 | 2026-07-20 | WP-014-R1 — PWR-A-017/018 ACCEPTED_CONSTRAINT disposition noted on principles 1 and 7 |
+| 1.5 | 2026-07-20 | WP-014-R2 — removed nominal-bound approximation; E_FAULT_BOUND proof rule; external back-feed topology-neutral (no isolation) |
