@@ -64,7 +64,7 @@ ADR-023 fault injection scope
 
 No hidden circular dependencies identified. Soft couplings shall be closed by threshold/fixture WPs without re-opening P0 architecture without a superseding ADR.
 
-## 4. Blocker state after Proposed acceptance (hypothetical)
+## 4. Blocker state after Architecture Review acceptance (2026-07-20)
 
 | Area | After P0 ADRs Accepted | Still blocked by |
 |------|---------------------|------------------|
@@ -91,7 +91,28 @@ Evidence remains NOT VERIFIED
 | ADR-DK-011 | Environmental/thermal split | After ADR-019/021; with threshold/thermal analysis |
 | ADR-DK-012 | Connector/enclosure candidates | After electrical architecture outline |
 
-## 6. Related records
+## 6. Conflict disposition (Accepted)
+
+```text
+EDL-001 remains authoritative.
+The STM32G431 DevKit-only candidate in docs/007 is not authorized for DK-A…DK-D gate evidence.
+This acceptance update does not rewrite the BOM or select a component.
+```
+
+## 7. Accepted options summary
+
+| ADR | Accepted option |
+|-----|-----------------|
+| ADR-016 | Option D, with Option B minimum for DK-A…DK-D |
+| ADR-017 | Option D, with Option B minimum for applicable DK-B/D evidence |
+| ADR-018 | staged model; Option B for certification builds |
+| ADR-019 | Option B via Option D staging |
+| ADR-020 | Option D |
+| ADR-021 | Option B + Option D envelope model |
+| ADR-022 | Option D using Option B timing classes |
+| ADR-023 | Option B scope using Option D injection-method rules |
+
+## 8. Related records
 
 | Record | Path |
 |--------|------|
@@ -106,3 +127,4 @@ Evidence remains NOT VERIFIED
 | 1.0 | 2026-07-20 | WP-008 initial crosswalk |
 | 1.1 | 2026-07-20 | WP-008-R1 — open-load conditional; ADR-023 REQs without 114; supply interruption DK-A/DK-D |
 | 1.2 | 2026-07-20 | Architecture Review — ADR-016…023 Accepted; WP-008 Accepted |
+| 1.3 | 2026-07-20 | Acceptance metadata alignment — conflict disposition; accepted-options summary; blocker section finalized |

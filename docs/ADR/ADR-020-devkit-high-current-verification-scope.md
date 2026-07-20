@@ -151,18 +151,28 @@ Fixture/load-bank requirements; threshold analysis; Phase E planning.
 
 Superseding ADR.
 
+
+### Accepted option (Architecture Review)
+
+```text
+Accepted: Option D
+```
+
 ### Architecture Review section
 
 | Field | Value |
 |-------|-------|
-| **Review status** | Complete |
+| **Review status** | Accepted |
 | **Architect decision** | Accepted |
+| **Review date** | 2026-07-20 |
 | **Approver role** | System Architect |
 | **Acceptance date** | 2026-07-20 |
-| **Acceptance conditions** | None for architecture decision body. Implementation, fixtures, and verification evidence remain outstanding. |
+| **Acceptance conditions** | Architecture decision Accepted. Implementation, fixtures, verification evidence, and open TBD numerics (where applicable) remain outstanding per ADR text. |
+| **Accepted option** | Option D |
 | **Rejection / correction notes** | None — blocking architecture findings: NONE |
 | **WP-008** | Accepted |
-| **PR** | #12 approved for merge |
+| **PR** | #12 approved for merge (merged `bdfe2b1`) |
+
 
 
 ### Revision history
@@ -171,3 +181,4 @@ Superseding ADR.
 |---------|------|--------|--------|
 | 1.0 | 2026-07-20 | Implementation Engineer (WP-008) | Proposed package |
 | 1.2 | 2026-07-20 | System Architect (acceptance) | Architecture Review — ACCEPTED |
+| 1.3 | 2026-07-20 | System Architect (acceptance refinement) | Review status Accepted; Accepted option recorded; acceptance conditions finalized |

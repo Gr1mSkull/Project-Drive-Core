@@ -8,7 +8,7 @@
 | **Author** | Implementation Engineer (cloud agent) |
 | **Author role** | Implementation Engineer |
 | **Date** | 2026-07-20 |
-| **Status** | Accepted |
+| **Status** | Accepted (Architecture Review 2026-07-20; PR #12 approved for merge) |
 | **Related WP / CR** | WP-008 / WP-008-R1; depends on WP-007 Accepted (PR #11 / `d176d9f`); originating requests ADR-DK-001…007, ADR-DK-010 |
 
 ### Reason for Change
@@ -21,13 +21,15 @@ WP-007 Accepted the DevKit requirements structure, verification governance, and 
 * No canonical Proposed ADRs for DevKit P0 fidelity/power/timing/fault-injection topics.
 * Candidate language in `docs/007`/`docs/008` (identical boards, 30 A, G431 alternate) remains non-authoritative and partially conflicting with Accepted EDL-001.
 
-### Proposed Behaviour
+### Accepted Behaviour (Architecture Review 2026-07-20)
 
-* Eight separate **Proposed** ADRs ADR-016…023 mapping ADR-DK-001…007 and ADR-DK-010.
+* Eight **Accepted** ADRs ADR-016…023 mapping ADR-DK-001…007 and ADR-DK-010.
+* **Accepted options:** ADR-016 Option D + Option B min DK-A…DK-D; ADR-017 Option D + Option B min; ADR-018 staged + Option B certification; ADR-019 Option B via Option D staging; ADR-020 Option D; ADR-021 Option B + Option D envelope; ADR-022 Option D + Option B classes; ADR-023 Option B scope + Option D methods.
 * WP-008-R1: open-load CONDITIONAL_ON_DEVKIT / CONDITIONAL_MANDATORY; ADR-023 requirement list corrected (no REQ-114); supply interruption classified MANDATORY_DK_A + MANDATORY_DK_D only.
-* Crosswalk, CIA, RHP for Architecture Review.
-* Traceability and DevKit planning docs gain Proposed ADR references without accepting ADRs, resolving TBDs, or marking verification PASS.
-* No schematics, PCB, firmware, BOM, fixtures, or VE records.
+* Crosswalk, CIA, RHP record Architecture Acceptance.
+* Traceability cites ADRs as **Accepted** architecture references; evidence remains **NOT VERIFIED**; TBD-DK-001…022 remain **Open**.
+* **Conflict disposition:** EDL-001 remains authoritative; STM32G431 DevKit-only candidate in docs/007 is **not** authorized for DK-A…DK-D gate evidence. BOM not rewritten.
+* No schematics, PCB, firmware, BOM selection, fixtures, or VE records.
 
 ### Affected Requirements
 
@@ -37,7 +39,7 @@ WP-007 Accepted the DevKit requirements structure, verification governance, and 
 | REQ-DCC-V-DK-017, 018, 023, 035, 038, 043–048, 054, 055, 058, 060, 067, 072, 073, 079, 080, 085, 087, 099, 100 | DevKit_System_Requirements | Fault-injection / testability → Accepted ADR-023 (not REQ-114) |
 | REQ-DCC-V-DK-009…014, 017–018, 102–103, 114 | DevKit_System_Requirements | Fidelity / reuse → Accepted ADR-016/017/018 |
 | REQ-DCC-V-DK-021, 031–038 | DevKit_System_Requirements | Timing policy → Accepted ADR-022 |
-| DK-GOV-009, 012, 024, 025 | Verification_Governance | Equivalence / freeze rules clarified by Proposed ADRs (status unchanged) |
+| DK-GOV-009, 012, 024, 025 | Verification_Governance | Equivalence / freeze rules clarified by Accepted ADRs (status unchanged) |
 | EDL-001…003, 007, 010, 011, 014 | docs/EDL | **Unchanged**; cited as constraints |
 | ADR-DK-008, 009, 011, 012 | Decision requests | Remain open; sequencing noted only |
 
@@ -74,7 +76,7 @@ DevKit set, ADR index, roadmap, `.ai/current_phase.md`, traceability matrix note
 |--------|------------|
 | Backward compatibility | Compatible — no runtime artifact change |
 | Forward compatibility | Compatible — enables subsequent WPs after Architect acceptance |
-| Silent field reinterpretation risk | None — Proposed status explicit; TBD Open retained |
+| Silent field reinterpretation risk | None — Accepted status explicit; TBD Open retained |
 
 ### Migration Requirements
 
@@ -82,36 +84,36 @@ None for field units. After Architect acceptance, electrical/fixture/threshold W
 
 ### Rollback Method
 
-Revert WP-008 commit/PR; leave WP-007 baseline intact. Proposed ADRs have no runtime effect.
+Revert WP-008 commit/PR; leave WP-007 baseline intact. Accepted ADRs have no runtime effect.
 
 ### Safety Impact
 
 | Area | Impact |
 |------|--------|
-| Safe states | Policy Proposed (ADR-022/023) — not implemented |
-| Kill / isolation | Timing hierarchy Proposed — numerics Open |
+| Safe states | Policy Accepted (ADR-022/023) — not implemented |
+| Kill / isolation | Timing hierarchy Accepted — numerics Open |
 | Fail-operational behaviour | Reaffirmed (Service/tablet not hardware emergency) |
 
 ### Validation Required
 
-Documentation validation per WP-008 §26; Architecture Review of Proposed ADRs; **no** physical validation in this WP.
+Documentation validation per WP-008 §26; Architecture Review **Accepted** 2026-07-20; **no** physical validation in this WP.
 
 ### Open Questions
 
-* Architect accept/correct each of ADR-016…023?
 * Threshold WP sequencing vs electrical architecture WP?
-* Resolve docs/007 G431 candidate conflict by accepting ADR-016 recommendation (EDL-001 wins)?
+* ADR-DK-008/009/011/012 follow-on WP timing?
 
 ### Approvals (architecture / policy)
 
 | Field | Value |
 |-------|-------|
-| **ADR Required** | YES — this package *is* the ADR set (Proposed) |
-| **Architect Approval Required** | YES |
-| **ADR / EDL reference** | ADR-016…023 Proposed; EDL-001…014 Accepted constraints |
+| **ADR Required** | YES — this package *is* the ADR set (Accepted) |
+| **Architect Approval Required** | YES — **Granted** |
+| **ADR / EDL reference** | ADR-016…023 Accepted; EDL-001…014 Accepted constraints |
 | **Architect approver (name/agent)** | System Architect |
 | **Architect role** | System Architect |
 | **Architect approval date** | 2026-07-20 |
+| **Conflict disposition** | EDL-001 authoritative; docs/007 STM32G431 DevKit-only candidate not authorized for DK-A…DK-D gate evidence |
 
 ### Review acknowledgment (not architecture approval)
 
@@ -129,3 +131,4 @@ Documentation validation per WP-008 §26; Architecture Review of Proposed ADRs; 
 | 1.0 | 2026-07-20 | WP-008 initial CIA |
 | 1.1 | 2026-07-20 | WP-008-R1 Level 1 consistency: open-load conditional; ADR-023 REQs without 114; supply interruption DK-A/DK-D; core recommendations unchanged |
 | 1.2 | 2026-07-20 | Architecture Review — Accepted; ADR-016…023 Accepted; WP-008 Accepted; PR #12 approved for merge |
+| 1.3 | 2026-07-20 | Acceptance metadata alignment — Review status Accepted; accepted-option text; conflict disposition |

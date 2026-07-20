@@ -17,7 +17,7 @@ Audit of existing DevKit-related claims against WP-007 authority rules. Classifi
 | EDL-014 DevKit gate before vehicle | docs/EDL/README.md | COMPLIANT | Accepted EDL | — | Preserve; map to DK-A…D | WP-007 (done) | P0 |
 | Three-board DCC / Gen2 Power swap | EDL-007 | COMPLIANT | Accepted EDL | — | Preserve | — | P0 |
 | J_LP + kill/enable + BOARD_ID pins | EDL-011; docs/002 | PARTIAL | Accepted EDL | Encoding map missing | Define BOARD_ID map without new HW | Hardware identity WP | P0 |
-| Logic identical to Gen1 Rev.A | docs/008 §2.1 | CONFLICT / TBD | Candidate only | docs/007 allows STM32G431 DevKit-only | **Accepted ADR-016** (EDL-001 wins for gates; not Accepted) | Architecture Review WP-008 | P0 |
+| Logic identical to Gen1 Rev.A | docs/008 §2.1 | CONFLICT / TBD | Candidate only | docs/007 allows STM32G431 DevKit-only | **Accepted ADR-016** — EDL-001 authoritative; G431 not authorized for DK-A…DK-D gate evidence | DevKit electrical architecture WP | P0 |
 | Radio identical to Gen1 Rev.A | docs/008 §2.1 | TBD | Candidate only | Physical vs interface equivalence undefined | **Accepted ADR-017** | Architecture Review WP-008 | P0 |
 | Same firmware binary as Gen1 | docs/008 §2.4 | CONFLICT | Candidate | MCU alt + no FW projects | **Accepted ADR-018** (Option B model) | Architecture Review WP-008 | P0 |
 | Power Rev.DK reduced channels | docs/008; docs/002 §10 | PARTIAL | Consistent candidate counts | Connector wording conflict | Freeze capabilities **Accepted ADR-019** | DevKit electrical architecture WP | P0 |

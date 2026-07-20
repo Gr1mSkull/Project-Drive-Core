@@ -173,18 +173,28 @@ Threshold-analysis WP; electrical architecture; firmware planning.
 
 Superseding ADR; must not silently weaken EDL-011.
 
+
+### Accepted option (Architecture Review)
+
+```text
+Accepted: Option D using Option B timing classes
+```
+
 ### Architecture Review section
 
 | Field | Value |
 |-------|-------|
-| **Review status** | Complete |
+| **Review status** | Accepted |
 | **Architect decision** | Accepted |
+| **Review date** | 2026-07-20 |
 | **Approver role** | System Architect |
 | **Acceptance date** | 2026-07-20 |
-| **Acceptance conditions** | Timing policy Accepted; numeric kill/watchdog/control-loss/commanded-OFF/re-enable thresholds remain Open (TBD-DK-004, 005, 007, 014, 021). |
+| **Acceptance conditions** | Timing-policy architecture Accepted. TBD-DK-004, TBD-DK-005, TBD-DK-007, TBD-DK-014, and TBD-DK-021 remain Open. No millisecond value is approved by this ADR. |
+| **Accepted option** | Option D using Option B timing classes |
 | **Rejection / correction notes** | None — blocking architecture findings: NONE |
 | **WP-008** | Accepted |
-| **PR** | #12 approved for merge |
+| **PR** | #12 approved for merge (merged `bdfe2b1`) |
+
 
 
 ### Revision history
@@ -193,3 +203,4 @@ Superseding ADR; must not silently weaken EDL-011.
 |---------|------|--------|--------|
 | 1.0 | 2026-07-20 | Implementation Engineer (WP-008) | Proposed package |
 | 1.2 | 2026-07-20 | System Architect (acceptance) | Architecture Review — ACCEPTED (numerics remain Open) |
+| 1.3 | 2026-07-20 | System Architect (acceptance refinement) | Review status Accepted; Accepted option recorded; acceptance conditions finalized |

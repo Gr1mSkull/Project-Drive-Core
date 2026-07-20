@@ -3,7 +3,7 @@
 | Field | Value |
 |-------|-------|
 | **Review Package ID** | RHP-2026-002 |
-| **Change Scope** | WP-008 Gen1 DevKit P0 Proposed ADR package (ADR-016…023), crosswalk, CIA, planning/traceability references |
+| **Change Scope** | WP-008 Gen1 DevKit Accepted ADR package (ADR-016…023), crosswalk, CIA, planning/traceability references |
 | **Related Requirements** | REQ-DCC-V-DK-* fidelity/power/timing; ADR-023 fault/testability set (017, 018, 023, 035, 038, 043–048, 054, 055, 058, 060, 067, 072, 073, 079, 080, 085, 087, 099, 100 — not 114); DK-GOV-009/012/024/025 |
 | **Related Architecture** | EDL-001, 002, 003, 007, 010, 011, 014; ADR-015; Accepted ADR-016…023; DevKit WP-007 Accepted baseline |
 | **Related WP / CR** | WP-008 / WP-008-R1 (depends on WP-007 Accepted / PR #11) |
@@ -29,10 +29,10 @@
 
 ### Changed Assumptions
 
-* “Identical Logic/Radio” and “same binary” are no longer only undocumented candidates — they have **Proposed** ADR recommendations (not Accepted).
-* Candidate 30 A is explicitly non-approved; architecture Option B+D Proposed for current envelope.
-* Kill/watchdog/control-loss/commanded-OFF timings are separate classes; numerics remain Open.
-* Fault-injection mandatory set Proposed; fixture schematic not designed.
+* “Identical Logic/Radio” and “same binary” have **Accepted** ADR recommendations (ADR-016…018).
+* Candidate 30 A is explicitly non-approved; architecture Option B+D **Accepted** for current envelope (ADR-021; numerics Open).
+* Kill/watchdog/control-loss/commanded-OFF timings are separate classes; numerics remain Open (ADR-022 Accepted).
+* Fault-injection mandatory set **Accepted** (ADR-023); fixture schematic not designed.
 * **WP-008-R1:** Open-load diagnostics are CONDITIONAL_ON_DEVKIT / injection CONDITIONAL_MANDATORY (claim-based; else DEFERRED_EXCLUDED). Supply interruption is MANDATORY_DK_A + MANDATORY_DK_D only (cases A-003, D-017). `REQ-DCC-V-DK-114` is fidelity-only (ADR-016/017), not an ADR-023 fault-injection requirement.
 
 ### Change Impact Analysis
@@ -45,7 +45,7 @@
 
 ### Validation Summary
 
-WP-008 §26 documentation validation executed in Completion Report. No physical tests. No VE records. ADRs remain Proposed. TBDs remain Open. Traceability statuses remain NOT VERIFIED.
+WP-008 §26 documentation validation executed in Completion Report. No physical tests. No VE records. ADRs **Accepted** (2026-07-20). TBDs remain Open. Traceability statuses remain NOT VERIFIED. PR #12 approved for merge.
 
 ### Evidence References
 
@@ -57,7 +57,7 @@ WP-008 §26 documentation validation executed in Completion Report. No physical 
 
 * Recommendations depend on Architect judgment where evidence is incomplete (currents, milliseconds).
 * Soft coupling between ADR-021 envelope and ADR-023 fixture energy budgets.
-* ARCHITECTURAL CONFLICT between EDL-001 and docs/007 G431 candidate called out in ADR-016 — not silently fixed in docs/007 BOM text (BOM not edited to avoid scope creep; conflict reported).
+* ARCHITECTURAL CONFLICT between EDL-001 and docs/007 G431 candidate — **Resolved at acceptance:** EDL-001 authoritative; G431 not authorized for DK-A…DK-D gate evidence (ADR-016).
 
 ### Known Risks
 
@@ -93,7 +93,7 @@ Revert PR/branch; WP-007 remains on `main` unchanged in substance.
 | **Independent Reviewer role** | Independent Reviewer |
 | **Independent review date** | TBD |
 | **Final Review Outcome** | Accepted |
-| **Architecture / policy approval** | System Architect — ADR-016…023 Accepted 2026-07-20; WP-008 Accepted; PR #12 approved for merge |
+| **Architecture / policy approval** | System Architect — ADR-016…023 Accepted 2026-07-20; WP-008 Accepted; PR #12 approved for merge (merged `bdfe2b1`) |
 
 ## Revision history
 
@@ -102,3 +102,4 @@ Revert PR/branch; WP-007 remains on `main` unchanged in substance.
 | 1.0 | 2026-07-20 | WP-008 initial RHP |
 | 1.1 | 2026-07-20 | WP-008-R1 — open-load conditional; ADR-023 REQ list without 114; supply interruption DK-A/DK-D |
 | 1.2 | 2026-07-20 | Architecture Review Accepted; ADRs Accepted; PR #12 approved for merge |
+| 1.3 | 2026-07-20 | Acceptance metadata alignment — assumptions/validation reflect Accepted state; conflict disposition recorded |
