@@ -1,9 +1,9 @@
 # DevKit Functional Electrical Architecture — WP-010
 
 **Document ID:** DOC-DK-FEA-001  
-**Version:** 1.0  
+**Version:** 1.1  
 **Status:** Proposed — requires Architecture Review  
-**Work Package:** WP-010  
+**Work Package:** WP-010 / WP-010-R1  
 **Date:** 2026-07-20  
 **Author role:** Implementation Engineer
 
@@ -29,7 +29,7 @@ This document converts Accepted WP-007 requirements, Accepted ADR-016…023, and
 |---|------|--------|
 | 1 | Logic owns Real-Time and safety-relevant output execution | ADR-016; constitution |
 | 2 | Radio cannot directly energize power outputs | ADR-017; REQ-DCC-V-DK-037 |
-| 3 | Hardware KILL independent of Radio and Tablet | ADR-022; REQ-DCC-V-DK-033 |
+| 3 | Hardware KILL independent of Radio, Tablet, and Logic CPU execution | ADR-022; REQ-DCC-V-DK-033 |
 | 4 | `nENABLE_GLOBAL` defaults inactive during Logic reset/unpowered | ADR-022; REQ-DCC-V-DK-034 |
 | 5 | Control-loss → Power-side fail-safe OFF | EDL-011; ADR-022; REQ-DCC-V-DK-035 |
 | 6 | External high-energy path separated from base envelope | ADR-020/021; WP-009 P6 |
@@ -49,9 +49,9 @@ Per ADR-016…019 Option D staged model; **DK-A…DK-D gate evidence requires Op
 | Attribute | Functional definition |
 |-----------|----------------------|
 | **Processor class** | STM32G474-class per EDL-001 |
-| **Responsibilities** | VSM; rule execution; CAN; J_LP master; DCPI RT endpoint; hardware kill observation/propagation; `nENABLE_GLOBAL` control; watchdog; BOARD_ID read; channel command scheduling |
-| **Interfaces** | J_LP (IF-DK-JLP); DCPI (IF-DK-DCPI); CAN (IF-DK-CAN); debug (IF-DK-DEBUG-LOGIC); kill input (IF-DK-KILL) |
-| **Safe state** | Outputs disabled via withdrawn `nENABLE_GLOBAL`; kill path asserted when applicable |
+| **Responsibilities** | VSM; rule execution; CAN; J_LP command master; DCPI RT endpoint; KILL **observation** (parallel branch only); `nENABLE_GLOBAL` control; watchdog; BOARD_ID read; channel command scheduling |
+| **Interfaces** | J_LP command/diagnostic (IF-DK-JLP); DCPI (IF-DK-DCPI); CAN (IF-DK-CAN); debug (IF-DK-DEBUG-LOGIC); kill observation (IF-DK-KILL observation branch) |
+| **Safe state** | Outputs disabled via withdrawn `nENABLE_GLOBAL`; KILL direct branch effective without Logic execution |
 | **Not authorized** | Exact package; dev-board MPN; pin-level schematic |
 
 ### 3.2 Radio board (Service domain)
@@ -68,7 +68,7 @@ Per ADR-016…019 Option D staged model; **DK-A…DK-D gate evidence requires Op
 
 | Attribute | Functional definition |
 |-----------|----------------------|
-| **Responsibilities** | Input distribution; channel switching (HS, PWM, BI); local protection; current sense aggregation; fault reporting; J_LP slave; BOARD_ID; control-loss fail-safe |
+| **Responsibilities** | Input distribution; channel switching (HS, PWM, BI); local protection; sense aggregation function; fault reporting; J_LP slave; BOARD_ID; control-loss fail-safe |
 | **Interfaces** | J_LP; base load (IF-DK-BASE-LOAD); bidirectional load (IF-DK-BIDIRECTIONAL-LOAD); measurement (IF-DK-MEASUREMENT) |
 | **Replaceability** | Power board replaceable without redesigning Logic/Radio external contracts (REQ-DCC-V-DK-113) |
 | **Not authorized** | Final channel population; switch MPN; copper sizing |
@@ -77,7 +77,7 @@ Per ADR-016…019 Option D staged model; **DK-A…DK-D gate evidence requires Op
 
 | Attribute | Functional definition |
 |-----------|----------------------|
-| **Responsibilities** | External high-energy source/load-bank interface; fixture protection; E-stop; energy supervision; measurement boundary |
+| **Responsibilities** | EXT-SOURCE / EXT-LOAD-BANK / EXT-POWER-MODULE interfaces; fixture protection; E-stop; energy supervision; measurement boundary |
 | **Separation** | Electrical, control, and evidence scope separate from base DevKit envelope (ADR-020) |
 | **Not authorized** | Fixture schematic or build |
 
@@ -136,29 +136,49 @@ Architecture valid only if future calculated `I_certified_cont` satisfies Scenar
 
 ### 5.2 External high-energy path
 
+External energy roles (distinct):
+
+| Role | Description |
+|------|-------------|
+| **EXT-SOURCE** | External source of electrical energy (e.g. bench supply for HC discovery) |
+| **EXT-LOAD-BANK** | Controlled external load that absorbs energy |
+| **EXT-POWER-MODULE** | External representative switching/protection module, if later required |
+
 ```text
-External high-energy source / load-bank
+EXT-SOURCE (when present)
   → separate fixture protection (I_loadbank_limit)
-  → external representative module or controlled load interface
+  → EXT-POWER-MODULE (if used)
+  → EXT-LOAD-BANK or controlled load interface
   → measurement boundary (DOM-MEASURE)
-  → abort / fixture E-stop
+  → fixture E-stop / abort
 ```
 
-**Rules:**
+**Accepted boundary constraints:**
 
-- External path shall **not** silently back-feed base DevKit input distribution (ADR-020/021).
-- `I_loadbank_limit` does **not** increase `I_certified_cont`.
-- Energization requires explicit fixture enable authority and procedural supervision (ADR-023).
-- Ground/isolation relationship: **Open decision** — see §10 and [`DevKit_Electrical_Architecture_Open_Issues.md`](DevKit_Electrical_Architecture_Open_Issues.md) OI-GND-001.
+- base and external envelopes remain distinct;
+- external ratings do **not** expand `I_certified_cont`;
+- back-feed into base distribution is **prohibited**;
+- external energization requires explicit fixture authority;
+- external E-stop removes external energy;
+- measurement and evidence scopes are distinct.
+
+**Ground/reference:** electrically separated in function and protected against back-feed; ground/reference relationship remains **Open** under OI-GND-001. Permitted future options include galvanically isolated, controlled common reference, single-point reference connection, or fixture-defined differential interface. WP-010 does **not** select one.
+
+Do **not** describe a load bank as an energy source.
 
 ## 6. View B — Control flow
 
 ```text
 Logic (RT)
-  → J_LP SPI command + PWM + nENABLE_GLOBAL + nKILL_HW observation
+  → J_LP command transport (SPI, PWM)
+  → J_LP hardwired safety signals (nENABLE_GLOBAL)
   → Power control domain (DOM-PWR-CTRL)
   → channel switching function (CH-HS-* / CH-BI-REP)
   → output function
+
+Physical KILL (parallel, not Logic-generated):
+  → direct hardware-effective branch → Power output-disable authority
+  → observation branch → Logic input (logging, epoch, recovery FSM)
 ```
 
 | Control element | Function | Safe default |
@@ -166,10 +186,10 @@ Logic (RT)
 | SPI command transport | Channel ON/OFF, PWM duty, configuration | Invalid/stale → rejected or ignored |
 | Command-valid / epoch | Pre-kill command invalidation | Post-kill: stale commands blocked (TBD-DK-021) |
 | PWM paths | Timer-driven switching | OFF when enable withdrawn |
-| `nENABLE_GLOBAL` | Global AND in enable chain | **Inactive (LOW)** = outputs disabled |
-| `nKILL_HW` | Hardware emergency AND | Asserted = outputs disabled regardless of SW |
-| Fault feedback | `FAULT_N`, sense data via J_LP | Observable by Logic; triggers protection |
-| BOARD_ID | Power revision identity | Invalid ID → safe degraded behaviour |
+| `nENABLE_GLOBAL` | Logic-controlled global enable (distinct from KILL) | **Inactive (LOW)** = outputs inhibited |
+| `nKILL_HW` | Hardwired safety signal — **not** Logic-generated command | Direct branch: outputs inhibited regardless of SW/Logic CPU |
+| Fault feedback | Aggregate fault + diagnostic observation path | Observable by Logic; triggers protection |
+| BOARD_ID | Power revision identity | Unsupported/invalid ID → **outputs inhibited** |
 
 **Control-loss:** Last valid J_LP frame → Power-side timeout → fail-safe OFF. Numeric `T_CTRL_LOSS_MAX` = TBD-DK-007 — **BLOCKED_BY_EDL_CLARIFICATION**. EDL-011 file unchanged; no interpretation selected.
 
@@ -200,10 +220,10 @@ Each path is **distinct** — not collapsed into one shutdown block.
 | **SS-WD** | Logic watchdog expires | RT → global disable | All outputs OFF | `T_WD_MAX` (TBD-DK-005) |
 | **SS-CTRL-LOSS** | J_LP communication lost | Power fail-safe | All outputs OFF | `T_CTRL_LOSS_MAX` (TBD-DK-007) |
 | **SS-LOCAL-OC** | Channel overcurrent | Local protection | Affected channel OFF | Component-dependent |
-| **SS-LOCAL-SC** | Short circuit | Local protection + fuse layer | Channel/system OFF | `T_SC_*` Open |
-| **SS-INPUT-UV** | Input undervoltage | Input monitor | Controlled shutdown | TBD-DK-001/012 |
-| **SS-INPUT-INT** | Input protection open / supply removed | Energy removal | All outputs OFF | Immediate |
-| **SS-FIX-ESTOP** | Fixture E-stop | Fixture energy removal | External path OFF | Immediate |
+| **SS-LOCAL-SC** | Short circuit | Local protection + fuse layer | Affected channel de-energized or upstream energy removed; no continued uncontrolled energization | `T_SC_*` Open |
+| **SS-INPUT-UV** | Input undervoltage | Input monitor | Outputs inhibited; prior ON commands not auto-restored | TBD-DK-001/012 |
+| **SS-INPUT-INT** | Input protection open / supply removed | Energy removal | All outputs inhibited; stale commands on restoration | Energy-removal / load-decay dependent; numeric Open |
+| **SS-FIX-ESTOP** | Fixture E-stop | Fixture energy removal | External path energy removed | Energy-removal dependent; numeric Open |
 | **SS-CMD-OFF** | Valid OFF command | Firmware-requested | Channel OFF | `T_CMD_OFF_MAX` (TBD-DK-014) |
 
 **Distinction:**
@@ -217,6 +237,17 @@ observability-only fault   → logged; may not de-energize if fail-operational a
 
 Post-kill re-enable FSM per WP-009 / TBD-DK-021 — no auto-restore; operator ack required.
 
+### 8.1 Safe-state recovery policies
+
+See [`DevKit_Safe_State_Path_Matrix.md`](DevKit_Safe_State_Path_Matrix.md) §2 for full policy text.
+
+| Event | Unconditional minimum | Auto-restore of prior ON commands |
+|-------|----------------------|----------------------------------|
+| Undervoltage | Outputs inhibited; safe state entered | **No** — explicit enable/new commands required |
+| Power restoration | Normal safe startup; all outputs default OFF | **No** — pre-interruption commands stale |
+| Invalid BOARD_ID | Outputs inhibited | N/A |
+| Invalid configuration | Outputs inhibited; config not executed | N/A |
+
 ## 9. View E — Measurement flow
 
 Measurement supports WP-009 [`DevKit_Threshold_Measurement_Plan.md`](DevKit_Threshold_Measurement_Plan.md). Full register: [`DevKit_Measurement_Point_Register.md`](DevKit_Measurement_Point_Register.md).
@@ -224,7 +255,7 @@ Measurement supports WP-009 [`DevKit_Threshold_Measurement_Plan.md`](DevKit_Thre
 | Flow | Points | Purpose |
 |------|--------|---------|
 | Input energy | MP-IN-V, MP-IN-I | Envelope certification; UV behaviour |
-| Kill chain | MP-KILL-RAW, MP-KILL-COND, MP-GLOBAL-ENABLE | TBD-DK-004 timing |
+| Kill chain | MP-KILL-RAW, MP-KILL-COND, MP-KILL-OBS, MP-GLOBAL-ENABLE, MP-CH-HS-VOUT | TBD-DK-004 timing |
 | J_LP | MP-JLP-CMD, MP-JLP-FAULT | Control-loss; fault visibility |
 | Channel | MP-CH-HS-VOUT, MP-CH-HS-IOUT, MP-CH-BI-* | TBD-DK-009; OC/SC |
 | Rails | MP-LOGIC-RAIL, MP-RADIO-RAIL, MP-POWER-CTRL-RAIL | TBD-DK-017 |
@@ -266,23 +297,61 @@ No fuse type, TVS, RP device, relay, conductor, connector, or rating selected.
 
 ## 12. J_LP functional contract
 
-Per EDL-011 and `docs/002` §9 (functional — no pin numbers in this architecture):
+Per EDL-011 and `docs/002` §9 (functional — no pin numbers in this architecture).
 
-| Signal class | Direction | Function |
-|--------------|-----------|----------|
-| SPI (SCK/MOSI/MISO/CS) | Logic → Power | Command transport; configuration |
-| `nKILL_HW` | Logic ↔ Power | Hardware kill net (active safe) |
-| `nENABLE_GLOBAL` | Logic → Power | Global output enable |
-| `FAULT_N` | Power → Logic | Aggregate fault indication |
-| PWM0–3 | Logic → Power | PWM control to channels |
-| ISENSE + MUX | Power → Logic | Multiplexed current sense |
-| VBATT_SENSE, TEMP | Power → Logic | Input and thermal observation |
-| BOARD_ID | Power → Logic | Revision identity |
-| `nRESET_PWR` | Logic → Power | Power controller reset |
+### 12.1 Signal classes (separated)
 
-**Disconnect behaviour:** J_LP removal → control-loss fail-safe → outputs OFF (REQ-DCC-V-DK-035). Numeric timeout **BLOCKED_BY_EDL_CLARIFICATION** (TBD-DK-007).
+| Class | Examples | Nature |
+|-------|----------|--------|
+| **J_LP command transport** | SPI (SCK/MOSI/MISO/CS); PWM0–3 | Logic-generated commands |
+| **J_LP hardwired safety signals** | `nKILL_HW` (if carried on J_LP); `nENABLE_GLOBAL`; `nRESET_PWR` | Hardwired safety — not Logic-generated commands |
+| **J_LP diagnostic/sense signals** | Aggregate fault; current-observation path; VBATT_SENSE; TEMP; BOARD_ID | Diagnostic observation |
+
+`nKILL_HW` carried on J_LP is classified as **hardwired safety signal carried by the interface** — not a Logic-generated J_LP control command.
+
+| Signal | Class | Direction | Function |
+|--------|-------|-----------|----------|
+| SPI | Command transport | Logic → Power | Command transport; configuration |
+| PWM0–3 | Command transport | Logic → Power | PWM control to channels |
+| `nKILL_HW` | Hardwired safety | External → Power (direct branch); tap → Logic (observation) | Hardware kill net — direct branch independent of Logic CPU |
+| `nENABLE_GLOBAL` | Hardwired safety | Logic → Power | Logic-controlled global enable — distinct from KILL |
+| `FAULT_N` | Diagnostic/sense | Power → Logic | Aggregate fault indication |
+| Current-observation path | Diagnostic/sense | Power → Logic | Sense aggregation function — topology Component/Schematic scope |
+| VBATT_SENSE, TEMP | Diagnostic/sense | Power → Logic | Input and thermal observation |
+| BOARD_ID | Diagnostic/sense | Power → Logic | Revision identity |
+| `nRESET_PWR` | Hardwired safety | Logic → Power | Power controller reset |
+
+**Disconnect behaviour:** J_LP removal → control-loss fail-safe → outputs inhibited (REQ-DCC-V-DK-035). Numeric timeout **BLOCKED_BY_EDL_CLARIFICATION** (TBD-DK-007).
 
 **Cable/board boundary:** Production-intent connector family — **Open** (ADR-DK-012).
+
+## 12.2 Hardware KILL independence topology
+
+```text
+Physical KILL input
+    ├── direct hardware-effective branch
+    │       → Power output-disable authority
+    │       → independent of Logic firmware,
+    │         Radio, Tablet and DCPI
+    │
+    └── observation branch
+            → Logic input
+            → event logging
+            → command-epoch invalidation
+            → post-kill recovery FSM
+```
+
+Logic observation may fail without preventing the hardware-effective disable action.
+
+The direct branch may traverse a future board connector or J_LP hardwired safety net, but shall **not** depend on:
+
+- Logic CPU execution;
+- Logic GPIO re-transmission of kill state;
+- SPI/DCPI traffic;
+- firmware scheduling;
+- Radio or Tablet state.
+
+`nENABLE_GLOBAL` remains a **separate** Logic-controlled global enable with inactive safe default. KILL and `nENABLE_GLOBAL` shall not be merged into one signal or one authority.
 
 ## 13. DCPI and Service boundary
 
@@ -332,16 +401,16 @@ power source
 
 Full-bridge component topology **not decided** — functional requirement only.
 
-## 16. External load-bank boundary
+## 16. External energy boundary
 
-| Boundary | Base DevKit | External bank |
-|----------|-------------|---------------|
+| Boundary | Base DevKit | External (EXT-SOURCE / EXT-LOAD-BANK / EXT-POWER-MODULE) |
+|----------|-------------|--------------------------------------------------------------|
 | Electrical | `I_certified_cont`; on-board channels | `I_loadbank_limit`; fixture-defined |
-| Control | Logic + J_LP | Fixture controller + operator |
-| Ground | BASE_LOAD_RETURN | EXTERNAL_LOAD_RETURN — relation **Open** |
+| Control | Logic RT + hardware enables | Fixture controller + operator |
+| Ground/reference | BASE_LOAD_RETURN | EXTERNAL_LOAD_RETURN — **Open** (OI-GND-001); functionally separated; back-feed prohibited |
 | Enable authority | Logic RT + hardware enables | Fixture explicit enable |
-| Abort authority | KILL + input removal | Fixture E-stop + KILL |
-| Back-feed prevention | Required — architecture constraint | Must not energize base input |
+| Abort authority | KILL direct branch + input removal | Fixture E-stop + KILL |
+| Back-feed prevention | Mandatory — base distribution protected | Must not energize base input |
 | Evidence scope | DK-A…DK-D bounded | HC continuous → Phase E (ADR-020) |
 | Energization condition | Standard lab procedure | Documented fixture procedure + supervision |
 
@@ -349,7 +418,9 @@ Full-bridge component topology **not decided** — functional requirement only.
 
 See [`DevKit_Representative_Channel_Allocation.md`](DevKit_Representative_Channel_Allocation.md).
 
-Functional aliases: CH-HS-BASE, CH-HS-PWM, CH-HS-SENSE, CH-HS-PROTECTED, CH-BI-REP, CH-HC-EXTERNAL.
+**Capability aliases** (not physical channel counts): CH-HS-BASE, CH-HS-PWM, CH-HS-SENSE, CH-HS-PROTECTED, CH-BI-REP, CH-HC-EXTERNAL.
+
+One physical channel may satisfy multiple HS aliases when §1 conditions in the channel allocation document are met. Physical channel count is **not frozen** in WP-010.
 
 ## 18. Fault-containment analysis (functional)
 
@@ -357,17 +428,17 @@ Label: **functional fault-containment analysis** — not full FMEA.
 
 | Fault origin | Propagation | Local containment | Global mechanism | Single-point risk |
 |--------------|-------------|-------------------|------------------|-------------------|
-| Logic unpowered | No RT commands | `nENABLE_GLOBAL` safe default | Outputs OFF | KILL path must remain hardware-effective |
-| Logic reset | Command epoch reset | Global enable inactive | Outputs OFF until re-enable | Stale command replay if epoch missing |
-| Logic pin stuck | Erroneous command | Watchdog; command validation | KILL override | KILL must not depend on Logic pin state alone |
+| Logic unpowered | No RT commands | `nENABLE_GLOBAL` safe default; KILL direct branch | Outputs inhibited | KILL direct branch must remain hardware-effective without Logic CPU |
+| Logic reset | Command epoch reset | Global enable inactive | Outputs inhibited until re-enable | Stale command replay if epoch missing |
+| Logic pin stuck | Erroneous command | Watchdog; command validation | KILL direct branch override | KILL direct branch must not depend on Logic pin state |
 | Power unpowered | No switching | Loads de-energized | Input removal | N/A |
 | Power comm frozen | Stale control | Control-loss fail-safe | `T_CTRL_LOSS_MAX` | Timeout value Open |
 | Radio unpowered | No Service | None on RT path | Fail-operational | None if RT independent |
-| Input protection open | No energy | Immediate OFF | All outputs OFF | Operator must replace protection |
-| HS stuck ON | Overcurrent | Local protection; KILL | KILL + fuse layer | Requires independent kill test |
-| Sense invalid | Wrong diagnostics | Plausibility checks | Channel derate/OFF | TBD — FW WP |
-| BI conflicting control | Shoot-through risk | Direction interlock | Command reject + OFF | Power hardware must default OFF |
-| External bank miswired | Back-feed | Fixture design | Input blocking | **Open** — fixture WP |
+| Input protection open | No energy | Outputs inhibited | All outputs inhibited | Operator must replace protection |
+| HS stuck ON | Overcurrent | Local protection; KILL direct branch | KILL + fuse layer | Requires independent kill test |
+| Sense invalid | Wrong diagnostics | Plausibility checks | Affected channel inhibited | TBD — FW WP |
+| BI conflicting control | Shoot-through risk | Direction interlock | Both directions inhibited | Power hardware must default OFF |
+| External bank miswired | Back-feed risk | Fixture design + base protection | Base outputs inhibited | OI-GND-001; fixture WP |
 | Measurement GF | Person/equipment hazard | Lab procedure | E-stop | Procedure-dependent |
 
 ## 19. Downstream design-input table
@@ -427,3 +498,4 @@ See [`DevKit_Electrical_Architecture_Open_Issues.md`](DevKit_Electrical_Architec
 | Version | Date | Change |
 |---------|------|--------|
 | 1.0 | 2026-07-20 | WP-010 initial functional electrical architecture — Proposed |
+| 1.1 | 2026-07-20 | WP-010-R1 — capability aliases; recovery policies; external energy roles; KILL direct branch |

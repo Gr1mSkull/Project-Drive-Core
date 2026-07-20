@@ -9,7 +9,7 @@
 | **Author role** | Implementation Engineer |
 | **Date** | 2026-07-20 |
 | **Status** | Draft — Under Architecture Review |
-| **Related WP / CR** | WP-010; depends on WP-009 Accepted (`6f3845e`+); ADR-016…023 Accepted |
+| **Related WP / CR** | WP-010 / WP-010-R1; depends on WP-009 Accepted (`6f3845e`+); ADR-016…023 Accepted |
 
 ### Reason for Change
 
@@ -119,8 +119,20 @@ See `DevKit_Electrical_Architecture_Open_Issues.md` and Architect Review Package
 | **Review date** | TBD |
 | **Evidence / CIA review note** | TBD |
 
+### WP-010-R1 corrections (Level 1 — 2026-07-20)
+
+Lightweight impact note — consistency corrections only:
+
+1. **Representative channel aliases** — CH-HS-* are capability/verification roles, not physical channel counts; conditional physical sharing permitted; PWM mandatory (BLOCKED if absent).
+2. **Safe-state recovery** — no auto-restore after UV/interruption; outputs inhibited for invalid BOARD_ID/config; deterministic matrix language.
+3. **External energy boundary** — EXT-SOURCE / EXT-LOAD-BANK / EXT-POWER-MODULE distinction; back-feed prohibited; ground/reference Open (OI-GND-001).
+4. **Hardware KILL independence** — direct hardware-effective branch independent of Logic CPU; observation branch parallel; J_LP signal classes separated.
+
+No ADR changes. No numeric approval. No hw/fw/schematic changes.
+
 ## Revision history
 
 | Version | Date | Change |
 |---------|------|--------|
 | 1.0 | 2026-07-20 | WP-010 initial CIA — Draft |
+| 1.1 | 2026-07-20 | WP-010-R1 — Level 1 consistency corrections |

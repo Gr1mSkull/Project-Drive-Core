@@ -1,9 +1,9 @@
 # DevKit Functional Block Diagram — WP-010
 
 **Document ID:** DOC-DK-FBD-001  
-**Version:** 1.0  
+**Version:** 1.1  
 **Status:** Proposed — requires Architecture Review  
-**Work Package:** WP-010  
+**Work Package:** WP-010 / WP-010-R1  
 **Date:** 2026-07-20
 
 Companion to [`DevKit_Functional_Electrical_Architecture.md`](DevKit_Functional_Electrical_Architecture.md). Diagrams are **not** substitutes for matrices.
@@ -15,7 +15,7 @@ Companion to [`DevKit_Functional_Electrical_Architecture.md`](DevKit_Functional_
 | `==>` solid | Power / energy flow |
 | `-->` dashed | Control flow |
 | `-.->` dotted | Diagnostic / measurement flow |
-| `==x` | Hardware safety path (kill / global disable) |
+| `==x` | Hardware safety path (kill direct branch / global disable) |
 | `[Open]` | Unresolved architecture decision |
 
 ## 1. System overview
@@ -25,8 +25,11 @@ flowchart TB
     subgraph EXT["External boundary"]
         PSU["Lab PSU<br/>(I_PSU_limit)"]
         KILL_SW["Kill switch<br/>(IF-DK-KILL)"]
-        FIX["External load-bank / fixture<br/>(I_loadbank_limit)"]
+        EXT_SRC["EXT-SOURCE<br/>(fixture energy supply)"]
+        EXT_LB["EXT-LOAD-BANK<br/>(controlled load)"]
+        EXT_MOD["EXT-POWER-MODULE<br/>[optional]"]
         ESTOP["Fixture E-stop"]
+        GND_OPEN["[Open] ground/reference<br/>OI-GND-001"]
     end
 
     subgraph BASE["BASE DEVKIT ENVELOPE (I_certified_cont)"]
@@ -39,6 +42,7 @@ flowchart TB
             STM["STM32G474-class"]
             WD["Watchdog"]
             CAN["CAN controller"]
+            KILL_OBS["KILL observation branch"]
         end
 
         subgraph RADIO["Radio board — Service domain"]
@@ -46,10 +50,11 @@ flowchart TB
         end
 
         subgraph POWER["Power board — representative"]
-            GLOB["Global enable AND + kill AND"]
+            KILL_DIR["KILL direct branch"]
+            GLOB["nENABLE_GLOBAL AND"]
             HS["HS channels CH-HS-*"]
             BI["Bidirectional CH-BI-REP"]
-            SENSE["Sense / fault aggregation"]
+            SENSE["Sense aggregation"]
         end
 
         BENCH["Bench load<br/>(IF-DK-BASE-LOAD)"]
@@ -61,8 +66,11 @@ flowchart TB
     DIST ==> RADIO
     DIST ==> POWER
 
-    KILL_SW ==x GLOB
+    KILL_SW ==x KILL_DIR
+    KILL_SW -.-> KILL_OBS
+    KILL_OBS -.-> STM
     STM -->|nENABLE_GLOBAL| GLOB
+    KILL_DIR --> GLOB
     STM -->|J_LP SPI/PWM| HS
     STM -->|J_LP SPI/PWM| BI
     STM <-.->|DCPI| ESP
@@ -77,9 +85,12 @@ flowchart TB
     BI -.-> SENSE
     SENSE -.-> STM
 
-    FIX ==>|"[Open] isolation"| BI
-    ESTOP ==x FIX
-    FIX -.-x BASE
+    EXT_SRC ==>|"[Open] back-feed blocked"| EXT_MOD
+    EXT_MOD ==> EXT_LB
+    EXT_LB -.-> BI
+    ESTOP ==x EXT_SRC
+    EXT_LB --- GND_OPEN
+    BASE --- GND_OPEN
 ```
 
 ## 2. Energy flow (View A)
@@ -96,29 +107,39 @@ flowchart LR
     H --> I["HS switch"]
     I --> J["Bench load"]
 
-    K["External source"] --> L["Fixture protection"]
-    L --> M["External interface"]
-    M --> N["Measurement"]
-    N --> O["E-stop abort"]
+    S["EXT-SOURCE"] --> T["Fixture protection"]
+    T --> U["EXT-POWER-MODULE"]
+    U --> V["EXT-LOAD-BANK"]
+    V --> W["Measurement"]
+    W --> X["E-stop abort"]
 ```
 
-**Constraint:** Path K→M shall not back-feed D without explicit `[Open]` isolation design.
+**Constraint:** EXT-SOURCE / EXT-LOAD-BANK path shall not back-feed D. Ground/reference at boundary: **[Open]** (OI-GND-001).
 
 ## 3. Control flow (View B)
 
 ```mermaid
 flowchart TB
-    L["Logic RT"] -->|SPI commands| P["Power controller"]
+    subgraph KILL_TOPO["Physical KILL topology"]
+        KIN["Physical KILL input"]
+        KDIR["Direct hardware-effective branch"]
+        KOBS["Observation branch → Logic"]
+        KIN ==x KDIR
+        KIN -.-> KOBS
+    end
+
+    L["Logic RT"] -->|J_LP command transport| P["Power controller"]
     L -->|PWM| P
     L -->|nENABLE_GLOBAL| G["Enable AND gate"]
-    K["nKILL_HW"] --> G
+    KDIR --> G
+    KOBS -.-> L
     G --> P
     P --> CH["Channel drivers"]
     CH --> OUT["Load terminals"]
-    P -->|FAULT_N| L
-    P -->|ISENSE mux| L
-    P -->|BOARD_ID| L
+    P -->|diagnostic observation| L
 ```
+
+KILL direct branch and `nENABLE_GLOBAL` are **distinct** authorities merged only at the enable AND gate.
 
 ## 4. Service flow (View C)
 
@@ -138,16 +159,16 @@ Service path (dotted-x) has **no direct** output enable authority.
 ```mermaid
 flowchart TB
     subgraph HW["Hardware-effective OFF"]
-        P1["KILL asserted"]
+        P1["KILL direct branch"]
         P2["nENABLE_GLOBAL inactive"]
         P3["Control-loss timeout"]
-        P4["Input protection open"]
+        P4["Input protection open / supply removed"]
         P5["Fixture E-stop"]
     end
 
     subgraph FW["Firmware-requested OFF"]
         P6["Commanded OFF"]
-        P7["Config invalid"]
+        P7["Config invalid → outputs inhibited"]
     end
 
     subgraph LOC["Local protection"]
@@ -157,7 +178,7 @@ flowchart TB
     end
 
     P1 & P2 & P3 & P4 & P5 --> SAFE["Outputs safe<br/>(V safe AND I safe)"]
-    P6 --> CHOFF["Channel OFF"]
+    P6 --> CHOFF["Channel inhibited"]
     P8 & P9 & P10 --> CHOFF
 ```
 
@@ -166,7 +187,7 @@ flowchart TB
 ```mermaid
 flowchart LR
     MP1["MP-IN-V/I"] --> LOG["Data capture"]
-    MP2["MP-KILL-*"] --> LOG
+    MP2["MP-KILL-RAW / COND / OBS"] --> LOG
     MP3["MP-GLOBAL-ENABLE"] --> LOG
     MP4["MP-CH-HS-IOUT"] --> LOG
     MP5["MP-JLP-FAULT"] --> LOG
@@ -187,9 +208,9 @@ flowchart LR
 | DOM-HS-REP | HS |
 | DOM-BI-REP | BI |
 | DOM-SENSE-DIAG | SENSE |
-| DOM-HW-KILL | KILL_SW → GLOB |
+| DOM-HW-KILL | KILL_SW → KILL_DIR + KILL_OBS |
 | DOM-GLOBAL-EN | GLOB |
-| DOM-EXT-BANK | FIX |
+| DOM-EXT-BANK | EXT_SRC / EXT_LB / EXT_MOD |
 | DOM-BENCH-LOAD | BENCH |
 | DOM-DCPI | STM ↔ ESP |
 | DOM-CAN | CAN |
@@ -201,3 +222,4 @@ flowchart LR
 | Version | Date | Change |
 |---------|------|--------|
 | 1.0 | 2026-07-20 | WP-010 initial block diagrams — Proposed |
+| 1.1 | 2026-07-20 | WP-010-R1 — KILL direct/observation branches; EXT-SOURCE/LOAD-BANK; ground Open marker |

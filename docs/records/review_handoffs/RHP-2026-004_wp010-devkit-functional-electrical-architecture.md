@@ -6,7 +6,7 @@
 | **Change Scope** | WP-010 Gen1 DevKit functional electrical architecture package |
 | **Related Requirements** | REQ-DCC-V-DK-005, 009–014, 019–027, 031–055, 093–097, 100, 102, 113, 116; DK-GOV-009, 024, 025 |
 | **Related Architecture** | ADR-016…023 Accepted; WP-009 Accepted; EDL-011 (unchanged) |
-| **Related WP / CR** | WP-010 (depends on WP-009 / `6f3845e`+) |
+| **Related WP / CR** | WP-010 / WP-010-R1 (depends on WP-009 / `6f3845e`+) |
 | **Impact Level** | 2 |
 | **Date** | 2026-07-20 |
 | **Implementer (name/agent)** | Implementation Engineer (cloud agent) |
@@ -35,14 +35,13 @@
 
 ### Changed Assumptions
 
-* Functional architecture uses staged Option D / Option B minimum per ADR-016…019.
-* Base DevKit envelope (`I_certified_cont`) and external bank (`I_loadbank_limit`) are electrically and procedurally separated.
-* KILL and `nENABLE_GLOBAL` remain distinct hardware paths.
-* Control-loss numeric timing remains BLOCKED_BY_EDL_CLARIFICATION — EDL-011 not modified.
-* Representative channels CH-HS-* and CH-BI-REP cover ADR-019 mandatory set; CH-HC-EXTERNAL is fixture-only.
-* Open-load remains conditional on future implementation claim.
-* `config/vehicles/devkit.yaml` channel/current values remain candidate — not Approved.
-* Ground/isolation between base and external bank is **Open** (OI-GND-001).
+* CH-HS-* identifiers are capability aliases — physical channel count not frozen.
+* KILL has direct hardware-effective branch independent of Logic CPU; observation branch parallel.
+* External energy roles: EXT-SOURCE, EXT-LOAD-BANK, EXT-POWER-MODULE — distinct from base envelope.
+* Ground/reference between base and external: functionally separated; back-feed prohibited; isolation option Open (OI-GND-001).
+* Safe recovery: no auto-restore of prior ON commands after UV/interruption; invalid BOARD_ID/config → outputs inhibited.
+* J_LP decomposed: command transport / hardwired safety / diagnostic-sense signal classes.
+* Diagnostic topology (shunt, mirror, mux, etc.) — Component/Schematic scope only.
 
 ### Change Impact Analysis
 
@@ -54,7 +53,7 @@
 
 ### Validation Summary
 
-WP-010 documentation validation complete per WP §33 checklist. No physical tests. No VE records. All TBD numeric values Open. Requirements NOT VERIFIED. Architecture Proposed — awaiting Review.
+WP-010 and WP-010-R1 documentation validation complete per WP §33 / R1 §8 checklists. No physical tests. No VE records. All TBD numeric values Open. Requirements NOT VERIFIED. Architecture Proposed — awaiting Review.
 
 ### Evidence References
 
@@ -111,3 +110,4 @@ Revert WP-010 PR; WP-009 Accepted baseline preserved.
 | Version | Date | Change |
 |---------|------|--------|
 | 1.0 | 2026-07-20 | WP-010 initial RHP — Draft |
+| 1.1 | 2026-07-20 | WP-010-R1 — consistency corrections; assumptions updated |
