@@ -214,3 +214,14 @@ This acceptance update does not rewrite the BOM or select a component.
 | 1.9 | 2026-07-20 | WP-012 — electrical sizing architecture framework (Proposed) |
 | 1.10 | 2026-07-20 | WP-012 Accepted status alignment; WP-013 class qualification mapping (Proposed) |
 | 1.11 | 2026-07-20 | WP-013 Accepted status; WP-014 fixture/load-bank mapping (Proposed) |
+| 1.12 | 2026-07-20 | WP-015 fixture preliminary design mapping (Proposed) |
+
+## 13. WP-015 fixture preliminary design mapping
+
+WP-015 converts Accepted `REQ-DCC-V-FX-*` into a preliminary design architecture (`FX-*` modules, `FX-PD-001…017`). ADR-020/021/022/023 remain the accepted authority; WP-015 selects no topology, MPN, numeric, ground/reference, or E-stop circuit. OI-GND-001 / OI-PROT-001/002 / OI-SC-001 / OI-FIX-002 / OI-BI-001 / OI-SENSE-001 remain Open (options compared, not selected). **Not authorized by WP-015:** detailed design · schematic · PCB · harness · BOM · MPN · numeric freeze · procurement · construction · energization · VE.
+
+| Artifact | Document | Status |
+|----------|----------|--------|
+| Preliminary design anchor | [`DevKit_Fixture_Preliminary_Design_Architecture.md`](DevKit_Fixture_Preliminary_Design_Architecture.md) | Proposed |
+| Decision register | [`DevKit_Fixture_Preliminary_Design_Decision_Register.md`](DevKit_Fixture_Preliminary_Design_Decision_Register.md) | Proposed |
+| Implementation readiness | [`DevKit_Fixture_Implementation_Readiness_Matrix.md`](DevKit_Fixture_Implementation_Readiness_Matrix.md) | Proposed |

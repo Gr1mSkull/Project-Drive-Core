@@ -1,7 +1,7 @@
 # DevKit Electrical Design Input Register — WP-011
 
 **Document ID:** DOC-DK-EDIR-001  
-**Version:** 1.5  
+**Version:** 1.6  
 **Status:** Accepted — Architecture Review  
 **Work Package:** WP-011  
 **Date:** 2026-07-20
@@ -120,6 +120,10 @@ ED-IN-020…023, ED-IN-033…035 are consumed by Proposed WP-014 fixture require
 | Identity/config inhibit | ED-IN-033 | No retention policy Approved |
 | E-stop residual energy | ED-IN-034 | Timing Open |
 
+## 7.1 WP-015 preliminary-design consumers
+
+WP-015 preliminary design references ED-IN entries as **dependency references (R6)** — not approved inputs. Fixture-relevant consumers: ED-IN-011/032 (sense topology/accuracy → measurement architecture), ED-IN-021 (SC injection → fault-injection), ED-IN-022 (external load-bank envelope → load-bank preliminary design), ED-IN-023 (base/external ground/isolation → OI-GND-001 option comparison), ED-IN-033…035 (fixture identity/config; E-stop energy-removal timing; fault-energy bounds). No numeric value invented; all remain OPEN/BLOCKED.
+
 ## 8. Revision history
 
 | Version | Date | Change |
@@ -130,3 +134,4 @@ ED-IN-020…023, ED-IN-033…035 are consumed by Proposed WP-014 fixture require
 | 1.3 | 2026-07-20 | WP-012 — sizing method cross-reference (ED-IN not frozen) |
 | 1.4 | 2026-07-20 | WP-013 — ED-IN-030/031/032 reference Proposed class comparisons (Status Open unchanged) |
 | 1.5 | 2026-07-20 | WP-014 — fixture consumers; ED-IN-033…035 added (OPEN; no numerics); R6 retained |
+| 1.6 | 2026-07-20 | WP-015 — preliminary-design consumers noted (R6 retained; no value changes) |

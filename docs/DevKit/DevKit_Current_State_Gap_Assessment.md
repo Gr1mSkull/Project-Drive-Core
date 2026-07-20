@@ -54,7 +54,8 @@ Audit of existing DevKit-related claims against WP-007 authority rules. Classifi
 | Physical fixtures / load bank | — | NOT IMPLEMENTED | — | Short fixture undefined | Fixture WP + ADR-DK-010 | Fixture WP | P0 |
 | Electrical sizing architecture framework | — | **Accepted** (WP-012) | WP-012 package | No numeric sizing | Methods Accepted | Class qual / provisional baseline | P0 |
 | Component-class qualification comparison | — | **Accepted** methodology (WP-013); final classes Open | WP-013 package | Final HS/sense/BI/protection Open; no MPN | Class acceptance + MPN prep (later) | Fixture / class closure | P0 |
-| Fixture and load-bank requirements | — | **Proposed** (WP-014) | WP-014 package | No construction; FX PROPOSED | Architecture Review WP-014 | Fixture prelim design (after accept) | P0 |
+| Fixture and load-bank requirements | — | **Accepted** (WP-014) | WP-014 package | FX Accepted / NOT VERIFIED | Merged PR #18 | Fixture prelim design | P0 |
+| Fixture preliminary design architecture | — | **Proposed** (WP-015) | WP-015 package | Not detailed design; not implemented | Architecture Review WP-015 | Detailed design (after accept) | P0 |
 | Automated-test coverage | — | NOT VERIFIED / NOT IMPLEMENTED | — | — | After bring-up | Bench tooling WP | P2 |
 | SRS §8.1 DevKit | Volume_2 placeholder | NOT IMPLEMENTED → pointer added | WP-007 | — | Keep pointer; no text duplication | WP-007 (done) | P0 |
 
@@ -117,3 +118,4 @@ Note: some rows carry dual tags (e.g. CONFLICT/TBD); counts reflect primary seve
 | Fixture construction | Not authorized |
 | Numeric thresholds | Open |
 | Physical verification | NOT VERIFIED |
+| 1.5 | 2026-07-20 | WP-015 — fixture preliminary design architecture Proposed; not implemented |

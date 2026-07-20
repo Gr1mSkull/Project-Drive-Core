@@ -1,7 +1,7 @@
 # DevKit Fixture Dependency and Readiness Matrix — WP-014
 
 **Document ID:** DOC-DK-FDRM-001  
-**Version:** 1.2  
+**Version:** 1.3  
 **Status:** Accepted — Architecture Review (2026-07-20)  
 **Work Package:** WP-014  
 **Date:** 2026-07-20
@@ -42,10 +42,11 @@
 
 | Before | Must close / accept |
 |--------|---------------------|
-| Fixture preliminary design | WP-014 Architecture Acceptance |
+| Fixture preliminary design | WP-014 Architecture Acceptance — **delivered by WP-015 (Proposed)**; see [`DevKit_Fixture_Implementation_Readiness_Matrix.md`](DevKit_Fixture_Implementation_Readiness_Matrix.md) |
+| Fixture detailed design | WP-015 acceptance + OI-GND-001 / OI-PROT / E-stop decision packages |
 | Fixture construction | Design review; E-stop; AUTH; back-feed; identity; residual energy; OI-GND if combined EXT | 
 | Physical testing | Constructed fixture; measurement cal; applicable AUTH; no VE until executed |
-| MPN selection | Separate; not WP-014 |
+| MPN selection | Separate qualification WP; not WP-014/WP-015 |
 
 ## 3. Revision history
 
@@ -54,3 +55,4 @@
 | 1.0 | 2026-07-20 | WP-014 initial fixture dependency and readiness matrix — Proposed |
 | 1.1 | 2026-07-20 | WP-014-R1 — E-stop readiness split; EXTERNAL_ENERGY_ARMED / OI-GND block |
 | 1.2 | 2026-07-20 | Architecture Review **Accepted** (WP-014; reviewed head `084f579`, PR #18); Open decisions retained; NOT VERIFIED |
+| 1.3 | 2026-07-20 | WP-015 — cross-reference to preliminary design + implementation readiness matrix; detailed-design gate added |
