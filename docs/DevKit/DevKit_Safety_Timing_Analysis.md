@@ -420,7 +420,7 @@ approved_limit ≥ measured_worst_case + measurement_uncertainty + design_margin
 | **Status** | Accepted — Architecture Review |
 | **Review date** | 2026-07-20 |
 | **Approver role** | System Architect |
-| **PR** | #13 approved for merge |
+| **PR** | #13 merged (`6f3845e`) |
 
 Accepted: timing budget structures, normalized path segments, measurement plan structure, TBD-DK-021 procedural contract, EDL-011 ambiguity documentation.  
 Not Accepted: numeric ms limits; EDL-011 numeric direction (BLOCKED_BY_EDL_CLARIFICATION).

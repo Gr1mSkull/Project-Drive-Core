@@ -94,7 +94,7 @@ Revert WP-009 PR; WP-008 and register Open status preserved.
 | **Independent Reviewer role** | Independent Reviewer |
 | **Independent review date** | TBD |
 | **Final Review Outcome** | Accepted |
-| **Architecture / policy approval** | System Architect — WP-009 Accepted 2026-07-20; threshold methods Accepted; numeric Open; PR #13 approved for merge |
+| **Architecture / policy approval** | System Architect — WP-009 Accepted 2026-07-20; threshold methods Accepted; numeric Open; PR #13 merged (`6f3845e`) |
 
 ## Revision history
 
@@ -103,3 +103,4 @@ Revert WP-009 PR; WP-008 and register Open status preserved.
 | 1.0 | 2026-07-20 | WP-009 initial RHP |
 | 1.1 | 2026-07-20 | WP-009-R1 — assumptions/weaknesses updated |
 | 1.2 | 2026-07-20 | Architecture Review Accepted — WP-009 methods Accepted; PR #13 approved for merge |
+| 1.3 | 2026-07-20 | PR #13 merged (`6f3845e`) |

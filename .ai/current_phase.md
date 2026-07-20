@@ -40,7 +40,7 @@ Follow-on: EDL-011 clarification CR · fixture/load-bank requirements · compone
 
 ## Active branch
 
-`cursor/wp009-devkit-threshold-analysis-3bb9` (PR #13 approved for merge)
+`main` @ `6f3845e` — PR #13 merged (WP-009 Accepted, 2026-07-20)
 
 ## Do not start without approval
 

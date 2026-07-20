@@ -485,7 +485,7 @@ Status remains Open.
 | **Status** | Accepted — Architecture Review |
 | **Review date** | 2026-07-20 |
 | **Approver role** | System Architect |
-| **PR** | #13 approved for merge |
+| **PR** | #13 merged (`6f3845e`) |
 
 Accepted: analytical structure, limit stack, profiles P0–P6, symbolic C1–C3, C2 calculation architecture, profile/overlap simultaneous model.  
 Not Accepted: numeric current limits, physical measurements, ampere ceiling.

@@ -8,7 +8,7 @@
 | **Author** | Implementation Engineer (cloud agent) |
 | **Author role** | Implementation Engineer |
 | **Date** | 2026-07-20 |
-| **Status** | Accepted (Architecture Review 2026-07-20; PR #13 approved for merge) |
+| **Status** | Accepted (Architecture Review 2026-07-20; PR #13 merged `6f3845e`) |
 | **Related WP / CR** | WP-009 / WP-009-R1; depends on WP-008 Accepted (`8bc5710`+); ADR-021/022 Accepted |
 
 ### Reason for Change
@@ -139,3 +139,4 @@ WP-009 §30 and WP-009-R1 §9 validation; Architecture Review **Accepted** 2026-
 | 1.0 | 2026-07-20 | WP-009 initial CIA |
 | 1.1 | 2026-07-20 | WP-009-R1 Level 1 corrections |
 | 1.2 | 2026-07-20 | Architecture Review — WP-009 Accepted; methods Accepted; numeric Open; PR #13 approved for merge |
+| 1.3 | 2026-07-20 | PR #13 merged (`6f3845e`) |
