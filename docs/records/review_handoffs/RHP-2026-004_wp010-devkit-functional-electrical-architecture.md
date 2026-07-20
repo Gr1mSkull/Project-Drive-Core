@@ -53,7 +53,7 @@
 
 ### Validation Summary
 
-WP-010 and WP-010-R1 documentation validation complete per WP §33 / R1 §8 checklists. No physical tests. No VE records. All TBD numeric values Open. Requirements NOT VERIFIED. Architecture Proposed — awaiting Review.
+WP-010 and WP-010-R1 validation complete. Architecture Review Accepted 2026-07-20. No physical tests. No VE records. TBD numeric values Open. Requirements NOT VERIFIED.
 
 ### Evidence References
 
@@ -102,8 +102,8 @@ Revert WP-010 PR; WP-009 Accepted baseline preserved.
 | **Independent Reviewer (name/agent)** | TBD |
 | **Independent Reviewer role** | Independent Reviewer |
 | **Independent review date** | TBD |
-| **Final Review Outcome** | TBD — Architecture Review pending |
-| **Architecture / policy approval** | Separate — System Architect only |
+| **Final Review Outcome** | Accepted |
+| **Architecture / policy approval** | System Architect — WP-010 / WP-010-R1 Accepted 2026-07-20; PR #14 merged (`c98ce56`); WP-011 authorized |
 
 ## Revision history
 
@@ -111,3 +111,4 @@ Revert WP-010 PR; WP-009 Accepted baseline preserved.
 |---------|------|--------|
 | 1.0 | 2026-07-20 | WP-010 initial RHP — Draft |
 | 1.1 | 2026-07-20 | WP-010-R1 — consistency corrections; assumptions updated |
+| 1.2 | 2026-07-20 | Architecture Review Accepted — WP-010 / WP-010-R1; PR #14 merged (`c98ce56`) |

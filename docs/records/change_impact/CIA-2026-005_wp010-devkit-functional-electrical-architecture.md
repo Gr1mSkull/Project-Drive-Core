@@ -8,7 +8,7 @@
 | **Author** | Implementation Engineer (cloud agent) |
 | **Author role** | Implementation Engineer |
 | **Date** | 2026-07-20 |
-| **Status** | Draft — Under Architecture Review |
+| **Status** | Accepted (Architecture Review 2026-07-20; PR #14 merged `c98ce56`) |
 | **Related WP / CR** | WP-010 / WP-010-R1; depends on WP-009 Accepted (`6f3845e`+); ADR-016…023 Accepted |
 
 ### Reason for Change
@@ -106,9 +106,9 @@ See `DevKit_Electrical_Architecture_Open_Issues.md` and Architect Review Package
 | **ADR Required** | NO (functional architecture under Accepted ADRs) |
 | **Architect Approval Required** | YES |
 | **ADR / EDL reference** | ADR-016…023; EDL-011 (unchanged) |
-| **Architect approver (name/agent)** | TBD |
+| **Architect approver (name/agent)** | System Architect |
 | **Architect role** | System Architect |
-| **Architect approval date** | TBD |
+| **Architect approval date** | 2026-07-20 |
 
 ### Review acknowledgment (not architecture approval)
 
@@ -136,3 +136,4 @@ No ADR changes. No numeric approval. No hw/fw/schematic changes.
 |---------|------|--------|
 | 1.0 | 2026-07-20 | WP-010 initial CIA — Draft |
 | 1.1 | 2026-07-20 | WP-010-R1 — Level 1 consistency corrections |
+| 1.2 | 2026-07-20 | Architecture Review — WP-010 / WP-010-R1 Accepted; PR #14 merged (`c98ce56`); WP-011 authorized |

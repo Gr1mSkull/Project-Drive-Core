@@ -1,9 +1,9 @@
 # DriveCore Gen1 DevKit — Document Set
 
 **Document ID:** DOC-DK-INDEX-001  
-**Version:** 1.7  
-**Status:** Accepted (index); WP-010 architecture **Proposed**  
-**Work Package:** WP-007 / WP-008 (Accepted) / WP-009 (Accepted) / WP-010 (Proposed)  
+**Version:** 1.8  
+**Status:** Accepted  
+**Work Package:** WP-007 / WP-008 (Accepted) / WP-009 (Accepted) / WP-010 (Accepted)  
 **Date:** 2026-07-20
 
 ```text
@@ -32,14 +32,14 @@ It does **not** define the final circuit, PCB, component set, enclosure, or BOM.
 | [DevKit_Safety_Timing_Analysis.md](DevKit_Safety_Timing_Analysis.md) | WP-009 timing budgets, EDL-011 interpretation, re-enable FSM | Accepted |
 | [DevKit_Threshold_Closure_Matrix.md](DevKit_Threshold_Closure_Matrix.md) | WP-009 TBD disposition and blockers | Accepted |
 | [DevKit_Threshold_Measurement_Plan.md](DevKit_Threshold_Measurement_Plan.md) | WP-009 measurement plan (not evidence) | Accepted |
-| [DevKit_Functional_Electrical_Architecture.md](DevKit_Functional_Electrical_Architecture.md) | WP-010 functional domains, views, fault containment | Proposed |
-| [DevKit_Functional_Block_Diagram.md](DevKit_Functional_Block_Diagram.md) | WP-010 energy/control/safety diagrams | Proposed |
-| [DevKit_Power_Domain_Matrix.md](DevKit_Power_Domain_Matrix.md) | WP-010 power domains and symbolic rails | Proposed |
-| [DevKit_Safe_State_Path_Matrix.md](DevKit_Safe_State_Path_Matrix.md) | WP-010 independent safe-state paths | Proposed |
-| [DevKit_Representative_Channel_Allocation.md](DevKit_Representative_Channel_Allocation.md) | WP-010 functional channel aliases (ADR-019) | Proposed |
-| [DevKit_Measurement_Point_Register.md](DevKit_Measurement_Point_Register.md) | WP-010 measurement points (MP-*) | Proposed |
-| [DevKit_Electrical_Interface_Register.md](DevKit_Electrical_Interface_Register.md) | WP-010 interface register (IF-DK-*) | Proposed |
-| [DevKit_Electrical_Architecture_Open_Issues.md](DevKit_Electrical_Architecture_Open_Issues.md) | WP-010 open issues and downstream WPs | Proposed |
+| [DevKit_Functional_Electrical_Architecture.md](DevKit_Functional_Electrical_Architecture.md) | WP-010 functional domains, views, fault containment | Accepted |
+| [DevKit_Functional_Block_Diagram.md](DevKit_Functional_Block_Diagram.md) | WP-010 energy/control/safety diagrams | Accepted |
+| [DevKit_Power_Domain_Matrix.md](DevKit_Power_Domain_Matrix.md) | WP-010 power domains and symbolic rails | Accepted |
+| [DevKit_Safe_State_Path_Matrix.md](DevKit_Safe_State_Path_Matrix.md) | WP-010 independent safe-state paths | Accepted |
+| [DevKit_Representative_Channel_Allocation.md](DevKit_Representative_Channel_Allocation.md) | WP-010 functional channel aliases (ADR-019) | Accepted |
+| [DevKit_Measurement_Point_Register.md](DevKit_Measurement_Point_Register.md) | WP-010 measurement points (MP-*) | Accepted |
+| [DevKit_Electrical_Interface_Register.md](DevKit_Electrical_Interface_Register.md) | WP-010 interface register (IF-DK-*) | Accepted |
+| [DevKit_Electrical_Architecture_Open_Issues.md](DevKit_Electrical_Architecture_Open_Issues.md) | WP-010 open issues and downstream WPs | Accepted |
 | This README | Navigation and authority statement | Accepted |
 
 ## Relationship to EDL-014
@@ -95,7 +95,7 @@ Every DevKit gate evidence package shall record a **composite system baseline** 
 | Verification plan | **Accepted** (structure) — cases NOT EXECUTED / BLOCKED; no PASS claims |
 | P0 ADRs ADR-016…023 | **Accepted** (WP-008; ADR-021/022 numerics Open) |
 | WP-009 threshold analysis | **Accepted** (2026-07-20) — methods Accepted; numeric values **Open** |
-| WP-010 functional electrical architecture | **Proposed** — requires Architecture Review |
+| WP-010 functional electrical architecture | **Accepted** (2026-07-20) — WP-010-R1 Accepted |
 | Hardware design | **NOT IMPLEMENTED** — detailed sizing/schematic/PCB **NOT AUTHORIZED** |
 | Firmware bring-up | NOT IMPLEMENTED |
 | Physical verification | NOT VERIFIED |
@@ -109,7 +109,8 @@ Still open decision **requests** (no Accepted ADR yet): `ADR-DK-008`, `ADR-DK-00
 
 Open thresholds: `TBD-DK-001` … `TBD-DK-022` (Status Open — WP-009 methods Accepted; numeric values not Approved).
 
-**Next step:** Architecture Review of WP-010 functional electrical architecture.  
+**Next authorized WP:** WP-011 — EDL-011 clarification + preliminary component-class qualification preparation.
+
 **Not authorized:** conductor/connector/fuse/PCB sizing · thermal freeze · schematics · firmware · fixtures.
 
 ## Revision history
@@ -125,3 +126,4 @@ Open thresholds: `TBD-DK-001` … `TBD-DK-022` (Status Open — WP-009 methods A
 | 1.5 | 2026-07-20 | WP-009 — threshold analysis package navigation; CIA-2026-004 / RHP-2026-003 |
 | 1.6 | 2026-07-20 | WP-009 Architecture Review — analysis package Accepted; functional electrical architecture authorized |
 | 1.7 | 2026-07-20 | WP-010 — functional electrical architecture package (Proposed) |
+| 1.8 | 2026-07-20 | WP-010 Architecture Review — functional electrical architecture Accepted; WP-011 authorized |

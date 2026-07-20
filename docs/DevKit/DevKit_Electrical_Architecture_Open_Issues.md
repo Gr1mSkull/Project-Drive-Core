@@ -2,8 +2,10 @@
 
 **Document ID:** DOC-DK-OI-001  
 **Version:** 1.1  
-**Status:** Proposed — requires Architecture Review  
-**Work Package:** WP-010 / WP-010-R1  
+**Status:** Accepted — Architecture Review  
+**Review date:** 2026-07-20  
+**Approver role:** System Architect  
+**Work Package:** WP-010 / WP-010-R1 (Accepted)  
 **Date:** 2026-07-20
 
 ## 1. Open issue register
@@ -81,3 +83,4 @@ Base and external envelopes are functionally separated and protected against bac
 |---------|------|--------|
 | 1.0 | 2026-07-20 | WP-010 initial open issue register — Proposed |
 | 1.1 | 2026-07-20 | WP-010-R1 — OI-UV-002, OI-CHAN-001, OI-CONFIG-001; GND-001 options; external energy roles |
+| 1.2 | 2026-07-20 | Architecture Review Accepted — PR #14 merged (`c98ce56`) |

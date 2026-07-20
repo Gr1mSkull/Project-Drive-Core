@@ -2,8 +2,10 @@
 
 **Document ID:** DOC-DK-FEA-001  
 **Version:** 1.1  
-**Status:** Proposed — requires Architecture Review  
-**Work Package:** WP-010 / WP-010-R1  
+**Status:** Accepted — Architecture Review  
+**Review date:** 2026-07-20  
+**Approver role:** System Architect  
+**Work Package:** WP-010 / WP-010-R1 (Accepted)  
 **Date:** 2026-07-20  
 **Author role:** Implementation Engineer
 
@@ -499,3 +501,19 @@ See [`DevKit_Electrical_Architecture_Open_Issues.md`](DevKit_Electrical_Architec
 |---------|------|--------|
 | 1.0 | 2026-07-20 | WP-010 initial functional electrical architecture — Proposed |
 | 1.1 | 2026-07-20 | WP-010-R1 — capability aliases; recovery policies; external energy roles; KILL direct branch |
+| 1.2 | 2026-07-20 | Architecture Review — WP-010 / WP-010-R1 Accepted; PR #14 merged (`c98ce56`) |
+
+## 24. Architecture Review acceptance (2026-07-20)
+
+| Field | Value |
+|-------|-------|
+| **Status** | Accepted — Architecture Review |
+| **Review date** | 2026-07-20 |
+| **Approver role** | System Architect |
+| **PR** | #14 merged (`c98ce56`) |
+
+**Accepted:** functional domain decomposition; energy/control/service/safety/measurement views; capability aliases and conditional sharing; safe-state recovery policies; KILL direct branch topology; external energy boundary; measurement and interface registers; open-issue model.
+
+**Not Accepted / remains Open:** numeric current and timing thresholds; component MPNs; connector pins; sizing; schematics; PCB; firmware; fixtures; EDL-011 resolution (TBD-DK-007 BLOCKED).
+
+**Next authorized WP:** WP-011 — EDL-011 clarification + preliminary component-class qualification preparation.

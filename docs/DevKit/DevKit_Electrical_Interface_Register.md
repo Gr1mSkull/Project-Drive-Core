@@ -2,8 +2,10 @@
 
 **Document ID:** DOC-DK-EIR-001  
 **Version:** 1.1  
-**Status:** Proposed — requires Architecture Review  
-**Work Package:** WP-010 / WP-010-R1  
+**Status:** Accepted — Architecture Review  
+**Review date:** 2026-07-20  
+**Approver role:** System Architect  
+**Work Package:** WP-010 / WP-010-R1 (Accepted)  
 **Date:** 2026-07-20
 
 Functional interface definitions — **no final pinouts**.
@@ -58,3 +60,4 @@ Connector family and pin assignment: **Open** (ADR-DK-012).
 |---------|------|--------|
 | 1.0 | 2026-07-20 | WP-010 initial electrical interface register — Proposed |
 | 1.1 | 2026-07-20 | WP-010-R1 — J_LP signal-class split; KILL direct branch; external energy boundary |
+| 1.2 | 2026-07-20 | Architecture Review Accepted — PR #14 merged (`c98ce56`) |

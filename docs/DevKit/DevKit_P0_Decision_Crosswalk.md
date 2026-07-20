@@ -127,7 +127,9 @@ This acceptance update does not rewrite the BOM or select a component.
 | ADR-020 | External bank — §16; CH-HC-EXTERNAL | Proposed |
 | ADR-021 | Input chain — §5, §11 | Proposed |
 | ADR-022 | Safe-state paths — [`DevKit_Safe_State_Path_Matrix.md`](DevKit_Safe_State_Path_Matrix.md) | Proposed |
-| ADR-023 | Fault containment — §18 | Proposed |
+| ADR-023 | Fault containment — §18 | Accepted |
+
+**Next authorized WP:** WP-011 — EDL-011 clarification + component-class qualification preparation.
 
 **Not authorized by WP-010:** sizing · schematics · PCB · firmware · fixtures.
 
@@ -150,3 +152,4 @@ This acceptance update does not rewrite the BOM or select a component.
 | 1.4 | 2026-07-20 | WP-009 — threshold analysis dependency on ADR-021/022 |
 | 1.5 | 2026-07-20 | WP-009 Architecture Review — methods Accepted; functional electrical architecture authorized |
 | 1.6 | 2026-07-20 | WP-010 — functional electrical architecture Proposed; ADR-019/020/021 architecture refs |
+| 1.7 | 2026-07-20 | WP-010 Architecture Review — functional electrical architecture Accepted |

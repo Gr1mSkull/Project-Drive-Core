@@ -12,7 +12,7 @@ Identity: ADR-015 / STD-REV-001 · Gate policy: EDL-014
 P0 architecture decisions: Accepted ADR-016…023 — [`DevKit_P0_Decision_Crosswalk.md`](DevKit_P0_Decision_Crosswalk.md) (WP-008).  
 Threshold analysis (Accepted): [`DevKit_Threshold_Closure_Matrix.md`](DevKit_Threshold_Closure_Matrix.md) (WP-009 — TBDs remain Open).
 
-Functional electrical architecture (Proposed): [`DevKit_Functional_Electrical_Architecture.md`](DevKit_Functional_Electrical_Architecture.md) (WP-010 — requires Architecture Review).
+Functional electrical architecture (Accepted): [`DevKit_Functional_Electrical_Architecture.md`](DevKit_Functional_Electrical_Architecture.md) (WP-010 / WP-010-R1 Accepted).
 
 > **TBD authority:** The Threshold Resolution Register in [`DevKit_System_Requirements.md`](DevKit_System_Requirements.md) §4 is the authoritative source for `TBD-DK-*` identifiers. This plan references those IDs; it does not redefine them.
 

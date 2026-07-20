@@ -2,8 +2,10 @@
 
 **Document ID:** DOC-DK-MPR-001  
 **Version:** 1.1  
-**Status:** Proposed — requires Architecture Review  
-**Work Package:** WP-010 / WP-010-R1  
+**Status:** Accepted — Architecture Review  
+**Review date:** 2026-07-20  
+**Approver role:** System Architect  
+**Work Package:** WP-010 / WP-010-R1 (Accepted)  
 **Date:** 2026-07-20
 
 Functional IDs only — **no physical test-pad designators**. Supports [`DevKit_Threshold_Measurement_Plan.md`](DevKit_Threshold_Measurement_Plan.md).
@@ -66,3 +68,4 @@ Functional IDs only — **no physical test-pad designators**. Supports [`DevKit_
 |---------|------|--------|
 | 1.0 | 2026-07-20 | WP-010 initial measurement point register — Proposed |
 | 1.1 | 2026-07-20 | WP-010-R1 — MP-KILL-OBS; KILL/global distinction; diagnostic topology language |
+| 1.2 | 2026-07-20 | Architecture Review Accepted — PR #14 merged (`c98ce56`) |

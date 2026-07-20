@@ -2,8 +2,10 @@
 
 **Document ID:** DOC-DK-SSM-001  
 **Version:** 1.1  
-**Status:** Proposed — requires Architecture Review  
-**Work Package:** WP-010 / WP-010-R1  
+**Status:** Accepted — Architecture Review  
+**Review date:** 2026-07-20  
+**Approver role:** System Architect  
+**Work Package:** WP-010 / WP-010-R1 (Accepted)  
 **Date:** 2026-07-20
 
 Companion to [`DevKit_Functional_Electrical_Architecture.md`](DevKit_Functional_Electrical_Architecture.md) View D.
@@ -99,3 +101,4 @@ FAULT_CLEAR_REQUIRED → READY_FOR_ENABLE → EXPLICIT_FUNCTION_ENABLE
 |---------|------|--------|
 | 1.0 | 2026-07-20 | WP-010 initial safe-state path matrix — Proposed |
 | 1.1 | 2026-07-20 | WP-010-R1 — recovery policies; deterministic safe-state language; KILL direct branch |
+| 1.2 | 2026-07-20 | Architecture Review Accepted — PR #14 merged (`c98ce56`) |

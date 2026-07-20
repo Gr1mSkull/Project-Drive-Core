@@ -2,8 +2,10 @@
 
 **Document ID:** DOC-DK-PDM-001  
 **Version:** 1.1  
-**Status:** Proposed — requires Architecture Review  
-**Work Package:** WP-010 / WP-010-R1  
+**Status:** Accepted — Architecture Review  
+**Review date:** 2026-07-20  
+**Approver role:** System Architect  
+**Work Package:** WP-010 / WP-010-R1 (Accepted)  
 **Date:** 2026-07-20
 
 Symbolic rails only — **no voltage values Approved**.
@@ -45,3 +47,4 @@ Symbolic rails only — **no voltage values Approved**.
 |---------|------|--------|
 | 1.0 | 2026-07-20 | WP-010 initial power domain matrix — Proposed |
 | 1.1 | 2026-07-20 | WP-010-R1 — recovery language; external energy roles; KILL direct branch; ground Open |
+| 1.2 | 2026-07-20 | Architecture Review Accepted — PR #14 merged (`c98ce56`) |

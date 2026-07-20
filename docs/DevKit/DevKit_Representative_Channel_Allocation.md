@@ -2,8 +2,10 @@
 
 **Document ID:** DOC-DK-RCA-001  
 **Version:** 1.1  
-**Status:** Proposed — requires Architecture Review  
-**Work Package:** WP-010 / WP-010-R1  
+**Status:** Accepted — Architecture Review  
+**Review date:** 2026-07-20  
+**Approver role:** System Architect  
+**Work Package:** WP-010 / WP-010-R1 (Accepted)  
 **Date:** 2026-07-20
 
 Functional aliases — **not** final connector labels. No MPNs. No ampere ratings Approved.
@@ -187,3 +189,4 @@ Open-load diagnostics (REQ-DCC-V-DK-046): **conditional** — required only if s
 |---------|------|--------|
 | 1.0 | 2026-07-20 | WP-010 initial representative channel allocation — Proposed |
 | 1.1 | 2026-07-20 | WP-010-R1 — capability alias rule; conditional physical sharing; diagnostic topology language; PWM BLOCKED not N/A |
+| 1.2 | 2026-07-20 | Architecture Review Accepted — PR #14 merged (`c98ce56`) |

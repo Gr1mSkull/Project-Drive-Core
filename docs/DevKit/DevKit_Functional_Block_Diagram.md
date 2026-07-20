@@ -2,8 +2,10 @@
 
 **Document ID:** DOC-DK-FBD-001  
 **Version:** 1.1  
-**Status:** Proposed — requires Architecture Review  
-**Work Package:** WP-010 / WP-010-R1  
+**Status:** Accepted — Architecture Review  
+**Review date:** 2026-07-20  
+**Approver role:** System Architect  
+**Work Package:** WP-010 / WP-010-R1 (Accepted)  
 **Date:** 2026-07-20
 
 Companion to [`DevKit_Functional_Electrical_Architecture.md`](DevKit_Functional_Electrical_Architecture.md). Diagrams are **not** substitutes for matrices.
@@ -223,3 +225,4 @@ flowchart LR
 |---------|------|--------|
 | 1.0 | 2026-07-20 | WP-010 initial block diagrams — Proposed |
 | 1.1 | 2026-07-20 | WP-010-R1 — KILL direct/observation branches; EXT-SOURCE/LOAD-BANK; ground Open marker |
+| 1.2 | 2026-07-20 | Architecture Review Accepted — PR #14 merged (`c98ce56`) |

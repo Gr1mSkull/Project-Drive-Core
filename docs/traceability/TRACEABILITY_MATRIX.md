@@ -191,7 +191,8 @@ Blocked cases (approx): 26
 * WP-009 (2026-07-20): Threshold analysis references in TBD register §4 and DevKit analysis docs; **no** threshold Resolved; **no** requirement Verified; evidence NOT VERIFIED.
 * WP-009-R1 (2026-07-20): EDL-011 ambiguity correction; symbolic current scenarios; profile/overlap simultaneous model; TBD-DK-007 BLOCKED_BY_EDL_CLARIFICATION.
 * WP-009 Architecture Review (2026-07-20): **Accepted** — threshold analysis methods Accepted; numeric values Open; evidence NOT VERIFIED; functional electrical architecture authorized.
-* WP-010 (2026-07-20): Functional electrical architecture **Proposed** — architecture references in DevKit FEA package; **no** threshold Resolved; **no** requirement Verified; evidence NOT VERIFIED; implementation TBD.
+* WP-010 (2026-07-20): Functional electrical architecture **Accepted** — WP-010-R1 Accepted; architecture refs in DevKit FEA package; **no** threshold Resolved; **no** requirement Verified; evidence NOT VERIFIED; WP-011 authorized.
+* WP-010 Architecture Review (2026-07-20): PR #14 merged (`c98ce56`); functional decomposition Accepted; sizing/schematic/PCB NOT AUTHORIZED.
 * WP-007-R4: Method:Test cases enforce semantic placeholder policy (unjustified placeholders remaining = 0).
 * EDL-014 meaning unchanged.
 
@@ -211,3 +212,4 @@ Blocked cases (approx): 26
 | 1.5.1 | 2026-07-20 | WP-008-R1 — conditional open-load; ADR-023 REQ alignment; supply interruption DK-A/DK-D; NOT VERIFIED retained |
 | 1.5.5 | 2026-07-20 | WP-009 Architecture Review Accepted — methods Accepted; numeric Open; NOT VERIFIED retained |
 | 1.5.6 | 2026-07-20 | WP-010 — functional electrical architecture Proposed; architecture refs; NOT VERIFIED retained |
+| 1.5.7 | 2026-07-20 | WP-010 Architecture Review Accepted — functional architecture Accepted; NOT VERIFIED retained |

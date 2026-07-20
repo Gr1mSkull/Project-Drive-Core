@@ -1,6 +1,6 @@
 # DriveCore — Current Phase
 
-**Updated:** WP-010 Proposed — DevKit functional electrical architecture (2026-07-20)
+**Updated:** WP-010 Accepted — DevKit functional electrical architecture (2026-07-20)
 
 ## Documentation
 
@@ -15,9 +15,9 @@
 | **WP-007 DevKit requirements + verification plan** | ✅ Accepted (2026-07-20) — evidence NOT VERIFIED |
 | **WP-008 DevKit P0 architecture decisions** | ✅ Accepted (2026-07-20) — ADR-016…023 |
 | **WP-009 DevKit threshold analysis** | ✅ Accepted (2026-07-20) — methods Accepted; numeric Open |
-| **WP-010 DevKit functional electrical architecture** | ⏳ Proposed — Architecture Review pending |
+| **WP-010 DevKit functional electrical architecture** | ✅ Accepted (2026-07-20) — WP-010-R1 Accepted |
 
-## DevKit (WP-007 / WP-008 / WP-009 / WP-010)
+## DevKit (WP-007 … WP-010)
 
 | Item | Status |
 |------|--------|
@@ -27,7 +27,7 @@
 | Threshold analysis methods | **Accepted** (WP-009) |
 | Threshold numeric values | **Open** (TBD-DK-001…022) |
 | TBD-DK-007 | **BLOCKED_BY_EDL_CLARIFICATION** |
-| Functional electrical architecture | **Proposed** (WP-010) |
+| Functional electrical architecture | **Accepted** (WP-010 / WP-010-R1) |
 | Hardware design approved | **No** — NOT IMPLEMENTED |
 | Detailed electrical sizing | **NOT AUTHORIZED** |
 | Schematics / PCB | **NOT AUTHORIZED** |
@@ -35,13 +35,15 @@
 | Physical verification | **NOT VERIFIED** |
 | Remaining open requests | ADR-DK-008, 009, 011, 012 |
 
-## Next authorized work (after WP-010 acceptance)
+## Next authorized work
 
-EDL-011 clarification CR · preliminary component-class qualification · electrical sizing and protection coordination · fixture/load-bank requirements · schematic WP · PCB constraints WP · firmware BSP planning.
+**WP-011** — EDL-011 clarification + preliminary component-class qualification preparation.
+
+Not authorized without separate WP: electrical sizing · schematics · PCB · firmware · fixtures · marking thresholds Resolved · marking requirements Verified.
 
 ## Active branch
 
-`cursor/wp010-devkit-functional-electrical-architecture-3bb9` (PR pending)
+`main` @ `c98ce56` — PR #14 merged (WP-010 Accepted, 2026-07-20)
 
 ## Do not start without approval
 
