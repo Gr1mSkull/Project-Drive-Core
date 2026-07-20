@@ -52,7 +52,8 @@ Audit of existing DevKit-related claims against WP-007 authority rules. Classifi
 | Threshold authority | docs/008 numerics | TBD | Candidates | vs WP-004 TBD amperes | Do not freeze without evidence | Threshold CR | P0 |
 | Evidence templates | docs/templates VE | COMPLIANT (scaffold) | CR-002 | No filled VE | Create VE when tests run | Execution WP | P2 |
 | Physical fixtures / load bank | — | NOT IMPLEMENTED | — | Short fixture undefined | Fixture WP + ADR-DK-010 | Fixture WP | P0 |
-| Electrical sizing architecture framework | — | NOT IMPLEMENTED → **Proposed WP-012** | WP-012 package | No numeric sizing | Architecture Review WP-012 | Sizing execution WP | P0 |
+| Electrical sizing architecture framework | — | **Accepted** (WP-012) | WP-012 package | No numeric sizing | Methods Accepted | Class qual / provisional baseline | P0 |
+| Component-class qualification comparison | — | **Proposed** (WP-013) | WP-013 package | No MPN; recommendations Proposed | Architecture Review WP-013 | Fixture / MPN prep | P0 |
 | Automated-test coverage | — | NOT VERIFIED / NOT IMPLEMENTED | — | — | After bring-up | Bench tooling WP | P2 |
 | SRS §8.1 DevKit | Volume_2 placeholder | NOT IMPLEMENTED → pointer added | WP-007 | — | Keep pointer; no text duplication | WP-007 (done) | P0 |
 

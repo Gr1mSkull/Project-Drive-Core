@@ -1,6 +1,6 @@
 # DriveCore — Current Phase
 
-**Updated:** WP-012 Accepted — electrical sizing architecture framework (2026-07-20); PR #16 merged (`fe700d4`)
+**Updated:** WP-013 Proposed — component-class qualification and symbolic calculations (2026-07-20)
 
 ## Documentation
 
@@ -18,8 +18,9 @@
 | **WP-010 DevKit functional electrical architecture** | ✅ Accepted (2026-07-20) — WP-010-R1 Accepted |
 | **WP-011 EDL-011 + component-class prep** | ✅ Accepted (2026-07-20) — WP-011-R1 Accepted |
 | **WP-012 electrical sizing architecture framework** | ✅ Accepted (2026-07-20) — WP-012-R1/R2 Accepted |
+| **WP-013 component-class qualification + symbolic calcs** | ⏳ Ready for Final Architecture Review — WP-013-R1 |
 
-## DevKit (WP-007 … WP-012)
+## DevKit (WP-007 … WP-013)
 
 | Item | Status |
 |------|--------|
@@ -31,22 +32,27 @@
 | Functional electrical architecture | **Accepted** (WP-010 / WP-010-R1) |
 | TBD-DK-007 | **BLOCKED_BY_EDL_CLARIFICATION** — not Resolved; numeric Open; verification Not Verified |
 | Component-class qualification prep | **Accepted** (WP-011) |
-| Electrical sizing framework | **Accepted** (WP-012 / WP-012-R1 / WP-012-R2) |
+| Electrical sizing framework | **Accepted** (WP-012) |
+| Component-class recommendations | **Ready for Final Architecture Review** (WP-013-R1) |
+| Concrete component qualification | **Not started** |
+| MPN selection | **Not authorized** |
+| Symbolic preliminary calculations | **Proposed** (WP-013) |
+| Numeric baseline | **Not created** |
 | Hardware design approved | **No** — NOT IMPLEMENTED |
-| Detailed electrical sizing | **NOT COMPLETED** — framework only |
+| Detailed electrical sizing | **NOT COMPLETED** |
 | Schematics / PCB | **NOT AUTHORIZED** |
 | Firmware bring-up complete | **No** (NOT IMPLEMENTED) |
 | Physical verification | **NOT VERIFIED** |
-| Remaining open requests | ADR-DK-008, 009, 011, 012 |
+| Remaining open requests | ADR-DK-008, 009, 011, 012; OI-PROT-001/002 |
 
-## Next authorized work
+## Next authorized work (after WP-013 acceptance)
 
-WP-013 — Component-Class Qualification + Symbolic Preliminary Calculations · fixture/load-bank requirements · ADR-DK-011 / ADR-DK-012 resolution.
+Fixture / load-bank requirements · ADR-DK-011 / ADR-DK-012 · concrete MPN qualification preparation · provisional design-baseline preparation (Architect only).
 
 ## Active branch
 
-`main` @ `fe700d4`+ (WP-012 Accepted — PR #16)
+`cursor/wp013-devkit-component-class-qualification-3bb9` — PR #17 (Architecture Review pending)
 
 ## Do not start without approval
 
-MPN selection · BOM · schematics · PCB · numeric threshold approval · EDL file edit · firmware · fixture construction · final electrical sizing completion · Verification Evidence creation
+MPN selection · BOM · schematics · PCB · numeric threshold approval · EDL file edit · firmware · fixture construction · Verification Evidence creation

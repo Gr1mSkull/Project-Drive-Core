@@ -50,6 +50,8 @@ Assumptions in this register shall **not** be converted to requirements or numer
 
 **WP-012-R1 rule:** Constraints first introduced by WP-012 remain **PROPOSED_CONSTRAINT** until explicit Architecture Review acceptance. Implementation Engineer cannot self-approve.
 
+**WP-013 note:** Class recommendations do not alter PWR-A statuses. PWR-A-020 (evaluation classes ≠ procurement shortlist) remains **ACCEPTED_CONSTRAINT**.
+
 ## 4. Revision history
 
 | Version | Date | Change |
@@ -57,3 +59,4 @@ Assumptions in this register shall **not** be converted to requirements or numer
 | 1.0 | 2026-07-20 | WP-012 initial power-path assumption register — Proposed |
 | 1.1 | 2026-07-20 | WP-012-R1 — PROPOSED_CONSTRAINT status; PWR-A-017/018 disposition |
 | 1.3 | 2026-07-20 | Architecture Review Accepted — PR #16 merged (`9c5c7e7` / `fe700d4`) |
+| 1.4 | 2026-07-20 | WP-013 — note that class recommendations do not change PWR-A statuses |

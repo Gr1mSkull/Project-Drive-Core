@@ -1,9 +1,9 @@
 # DevKit Component-Class Qualification Framework — WP-011
 
 **Document ID:** DOC-DK-CCQF-001  
-**Version:** 1.2  
+**Version:** 1.3  
 **Status:** Accepted — Architecture Review  
-**Work Package:** WP-011  
+**Work Package:** WP-011 (Accepted); WP-013 comparison package Proposed  
 **Date:** 2026-07-20
 
 ```text
@@ -157,6 +157,7 @@ Protection coordination (channel vs system on SC) remains **sizing WP** scope.
 | MPN qualification report | CR-001 path per MPN |
 | DevKit channel-to-class mapping | Schematic WP |
 | Thermal validation package | ADR-DK-011 + sizing WP |
+| WP-013 class comparison + symbolic calcs | [`DevKit_Component_Class_Qualification_Report.md`](DevKit_Component_Class_Qualification_Report.md) — **Proposed** |
 
 ## 10. Revision history
 
@@ -165,3 +166,4 @@ Protection coordination (channel vs system on SC) remains **sizing WP** scope.
 | 1.0 | 2026-07-20 | WP-011 initial component-class qualification framework — Proposed |
 | 1.1 | 2026-07-20 | WP-011-R1 — evaluation-class terminology; procurement disclaimer; qualification gating |
 | 1.2 | 2026-07-20 | Architecture Review Accepted — PR #15 |
+| 1.3 | 2026-07-20 | WP-013 — cross-ref qualification report (framework unchanged; no MPN) |
