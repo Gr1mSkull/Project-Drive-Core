@@ -193,6 +193,7 @@ Blocked cases (approx): 26
 * WP-009 Architecture Review (2026-07-20): **Accepted** — threshold analysis methods Accepted; numeric values Open; evidence NOT VERIFIED; functional electrical architecture authorized.
 * WP-010 (2026-07-20): Functional electrical architecture **Accepted** — WP-010-R1 Accepted; architecture refs in DevKit FEA package; **no** threshold Resolved; **no** requirement Verified; evidence NOT VERIFIED; WP-011 authorized.
 * WP-010 Architecture Review (2026-07-20): PR #14 merged (`c98ce56`); functional decomposition Accepted; sizing/schematic/PCB NOT AUTHORIZED.
+* WP-011 (2026-07-20): EDL-011 clarification **Proposed**; component-class framework **Proposed**; EDL files unchanged; TBD-DK-007 BLOCKED; NOT VERIFIED unchanged.
 * WP-007-R4: Method:Test cases enforce semantic placeholder policy (unjustified placeholders remaining = 0).
 * EDL-014 meaning unchanged.
 
@@ -213,3 +214,4 @@ Blocked cases (approx): 26
 | 1.5.5 | 2026-07-20 | WP-009 Architecture Review Accepted — methods Accepted; numeric Open; NOT VERIFIED retained |
 | 1.5.6 | 2026-07-20 | WP-010 — functional electrical architecture Proposed; architecture refs; NOT VERIFIED retained |
 | 1.5.7 | 2026-07-20 | WP-010 Architecture Review Accepted — functional architecture Accepted; NOT VERIFIED retained |
+| 1.5.8 | 2026-07-20 | WP-011 — EDL-011 proposal + component-class refs; NOT VERIFIED retained |

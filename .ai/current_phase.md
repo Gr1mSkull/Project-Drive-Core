@@ -1,6 +1,6 @@
 # DriveCore — Current Phase
 
-**Updated:** WP-010 Accepted — DevKit functional electrical architecture (2026-07-20)
+**Updated:** WP-011 Proposed — EDL-011 clarification + component-class prep (2026-07-20)
 
 ## Documentation
 
@@ -16,8 +16,9 @@
 | **WP-008 DevKit P0 architecture decisions** | ✅ Accepted (2026-07-20) — ADR-016…023 |
 | **WP-009 DevKit threshold analysis** | ✅ Accepted (2026-07-20) — methods Accepted; numeric Open |
 | **WP-010 DevKit functional electrical architecture** | ✅ Accepted (2026-07-20) — WP-010-R1 Accepted |
+| **WP-011 EDL-011 + component-class prep** | ⏳ Proposed — Architecture Review pending |
 
-## DevKit (WP-007 … WP-010)
+## DevKit (WP-007 … WP-011)
 
 | Item | Status |
 |------|--------|
@@ -26,8 +27,10 @@
 | P0 ADRs ADR-016…023 | **Accepted** |
 | Threshold analysis methods | **Accepted** (WP-009) |
 | Threshold numeric values | **Open** (TBD-DK-001…022) |
-| TBD-DK-007 | **BLOCKED_BY_EDL_CLARIFICATION** |
+| TBD-DK-007 | **BLOCKED_BY_EDL_CLARIFICATION** — WP-011 proposal pending Review |
 | Functional electrical architecture | **Accepted** (WP-010 / WP-010-R1) |
+| EDL-011 clarification proposal | **Proposed** (WP-011) |
+| Component-class qualification prep | **Proposed** (WP-011) |
 | Hardware design approved | **No** — NOT IMPLEMENTED |
 | Detailed electrical sizing | **NOT AUTHORIZED** |
 | Schematics / PCB | **NOT AUTHORIZED** |
@@ -35,16 +38,14 @@
 | Physical verification | **NOT VERIFIED** |
 | Remaining open requests | ADR-DK-008, 009, 011, 012 |
 
-## Next authorized work
+## Next authorized work (after WP-011 acceptance)
 
-**WP-011** — EDL-011 clarification + preliminary component-class qualification preparation.
-
-Not authorized without separate WP: electrical sizing · schematics · PCB · firmware · fixtures · marking thresholds Resolved · marking requirements Verified.
+Component-class qualification execution · electrical sizing and protection coordination · optional EDL-011 text CR · fixture/load-bank requirements.
 
 ## Active branch
 
-`main` @ `c98ce56` — PR #14 merged (WP-010 Accepted, 2026-07-20)
+`cursor/wp011-edl011-component-class-3bb9` (PR pending)
 
 ## Do not start without approval
 
-Final sizing/freeze · PCB/schematics · component BOM · firmware · fixture construction · marking thresholds Resolved · marking requirements Verified
+MPN selection · BOM · schematics · PCB · numeric threshold approval · EDL file edit · firmware · fixture construction

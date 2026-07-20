@@ -1,9 +1,9 @@
 # DriveCore Gen1 DevKit — Document Set
 
 **Document ID:** DOC-DK-INDEX-001  
-**Version:** 1.8  
-**Status:** Accepted  
-**Work Package:** WP-007 / WP-008 (Accepted) / WP-009 (Accepted) / WP-010 (Accepted)  
+**Version:** 1.9  
+**Status:** Accepted (index); WP-011 **Proposed**  
+**Work Package:** WP-007 / WP-008 (Accepted) / WP-009 (Accepted) / WP-010 (Accepted) / WP-011 (Proposed)  
 **Date:** 2026-07-20
 
 ```text
@@ -40,6 +40,10 @@ It does **not** define the final circuit, PCB, component set, enclosure, or BOM.
 | [DevKit_Measurement_Point_Register.md](DevKit_Measurement_Point_Register.md) | WP-010 measurement points (MP-*) | Accepted |
 | [DevKit_Electrical_Interface_Register.md](DevKit_Electrical_Interface_Register.md) | WP-010 interface register (IF-DK-*) | Accepted |
 | [DevKit_Electrical_Architecture_Open_Issues.md](DevKit_Electrical_Architecture_Open_Issues.md) | WP-010 open issues and downstream WPs | Accepted |
+| [DevKit_EDL011_Clarification_Proposal.md](DevKit_EDL011_Clarification_Proposal.md) | WP-011 EDL-011 interpretation proposal (EDL unchanged) | Proposed |
+| [DevKit_Component_Class_Qualification_Framework.md](DevKit_Component_Class_Qualification_Framework.md) | WP-011 component-class qualification criteria | Proposed |
+| [DevKit_Component_Class_Matrix.md](DevKit_Component_Class_Matrix.md) | WP-011 candidate component classes (no MPN) | Proposed |
+| [DevKit_Electrical_Design_Input_Register.md](DevKit_Electrical_Design_Input_Register.md) | WP-011 electrical design inputs (ED-IN-*) | Proposed |
 | This README | Navigation and authority statement | Accepted |
 
 ## Relationship to EDL-014
@@ -82,6 +86,8 @@ Every DevKit gate evidence package shall record a **composite system baseline** 
 | Review Handoff (WP-009) | [`docs/records/review_handoffs/RHP-2026-003_wp009-devkit-threshold-analysis.md`](../records/review_handoffs/RHP-2026-003_wp009-devkit-threshold-analysis.md) |
 | CIA (WP-010) | [`docs/records/change_impact/CIA-2026-005_wp010-devkit-functional-electrical-architecture.md`](../records/change_impact/CIA-2026-005_wp010-devkit-functional-electrical-architecture.md) |
 | Review Handoff (WP-010) | [`docs/records/review_handoffs/RHP-2026-004_wp010-devkit-functional-electrical-architecture.md`](../records/review_handoffs/RHP-2026-004_wp010-devkit-functional-electrical-architecture.md) |
+| CIA (WP-011) | [`docs/records/change_impact/CIA-2026-006_wp011-edl011-component-class.md`](../records/change_impact/CIA-2026-006_wp011-edl011-component-class.md) |
+| Review Handoff (WP-011) | [`docs/records/review_handoffs/RHP-2026-005_wp011-edl011-component-class.md`](../records/review_handoffs/RHP-2026-005_wp011-edl011-component-class.md) |
 | P0 ADR package | [`docs/ADR/README.md`](../ADR/README.md) — ADR-016…023 **Accepted** |
 | Traceability | [`docs/traceability/TRACEABILITY_MATRIX.md`](../traceability/TRACEABILITY_MATRIX.md) |
 | SRS pointer | [`docs/SRS/Volume_2_DCC.md`](../SRS/Volume_2_DCC.md) §8.1 |
@@ -96,6 +102,7 @@ Every DevKit gate evidence package shall record a **composite system baseline** 
 | P0 ADRs ADR-016…023 | **Accepted** (WP-008; ADR-021/022 numerics Open) |
 | WP-009 threshold analysis | **Accepted** (2026-07-20) — methods Accepted; numeric values **Open** |
 | WP-010 functional electrical architecture | **Accepted** (2026-07-20) — WP-010-R1 Accepted |
+| WP-011 EDL-011 + component-class prep | **Proposed** — Architecture Review pending |
 | Hardware design | **NOT IMPLEMENTED** — detailed sizing/schematic/PCB **NOT AUTHORIZED** |
 | Firmware bring-up | NOT IMPLEMENTED |
 | Physical verification | NOT VERIFIED |
@@ -109,9 +116,9 @@ Still open decision **requests** (no Accepted ADR yet): `ADR-DK-008`, `ADR-DK-00
 
 Open thresholds: `TBD-DK-001` … `TBD-DK-022` (Status Open — WP-009 methods Accepted; numeric values not Approved).
 
-**Next authorized WP:** WP-011 — EDL-011 clarification + preliminary component-class qualification preparation.
+**Next step:** Architecture Review of WP-011 (EDL-011 proposal + component-class framework).
 
-**Not authorized:** conductor/connector/fuse/PCB sizing · thermal freeze · schematics · firmware · fixtures.
+**Not authorized:** MPN selection · BOM · schematics · PCB · numeric threshold approval · EDL file edit.
 
 ## Revision history
 
@@ -127,3 +134,4 @@ Open thresholds: `TBD-DK-001` … `TBD-DK-022` (Status Open — WP-009 methods A
 | 1.6 | 2026-07-20 | WP-009 Architecture Review — analysis package Accepted; functional electrical architecture authorized |
 | 1.7 | 2026-07-20 | WP-010 — functional electrical architecture package (Proposed) |
 | 1.8 | 2026-07-20 | WP-010 Architecture Review — functional electrical architecture Accepted; WP-011 authorized |
+| 1.9 | 2026-07-20 | WP-011 — EDL-011 clarification proposal + component-class qualification prep (Proposed) |
