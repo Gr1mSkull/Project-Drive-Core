@@ -8,7 +8,7 @@
 | **Author** | Implementation Engineer (cloud agent) |
 | **Author role** | Implementation Engineer |
 | **Date** | 2026-07-20 |
-| **Status** | **Accepted** — Architecture Review (2026-07-20); reviewed head `084f579`; PR #18 approved for merge |
+| **Status** | **Accepted** — Architecture Review (2026-07-20); reviewed head `084f579`; PR #18 merged (`7c72181` / `e46aff4`) |
 | **Related WP / CR** | WP-014 / WP-014-R1 / WP-014-R2 / WP-014-R3; depends on WP-013 Accepted (`ee462fb`+); ADR-016…023 Accepted |
 
 ### Reason for Change
@@ -352,3 +352,4 @@ Physical tests: **NOT EXECUTED**.
 | 1.3 | 2026-07-20 | WP-014-R2 — fault-energy nominal-bound removed; topology-neutral back-feed; R2-A/B/C validation |
 | 1.4 | 2026-07-20 | WP-014-R3 — metadata reconciled (R1/R2/R3); FX group notation; R3-D ID-allocation check |
 | 1.5 | 2026-07-20 | WP-014 Architecture Acceptance recorded — Accepted; PR #18 approved for merge; PWR-A-021…024 ACCEPTED_CONSTRAINT; WP-015 authorized |
+| 1.6 | 2026-07-20 | WP-014 PR #18 merged (`7c72181` / `e46aff4`) — merge commit recorded |

@@ -11,7 +11,7 @@
 | **Date** | 2026-07-20 |
 | **Implementer** | Implementation Engineer (cloud agent) |
 | **Implementer role** | Implementation Engineer |
-| **Status** | **Accepted** — Architecture Review (2026-07-20); PR #18 approved for merge |
+| **Status** | **Accepted** — Architecture Review (2026-07-20); PR #18 merged (`7c72181` / `e46aff4`) |
 
 ### R1 corrections summary
 
@@ -331,7 +331,7 @@ Physical tests: **NOT EXECUTED**.
 |-------|-------|
 | **Implementer Self-Review Status** | Complete (R3) |
 | **Independent Review Status** | Complete — Architecture Review |
-| **Final Review Outcome** | **Accepted** — Architecture Review (2026-07-20); WP-014 / R1 / R2 / R3 Accepted; PR #18 approved for merge (reviewed head `084f579`); REQ-DCC-V-FX-* Accepted but NOT VERIFIED; fixture NOT IMPLEMENTED |
+| **Final Review Outcome** | **Accepted** — Architecture Review (2026-07-20); WP-014 / R1 / R2 / R3 Accepted; PR #18 merged (`7c72181` / `e46aff4`; reviewed head `084f579`); REQ-DCC-V-FX-* Accepted but NOT VERIFIED; fixture NOT IMPLEMENTED |
 | **Architecture / policy approval** | Accepted — System Architect (2026-07-20); PWR-A-021…024 → ACCEPTED_CONSTRAINT; WP-015 authorized |
 
 ## Revision history
@@ -344,3 +344,4 @@ Physical tests: **NOT EXECUTED**.
 | 1.3 | 2026-07-20 | WP-014-R2 — fault-energy consistency; topology-neutral back-feed; R2-A/B/C |
 | 1.4 | 2026-07-20 | WP-014-R3 — self-contained V1–V7 + R2-A/B/C; full 17 questions; FX-group notation; R3-D ID check; metadata reconciled |
 | 1.5 | 2026-07-20 | WP-014 Architecture Acceptance recorded — Accepted; PR #18 approved for merge; WP-015 authorized |
+| 1.6 | 2026-07-20 | WP-014 PR #18 merged (`7c72181` / `e46aff4`) — merge commit recorded |

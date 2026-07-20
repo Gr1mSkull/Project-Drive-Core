@@ -1,7 +1,7 @@
 # DriveCore Gen1 DevKit — Document Set
 
 **Document ID:** DOC-DK-INDEX-001  
-**Version:** 1.22  
+**Version:** 1.23  
 **Status:** Accepted (index); WP-013 **Accepted**; WP-014 **Accepted**  
 **Work Package:** WP-007…WP-014 (Accepted)  
 **Date:** 2026-07-20
@@ -132,7 +132,7 @@ Every DevKit gate evidence package shall record a **composite system baseline** 
 | WP-011 EDL-011 + component-class prep | **Accepted** (2026-07-20) — WP-011-R1 Accepted |
 | WP-012 electrical sizing architecture framework | **Accepted** (2026-07-20) — WP-012-R1/R2 Accepted; PR #16 merged (`9c5c7e7` / `fe700d4`) |
 | WP-013 component-class qualification + symbolic calcs | **Accepted** (2026-07-20) — WP-013-R1 Accepted; PR #17 merged (`d1698a0` / `23bdb07`); final classes/topology Open |
-| WP-014 fixture and load-bank requirements | **Accepted** — Architecture Review (2026-07-20); WP-014-R1/R2/R3 Accepted; PR #18 approved for merge; fixture hardware NOT IMPLEMENTED; no procurement/construction; no VE |
+| WP-014 fixture and load-bank requirements | **Accepted** — Architecture Review (2026-07-20); WP-014-R1/R2/R3 Accepted; PR #18 merged (`7c72181` / `e46aff4`); fixture hardware NOT IMPLEMENTED; no procurement/construction; no VE |
 | Hardware design | **NOT IMPLEMENTED** — detailed sizing/schematic/PCB **NOT AUTHORIZED** |
 | Firmware bring-up | NOT IMPLEMENTED |
 | Physical verification | NOT VERIFIED |
@@ -178,3 +178,4 @@ Open thresholds: `TBD-DK-001` … `TBD-DK-022` (Status Open — WP-009 methods A
 | 1.20 | 2026-07-20 | WP-014-R1 — architecture consistency corrections; Ready for Final Architecture Review |
 | 1.21 | 2026-07-20 | WP-014-R2/R3 — fault-energy consistency; self-contained RHP; FX group notation; Ready for Final Architecture Acceptance |
 | 1.22 | 2026-07-20 | WP-014 Architecture Acceptance — package Accepted; PR #18 approved for merge; WP-015 authorized |
+| 1.23 | 2026-07-20 | WP-014 PR #18 merged (`7c72181` / `e46aff4`) — acceptance metadata recorded on main |

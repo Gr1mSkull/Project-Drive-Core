@@ -13,7 +13,7 @@
 | 5 Implementation scaffold | ✅ v0.1 (`firmware/shared`, tools, web/ui) |
 | WP-001…WP-006 / CR-001 / CR-002 / ADR-015 | ✅ on `main` (see git history) |
 | **WP-007…WP-014 DevKit packages** | ✅ Accepted (2026-07-20) — evidence NOT VERIFIED |
-| **WP-014 fixture and load-bank requirements** | ✅ Accepted (2026-07-20) — R1/R2/R3 Accepted; PR #18 approved for merge; evidence NOT VERIFIED |
+| **WP-014 fixture and load-bank requirements** | ✅ Accepted (2026-07-20) — R1/R2/R3 Accepted; PR #18 merged (`e46aff4`); evidence NOT VERIFIED |
 
 ## DevKit (WP-007 … WP-014)
 
@@ -37,7 +37,7 @@
 
 ## Active branch
 
-`cursor/wp014-devkit-fixture-load-bank-requirements-3bb9` — WP-014 Accepted; PR #18 approved for merge
+`main` — WP-014 Accepted; PR #18 merged (`e46aff4`)
 
 ## Do not start without approval
 
