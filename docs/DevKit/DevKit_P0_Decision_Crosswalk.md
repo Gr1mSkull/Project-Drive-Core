@@ -129,11 +129,20 @@ This acceptance update does not rewrite the BOM or select a component.
 | ADR-022 | Safe-state paths — [`DevKit_Safe_State_Path_Matrix.md`](DevKit_Safe_State_Path_Matrix.md) | Proposed |
 | ADR-023 | Fault containment — §18 | Accepted |
 
-**Next authorized WP:** WP-011 — EDL-011 clarification + component-class qualification preparation.
+**Next authorized work:** Component-class qualification execution · electrical sizing · fixture requirements.
 
-**Not authorized by WP-010:** sizing · schematics · PCB · firmware · fixtures.
+**Not authorized by WP-011:** MPN selection · BOM · schematics · PCB · numeric threshold approval · EDL file edit. `TBD-DK-007` remains **BLOCKED_BY_EDL_CLARIFICATION** (not Resolved).
 
-## 9. Related records
+## 9. WP-011 EDL-011 + component-class preparation mapping
+
+| Artifact | Document | Status |
+|----------|----------|--------|
+| EDL-011 interpretation (Option D) | [`DevKit_EDL011_Clarification_Proposal.md`](DevKit_EDL011_Clarification_Proposal.md) | Accepted |
+| Component-class qualification framework | [`DevKit_Component_Class_Qualification_Framework.md`](DevKit_Component_Class_Qualification_Framework.md) | Accepted |
+| Evaluation-class matrix | [`DevKit_Component_Class_Matrix.md`](DevKit_Component_Class_Matrix.md) | Accepted |
+| Electrical design input register | [`DevKit_Electrical_Design_Input_Register.md`](DevKit_Electrical_Design_Input_Register.md) | Accepted |
+
+## 10. Related records
 
 | Record | Path |
 |--------|------|
@@ -153,3 +162,4 @@ This acceptance update does not rewrite the BOM or select a component.
 | 1.5 | 2026-07-20 | WP-009 Architecture Review — methods Accepted; functional electrical architecture authorized |
 | 1.6 | 2026-07-20 | WP-010 — functional electrical architecture Proposed; ADR-019/020/021 architecture refs |
 | 1.7 | 2026-07-20 | WP-010 Architecture Review — functional electrical architecture Accepted |
+| 1.8 | 2026-07-20 | WP-011 Architecture Review — EDL-011 + component-class prep Accepted; TBD-DK-007 BLOCKED retained |

@@ -1,9 +1,9 @@
 # DriveCore Gen1 DevKit — Document Set
 
 **Document ID:** DOC-DK-INDEX-001  
-**Version:** 1.10  
-**Status:** Accepted (index); WP-011 **Ready for Final Architecture Review**  
-**Work Package:** WP-007 / WP-008 (Accepted) / WP-009 (Accepted) / WP-010 (Accepted) / WP-011 (Proposed)  
+**Version:** 1.11  
+**Status:** Accepted (index); WP-011 **Accepted**  
+**Work Package:** WP-007 / WP-008 (Accepted) / WP-009 (Accepted) / WP-010 (Accepted) / WP-011 (Accepted)  
 **Date:** 2026-07-20
 
 ```text
@@ -40,10 +40,10 @@ It does **not** define the final circuit, PCB, component set, enclosure, or BOM.
 | [DevKit_Measurement_Point_Register.md](DevKit_Measurement_Point_Register.md) | WP-010 measurement points (MP-*) | Accepted |
 | [DevKit_Electrical_Interface_Register.md](DevKit_Electrical_Interface_Register.md) | WP-010 interface register (IF-DK-*) | Accepted |
 | [DevKit_Electrical_Architecture_Open_Issues.md](DevKit_Electrical_Architecture_Open_Issues.md) | WP-010 open issues and downstream WPs | Accepted |
-| [DevKit_EDL011_Clarification_Proposal.md](DevKit_EDL011_Clarification_Proposal.md) | WP-011 EDL-011 interpretation proposal (EDL unchanged) | Ready for Final Architecture Review |
-| [DevKit_Component_Class_Qualification_Framework.md](DevKit_Component_Class_Qualification_Framework.md) | WP-011 component-class qualification criteria | Ready for Final Architecture Review |
-| [DevKit_Component_Class_Matrix.md](DevKit_Component_Class_Matrix.md) | WP-011 evaluation component classes (no MPN) | Ready for Final Architecture Review |
-| [DevKit_Electrical_Design_Input_Register.md](DevKit_Electrical_Design_Input_Register.md) | WP-011 electrical design inputs (ED-IN-*) | Ready for Final Architecture Review |
+| [DevKit_EDL011_Clarification_Proposal.md](DevKit_EDL011_Clarification_Proposal.md) | WP-011 EDL-011 interpretation proposal (EDL unchanged) | Accepted |
+| [DevKit_Component_Class_Qualification_Framework.md](DevKit_Component_Class_Qualification_Framework.md) | WP-011 component-class qualification criteria | Accepted |
+| [DevKit_Component_Class_Matrix.md](DevKit_Component_Class_Matrix.md) | WP-011 evaluation component classes (no MPN) | Accepted |
+| [DevKit_Electrical_Design_Input_Register.md](DevKit_Electrical_Design_Input_Register.md) | WP-011 electrical design inputs (ED-IN-*) | Accepted |
 | This README | Navigation and authority statement | Accepted |
 
 ## Relationship to EDL-014
@@ -102,7 +102,7 @@ Every DevKit gate evidence package shall record a **composite system baseline** 
 | P0 ADRs ADR-016…023 | **Accepted** (WP-008; ADR-021/022 numerics Open) |
 | WP-009 threshold analysis | **Accepted** (2026-07-20) — methods Accepted; numeric values **Open** |
 | WP-010 functional electrical architecture | **Accepted** (2026-07-20) — WP-010-R1 Accepted |
-| WP-011 EDL-011 + component-class prep | **Ready for Final Architecture Review** — WP-011-R1 applied |
+| WP-011 EDL-011 + component-class prep | **Accepted** (2026-07-20) — WP-011-R1 Accepted |
 | Hardware design | **NOT IMPLEMENTED** — detailed sizing/schematic/PCB **NOT AUTHORIZED** |
 | Firmware bring-up | NOT IMPLEMENTED |
 | Physical verification | NOT VERIFIED |
@@ -114,9 +114,9 @@ P0 ADRs ADR-016…023 (ADR-DK-001…007, 010) are **Accepted** (WP-008 Architect
 
 Still open decision **requests** (no Accepted ADR yet): `ADR-DK-008`, `ADR-DK-009`, `ADR-DK-011`, `ADR-DK-012`.
 
-Open thresholds: `TBD-DK-001` … `TBD-DK-022` (Status Open — WP-009 methods Accepted; numeric values not Approved).
+Open thresholds: `TBD-DK-001` … `TBD-DK-022` (Status Open — WP-009 methods Accepted; numeric values not Approved). `TBD-DK-007` remains **BLOCKED_BY_EDL_CLARIFICATION** — not Resolved.
 
-**Next step:** Final Architecture Review of WP-011 (WP-011-R1 corrections applied).
+**Next step:** Component-class qualification / electrical sizing (TBD-DK-007 blocker unchanged).
 
 **Not authorized:** MPN selection · BOM · schematics · PCB · numeric threshold approval · EDL file edit.
 
@@ -136,3 +136,4 @@ Open thresholds: `TBD-DK-001` … `TBD-DK-022` (Status Open — WP-009 methods A
 | 1.8 | 2026-07-20 | WP-010 Architecture Review — functional electrical architecture Accepted; WP-011 authorized |
 | 1.9 | 2026-07-20 | WP-011 — EDL-011 clarification proposal + component-class qualification prep (Proposed) |
 | 1.10 | 2026-07-20 | WP-011-R1 — review corrections; Ready for Final Architecture Review |
+| 1.11 | 2026-07-20 | Architecture Review — WP-011 Accepted; PR #15 merged (`07c550c`); TBD-DK-007 BLOCKED unchanged |

@@ -8,7 +8,7 @@
 | **Author** | Implementation Engineer (cloud agent) |
 | **Author role** | Implementation Engineer |
 | **Date** | 2026-07-20 |
-| **Status** | Draft — Under Architecture Review |
+| **Status** | Accepted — Architecture Review |
 | **Related WP / CR** | WP-011; depends on WP-010 Accepted (`c98ce56`+); ADR-016…023 Accepted |
 
 ### Reason for Change
@@ -136,3 +136,4 @@ See RHP-2026-005 and EDL-011 proposal §6.
 |---------|------|--------|
 | 1.0 | 2026-07-20 | WP-011 initial CIA — Draft |
 | 1.1 | 2026-07-20 | WP-011-R1 — Level 1 documentation corrections |
+| 1.2 | 2026-07-20 | Architecture Review Accepted — PR #15 merged (`07c550c`); TBD-DK-007 BLOCKED retained |

@@ -1,8 +1,8 @@
 # DevKit Electrical Design Input Register — WP-011
 
 **Document ID:** DOC-DK-EDIR-001  
-**Version:** 1.1  
-**Status:** Ready for Final Architecture Review  
+**Version:** 1.2  
+**Status:** Accepted — Architecture Review  
 **Work Package:** WP-011  
 **Date:** 2026-07-20
 
@@ -78,8 +78,8 @@ WP-011 adds **ED-IN-029..032** as architecture-prep inputs; does **not** resolve
 
 | Dimension | Disposition |
 |-----------|-------------|
-| **Semantics** | **Accepted architecture interpretation** — Option D; EDL-011 file unchanged |
-| **Numeric threshold** | **Open** — TBD-DK-007 register Status Open |
+| **Semantics** | **Accepted architecture interpretation** — Option D (WP-011 Accepted); EDL-011 file unchanged |
+| **Numeric threshold** | **Open** — TBD-DK-007 register **BLOCKED_BY_EDL_CLARIFICATION** (not Resolved) |
 | **Verification** | **Not Verified** — no VE records; VER-DCC-DK-A-008 / C-012 BLOCKED for numeric PASS |
 
 ```text
@@ -92,3 +92,4 @@ WP-011 Option D is an architectural interpretation only and does not modify EDL-
 |---------|------|--------|
 | 1.0 | 2026-07-20 | WP-011 initial electrical design input register — Proposed |
 | 1.1 | 2026-07-20 | WP-011-R1 — R6 dependency-reference rule; TBD-DK-007 disposition separation |
+| 1.2 | 2026-07-20 | Architecture Review Accepted — PR #15; TBD-DK-007 BLOCKED retained |

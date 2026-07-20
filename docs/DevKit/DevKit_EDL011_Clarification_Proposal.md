@@ -1,8 +1,8 @@
 # DevKit EDL-011 Clarification Proposal — WP-011
 
 **Document ID:** DOC-DK-EDL011-001  
-**Version:** 1.1  
-**Status:** Ready for Final Architecture Review  
+**Version:** 1.2  
+**Status:** Accepted — Architecture Review  
 **Work Package:** WP-011  
 **Date:** 2026-07-20  
 **Author role:** Implementation Engineer
@@ -164,10 +164,11 @@ WP-011 separates three independent dimensions. Accepting Option D semantics does
 WP-011 Option D is an architectural interpretation only and does not modify EDL-011.
 ```
 
-| Field | WP-011 disposition |
-|-------|-------------------|
+| Field | WP-011 disposition (post-Acceptance) |
+|-------|-------------------------------------|
 | Register Status | **Open** (unchanged) |
-| Prior blocker label | **BLOCKED_BY_EDL_CLARIFICATION** — semantics layer addressed by Option D; numeric/verification Open |
+| Blocker | **BLOCKED_BY_EDL_CLARIFICATION** — **not Resolved** |
+| Architecture interpretation | Option D **Accepted** (WP-011); EDL-011 file unchanged |
 | Methods Accepted | WP-009 budget + measurement (unchanged) |
 
 ## 9. Traceability
@@ -186,3 +187,4 @@ WP-011 Option D is an architectural interpretation only and does not modify EDL-
 |---------|------|--------|
 | 1.0 | 2026-07-20 | WP-011 initial EDL-011 clarification proposal — Proposed |
 | 1.1 | 2026-07-20 | WP-011-R1 — Option D scope statement; TBD-DK-007 disposition separation; Ready for Final Architecture Review |
+| 1.2 | 2026-07-20 | Architecture Review Accepted — PR #15; TBD-DK-007 BLOCKED_BY_EDL_CLARIFICATION retained |

@@ -109,7 +109,7 @@ Revert WP-011 PR (including R1); WP-010 baseline preserved; TBD-DK-007 numeric O
 | **Independent Reviewer (name/agent)** | TBD |
 | **Independent Reviewer role** | Independent Reviewer |
 | **Independent review date** | TBD |
-| **Final Review Outcome** | **Ready for Final Architecture Review** — WP-011-R1 applied |
+| **Final Review Outcome** | **Accepted** — Architecture Review (2026-07-20); PR #15 merged (`07c550c`) |
 | **Architecture / policy approval** | Separate — System Architect only |
 
 ## Revision history
@@ -118,3 +118,4 @@ Revert WP-011 PR (including R1); WP-010 baseline preserved; TBD-DK-007 numeric O
 |---------|------|--------|
 | 1.0 | 2026-07-20 | WP-011 initial RHP — Draft |
 | 1.1 | 2026-07-20 | WP-011-R1 — review corrections; Ready for Final Architecture Review |
+| 1.2 | 2026-07-20 | Architecture Review Accepted — PR #15; TBD-DK-007 BLOCKED_BY_EDL_CLARIFICATION retained |

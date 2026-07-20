@@ -1,6 +1,6 @@
 # DriveCore — Current Phase
 
-**Updated:** WP-011 Ready for Final Architecture Review — WP-011-R1 (2026-07-20)
+**Updated:** WP-011 Accepted — EDL-011 clarification + component-class prep (2026-07-20); PR #15 merged (`07c550c`)
 
 ## Documentation
 
@@ -16,7 +16,7 @@
 | **WP-008 DevKit P0 architecture decisions** | ✅ Accepted (2026-07-20) — ADR-016…023 |
 | **WP-009 DevKit threshold analysis** | ✅ Accepted (2026-07-20) — methods Accepted; numeric Open |
 | **WP-010 DevKit functional electrical architecture** | ✅ Accepted (2026-07-20) — WP-010-R1 Accepted |
-| **WP-011 EDL-011 + component-class prep** | ⏳ Ready for Final Architecture Review — WP-011-R1 |
+| **WP-011 EDL-011 + component-class prep** | ✅ Accepted (2026-07-20) — WP-011-R1 Accepted |
 
 ## DevKit (WP-007 … WP-011)
 
@@ -28,9 +28,9 @@
 | Threshold analysis methods | **Accepted** (WP-009) |
 | Threshold numeric values | **Open** (TBD-DK-001…022) |
 | Functional electrical architecture | **Accepted** (WP-010 / WP-010-R1) |
-| TBD-DK-007 | **Semantics:** Accepted architecture interpretation (Option D) · **Numeric:** Open · **Verification:** Not Verified |
-| EDL-011 clarification proposal | **Ready for Final Architecture Review** (WP-011-R1) |
-| Component-class qualification prep | **Ready for Final Architecture Review** (WP-011-R1) |
+| TBD-DK-007 | **BLOCKED_BY_EDL_CLARIFICATION** — not Resolved; numeric Open; verification Not Verified |
+| EDL-011 clarification proposal | **Accepted** (WP-011 / WP-011-R1) |
+| Component-class qualification prep | **Accepted** (WP-011 / WP-011-R1) |
 | Hardware design approved | **No** — NOT IMPLEMENTED |
 | Detailed electrical sizing | **NOT AUTHORIZED** |
 | Schematics / PCB | **NOT AUTHORIZED** |
@@ -38,13 +38,13 @@
 | Physical verification | **NOT VERIFIED** |
 | Remaining open requests | ADR-DK-008, 009, 011, 012 |
 
-## Next authorized work (after WP-011 acceptance)
+## Next authorized work
 
 Component-class qualification execution · electrical sizing and protection coordination · optional EDL-011 text CR · fixture/load-bank requirements.
 
 ## Active branch
 
-`cursor/wp011-edl011-component-class-3bb9` — PR #15 (Final Architecture Review pending)
+`main` @ `07c550c`+ (WP-011 Accepted — PR #15)
 
 ## Do not start without approval
 
