@@ -51,7 +51,7 @@ Fixture / load-bank requirements · ADR-DK-011 / ADR-DK-012 · concrete MPN qual
 
 ## Active branch
 
-`cursor/wp013-devkit-component-class-qualification-3bb9` — WP-013 Proposed
+`cursor/wp013-devkit-component-class-qualification-3bb9` — PR #17 (Architecture Review pending)
 
 ## Do not start without approval
 
