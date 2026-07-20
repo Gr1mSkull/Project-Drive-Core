@@ -1,7 +1,7 @@
 # DevKit Power-Path Assumption Register — WP-012
 
 **Document ID:** DOC-DK-PPAR-001  
-**Version:** 1.3  
+**Version:** 1.5  
 **Status:** Accepted — Architecture Review  
 **Work Package:** WP-012  
 **Date:** 2026-07-20
@@ -13,7 +13,7 @@ Assumptions and constraints for power-path sizing. **Not** approved design input
 | Status | Meaning |
 |--------|---------|
 | **ACCEPTED_CONSTRAINT** | Architecturally Accepted boundary — not a numeric value; exact Accepted source cited |
-| **PROPOSED_CONSTRAINT** | First introduced by WP-012 — **Proposed** until Architecture Review acceptance; WP-012 shall not self-approve |
+| **PROPOSED_CONSTRAINT** | First introduced by a WP — **Proposed** until Architecture Review acceptance; Implementation Engineer shall not self-approve |
 | **OPEN_ASSUMPTION** | Documented assumption; closure required |
 | **BLOCKED** | Cannot proceed without listed artifact |
 | **REJECTED** | Shall not be used as normative basis |
@@ -43,6 +43,10 @@ Assumptions and constraints for power-path sizing. **Not** approved design input
 | **PWR-A-018** | Software OFF ≠ hardware protection | WP-012 protection framework §3 princ. 7 | WP-012 (first formalized) | **PROPOSED_CONSTRAINT** | No exact Accepted ADR/EDL citation for this wording — parallel safety-layer intent only | SC sustained by SW only | FW Architect | Architecture Review acceptance |
 | **PWR-A-019** | ED-IN entries are dependency references only | WP-011 R6 | Accepted WP-011 | ACCEPTED_CONSTRAINT | No silent input freeze | Treating register as Approved BOM input | System Architect | ED-IN register |
 | **PWR-A-020** | Evaluation classes are not procurement shortlist | WP-011 | Accepted WP-011 | ACCEPTED_CONSTRAINT | Qualification discipline | Premature MPN order | Component Engineer | Qualification WP |
+| **PWR-A-021** | Fixture E-stop is independent of DUT physical KILL and `nENABLE_GLOBAL` | WP-014 FESB | WP-014 (first formalized) | **PROPOSED_CONSTRAINT** | Distinct safety authorities | Merged authorities hide failures | System Architect | Architecture Review WP-014 |
+| **PWR-A-022** | Hazardous fixture AUTH_* default inactive; stale after interruption/reset | WP-014 FFA | WP-014 (first formalized) | **PROPOSED_CONSTRAINT** | No auto-resume | Unexpected energization | System Architect | Architecture Review WP-014 |
+| **PWR-A-023** | EXT-LOAD-BANK is an energy sink, not a source | WP-014 FESB; ADR-020 | WP-014 (first formalized) | **PROPOSED_CONSTRAINT** | Prevent source/sink confusion | Back-feed / wrong evidence | System Architect | Architecture Review WP-014 |
+| **PWR-A-024** | Radio/Tablet have no direct hazardous-energy authority on fixture | WP-014; safety standard | WP-014 (first formalized) | **PROPOSED_CONSTRAINT** | Align ESP32 non-safety | UI-owned energy | System Architect | Architecture Review WP-014 |
 
 ## 3. Prohibited conversions
 
@@ -52,6 +56,8 @@ Assumptions in this register shall **not** be converted to requirements or numer
 
 **WP-013 note:** Class recommendations do not alter PWR-A statuses. PWR-A-020 (evaluation classes ≠ procurement shortlist) remains **ACCEPTED_CONSTRAINT**.
 
+**WP-014 note:** PWR-A-021…024 are **PROPOSED_CONSTRAINT** until Architecture Review. PWR-A-001/002/003/004/005/006/009 remain as prior Accepted/Open statuses. WP-014 shall not cite itself as prior Accepted authority.
+
 ## 4. Revision history
 
 | Version | Date | Change |
@@ -60,3 +66,4 @@ Assumptions in this register shall **not** be converted to requirements or numer
 | 1.1 | 2026-07-20 | WP-012-R1 — PROPOSED_CONSTRAINT status; PWR-A-017/018 disposition |
 | 1.3 | 2026-07-20 | Architecture Review Accepted — PR #16 merged (`9c5c7e7` / `fe700d4`) |
 | 1.4 | 2026-07-20 | WP-013 — note that class recommendations do not change PWR-A statuses |
+| 1.5 | 2026-07-20 | WP-014 — PWR-A-021…024 PROPOSED_CONSTRAINT (fixture authorities / sink / UI) |

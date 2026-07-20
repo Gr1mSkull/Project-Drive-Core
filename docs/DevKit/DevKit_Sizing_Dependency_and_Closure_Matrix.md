@@ -31,7 +31,7 @@ Closure disposition for sizing parameters. Register Status for TBD-DK-* remains 
 | **TBD-DK-022** BI stall | Register | Open | Stall I × duration | Fixture boundary | ADR-019 | BI class | Bridge topology | — | Stall fixture | DK-C-011 | Stall test | Fixture WP |
 | **ADR-DK-011** thermal/environment | Request | Open | Test split definition | T_amb classes | Architect decision | Qual scope | — | Enclosure | Chamber policy | All thermal | Qualification scope | Architect ADR |
 | **ADR-DK-012** connector/enclosure | Request | Open | Entry/distribution class | Connector family | Architect decision | Connector qual | Symbol placement | Mechanical | — | — | Schematic auth | Architect ADR |
-| **OI-GND-001** external GND | OI register | Open | Isolation model | GND option selection | ADR-020/021 | — | Isolation devices | — | Fixture GND | Fixture qual | P6 safety | Fixture + Architect |
+| **OI-GND-001** external GND | OI register | Open | Isolation model | GND option selection | ADR-020/021; WP-014 FESB | — | Isolation devices | — | WP-014 retains Open; EXT block | Fixture qual | P6 safety | Architect + fixture design |
 | **OI-CHAN-001** channel population | OI register | Open | Alias→instance map | Physical count | WP-010-R1 | Channel count | Schematic | Layout | — | Per-channel DK-C | Schematic | Schematic WP |
 | **OI-COMP-001** HS evaluation class | OI register | Open | Class comparison | ED-IN-002/026/030 | ADR-019 | HS class qual | — | — | — | — | Schematic | Component qual WP |
 | **OI-COMP-002** BI evaluation class | OI register | Open | Class comparison | ED-IN-031; TBD-DK-022 | ADR-019 | BI class qual | — | — | Stall fixture | DK-C-011 | Schematic | Component qual WP |
@@ -63,8 +63,10 @@ Readiness legend: **READY_FOR_CLASS_COMPARISON** · **PARTIAL** · **NOT_READY**
 | [`DevKit_Thermal_Sizing_Framework.md`](DevKit_Thermal_Sizing_Framework.md) | Thermal path; states; R_th rules |
 | [`DevKit_Protection_Coordination_Framework.md`](DevKit_Protection_Coordination_Framework.md) | P0–P5; faults; E_FAULT |
 | [`DevKit_Power_Path_Assumption_Register.md`](DevKit_Power_Path_Assumption_Register.md) | PWR-A-* constraints |
-| [`DevKit_Class_Recommendation_and_Readiness_Matrix.md`](DevKit_Class_Recommendation_and_Readiness_Matrix.md) | WP-013 class recommendations (**Proposed**) |
+| [`DevKit_Class_Recommendation_and_Readiness_Matrix.md`](DevKit_Class_Recommendation_and_Readiness_Matrix.md) | WP-013 class recommendations (methodology Accepted; final classes Open) |
 | [`DevKit_Symbolic_Preliminary_Calculations.md`](DevKit_Symbolic_Preliminary_Calculations.md) | WP-013 symbolic calc readiness |
+| [`DevKit_Fixture_Dependency_and_Readiness_Matrix.md`](DevKit_Fixture_Dependency_and_Readiness_Matrix.md) | WP-014 fixture capability readiness (**Proposed**) |
+| [`DevKit_Fixture_and_Load_Bank_Requirements.md`](DevKit_Fixture_and_Load_Bank_Requirements.md) | WP-014 REQ-DCC-V-FX-* (**Proposed**) |
 
 ## 4. Revision history
 
@@ -74,3 +76,4 @@ Readiness legend: **READY_FOR_CLASS_COMPARISON** · **PARTIAL** · **NOT_READY**
 | 1.1 | 2026-07-20 | WP-012-R1 — cross-ref staged closure model |
 | 1.3 | 2026-07-20 | Architecture Review Accepted — PR #16 merged (`9c5c7e7` / `fe700d4`); TBD-DK-007 BLOCKED unchanged |
 | 1.4 | 2026-07-20 | WP-013 — class recommendation / symbolic calc cross-refs (TBD statuses Open unchanged) |
+| 1.5 | 2026-07-20 | WP-014 — fixture readiness cross-refs; TBD/OI statuses Open unchanged |

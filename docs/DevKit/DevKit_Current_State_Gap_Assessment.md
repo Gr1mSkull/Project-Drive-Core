@@ -53,7 +53,8 @@ Audit of existing DevKit-related claims against WP-007 authority rules. Classifi
 | Evidence templates | docs/templates VE | COMPLIANT (scaffold) | CR-002 | No filled VE | Create VE when tests run | Execution WP | P2 |
 | Physical fixtures / load bank | — | NOT IMPLEMENTED | — | Short fixture undefined | Fixture WP + ADR-DK-010 | Fixture WP | P0 |
 | Electrical sizing architecture framework | — | **Accepted** (WP-012) | WP-012 package | No numeric sizing | Methods Accepted | Class qual / provisional baseline | P0 |
-| Component-class qualification comparison | — | **Proposed** (WP-013) | WP-013 package | No MPN; recommendations Proposed | Architecture Review WP-013 | Fixture / MPN prep | P0 |
+| Component-class qualification comparison | — | **Accepted** methodology (WP-013); final classes Open | WP-013 package | Final HS/sense/BI/protection Open; no MPN | Class acceptance + MPN prep (later) | Fixture / class closure | P0 |
+| Fixture and load-bank requirements | — | **Proposed** (WP-014) | WP-014 package | No construction; FX PROPOSED | Architecture Review WP-014 | Fixture prelim design (after accept) | P0 |
 | Automated-test coverage | — | NOT VERIFIED / NOT IMPLEMENTED | — | — | After bring-up | Bench tooling WP | P2 |
 | SRS §8.1 DevKit | Volume_2 placeholder | NOT IMPLEMENTED → pointer added | WP-007 | — | Keep pointer; no text duplication | WP-007 (done) | P0 |
 
@@ -102,3 +103,17 @@ Note: some rows carry dual tags (e.g. CONFLICT/TBD); counts reflect primary seve
 | 1.1 | 2026-07-20 | Architecture Review — ACCEPTED; PR #11 approved for merge (requirements structure, governance, verification-plan structure, traceability baseline) |
 | 1.2 | 2026-07-20 | WP-008 — map P0 gaps to Accepted ADR-016…023; no TBD closures; conflict G431 vs EDL-001 still reported |
 | 1.3 | 2026-07-20 | WP-010 — functional electrical architecture Proposed; gap items reference FEA package |
+
+
+## WP-014 status
+
+| Item | Status |
+|---|---|
+| WP-014 | Proposed — Fixture and Load-Bank Requirements |
+| Fixture requirements | Proposed |
+| Fixture architecture | Proposed |
+| Fixture hardware | Not implemented |
+| Fixture procurement | Not authorized |
+| Fixture construction | Not authorized |
+| Numeric thresholds | Open |
+| Physical verification | NOT VERIFIED |
