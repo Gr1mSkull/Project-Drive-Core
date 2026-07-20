@@ -8,7 +8,7 @@
 - Модель конфигурации
 - Bootloader / OTA pipeline
 
-### WP-007 / WP-008 / WP-009 status (2026-07-20)
+### WP-007 / WP-008 / WP-009 / WP-010 status (2026-07-20)
 
 | Item | Status |
 |------|--------|
@@ -16,13 +16,14 @@
 | DevKit verification plan (DK-A…DK-D) | **Accepted** structure — cases NOT EXECUTED / BLOCKED |
 | DevKit P0 ADRs (ADR-016…023) | **Accepted** (WP-008); ADR-021/022 numerics Open |
 | WP-009 threshold analysis | **Accepted** (2026-07-20); numeric values Open; TBD-DK-007 BLOCKED_BY_EDL_CLARIFICATION |
-| DevKit hardware design | **Not approved** |
-| DevKit built / verified | **No** — NOT IMPLEMENTED / NOT VERIFIED |
+| WP-010 functional electrical architecture | **Proposed** — Architecture Review pending |
+| DevKit hardware design | **NOT IMPLEMENTED** — sizing/schematic/PCB NOT AUTHORIZED |
+| DevKit built / verified | **No** — NOT VERIFIED |
 | Remaining decisions | ADR-DK-008/009/011/012; EDL-011 clarification; thresholds TBD-DK-001…022 Open |
 
-**Next authorized WP:** Functional DevKit electrical architecture.
+**Next step:** Architecture Review of WP-010 functional electrical architecture.
 
-**Next expected engineering stage:** functional electrical architecture → EDL-011 clarification → fixture/load-bank requirements → component qualification → (only then) sizing/PCB/firmware WPs.
+**Next expected engineering stage:** architecture acceptance → EDL-011 clarification → component qualification → electrical sizing → fixture requirements → (only then) schematic/PCB/firmware WPs.
 
 ## Фаза 1 — Первый автомобиль (E30)
 

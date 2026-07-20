@@ -117,7 +117,21 @@ This acceptance update does not rewrite the BOM or select a component.
 | ADR-022 | Option D using Option B timing classes |
 | ADR-023 | Option B scope using Option D injection-method rules |
 
-## 8. Related records
+## 8. WP-010 functional electrical architecture mapping
+
+| ADR | Architecture artifact | Status |
+|-----|----------------------|--------|
+| ADR-016 | Logic domain — [`DevKit_Functional_Electrical_Architecture.md`](DevKit_Functional_Electrical_Architecture.md) §3.1 | Proposed |
+| ADR-017 | Radio domain — §3.2 | Proposed |
+| ADR-019 | Representative channels — [`DevKit_Representative_Channel_Allocation.md`](DevKit_Representative_Channel_Allocation.md) | Proposed |
+| ADR-020 | External bank — §16; CH-HC-EXTERNAL | Proposed |
+| ADR-021 | Input chain — §5, §11 | Proposed |
+| ADR-022 | Safe-state paths — [`DevKit_Safe_State_Path_Matrix.md`](DevKit_Safe_State_Path_Matrix.md) | Proposed |
+| ADR-023 | Fault containment — §18 | Proposed |
+
+**Not authorized by WP-010:** sizing · schematics · PCB · firmware · fixtures.
+
+## 9. Related records
 
 | Record | Path |
 |--------|------|
@@ -135,3 +149,4 @@ This acceptance update does not rewrite the BOM or select a component.
 | 1.3 | 2026-07-20 | Acceptance metadata alignment — conflict disposition; accepted-options summary |
 | 1.4 | 2026-07-20 | WP-009 — threshold analysis dependency on ADR-021/022 |
 | 1.5 | 2026-07-20 | WP-009 Architecture Review — methods Accepted; functional electrical architecture authorized |
+| 1.6 | 2026-07-20 | WP-010 — functional electrical architecture Proposed; ADR-019/020/021 architecture refs |

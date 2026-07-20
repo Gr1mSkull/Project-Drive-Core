@@ -1298,7 +1298,7 @@ is the authoritative source for TBD-DK identifiers.
 Other DevKit documents, CIA, and RHP **shall reference** this register and **shall not** redefine TBD-DK meanings.
 
 Unresolved numeric/procedure thresholds. Candidates from `docs/008` or other sources are **not** normative until closed.
-**Status of all entries: Open.** WP-009 Architecture Review (2026-07-20) Accepted analysis methods and procedural contracts; numeric values remain Open.
+**Status of all entries: Open.** WP-009 Architecture Review (2026-07-20) Accepted analysis methods and procedural contracts; numeric values remain Open. WP-010 (2026-07-20) adds functional electrical architecture references — **does not** resolve numeric thresholds.
 
 ### 4.1 Summary
 
@@ -1638,9 +1638,9 @@ Unresolved numeric/procedure thresholds. Candidates from `docs/008` or other sou
 | Verification cases blocked | VER-DCC-DK-A-003 |
 | Gates affected | DK-A |
 | Owner role | Hardware Engineer |
-| Closure artifact | DevKit electrical architecture WP; WP-009 P1 profile |
+| Closure artifact | [`DevKit_Functional_Electrical_Architecture.md`](DevKit_Functional_Electrical_Architecture.md) §19; WP-009 P1 profile |
 | Status | Open |
-| Acceptance readiness | **BLOCKED_BY_ELECTRICAL_ARCHITECTURE** (WP-009) |
+| Acceptance readiness | WP-010 Proposed — architecture reference added; numeric still Open |
 | Notes | Per-rail list must be explicit when closed. Candidate ±5 % not approved. |
 
 #### TBD-DK-018
@@ -1777,3 +1777,4 @@ Threshold numeric values associated with ADR-DK-006 / ADR-DK-007 / ADR-DK-011 ar
 | 1.5 | 2026-07-20 | WP-009 — threshold analysis references and acceptance-readiness fields; Status Open unchanged |
 | 1.5.1 | 2026-07-20 | WP-009-R1 — EDL clarification block; symbolic scenarios; profile-based TBD-DK-003; no ampere bands |
 | 1.5.2 | 2026-07-20 | WP-009 Architecture Review — methods Accepted; numeric Open; TBD Status Open unchanged |
+| 1.6 | 2026-07-20 | WP-010 — functional electrical architecture references; TBD Status Open unchanged |
