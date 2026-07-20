@@ -43,8 +43,8 @@ ADR-019 represented capabilities
     → DK-C readiness
 
 ADR-022 safety timing
-    → kill/watchdog implementation planning
-    → timing threshold closure WP
+    → WP-009 threshold analysis (Proposed)
+    → timing threshold Architect acceptance
     → DK-A / DK-C readiness
 
 ADR-023 fault injection scope
@@ -127,4 +127,5 @@ This acceptance update does not rewrite the BOM or select a component.
 | 1.0 | 2026-07-20 | WP-008 initial crosswalk |
 | 1.1 | 2026-07-20 | WP-008-R1 — open-load conditional; ADR-023 REQs without 114; supply interruption DK-A/DK-D |
 | 1.2 | 2026-07-20 | Architecture Review — ADR-016…023 Accepted; WP-008 Accepted |
-| 1.3 | 2026-07-20 | Acceptance metadata alignment — conflict disposition; accepted-options summary; blocker section finalized |
+| 1.3 | 2026-07-20 | Acceptance metadata alignment — conflict disposition; accepted-options summary |
+| 1.4 | 2026-07-20 | WP-009 — threshold analysis dependency on ADR-021/022 |

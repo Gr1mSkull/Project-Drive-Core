@@ -188,6 +188,7 @@ Blocked cases (approx): 26
 * Accepted ADR-016…023 may appear in Architecture / Interface Reference columns; Accepted ADR references do **not** mark requirements Verified; evidence remains NOT VERIFIED.
 * WP-008-R1: open-load CONDITIONAL; ADR-023 excludes REQ-114; supply interruption maps to A-003 and D-017 only.
 * WP-008 Architecture Review (2026-07-20): ADR-016…023 Accepted; TBD numerics remain Open; statuses remain NOT VERIFIED.
+* WP-009 (2026-07-20): Threshold analysis references in TBD register §4 and DevKit analysis docs; **no** threshold Resolved; **no** requirement Verified; evidence NOT VERIFIED.
 * WP-007-R4: Method:Test cases enforce semantic placeholder policy (unjustified placeholders remaining = 0).
 * EDL-014 meaning unchanged.
 
@@ -205,4 +206,4 @@ Blocked cases (approx): 26
 | 1.4 | 2026-07-20 | Architecture Review — WP-007 traceability baseline ACCEPTED; requirement rows remain NOT VERIFIED |
 | 1.5 | 2026-07-20 | WP-008 — add Accepted ADR-016…023 architecture references; statuses remain NOT VERIFIED |
 | 1.5.1 | 2026-07-20 | WP-008-R1 — conditional open-load; ADR-023 REQ alignment; supply interruption DK-A/DK-D; NOT VERIFIED retained |
-| 1.5.2 | 2026-07-20 | WP-008 acceptance — ADR-016…023 Accepted references; NOT VERIFIED retained |
+| 1.5.3 | 2026-07-20 | WP-009 — threshold analysis references; TBD Open; NOT VERIFIED retained |

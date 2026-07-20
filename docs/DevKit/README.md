@@ -3,7 +3,7 @@
 **Document ID:** DOC-DK-INDEX-001  
 **Version:** 1.4  
 **Status:** Accepted  
-**Work Package:** WP-007 / WP-008 (Accepted)  
+**Work Package:** WP-007 / WP-008 (Accepted) / WP-009 (Proposed)  
 **Date:** 2026-07-20
 
 ```text
@@ -28,6 +28,10 @@ It does **not** define the final circuit, PCB, component set, enclosure, or BOM.
 | [DevKit_Verification_Plan.md](DevKit_Verification_Plan.md) | Phase A–D + governance inspection; gates DK-A…DK-D | Accepted |
 | [DevKit_Current_State_Gap_Assessment.md](DevKit_Current_State_Gap_Assessment.md) | Audit of existing claims vs baseline | Accepted |
 | [DevKit_P0_Decision_Crosswalk.md](DevKit_P0_Decision_Crosswalk.md) | WP-008 P0 Accepted ADR-016…023 crosswalk | Accepted |
+| [DevKit_Current_Envelope_Analysis.md](DevKit_Current_Envelope_Analysis.md) | WP-009 current limit stack, profiles P0–P6, scenarios C1–C3 | Proposed |
+| [DevKit_Safety_Timing_Analysis.md](DevKit_Safety_Timing_Analysis.md) | WP-009 timing budgets, EDL-011 interpretation, re-enable FSM | Proposed |
+| [DevKit_Threshold_Closure_Matrix.md](DevKit_Threshold_Closure_Matrix.md) | WP-009 TBD disposition and blockers | Proposed |
+| [DevKit_Threshold_Measurement_Plan.md](DevKit_Threshold_Measurement_Plan.md) | WP-009 measurement plan (not evidence) | Proposed |
 | This README | Navigation and authority statement | Accepted |
 
 ## Relationship to EDL-014
@@ -66,7 +70,8 @@ Every DevKit gate evidence package shall record a **composite system baseline** 
 | CIA (WP-007) | [`docs/records/change_impact/CIA-2026-002_wp007-devkit-requirements.md`](../records/change_impact/CIA-2026-002_wp007-devkit-requirements.md) |
 | CIA (WP-008) | [`docs/records/change_impact/CIA-2026-003_wp008-devkit-p0-adrs.md`](../records/change_impact/CIA-2026-003_wp008-devkit-p0-adrs.md) |
 | Review Handoff (WP-007) | [`docs/records/review_handoffs/RHP-2026-001_wp007-devkit-requirements.md`](../records/review_handoffs/RHP-2026-001_wp007-devkit-requirements.md) |
-| Review Handoff (WP-008) | [`docs/records/review_handoffs/RHP-2026-002_wp008-devkit-p0-adrs.md`](../records/review_handoffs/RHP-2026-002_wp008-devkit-p0-adrs.md) |
+| CIA (WP-009) | [`docs/records/change_impact/CIA-2026-004_wp009-devkit-threshold-analysis.md`](../records/change_impact/CIA-2026-004_wp009-devkit-threshold-analysis.md) |
+| Review Handoff (WP-009) | [`docs/records/review_handoffs/RHP-2026-003_wp009-devkit-threshold-analysis.md`](../records/review_handoffs/RHP-2026-003_wp009-devkit-threshold-analysis.md) |
 | P0 ADR package | [`docs/ADR/README.md`](../ADR/README.md) — ADR-016…023 **Accepted** |
 | Traceability | [`docs/traceability/TRACEABILITY_MATRIX.md`](../traceability/TRACEABILITY_MATRIX.md) |
 | SRS pointer | [`docs/SRS/Volume_2_DCC.md`](../SRS/Volume_2_DCC.md) §8.1 |
@@ -79,6 +84,7 @@ Every DevKit gate evidence package shall record a **composite system baseline** 
 | Governance rules | **Accepted** (`DK-GOV-*`) |
 | Verification plan | **Accepted** (structure) — cases NOT EXECUTED / BLOCKED; no PASS claims |
 | P0 ADRs ADR-016…023 | **Accepted** (WP-008; ADR-021/022 numerics Open) |
+| WP-009 threshold analysis | **Proposed** — closure methods; TBDs **Open** |
 | Hardware design | Not approved — electrical/fixture WPs next |
 | Firmware bring-up | NOT IMPLEMENTED |
 | Physical verification | NOT VERIFIED |
@@ -90,7 +96,7 @@ P0 ADRs ADR-016…023 (ADR-DK-001…007, 010) are **Accepted** (WP-008 Architect
 
 Still open decision **requests** (no Accepted ADR yet): `ADR-DK-008`, `ADR-DK-009`, `ADR-DK-011`, `ADR-DK-012`.
 
-Open thresholds: `TBD-DK-001` … `TBD-DK-022` (Status Open — numerics not closed by WP-008 acceptance).
+Open thresholds: `TBD-DK-001` … `TBD-DK-022` (Status Open — WP-009 proposes closure methods; numerics not Approved).
 
 Hardware design remains **not** approved (electrical architecture / fixture WPs next).
 
@@ -104,3 +110,4 @@ Hardware design remains **not** approved (electrical architecture / fixture WPs 
 | 1.2 | 2026-07-20 | Architecture Review — ACCEPTED; PR #11 approved for merge (requirements structure, governance, verification-plan structure, traceability baseline) |
 | 1.3 | 2026-07-20 | WP-008 — P0 Proposed ADR package navigation (ADR-016…023); CIA-2026-003 / RHP-2026-002 |
 | 1.4 | 2026-07-20 | Architecture Review — ADR-016…023 Accepted; WP-008 Accepted; PR #12 approved for merge |
+| 1.5 | 2026-07-20 | WP-009 — threshold analysis package navigation; CIA-2026-004 / RHP-2026-003 |
