@@ -30,12 +30,12 @@ Audit of existing DevKit-related claims against WP-007 authority rules. Classifi
 | USB-C role | docs/008 | CANDIDATE | Gen1 Logic intent | — | Keep candidate | Electrical architecture WP | P2 |
 | Hammond enclosure | docs/008; docs/007 | CANDIDATE | — | — | ADR-DK-012 | Architecture decision | P2 |
 | BOOT/USER/KILL buttons | docs/008 | CANDIDATE | Kill testability required | Button implementation not frozen | Require kill testability; UI buttons candidate | Electrical architecture WP | P1 |
-| 13.8 V / 30 A bench limits | docs/008 | TBD | Candidates only | Not authoritative freeze | TBD-DK-001…003 Open; **Accepted ADR-021** (architecture; numerics Open) | Threshold WP | P0 |
+| 13.8 V / 30 A bench limits | docs/008 | TBD | Candidates only | Not authoritative freeze | **WP-009 Accepted** — symbolic C2; methods Accepted; TBD-DK-002/003 numeric Open | Functional electrical architecture WP | P0 |
 | Exact lamp wattages / loads | docs/008 | CANDIDATE | — | hardware README / yaml partial mismatch | Treat as example loads | Fixture WP | P2 |
 | Kill / watchdog numeric limits | docs/008 A6/A7 | TBD | Candidates only | Vague “immediately” | TBD-DK-004/005/007/014/021 Open; **Accepted ADR-022** | Threshold WP | P0 |
 | `hardware.profile: devkit` | docs/008; devkit.yaml | CONFLICT / PARTIAL | File present | Not in docs/005 schema | Schema decision | Config schema CR | P1 |
 | Phase A–D procedures in docs/008 | docs/008 §5–8 | PARTIAL | Strategy accepted via EDL-014 | Vague pass criteria; duplicate vs WP-007 plan | Navigate to DevKit_Verification_Plan | WP-007 (done) | P0 |
-| Existing pass thresholds (±5%, 200 ms, 10.5 V, …) | docs/008 | TBD | Candidates | Vague terms (“immediately”, “waveform clean”) | Threshold register | Threshold CR | P0 |
+| Existing pass thresholds (±5%, 200 ms, 10.5 V, …) | docs/008 | TBD | Candidates | Vague terms | **WP-009 Accepted** — budget/measurement methods; numerics Open | Functional electrical architecture WP | P0 |
 | OTA in DevKit gate | docs/008 B14 | TBD | Protocol exists in docs | Mandatory? | ADR-DK-008 | Architecture decision | P1 |
 | Configuration hot reload | docs/008 D10 | TBD / CONFLICT | Config model intent | Mode auth / Service Mode rules | ADR-DK-009 | Architecture decision | P1 |
 | Physical fault injection | docs/008 §12; DC-DCC-PWR-089 | PARTIAL / TBD | Proposed power reqs | Safe methods undefined | **Accepted ADR-023** | Fixture WP after ADR acceptance | P0 |

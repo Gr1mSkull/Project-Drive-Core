@@ -1298,7 +1298,7 @@ is the authoritative source for TBD-DK identifiers.
 Other DevKit documents, CIA, and RHP **shall reference** this register and **shall not** redefine TBD-DK meanings.
 
 Unresolved numeric/procedure thresholds. Candidates from `docs/008` or other sources are **not** normative until closed.
-**Status of all entries: Open.** No `TBD-DK-*` value is resolved in WP-007 / R1 / R2.
+**Status of all entries: Open.** WP-009 Architecture Review (2026-07-20) Accepted analysis methods and procedural contracts; numeric values remain Open.
 
 ### 4.1 Summary
 
@@ -1343,9 +1343,9 @@ Unresolved numeric/procedure thresholds. Candidates from `docs/008` or other sou
 | Verification cases blocked | VER-DCC-DK-A-003 |
 | Gates affected | DK-A; DK-C (UV path with TBD-DK-012) |
 | Owner role | System Architect / Test Owner |
-| Closure artifact | Threshold CR / WP |
+| Closure artifact | WP-009 interaction note; threshold CR |
 | Status | Open |
-| Notes | Candidate is not normative. DK-GOV-024 freezes approval before DK-A power-test exit. |
+| Notes | WP-009: pairs with TBD-DK-012 for UV path; `V_in` sets power at fixed I. Candidate not normative. |
 
 #### TBD-DK-002
 
@@ -1356,14 +1356,15 @@ Unresolved numeric/procedure thresholds. Candidates from `docs/008` or other sou
 | Unit | A |
 | Current candidate | 30 A fuse / continuous |
 | Candidate source | docs/008 §2.3 / §3.3 |
-| Evidence required | Accepted ADR-021 architecture + thermal/electrical analysis + measurement (numerics remain Open until threshold WP) |
+| Evidence required | WP-009 envelope analysis + electrical architecture + measurement |
 | Requirements blocked | REQ-DCC-V-DK-020; DK-GOV-025 related (withdrawn REQ-029); originating ADR-DK-006 → Accepted ADR-021 |
-| Verification cases blocked | — (blocks protection sizing claims; energization cases when current limit required) |
+| Verification cases blocked | VER-DCC-DK-A-002 (numeric freeze) |
 | Gates affected | DK-A |
 | Owner role | System Architect |
-| Closure artifact | Threshold WP after Accepted ADR-021 Accepted (architecture); numeric approval separate |
+| Closure artifact | Architect threshold decision; [`DevKit_Current_Envelope_Analysis.md`](DevKit_Current_Envelope_Analysis.md); [`DevKit_Threshold_Closure_Matrix.md`](DevKit_Threshold_Closure_Matrix.md) |
 | Status | Open |
-| Notes | Pairs with Accepted ADR-021. Continuous vs fuse rating distinguished in ADR-021; candidate 30 A not approved. Status remains Open. |
+| Architecture Review (WP-009) | **Methods Accepted** — limit stack; continuous/protection/transient/fault distinction; C2 calculation architecture. **Numeric Open** — no ampere ceiling approved. |
+| Notes | Pairs with Accepted ADR-021. Tuple decomposition (002A/B/C) recommended — register CR pending. Candidate 30 A not approved. |
 
 #### TBD-DK-003
 
@@ -1374,14 +1375,15 @@ Unresolved numeric/procedure thresholds. Candidates from `docs/008` or other sou
 | Unit | A |
 | Current candidate | 30 A continuous |
 | Candidate source | docs/008 §3.3 |
-| Evidence required | Accepted ADR-021 simultaneous-load policy + analysis/measurement |
+| Evidence required | WP-009-R1 profile/overlap model + P4 measurement |
 | Requirements blocked | DK-GOV-025 (from withdrawn REQ-029); originating ADR-DK-006 → Accepted ADR-021 |
-| Verification cases blocked | — (no Phase C case IDs yet cite this ID; multi-channel simultaneous-load claims blocked) |
+| Verification cases blocked | Multi-channel simultaneous-load claims (DK-C) |
 | Gates affected | DK-C |
 | Owner role | System Architect |
-| Closure artifact | Threshold WP after Accepted ADR-021 Accepted (architecture); numeric approval separate |
+| Closure artifact | [`DevKit_Current_Envelope_Analysis.md`](DevKit_Current_Envelope_Analysis.md) §4.3–§4.4, §7; [`DevKit_Threshold_Measurement_Plan.md`](DevKit_Threshold_Measurement_Plan.md) §2.2 |
 | Status | Open |
-| Notes | Architecture direction in Accepted ADR-021 (lower base + external bank). Status remains Open. |
+| Architecture Review (WP-009) | **Methods Accepted** — profile/overlap closure model; instantaneous/avg/RMS/transient-overlap; unknown overlap → concurrent. **Numeric Open** — every numeric simultaneous limit. |
+| Notes | Profile/overlap model Accepted. Invalid ΣD_n ≤ 1 removed. Numeric Open. |
 
 #### TBD-DK-004
 
@@ -1392,14 +1394,15 @@ Unresolved numeric/procedure thresholds. Candidates from `docs/008` or other sou
 | Unit | ms |
 | Current candidate | “immediately” (vague — rejected as criterion) |
 | Candidate source | docs/008 A7 |
-| Evidence required | Accepted ADR-022 timing hierarchy + hardware path budget + measurement plan |
+| Evidence required | WP-009 kill budget + hardware measurement |
 | Requirements blocked | REQ-DCC-V-DK-036 |
 | Verification cases blocked | VER-DCC-DK-A-012 |
 | Gates affected | DK-A |
 | Owner role | System Architect / Test Owner |
-| Closure artifact | Threshold CR/WP; Accepted ADR-022 (policy) |
+| Closure artifact | [`DevKit_Safety_Timing_Analysis.md`](DevKit_Safety_Timing_Analysis.md) §3.1; [`DevKit_Threshold_Measurement_Plan.md`](DevKit_Threshold_Measurement_Plan.md) §3.1 |
 | Status | Open |
-| Notes | Must become a measurable limit; vague wording rejected. Policy **Accepted** in ADR-022; numeric Status remains Open. |
+| Architecture Review (WP-009) | **Methods Accepted** — hardware-kill budget; normalized start/end events; measurement method. **Numeric Open** — response limit. |
+| Notes | Kill budget Accepted. EDL-011 >100 ms shall NOT apply to kill. Numeric Open. |
 
 #### TBD-DK-005
 
@@ -1410,14 +1413,15 @@ Unresolved numeric/procedure thresholds. Candidates from `docs/008` or other sou
 | Unit | ms |
 | Current candidate | <200 ms |
 | Candidate source | docs/008 A6 |
-| Evidence required | Accepted ADR-022 real-time safety class + measurement |
+| Evidence required | WP-009 watchdog budget + WD period freeze + measurement |
 | Requirements blocked | REQ-DCC-V-DK-038 |
 | Verification cases blocked | VER-DCC-DK-A-011 |
 | Gates affected | DK-A |
 | Owner role | System Architect / Test Owner |
-| Closure artifact | Threshold CR/WP; Accepted ADR-022 (policy) |
+| Closure artifact | [`DevKit_Safety_Timing_Analysis.md`](DevKit_Safety_Timing_Analysis.md) §3.2; [`DevKit_Threshold_Measurement_Plan.md`](DevKit_Threshold_Measurement_Plan.md) §3.2 |
 | Status | Open |
-| Notes | Candidate <200 ms not approved. Policy **Accepted** in ADR-022; Status remains Open. |
+| Architecture Review (WP-009) | **Methods Accepted** — watchdog budget; measurement method. **Numeric Open** — expiry, handler, total limit. |
+| Notes | Candidate <200 ms not approved. Watchdog class separate from kill. Numeric Open. |
 
 #### TBD-DK-006
 
@@ -1446,14 +1450,15 @@ Unresolved numeric/procedure thresholds. Candidates from `docs/008` or other sou
 | Unit | ms |
 | Current candidate | >100 ms |
 | Candidate source | EDL-011 |
-| Evidence required | Confirm DevKit freeze consistent with EDL-011 >100 ms; Accepted ADR-022 communication-loss class + measurement |
+| Evidence required | WP-009 EDL-011 interpretation + DCPI period/missed-frame table + measurement |
 | Requirements blocked | REQ-DCC-V-DK-035 |
 | Verification cases blocked | VER-DCC-DK-A-008; VER-DCC-DK-C-012 |
 | Gates affected | DK-A; DK-C |
 | Owner role | System Architect |
-| Closure artifact | Threshold WP; Accepted ADR-022; EDL-011 unchanged |
+| Closure artifact | [`DevKit_Safety_Timing_Analysis.md`](DevKit_Safety_Timing_Analysis.md) §4; [`DevKit_Threshold_Measurement_Plan.md`](DevKit_Threshold_Measurement_Plan.md) §3.3 |
 | Status | Open |
-| Notes | EDL-011 states >100 ms; DevKit evidence freeze still Open. ADR-022 does not change EDL-011. |
+| Architecture Review (WP-009) | **Methods Accepted** — control-loss budget; message-period/missed-frame method; measurement method. **Numeric Open**; **BLOCKED_BY_EDL_CLARIFICATION**. No >100 ms or ≤100 ms bound approved. |
+| Notes | EDL-011 clarification required (readings A/B/C/D). EDL file unchanged. Numeric Open. |
 
 #### TBD-DK-008
 
@@ -1541,8 +1546,9 @@ Unresolved numeric/procedure thresholds. Candidates from `docs/008` or other sou
 | Verification cases blocked | VER-DCC-DK-C-008 |
 | Gates affected | DK-C |
 | Owner role | System Architect |
-| Closure artifact | Threshold CR |
+| Closure artifact | Hazard + reaction table WP; WP-009 §8 interaction |
 | Status | Open |
+| Acceptance readiness | **BLOCKED_BY_HAZARD_DECISION** (WP-009) |
 | Notes | REQ-047 also cites TBD-DK-001 for supply context; UV stimulus/reaction is this ID. |
 
 #### TBD-DK-013
@@ -1572,14 +1578,15 @@ Unresolved numeric/procedure thresholds. Candidates from `docs/008` or other sou
 | Unit | ms |
 | Current candidate | not defined |
 | Candidate source | WP-004 safe OFF TBD |
-| Evidence required | Accepted ADR-022 commanded-shutdown class + measurement |
+| Evidence required | WP-009 commanded-OFF budget + FW/switch measurement |
 | Requirements blocked | REQ-DCC-V-DK-050 |
 | Verification cases blocked | VER-DCC-DK-A-016; VER-DCC-DK-C-002 |
 | Gates affected | DK-A; DK-C |
 | Owner role | System Architect |
-| Closure artifact | Threshold WP; Accepted ADR-022 |
+| Closure artifact | [`DevKit_Safety_Timing_Analysis.md`](DevKit_Safety_Timing_Analysis.md) §3.4; [`DevKit_Threshold_Measurement_Plan.md`](DevKit_Threshold_Measurement_Plan.md) §3.4 |
 | Status | Open |
-| Notes | Used for commanded OFF timing on represented channels. |
+| Architecture Review (WP-009) | **Methods Accepted** — commanded-OFF budget; start/end definition; measurement method. **Numeric Open** — response limit. |
+| Notes | Separate from kill and control-loss. Numeric Open. |
 
 #### TBD-DK-015
 
@@ -1631,9 +1638,10 @@ Unresolved numeric/procedure thresholds. Candidates from `docs/008` or other sou
 | Verification cases blocked | VER-DCC-DK-A-003 |
 | Gates affected | DK-A |
 | Owner role | Hardware Engineer |
-| Closure artifact | DevKit electrical architecture WP |
+| Closure artifact | DevKit electrical architecture WP; WP-009 P1 profile |
 | Status | Open |
-| Notes | Per-rail list must be explicit when closed. |
+| Acceptance readiness | **BLOCKED_BY_ELECTRICAL_ARCHITECTURE** (WP-009) |
+| Notes | Per-rail list must be explicit when closed. Candidate ±5 % not approved. |
 
 #### TBD-DK-018
 
@@ -1649,9 +1657,10 @@ Unresolved numeric/procedure thresholds. Candidates from `docs/008` or other sou
 | Verification cases blocked | VER-DCC-DK-C-009 |
 | Gates affected | DK-C |
 | Owner role | System Architect / Test Owner |
-| Closure artifact | ADR-DK-011 |
+| Closure artifact | ADR-DK-011; WP-009 thermal interaction §8 |
 | Status | Open |
-| Notes | Do not import Gen1 Phase E durations without ADR-DK-011. |
+| Acceptance readiness | **BLOCKED_BY_MEASUREMENT** (WP-009) |
+| Notes | Do not import Gen1 Phase E durations without ADR-DK-011. Duration constrains current at fixed I. |
 
 #### TBD-DK-019
 
@@ -1667,9 +1676,10 @@ Unresolved numeric/procedure thresholds. Candidates from `docs/008` or other sou
 | Verification cases blocked | VER-DCC-DK-C-009 |
 | Gates affected | DK-C |
 | Owner role | System Architect |
-| Closure artifact | ADR-DK-011 |
+| Closure artifact | ADR-DK-011; WP-009 §8 |
 | Status | Open |
-| Notes | Candidate not approved for DevKit gate evidence. |
+| Acceptance readiness | **BLOCKED_BY_HAZARD_DECISION** (WP-009) |
+| Notes | Candidate not approved for DevKit gate evidence. Operator touch hazard. |
 
 #### TBD-DK-020
 
@@ -1698,14 +1708,15 @@ Unresolved numeric/procedure thresholds. Candidates from `docs/008` or other sou
 | Unit | N/A (procedure) |
 | Current candidate | partial intent in fault/startup docs |
 | Candidate source | fault/startup documentation (repository) |
-| Evidence required | Explicit sequence definition per Accepted ADR-022 path 8 |
+| Evidence required | WP-009 state-machine proposal + Architect acceptance + FW implementation |
 | Requirements blocked | REQ-DCC-V-DK-034 |
 | Verification cases blocked | VER-DCC-DK-A-014 |
 | Gates affected | DK-A |
 | Owner role | System Architect |
-| Closure artifact | Threshold/procedure WP; Accepted ADR-022 |
+| Closure artifact | [`DevKit_Safety_Timing_Analysis.md`](DevKit_Safety_Timing_Analysis.md) §7; [`DevKit_Threshold_Measurement_Plan.md`](DevKit_Threshold_Measurement_Plan.md) §3.5 |
 | Status | Open |
-| Notes | Sequence must be explicit and testable. |
+| Architecture Review (WP-009) | **Procedure Accepted** — deterministic state-machine contract; command epoch; kill-release lockout; ack + fault-clear required; Service/Tablet not sole authority. **Implementation/evidence Open**. |
+| Notes | Procedure accepted by WP-009 Architecture Review; implementation and verification closure remain Open. |
 
 #### TBD-DK-022
 
@@ -1721,9 +1732,10 @@ Unresolved numeric/procedure thresholds. Candidates from `docs/008` or other sou
 | Verification cases blocked | VER-DCC-DK-C-013 |
 | Gates affected | DK-C |
 | Owner role | Test Owner / System Architect |
-| Closure artifact | Fixture WP; Accepted ADR-023 (CONDITIONAL stall class) |
+| Closure artifact | Fixture WP; Accepted ADR-023; WP-009 P5 fault class |
 | Status | Open |
-| Notes | Split from former compound C-010; direction case C-010 does not use this ID. ADR-023 classifies stall as CONDITIONAL_MANDATORY. |
+| Acceptance readiness | **BLOCKED_BY_COMPONENT_SELECTION** (WP-009) |
+| Notes | Stall is P5 fault class — not part of TBD-DK-002/003 continuous envelope. ADR-023 CONDITIONAL_MANDATORY. |
 
 
 ## 5. Architectural decisions required
@@ -1747,7 +1759,7 @@ Crosswalk: [`DevKit_P0_Decision_Crosswalk.md`](DevKit_P0_Decision_Crosswalk.md).
 | ADR-DK-011 | — | DevKit vs DCC Gen1 electrical/thermal environmental test split? | Open request |
 | ADR-DK-012 | — | Which enclosure/connector candidates remain valid (WAGO vs screw, etc.)? | Open request |
 
-Threshold numeric values associated with ADR-DK-006 / ADR-DK-007 / ADR-DK-011 are defined only in §4 (`TBD-DK-*`) and remain Open.
+Threshold numeric values associated with ADR-DK-006 / ADR-DK-007 / ADR-DK-011 are defined only in §4 (`TBD-DK-*`) and remain Open. WP-009 **Accepted** (2026-07-20): threshold analysis methods Accepted; numeric values Open; see [`DevKit_Threshold_Closure_Matrix.md`](DevKit_Threshold_Closure_Matrix.md).
 
 
 ## Revision history
@@ -1762,3 +1774,6 @@ Threshold numeric values associated with ADR-DK-006 / ADR-DK-007 / ADR-DK-011 ar
 | 1.2 | 2026-07-20 | Architecture Review — ACCEPTED; PR #11 approved for merge (requirements structure, governance, verification-plan structure, traceability baseline) |
 | 1.3 | 2026-07-20 | WP-008 — TBD register ADR references for Accepted ADR-016…023; Status Open unchanged |
 | 1.4 | 2026-07-20 | Architecture Review — ADR-016…023 Accepted; WP-008 Accepted; PR #12 approved for merge; TBD Status Open unchanged |
+| 1.5 | 2026-07-20 | WP-009 — threshold analysis references and acceptance-readiness fields; Status Open unchanged |
+| 1.5.1 | 2026-07-20 | WP-009-R1 — EDL clarification block; symbolic scenarios; profile-based TBD-DK-003; no ampere bands |
+| 1.5.2 | 2026-07-20 | WP-009 Architecture Review — methods Accepted; numeric Open; TBD Status Open unchanged |

@@ -42,9 +42,13 @@ ADR-019 represented capabilities
     → fixture requirements (with ADR-023)
     → DK-C readiness
 
+ADR-021 input current
+    → WP-009 Accepted (methods); threshold numeric Open
+    → functional electrical architecture WP (authorized)
+
 ADR-022 safety timing
-    → kill/watchdog implementation planning
-    → timing threshold closure WP
+    → WP-009 Accepted (methods); timing numeric Open
+    → EDL-011 clarification (TBD-DK-007)
     → DK-A / DK-C readiness
 
 ADR-023 fault injection scope
@@ -69,8 +73,8 @@ No hidden circular dependencies identified. Soft couplings shall be closed by th
 | Area | After P0 ADRs Accepted | Still blocked by |
 |------|---------------------|------------------|
 | Architecture direction | Architecture blocker reduced | — |
-| Electrical design start | May be authorized by Architect as next WP | Implementation not started |
-| Numeric thresholds | **Not** closed | Threshold WP; TBD Open |
+| Numeric thresholds | Methods **Accepted** (WP-009); values **Open** | EDL-011 clarification; electrical architecture; measurement |
+| Electrical design start | **Authorized** — functional architecture WP | Sizing/freeze not authorized |
 | Fixtures | Boundary known | Fixture WP; implementation |
 | Evidence | — | Remains NOT VERIFIED |
 
@@ -78,7 +82,8 @@ No hidden circular dependencies identified. Soft couplings shall be closed by th
 Architecture blocker resolved (Accepted)
 Implementation blocker remains
 Fixture blocker remains
-Threshold blocker remains
+Threshold methods resolved (Accepted); numeric values Open
+Functional electrical architecture authorized
 Evidence remains NOT VERIFIED
 ```
 
@@ -127,4 +132,6 @@ This acceptance update does not rewrite the BOM or select a component.
 | 1.0 | 2026-07-20 | WP-008 initial crosswalk |
 | 1.1 | 2026-07-20 | WP-008-R1 — open-load conditional; ADR-023 REQs without 114; supply interruption DK-A/DK-D |
 | 1.2 | 2026-07-20 | Architecture Review — ADR-016…023 Accepted; WP-008 Accepted |
-| 1.3 | 2026-07-20 | Acceptance metadata alignment — conflict disposition; accepted-options summary; blocker section finalized |
+| 1.3 | 2026-07-20 | Acceptance metadata alignment — conflict disposition; accepted-options summary |
+| 1.4 | 2026-07-20 | WP-009 — threshold analysis dependency on ADR-021/022 |
+| 1.5 | 2026-07-20 | WP-009 Architecture Review — methods Accepted; functional electrical architecture authorized |
