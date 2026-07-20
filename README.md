@@ -18,7 +18,7 @@
 | 006 | [Web Interface](docs/006_Web_Interface.md) | Web UI на планшете |
 | 007 | [Component Selection](docs/007_Component_Selection.md) | Компонентная база |
 | 008 | [Testing and Validation](docs/008_Testing_and_Validation.md) | Validation strategy Phase A–F (DevKit detail → `docs/DevKit/`) |
-| DK | [DevKit requirements](docs/DevKit/README.md) | Gen1 DevKit requirements (WP-007); P0 ADRs (WP-008); threshold analysis (WP-009); functional architecture (WP-010); EDL/component prep Accepted (WP-011); sizing framework Accepted (WP-012); class qualification Proposed (WP-013) |
+| DK | [DevKit requirements](docs/DevKit/README.md) | Gen1 DevKit requirements (WP-007); P0 ADRs (WP-008); threshold analysis (WP-009); functional architecture (WP-010); EDL/component prep Accepted (WP-011); sizing framework Accepted (WP-012); class qualification Accepted (WP-013) |
 | 009 | [Roadmap](docs/009_Roadmap.md) | Дорожная карта |
 | EDL | [Engineering Decision Log](docs/EDL/README.md) | Ключевые решения |
 | HB | [Engineering foundation](docs/PROJECT_PHILOSOPHY.md) | Philosophy, workflow, SRS, ADR |

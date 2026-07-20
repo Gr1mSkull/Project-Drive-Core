@@ -8,7 +8,7 @@
 | **Author** | Implementation Engineer (cloud agent) |
 | **Author role** | Implementation Engineer |
 | **Date** | 2026-07-20 |
-| **Status** | Draft — Under Architecture Review (WP-013-R1 corrections applied) |
+| **Status** | Accepted — Architecture Review |
 | **Related WP / CR** | WP-013 / WP-013-R1; depends on WP-012 Accepted (`fe700d4` / `653264d`+); WP-011 Accepted; ADR-016…023 Accepted |
 
 ### Reason for Change
@@ -112,11 +112,11 @@ Revert WP-013 PR; WP-012 Accepted baseline preserved.
 
 ### Unresolved decisions
 
-OI-PROT-001/002 · OI-COMP-001/002 · OI-SENSE-001 · OI-BI-001 · ADR-DK-011/012 · TBD-DK-007 numeric · Architect class acceptances (RHP questions).
+Final HS / sense / BI / protection class selections remain **Open**. OI-PROT-001/002 · OI-COMP-001/002 · OI-SENSE-001 · OI-BI-001 · ADR-DK-011/012 · TBD-DK-007 numeric remain Open / BLOCKED as applicable.
 
 ### Validation Required
 
-Architecture Review of WP-013 package. No physical tests. No VE.
+Architecture Review complete for WP-013 methodology. No physical tests. No VE.
 
 ### Approvals (architecture / policy)
 
@@ -124,8 +124,8 @@ Architecture Review of WP-013 package. No physical tests. No VE.
 |-------|-------|
 | **ADR Required** | NO (class recommendations may drive future ADR-DK resolution) |
 | **Architect Approval Required** | YES |
-| **Architect approver** | TBD |
-| **Architect approval date** | TBD |
+| **Architect approver** | System Architect |
+| **Architect approval date** | 2026-07-20 |
 
 ## Revision history
 
@@ -133,3 +133,4 @@ Architecture Review of WP-013 package. No physical tests. No VE.
 |---------|------|--------|
 | 1.0 | 2026-07-20 | WP-013 initial CIA — Draft |
 | 1.1 | 2026-07-20 | WP-013-R1 — capability-role mapping; observation conditional; symbolic equation corrections |
+| 1.2 | 2026-07-20 | Architecture Review Accepted — PR #17 merged (`d1698a0` / `23bdb07`); final classes Open; TBD-DK-007 BLOCKED unchanged |

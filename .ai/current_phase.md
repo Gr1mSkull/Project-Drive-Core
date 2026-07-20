@@ -1,6 +1,6 @@
 # DriveCore — Current Phase
 
-**Updated:** WP-013 Proposed — component-class qualification and symbolic calculations (2026-07-20)
+**Updated:** WP-013 Accepted — component-class qualification and symbolic calculations (2026-07-20); PR #17 merged (`23bdb07`)
 
 ## Documentation
 
@@ -18,7 +18,7 @@
 | **WP-010 DevKit functional electrical architecture** | ✅ Accepted (2026-07-20) — WP-010-R1 Accepted |
 | **WP-011 EDL-011 + component-class prep** | ✅ Accepted (2026-07-20) — WP-011-R1 Accepted |
 | **WP-012 electrical sizing architecture framework** | ✅ Accepted (2026-07-20) — WP-012-R1/R2 Accepted |
-| **WP-013 component-class qualification + symbolic calcs** | ⏳ Ready for Final Architecture Review — WP-013-R1 |
+| **WP-013 component-class qualification + symbolic calcs** | ✅ Accepted (2026-07-20) — WP-013-R1 Accepted |
 
 ## DevKit (WP-007 … WP-013)
 
@@ -33,26 +33,28 @@
 | TBD-DK-007 | **BLOCKED_BY_EDL_CLARIFICATION** — not Resolved; numeric Open; verification Not Verified |
 | Component-class qualification prep | **Accepted** (WP-011) |
 | Electrical sizing framework | **Accepted** (WP-012) |
-| Component-class recommendations | **Ready for Final Architecture Review** (WP-013-R1) |
+| Component-class qualification methodology | **Accepted** (WP-013 / WP-013-R1) — evaluation directions Accepted; final classes Open |
+| High-side / sense / BI / protection final class | **Open** |
+| OI-COMP-001/002 · OI-SENSE-001 · OI-PROT-001/002 · OI-BI-001 | **Open** |
 | Concrete component qualification | **Not started** |
-| MPN selection | **Not authorized** |
-| Symbolic preliminary calculations | **Proposed** (WP-013) |
+| MPN selection | **Not started** |
+| Symbolic preliminary calculations | **Accepted** (methods) — numeric Open |
 | Numeric baseline | **Not created** |
 | Hardware design approved | **No** — NOT IMPLEMENTED |
 | Detailed electrical sizing | **NOT COMPLETED** |
 | Schematics / PCB | **NOT AUTHORIZED** |
 | Firmware bring-up complete | **No** (NOT IMPLEMENTED) |
 | Physical verification | **NOT VERIFIED** |
-| Remaining open requests | ADR-DK-008, 009, 011, 012; OI-PROT-001/002 |
+| Remaining open requests | ADR-DK-008, 009, 011, 012; OI-PROT-001/002; OI-SENSE-001; OI-BI-001; OI-COMP-001/002 |
 
-## Next authorized work (after WP-013 acceptance)
+## Next authorized work
 
-Fixture / load-bank requirements · ADR-DK-011 / ADR-DK-012 · concrete MPN qualification preparation · provisional design-baseline preparation (Architect only).
+WP-014 — Gen1 DevKit Fixture and Load-Bank Requirements · ADR-DK-011 / ADR-DK-012 preparation · concrete MPN qualification prep only after role-specific inputs + Architect authorization.
 
 ## Active branch
 
-`cursor/wp013-devkit-component-class-qualification-3bb9` — PR #17 (Architecture Review pending)
+`main` @ `23bdb07`+ (WP-013 Accepted — PR #17)
 
 ## Do not start without approval
 
-MPN selection · BOM · schematics · PCB · numeric threshold approval · EDL file edit · firmware · fixture construction · Verification Evidence creation
+MPN selection · BOM · schematics · PCB · numeric threshold freeze · EDL file edit · firmware BSP · fixture construction · Verification Evidence creation

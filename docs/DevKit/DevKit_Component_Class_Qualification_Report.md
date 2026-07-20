@@ -1,8 +1,8 @@
 # DevKit Component-Class Qualification Report — WP-013
 
 **Document ID:** DOC-DK-CCQR-001  
-**Version:** 1.1  
-**Status:** Ready for Final Architecture Review  
+**Version:** 1.2  
+**Status:** Accepted — Architecture Review  
 **Work Package:** WP-013 / WP-013-R1  
 **Date:** 2026-07-20  
 **Author role:** Implementation Engineer
@@ -178,3 +178,4 @@ CIA: `CIA-2026-008` · RHP: `RHP-2026-007`.
 |---------|------|--------|
 | 1.0 | 2026-07-20 | WP-013 initial component-class qualification report — Proposed |
 | 1.1 | 2026-07-20 | WP-013-R1 — capability-role mapping; observation conditional; symbolic equation corrections |
+| 1.2 | 2026-07-20 | Architecture Review Accepted — PR #17 merged (`d1698a0` / `23bdb07`); methodology Accepted; final classes/topology Open; TBD-DK-007 BLOCKED unchanged |

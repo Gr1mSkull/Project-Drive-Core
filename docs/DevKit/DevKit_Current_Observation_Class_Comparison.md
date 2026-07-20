@@ -1,8 +1,8 @@
 # DevKit Current-Observation Class Comparison — WP-013
 
 **Document ID:** DOC-DK-COCC-001  
-**Version:** 1.1  
-**Status:** Ready for Final Architecture Review  
+**Version:** 1.2  
+**Status:** Accepted — Architecture Review  
 **Work Package:** WP-013 / WP-013-R1  
 **Date:** 2026-07-20
 
@@ -108,3 +108,4 @@ REQ-DCC-V-DK-043 · VER-DCC-DK-C-004 · ADR-019 · ED-IN-011/032 · OI-SENSE-001
 |---------|------|--------|
 | 1.0 | 2026-07-20 | WP-013 initial current-observation class comparison — Proposed |
 | 1.1 | 2026-07-20 | WP-013-R1 — SENSE-HYBRID conditional only; INTEGRATED conditional for diag/protect; SHUNT-LS not globally rejected |
+| 1.2 | 2026-07-20 | Architecture Review Accepted — PR #17 merged (`d1698a0` / `23bdb07`); methodology Accepted; final classes/topology Open; TBD-DK-007 BLOCKED unchanged |

@@ -1,8 +1,8 @@
 # DevKit Symbolic Preliminary Calculations — WP-013
 
 **Document ID:** DOC-DK-SPC-001  
-**Version:** 1.1  
-**Status:** Ready for Final Architecture Review  
+**Version:** 1.2  
+**Status:** Accepted — Architecture Review  
 **Work Package:** WP-013 / WP-013-R1  
 **Date:** 2026-07-20
 
@@ -332,3 +332,4 @@ WP-012 CPBM / Thermal / Protection · ADR-019…023 · ED-IN-* · TBD-DK-* · PW
 |---------|------|--------|
 | 1.0 | 2026-07-20 | WP-013 initial symbolic preliminary calculations — Proposed |
 | 1.1 | 2026-07-20 | WP-013-R1 — conduction duty discipline; event-based switching; separated stall/bridge energies; thermal-state retry; fault-energy bound |
+| 1.2 | 2026-07-20 | Architecture Review Accepted — PR #17 merged (`d1698a0` / `23bdb07`); methodology Accepted; final classes/topology Open; TBD-DK-007 BLOCKED unchanged |

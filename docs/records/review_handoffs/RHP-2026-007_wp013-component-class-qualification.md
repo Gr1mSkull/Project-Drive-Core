@@ -169,8 +169,8 @@ rg 'BLOCKED_BY_EDL_CLARIFICATION' \
 |-------|-------|
 | **Implementer Self-Review Status** | Complete |
 | **Independent Review Status** | Not started |
-| **Final Review Outcome** | **Ready for Final Architecture Review** — WP-013-R1 applied |
-| **Architecture / policy approval** | Separate — System Architect only |
+| **Final Review Outcome** | **Accepted** — Architecture Review (2026-07-20); PR #17 merged (`d1698a0` / `23bdb07`); WP-013-R1 Accepted; final classes/topology Open |
+| **Architecture / policy approval** | Accepted — System Architect (2026-07-20) |
 
 ## Revision history
 
@@ -178,3 +178,4 @@ rg 'BLOCKED_BY_EDL_CLARIFICATION' \
 |---------|------|--------|
 | 1.0 | 2026-07-20 | WP-013 initial RHP — Draft |
 | 1.1 | 2026-07-20 | WP-013-R1 — capability-role mapping; observation conditional; symbolic equation corrections; reproducible validation |
+| 1.2 | 2026-07-20 | Architecture Review Accepted — PR #17; methodology Accepted; final classes Open; TBD-DK-007 BLOCKED unchanged |

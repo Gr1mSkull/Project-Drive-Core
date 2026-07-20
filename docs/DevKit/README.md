@@ -1,9 +1,9 @@
 # DriveCore Gen1 DevKit — Document Set
 
 **Document ID:** DOC-DK-INDEX-001  
-**Version:** 1.17  
-**Status:** Accepted (index); WP-013 **Ready for Final Architecture Review**  
-**Work Package:** WP-007 / WP-008 (Accepted) / WP-009 (Accepted) / WP-010 (Accepted) / WP-011 (Accepted) / WP-012 (Accepted) / WP-013 (Proposed)  
+**Version:** 1.18  
+**Status:** Accepted (index); WP-013 **Accepted**  
+**Work Package:** WP-007 / WP-008 (Accepted) / WP-009 (Accepted) / WP-010 (Accepted) / WP-011 (Accepted) / WP-012 (Accepted) / WP-013 (Accepted)  
 **Date:** 2026-07-20
 
 ```text
@@ -50,13 +50,13 @@ It does **not** define the final circuit, PCB, component set, enclosure, or BOM.
 | [DevKit_Protection_Coordination_Framework.md](DevKit_Protection_Coordination_Framework.md) | WP-012 protection layers P0–P5; 16 fault classes | Accepted |
 | [DevKit_Power_Path_Assumption_Register.md](DevKit_Power_Path_Assumption_Register.md) | WP-012 PWR-A assumptions incl. PROPOSED_CONSTRAINT | Accepted |
 | [DevKit_Sizing_Dependency_and_Closure_Matrix.md](DevKit_Sizing_Dependency_and_Closure_Matrix.md) | WP-012 sizing blockers and closure | Accepted |
-| [DevKit_Component_Class_Qualification_Report.md](DevKit_Component_Class_Qualification_Report.md) | WP-013 class qualification summary | Proposed |
-| [DevKit_High_Side_Class_Comparison.md](DevKit_High_Side_Class_Comparison.md) | WP-013 high-side class comparison | Proposed |
-| [DevKit_Current_Observation_Class_Comparison.md](DevKit_Current_Observation_Class_Comparison.md) | WP-013 current-observation class comparison | Proposed |
-| [DevKit_Protection_Class_Comparison.md](DevKit_Protection_Class_Comparison.md) | WP-013 protection class comparison | Proposed |
-| [DevKit_Bidirectional_Class_Comparison.md](DevKit_Bidirectional_Class_Comparison.md) | WP-013 bidirectional class comparison | Proposed |
-| [DevKit_Symbolic_Preliminary_Calculations.md](DevKit_Symbolic_Preliminary_Calculations.md) | WP-013 symbolic preliminary calculations | Proposed |
-| [DevKit_Class_Recommendation_and_Readiness_Matrix.md](DevKit_Class_Recommendation_and_Readiness_Matrix.md) | WP-013 class recommendations (not Accepted) | Proposed |
+| [DevKit_Component_Class_Qualification_Report.md](DevKit_Component_Class_Qualification_Report.md) | WP-013 class qualification summary | Accepted |
+| [DevKit_High_Side_Class_Comparison.md](DevKit_High_Side_Class_Comparison.md) | WP-013 high-side class comparison | Accepted |
+| [DevKit_Current_Observation_Class_Comparison.md](DevKit_Current_Observation_Class_Comparison.md) | WP-013 current-observation class comparison | Accepted |
+| [DevKit_Protection_Class_Comparison.md](DevKit_Protection_Class_Comparison.md) | WP-013 protection class comparison | Accepted |
+| [DevKit_Bidirectional_Class_Comparison.md](DevKit_Bidirectional_Class_Comparison.md) | WP-013 bidirectional class comparison | Accepted |
+| [DevKit_Symbolic_Preliminary_Calculations.md](DevKit_Symbolic_Preliminary_Calculations.md) | WP-013 symbolic preliminary calculations | Accepted |
+| [DevKit_Class_Recommendation_and_Readiness_Matrix.md](DevKit_Class_Recommendation_and_Readiness_Matrix.md) | WP-013 class evaluation directions (final classes Open) | Accepted |
 | This README | Navigation and authority statement | Accepted |
 
 ## Relationship to EDL-014
@@ -121,7 +121,7 @@ Every DevKit gate evidence package shall record a **composite system baseline** 
 | WP-010 functional electrical architecture | **Accepted** (2026-07-20) — WP-010-R1 Accepted |
 | WP-011 EDL-011 + component-class prep | **Accepted** (2026-07-20) — WP-011-R1 Accepted |
 | WP-012 electrical sizing architecture framework | **Accepted** (2026-07-20) — WP-012-R1/R2 Accepted; PR #16 merged (`9c5c7e7` / `fe700d4`) |
-| WP-013 component-class qualification + symbolic calcs | **Ready for Final Architecture Review** — WP-013-R1 applied |
+| WP-013 component-class qualification + symbolic calcs | **Accepted** (2026-07-20) — WP-013-R1 Accepted; PR #17 merged (`d1698a0` / `23bdb07`); final classes/topology Open |
 | Hardware design | **NOT IMPLEMENTED** — detailed sizing/schematic/PCB **NOT AUTHORIZED** |
 | Firmware bring-up | NOT IMPLEMENTED |
 | Physical verification | NOT VERIFIED |
@@ -135,9 +135,9 @@ Still open decision **requests** (no Accepted ADR yet): `ADR-DK-008`, `ADR-DK-00
 
 Open thresholds: `TBD-DK-001` … `TBD-DK-022` (Status Open — WP-009 methods Accepted; numeric values not Approved). `TBD-DK-007` remains **BLOCKED_BY_EDL_CLARIFICATION** — not Resolved.
 
-**Next step:** Architecture Review of WP-013 (class recommendations Proposed; no MPN/numeric Approved).
+**Next step:** WP-014 — Gen1 DevKit Fixture and Load-Bank Requirements.
 
-**Not authorized:** MPN selection · BOM · schematics · PCB · numeric threshold approval · EDL file edit · final electrical sizing completion · Verification Evidence creation.
+**Not authorized:** MPN selection · BOM · schematics · PCB · numeric threshold freeze · EDL file edit · final electrical sizing completion · Verification Evidence creation · fixture construction.
 
 ## Revision history
 
@@ -162,3 +162,4 @@ Open thresholds: `TBD-DK-001` … `TBD-DK-022` (Status Open — WP-009 methods A
 | 1.15 | 2026-07-20 | Architecture Review — WP-012 Accepted; PR #16 merged (`9c5c7e7` / `fe700d4`); TBD-DK-007 BLOCKED unchanged |
 | 1.16 | 2026-07-20 | WP-013 — component-class qualification + symbolic preliminary calculations (Proposed) |
 | 1.17 | 2026-07-20 | WP-013-R1 — capability-role mapping; observation conditional; symbolic equation corrections |
+| 1.18 | 2026-07-20 | Architecture Review — WP-013 Accepted; PR #17 merged (`d1698a0` / `23bdb07`); final classes Open; TBD-DK-007 BLOCKED unchanged |

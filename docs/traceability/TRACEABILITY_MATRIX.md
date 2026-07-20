@@ -1,7 +1,7 @@
 # DriveCore Traceability Matrix
 
 **Document ID:** DOC-TRACE-MAT-001  
-**Version:** 1.6.4  
+**Version:** 1.6.5  
 **Status:** Accepted  
 **Work Package:** WP-007 (Accepted); WP-010 architecture refs
 
@@ -197,6 +197,7 @@ Blocked cases (approx): 26
 * WP-012 (2026-07-20): Electrical sizing architecture framework **Proposed**; WP-012-R2 **Ready for Final Architecture Acceptance**; signed net `I_CH_IN_n` convention; Stage [D] qualification authority clarified; sizing methods Proposed; numeric Open; NOT VERIFIED unchanged; TBD-DK-007 BLOCKED retained.
 * WP-012 Architecture Review (2026-07-20): Electrical sizing framework **Accepted** — WP-012-R1/R2 Accepted; PR #16 merged (`9c5c7e7` / `fe700d4`); sizing methods Accepted; numeric Open; NOT VERIFIED unchanged; TBD-DK-007 **BLOCKED_BY_EDL_CLARIFICATION** retained; WP-013 authorized.
 * WP-013 (2026-07-20): Component-class qualification and symbolic preliminary calculations **Proposed**; class recommendations Proposed (not Accepted); no MPN; numeric Open; NOT VERIFIED unchanged; TBD-DK-007 BLOCKED retained.
+* WP-013 Architecture Review (2026-07-20): Component-class qualification methodology **Accepted** — WP-013-R1 Accepted; PR #17 merged (`d1698a0` / `23bdb07`); evaluation directions Accepted; final HS/sense/BI/protection classes **Open**; OI-COMP/SENSE/PROT/BI remain Open; numeric Open; NOT VERIFIED unchanged; TBD-DK-007 **BLOCKED_BY_EDL_CLARIFICATION** retained; WP-014 authorized.
 * WP-007-R4: Method:Test cases enforce semantic placeholder policy (unjustified placeholders remaining = 0).
 * EDL-014 meaning unchanged.
 
@@ -224,3 +225,4 @@ Blocked cases (approx): 26
 | 1.6.2 | 2026-07-20 | WP-012-R1 — iterative closure; measurement boundaries; NOT VERIFIED retained |
 | 1.6.3 | 2026-07-20 | WP-012-R2 corrections; WP-012 Architecture Review Accepted — NOT VERIFIED retained; TBD-DK-007 BLOCKED retained |
 | 1.6.4 | 2026-07-20 | WP-013 — class qualification refs Proposed; NOT VERIFIED retained; TBD-DK-007 BLOCKED retained |
+| 1.6.5 | 2026-07-20 | WP-013 Architecture Review Accepted — methodology Accepted; final classes Open; NOT VERIFIED retained; TBD-DK-007 BLOCKED retained |

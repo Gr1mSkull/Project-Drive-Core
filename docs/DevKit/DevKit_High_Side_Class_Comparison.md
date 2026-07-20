@@ -1,8 +1,8 @@
 # DevKit High-Side Class Comparison — WP-013
 
 **Document ID:** DOC-DK-HSCC-001  
-**Version:** 1.1  
-**Status:** Ready for Final Architecture Review  
+**Version:** 1.2  
+**Status:** Accepted — Architecture Review  
 **Work Package:** WP-013 / WP-013-R1  
 **Date:** 2026-07-20
 
@@ -121,3 +121,4 @@ REQ-DCC-V-DK-039…049 · ADR-019 · WP-010 aliases · ED-IN-030 · OI-COMP-001 
 |---------|------|--------|
 | 1.0 | 2026-07-20 | WP-013 initial high-side class comparison — Proposed |
 | 1.1 | 2026-07-20 | WP-013-R1 — capability-role mapping; HS-INT-BASIC conditional; no universal primary class |
+| 1.2 | 2026-07-20 | Architecture Review Accepted — PR #17 merged (`d1698a0` / `23bdb07`); methodology Accepted; final classes/topology Open; TBD-DK-007 BLOCKED unchanged |

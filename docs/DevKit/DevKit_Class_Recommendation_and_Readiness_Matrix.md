@@ -1,16 +1,19 @@
 # DevKit Class Recommendation and Readiness Matrix — WP-013
 
 **Document ID:** DOC-DK-CRRM-001  
-**Version:** 1.1  
-**Status:** Ready for Final Architecture Review  
+**Version:** 1.2  
+**Status:** Accepted — Architecture Review  
 **Work Package:** WP-013 / WP-013-R1  
 **Date:** 2026-07-20
 
 ```text
-Recommendations are class-level only.
-Recommendation ≠ Architecture Acceptance ≠ MPN qualification ≠ procurement ≠ schematic use.
+Recommendations are class-level evaluation directions.
+Architecture Review acceptance of WP-013 accepts the comparison framework and conditional directions.
+It does not convert conditional recommendations into final component-class selections.
+Recommendation ≠ Final class selection ≠ MPN qualification ≠ procurement ≠ schematic use.
 RECOMMENDED_FOR_NEXT_STAGE = evaluation may continue — not class Accepted for every physical channel.
 OI-PROT-001 / OI-PROT-002 remain Open.
+OI-COMP-001/002 · OI-SENSE-001 · OI-BI-001 remain Open.
 TBD-DK-007 remains BLOCKED_BY_EDL_CLARIFICATION.
 Numeric values remain Open.
 ```
@@ -117,3 +120,4 @@ Recommendation values: `RECOMMENDED_FOR_NEXT_STAGE` · `CONDITIONALLY_RECOMMENDE
 |---------|------|--------|
 | 1.0 | 2026-07-20 | WP-013 initial class recommendation and readiness matrix — Proposed |
 | 1.1 | 2026-07-20 | WP-013-R1 — role mapping; HS-INT-BASIC conditional; SENSE-HYBRID conditional; Open OI-PROT retained |
+| 1.2 | 2026-07-20 | Architecture Review Accepted — PR #17 merged (`d1698a0` / `23bdb07`); methodology Accepted; final classes/topology Open; TBD-DK-007 BLOCKED unchanged |

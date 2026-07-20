@@ -19,14 +19,14 @@
 | WP-010 functional electrical architecture | **Accepted** (2026-07-20); WP-010-R1 Accepted |
 | WP-011 EDL-011 + component-class prep | **Accepted** (2026-07-20); WP-011-R1 Accepted |
 | WP-012 electrical sizing architecture framework | **Accepted** (2026-07-20); WP-012-R1/R2 Accepted; PR #16 merged (`9c5c7e7` / `fe700d4`) |
-| WP-013 component-class qualification + symbolic calcs | **Ready for Final Architecture Review** — WP-013-R1 |
+| WP-013 component-class qualification + symbolic calcs | **Accepted** (2026-07-20); WP-013-R1 Accepted; PR #17 merged (`d1698a0` / `23bdb07`) |
 | DevKit hardware design | **NOT IMPLEMENTED** — sizing/schematic/PCB NOT AUTHORIZED |
 | DevKit built / verified | **No** — NOT VERIFIED |
-| Remaining decisions | ADR-DK-008/009/011/012; OI-PROT-001/002; TBD-DK-007 BLOCKED (not Resolved); thresholds TBD-DK-001…022 Open |
+| Remaining decisions | ADR-DK-008/009/011/012; OI-COMP-001/002; OI-SENSE-001; OI-PROT-001/002; OI-BI-001; TBD-DK-007 BLOCKED (not Resolved); thresholds TBD-DK-001…022 Open |
 
-**Next step:** Final Architecture Review of WP-013 (WP-013-R1 corrections applied).
+**Next step:** WP-014 — Gen1 DevKit Fixture and Load-Bank Requirements.
 
-**Next expected engineering stage (after WP-013 acceptance):** fixture/load-bank requirements · ADR-DK-011/012 · MPN qualification prep · provisional baseline (Architect) → (only then) schematic/PCB/firmware WPs.
+**Next expected engineering stage:** WP-014 fixture/load-bank requirements · ADR-DK-011/012 · MPN qualification prep (after role inputs + Architect authorization) → (only then) schematic/PCB/firmware WPs.
 
 ## Фаза 1 — Первый автомобиль (E30)
 
