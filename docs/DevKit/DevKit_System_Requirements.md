@@ -1,8 +1,8 @@
 # DevKit System Requirements — Gen1
 
 **Document ID:** DOC-DK-REQ-001  
-**Version:** 1.1.3  
-**Status:** Proposed  
+**Version:** 1.2  
+**Status:** Accepted  
 **Work Package:** WP-007 / WP-007-R1  
 **Date:** 2026-07-19  
 **Governance:** [DevKit_Verification_Governance.md](DevKit_Verification_Governance.md)  
@@ -36,7 +36,7 @@ Withdrawn IDs are preserved and **not reused**.
 | Rationale | Defines DevKit purpose as verification gate, not production unit. |
 | Verification method | Inspection |
 | Verification reference | `VER-DCC-DK-A-001` |
-| Status | Proposed |
+| Status | Accepted |
 | Notes | — |
 
 #### REQ-DCC-V-DK-004
@@ -49,7 +49,7 @@ Withdrawn IDs are preserved and **not reused**.
 | Rationale | Three-domain representation required for meaningful gate testing. |
 | Verification method | Inspection / Analysis |
 | Verification reference | `VER-DCC-DK-A-001` |
-| Status | Proposed |
+| Status | Accepted |
 | Notes | — |
 
 #### REQ-DCC-V-DK-005
@@ -62,7 +62,7 @@ Withdrawn IDs are preserved and **not reused**.
 | Rationale | Keeps lab platform scoped. |
 | Verification method | Inspection |
 | Verification reference | `VER-DCC-DK-A-001` |
-| Status | Proposed |
+| Status | Accepted |
 | Notes | Exact production exclusions for Power population remain subject to ADR-DK-004. |
 
 #### REQ-DCC-V-DK-007
@@ -75,7 +75,7 @@ Withdrawn IDs are preserved and **not reused**.
 | Rationale | Unattended high-current risk. |
 | Verification method | Demonstration |
 | Verification reference | `VER-DCC-DK-A-003` |
-| Status | Proposed |
+| Status | Accepted |
 | Notes | Unattended-operation prohibition — see REQ-DCC-V-DK-030. |
 
 ### 2.B — Architecture fidelity
@@ -90,7 +90,7 @@ Withdrawn IDs are preserved and **not reused**.
 | Rationale | Fail-operational and RT independence. |
 | Verification method | Test |
 | Verification reference | `VER-DCC-DK-A-010` |
-| Status | Proposed |
+| Status | Accepted |
 | Notes | — |
 
 #### REQ-DCC-V-DK-010
@@ -103,7 +103,7 @@ Withdrawn IDs are preserved and **not reused**.
 | Rationale | Service failure isolation. |
 | Verification method | Test |
 | Verification reference | `VER-DCC-DK-A-005`, `VER-DCC-DK-D-012` |
-| Status | Proposed |
+| Status | Accepted |
 | Notes | — |
 
 #### REQ-DCC-V-DK-011
@@ -116,7 +116,7 @@ Withdrawn IDs are preserved and **not reused**.
 | Rationale | Production interface compatibility for Power swap path. |
 | Verification method | Test / Inspection |
 | Verification reference | `VER-DCC-DK-A-007`, `VER-DCC-DK-A-008` |
-| Status | Proposed |
+| Status | Accepted |
 | Notes | Pin-level reuse vs adapter is ADR-DK-001. |
 
 #### REQ-DCC-V-DK-012
@@ -129,7 +129,7 @@ Withdrawn IDs are preserved and **not reused**.
 | Rationale | Service-layer communication fidelity. |
 | Verification method | Test |
 | Verification reference | `VER-DCC-DK-A-007`, `VER-DCC-DK-A-009`, `VER-DCC-DK-B-006` |
-| Status | Proposed |
+| Status | Accepted |
 | Notes | — |
 
 #### REQ-DCC-V-DK-013
@@ -142,7 +142,7 @@ Withdrawn IDs are preserved and **not reused**.
 | Rationale | Configuration-over-code. |
 | Verification method | Analysis / Test |
 | Verification reference | `VER-DCC-DK-D-003` |
-| Status | Proposed |
+| Status | Accepted |
 | Notes | — |
 
 #### REQ-DCC-V-DK-014
@@ -155,7 +155,7 @@ Withdrawn IDs are preserved and **not reused**.
 | Rationale | Capability representation without MPN. |
 | Verification method | Analysis / Test |
 | Verification reference | `VER-DCC-DK-C-001` |
-| Status | Proposed |
+| Status | Accepted |
 | Notes | Exact class set: ADR-DK-004. |
 
 #### REQ-DCC-V-DK-017
@@ -168,7 +168,7 @@ Withdrawn IDs are preserved and **not reused**.
 | Rationale | Uses existing BOARD_ID; does not redesign. |
 | Verification method | Test / Inspection |
 | Verification reference | `VER-DCC-DK-A-015` |
-| Status | Proposed |
+| Status | Accepted |
 | Notes | Encoding map TBD — TBD-DK-020. |
 
 #### REQ-DCC-V-DK-018
@@ -181,7 +181,7 @@ Withdrawn IDs are preserved and **not reused**.
 | Rationale | Safety ownership. |
 | Verification method | Test |
 | Verification reference | `VER-DCC-DK-D-012` |
-| Status | Proposed |
+| Status | Accepted |
 | Notes | — |
 
 ### 2.C — Power input and bench safety
@@ -196,7 +196,7 @@ Withdrawn IDs are preserved and **not reused**.
 | Rationale | Controlled first power. |
 | Verification method | Inspection / Demonstration |
 | Verification reference | `VER-DCC-DK-A-002`, `VER-DCC-DK-A-007` |
-| Status | Proposed |
+| Status | Accepted |
 | Notes | — |
 
 #### REQ-DCC-V-DK-020
@@ -209,7 +209,7 @@ Withdrawn IDs are preserved and **not reused**.
 | Rationale | Bench protection; rating TBD. |
 | Verification method | Inspection / Analysis |
 | Verification reference | `VER-DCC-DK-A-002` |
-| Status | Proposed |
+| Status | Accepted |
 | Notes | Limit TBD-DK-002; ADR-DK-006. |
 
 #### REQ-DCC-V-DK-021
@@ -222,7 +222,7 @@ Withdrawn IDs are preserved and **not reused**.
 | Rationale | Hardware path required. |
 | Verification method | Test |
 | Verification reference | `VER-DCC-DK-A-012` |
-| Status | Proposed |
+| Status | Accepted |
 | Notes | — |
 
 #### REQ-DCC-V-DK-022
@@ -235,7 +235,7 @@ Withdrawn IDs are preserved and **not reused**.
 | Rationale | First-power safety. |
 | Verification method | Inspection |
 | Verification reference | `VER-DCC-DK-A-002` |
-| Status | Proposed |
+| Status | Accepted |
 | Notes | — |
 
 #### REQ-DCC-V-DK-023
@@ -248,7 +248,7 @@ Withdrawn IDs are preserved and **not reused**.
 | Rationale | Default safe state. |
 | Verification method | Test |
 | Verification reference | `VER-DCC-DK-A-003`, `VER-DCC-DK-A-016` |
-| Status | Proposed |
+| Status | Accepted |
 | Notes | — |
 
 #### REQ-DCC-V-DK-024
@@ -261,7 +261,7 @@ Withdrawn IDs are preserved and **not reused**.
 | Rationale | Lab shock/burn risk. |
 | Verification method | Inspection |
 | Verification reference | `VER-DCC-DK-A-002` |
-| Status | Proposed |
+| Status | Accepted |
 | Notes | Does not specify enclosure model. |
 
 #### REQ-DCC-V-DK-025
@@ -274,7 +274,7 @@ Withdrawn IDs are preserved and **not reused**.
 | Rationale | Measurement repeatability and safety. |
 | Verification method | Inspection |
 | Verification reference | `VER-DCC-DK-A-002` |
-| Status | Proposed |
+| Status | Accepted |
 | Notes | — |
 
 #### REQ-DCC-V-DK-026
@@ -287,7 +287,7 @@ Withdrawn IDs are preserved and **not reused**.
 | Rationale | Safe load handling. |
 | Verification method | Demonstration |
 | Verification reference | `VER-DCC-DK-C-002` |
-| Status | Proposed |
+| Status | Accepted |
 | Notes | — |
 
 #### REQ-DCC-V-DK-027
@@ -300,7 +300,7 @@ Withdrawn IDs are preserved and **not reused**.
 | Rationale | Fault interruption. |
 | Verification method | Inspection / Test |
 | Verification reference | `VER-DCC-DK-A-002` |
-| Status | Proposed |
+| Status | Accepted |
 | Notes | — |
 
 #### REQ-DCC-V-DK-030
@@ -313,7 +313,7 @@ Withdrawn IDs are preserved and **not reused**.
 | Rationale | Fire/thermal risk. |
 | Verification method | Inspection / Demonstration |
 | Verification reference | `VER-DCC-DK-A-003` |
-| Status | Proposed |
+| Status | Accepted |
 | Notes | — |
 
 ### 2.D — Kill and global enable
@@ -328,7 +328,7 @@ Withdrawn IDs are preserved and **not reused**.
 | Rationale | Independent kill testability. |
 | Verification method | Test |
 | Verification reference | `VER-DCC-DK-A-012` |
-| Status | Proposed |
+| Status | Accepted |
 | Notes | — |
 
 #### REQ-DCC-V-DK-032
@@ -341,7 +341,7 @@ Withdrawn IDs are preserved and **not reused**.
 | Rationale | Observability. |
 | Verification method | Test / Demonstration |
 | Verification reference | `VER-DCC-DK-A-013` |
-| Status | Proposed |
+| Status | Accepted |
 | Notes | — |
 
 #### REQ-DCC-V-DK-033
@@ -354,7 +354,7 @@ Withdrawn IDs are preserved and **not reused**.
 | Rationale | Hardware de-energization. |
 | Verification method | Test |
 | Verification reference | `VER-DCC-DK-A-012` |
-| Status | Proposed |
+| Status | Accepted |
 | Notes | — |
 
 #### REQ-DCC-V-DK-034
@@ -367,7 +367,7 @@ Withdrawn IDs are preserved and **not reused**.
 | Rationale | No auto-restart hazard. |
 | Verification method | Test |
 | Verification reference | `VER-DCC-DK-A-014` |
-| Status | Proposed |
+| Status | Accepted |
 | Notes | Exact sequence TBD if not yet specified — TBD-DK-021. |
 
 #### REQ-DCC-V-DK-035
@@ -380,7 +380,7 @@ Withdrawn IDs are preserved and **not reused**.
 | Rationale | Control-loss behaviour. |
 | Verification method | Test |
 | Verification reference | `VER-DCC-DK-A-008`, `VER-DCC-DK-C-012` |
-| Status | Proposed |
+| Status | Accepted |
 | Notes | Timeout value TBD-DK-007 pending authoritative freeze; EDL-011 states >100 ms. |
 
 #### REQ-DCC-V-DK-036
@@ -393,7 +393,7 @@ Withdrawn IDs are preserved and **not reused**.
 | Rationale | Measurable kill timing. |
 | Verification method | Test |
 | Verification reference | `VER-DCC-DK-A-012` |
-| Status | Proposed |
+| Status | Accepted |
 | Notes | Vague 'immediately' prohibited; threshold open. |
 
 #### REQ-DCC-V-DK-037
@@ -406,7 +406,7 @@ Withdrawn IDs are preserved and **not reused**.
 | Rationale | No software bypass of kill. |
 | Verification method | Test |
 | Verification reference | `VER-DCC-DK-A-012`, `VER-DCC-DK-B-012`, `VER-DCC-DK-B-013` |
-| Status | Proposed |
+| Status | Accepted |
 | Notes | — |
 
 #### REQ-DCC-V-DK-038
@@ -419,7 +419,7 @@ Withdrawn IDs are preserved and **not reused**.
 | Rationale | Measurable WDT response. |
 | Verification method | Test |
 | Verification reference | `VER-DCC-DK-A-011` |
-| Status | Proposed |
+| Status | Accepted |
 | Notes | Candidate <200 ms not automatically normative. |
 
 ### 2.E — Representative power-channel capability
@@ -434,7 +434,7 @@ Withdrawn IDs are preserved and **not reused**.
 | Rationale | Representative HS capability. |
 | Verification method | Test |
 | Verification reference | `VER-DCC-DK-C-001`, `VER-DCC-DK-C-002` |
-| Status | Proposed |
+| Status | Accepted |
 | Notes | — |
 
 #### REQ-DCC-V-DK-040
@@ -447,7 +447,7 @@ Withdrawn IDs are preserved and **not reused**.
 | Rationale | PWM representation. |
 | Verification method | Test |
 | Verification reference | `VER-DCC-DK-C-003` |
-| Status | Proposed |
+| Status | Accepted |
 | Notes | PWM frequency range TBD-DK-008. |
 
 #### REQ-DCC-V-DK-041
@@ -460,7 +460,7 @@ Withdrawn IDs are preserved and **not reused**.
 | Rationale | Class diversity without claiming full Gen1 set. |
 | Verification method | Test |
 | Verification reference | `VER-DCC-DK-C-001` |
-| Status | Proposed |
+| Status | Accepted |
 | Notes | — |
 
 #### REQ-DCC-V-DK-042
@@ -473,7 +473,7 @@ Withdrawn IDs are preserved and **not reused**.
 | Rationale | H-bridge representation by capability. |
 | Verification method | Test |
 | Verification reference | `VER-DCC-DK-C-010` |
-| Status | Proposed |
+| Status | Accepted |
 | Notes | Does not require specific H-bridge MPN. |
 
 #### REQ-DCC-V-DK-043
@@ -486,7 +486,7 @@ Withdrawn IDs are preserved and **not reused**.
 | Rationale | Current observability. |
 | Verification method | Test |
 | Verification reference | `VER-DCC-DK-C-004` |
-| Status | Proposed |
+| Status | Accepted |
 | Notes | — |
 
 #### REQ-DCC-V-DK-044
@@ -499,7 +499,7 @@ Withdrawn IDs are preserved and **not reused**.
 | Rationale | Overcurrent behaviour. |
 | Verification method | Test |
 | Verification reference | `VER-DCC-DK-C-005` |
-| Status | Proposed |
+| Status | Accepted |
 | Notes | Threshold tolerance TBD-DK-011. |
 
 #### REQ-DCC-V-DK-045
@@ -512,7 +512,7 @@ Withdrawn IDs are preserved and **not reused**.
 | Rationale | Short-circuit behaviour. |
 | Verification method | Test |
 | Verification reference | `VER-DCC-DK-C-006` |
-| Status | Proposed |
+| Status | Accepted |
 | Notes | Safe fixture required; else BLOCKED. |
 
 #### REQ-DCC-V-DK-046
@@ -525,7 +525,7 @@ Withdrawn IDs are preserved and **not reused**.
 | Rationale | Open-load where supported. |
 | Verification method | Test |
 | Verification reference | `VER-DCC-DK-C-007` |
-| Status | Proposed |
+| Status | Accepted |
 | Notes | — |
 
 #### REQ-DCC-V-DK-047
@@ -538,7 +538,7 @@ Withdrawn IDs are preserved and **not reused**.
 | Rationale | Supply fault behaviour. |
 | Verification method | Test |
 | Verification reference | `VER-DCC-DK-C-008` |
-| Status | Proposed |
+| Status | Accepted |
 | Notes | Candidate 10.5 V not automatically normative. |
 
 #### REQ-DCC-V-DK-048
@@ -551,7 +551,7 @@ Withdrawn IDs are preserved and **not reused**.
 | Rationale | Thermal observability. |
 | Verification method | Test |
 | Verification reference | `VER-DCC-DK-C-009` |
-| Status | Proposed |
+| Status | Accepted |
 | Notes | — |
 
 #### REQ-DCC-V-DK-049
@@ -564,7 +564,7 @@ Withdrawn IDs are preserved and **not reused**.
 | Rationale | Retry/latch. |
 | Verification method | Test |
 | Verification reference | `VER-DCC-DK-C-014` |
-| Status | Proposed |
+| Status | Accepted |
 | Notes | — |
 
 #### REQ-DCC-V-DK-050
@@ -577,7 +577,7 @@ Withdrawn IDs are preserved and **not reused**.
 | Rationale | Safe OFF timing. |
 | Verification method | Test |
 | Verification reference | `VER-DCC-DK-A-016`, `VER-DCC-DK-C-002` |
-| Status | Proposed |
+| Status | Accepted |
 | Notes | — |
 
 #### REQ-DCC-V-DK-051
@@ -590,7 +590,7 @@ Withdrawn IDs are preserved and **not reused**.
 | Rationale | Diagnostic readout. |
 | Verification method | Test |
 | Verification reference | `VER-DCC-DK-B-009`, `VER-DCC-DK-C-004` |
-| Status | Proposed |
+| Status | Accepted |
 | Notes | — |
 
 #### REQ-DCC-V-DK-054
@@ -603,7 +603,7 @@ Withdrawn IDs are preserved and **not reused**.
 | Rationale | Bridge shoot-through / conflict prevention. |
 | Verification method | Test |
 | Verification reference | `VER-DCC-DK-C-010`, `VER-DCC-DK-C-011` |
-| Status | Proposed |
+| Status | Accepted |
 | Notes | — |
 
 #### REQ-DCC-V-DK-055
@@ -616,7 +616,7 @@ Withdrawn IDs are preserved and **not reused**.
 | Rationale | Stall response. |
 | Verification method | Test |
 | Verification reference | `VER-DCC-DK-C-013` |
-| Status | Proposed |
+| Status | Accepted |
 | Notes | May be BLOCKED pending fixture. |
 
 ### 2.F — Logic and Real-Time domain
@@ -631,7 +631,7 @@ Withdrawn IDs are preserved and **not reused**.
 | Rationale | Bring-up. |
 | Verification method | Test |
 | Verification reference | `VER-DCC-DK-A-004` |
-| Status | Proposed |
+| Status | Accepted |
 | Notes | — |
 
 #### REQ-DCC-V-DK-057
@@ -644,7 +644,7 @@ Withdrawn IDs are preserved and **not reused**.
 | Rationale | Safe debug. |
 | Verification method | Inspection |
 | Verification reference | `VER-DCC-DK-A-004` |
-| Status | Proposed |
+| Status | Accepted |
 | Notes | — |
 
 #### REQ-DCC-V-DK-058
@@ -657,7 +657,7 @@ Withdrawn IDs are preserved and **not reused**.
 | Rationale | WDT. |
 | Verification method | Test |
 | Verification reference | `VER-DCC-DK-A-011` |
-| Status | Proposed |
+| Status | Accepted |
 | Notes | — |
 
 #### REQ-DCC-V-DK-059
@@ -670,7 +670,7 @@ Withdrawn IDs are preserved and **not reused**.
 | Rationale | Startup. |
 | Verification method | Test |
 | Verification reference | `VER-DCC-DK-A-010` |
-| Status | Proposed |
+| Status | Accepted |
 | Notes | — |
 
 #### REQ-DCC-V-DK-060
@@ -683,7 +683,7 @@ Withdrawn IDs are preserved and **not reused**.
 | Rationale | Safe reset. |
 | Verification method | Test |
 | Verification reference | `VER-DCC-DK-A-014`, `VER-DCC-DK-D-017` |
-| Status | Proposed |
+| Status | Accepted |
 | Notes | — |
 
 #### REQ-DCC-V-DK-061
@@ -696,7 +696,7 @@ Withdrawn IDs are preserved and **not reused**.
 | Rationale | Power-channel control. |
 | Verification method | Test |
 | Verification reference | `VER-DCC-DK-D-003` |
-| Status | Proposed |
+| Status | Accepted |
 | Notes | — |
 
 #### REQ-DCC-V-DK-062
@@ -709,7 +709,7 @@ Withdrawn IDs are preserved and **not reused**.
 | Rationale | State machine. |
 | Verification method | Test |
 | Verification reference | `VER-DCC-DK-D-002` |
-| Status | Proposed |
+| Status | Accepted |
 | Notes | — |
 
 #### REQ-DCC-V-DK-063
@@ -722,7 +722,7 @@ Withdrawn IDs are preserved and **not reused**.
 | Rationale | Event logging. |
 | Verification method | Test |
 | Verification reference | `VER-DCC-DK-D-016` |
-| Status | Proposed |
+| Status | Accepted |
 | Notes | — |
 
 #### REQ-DCC-V-DK-064
@@ -735,7 +735,7 @@ Withdrawn IDs are preserved and **not reused**.
 | Rationale | Persistent diagnostics. |
 | Verification method | Test |
 | Verification reference | `VER-DCC-DK-D-016` |
-| Status | Proposed |
+| Status | Accepted |
 | Notes | — |
 
 #### REQ-DCC-V-DK-065
@@ -748,7 +748,7 @@ Withdrawn IDs are preserved and **not reused**.
 | Rationale | Operation without Service. |
 | Verification method | Test |
 | Verification reference | `VER-DCC-DK-D-012` |
-| Status | Proposed |
+| Status | Accepted |
 | Notes | — |
 
 ### 2.G — Radio and Service domain
@@ -763,7 +763,7 @@ Withdrawn IDs are preserved and **not reused**.
 | Rationale | Radio bring-up. |
 | Verification method | Test |
 | Verification reference | `VER-DCC-DK-A-005` |
-| Status | Proposed |
+| Status | Accepted |
 | Notes | — |
 
 #### REQ-DCC-V-DK-067
@@ -776,7 +776,7 @@ Withdrawn IDs are preserved and **not reused**.
 | Rationale | DCPI. |
 | Verification method | Test |
 | Verification reference | `VER-DCC-DK-A-009`, `VER-DCC-DK-B-006` |
-| Status | Proposed |
+| Status | Accepted |
 | Notes | — |
 
 #### REQ-DCC-V-DK-068
@@ -789,7 +789,7 @@ Withdrawn IDs are preserved and **not reused**.
 | Rationale | Config delivery. |
 | Verification method | Test |
 | Verification reference | `VER-DCC-DK-B-007` |
-| Status | Proposed |
+| Status | Accepted |
 | Notes | — |
 
 #### REQ-DCC-V-DK-069
@@ -802,7 +802,7 @@ Withdrawn IDs are preserved and **not reused**.
 | Rationale | Diagnostics. |
 | Verification method | Test |
 | Verification reference | `VER-DCC-DK-B-009` |
-| Status | Proposed |
+| Status | Accepted |
 | Notes | — |
 
 #### REQ-DCC-V-DK-070
@@ -815,7 +815,7 @@ Withdrawn IDs are preserved and **not reused**.
 | Rationale | REST status. |
 | Verification method | Test |
 | Verification reference | `VER-DCC-DK-B-010` |
-| Status | Proposed |
+| Status | Accepted |
 | Notes | Encoded/version field mapping TBD per ADR-015. |
 
 #### REQ-DCC-V-DK-071
@@ -828,7 +828,7 @@ Withdrawn IDs are preserved and **not reused**.
 | Rationale | WS telemetry. |
 | Verification method | Test |
 | Verification reference | `VER-DCC-DK-B-011` |
-| Status | Proposed |
+| Status | Accepted |
 | Notes | — |
 
 #### REQ-DCC-V-DK-072
@@ -841,7 +841,7 @@ Withdrawn IDs are preserved and **not reused**.
 | Rationale | Service failure isolation. |
 | Verification method | Test |
 | Verification reference | `VER-DCC-DK-D-012` |
-| Status | Proposed |
+| Status | Accepted |
 | Notes | — |
 
 #### REQ-DCC-V-DK-073
@@ -854,7 +854,7 @@ Withdrawn IDs are preserved and **not reused**.
 | Rationale | Tablet independence. |
 | Verification method | Test |
 | Verification reference | `VER-DCC-DK-D-013` |
-| Status | Proposed |
+| Status | Accepted |
 | Notes | — |
 
 ### 2.H — CAN and external node simulation
@@ -869,7 +869,7 @@ Withdrawn IDs are preserved and **not reused**.
 | Rationale | DCP. |
 | Verification method | Test |
 | Verification reference | `VER-DCC-DK-B-001` |
-| Status | Proposed |
+| Status | Accepted |
 | Notes | — |
 
 #### REQ-DCC-V-DK-076
@@ -882,7 +882,7 @@ Withdrawn IDs are preserved and **not reused**.
 | Rationale | Termination. |
 | Verification method | Inspection / Test |
 | Verification reference | `VER-DCC-DK-B-005` |
-| Status | Proposed |
+| Status | Accepted |
 | Notes | Waveform acceptance TBD-DK-015. |
 
 #### REQ-DCC-V-DK-077
@@ -895,7 +895,7 @@ Withdrawn IDs are preserved and **not reused**.
 | Rationale | ECU simulation. |
 | Verification method | Test |
 | Verification reference | `VER-DCC-DK-B-002`, `VER-DCC-DK-D-004` |
-| Status | Proposed |
+| Status | Accepted |
 | Notes | — |
 
 #### REQ-DCC-V-DK-078
@@ -908,7 +908,7 @@ Withdrawn IDs are preserved and **not reused**.
 | Rationale | Button Box simulation. |
 | Verification method | Test |
 | Verification reference | `VER-DCC-DK-B-004`, `VER-DCC-DK-D-006` |
-| Status | Proposed |
+| Status | Accepted |
 | Notes | — |
 
 #### REQ-DCC-V-DK-079
@@ -921,7 +921,7 @@ Withdrawn IDs are preserved and **not reused**.
 | Rationale | Stale-node. |
 | Verification method | Test |
 | Verification reference | `VER-DCC-DK-B-003`, `VER-DCC-DK-D-014` |
-| Status | Proposed |
+| Status | Accepted |
 | Notes | — |
 
 #### REQ-DCC-V-DK-080
@@ -934,7 +934,7 @@ Withdrawn IDs are preserved and **not reused**.
 | Rationale | LOC testing. |
 | Verification method | Test |
 | Verification reference | `VER-DCC-DK-D-014` |
-| Status | Proposed |
+| Status | Accepted |
 | Notes | — |
 
 #### REQ-DCC-V-DK-081
@@ -947,7 +947,7 @@ Withdrawn IDs are preserved and **not reused**.
 | Rationale | Bus observation. |
 | Verification method | Demonstration |
 | Verification reference | `VER-DCC-DK-B-001` |
-| Status | Proposed |
+| Status | Accepted |
 | Notes | — |
 
 ### 2.I — Configuration
@@ -962,7 +962,7 @@ Withdrawn IDs are preserved and **not reused**.
 | Rationale | DevKit profile. |
 | Verification method | Inspection |
 | Verification reference | `VER-DCC-DK-B-007` |
-| Status | Proposed |
+| Status | Accepted |
 | Notes | Schema field hardware.profile not in docs/005 — ADR-DK-009 related. |
 
 #### REQ-DCC-V-DK-084
@@ -975,7 +975,7 @@ Withdrawn IDs are preserved and **not reused**.
 | Rationale | Validation before apply. |
 | Verification method | Test |
 | Verification reference | `VER-DCC-DK-D-015`, `VER-DCC-DK-D-011` |
-| Status | Proposed |
+| Status | Accepted |
 | Notes | — |
 
 #### REQ-DCC-V-DK-085
@@ -988,7 +988,7 @@ Withdrawn IDs are preserved and **not reused**.
 | Rationale | Hardware-capacity validation. |
 | Verification method | Test |
 | Verification reference | `VER-DCC-DK-D-007`, `VER-DCC-DK-D-008` |
-| Status | Proposed |
+| Status | Accepted |
 | Notes | Capacity declaration mechanism TBD if schema incomplete. |
 
 #### REQ-DCC-V-DK-086
@@ -1001,7 +1001,7 @@ Withdrawn IDs are preserved and **not reused**.
 | Rationale | Representative rules. |
 | Verification method | Analysis / Test |
 | Verification reference | `VER-DCC-DK-D-003`, `VER-DCC-DK-D-005` |
-| Status | Proposed |
+| Status | Accepted |
 | Notes | — |
 
 #### REQ-DCC-V-DK-087
@@ -1014,7 +1014,7 @@ Withdrawn IDs are preserved and **not reused**.
 | Rationale | Invalid rejection. |
 | Verification method | Test |
 | Verification reference | `VER-DCC-DK-D-015`, `VER-DCC-DK-D-018` |
-| Status | Proposed |
+| Status | Accepted |
 | Notes | — |
 
 #### REQ-DCC-V-DK-088
@@ -1027,7 +1027,7 @@ Withdrawn IDs are preserved and **not reused**.
 | Rationale | Atomic apply. |
 | Verification method | Test |
 | Verification reference | `VER-DCC-DK-D-007`, `VER-DCC-DK-D-018` |
-| Status | Proposed |
+| Status | Accepted |
 | Notes | If semantics undefined: escalate. |
 
 #### REQ-DCC-V-DK-089
@@ -1040,7 +1040,7 @@ Withdrawn IDs are preserved and **not reused**.
 | Rationale | DCFG identity. |
 | Verification method | Inspection / Test |
 | Verification reference | `VER-DCC-DK-B-007`, `VER-DCC-DK-B-015` |
-| Status | Proposed |
+| Status | Accepted |
 | Notes | CRC coverage open — interface CR. |
 
 ### 2.J — Testability and observability
@@ -1055,7 +1055,7 @@ Withdrawn IDs are preserved and **not reused**.
 | Rationale | Accessible measurement. |
 | Verification method | Inspection |
 | Verification reference | `VER-DCC-DK-A-002` |
-| Status | Proposed |
+| Status | Accepted |
 | Notes | — |
 
 #### REQ-DCC-V-DK-094
@@ -1068,7 +1068,7 @@ Withdrawn IDs are preserved and **not reused**.
 | Rationale | Voltage observation. |
 | Verification method | Test |
 | Verification reference | `VER-DCC-DK-A-003` |
-| Status | Proposed |
+| Status | Accepted |
 | Notes | — |
 
 #### REQ-DCC-V-DK-095
@@ -1081,7 +1081,7 @@ Withdrawn IDs are preserved and **not reused**.
 | Rationale | Current observation. |
 | Verification method | Test |
 | Verification reference | `VER-DCC-DK-C-004` |
-| Status | Proposed |
+| Status | Accepted |
 | Notes | — |
 
 #### REQ-DCC-V-DK-096
@@ -1094,7 +1094,7 @@ Withdrawn IDs are preserved and **not reused**.
 | Rationale | Temperature observation. |
 | Verification method | Test |
 | Verification reference | `VER-DCC-DK-C-009` |
-| Status | Proposed |
+| Status | Accepted |
 | Notes | — |
 
 #### REQ-DCC-V-DK-097
@@ -1107,7 +1107,7 @@ Withdrawn IDs are preserved and **not reused**.
 | Rationale | Logic/fault observation. |
 | Verification method | Test |
 | Verification reference | `VER-DCC-DK-B-009` |
-| Status | Proposed |
+| Status | Accepted |
 | Notes | — |
 
 #### REQ-DCC-V-DK-098
@@ -1120,7 +1120,7 @@ Withdrawn IDs are preserved and **not reused**.
 | Rationale | CAN capture. |
 | Verification method | Demonstration |
 | Verification reference | `VER-DCC-DK-B-001` |
-| Status | Proposed |
+| Status | Accepted |
 | Notes | — |
 
 #### REQ-DCC-V-DK-099
@@ -1133,7 +1133,7 @@ Withdrawn IDs are preserved and **not reused**.
 | Rationale | DCPI fault observation. |
 | Verification method | Test |
 | Verification reference | `VER-DCC-DK-A-009`, `VER-DCC-DK-B-008` |
-| Status | Proposed |
+| Status | Accepted |
 | Notes | — |
 
 #### REQ-DCC-V-DK-100
@@ -1146,7 +1146,7 @@ Withdrawn IDs are preserved and **not reused**.
 | Rationale | Fault injection. |
 | Verification method | Analysis / Test |
 | Verification reference | `VER-DCC-DK-C-005`, `VER-DCC-DK-C-006` |
-| Status | Proposed |
+| Status | Accepted |
 | Notes | Which injections mandatory: ADR-DK-010. |
 
 #### REQ-DCC-V-DK-101
@@ -1159,7 +1159,7 @@ Withdrawn IDs are preserved and **not reused**.
 | Rationale | Deterministic reset. |
 | Verification method | Test |
 | Verification reference | `VER-DCC-DK-A-014`, `VER-DCC-DK-D-017` |
-| Status | Proposed |
+| Status | Accepted |
 | Notes | — |
 
 #### REQ-DCC-V-DK-102
@@ -1172,7 +1172,7 @@ Withdrawn IDs are preserved and **not reused**.
 | Rationale | Serviceable loads / isolation. |
 | Verification method | Inspection / Demonstration |
 | Verification reference | `VER-DCC-DK-C-001` |
-| Status | Proposed |
+| Status | Accepted |
 | Notes | — |
 
 ### 2.L — Maintainability and reuse
@@ -1187,7 +1187,7 @@ Withdrawn IDs are preserved and **not reused**.
 | Rationale | Replaceable Power. |
 | Verification method | Analysis / Inspection |
 | Verification reference | `VER-DCC-DK-A-008` |
-| Status | Proposed |
+| Status | Accepted |
 | Notes | Physical board identity ADR-DK-001. |
 
 #### REQ-DCC-V-DK-114
@@ -1213,7 +1213,7 @@ Withdrawn IDs are preserved and **not reused**.
 | Rationale | Labelled connections. |
 | Verification method | Inspection |
 | Verification reference | `VER-DCC-DK-A-002` |
-| Status | Proposed |
+| Status | Accepted |
 | Notes | — |
 
 #### REQ-DCC-V-DK-116
@@ -1226,7 +1226,7 @@ Withdrawn IDs are preserved and **not reused**.
 | Rationale | Serviceable loads. |
 | Verification method | Inspection |
 | Verification reference | `VER-DCC-DK-C-001` |
-| Status | Proposed |
+| Status | Accepted |
 | Notes | — |
 
 #### REQ-DCC-V-DK-117
@@ -1239,7 +1239,7 @@ Withdrawn IDs are preserved and **not reused**.
 | Rationale | Repeatable setup. |
 | Verification method | Demonstration |
 | Verification reference | `VER-DCC-DK-A-006`, `VER-DCC-DK-A-007`, `VER-DCC-DK-D-019` |
-| Status | Proposed |
+| Status | Accepted |
 | Notes | — |
 
 #### REQ-DCC-V-DK-118
@@ -1252,7 +1252,7 @@ Withdrawn IDs are preserved and **not reused**.
 | Rationale | Rollback/recovery. |
 | Verification method | Inspection / Demonstration |
 | Verification reference | `VER-DCC-DK-B-007` |
-| Status | Proposed |
+| Status | Accepted |
 | Notes | — |
 
 ## 3. Withdrawn requirements (moved to governance)
@@ -1757,3 +1757,4 @@ Threshold numeric values associated with ADR-DK-006 / ADR-DK-007 / ADR-DK-011 ar
 | 1.1.1 | 2026-07-19 | WP-007-R1 mapping corrections for A-006/A-007 and restored case IDs |
 | 1.1.2 | 2026-07-19 | WP-007-R2 — restore authoritative Threshold Resolution Register (TBD-DK-001…022) |
 | 1.1.3 | 2026-07-19 | WP-007-R3 — verification references for D-015 split cases |
+| 1.2 | 2026-07-20 | Architecture Review — ACCEPTED; PR #11 approved for merge (requirements structure, governance, verification-plan structure, traceability baseline) |

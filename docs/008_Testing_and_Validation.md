@@ -1,8 +1,8 @@
 # 008 — Testing and Validation
 
-**Version:** Gen1 v0.1.2  
-**Status:** этап 4 — strategy overview (WP-007 / R1)  
-**Work Package update:** WP-007 / WP-007-R1
+**Version:** Gen1 v0.1.3  
+**Status:** этап 4 — strategy overview (WP-007 Accepted)  
+**Work Package update:** WP-007 (Accepted 2026-07-20)
 
 > **Test before track.** Ни одна новая функция не попадает в автомобиль без проверки на стенде.
 
@@ -152,9 +152,9 @@ When firmware trees exist, modules (Power Manager, VCM, CAN, Rules, Config, DCPI
 
 - [x] System validation strategy Phase A–F
 - [x] EDL-014 gate intent preserved
-- [x] DevKit requirements + verification plan (Proposed)
-- [x] Traceability import of `REQ-DCC-V-DK-*` (NOT VERIFIED)
-- [ ] Architecture Review acceptance of DevKit baseline
+- [x] DevKit requirements + verification plan (**Accepted** structure)
+- [x] Traceability import of `REQ-DCC-V-DK-*` (baseline Accepted; evidence NOT VERIFIED)
+- [x] Architecture Review acceptance of DevKit baseline (2026-07-20)
 - [ ] DevKit hardware design approved
 - [ ] First physical Phase A execution / VE records
 
@@ -177,3 +177,4 @@ When firmware trees exist, modules (Power Manager, VCM, CAN, Rules, Config, DCPI
 | 0.1 | 2026-07-12 | Initial Phase A–F DevKit-oriented procedures |
 | 0.1.1 | 2026-07-19 | WP-007 — strategy/navigation; detailed A–D normative cases moved to DevKit verification plan |
 | 0.1.2 | 2026-07-19 | WP-007-R1 — link verification governance document |
+| 0.1.3 | 2026-07-20 | WP-007 Architecture Review ACCEPTED — status checklist updated |

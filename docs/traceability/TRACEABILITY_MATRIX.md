@@ -1,9 +1,9 @@
 # DriveCore Traceability Matrix
 
 **Document ID:** DOC-TRACE-MAT-001  
-**Version:** 1.3.4  
-**Status:** Proposed  
-**Work Package:** WP-007 / WP-007-R4
+**Version:** 1.4  
+**Status:** Accepted  
+**Work Package:** WP-007 (Accepted)
 
 Authoritative policy: `.cursor/ENGINEERING_CONSTITUTION.mdc` §6.
 
@@ -199,3 +199,4 @@ Blocked cases (approx): 26
 | 1.3.2 | 2026-07-19 | WP-007-R2 — TBD register authority note (no status changes) |
 | 1.3.3 | 2026-07-19 | WP-007-R3 — D-015 split verification refs |
 | 1.3.4 | 2026-07-19 | WP-007-R4 — placeholder audit note (no requirement status changes) |
+| 1.4 | 2026-07-20 | Architecture Review — WP-007 traceability baseline ACCEPTED; requirement rows remain NOT VERIFIED |

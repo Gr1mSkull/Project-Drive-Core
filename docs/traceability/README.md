@@ -1,8 +1,8 @@
 # DriveCore Traceability
 
 **Document ID:** DOC-TRACE-001  
-**Version:** 1.3.1  
-**Status:** Proposed  
+**Version:** 1.4  
+**Status:** Accepted  
 **Change Request:** CR-002 / CR-002-R1 / CR-002-R2 · **ADR:** ADR-015 · **WP:** WP-007 / WP-007-R2
 
 ## Purpose
@@ -59,3 +59,4 @@ Requirement ID
 | 1.2 | 2026-07-19 | WP-007 — DevKit `REQ-DCC-V-DK-*` imported to primary matrix (NOT VERIFIED) |
 | 1.3 | 2026-07-19 | WP-007-R1 — active system vs governance traceability subsections |
 | 1.3.1 | 2026-07-19 | WP-007-R2 — note TBD register authority in System Requirements §4 |
+| 1.4 | 2026-07-20 | WP-007 traceability baseline ACCEPTED |

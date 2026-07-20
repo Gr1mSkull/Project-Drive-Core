@@ -11,7 +11,7 @@
 | **Date** | 2026-07-19 |
 | **Implementer (name/agent)** | Implementation Engineer (cloud agent) |
 | **Implementer role** | Implementation Engineer |
-| **Revision** | WP-007-R4 — semantic placeholder enforcement |
+| **Revision** | WP-007 Accepted — PR #11 approved for merge |
 
 ### Changed Files
 
@@ -96,12 +96,12 @@ Revert WP-007 PR; restore prior docs/008 detailed tables from git history if nee
 | Field | Value |
 |-------|-------|
 | **Implementer Self-Review Status** | Complete |
-| **Independent Review Status** | Not started |
-| **Independent Reviewer (name/agent)** | TBD |
+| **Independent Review Status** | Complete — no blocking findings |
+| **Independent Reviewer (name/agent)** | Architecture Review |
 | **Independent Reviewer role** | Independent Reviewer \| Test Owner |
-| **Independent review date** | TBD |
-| **Final Review Outcome** | TBD |
-| **Architecture / policy approval** | Separate — System Architect only |
+| **Independent review date** | 2026-07-20 |
+| **Final Review Outcome** | ACCEPTED — Approved for merge |
+| **Architecture / policy approval** | ACCEPTED 2026-07-20 — requirements structure, governance, verification-plan structure, traceability baseline |
 
 ---
 
@@ -115,3 +115,4 @@ Revert WP-007 PR; restore prior docs/008 detailed tables from git history if nee
 | 1.1.2 | 2026-07-19 | WP-007-R2 — threshold register restore and dependency integrity |
 | 1.1.3 | 2026-07-19 | WP-007-R3 — verification-case completeness audit |
 | 1.1.4 | 2026-07-19 | WP-007-R4 — semantic placeholder enforcement |
+| 1.2 | 2026-07-20 | Architecture Review ACCEPTED; approved for merge (no blocking findings) |

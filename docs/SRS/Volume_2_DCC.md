@@ -112,7 +112,7 @@
 
 ### 8.1 DevKit requirements
 
-**Normative DevKit requirements (Proposed):**
+**Normative DevKit requirements (Accepted — structure; evidence NOT VERIFIED):**
 
 ```text
 docs/DevKit/DevKit_System_Requirements.md
@@ -122,12 +122,12 @@ docs/DevKit/DevKit_System_Requirements.md
 |-------|-------|
 | Active system identifier range | `REQ-DCC-V-DK-*` (93 active after WP-007-R1; withdrawn IDs preserved) |
 | Governance rules | `DK-GOV-*` in `docs/DevKit/DevKit_Verification_Governance.md` |
-| Status | Proposed — requires Architecture Review |
+| Status | **Accepted** (Architecture Review 2026-07-20); verification evidence remains `NOT VERIFIED` |
 | Scope | Gen1 DevKit **system** properties/behaviours/testability; governance/evidence-claim rules separated |
-| Verification plan | `docs/DevKit/DevKit_Verification_Plan.md` (Gates DK-A…DK-D) |
+| Verification plan | `docs/DevKit/DevKit_Verification_Plan.md` (Gates DK-A…DK-D) — structure Accepted |
 | Relationship to EDL-014 | DevKit gates support but do **not** replace Phase E on full DCC Gen1; vehicle install still gated by EDL-014 |
 | System validation overview | `docs/008_Testing_and_Validation.md` |
-| Traceability | Active system + governance subsections in `docs/traceability/TRACEABILITY_MATRIX.md` — status `NOT VERIFIED` |
+| Traceability | Active system + governance subsections in `docs/traceability/TRACEABILITY_MATRIX.md` — baseline Accepted; rows `NOT VERIFIED` |
 
 Do not duplicate full requirement text in this SRS volume.
 
@@ -144,3 +144,4 @@ See `docs/traceability/TRACEABILITY_MATRIX.md` and `docs/DevKit/DevKit_Verificat
 | 0.1 | 2026-07-12 | WP-001 chapter structure only |
 | 0.2 | 2026-07-19 | WP-007 — §8.1 DevKit requirements pointer and ID range |
 | 0.2.1 | 2026-07-19 | WP-007-R1 — active vs governance split noted |
+| 0.2.2 | 2026-07-20 | WP-007 Architecture Review ACCEPTED — §8.1 status update |

@@ -1,8 +1,8 @@
 # DevKit Current-State Gap Assessment — Gen1
 
 **Document ID:** DOC-DK-GAP-001  
-**Version:** 1.0.2  
-**Status:** Proposed  
+**Version:** 1.1  
+**Status:** Accepted  
 **Work Package:** WP-007 / WP-007-R2  
 **Date:** 2026-07-19
 
@@ -96,3 +96,4 @@ Note: some rows carry dual tags (e.g. CONFLICT/TBD); counts reflect primary seve
 | 1.0 | 2026-07-19 | WP-007 initial gap assessment |
 | 1.0.1 | 2026-07-19 | WP-007-R1 — note governance split; no ADR/TBD resolutions |
 | 1.0.2 | 2026-07-19 | WP-007-R2 — TBD references point to restored register (no value closures) |
+| 1.1 | 2026-07-20 | Architecture Review — ACCEPTED; PR #11 approved for merge (requirements structure, governance, verification-plan structure, traceability baseline) |

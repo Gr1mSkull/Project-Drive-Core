@@ -1,8 +1,8 @@
 # DevKit Verification Governance — Gen1
 
 **Document ID:** DOC-DK-GOV-001  
-**Version:** 1.0.1  
-**Status:** Proposed  
+**Version:** 1.1  
+**Status:** Accepted  
 **Work Package:** WP-007 / WP-007-R2  
 **Date:** 2026-07-19  
 
@@ -315,3 +315,4 @@ A MANDATORY case that is `BLOCKED`, `NOT EXECUTED`, `PARTIAL`, `NOT VERIFIED`, o
 |---------|------|--------|
 | 1.0 | 2026-07-19 | WP-007-R1 — initial governance rules from withdrawn REQ-DCC-V-DK-* |
 | 1.0.1 | 2026-07-19 | WP-007-R2 — TBD authority pointer; GOV-024/025 reference register IDs |
+| 1.1 | 2026-07-20 | Architecture Review — ACCEPTED; PR #11 approved for merge (requirements structure, governance, verification-plan structure, traceability baseline) |

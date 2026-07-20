@@ -1,8 +1,8 @@
 # DevKit Interface Matrix — Gen1
 
 **Document ID:** DOC-DK-IF-001  
-**Version:** 1.0.2  
-**Status:** Proposed  
+**Version:** 1.1  
+**Status:** Accepted  
 **Work Package:** WP-007 / WP-007-R2  
 **Date:** 2026-07-19
 
@@ -48,3 +48,4 @@
 | 1.0 | 2026-07-19 | WP-007 initial Proposed interface matrix |
 | 1.0.1 | 2026-07-19 | WP-007-R1 — metadata only; no new pinouts |
 | 1.0.2 | 2026-07-19 | WP-007-R2 — TBD authority pointer to System Requirements §4 |
+| 1.1 | 2026-07-20 | Architecture Review — ACCEPTED; PR #11 approved for merge (requirements structure, governance, verification-plan structure, traceability baseline) |

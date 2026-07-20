@@ -1,6 +1,6 @@
 # DriveCore — Current Phase
 
-**Updated:** WP-007-R1 DevKit taxonomy/verification corrections (2026-07-19)
+**Updated:** WP-007 Accepted — Architecture Review (2026-07-20)
 
 ## Documentation
 
@@ -12,14 +12,14 @@
 | 4 Validation (008) | ✅ v0.1.2 strategy overview (WP-007/R1) |
 | 5 Implementation scaffold | ✅ v0.1 (`firmware/shared`, tools, web/ui) |
 | WP-001…WP-006 / CR-001 / CR-002 / ADR-015 | ✅ on `main` (see git history) |
-| **WP-007 DevKit requirements + verification plan** | 🔄 Proposed — R1 corrections; Architecture Review |
+| **WP-007 DevKit requirements + verification plan** | ✅ Accepted (2026-07-20) — structure/governance/plan/traceability; evidence still NOT VERIFIED |
 
 ## DevKit (WP-007)
 
 | Item | Status |
 |------|--------|
-| Active system `REQ-DCC-V-DK-*` (93) + `DK-GOV-*` (25) | Proposed (R1 taxonomy) |
-| Verification plan DK-A…DK-D | Proposed (NOT EXECUTED) |
+| Active system `REQ-DCC-V-DK-*` (93) + `DK-GOV-*` (25) | **Accepted** (structure); NOT VERIFIED (evidence) |
+| Verification plan DK-A…DK-D | **Accepted** structure (cases NOT EXECUTED / BLOCKED) |
 | Hardware design approved | **No** |
 | Firmware bring-up complete | **No** (NOT IMPLEMENTED) |
 | Physical verification | **NOT VERIFIED** |
@@ -29,7 +29,7 @@
 
 `docs/SRS/Volume_2_DCC.md` §8.1 points to `docs/DevKit/DevKit_System_Requirements.md`. Other SRS chapters remain largely structural.
 
-## Next expected work (after Architecture Review of WP-007)
+## Next expected work (after WP-007 acceptance)
 
 1. Resolve ADR-DK blocking decisions and priority thresholds  
 2. DevKit electrical / representative power-channel architecture  

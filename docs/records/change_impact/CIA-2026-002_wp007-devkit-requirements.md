@@ -8,7 +8,7 @@
 | **Author** | Implementation Engineer (cloud agent) |
 | **Author role** | Implementation Engineer |
 | **Date** | 2026-07-19 |
-| **Status** | Under Review |
+| **Status** | Accepted |
 | **Related WP / CR** | WP-007 / WP-007-R1; related ADR-015 / STD-REV-001 / EDL-014 |
 
 ### Reason for Change
@@ -114,17 +114,17 @@ DCFG CRC coverage and encoded-version mappings remain outside WP-007 (ADR-015 co
 | **ADR Required** | YES (multiple ADR-DK-* decisions) |
 | **Architect Approval Required** | YES |
 | **ADR / EDL reference** | EDL-014; ADR-015; EDL-007; EDL-011; pending ADR-DK-* |
-| **Architect approver (name/agent)** | TBD |
+| **Architect approver (name/agent)** | System Architect (Architecture Review) |
 | **Architect role** | System Architect |
-| **Architect approval date** | TBD |
+| **Architect approval date** | 2026-07-20 |
 
 ### Review acknowledgment (not architecture approval)
 
 | Field | Value |
 |-------|-------|
-| **Reviewer (name/agent)** | TBD |
+| **Reviewer (name/agent)** | Architecture Review |
 | **Reviewer role** | Independent Reviewer |
-| **Review date** | TBD |
+| **Review date** | 2026-07-20 |
 | **Evidence / CIA review note** | Documentation-only CIA; no physical verification |
 
 ---
@@ -138,3 +138,4 @@ DCFG CRC coverage and encoded-version mappings remain outside WP-007 (ADR-015 co
 | 1.0.2 | 2026-07-19 | WP-007-R2 — Level 1: TBD register restored; CIA references register (no TBD/ADR closures) |
 | 1.0.3 | 2026-07-19 | WP-007-R3 — Level 1: Test-case completeness; D-015 split; counts aligned (no ADR/TBD closures) |
 | 1.0.4 | 2026-07-19 | WP-007-R4 — Level 1: semantic placeholder enforcement on Method:Test cases (no ADR/TBD closures) |
+| 1.1 | 2026-07-20 | Architecture Review ACCEPTED; PR #11 approved for merge |

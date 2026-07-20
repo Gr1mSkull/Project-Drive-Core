@@ -1,8 +1,8 @@
 # DevKit Verification Plan — Gen1
 
 **Document ID:** DOC-DK-VER-001  
-**Version:** 1.1.4  
-**Status:** Proposed  
+**Version:** 1.2  
+**Status:** Accepted  
 **Work Package:** WP-007 / WP-007-R4  
 **Date:** 2026-07-19  
 
@@ -1947,3 +1947,4 @@ See governance §2–§4. Outcomes: PASS / FAIL / BLOCKED / NOT ASSESSED. Incomp
 | 1.1.2 | 2026-07-19 | WP-007-R2 — TBD register references; A-006 identity-only blockers; blocked matrix exact IDs |
 | 1.1.3 | 2026-07-19 | WP-007-R3 — Test-case completeness audit; D-015 split; placeholder policy |
 | 1.1.4 | 2026-07-19 | WP-007-R4 — semantic placeholder enforcement; C-002/003/008/009 and related Test cases completed |
+| 1.2 | 2026-07-20 | Architecture Review — ACCEPTED; PR #11 approved for merge (requirements structure, governance, verification-plan structure, traceability baseline) |
