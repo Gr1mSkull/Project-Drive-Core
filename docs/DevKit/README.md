@@ -1,10 +1,10 @@
 # DriveCore Gen1 DevKit — Document Set
 
 **Document ID:** DOC-DK-INDEX-001  
-**Version:** 1.2  
+**Version:** 1.4  
 **Status:** Accepted  
-**Work Package:** WP-007 / WP-007-R1  
-**Date:** 2026-07-19
+**Work Package:** WP-007 / WP-008 (Accepted)  
+**Date:** 2026-07-20
 
 ```text
 The DevKit is a controlled verification platform.
@@ -27,6 +27,7 @@ It does **not** define the final circuit, PCB, component set, enclosure, or BOM.
 | [DevKit_Interface_Matrix.md](DevKit_Interface_Matrix.md) | Interface boundaries and testability | Accepted |
 | [DevKit_Verification_Plan.md](DevKit_Verification_Plan.md) | Phase A–D + governance inspection; gates DK-A…DK-D | Accepted |
 | [DevKit_Current_State_Gap_Assessment.md](DevKit_Current_State_Gap_Assessment.md) | Audit of existing claims vs baseline | Accepted |
+| [DevKit_P0_Decision_Crosswalk.md](DevKit_P0_Decision_Crosswalk.md) | WP-008 P0 Accepted ADR-016…023 crosswalk | Accepted |
 | This README | Navigation and authority statement | Accepted |
 
 ## Relationship to EDL-014
@@ -44,7 +45,7 @@ WP-007 normalizes Phase A–D into gates **DK-A…DK-D**. Passing those gates:
 | Topic | Statement |
 |-------|-----------|
 | Architecture family | Same three-board DCC concept (Logic + Power + Radio) — EDL-007 |
-| Production fidelity | Exact “identical board / same binary” rules are **ARCHITECTURAL DECISION REQUIRED** (ADR-DK-001…003) |
+| Production fidelity | Exact “identical board / same binary” rules: **Accepted** ADR-016…018 (originating ADR-DK-001…003) |
 | Power domain | Representative capability for laboratory verification; not full production channel population by default |
 | Acceptance | DevKit ≠ DCC Gen1 product acceptance |
 
@@ -62,8 +63,11 @@ Every DevKit gate evidence package shall record a **composite system baseline** 
 
 | Record | Path |
 |--------|------|
-| CIA | [`docs/records/change_impact/CIA-2026-002_wp007-devkit-requirements.md`](../records/change_impact/CIA-2026-002_wp007-devkit-requirements.md) |
-| Review Handoff | [`docs/records/review_handoffs/RHP-2026-001_wp007-devkit-requirements.md`](../records/review_handoffs/RHP-2026-001_wp007-devkit-requirements.md) |
+| CIA (WP-007) | [`docs/records/change_impact/CIA-2026-002_wp007-devkit-requirements.md`](../records/change_impact/CIA-2026-002_wp007-devkit-requirements.md) |
+| CIA (WP-008) | [`docs/records/change_impact/CIA-2026-003_wp008-devkit-p0-adrs.md`](../records/change_impact/CIA-2026-003_wp008-devkit-p0-adrs.md) |
+| Review Handoff (WP-007) | [`docs/records/review_handoffs/RHP-2026-001_wp007-devkit-requirements.md`](../records/review_handoffs/RHP-2026-001_wp007-devkit-requirements.md) |
+| Review Handoff (WP-008) | [`docs/records/review_handoffs/RHP-2026-002_wp008-devkit-p0-adrs.md`](../records/review_handoffs/RHP-2026-002_wp008-devkit-p0-adrs.md) |
+| P0 ADR package | [`docs/ADR/README.md`](../ADR/README.md) — ADR-016…023 **Accepted** |
 | Traceability | [`docs/traceability/TRACEABILITY_MATRIX.md`](../traceability/TRACEABILITY_MATRIX.md) |
 | SRS pointer | [`docs/SRS/Volume_2_DCC.md`](../SRS/Volume_2_DCC.md) §8.1 |
 
@@ -74,16 +78,21 @@ Every DevKit gate evidence package shall record a **composite system baseline** 
 | Requirements baseline | **Accepted** — Architecture Review (2026-07-20); verification evidence still NOT VERIFIED |
 | Governance rules | **Accepted** (`DK-GOV-*`) |
 | Verification plan | **Accepted** (structure) — cases NOT EXECUTED / BLOCKED; no PASS claims |
-| Hardware design | Not approved by WP-007 |
+| P0 ADRs ADR-016…023 | **Accepted** (WP-008; ADR-021/022 numerics Open) |
+| Hardware design | Not approved — electrical/fixture WPs next |
 | Firmware bring-up | NOT IMPLEMENTED |
 | Physical verification | NOT VERIFIED |
-| Filled VE records | None (WP-007 creates none) |
+| Filled VE records | None |
 
 ## Known blocking decisions
 
-See requirements §6 and Architect Review Package:
+P0 ADRs ADR-016…023 (ADR-DK-001…007, 010) are **Accepted** (WP-008 Architecture Review 2026-07-20). ADR-021/022 numeric limits remain **Open**.
 
-`ADR-DK-001` … `ADR-DK-012`, plus open thresholds `TBD-DK-001` … `TBD-DK-022`.
+Still open decision **requests** (no Accepted ADR yet): `ADR-DK-008`, `ADR-DK-009`, `ADR-DK-011`, `ADR-DK-012`.
+
+Open thresholds: `TBD-DK-001` … `TBD-DK-022` (Status Open — numerics not closed by WP-008 acceptance).
+
+Hardware design remains **not** approved (electrical architecture / fixture WPs next).
 
 ## Revision history
 
@@ -93,3 +102,5 @@ See requirements §6 and Architect Review Package:
 | 1.1 | 2026-07-19 | WP-007-R1 — governance document; taxonomy/gate corrections |
 | 1.1.1 | 2026-07-19 | WP-007-R1 — identity gate language aligned (no PARTIAL PASS) |
 | 1.2 | 2026-07-20 | Architecture Review — ACCEPTED; PR #11 approved for merge (requirements structure, governance, verification-plan structure, traceability baseline) |
+| 1.3 | 2026-07-20 | WP-008 — P0 Proposed ADR package navigation (ADR-016…023); CIA-2026-003 / RHP-2026-002 |
+| 1.4 | 2026-07-20 | Architecture Review — ADR-016…023 Accepted; WP-008 Accepted; PR #12 approved for merge |

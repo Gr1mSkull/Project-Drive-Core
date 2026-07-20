@@ -1356,14 +1356,14 @@ Unresolved numeric/procedure thresholds. Candidates from `docs/008` or other sou
 | Unit | A |
 | Current candidate | 30 A fuse / continuous |
 | Candidate source | docs/008 §2.3 / §3.3 |
-| Evidence required | Architecture decision + thermal/electrical analysis |
-| Requirements blocked | REQ-DCC-V-DK-020; DK-GOV-025 related (withdrawn REQ-029); ADR-DK-006 |
+| Evidence required | Accepted ADR-021 architecture + thermal/electrical analysis + measurement (numerics remain Open until threshold WP) |
+| Requirements blocked | REQ-DCC-V-DK-020; DK-GOV-025 related (withdrawn REQ-029); originating ADR-DK-006 → Accepted ADR-021 |
 | Verification cases blocked | — (blocks protection sizing claims; energization cases when current limit required) |
 | Gates affected | DK-A |
 | Owner role | System Architect |
-| Closure artifact | ADR-DK-006 |
+| Closure artifact | Threshold WP after Accepted ADR-021 Accepted (architecture); numeric approval separate |
 | Status | Open |
-| Notes | Pairs with ADR-DK-006. Continuous vs fuse rating not distinguished in candidate. |
+| Notes | Pairs with Accepted ADR-021. Continuous vs fuse rating distinguished in ADR-021; candidate 30 A not approved. Status remains Open. |
 
 #### TBD-DK-003
 
@@ -1374,14 +1374,14 @@ Unresolved numeric/procedure thresholds. Candidates from `docs/008` or other sou
 | Unit | A |
 | Current candidate | 30 A continuous |
 | Candidate source | docs/008 §3.3 |
-| Evidence required | Architecture decision |
-| Requirements blocked | DK-GOV-025 (from withdrawn REQ-029); ADR-DK-006 |
+| Evidence required | Accepted ADR-021 simultaneous-load policy + analysis/measurement |
+| Requirements blocked | DK-GOV-025 (from withdrawn REQ-029); originating ADR-DK-006 → Accepted ADR-021 |
 | Verification cases blocked | — (no Phase C case IDs yet cite this ID; multi-channel simultaneous-load claims blocked) |
 | Gates affected | DK-C |
 | Owner role | System Architect |
-| Closure artifact | ADR-DK-006 |
+| Closure artifact | Threshold WP after Accepted ADR-021 Accepted (architecture); numeric approval separate |
 | Status | Open |
-| Notes | No active REQ-DCC-V-DK-* text cites this ID after R1 taxonomy move of REQ-029. |
+| Notes | Architecture direction in Accepted ADR-021 (lower base + external bank). Status remains Open. |
 
 #### TBD-DK-004
 
@@ -1392,14 +1392,14 @@ Unresolved numeric/procedure thresholds. Candidates from `docs/008` or other sou
 | Unit | ms |
 | Current candidate | “immediately” (vague — rejected as criterion) |
 | Candidate source | docs/008 A7 |
-| Evidence required | Architecture decision + measurement |
+| Evidence required | Accepted ADR-022 timing hierarchy + hardware path budget + measurement plan |
 | Requirements blocked | REQ-DCC-V-DK-036 |
 | Verification cases blocked | VER-DCC-DK-A-012 |
 | Gates affected | DK-A |
 | Owner role | System Architect / Test Owner |
-| Closure artifact | Threshold CR; ADR-DK-007 |
+| Closure artifact | Threshold CR/WP; Accepted ADR-022 (policy) |
 | Status | Open |
-| Notes | Must become a measurable limit; vague wording rejected. |
+| Notes | Must become a measurable limit; vague wording rejected. Policy **Accepted** in ADR-022; numeric Status remains Open. |
 
 #### TBD-DK-005
 
@@ -1410,14 +1410,14 @@ Unresolved numeric/procedure thresholds. Candidates from `docs/008` or other sou
 | Unit | ms |
 | Current candidate | <200 ms |
 | Candidate source | docs/008 A6 |
-| Evidence required | Architecture decision + measurement |
+| Evidence required | Accepted ADR-022 real-time safety class + measurement |
 | Requirements blocked | REQ-DCC-V-DK-038 |
 | Verification cases blocked | VER-DCC-DK-A-011 |
 | Gates affected | DK-A |
 | Owner role | System Architect / Test Owner |
-| Closure artifact | Threshold CR; ADR-DK-007 |
+| Closure artifact | Threshold CR/WP; Accepted ADR-022 (policy) |
 | Status | Open |
-| Notes | Candidate not approved for DevKit evidence until ADR-DK-007 / threshold CR. |
+| Notes | Candidate <200 ms not approved. Policy **Accepted** in ADR-022; Status remains Open. |
 
 #### TBD-DK-006
 
@@ -1446,14 +1446,14 @@ Unresolved numeric/procedure thresholds. Candidates from `docs/008` or other sou
 | Unit | ms |
 | Current candidate | >100 ms |
 | Candidate source | EDL-011 |
-| Evidence required | Confirm whether EDL-011 value is normative for DevKit evidence |
+| Evidence required | Confirm DevKit freeze consistent with EDL-011 >100 ms; Accepted ADR-022 communication-loss class + measurement |
 | Requirements blocked | REQ-DCC-V-DK-035 |
 | Verification cases blocked | VER-DCC-DK-A-008; VER-DCC-DK-C-012 |
 | Gates affected | DK-A; DK-C |
 | Owner role | System Architect |
-| Closure artifact | Interface confirmation / ADR if needed |
+| Closure artifact | Threshold WP; Accepted ADR-022; EDL-011 unchanged |
 | Status | Open |
-| Notes | EDL-011 states >100 ms; DevKit evidence freeze still open. |
+| Notes | EDL-011 states >100 ms; DevKit evidence freeze still Open. ADR-022 does not change EDL-011. |
 
 #### TBD-DK-008
 
@@ -1518,14 +1518,14 @@ Unresolved numeric/procedure thresholds. Candidates from `docs/008` or other sou
 | Unit | % or A |
 | Current candidate | not defined |
 | Candidate source | docs/008 C2 / WP-004 TBD |
-| Evidence required | Protection requirements freeze |
+| Evidence required | Channel-class / qualification analysis; fault-injection method per Accepted ADR-023 |
 | Requirements blocked | REQ-DCC-V-DK-044 |
 | Verification cases blocked | VER-DCC-DK-C-005 |
 | Gates affected | DK-C |
 | Owner role | System Architect |
-| Closure artifact | Power-channel WP; ADR-DK-010 |
+| Closure artifact | Threshold WP; Accepted ADR-023 (method); Accepted ADR-019 (capability) |
 | Status | Open |
-| Notes | Fault-injection method also gated by ADR-DK-010. |
+| Notes | Numeric tolerance Open. Injection method gated by originating ADR-DK-010 → Accepted ADR-023. |
 
 #### TBD-DK-012
 
@@ -1572,12 +1572,12 @@ Unresolved numeric/procedure thresholds. Candidates from `docs/008` or other sou
 | Unit | ms |
 | Current candidate | not defined |
 | Candidate source | WP-004 safe OFF TBD |
-| Evidence required | Architecture decision |
+| Evidence required | Accepted ADR-022 commanded-shutdown class + measurement |
 | Requirements blocked | REQ-DCC-V-DK-050 |
 | Verification cases blocked | VER-DCC-DK-A-016; VER-DCC-DK-C-002 |
 | Gates affected | DK-A; DK-C |
 | Owner role | System Architect |
-| Closure artifact | Power-channel WP |
+| Closure artifact | Threshold WP; Accepted ADR-022 |
 | Status | Open |
 | Notes | Used for commanded OFF timing on represented channels. |
 
@@ -1698,12 +1698,12 @@ Unresolved numeric/procedure thresholds. Candidates from `docs/008` or other sou
 | Unit | N/A (procedure) |
 | Current candidate | partial intent in fault/startup docs |
 | Candidate source | fault/startup documentation (repository) |
-| Evidence required | Architecture / safety procedure |
+| Evidence required | Explicit sequence definition per Accepted ADR-022 path 8 |
 | Requirements blocked | REQ-DCC-V-DK-034 |
 | Verification cases blocked | VER-DCC-DK-A-014 |
 | Gates affected | DK-A |
 | Owner role | System Architect |
-| Closure artifact | Safety procedure WP |
+| Closure artifact | Threshold/procedure WP; Accepted ADR-022 |
 | Status | Open |
 | Notes | Sequence must be explicit and testable. |
 
@@ -1721,31 +1721,33 @@ Unresolved numeric/procedure thresholds. Candidates from `docs/008` or other sou
 | Verification cases blocked | VER-DCC-DK-C-013 |
 | Gates affected | DK-C |
 | Owner role | Test Owner / System Architect |
-| Closure artifact | Fixture WP |
+| Closure artifact | Fixture WP; Accepted ADR-023 (CONDITIONAL stall class) |
 | Status | Open |
-| Notes | Split from former compound C-010; direction case C-010 does not use this ID. |
+| Notes | Split from former compound C-010; direction case C-010 does not use this ID. ADR-023 classifies stall as CONDITIONAL_MANDATORY. |
 
 
 ## 5. Architectural decisions required
 
-`ADR-DK-001`…`ADR-DK-012` remain **open**. **Not resolved in R2.**
+`ADR-DK-001`…`ADR-DK-007` and `ADR-DK-010` map to **Accepted** canonical ADR-016…023 (WP-008 Architecture Review 2026-07-20). ADR-021/022 numeric limits remain **Open**. `ADR-DK-008`, `009`, `011`, `012` remain open requests without Accepted ADR files. **TBDs remain Open.**
 
-| ID | Question |
-|----|----------|
-| ADR-DK-001 | Same physical Logic Board vs same electrical/firmware interfaces? |
-| ADR-DK-002 | Same physical Radio Board vs equivalent Service interfaces? |
-| ADR-DK-003 | Same compiled RT binary mandatory vs same source/feature set? |
-| ADR-DK-004 | Which representative power-channel classes must DevKit contain? |
-| ADR-DK-005 | Is a high-current class required on DevKit or only external/Gen1? |
-| ADR-DK-006 | Approved maximum DevKit input/simultaneous current? |
-| ADR-DK-007 | Approved kill and watchdog response-time limits (with TBD-DK-004 / TBD-DK-005)? |
-| ADR-DK-008 | Is OTA part of mandatory DevKit gate? |
-| ADR-DK-009 | Is configuration hot reload permitted outside Service/Wiring modes? |
-| ADR-DK-010 | Which fault injections are mandatory and how performed safely? |
-| ADR-DK-011 | DevKit vs DCC Gen1 electrical/thermal environmental test split? |
-| ADR-DK-012 | Which enclosure/connector candidates remain valid (WAGO vs screw, etc.)? |
+Crosswalk: [`DevKit_P0_Decision_Crosswalk.md`](DevKit_P0_Decision_Crosswalk.md).
 
-Threshold numeric values associated with ADR-DK-006 / ADR-DK-007 / ADR-DK-011 are defined only in §4 (`TBD-DK-*`).
+| Originating request | Canonical ADR | Question | WP-008 status |
+|---------------------|---------------|----------|---------------|
+| ADR-DK-001 | [ADR-016](../ADR/ADR-016-devkit-logic-board-fidelity.md) | Same physical Logic Board vs same electrical/firmware interfaces? | **Accepted** |
+| ADR-DK-002 | [ADR-017](../ADR/ADR-017-devkit-radio-board-fidelity.md) | Same physical Radio Board vs equivalent Service interfaces? | **Accepted** |
+| ADR-DK-003 | [ADR-018](../ADR/ADR-018-devkit-firmware-equivalence.md) | Same compiled RT binary mandatory vs same source/feature set? | **Accepted** |
+| ADR-DK-004 | [ADR-019](../ADR/ADR-019-devkit-represented-power-capabilities.md) | Which representative power-channel capabilities must DevKit contain? | **Accepted** |
+| ADR-DK-005 | [ADR-020](../ADR/ADR-020-devkit-high-current-verification-scope.md) | Is a high-current class required on DevKit or only external/Gen1? | **Accepted** |
+| ADR-DK-006 | [ADR-021](../ADR/ADR-021-devkit-input-current-architecture.md) | Approved maximum DevKit input/simultaneous current architecture? | **Accepted** (numerics Open) |
+| ADR-DK-007 | [ADR-022](../ADR/ADR-022-devkit-kill-watchdog-timing-policy.md) | Kill/watchdog/control-loss timing policy (with TBD-DK-004/005/007/014/021)? | **Accepted** (numerics Open) |
+| ADR-DK-008 | — | Is OTA part of mandatory DevKit gate? | Open request |
+| ADR-DK-009 | — | Is configuration hot reload permitted outside Service/Wiring modes? | Open request |
+| ADR-DK-010 | [ADR-023](../ADR/ADR-023-devkit-fault-injection-scope.md) | Which fault injections are mandatory and how performed safely? | **Accepted** |
+| ADR-DK-011 | — | DevKit vs DCC Gen1 electrical/thermal environmental test split? | Open request |
+| ADR-DK-012 | — | Which enclosure/connector candidates remain valid (WAGO vs screw, etc.)? | Open request |
+
+Threshold numeric values associated with ADR-DK-006 / ADR-DK-007 / ADR-DK-011 are defined only in §4 (`TBD-DK-*`) and remain Open.
 
 
 ## Revision history
@@ -1758,3 +1760,5 @@ Threshold numeric values associated with ADR-DK-006 / ADR-DK-007 / ADR-DK-011 ar
 | 1.1.2 | 2026-07-19 | WP-007-R2 — restore authoritative Threshold Resolution Register (TBD-DK-001…022) |
 | 1.1.3 | 2026-07-19 | WP-007-R3 — verification references for D-015 split cases |
 | 1.2 | 2026-07-20 | Architecture Review — ACCEPTED; PR #11 approved for merge (requirements structure, governance, verification-plan structure, traceability baseline) |
+| 1.3 | 2026-07-20 | WP-008 — TBD register ADR references for Accepted ADR-016…023; Status Open unchanged |
+| 1.4 | 2026-07-20 | Architecture Review — ADR-016…023 Accepted; WP-008 Accepted; PR #12 approved for merge; TBD Status Open unchanged |

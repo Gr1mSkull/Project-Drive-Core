@@ -1,10 +1,10 @@
 # DevKit Current-State Gap Assessment — Gen1
 
 **Document ID:** DOC-DK-GAP-001  
-**Version:** 1.1  
+**Version:** 1.2  
 **Status:** Accepted  
-**Work Package:** WP-007 / WP-007-R2  
-**Date:** 2026-07-19
+**Work Package:** WP-007 / WP-007-R2; gap refs updated WP-008  
+**Date:** 2026-07-20
 
 Audit of existing DevKit-related claims against WP-007 authority rules. Classifications:
 
@@ -17,30 +17,31 @@ Audit of existing DevKit-related claims against WP-007 authority rules. Classifi
 | EDL-014 DevKit gate before vehicle | docs/EDL/README.md | COMPLIANT | Accepted EDL | — | Preserve; map to DK-A…D | WP-007 (done) | P0 |
 | Three-board DCC / Gen2 Power swap | EDL-007 | COMPLIANT | Accepted EDL | — | Preserve | — | P0 |
 | J_LP + kill/enable + BOARD_ID pins | EDL-011; docs/002 | PARTIAL | Accepted EDL | Encoding map missing | Define BOARD_ID map without new HW | Hardware identity WP | P0 |
-| Logic identical to Gen1 Rev.A | docs/008 §2.1 | CONFLICT / TBD | Candidate only | docs/007 allows STM32G431 DevKit-only | ADR-DK-001 | Architecture decision | P0 |
-| Radio identical to Gen1 Rev.A | docs/008 §2.1 | TBD | Candidate only | Physical vs interface equivalence undefined | ADR-DK-002 | Architecture decision | P0 |
-| Same firmware binary as Gen1 | docs/008 §2.4 | CONFLICT | Candidate | MCU alt + no FW projects | ADR-DK-003 | Architecture decision | P0 |
-| Power Rev.DK reduced channels | docs/008; docs/002 §10 | PARTIAL | Consistent candidate counts | Connector wording conflict | Freeze representative classes ADR-DK-004 | DevKit electrical architecture WP | P0 |
+| Logic identical to Gen1 Rev.A | docs/008 §2.1 | CONFLICT / TBD | Candidate only | docs/007 allows STM32G431 DevKit-only | **Accepted ADR-016** (EDL-001 wins for gates; not Accepted) | Architecture Review WP-008 | P0 |
+| Radio identical to Gen1 Rev.A | docs/008 §2.1 | TBD | Candidate only | Physical vs interface equivalence undefined | **Accepted ADR-017** | Architecture Review WP-008 | P0 |
+| Same firmware binary as Gen1 | docs/008 §2.4 | CONFLICT | Candidate | MCU alt + no FW projects | **Accepted ADR-018** (Option B model) | Architecture Review WP-008 | P0 |
+| Power Rev.DK reduced channels | docs/008; docs/002 §10 | PARTIAL | Consistent candidate counts | Connector wording conflict | Freeze capabilities **Accepted ADR-019** | DevKit electrical architecture WP | P0 |
 | Channel counts HS30×2 / HS15×4 / HS05×4 / HB×1 / no HS60 | docs/002/008/yaml/hardware README | PARTIAL | Internally consistent counts | HS* vs WP-004 HC* taxonomy; yaml missing ch9–10 outputs | Map classes; complete profile after ADR | Config + architecture | P1 |
 | Exact smart-switch MPNs (BTS*/BTN*) | docs/008 §2.2; docs/007 | CANDIDATE → not normative | EDL-003 technology only | Remap vs Gen1 channel↔MPN | Keep as candidates; qualify later | Component qualification | P1 |
 | H-bridge present on DevKit | docs/008 | PARTIAL | Capability required by REQ-DCC-V-DK-042 | MPN candidate only | Verify by capability | Power architecture WP | P1 |
-| Absence of HS60 on DevKit | docs/008 | PARTIAL | Consistent statement | Whether any high-current class mandatory | ADR-DK-005 | Architecture decision | P0 |
+| Absence of HS60 on DevKit | docs/008 | PARTIAL | Consistent statement | Whether any high-current class mandatory | **Accepted ADR-020** | Architecture Review WP-008 | P0 |
 | WAGO output terminals | docs/008; docs/007 | CONFLICT | Candidate | docs/002 §10 “винтовые” | ADR-DK-012 | Architecture decision | P1 |
 | DTM CAN connector | docs/008 | CANDIDATE | — | Not mandated by Accepted ADR | Keep candidate | Connector policy WP | P2 |
 | USB-C role | docs/008 | CANDIDATE | Gen1 Logic intent | — | Keep candidate | Electrical architecture WP | P2 |
 | Hammond enclosure | docs/008; docs/007 | CANDIDATE | — | — | ADR-DK-012 | Architecture decision | P2 |
 | BOOT/USER/KILL buttons | docs/008 | CANDIDATE | Kill testability required | Button implementation not frozen | Require kill testability; UI buttons candidate | Electrical architecture WP | P1 |
-| 13.8 V / 30 A bench limits | docs/008 | TBD | Candidates only | Not authoritative freeze | TBD-DK-001, TBD-DK-002, TBD-DK-003 (register §4); ADR-DK-006 | Threshold CR | P0 |
+| 13.8 V / 30 A bench limits | docs/008 | TBD | Candidates only | Not authoritative freeze | TBD-DK-001…003 Open; **Accepted ADR-021** (architecture; numerics Open) | Threshold WP | P0 |
 | Exact lamp wattages / loads | docs/008 | CANDIDATE | — | hardware README / yaml partial mismatch | Treat as example loads | Fixture WP | P2 |
+| Kill / watchdog numeric limits | docs/008 A6/A7 | TBD | Candidates only | Vague “immediately” | TBD-DK-004/005/007/014/021 Open; **Accepted ADR-022** | Threshold WP | P0 |
 | `hardware.profile: devkit` | docs/008; devkit.yaml | CONFLICT / PARTIAL | File present | Not in docs/005 schema | Schema decision | Config schema CR | P1 |
 | Phase A–D procedures in docs/008 | docs/008 §5–8 | PARTIAL | Strategy accepted via EDL-014 | Vague pass criteria; duplicate vs WP-007 plan | Navigate to DevKit_Verification_Plan | WP-007 (done) | P0 |
 | Existing pass thresholds (±5%, 200 ms, 10.5 V, …) | docs/008 | TBD | Candidates | Vague terms (“immediately”, “waveform clean”) | Threshold register | Threshold CR | P0 |
 | OTA in DevKit gate | docs/008 B14 | TBD | Protocol exists in docs | Mandatory? | ADR-DK-008 | Architecture decision | P1 |
 | Configuration hot reload | docs/008 D10 | TBD / CONFLICT | Config model intent | Mode auth / Service Mode rules | ADR-DK-009 | Architecture decision | P1 |
-| Physical fault injection | docs/008 §12; DC-DCC-PWR-089 | PARTIAL / TBD | Proposed power reqs | Safe methods undefined | ADR-DK-010 | Fixture + ADR | P0 |
-| Representative class coverage vs Gen1 | DC-DCC-PWR-108 Proposed | PARTIAL | Count differences allowed | Class set not frozen | ADR-DK-004/005 | Architecture decision | P0 |
+| Physical fault injection | docs/008 §12; DC-DCC-PWR-089 | PARTIAL / TBD | Proposed power reqs | Safe methods undefined | **Accepted ADR-023** | Fixture WP after ADR acceptance | P0 |
+| Representative class coverage vs Gen1 | DC-DCC-PWR-108 Proposed | PARTIAL | Count differences allowed | Class set not frozen | **Accepted ADR-019/020** | Architecture Review WP-008 | P0 |
 | `hardware/devkit/` KiCad | hardware/devkit | NOT IMPLEMENTED | README + `.kicad_pro` only | — | Design after requirements acceptance | PCB WP | P1 |
-| `firmware/dcc/logic` / `radio` | firmware/ | NOT PRESENT | shared headers only | — | Bring-up after ADR-DK-003 | Firmware WP | P1 |
+| `firmware/dcc/logic` / `radio` | firmware/ | NOT PRESENT | shared headers only | — | Bring-up after **Accepted ADR-018** Accepted | Firmware WP | P1 |
 | `config/vehicles/devkit.yaml` | config/ | PARTIAL | Present scaffold | Cooling thresholds vs docs/008 D4/D5; incomplete channels | Align after ADR; do not invent in WP-007 | Config WP | P1 |
 | `tools/can_sim` | tools/ | PARTIAL | Scaffold present | Not verified | Use in Phase B/D when ready | Bench tooling WP | P2 |
 | `tools/bench` automation | docs/008 TBD | NOT PRESENT | — | — | Future tooling | Bench tooling WP | P2 |
@@ -97,3 +98,4 @@ Note: some rows carry dual tags (e.g. CONFLICT/TBD); counts reflect primary seve
 | 1.0.1 | 2026-07-19 | WP-007-R1 — note governance split; no ADR/TBD resolutions |
 | 1.0.2 | 2026-07-19 | WP-007-R2 — TBD references point to restored register (no value closures) |
 | 1.1 | 2026-07-20 | Architecture Review — ACCEPTED; PR #11 approved for merge (requirements structure, governance, verification-plan structure, traceability baseline) |
+| 1.2 | 2026-07-20 | WP-008 — map P0 gaps to Accepted ADR-016…023; no TBD closures; conflict G431 vs EDL-001 still reported |
