@@ -9,7 +9,7 @@
 | **Author role** | Implementation Engineer |
 | **Date** | 2026-07-20 |
 | **Status** | Under Review |
-| **Related WP / CR** | WP-008; depends on WP-007 Accepted (PR #11 / `d176d9f`); originating requests ADR-DK-001…007, ADR-DK-010 |
+| **Related WP / CR** | WP-008 / WP-008-R1; depends on WP-007 Accepted (PR #11 / `d176d9f`); originating requests ADR-DK-001…007, ADR-DK-010 |
 
 ### Reason for Change
 
@@ -24,6 +24,7 @@ WP-007 Accepted the DevKit requirements structure, verification governance, and 
 ### Proposed Behaviour
 
 * Eight separate **Proposed** ADRs ADR-016…023 mapping ADR-DK-001…007 and ADR-DK-010.
+* WP-008-R1: open-load CONDITIONAL_ON_DEVKIT / CONDITIONAL_MANDATORY; ADR-023 requirement list corrected (no REQ-114); supply interruption classified MANDATORY_DK_A + MANDATORY_DK_D only.
 * Crosswalk, CIA, RHP for Architecture Review.
 * Traceability and DevKit planning docs gain Proposed ADR references without accepting ADRs, resolving TBDs, or marking verification PASS.
 * No schematics, PCB, firmware, BOM, fixtures, or VE records.
@@ -32,8 +33,9 @@ WP-007 Accepted the DevKit requirements structure, verification governance, and 
 
 | Requirement ID | Source | Impact |
 |----------------|--------|--------|
-| REQ-DCC-V-DK-009…014, 017–018, 102–103 | DevKit_System_Requirements | Architecture reference → Proposed ADR-016/017/018 |
-| REQ-DCC-V-DK-005, 020, 026, 039–055, 114 | DevKit_System_Requirements | Architecture reference → Proposed ADR-019…023 |
+| REQ-DCC-V-DK-005, 020, 026, 039–055 | DevKit_System_Requirements | Architecture reference → Proposed ADR-019…021, 023 (capabilities / current / faults) |
+| REQ-DCC-V-DK-017, 018, 023, 035, 038, 043–048, 054, 055, 058, 060, 067, 072, 073, 079, 080, 085, 087, 099, 100 | DevKit_System_Requirements | Fault-injection / testability → Proposed ADR-023 (not REQ-114) |
+| REQ-DCC-V-DK-009…014, 017–018, 102–103, 114 | DevKit_System_Requirements | Fidelity / reuse → Proposed ADR-016/017/018 |
 | REQ-DCC-V-DK-021, 031–038 | DevKit_System_Requirements | Timing policy → Proposed ADR-022 |
 | DK-GOV-009, 012, 024, 025 | Verification_Governance | Equivalence / freeze rules clarified by Proposed ADRs (status unchanged) |
 | EDL-001…003, 007, 010, 011, 014 | docs/EDL | **Unchanged**; cited as constraints |
@@ -125,3 +127,4 @@ Documentation validation per WP-008 §26; Architecture Review of Proposed ADRs; 
 | Version | Date | Change |
 |---------|------|--------|
 | 1.0 | 2026-07-20 | WP-008 initial CIA |
+| 1.1 | 2026-07-20 | WP-008-R1 Level 1 consistency: open-load conditional; ADR-023 REQs without 114; supply interruption DK-A/DK-D; core recommendations unchanged |

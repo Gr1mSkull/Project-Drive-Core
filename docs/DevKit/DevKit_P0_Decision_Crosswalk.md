@@ -1,9 +1,9 @@
 # DevKit P0 Decision Crosswalk — WP-008
 
 **Document ID:** DOC-DK-P0-XWALK-001  
-**Version:** 1.0  
+**Version:** 1.1  
 **Status:** Proposed  
-**Work Package:** WP-008  
+**Work Package:** WP-008 / WP-008-R1  
 **Date:** 2026-07-20
 
 > Maps Proposed ADR-016…023 recommendations to requirements, cases, TBDs, and next Work Packages.  
@@ -16,11 +16,11 @@
 | Logic fidelity | ADR-016 | Option D; Option B min for DK-A…DK-D; EDL-001 processor | 009, 011, 012, 017, 018, 102, 103 | A-007…A-017, B-006 | — (identity map later) | Electrical architecture; platform |
 | Radio fidelity | ADR-017 | Option D; Option B min for DK-B/D Service/DCPI | 010, 012, 018, 102, 103 | A-005, A-009, B-006…B-015, D-012, D-013 | TBD-DK-006 (timing only) | Electrical; Radio qual; ADR-DK-008 |
 | Firmware equivalence | ADR-018 | Option D lifecycle; Option B certification model | 013; DK-GOV-009/012 | A-006, A-017, D-019, G-003; Method:Test set | — | Platform/build system |
-| Represented power capabilities | ADR-019 | Min capability set Option B (+ staged D) | 005, 014, 039–055, 026 | C-001…C-014, A-016 | Constrains 002/003/011/018/019/022 | Electrical architecture |
+| Represented power capabilities | ADR-019 | Min capability set Option B (+ staged D); open-load CONDITIONAL_ON_DEVKIT | 005, 014, 039–055, 026 | C-001…C-014 (C-007 conditional), A-016 | Constrains 002/003/011/018/019/022 | Electrical architecture |
 | Highest-current scope | ADR-020 | Option D: external discovery + Phase E confirm | 005, 014, 041 | C-001; C-005/006 scope notes | Constrains 002/003 | Fixture; Phase E plan |
 | Input / simultaneous current | ADR-021 | Option B + D distinction; numerics Open | 020, 007, 030; DK-GOV-024/025 | A-002, A-003; multi-load C; G-004 | **002, 003** method; constrains 001/012/017/018/019 | Threshold analysis |
 | Kill / watchdog timing | ADR-022 | Option D hierarchical fixed safety | 021, 031–038, 034, 035, 058 | A-011…A-014, C-012, B-013, D-012/013 | **004, 005, 007, 014, 021** | Threshold analysis |
-| Fault injection / fixture boundary | ADR-023 | Gate-tiered Option B + method Option D | 044–047, 054, 055, 114 | A-008/009/011/015; B-003/008; C-005…014; D-007/008/012…014/017 | 011, 022; energy notes | Fixture/load-bank reqs |
+| Fault injection / fixture boundary | ADR-023 | Gate-tiered Option B + method Option D; open-load CONDITIONAL_MANDATORY; supply interruption MANDATORY_DK_A + MANDATORY_DK_D | 017, 018, 023, 035, 038, 043–048, 054, 055, 058, 060, 067, 072, 073, 079, 080, 085, 087, 099, 100 (not 114) | A-003, A-008/009/011/015; B-003/008; C-005…014 (C-007 conditional); D-007/008/012…014/017 | 011, 022; energy notes | Fixture/load-bank reqs |
 
 ## 2. Dependency graph
 
@@ -104,3 +104,4 @@ Evidence remains NOT VERIFIED
 | Version | Date | Change |
 |---------|------|--------|
 | 1.0 | 2026-07-20 | WP-008 initial crosswalk |
+| 1.1 | 2026-07-20 | WP-008-R1 — open-load conditional; ADR-023 REQs without 114; supply interruption DK-A/DK-D |

@@ -8,7 +8,7 @@
 | **Status** | Proposed |
 | **Date** | 2026-07-20 |
 | **Decision owner** | System Architect |
-| **Work Package** | WP-008 |
+| **Work Package** | WP-008 / WP-008-R1 |
 | **Deliverable status** | Proposed — requires Architecture Review |
 
 > This ADR is **Proposed**. Recommendations are not Accepted. Implementation Engineer cannot approve.
@@ -77,10 +77,10 @@ Ratings: **Strong** · **Acceptable** · **Weak** · **Unacceptable**.
 | PWM-capable high-side | **MANDATORY_ON_DEVKIT** | Distinct timing/EMI/diag path | 040 | C-003 | May share HS channel if PWM truly supported | PWM on non-PWM silicon |
 | Current-sensed output | **MANDATORY_ON_DEVKIT** | Protection/diag evidence | 043, 051 | C-004 | Usually same as HS | Accuracy numbers until TBD closed |
 | Lower-current output (if behaviour differs materially) | **CONDITIONAL_ON_DEVKIT** | Required only if protection/diag class differs from medium | 041 | C-001 | One channel may cover if class identical | Other class ratings |
-| Medium-current output | **MANDATORY_ON_DEVKIT** | Primary lab workhorse class | 014, 041 | C-001–C-007 | — | Highest-class continuous |
+| Medium-current output | **MANDATORY_ON_DEVKIT** | Primary lab workhorse class | 014, 041 | C-001–C-006, C-014; C-007 only if OL claimed | — | Highest-class continuous |
 | High-current / HC-A class continuous | **EXTERNAL_FIXTURE** or per ADR-020 | Energy/thermal burden | ADR-020 | C-* high-energy | Not required on DevKit PCB | Vehicle HC thermal |
 | Bidirectional output | **MANDATORY_ON_DEVKIT** | REQ-042 requires channel or BLOCKED | 042, 054, 055 | C-010, C-011, C-013 | Dedicated bridge channel | Stall energy beyond fixture limit |
-| Open-load diagnostics (where claimed) | **MANDATORY_ON_DEVKIT** | Claimed diag must be testable | 046 | C-007 | On sensed HS | Unclaimed channels |
+| Open-load diagnostics (where claimed) | **CONDITIONAL_ON_DEVKIT** | Required only when the selected representative channel or implementation claims open-load diagnostic capability (`REQ-DCC-V-DK-046`). If not claimed: **DEFERRED_EXCLUDED** and gate coverage shall explicitly exclude that capability. | 046 | C-007 (CONDITIONAL_MANDATORY) | May share sensed HS when claimed | Open-load on channels that do not claim the diagnostic; do not mandate OL on every smart HS |
 | Overcurrent protection | **MANDATORY_ON_DEVKIT** | Hazard mitigation + DK-C | 044 | C-005 | — | Unlimited fault energy |
 | Short-circuit protection | **MANDATORY_ON_DEVKIT** | Hazard mitigation + DK-C | 045 | C-006 | Fixture-limited | Vehicle harness SC |
 | Thermal observation | **CONDITIONAL_ON_DEVKIT** | Required if thermal cases in DK-C scope | 048; TBD-018/019; ADR-DK-011 | C-009 | Board-level NTC may suffice | Junction accuracy |
@@ -91,10 +91,11 @@ Ratings: **Strong** · **Acceptable** · **Weak** · **Unacceptable**.
 
 ```text
 PROPOSED: The DevKit minimum representative power capability set is Option B as tabulated above.
-DevKit shall physically implement at least: switched HS, PWM-capable HS, current sense, medium-current class behaviour, open-load (where claimed), overcurrent, short-circuit protection behaviour, retry/latch, control-loss safe OFF, and one bidirectional channel (or bidirectional Method:Test cases remain BLOCKED).
+Unconditional minimum on DevKit: switched HS, PWM-capable HS, current sense, medium-current class behaviour, overcurrent protection, short-circuit protection behaviour, retry/latch, control-loss safe OFF, and one bidirectional channel (or bidirectional Method:Test cases remain BLOCKED).
+Open-load diagnostics are CONDITIONAL_ON_DEVKIT: required only when the selected representative channel or implementation claims open-load diagnostic capability. If not claimed, open-load verification is DEFERRED_EXCLUDED and gate coverage shall explicitly exclude that capability. This ADR does not require every DevKit smart high-side channel to provide open-load diagnostics and does not select an MPN to obtain that capability.
 Highest-current continuous class representation follows ADR-020 (not assumed on DevKit Power PCB).
-Lower-current distinct class is CONDITIONAL if behaviour is not materially covered by the medium-current representative.
-Thermal observation is CONDITIONAL pending ADR-DK-011 / thermal TBDs.
+Lower-current distinct class is CONDITIONAL_ON_DEVKIT if behaviour is not materially covered by the medium-current representative.
+Thermal observation is CONDITIONAL_ON_DEVKIT pending ADR-DK-011 / thermal TBDs.
 This decision defines capabilities, not channel counts, connectors, or switch MPNs.
 Full production population remains DCC Gen1 Phase E.
 ```
@@ -157,4 +158,5 @@ Superseding ADR.
 | Version | Date | Author | Change |
 |---------|------|--------|--------|
 | 1.0 | 2026-07-20 | Implementation Engineer (WP-008) | Proposed package |
+| 1.1 | 2026-07-20 | Implementation Engineer (WP-008-R1) | Open-load → CONDITIONAL_ON_DEVKIT; unconditional min set clarified |
 

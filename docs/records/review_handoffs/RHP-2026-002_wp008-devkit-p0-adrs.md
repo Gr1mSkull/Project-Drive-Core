@@ -4,9 +4,9 @@
 |-------|-------|
 | **Review Package ID** | RHP-2026-002 |
 | **Change Scope** | WP-008 Gen1 DevKit P0 Proposed ADR package (ADR-016…023), crosswalk, CIA, planning/traceability references |
-| **Related Requirements** | REQ-DCC-V-DK-* (fidelity, power representation, safety timing, fault injection); DK-GOV-009/012/024/025 |
+| **Related Requirements** | REQ-DCC-V-DK-* fidelity/power/timing; ADR-023 fault/testability set (017, 018, 023, 035, 038, 043–048, 054, 055, 058, 060, 067, 072, 073, 079, 080, 085, 087, 099, 100 — not 114); DK-GOV-009/012/024/025 |
 | **Related Architecture** | EDL-001, 002, 003, 007, 010, 011, 014; ADR-015; Proposed ADR-016…023; DevKit WP-007 Accepted baseline |
-| **Related WP / CR** | WP-008 (depends on WP-007 Accepted / PR #11) |
+| **Related WP / CR** | WP-008 / WP-008-R1 (depends on WP-007 Accepted / PR #11) |
 | **Impact Level** | 2 |
 | **Date** | 2026-07-20 |
 | **Implementer (name/agent)** | Implementation Engineer (cloud agent) |
@@ -33,12 +33,13 @@
 * Candidate 30 A is explicitly non-approved; architecture Option B+D Proposed for current envelope.
 * Kill/watchdog/control-loss/commanded-OFF timings are separate classes; numerics remain Open.
 * Fault-injection mandatory set Proposed; fixture schematic not designed.
+* **WP-008-R1:** Open-load diagnostics are CONDITIONAL_ON_DEVKIT / injection CONDITIONAL_MANDATORY (claim-based; else DEFERRED_EXCLUDED). Supply interruption is MANDATORY_DK_A + MANDATORY_DK_D only (cases A-003, D-017). `REQ-DCC-V-DK-114` is fidelity-only (ADR-016/017), not an ADR-023 fault-injection requirement.
 
 ### Change Impact Analysis
 
 | Field | Value |
 |-------|-------|
-| **Impact classification** | Level 2 CIA-2026-003 |
+| **Impact classification** | Level 2 CIA-2026-003 (original package); WP-008-R1 corrections are Level 1 Lightweight Impact Note applied to the same records |
 | **CIA / note path** | `docs/records/change_impact/CIA-2026-003_wp008-devkit-p0-adrs.md` |
 | **ADR Required** | YES — package under review |
 
@@ -99,3 +100,4 @@ Revert PR/branch; WP-007 remains on `main` unchanged in substance.
 | Version | Date | Change |
 |---------|------|--------|
 | 1.0 | 2026-07-20 | WP-008 initial RHP |
+| 1.1 | 2026-07-20 | WP-008-R1 — open-load conditional; ADR-023 REQ list without 114; supply interruption DK-A/DK-D |
