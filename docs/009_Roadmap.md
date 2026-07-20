@@ -8,7 +8,7 @@
 - Модель конфигурации
 - Bootloader / OTA pipeline
 
-### WP-007 / WP-008 / WP-009 / WP-010 / WP-011 status (2026-07-20)
+### WP-007 / WP-008 / WP-009 / WP-010 / WP-011 / WP-012 status (2026-07-20)
 
 | Item | Status |
 |------|--------|
@@ -18,13 +18,14 @@
 | WP-009 threshold analysis | **Accepted** (2026-07-20); numeric values Open; TBD-DK-007 **BLOCKED_BY_EDL_CLARIFICATION** |
 | WP-010 functional electrical architecture | **Accepted** (2026-07-20); WP-010-R1 Accepted |
 | WP-011 EDL-011 + component-class prep | **Accepted** (2026-07-20); WP-011-R1 Accepted |
+| WP-012 electrical sizing architecture framework | **Ready for Final Architecture Acceptance** — WP-012-R2 |
 | DevKit hardware design | **NOT IMPLEMENTED** — sizing/schematic/PCB NOT AUTHORIZED |
 | DevKit built / verified | **No** — NOT VERIFIED |
 | Remaining decisions | ADR-DK-008/009/011/012; TBD-DK-007 BLOCKED (not Resolved); thresholds TBD-DK-001…022 Open |
 
-**Next step:** Component-class qualification / electrical sizing (TBD-DK-007 remains BLOCKED_BY_EDL_CLARIFICATION).
+**Next step:** Final Architecture Acceptance of WP-012 (WP-012-R2 corrections applied).
 
-**Next expected engineering stage:** Component-class qualification / electrical sizing → fixture requirements → (only then) schematic/PCB/firmware WPs.
+**Next expected engineering stage:** WP-012 acceptance → component-class qualification / symbolic preliminary calculation → fixture requirements → (only then) schematic/PCB/firmware WPs.
 
 ## Фаза 1 — Первый автомобиль (E30)
 

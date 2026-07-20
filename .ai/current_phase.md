@@ -1,6 +1,6 @@
 # DriveCore — Current Phase
 
-**Updated:** WP-011 Accepted — EDL-011 clarification + component-class prep (2026-07-20); PR #15 merged (`07c550c`)
+**Updated:** WP-012 Ready for Final Architecture Acceptance — WP-012-R2 (2026-07-20)
 
 ## Documentation
 
@@ -17,8 +17,9 @@
 | **WP-009 DevKit threshold analysis** | ✅ Accepted (2026-07-20) — methods Accepted; numeric Open |
 | **WP-010 DevKit functional electrical architecture** | ✅ Accepted (2026-07-20) — WP-010-R1 Accepted |
 | **WP-011 EDL-011 + component-class prep** | ✅ Accepted (2026-07-20) — WP-011-R1 Accepted |
+| **WP-012 electrical sizing architecture framework** | ⏳ Ready for Final Architecture Acceptance — WP-012-R2 |
 
-## DevKit (WP-007 … WP-011)
+## DevKit (WP-007 … WP-012)
 
 | Item | Status |
 |------|--------|
@@ -29,23 +30,23 @@
 | Threshold numeric values | **Open** (TBD-DK-001…022) |
 | Functional electrical architecture | **Accepted** (WP-010 / WP-010-R1) |
 | TBD-DK-007 | **BLOCKED_BY_EDL_CLARIFICATION** — not Resolved; numeric Open; verification Not Verified |
-| EDL-011 clarification proposal | **Accepted** (WP-011 / WP-011-R1) |
-| Component-class qualification prep | **Accepted** (WP-011 / WP-011-R1) |
+| Component-class qualification prep | **Accepted** (WP-011) |
+| Electrical sizing framework | **Ready for Final Architecture Acceptance** (WP-012-R2) |
 | Hardware design approved | **No** — NOT IMPLEMENTED |
-| Detailed electrical sizing | **NOT AUTHORIZED** |
+| Detailed electrical sizing | **NOT COMPLETED** — framework only |
 | Schematics / PCB | **NOT AUTHORIZED** |
 | Firmware bring-up complete | **No** (NOT IMPLEMENTED) |
 | Physical verification | **NOT VERIFIED** |
 | Remaining open requests | ADR-DK-008, 009, 011, 012 |
 
-## Next authorized work
+## Next authorized work (after WP-012 acceptance)
 
-Component-class qualification execution · electrical sizing and protection coordination · optional EDL-011 text CR · fixture/load-bank requirements.
+Component-class qualification · symbolic preliminary calculation · fixture/load-bank requirements.
 
 ## Active branch
 
-`main` @ `07c550c`+ (WP-011 Accepted — PR #15)
+`cursor/wp012-devkit-electrical-sizing-framework-3bb9` — PR #16 (Final Architecture Acceptance pending)
 
 ## Do not start without approval
 
-MPN selection · BOM · schematics · PCB · numeric threshold approval · EDL file edit · firmware · fixture construction
+MPN selection · BOM · schematics · PCB · numeric threshold approval · EDL file edit · firmware · fixture construction · final electrical sizing completion
