@@ -8,7 +8,7 @@
 | **Author** | Implementation Engineer (cloud agent) |
 | **Author role** | Implementation Engineer |
 | **Date** | 2026-07-20 |
-| **Status** | Draft — Under Architecture Review |
+| **Status** | Accepted — Architecture Review |
 | **Related WP / CR** | WP-012; depends on WP-011 Accepted (`c36d329`+); ADR-016…023 Accepted |
 
 ### Reason for Change
@@ -254,9 +254,9 @@ See RHP-2026-006.
 | **ADR Required** | NO |
 | **Architect Approval Required** | YES |
 | **ADR / EDL reference** | ADR-019…023; EDL unchanged |
-| **Architect approver (name/agent)** | TBD |
+| **Architect approver (name/agent)** | System Architect |
 | **Architect role** | System Architect |
-| **Architect approval date** | TBD |
+| **Architect approval date** | 2026-07-20 |
 
 ### Review acknowledgment (not architecture approval)
 
@@ -274,3 +274,4 @@ See RHP-2026-006.
 | 1.0 | 2026-07-20 | WP-012 initial CIA — Draft |
 | 1.1 | 2026-07-20 | WP-012-R1 — Level 1 corrections; validation evidence expanded |
 | 1.2 | 2026-07-20 | WP-012-R2 — sign convention; Stage [D] authority; reproducible validation |
+| 1.3 | 2026-07-20 | Architecture Review Accepted — PR #16 merged (`9c5c7e7` / `fe700d4`); numeric Open; TBD-DK-007 BLOCKED unchanged |

@@ -1,8 +1,8 @@
 # DevKit Electrical Sizing Framework — WP-012
 
 **Document ID:** DOC-DK-ESF-001  
-**Version:** 1.2  
-**Status:** Ready for Final Architecture Acceptance  
+**Version:** 1.3  
+**Status:** Accepted — Architecture Review  
 **Work Package:** WP-012  
 **Date:** 2026-07-20  
 **Author role:** Implementation Engineer
@@ -284,3 +284,4 @@ See [`DevKit_Current_and_Power_Budget_Model.md`](DevKit_Current_and_Power_Budget
 | 1.0 | 2026-07-20 | WP-012 initial electrical sizing framework — Proposed |
 | 1.1 | 2026-07-20 | WP-012-R1 — staged iterative closure; provisional baseline path; measurement-boundary cross-ref |
 | 1.2 | 2026-07-20 | WP-012-R2 — Stage [D] qualification authority; MPN/procurement/schematic separation |
+| 1.3 | 2026-07-20 | Architecture Review Accepted — PR #16 merged (`9c5c7e7` / `fe700d4`); numeric Open; TBD-DK-007 BLOCKED unchanged |

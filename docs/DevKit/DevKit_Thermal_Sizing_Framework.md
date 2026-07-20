@@ -1,8 +1,8 @@
 # DevKit Thermal Sizing Framework — WP-012
 
 **Document ID:** DOC-DK-TSF-001  
-**Version:** 1.2  
-**Status:** Ready for Final Architecture Acceptance  
+**Version:** 1.3  
+**Status:** Accepted — Architecture Review  
 **Work Package:** WP-012  
 **Date:** 2026-07-20
 
@@ -136,3 +136,4 @@ I_PCB_cont(T) = I_PCB_cont(T_ref) × sqrt((T_max - T)/(T_max - T_ref))   — CAN
 |---------|------|--------|
 | 1.0 | 2026-07-20 | WP-012 initial thermal sizing framework — Proposed |
 | 1.1 | 2026-07-20 | WP-012-R1 — sqrt derating demoted to candidate form; general g() retained |
+| 1.3 | 2026-07-20 | Architecture Review Accepted — PR #16 merged (`9c5c7e7` / `fe700d4`) |

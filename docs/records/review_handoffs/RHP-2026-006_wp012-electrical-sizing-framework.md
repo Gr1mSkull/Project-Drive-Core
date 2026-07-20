@@ -231,8 +231,8 @@ Revert WP-012 PR; WP-011 baseline preserved.
 | **Independent Reviewer (name/agent)** | TBD |
 | **Independent Reviewer role** | Independent Reviewer |
 | **Independent review date** | TBD |
-| **Final Review Outcome** | **Ready for Final Architecture Acceptance** — WP-012-R2 applied |
-| **Architecture / policy approval** | Separate — System Architect only |
+| **Final Review Outcome** | **Accepted** — Architecture Review (2026-07-20); PR #16 merged (`9c5c7e7` / `fe700d4`); WP-012-R1/R2 Accepted |
+| **Architecture / policy approval** | Accepted — System Architect (2026-07-20) |
 
 ## Revision history
 
@@ -241,3 +241,4 @@ Revert WP-012 PR; WP-011 baseline preserved.
 | 1.0 | 2026-07-20 | WP-012 initial RHP — Draft |
 | 1.1 | 2026-07-20 | WP-012-R1 — iterative lifecycle; 16 fault classes; validation evidence |
 | 1.2 | 2026-07-20 | WP-012-R2 — sign convention; Stage [D] authority; reproducible validation |
+| 1.3 | 2026-07-20 | Architecture Review Accepted — PR #16 merged (`9c5c7e7` / `fe700d4`); TBD-DK-007 BLOCKED unchanged |

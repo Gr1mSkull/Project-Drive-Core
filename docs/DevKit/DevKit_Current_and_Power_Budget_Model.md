@@ -1,8 +1,8 @@
 # DevKit Current and Power Budget Model — WP-012
 
 **Document ID:** DOC-DK-CPBM-001  
-**Version:** 1.2  
-**Status:** Ready for Final Architecture Acceptance  
+**Version:** 1.3  
+**Status:** Accepted — Architecture Review  
 **Work Package:** WP-012  
 **Date:** 2026-07-20
 
@@ -288,3 +288,4 @@ See [`DevKit_Electrical_Sizing_Framework.md`](DevKit_Electrical_Sizing_Framework
 | 1.0 | 2026-07-20 | WP-012 initial current and power budget model — Proposed |
 | 1.1 | 2026-07-20 | WP-012-R1 — measurement boundaries; source-referred aggregation; external envelope exclusion |
 | 1.2 | 2026-07-20 | WP-012-R2 — sign convention; signed `I_CH_IN_n`; `I_STORAGE_NET` unallocated-only; anti double-count |
+| 1.3 | 2026-07-20 | Architecture Review Accepted — PR #16 merged (`9c5c7e7` / `fe700d4`) |

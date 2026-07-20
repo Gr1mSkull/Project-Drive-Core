@@ -1,8 +1,8 @@
 # DevKit Power-Path Assumption Register — WP-012
 
 **Document ID:** DOC-DK-PPAR-001  
-**Version:** 1.2  
-**Status:** Ready for Final Architecture Acceptance  
+**Version:** 1.3  
+**Status:** Accepted — Architecture Review  
 **Work Package:** WP-012  
 **Date:** 2026-07-20
 
@@ -56,3 +56,4 @@ Assumptions in this register shall **not** be converted to requirements or numer
 |---------|------|--------|
 | 1.0 | 2026-07-20 | WP-012 initial power-path assumption register — Proposed |
 | 1.1 | 2026-07-20 | WP-012-R1 — PROPOSED_CONSTRAINT status; PWR-A-017/018 disposition |
+| 1.3 | 2026-07-20 | Architecture Review Accepted — PR #16 merged (`9c5c7e7` / `fe700d4`) |

@@ -1,8 +1,8 @@
 # DevKit Protection Coordination Framework — WP-012
 
 **Document ID:** DOC-DK-PCF-001  
-**Version:** 1.2  
-**Status:** Ready for Final Architecture Acceptance  
+**Version:** 1.3  
+**Status:** Accepted — Architecture Review  
 **Work Package:** WP-012  
 **Date:** 2026-07-20
 
@@ -117,3 +117,4 @@ Table population: **16 fault classes** (§5.1).
 |---------|------|--------|
 | 1.0 | 2026-07-20 | WP-012 initial protection coordination framework — Proposed |
 | 1.1 | 2026-07-20 | WP-012-R1 — explicit 16-class population count |
+| 1.3 | 2026-07-20 | Architecture Review Accepted — PR #16 merged (`9c5c7e7` / `fe700d4`); 16 fault classes retained |

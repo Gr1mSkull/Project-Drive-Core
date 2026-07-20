@@ -1,6 +1,6 @@
 # DriveCore — Current Phase
 
-**Updated:** WP-012 Ready for Final Architecture Acceptance — WP-012-R2 (2026-07-20)
+**Updated:** WP-012 Accepted — electrical sizing architecture framework (2026-07-20); PR #16 merged (`fe700d4`)
 
 ## Documentation
 
@@ -17,7 +17,7 @@
 | **WP-009 DevKit threshold analysis** | ✅ Accepted (2026-07-20) — methods Accepted; numeric Open |
 | **WP-010 DevKit functional electrical architecture** | ✅ Accepted (2026-07-20) — WP-010-R1 Accepted |
 | **WP-011 EDL-011 + component-class prep** | ✅ Accepted (2026-07-20) — WP-011-R1 Accepted |
-| **WP-012 electrical sizing architecture framework** | ⏳ Ready for Final Architecture Acceptance — WP-012-R2 |
+| **WP-012 electrical sizing architecture framework** | ✅ Accepted (2026-07-20) — WP-012-R1/R2 Accepted |
 
 ## DevKit (WP-007 … WP-012)
 
@@ -31,7 +31,7 @@
 | Functional electrical architecture | **Accepted** (WP-010 / WP-010-R1) |
 | TBD-DK-007 | **BLOCKED_BY_EDL_CLARIFICATION** — not Resolved; numeric Open; verification Not Verified |
 | Component-class qualification prep | **Accepted** (WP-011) |
-| Electrical sizing framework | **Ready for Final Architecture Acceptance** (WP-012-R2) |
+| Electrical sizing framework | **Accepted** (WP-012 / WP-012-R1 / WP-012-R2) |
 | Hardware design approved | **No** — NOT IMPLEMENTED |
 | Detailed electrical sizing | **NOT COMPLETED** — framework only |
 | Schematics / PCB | **NOT AUTHORIZED** |
@@ -39,14 +39,14 @@
 | Physical verification | **NOT VERIFIED** |
 | Remaining open requests | ADR-DK-008, 009, 011, 012 |
 
-## Next authorized work (after WP-012 acceptance)
+## Next authorized work
 
-Component-class qualification · symbolic preliminary calculation · fixture/load-bank requirements.
+WP-013 — Component-Class Qualification + Symbolic Preliminary Calculations · fixture/load-bank requirements · ADR-DK-011 / ADR-DK-012 resolution.
 
 ## Active branch
 
-`cursor/wp012-devkit-electrical-sizing-framework-3bb9` — PR #16 (Final Architecture Acceptance pending)
+`main` @ `fe700d4`+ (WP-012 Accepted — PR #16)
 
 ## Do not start without approval
 
-MPN selection · BOM · schematics · PCB · numeric threshold approval · EDL file edit · firmware · fixture construction · final electrical sizing completion
+MPN selection · BOM · schematics · PCB · numeric threshold approval · EDL file edit · firmware · fixture construction · final electrical sizing completion · Verification Evidence creation
