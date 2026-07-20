@@ -45,7 +45,7 @@ Component-class qualification · symbolic preliminary calculation · fixture/loa
 
 ## Active branch
 
-`cursor/wp012-devkit-electrical-sizing-framework-3bb9` (PR pending)
+`cursor/wp012-devkit-electrical-sizing-framework-3bb9` — PR #16 (Architecture Review pending)
 
 ## Do not start without approval
 
