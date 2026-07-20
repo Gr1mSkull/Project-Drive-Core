@@ -44,7 +44,7 @@ Component-class qualification execution · electrical sizing and protection coor
 
 ## Active branch
 
-`cursor/wp011-edl011-component-class-3bb9` (PR pending)
+`cursor/wp011-edl011-component-class-3bb9` — PR #15 (Architecture Review pending)
 
 ## Do not start without approval
 
