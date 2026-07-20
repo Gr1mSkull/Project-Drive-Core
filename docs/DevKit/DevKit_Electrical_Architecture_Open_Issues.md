@@ -72,6 +72,7 @@ Base and external envelopes are functionally separated and protected against bac
 | EDL-011 clarification CR | OI-EDL-011 |
 | Preliminary component-class qualification | OI-COMP-001, OI-COMP-002, OI-BI-001, OI-SENSE-001 — WP-012 evaluation readiness |
 | Electrical sizing framework (WP-012) | OI-CUR-001…003, OI-PCB-001, OI-RAIL-001, OI-UV-001 |
+| Component-class comparison (WP-013) | OI-COMP-001, OI-COMP-002, OI-BI-001, OI-SENSE-001, OI-PROT-001/002 — recommendations **Proposed** |
 | Fixture/load-bank requirements | OI-GND-001, OI-FIX-001, OI-FIX-002, OI-SC-001 |
 | Schematic WP | OI-PROT-001/002, OI-KILL-001, OI-CONN-001, OI-CHAN-001 |
 | PCB constraints/layout WP | OI-PCB-001 |
@@ -85,3 +86,4 @@ Base and external envelopes are functionally separated and protected against bac
 | 1.1 | 2026-07-20 | WP-010-R1 — OI-UV-002, OI-CHAN-001, OI-CONFIG-001; GND-001 options; external energy roles |
 | 1.2 | 2026-07-20 | Architecture Review Accepted — PR #14 merged (`c98ce56`) |
 | 1.3 | 2026-07-20 | WP-012 — downstream mapping for sizing framework |
+| 1.4 | 2026-07-20 | WP-013 — downstream mapping for class comparison (OI statuses unchanged) |

@@ -52,9 +52,9 @@ Controlled registry of electrical design inputs for future sizing and schematic 
 | **ED-IN-027** | Channel inrush | `I_INRUSH` | TBD-DK-002 | OPEN | Implementation Engineer | Protection | Sizing WP |
 | **ED-IN-028** | Connector/enclosure policy | connector class | ADR-DK-012 | OPEN | System Architect | Schematic | ADR-DK-012 |
 | **ED-IN-029** | EDL-011 control-loss semantics | EDL-011 interpretation | WP-011 proposal | **BLOCKED** | System Architect | TBD-DK-007 | Architecture Review + optional EDL CR |
-| **ED-IN-030** | Component class direction (HS) | HS class | WP-011 matrix | OPEN | Component Engineer | Schematic auth | Qualification WP |
-| **ED-IN-031** | Component class direction (BI) | BI class | WP-011 matrix | OPEN | Component Engineer | Schematic auth | Qualification WP |
-| **ED-IN-032** | Sense topology class | sense class | WP-011 matrix | OPEN | Component Engineer | DK-C-004 | Qualification WP |
+| **ED-IN-030** | Component class direction (HS) | HS class | WP-011 matrix; WP-013 HS comparison **Proposed** | OPEN | Component Engineer | Schematic auth | Architect class acceptance |
+| **ED-IN-031** | Component class direction (BI) | BI class | WP-011 matrix; WP-013 BI comparison **Proposed** | OPEN | Component Engineer | Schematic auth | Architect class acceptance |
+| **ED-IN-032** | Sense topology class | sense class | WP-011 matrix; WP-013 sense comparison **Proposed** | OPEN | Component Engineer | DK-C-004 | Architect class acceptance |
 
 ## 3. Dependency graph (simplified)
 
@@ -113,3 +113,4 @@ Full matrix: [`DevKit_Sizing_Dependency_and_Closure_Matrix.md`](DevKit_Sizing_De
 | 1.1 | 2026-07-20 | WP-011-R1 — R6 dependency-reference rule; TBD-DK-007 disposition separation |
 | 1.2 | 2026-07-20 | Architecture Review Accepted — PR #15; TBD-DK-007 BLOCKED retained |
 | 1.3 | 2026-07-20 | WP-012 — sizing method cross-reference (ED-IN not frozen) |
+| 1.4 | 2026-07-20 | WP-013 — ED-IN-030/031/032 reference Proposed class comparisons (Status Open unchanged) |

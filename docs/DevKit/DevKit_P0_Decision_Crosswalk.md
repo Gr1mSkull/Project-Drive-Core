@@ -146,18 +146,32 @@ This acceptance update does not rewrite the BOM or select a component.
 
 | Artifact | Document | Status |
 |----------|----------|--------|
-| Electrical sizing framework | [`DevKit_Electrical_Sizing_Framework.md`](DevKit_Electrical_Sizing_Framework.md) | Proposed |
-| Current and power budget model | [`DevKit_Current_and_Power_Budget_Model.md`](DevKit_Current_and_Power_Budget_Model.md) | Proposed |
-| Thermal sizing framework | [`DevKit_Thermal_Sizing_Framework.md`](DevKit_Thermal_Sizing_Framework.md) | Proposed |
-| Protection coordination framework | [`DevKit_Protection_Coordination_Framework.md`](DevKit_Protection_Coordination_Framework.md) | Proposed |
-| Power-path assumption register | [`DevKit_Power_Path_Assumption_Register.md`](DevKit_Power_Path_Assumption_Register.md) | Proposed |
-| Sizing dependency and closure matrix | [`DevKit_Sizing_Dependency_and_Closure_Matrix.md`](DevKit_Sizing_Dependency_and_Closure_Matrix.md) | Proposed |
+| Electrical sizing framework | [`DevKit_Electrical_Sizing_Framework.md`](DevKit_Electrical_Sizing_Framework.md) | **Accepted** |
+| Current and power budget model | [`DevKit_Current_and_Power_Budget_Model.md`](DevKit_Current_and_Power_Budget_Model.md) | **Accepted** |
+| Thermal sizing framework | [`DevKit_Thermal_Sizing_Framework.md`](DevKit_Thermal_Sizing_Framework.md) | **Accepted** |
+| Protection coordination framework | [`DevKit_Protection_Coordination_Framework.md`](DevKit_Protection_Coordination_Framework.md) | **Accepted** |
+| Power-path assumption register | [`DevKit_Power_Path_Assumption_Register.md`](DevKit_Power_Path_Assumption_Register.md) | **Accepted** |
+| Sizing dependency and closure matrix | [`DevKit_Sizing_Dependency_and_Closure_Matrix.md`](DevKit_Sizing_Dependency_and_Closure_Matrix.md) | **Accepted** |
 
-**Next authorized work (after WP-012 acceptance):** Component-class qualification · symbolic preliminary calculation · fixture requirements.
+**Next authorized work (after WP-012 acceptance):** Component-class qualification · symbolic preliminary calculation · fixture requirements — **WP-013 Proposed**.
 
 **Not authorized by WP-012:** MPN selection · numeric freeze · schematic · PCB · fixture build. `TBD-DK-007` remains **BLOCKED_BY_EDL_CLARIFICATION**.
 
-## 11. Related records
+## 11. WP-013 component-class qualification mapping
+
+| Artifact | Document | Status |
+|----------|----------|--------|
+| Qualification report | [`DevKit_Component_Class_Qualification_Report.md`](DevKit_Component_Class_Qualification_Report.md) | Proposed |
+| High-side comparison | [`DevKit_High_Side_Class_Comparison.md`](DevKit_High_Side_Class_Comparison.md) | Proposed |
+| Current-observation comparison | [`DevKit_Current_Observation_Class_Comparison.md`](DevKit_Current_Observation_Class_Comparison.md) | Proposed |
+| Protection comparison | [`DevKit_Protection_Class_Comparison.md`](DevKit_Protection_Class_Comparison.md) | Proposed |
+| Bidirectional comparison | [`DevKit_Bidirectional_Class_Comparison.md`](DevKit_Bidirectional_Class_Comparison.md) | Proposed |
+| Symbolic preliminary calculations | [`DevKit_Symbolic_Preliminary_Calculations.md`](DevKit_Symbolic_Preliminary_Calculations.md) | Proposed |
+| Class recommendation matrix | [`DevKit_Class_Recommendation_and_Readiness_Matrix.md`](DevKit_Class_Recommendation_and_Readiness_Matrix.md) | Proposed |
+
+**Not authorized by WP-013:** MPN selection · manufacturer preference · BOM · numeric freeze · schematic · PCB · VE.
+
+## 12. Related records
 
 | Record | Path |
 |--------|------|
@@ -179,3 +193,4 @@ This acceptance update does not rewrite the BOM or select a component.
 | 1.7 | 2026-07-20 | WP-010 Architecture Review — functional electrical architecture Accepted |
 | 1.8 | 2026-07-20 | WP-011 Architecture Review — EDL-011 + component-class prep Accepted; TBD-DK-007 BLOCKED retained |
 | 1.9 | 2026-07-20 | WP-012 — electrical sizing architecture framework (Proposed) |
+| 1.10 | 2026-07-20 | WP-012 Accepted status alignment; WP-013 class qualification mapping (Proposed) |

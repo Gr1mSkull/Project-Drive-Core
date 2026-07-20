@@ -1,9 +1,9 @@
 # DevKit Component-Class Matrix — WP-011
 
 **Document ID:** DOC-DK-CCM-001  
-**Version:** 1.2  
+**Version:** 1.3  
 **Status:** Accepted — Architecture Review  
-**Work Package:** WP-011  
+**Work Package:** WP-011 (Accepted); WP-013 comparison package Proposed  
 **Date:** 2026-07-20
 
 Evaluation **classes** only — no MPN, no manufacturer, no BOM. Component class definitions are evaluation criteria, not procurement shortlist.
@@ -43,10 +43,20 @@ Physical channel sharing (WP-010-R1) may combine aliases on one switch class **o
 5. No class selection authorizes schematic capture.
 6. Class selection gated per [`DevKit_Component_Class_Qualification_Framework.md`](DevKit_Component_Class_Qualification_Framework.md) §3.1 (current envelope, thermal assumptions, protection philosophy, verification boundary).
 
-## 4. Revision history
+## 4. WP-013 comparison note
+
+WP-013 extends evaluation with additional comparison IDs (e.g. HS-INT-BASIC, HS-ARRAY, SENSE-SHUNT-HS/LS, RP-*, TRANSIENT-*, INPUT-*, BI-HB-DISCRETE/HYBRID/RELAY/DUAL-HSLS, CTRL-MIXED-HARDWIRED). See:
+
+* [`DevKit_Component_Class_Qualification_Report.md`](DevKit_Component_Class_Qualification_Report.md)
+* [`DevKit_Class_Recommendation_and_Readiness_Matrix.md`](DevKit_Class_Recommendation_and_Readiness_Matrix.md)
+
+Recommendations remain **Proposed** — not Architecture Accepted. No MPN selected.
+
+## 5. Revision history
 
 | Version | Date | Change |
 |---------|------|--------|
 | 1.0 | 2026-07-20 | WP-011 initial component-class matrix — Proposed |
 | 1.1 | 2026-07-20 | WP-011-R1 — evaluation-class terminology; selection gating reference |
 | 1.2 | 2026-07-20 | Architecture Review Accepted — PR #15 |
+| 1.3 | 2026-07-20 | WP-013 — cross-ref class comparison package (matrix IDs retained; recommendations Proposed) |

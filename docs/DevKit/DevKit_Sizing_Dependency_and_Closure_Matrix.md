@@ -63,6 +63,8 @@ Readiness legend: **READY_FOR_CLASS_COMPARISON** · **PARTIAL** · **NOT_READY**
 | [`DevKit_Thermal_Sizing_Framework.md`](DevKit_Thermal_Sizing_Framework.md) | Thermal path; states; R_th rules |
 | [`DevKit_Protection_Coordination_Framework.md`](DevKit_Protection_Coordination_Framework.md) | P0–P5; faults; E_FAULT |
 | [`DevKit_Power_Path_Assumption_Register.md`](DevKit_Power_Path_Assumption_Register.md) | PWR-A-* constraints |
+| [`DevKit_Class_Recommendation_and_Readiness_Matrix.md`](DevKit_Class_Recommendation_and_Readiness_Matrix.md) | WP-013 class recommendations (**Proposed**) |
+| [`DevKit_Symbolic_Preliminary_Calculations.md`](DevKit_Symbolic_Preliminary_Calculations.md) | WP-013 symbolic calc readiness |
 
 ## 4. Revision history
 
@@ -71,3 +73,4 @@ Readiness legend: **READY_FOR_CLASS_COMPARISON** · **PARTIAL** · **NOT_READY**
 | 1.0 | 2026-07-20 | WP-012 initial sizing dependency and closure matrix — Proposed |
 | 1.1 | 2026-07-20 | WP-012-R1 — cross-ref staged closure model |
 | 1.3 | 2026-07-20 | Architecture Review Accepted — PR #16 merged (`9c5c7e7` / `fe700d4`); TBD-DK-007 BLOCKED unchanged |
+| 1.4 | 2026-07-20 | WP-013 — class recommendation / symbolic calc cross-refs (TBD statuses Open unchanged) |
