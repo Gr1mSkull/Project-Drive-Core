@@ -3,13 +3,13 @@
 | Field | Value |
 |-------|-------|
 | **Change ID** | CIA-2026-009 |
-| **Impact Level** | 2 (original WP-014); **R1 = Level 1** — Architecture consistency correction |
-| **Title** | WP-014 Gen1 DevKit Fixture and Load-Bank Requirements (+ WP-014-R1) |
+| **Impact Level** | Original Level 2; R1 Level 1 (architecture consistency); R2 Level 1 (architecture consistency); R3 Level 1 (editorial/governance consistency) |
+| **Title** | WP-014 Gen1 DevKit Fixture and Load-Bank Requirements (+ WP-014-R1 / R2 / R3) |
 | **Author** | Implementation Engineer (cloud agent) |
 | **Author role** | Implementation Engineer |
 | **Date** | 2026-07-20 |
-| **Status** | Draft — Ready for Final Architecture Review (after R1) |
-| **Related WP / CR** | WP-014 / WP-014-R1 / WP-014-R2; depends on WP-013 Accepted (`ee462fb`+); ADR-016…023 Accepted |
+| **Status** | Draft — Ready for Final Architecture Acceptance after R3 |
+| **Related WP / CR** | WP-014 / WP-014-R1 / WP-014-R2 / WP-014-R3; depends on WP-013 Accepted (`ee462fb`+); ADR-016…023 Accepted |
 
 ### Reason for Change
 
@@ -22,6 +22,18 @@ Accepted DevKit architecture, sizing, and class-evaluation packages lack control
 **WP-014-R1 (Level 1):** Documentation consistency only — external-energy state semantics, isolation wording, load-bank stuck-on, E-stop integrity disposition, PWR-A-017/018 acceptance, reproducible validation.
 
 **WP-014-R2 (Level 1):** Documentation consistency only — removed remaining nominal-bound fault-energy approximation (`E_FAULT ≈ V_nom × I_FAULT_PEAK × T_FAULT_CLEAR`) from the protection framework and WP-009 current-envelope analysis; enforced `E_FAULT_BOUND = V_BOUND × I_BOUND × T_BOUND` with proof-or-`BLOCKED_BY_INPUT` and candidate/non-normative labelling across WP-009…WP-014 fault-energy statements; made external-bank back-feed protection allocation topology-neutral (removed “P2 isolation / Isolation proof”; no galvanic isolation implied while OI-GND-001 Open).
+
+**WP-014-R3 (Level 1):** Editorial/governance consistency only — made RHP-2026-008 self-contained (full reproducible V1–V7 and R2-A/B/C evidence; all 17 Architect questions in full); corrected FX requirement-range notation to declared allocated groups; reconciled R1/R2/R3 metadata across CIA/RHP/PR/`.ai`; added reproducible FX requirement-ID allocation check (R3-D). No technical content change.
+
+### FX requirement-ID allocation (declared groups)
+
+```text
+REQ-DCC-V-FX-* allocated groups:
+001–005, 010–015, 020–026, 030–034,
+040, 050–056, 060–062, 070–071
+```
+
+The identifiers are **not** a continuous range; the group notation above is authoritative.
 
 ### Scope exclusions (mandatory)
 
@@ -40,7 +52,7 @@ No VE created.
 
 | ID | Impact |
 |----|--------|
-| REQ-DCC-V-FX-001…071 (incl. FX-005, FX-071 new in R1) | **PROPOSED** — NOT VERIFIED |
+| REQ-DCC-V-FX-* (groups 001–005, 010–015, 020–026, 030–034, 040, 050–056, 060–062, 070–071; FX-005 and FX-071 added in R1) | **PROPOSED** — NOT VERIFIED |
 | REQ-DCC-V-DK-* | Mapping only — NOT VERIFIED unchanged |
 | VER-DCC-DK-* fixture-blocked | NOT EXECUTED / BLOCKED |
 | TBD-DK-007 | BLOCKED_BY_EDL_CLARIFICATION retained |
@@ -99,6 +111,46 @@ rg -l 'candidate analytical form' docs/DevKit
 | stdout | 7 files (protection framework/comparison, symbolic calc, current-envelope, load/fault catalog, fixture requirements, current+power budget) |
 | exit status | `0` |
 | result | **PASS** |
+
+### WP-014-R3 additional validation
+
+#### R3-D — FX requirement-ID allocation check
+
+```bash
+python3 - <<'PY'
+import re, sys
+doc = "docs/DevKit/DevKit_Fixture_and_Load_Bank_Requirements.md"
+text = open(doc, encoding="utf-8").read()
+headings = re.findall(r'^####\s+REQ-DCC-V-FX-(\d{3})\s*$', text, re.MULTILINE)
+ids = [int(h) for h in headings]
+expected = (list(range(1,6)) + list(range(10,16)) + list(range(20,27)) +
+            list(range(30,35)) + [40] + list(range(50,57)) +
+            list(range(60,63)) + list(range(70,72)))
+expected_set = set(expected)
+seen = {}
+for i in ids: seen[i] = seen.get(i,0)+1
+dups = [(i,c) for i,c in seen.items() if c>1]
+missing = sorted(expected_set - set(ids))
+unexpected = sorted(set(ids) - expected_set)
+print(f"allocated ID count: {len(ids)}")
+print(f"unique ID count: {len(set(ids))}")
+print(f"expected ID count: {len(expected)}")
+print(f"duplicate IDs: {sorted(dups) if dups else 'none'}")
+print(f"missing IDs within declared groups: {['REQ-DCC-V-FX-%03d'%m for m in missing] if missing else 'none'}")
+print(f"unexpected IDs: {['REQ-DCC-V-FX-%03d'%u for u in unexpected] if unexpected else 'none'}")
+ok = (not dups) and (not missing) and (not unexpected)
+print("RESULT:", "PASS" if ok else "FAIL")
+sys.exit(0 if ok else 1)
+PY
+```
+
+Expected allocated groups: `001–005, 010–015, 020–026, 030–034, 040, 050–056, 060–062, 070–071`.
+
+| Field | Value |
+|-------|-------|
+| stdout | `allocated ID count: 36` / `unique ID count: 36` / `expected ID count: 36` / `duplicate IDs: none` / `missing IDs within declared groups: none` / `unexpected IDs: none` / `RESULT: PASS` |
+| exit status | `0` |
+| result | **PASS** — fails on duplicate heading, absent expected ID, or undeclared FX heading |
 
 ### Validation performed (WP-014-R1 — reproducible)
 
@@ -297,3 +349,4 @@ Physical tests: **NOT EXECUTED**.
 | 1.1 | 2026-07-20 | Reproducible validation evidence; Level 2 rationale expanded |
 | 1.2 | 2026-07-20 | WP-014-R1 — Level 1 corrections; full V1–V7 reproducible evidence; PWR-A-017/018 Accepted |
 | 1.3 | 2026-07-20 | WP-014-R2 — fault-energy nominal-bound removed; topology-neutral back-feed; R2-A/B/C validation |
+| 1.4 | 2026-07-20 | WP-014-R3 — metadata reconciled (R1/R2/R3); FX group notation; R3-D ID-allocation check |

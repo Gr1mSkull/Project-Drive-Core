@@ -1,8 +1,8 @@
 # DriveCore Gen1 DevKit — Document Set
 
 **Document ID:** DOC-DK-INDEX-001  
-**Version:** 1.20  
-**Status:** Accepted (index); WP-013 **Accepted**; WP-014 **Proposed** (R1)  
+**Version:** 1.21  
+**Status:** Accepted (index); WP-013 **Accepted**; WP-014 **Proposed** (R3)  
 **Work Package:** WP-007…WP-013 (Accepted) / WP-014 (Proposed)  
 **Date:** 2026-07-20
 
@@ -132,7 +132,7 @@ Every DevKit gate evidence package shall record a **composite system baseline** 
 | WP-011 EDL-011 + component-class prep | **Accepted** (2026-07-20) — WP-011-R1 Accepted |
 | WP-012 electrical sizing architecture framework | **Accepted** (2026-07-20) — WP-012-R1/R2 Accepted; PR #16 merged (`9c5c7e7` / `fe700d4`) |
 | WP-013 component-class qualification + symbolic calcs | **Accepted** (2026-07-20) — WP-013-R1 Accepted; PR #17 merged (`d1698a0` / `23bdb07`); final classes/topology Open |
-| WP-014 fixture and load-bank requirements | **Proposed** — WP-014-R1 applied; Ready for Final Architecture Review; fixture hardware NOT IMPLEMENTED; no procurement/construction; no VE |
+| WP-014 fixture and load-bank requirements | **Proposed** — WP-014-R1/R2/R3 applied; Ready for Final Architecture Acceptance; fixture hardware NOT IMPLEMENTED; no procurement/construction; no VE |
 | Hardware design | **NOT IMPLEMENTED** — detailed sizing/schematic/PCB **NOT AUTHORIZED** |
 | Firmware bring-up | NOT IMPLEMENTED |
 | Physical verification | NOT VERIFIED |
@@ -176,3 +176,4 @@ Open thresholds: `TBD-DK-001` … `TBD-DK-022` (Status Open — WP-009 methods A
 | 1.18 | 2026-07-20 | Architecture Review — WP-013 Accepted; PR #17 merged (`d1698a0` / `23bdb07`); final classes Open; TBD-DK-007 BLOCKED unchanged |
 | 1.19 | 2026-07-20 | WP-014 — fixture and load-bank requirements package (Proposed); CIA-2026-009 / RHP-2026-008 |
 | 1.20 | 2026-07-20 | WP-014-R1 — architecture consistency corrections; Ready for Final Architecture Review |
+| 1.21 | 2026-07-20 | WP-014-R2/R3 — fault-energy consistency; self-contained RHP; FX group notation; Ready for Final Architecture Acceptance |
