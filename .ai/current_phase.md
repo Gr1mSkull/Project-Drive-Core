@@ -1,6 +1,6 @@
 # DriveCore — Current Phase
 
-**Updated:** WP-009 Accepted — DevKit threshold analysis (2026-07-20)
+**Updated:** WP-010 Proposed — DevKit functional electrical architecture (2026-07-20)
 
 ## Documentation
 
@@ -15,8 +15,9 @@
 | **WP-007 DevKit requirements + verification plan** | ✅ Accepted (2026-07-20) — evidence NOT VERIFIED |
 | **WP-008 DevKit P0 architecture decisions** | ✅ Accepted (2026-07-20) — ADR-016…023 |
 | **WP-009 DevKit threshold analysis** | ✅ Accepted (2026-07-20) — methods Accepted; numeric Open |
+| **WP-010 DevKit functional electrical architecture** | ⏳ Proposed — Architecture Review pending |
 
-## DevKit (WP-007 / WP-008 / WP-009)
+## DevKit (WP-007 / WP-008 / WP-009 / WP-010)
 
 | Item | Status |
 |------|--------|
@@ -26,21 +27,21 @@
 | Threshold analysis methods | **Accepted** (WP-009) |
 | Threshold numeric values | **Open** (TBD-DK-001…022) |
 | TBD-DK-007 | **BLOCKED_BY_EDL_CLARIFICATION** |
-| Hardware design approved | **No** |
+| Functional electrical architecture | **Proposed** (WP-010) |
+| Hardware design approved | **No** — NOT IMPLEMENTED |
+| Detailed electrical sizing | **NOT AUTHORIZED** |
+| Schematics / PCB | **NOT AUTHORIZED** |
 | Firmware bring-up complete | **No** (NOT IMPLEMENTED) |
 | Physical verification | **NOT VERIFIED** |
 | Remaining open requests | ADR-DK-008, 009, 011, 012 |
 
-## Next authorized work
+## Next authorized work (after WP-010 acceptance)
 
-**Functional DevKit electrical architecture** — authorized by WP-009 Architecture Review.  
-Not authorized: conductor/connector/fuse/PCB sizing, thermal freeze, firmware, fixtures.
-
-Follow-on: EDL-011 clarification CR · fixture/load-bank requirements · component qualification (as separately authorized).
+EDL-011 clarification CR · preliminary component-class qualification · electrical sizing and protection coordination · fixture/load-bank requirements · schematic WP · PCB constraints WP · firmware BSP planning.
 
 ## Active branch
 
-`main` @ `6f3845e` — PR #13 merged (WP-009 Accepted, 2026-07-20)
+`cursor/wp010-devkit-functional-electrical-architecture-3bb9` (PR pending)
 
 ## Do not start without approval
 

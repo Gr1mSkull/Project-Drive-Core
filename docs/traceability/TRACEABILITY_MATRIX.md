@@ -1,9 +1,9 @@
 # DriveCore Traceability Matrix
 
 **Document ID:** DOC-TRACE-MAT-001  
-**Version:** 1.4  
+**Version:** 1.5.6  
 **Status:** Accepted  
-**Work Package:** WP-007 (Accepted)
+**Work Package:** WP-007 (Accepted); WP-010 architecture refs
 
 Authoritative policy: `.cursor/ENGINEERING_CONSTITUTION.mdc` §6.
 
@@ -191,6 +191,7 @@ Blocked cases (approx): 26
 * WP-009 (2026-07-20): Threshold analysis references in TBD register §4 and DevKit analysis docs; **no** threshold Resolved; **no** requirement Verified; evidence NOT VERIFIED.
 * WP-009-R1 (2026-07-20): EDL-011 ambiguity correction; symbolic current scenarios; profile/overlap simultaneous model; TBD-DK-007 BLOCKED_BY_EDL_CLARIFICATION.
 * WP-009 Architecture Review (2026-07-20): **Accepted** — threshold analysis methods Accepted; numeric values Open; evidence NOT VERIFIED; functional electrical architecture authorized.
+* WP-010 (2026-07-20): Functional electrical architecture **Proposed** — architecture references in DevKit FEA package; **no** threshold Resolved; **no** requirement Verified; evidence NOT VERIFIED; implementation TBD.
 * WP-007-R4: Method:Test cases enforce semantic placeholder policy (unjustified placeholders remaining = 0).
 * EDL-014 meaning unchanged.
 
@@ -209,3 +210,4 @@ Blocked cases (approx): 26
 | 1.5 | 2026-07-20 | WP-008 — add Accepted ADR-016…023 architecture references; statuses remain NOT VERIFIED |
 | 1.5.1 | 2026-07-20 | WP-008-R1 — conditional open-load; ADR-023 REQ alignment; supply interruption DK-A/DK-D; NOT VERIFIED retained |
 | 1.5.5 | 2026-07-20 | WP-009 Architecture Review Accepted — methods Accepted; numeric Open; NOT VERIFIED retained |
+| 1.5.6 | 2026-07-20 | WP-010 — functional electrical architecture Proposed; architecture refs; NOT VERIFIED retained |

@@ -10,11 +10,13 @@ System requirements: [`DevKit_System_Requirements.md`](DevKit_System_Requirement
 Governance: [`DevKit_Verification_Governance.md`](DevKit_Verification_Governance.md)  
 Identity: ADR-015 / STD-REV-001 · Gate policy: EDL-014  
 P0 architecture decisions: Accepted ADR-016…023 — [`DevKit_P0_Decision_Crosswalk.md`](DevKit_P0_Decision_Crosswalk.md) (WP-008).  
-Threshold analysis (Proposed): [`DevKit_Threshold_Closure_Matrix.md`](DevKit_Threshold_Closure_Matrix.md) (WP-009 — TBDs remain Open).
+Threshold analysis (Accepted): [`DevKit_Threshold_Closure_Matrix.md`](DevKit_Threshold_Closure_Matrix.md) (WP-009 — TBDs remain Open).
+
+Functional electrical architecture (Proposed): [`DevKit_Functional_Electrical_Architecture.md`](DevKit_Functional_Electrical_Architecture.md) (WP-010 — requires Architecture Review).
 
 > **TBD authority:** The Threshold Resolution Register in [`DevKit_System_Requirements.md`](DevKit_System_Requirements.md) §4 is the authoritative source for `TBD-DK-*` identifiers. This plan references those IDs; it does not redefine them.
 
-> No case is marked PASS. No physical tests were executed in WP-007 / R1 / R2 / R3 / WP-008 / WP-009.
+> No case is marked PASS. No physical tests were executed in WP-007 / R1 / R2 / R3 / WP-008 / WP-009 / WP-010.
 
 ## 1. Methods and schemas
 
@@ -1951,3 +1953,4 @@ See governance §2–§4. Outcomes: PASS / FAIL / BLOCKED / NOT ASSESSED. Incomp
 | 1.1.4 | 2026-07-19 | WP-007-R4 — semantic placeholder enforcement; C-002/003/008/009 and related Test cases completed |
 | 1.2 | 2026-07-20 | Architecture Review — ACCEPTED; PR #11 approved for merge (requirements structure, governance, verification-plan structure, traceability baseline) |
 | 1.2.2 | 2026-07-20 | WP-009 — link threshold analysis; no case PASS changes |
+| 1.2.3 | 2026-07-20 | WP-010 — link functional electrical architecture; no case PASS changes |

@@ -99,3 +99,4 @@ Note: some rows carry dual tags (e.g. CONFLICT/TBD); counts reflect primary seve
 | 1.0.2 | 2026-07-19 | WP-007-R2 — TBD references point to restored register (no value closures) |
 | 1.1 | 2026-07-20 | Architecture Review — ACCEPTED; PR #11 approved for merge (requirements structure, governance, verification-plan structure, traceability baseline) |
 | 1.2 | 2026-07-20 | WP-008 — map P0 gaps to Accepted ADR-016…023; no TBD closures; conflict G431 vs EDL-001 still reported |
+| 1.3 | 2026-07-20 | WP-010 — functional electrical architecture Proposed; gap items reference FEA package |
