@@ -9,7 +9,7 @@
 | **Author role** | Implementation Engineer |
 | **Date** | 2026-07-20 |
 | **Status** | Draft — Ready for Final Architecture Review (after R1) |
-| **Related WP / CR** | WP-014 / WP-014-R1; depends on WP-013 Accepted (`ee462fb`+); ADR-016…023 Accepted |
+| **Related WP / CR** | WP-014 / WP-014-R1 / WP-014-R2; depends on WP-013 Accepted (`ee462fb`+); ADR-016…023 Accepted |
 
 ### Reason for Change
 
@@ -20,6 +20,8 @@ Accepted DevKit architecture, sizing, and class-evaluation packages lack control
 **WP-014 (Level 2):** Fixture requirements constrain future laboratory energy, E-stop, load banks, fault injection, measurement, evidence scopes, and construction gates.
 
 **WP-014-R1 (Level 1):** Documentation consistency only — external-energy state semantics, isolation wording, load-bank stuck-on, E-stop integrity disposition, PWR-A-017/018 acceptance, reproducible validation.
+
+**WP-014-R2 (Level 1):** Documentation consistency only — removed remaining nominal-bound fault-energy approximation (`E_FAULT ≈ V_nom × I_FAULT_PEAK × T_FAULT_CLEAR`) from the protection framework and WP-009 current-envelope analysis; enforced `E_FAULT_BOUND = V_BOUND × I_BOUND × T_BOUND` with proof-or-`BLOCKED_BY_INPUT` and candidate/non-normative labelling across WP-009…WP-014 fault-energy statements; made external-bank back-feed protection allocation topology-neutral (removed “P2 isolation / Isolation proof”; no galvanic isolation implied while OI-GND-001 Open).
 
 ### Scope exclusions (mandatory)
 
@@ -56,6 +58,47 @@ No EDL/ADR content change. No hardware/firmware/config implementation. No schema
 ### Rollback
 
 Revert WP-014 PR; WP-013 Accepted baseline (`ee462fb`) preserved.
+
+### WP-014-R2 additional validation
+
+#### R2-A — No active nominal-bound approximation
+
+```bash
+rg -n 'E_FAULT ≈|E_fault ≈|≈ V_nom|Conservative approximation permitted|Conservative approximation when justified' docs/DevKit
+```
+
+| Field | Value |
+|-------|-------|
+| stdout | *(empty — rg no-match in docs/DevKit)* |
+| exit status | `1` |
+| result | **PASS** — only a historical match remains inside a prior RHP-2026-007 validation-command string (non-normative record) |
+
+#### R2-B — No premature isolation in protection docs
+
+```bash
+rg -n 'P2 isolation|Isolation proof' \
+  docs/DevKit/DevKit_Protection_Coordination_Framework.md \
+  docs/DevKit/DevKit_Protection_Class_Comparison.md \
+  docs/DevKit/DevKit_Power_Path_Assumption_Register.md
+```
+
+| Field | Value |
+|-------|-------|
+| stdout | *(empty — rg no-match)* |
+| exit status | `1` |
+| result | **PASS** |
+
+#### R2-C — Candidate/non-normative labelling present
+
+```bash
+rg -l 'candidate analytical form' docs/DevKit
+```
+
+| Field | Value |
+|-------|-------|
+| stdout | 7 files (protection framework/comparison, symbolic calc, current-envelope, load/fault catalog, fixture requirements, current+power budget) |
+| exit status | `0` |
+| result | **PASS** |
 
 ### Validation performed (WP-014-R1 — reproducible)
 
@@ -253,3 +296,4 @@ Physical tests: **NOT EXECUTED**.
 | 1.0 | 2026-07-20 | WP-014 initial CIA — Draft |
 | 1.1 | 2026-07-20 | Reproducible validation evidence; Level 2 rationale expanded |
 | 1.2 | 2026-07-20 | WP-014-R1 — Level 1 corrections; full V1–V7 reproducible evidence; PWR-A-017/018 Accepted |
+| 1.3 | 2026-07-20 | WP-014-R2 — fault-energy nominal-bound removed; topology-neutral back-feed; R2-A/B/C validation |

@@ -1,6 +1,6 @@
 # DriveCore — Current Phase
 
-**Updated:** WP-014-R1 — fixture/load-bank requirements corrections (2026-07-20)
+**Updated:** WP-014-R2 — fixture/load-bank requirements corrections (2026-07-20)
 
 ## Documentation
 

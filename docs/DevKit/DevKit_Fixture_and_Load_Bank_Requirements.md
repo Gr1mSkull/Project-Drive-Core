@@ -1,7 +1,7 @@
 # DevKit Fixture and Load-Bank Requirements — WP-014
 
 **Document ID:** DOC-DK-FLBR-001  
-**Version:** 1.1  
+**Version:** 1.2  
 **Status:** Proposed — Architecture Review pending  
 **Work Package:** WP-014  
 **Date:** 2026-07-20
@@ -295,7 +295,7 @@ Radio/Tablet may **request**; fixture safety layer **decides**.
 | Field | Value |
 |-------|-------|
 | Requirement ID | `REQ-DCC-V-FX-055` |
-| Statement | `E_FAULT = ∫ V(t)×I(t) dt`. Bound `V_BOUND×I_BOUND×T_BOUND` only when bounds proven; else BLOCKED_BY_INPUT. Nominal multiplication without proof is not conservative. |
+| Statement | `E_FAULT = ∫ V(t)×I(t) dt`. Bound `V_BOUND×I_BOUND×T_BOUND` only when V_BOUND, I_BOUND, and T_BOUND are proven bounds; else BLOCKED_BY_INPUT. The bound form is a candidate analytical form, non-normative, and not conservative unless every input is a proven bound. `V_nom`/`I_nom`/typical current/expected clearing time are not conservative bounds without separate proof. |
 | Status | PROPOSED |
 | Trace | WP-012/WP-013-R1 |
 
@@ -380,3 +380,4 @@ REQ-DCC-V-DK-* · VER-DCC-DK-* · ADR-019…023 · TBD-DK-* · ED-IN-* · OI-* �
 |---------|------|--------|
 | 1.0 | 2026-07-20 | WP-014 initial fixture and load-bank requirements — Proposed |
 | 1.1 | 2026-07-20 | WP-014-R1 — FX-005 EXTERNAL_ENERGY_ARMED; FX-032 stuck-on; FX-071 E-stop integrity; PWR-A-017 Accepted |
+| 1.2 | 2026-07-20 | WP-014-R2 — FX-055 fault-energy candidate/non-normative bound wording |

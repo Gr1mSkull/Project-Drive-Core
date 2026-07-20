@@ -1,7 +1,7 @@
 # DevKit Current Envelope Analysis — WP-009
 
 **Document ID:** DOC-DK-ENV-001  
-**Version:** 1.2  
+**Version:** 1.3  
 **Status:** Accepted — Architecture Review  
 **Review date:** 2026-07-20  
 **Approver role:** System Architect  
@@ -72,11 +72,13 @@ I_simultaneous = Σ (I_channel_n × duty_factor_n)
 E_fault = ∫ V(t) × I(t) dt
 ```
 
-Conservative approximation permitted when justified:
+A bounded candidate expression may be used only as:
 
 ```text
-E_fault ≈ V_nom × I_fault_peak × t_fault
+E_FAULT_BOUND = V_BOUND × I_BOUND × T_BOUND
 ```
+
+and only when `V_BOUND`, `I_BOUND`, and `T_BOUND` are each demonstrated bounds over the applicable fault interval; otherwise **BLOCKED_BY_INPUT**. `V_nom`, `I_nom`, typical current, and expected clearing time are **not** conservative bounds without separate proof (aligns Accepted WP-013-R1; WP-014-R2). Any retained form is a **candidate analytical form**, **non-normative**, and **not conservative unless every input is a proven bound**.
 
 ### 2.4 Protection coordination (relationships)
 
@@ -497,3 +499,4 @@ Not Accepted: numeric current limits, physical measurements, ampere ceiling.
 | 1.0 | 2026-07-20 | WP-009 initial current envelope analysis |
 | 1.1 | 2026-07-20 | WP-009-R1 — symbolic scenarios; corrected simultaneous model; no ampere bands |
 | 1.2 | 2026-07-20 | Architecture Review — methods Accepted; numeric Open |
+| 1.3 | 2026-07-20 | WP-014-R2 — fault-energy nominal-bound removed; E_FAULT_BOUND proof rule; candidate/non-normative label |

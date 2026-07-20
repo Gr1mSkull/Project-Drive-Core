@@ -1,7 +1,7 @@
 # DevKit Load and Fault Profile Catalog — WP-014
 
 **Document ID:** DOC-DK-LFPC-001  
-**Version:** 1.1  
+**Version:** 1.2  
 **Status:** Proposed — Architecture Review pending  
 **Work Package:** WP-014  
 **Date:** 2026-07-20
@@ -67,10 +67,10 @@ Required fields per energy-producing fault: energy source · source impedance ·
 
 ```text
 E_FAULT = ∫ V(t) × I(t) dt
-E_FAULT_BOUND = V_BOUND × I_BOUND × T_BOUND   # only if bounds proven
+E_FAULT_BOUND = V_BOUND × I_BOUND × T_BOUND   # only if V_BOUND, I_BOUND, T_BOUND are proven bounds
 ```
 
-Else **BLOCKED_BY_INPUT**.
+Else **BLOCKED_BY_INPUT**. The bound form is a **candidate analytical form**, **non-normative**, and **not conservative unless every input is a proven bound**. `V_nom`, `I_nom`, typical current, and expected clearing time are not conservative bounds without separate proof.
 
 ## 5. Bidirectional energy separation
 
@@ -86,3 +86,4 @@ Do not equate source stall energy with bridge thermal loss.
 |---------|------|--------|
 | 1.0 | 2026-07-20 | WP-014 initial load and fault profile catalog — Proposed |
 | 1.1 | 2026-07-20 | WP-014-R1 — P6 EXTERNAL_ENERGY_ARMED name; OI-GND combined block |
+| 1.2 | 2026-07-20 | WP-014-R2 — fault-energy candidate/non-normative label; no nominal bound |

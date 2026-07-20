@@ -6,7 +6,7 @@
 | **Change Scope** | WP-014 Gen1 DevKit fixture and load-bank requirements (+ WP-014-R1) |
 | **Related Requirements** | REQ-DCC-V-FX-001…071; REQ-DCC-V-DK-*; DK-GOV-*; VER-DCC-DK-* |
 | **Related Architecture** | ADR-019…023; WP-010…013 Accepted; PWR-A-017/018 ACCEPTED_CONSTRAINT (R1) |
-| **Related WP / CR** | WP-014 / WP-014-R1 (depends on WP-013 `ee462fb`+) |
+| **Related WP / CR** | WP-014 / WP-014-R1 / WP-014-R2 (depends on WP-013 `ee462fb`+) |
 | **Impact Level** | 2 (package); R1 = Level 1 |
 | **Date** | 2026-07-20 |
 | **Implementer** | Implementation Engineer (cloud agent) |
@@ -20,6 +20,20 @@
 4. E-stop path failure: REQ-DCC-V-FX-071 Proposed; H-FX-008 safe minimum = AUTH inhibit if integrity unconfirmed; prelim design **BLOCKED_BY_ARCHITECTURE**; no dual-path topology selected.
 5. **PWR-A-017/018** → **ACCEPTED_CONSTRAINT**; **PWR-A-021…024** remain **PROPOSED_CONSTRAINT**.
 6. Validation V1–V7 fully reproducible with commands, stdout, exit status.
+
+### R2 corrections summary
+
+1. Removed remaining nominal-bound fault-energy approximation (`E_FAULT ≈ V_nom × I_FAULT_PEAK × T_FAULT_CLEAR`) from `DevKit_Protection_Coordination_Framework.md` and `DevKit_Current_Envelope_Analysis.md`.
+2. `E_FAULT_BOUND = V_BOUND × I_BOUND × T_BOUND` allowed only with proven bounds; else **BLOCKED_BY_INPUT**; labelled **candidate analytical form / non-normative / not conservative unless every input is a proven bound** across WP-009…WP-014 fault-energy statements.
+3. External-bank back-feed protection allocation made topology-neutral (first layer = fixture back-feed-prevention; backup = external/upstream energy removal; safe minimum = no uncontrolled base energization); removed “P2 isolation / Isolation proof”; no galvanic isolation implied while OI-GND-001 Open.
+
+Additional R2 validation:
+
+| ID | Command | Exit | Result |
+|----|---------|------|--------|
+| R2-A | `rg 'E_FAULT ≈|≈ V_nom|Conservative approximation ...' docs/DevKit` | 1 | PASS (no active match) |
+| R2-B | `rg 'P2 isolation|Isolation proof' <protection docs>` | 1 | PASS |
+| R2-C | `rg -l 'candidate analytical form' docs/DevKit` | 0 | PASS (7 files) |
 
 ### Exact Architect questions (final)
 
@@ -68,3 +82,4 @@ Physical tests: **NOT EXECUTED**.
 | 1.0 | 2026-07-20 | WP-014 initial RHP — Draft |
 | 1.1 | 2026-07-20 | Validation evidence with exit status |
 | 1.2 | 2026-07-20 | WP-014-R1 corrections summary; V1–V7 aligned with CIA |
+| 1.3 | 2026-07-20 | WP-014-R2 — fault-energy consistency; topology-neutral back-feed; R2-A/B/C |
