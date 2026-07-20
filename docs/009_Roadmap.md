@@ -20,15 +20,15 @@
 | WP-011 EDL-011 + component-class prep | **Accepted** (2026-07-20); WP-011-R1 Accepted |
 | WP-012 electrical sizing architecture framework | **Accepted** (2026-07-20); WP-012-R1/R2 Accepted; PR #16 merged (`9c5c7e7` / `fe700d4`) |
 | WP-013 component-class qualification + symbolic calcs | **Accepted** (2026-07-20); WP-013-R1 Accepted; PR #17 merged (`d1698a0` / `23bdb07`) |
-| WP-014 fixture and load-bank requirements | **Proposed** — Architecture Review pending; REQ-DCC-V-FX-*; fixture hardware NOT IMPLEMENTED |
+| WP-014 fixture and load-bank requirements | **Accepted** (2026-07-20) — R1/R2/R3 Accepted; PR #18 approved for merge; REQ-DCC-V-FX-* Accepted; fixture hardware NOT IMPLEMENTED |
 | DevKit hardware design | **NOT IMPLEMENTED** — sizing/schematic/PCB NOT AUTHORIZED |
 | Fixture hardware / procurement / construction | **NOT IMPLEMENTED / Not authorized** |
 | DevKit built / verified | **No** — NOT VERIFIED |
 | Remaining decisions | ADR-DK-008/009/011/012; OI-GND-001; OI-FIX-001/002; OI-SC-001; OI-COMP-001/002; OI-SENSE-001; OI-PROT-001/002; OI-BI-001; TBD-DK-007 BLOCKED (not Resolved); thresholds TBD-DK-001…022 Open |
 
-**Next step:** Architecture Review of WP-014. After acceptance: fixture preliminary design requirements only (Architect-authorized).
+**Next step:** WP-015 — Fixture Preliminary Design Architecture (Architect-authorized).
 
-**Next expected engineering stage:** Fixture prelim design (if authorized) · ADR-DK-011/012 · MPN qualification prep (after role inputs + Architect authorization) → (only then) schematic/PCB/firmware WPs. **Not authorized:** fixture construction / energization.
+**Next expected engineering stage:** WP-015 fixture preliminary design · ADR-DK-011/012 · MPN qualification prep (after role inputs + Architect authorization) → (only then) schematic/PCB/firmware WPs. **Not authorized:** procurement / construction / energization / physical testing / DevKit schematic/PCB / numeric freeze / VE.
 
 ## Фаза 1 — Первый автомобиль (E30)
 

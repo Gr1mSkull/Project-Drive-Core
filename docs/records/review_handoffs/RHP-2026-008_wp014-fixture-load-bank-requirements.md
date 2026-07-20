@@ -11,7 +11,7 @@
 | **Date** | 2026-07-20 |
 | **Implementer** | Implementation Engineer (cloud agent) |
 | **Implementer role** | Implementation Engineer |
-| **Status** | Ready for Final Architecture Acceptance after R3 |
+| **Status** | **Accepted** — Architecture Review (2026-07-20); PR #18 approved for merge |
 
 ### R1 corrections summary
 
@@ -330,9 +330,9 @@ Physical tests: **NOT EXECUTED**.
 | Field | Value |
 |-------|-------|
 | **Implementer Self-Review Status** | Complete (R3) |
-| **Independent Review Status** | Not started |
-| **Final Review Outcome** | **Ready for Final Architecture Acceptance** |
-| **Architecture / policy approval** | Separate — System Architect only |
+| **Independent Review Status** | Complete — Architecture Review |
+| **Final Review Outcome** | **Accepted** — Architecture Review (2026-07-20); WP-014 / R1 / R2 / R3 Accepted; PR #18 approved for merge (reviewed head `084f579`); REQ-DCC-V-FX-* Accepted but NOT VERIFIED; fixture NOT IMPLEMENTED |
+| **Architecture / policy approval** | Accepted — System Architect (2026-07-20); PWR-A-021…024 → ACCEPTED_CONSTRAINT; WP-015 authorized |
 
 ## Revision history
 
@@ -343,3 +343,4 @@ Physical tests: **NOT EXECUTED**.
 | 1.2 | 2026-07-20 | WP-014-R1 corrections summary; V1–V7 aligned with CIA |
 | 1.3 | 2026-07-20 | WP-014-R2 — fault-energy consistency; topology-neutral back-feed; R2-A/B/C |
 | 1.4 | 2026-07-20 | WP-014-R3 — self-contained V1–V7 + R2-A/B/C; full 17 questions; FX-group notation; R3-D ID check; metadata reconciled |
+| 1.5 | 2026-07-20 | WP-014 Architecture Acceptance recorded — Accepted; PR #18 approved for merge; WP-015 authorized |

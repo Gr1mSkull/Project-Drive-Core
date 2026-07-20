@@ -1,7 +1,7 @@
 # DriveCore Traceability Matrix
 
 **Document ID:** DOC-TRACE-MAT-001  
-**Version:** 1.6.7  
+**Version:** 1.6.8  
 **Status:** Accepted  
 **Work Package:** WP-007 (Accepted); WP-010 architecture refs
 
@@ -219,6 +219,7 @@ Fixture-dependent DevKit cases (examples): VER-DCC-DK-A-011/012/014; VER-DCC-DK-
 * WP-013 (2026-07-20): Component-class qualification and symbolic preliminary calculations **Proposed**; class recommendations Proposed (not Accepted); no MPN; numeric Open; NOT VERIFIED unchanged; TBD-DK-007 BLOCKED retained.
 * WP-013 Architecture Review (2026-07-20): Component-class qualification methodology **Accepted** — WP-013-R1 Accepted; PR #17 merged (`d1698a0` / `23bdb07`); evaluation directions Accepted; final HS/sense/BI/protection classes **Open**; OI-COMP/SENSE/PROT/BI remain Open; numeric Open; NOT VERIFIED unchanged; TBD-DK-007 **BLOCKED_BY_EDL_CLARIFICATION** retained; WP-014 authorized.
 * WP-014 (2026-07-20): Fixture and load-bank requirements **Proposed**; REQ-DCC-V-FX-* NOT VERIFIED; fixture NOT IMPLEMENTED; no VE; no PASS; numeric Open; TBD-DK-007 BLOCKED retained; OI-GND-001 Open; WP-013 Accepted baseline retained.
+* WP-014 Architecture Acceptance (2026-07-20): Fixture and load-bank requirements **Accepted** — R1/R2/R3 Accepted; PR #18 approved for merge (reviewed head `084f579`); REQ-DCC-V-FX-* Accepted as requirements but remain **NOT VERIFIED**; fixture **NOT IMPLEMENTED**; no VE; no case PASS; numeric Open; TBD-DK-007 BLOCKED_BY_EDL_CLARIFICATION retained; OI-GND-001/OI-PROT/OI-FIX/OI-SC/OI-BI remain Open; PWR-A-017/018/021…024 ACCEPTED_CONSTRAINT; WP-015 authorized.
 * WP-014-R1 (2026-07-20): Architecture consistency corrections — EXTERNAL_ENERGY_ARMED authorization-only; OI-GND combined BASE/EXT block; load-bank stuck-on upstream energy remove; E-stop integrity REQ-DCC-V-FX-071; PWR-A-017/018 **ACCEPTED_CONSTRAINT**; PWR-A-021…024 remain PROPOSED_CONSTRAINT; NOT VERIFIED retained; TBD-DK-007 BLOCKED retained.
 * WP-007-R4: Method:Test cases enforce semantic placeholder policy (unjustified placeholders remaining = 0).
 * EDL-014 meaning unchanged.
@@ -250,3 +251,4 @@ Fixture-dependent DevKit cases (examples): VER-DCC-DK-A-011/012/014; VER-DCC-DK-
 | 1.6.5 | 2026-07-20 | WP-013 Architecture Review Accepted — methodology Accepted; final classes Open; NOT VERIFIED retained; TBD-DK-007 BLOCKED retained |
 | 1.6.6 | 2026-07-20 | WP-014 — REQ-DCC-V-FX-* matrix (Proposed); NOT VERIFIED; TBD-DK-007 BLOCKED retained |
 | 1.6.7 | 2026-07-20 | WP-014-R1 — FX-005/071; PWR-A-017/018 Accepted disposition notes; NOT VERIFIED retained |
+| 1.6.8 | 2026-07-20 | WP-014 Architecture Acceptance — package Accepted; REQ-DCC-V-FX-* NOT VERIFIED retained; TBD-DK-007 BLOCKED retained |

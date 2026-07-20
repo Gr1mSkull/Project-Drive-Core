@@ -1,7 +1,7 @@
 # DevKit Power-Path Assumption Register — WP-012
 
 **Document ID:** DOC-DK-PPAR-001  
-**Version:** 1.6  
+**Version:** 1.7  
 **Status:** Accepted — Architecture Review  
 **Work Package:** WP-012  
 **Date:** 2026-07-20
@@ -43,10 +43,10 @@ Assumptions and constraints for power-path sizing. **Not** approved design input
 | **PWR-A-018** | Software-commanded OFF is not hardware fault containment | WP-012 protection framework §3 princ. 7 | WP-012 protection framework + explicit WP-014 Architecture Review disposition | **ACCEPTED_CONSTRAINT** | Software OFF ≠ hardware protection | SC sustained by SW only | System Architect | WP-014 Architecture Review (non-numeric; no topology/component approved) |
 | **PWR-A-019** | ED-IN entries are dependency references only | WP-011 R6 | Accepted WP-011 | ACCEPTED_CONSTRAINT | No silent input freeze | Treating register as Approved BOM input | System Architect | ED-IN register |
 | **PWR-A-020** | Evaluation classes are not procurement shortlist | WP-011 | Accepted WP-011 | ACCEPTED_CONSTRAINT | Qualification discipline | Premature MPN order | Component Engineer | Qualification WP |
-| **PWR-A-021** | Fixture E-stop is independent of DUT physical KILL and `nENABLE_GLOBAL` | WP-014 FESB | WP-014 (first formalized) | **PROPOSED_CONSTRAINT** | Distinct safety authorities | Merged authorities hide failures | System Architect | Architecture Review WP-014 |
-| **PWR-A-022** | Hazardous fixture AUTH_* default inactive; stale after interruption/reset | WP-014 FFA | WP-014 (first formalized) | **PROPOSED_CONSTRAINT** | No auto-resume | Unexpected energization | System Architect | Architecture Review WP-014 |
-| **PWR-A-023** | EXT-LOAD-BANK is an energy sink, not a source | WP-014 FESB; ADR-020 | WP-014 (first formalized) | **PROPOSED_CONSTRAINT** | Prevent source/sink confusion | Back-feed / wrong evidence | System Architect | Architecture Review WP-014 |
-| **PWR-A-024** | Radio/Tablet have no direct hazardous-energy authority on fixture | WP-014; safety standard | WP-014 (first formalized) | **PROPOSED_CONSTRAINT** | Align ESP32 non-safety | UI-owned energy | System Architect | Architecture Review WP-014 |
+| **PWR-A-021** | Fixture E-stop is independent of DUT physical KILL and `nENABLE_GLOBAL` | WP-014 FESB | WP-014 + Architecture Review disposition | **ACCEPTED_CONSTRAINT** | Distinct safety authorities | Merged authorities hide failures | System Architect | WP-014 Architecture Review (2026-07-20) |
+| **PWR-A-022** | Hazardous fixture AUTH_* default inactive; stale after interruption/reset | WP-014 FFA | WP-014 + Architecture Review disposition | **ACCEPTED_CONSTRAINT** | No auto-resume | Unexpected energization | System Architect | WP-014 Architecture Review (2026-07-20) |
+| **PWR-A-023** | EXT-LOAD-BANK is an energy sink, not a source | WP-014 FESB; ADR-020 | WP-014 + Architecture Review disposition | **ACCEPTED_CONSTRAINT** | Prevent source/sink confusion | Back-feed / wrong evidence | System Architect | WP-014 Architecture Review (2026-07-20) |
+| **PWR-A-024** | Radio/Tablet have no direct hazardous-energy authority on fixture | WP-014; safety standard | WP-014 + Architecture Review disposition | **ACCEPTED_CONSTRAINT** | Align ESP32 non-safety | UI-owned energy | System Architect | WP-014 Architecture Review (2026-07-20) |
 
 ## 3. Prohibited conversions
 
@@ -56,7 +56,9 @@ Assumptions in this register shall **not** be converted to requirements or numer
 
 **WP-013 note:** Class recommendations do not alter PWR-A statuses. PWR-A-020 (evaluation classes ≠ procurement shortlist) remains **ACCEPTED_CONSTRAINT**.
 
-**WP-014 / WP-014-R1 note:** PWR-A-017 and PWR-A-018 are **ACCEPTED_CONSTRAINT** by explicit Architecture Review disposition (non-numeric; no component, topology, fuse, current, or clearing time approved; no verification claim). PWR-A-021…024 remain **PROPOSED_CONSTRAINT** until final WP-014 acceptance. PWR-A-003 closure artifact no longer requires an unconditional isolation proof — isolation proof is a possible future artifact only if Architect selects galvanic isolation under OI-GND-001.
+**WP-014 / WP-014-R1 note:** PWR-A-017 and PWR-A-018 are **ACCEPTED_CONSTRAINT** by explicit Architecture Review disposition (non-numeric; no component, topology, fuse, current, or clearing time approved; no verification claim). PWR-A-003 closure artifact no longer requires an unconditional isolation proof — isolation proof is a possible future artifact only if Architect selects galvanic isolation under OI-GND-001.
+
+**WP-014 acceptance note (2026-07-20):** PWR-A-021…024 are now **ACCEPTED_CONSTRAINT** through WP-014 Architecture Acceptance (non-numeric safety-authority/sink/UI boundaries; no component, topology, or numeric value approved; no verification claim). OI-GND-001 and all listed OI-* remain Open; TBD-DK-007 remains BLOCKED_BY_EDL_CLARIFICATION.
 
 ## 4. Revision history
 
@@ -68,3 +70,4 @@ Assumptions in this register shall **not** be converted to requirements or numer
 | 1.4 | 2026-07-20 | WP-013 — note that class recommendations do not change PWR-A statuses |
 | 1.5 | 2026-07-20 | WP-014 — PWR-A-021…024 PROPOSED_CONSTRAINT (fixture authorities / sink / UI) |
 | 1.6 | 2026-07-20 | WP-014-R1 — PWR-A-017/018 ACCEPTED_CONSTRAINT; PWR-A-003 closure artifact (no isolation proof mandate) |
+| 1.7 | 2026-07-20 | WP-014 Architecture Acceptance — PWR-A-021…024 ACCEPTED_CONSTRAINT; Open decisions retained |

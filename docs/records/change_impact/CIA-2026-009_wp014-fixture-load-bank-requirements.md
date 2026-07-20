@@ -8,7 +8,7 @@
 | **Author** | Implementation Engineer (cloud agent) |
 | **Author role** | Implementation Engineer |
 | **Date** | 2026-07-20 |
-| **Status** | Draft — Ready for Final Architecture Acceptance after R3 |
+| **Status** | **Accepted** — Architecture Review (2026-07-20); reviewed head `084f579`; PR #18 approved for merge |
 | **Related WP / CR** | WP-014 / WP-014-R1 / WP-014-R2 / WP-014-R3; depends on WP-013 Accepted (`ee462fb`+); ADR-016…023 Accepted |
 
 ### Reason for Change
@@ -338,8 +338,9 @@ Physical tests: **NOT EXECUTED**.
 |-------|-------|
 | **ADR Required** | NO |
 | **Architect Approval Required** | YES |
-| **Architect approver** | TBD |
-| **Architect approval date** | TBD |
+| **Architect approver** | System Architect |
+| **Architect approval date** | 2026-07-20 |
+| **Architect disposition** | **Accepted** — WP-014 / R1 / R2 / R3 Accepted; PR #18 approved for merge; reviewed head `084f579`; PWR-A-021…024 → ACCEPTED_CONSTRAINT; WP-015 authorized; MPN/numeric/procurement/construction/energization/physical testing/DevKit schematic-PCB/VE still not authorized |
 
 ## Revision history
 
@@ -350,3 +351,4 @@ Physical tests: **NOT EXECUTED**.
 | 1.2 | 2026-07-20 | WP-014-R1 — Level 1 corrections; full V1–V7 reproducible evidence; PWR-A-017/018 Accepted |
 | 1.3 | 2026-07-20 | WP-014-R2 — fault-energy nominal-bound removed; topology-neutral back-feed; R2-A/B/C validation |
 | 1.4 | 2026-07-20 | WP-014-R3 — metadata reconciled (R1/R2/R3); FX group notation; R3-D ID-allocation check |
+| 1.5 | 2026-07-20 | WP-014 Architecture Acceptance recorded — Accepted; PR #18 approved for merge; PWR-A-021…024 ACCEPTED_CONSTRAINT; WP-015 authorized |

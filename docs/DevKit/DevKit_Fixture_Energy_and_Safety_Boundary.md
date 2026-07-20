@@ -1,8 +1,8 @@
 # DevKit Fixture Energy and Safety Boundary — WP-014
 
 **Document ID:** DOC-DK-FESB-001  
-**Version:** 1.1  
-**Status:** Proposed — Architecture Review pending  
+**Version:** 1.2  
+**Status:** Accepted — Architecture Review (2026-07-20)  
 **Work Package:** WP-014  
 **Date:** 2026-07-20
 
@@ -165,3 +165,4 @@ ADR-020/021 · PWR-A-001…005/009 · OI-GND-001 · OI-FIX-001 · WP-012 envelop
 |---------|------|--------|
 | 1.0 | 2026-07-20 | WP-014 initial fixture energy and safety boundary — Proposed |
 | 1.1 | 2026-07-20 | WP-014-R1 — EXTERNAL_ENERGY_ARMED auth-only; OI-GND combined block; load-bank stuck-on |
+| 1.2 | 2026-07-20 | Architecture Review **Accepted** (WP-014; reviewed head `084f579`, PR #18); Open decisions retained; NOT VERIFIED |

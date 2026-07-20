@@ -1,8 +1,8 @@
 # DevKit Load and Fault Profile Catalog — WP-014
 
 **Document ID:** DOC-DK-LFPC-001  
-**Version:** 1.2  
-**Status:** Proposed — Architecture Review pending  
+**Version:** 1.3  
+**Status:** Accepted — Architecture Review (2026-07-20)  
 **Work Package:** WP-014  
 **Date:** 2026-07-20
 
@@ -87,3 +87,4 @@ Do not equate source stall energy with bridge thermal loss.
 | 1.0 | 2026-07-20 | WP-014 initial load and fault profile catalog — Proposed |
 | 1.1 | 2026-07-20 | WP-014-R1 — P6 EXTERNAL_ENERGY_ARMED name; OI-GND combined block |
 | 1.2 | 2026-07-20 | WP-014-R2 — fault-energy candidate/non-normative label; no nominal bound |
+| 1.3 | 2026-07-20 | Architecture Review **Accepted** (WP-014; reviewed head `084f579`, PR #18); Open decisions retained; NOT VERIFIED |

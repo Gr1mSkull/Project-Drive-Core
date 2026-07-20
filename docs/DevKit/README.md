@@ -1,9 +1,9 @@
 # DriveCore Gen1 DevKit — Document Set
 
 **Document ID:** DOC-DK-INDEX-001  
-**Version:** 1.21  
-**Status:** Accepted (index); WP-013 **Accepted**; WP-014 **Proposed** (R3)  
-**Work Package:** WP-007…WP-013 (Accepted) / WP-014 (Proposed)  
+**Version:** 1.22  
+**Status:** Accepted (index); WP-013 **Accepted**; WP-014 **Accepted**  
+**Work Package:** WP-007…WP-014 (Accepted)  
 **Date:** 2026-07-20
 
 ```text
@@ -57,7 +57,7 @@ It does **not** define the final circuit, PCB, component set, enclosure, or BOM.
 | [DevKit_Bidirectional_Class_Comparison.md](DevKit_Bidirectional_Class_Comparison.md) | WP-013 bidirectional class comparison | Accepted |
 | [DevKit_Symbolic_Preliminary_Calculations.md](DevKit_Symbolic_Preliminary_Calculations.md) | WP-013 symbolic preliminary calculations | Accepted |
 | [DevKit_Class_Recommendation_and_Readiness_Matrix.md](DevKit_Class_Recommendation_and_Readiness_Matrix.md) | WP-013 class evaluation directions (final classes Open) | Accepted |
-| [DevKit_Fixture_and_Load_Bank_Requirements.md](DevKit_Fixture_and_Load_Bank_Requirements.md) | WP-014 fixture/load-bank requirements (`REQ-DCC-V-FX-*`) | **Proposed** |
+| [DevKit_Fixture_and_Load_Bank_Requirements.md](DevKit_Fixture_and_Load_Bank_Requirements.md) | WP-014 fixture/load-bank requirements (`REQ-DCC-V-FX-*`) | **Accepted** |
 | [DevKit_Fixture_Functional_Architecture.md](DevKit_Fixture_Functional_Architecture.md) | WP-014 fixture domains, states, authorities | **Proposed** |
 | [DevKit_Fixture_Energy_and_Safety_Boundary.md](DevKit_Fixture_Energy_and_Safety_Boundary.md) | WP-014 base/external envelopes; E-stop vs KILL | **Proposed** |
 | [DevKit_Load_and_Fault_Profile_Catalog.md](DevKit_Load_and_Fault_Profile_Catalog.md) | WP-014 load classes; P0–P6 map; fault classes | **Proposed** |
@@ -132,7 +132,7 @@ Every DevKit gate evidence package shall record a **composite system baseline** 
 | WP-011 EDL-011 + component-class prep | **Accepted** (2026-07-20) — WP-011-R1 Accepted |
 | WP-012 electrical sizing architecture framework | **Accepted** (2026-07-20) — WP-012-R1/R2 Accepted; PR #16 merged (`9c5c7e7` / `fe700d4`) |
 | WP-013 component-class qualification + symbolic calcs | **Accepted** (2026-07-20) — WP-013-R1 Accepted; PR #17 merged (`d1698a0` / `23bdb07`); final classes/topology Open |
-| WP-014 fixture and load-bank requirements | **Proposed** — WP-014-R1/R2/R3 applied; Ready for Final Architecture Acceptance; fixture hardware NOT IMPLEMENTED; no procurement/construction; no VE |
+| WP-014 fixture and load-bank requirements | **Accepted** — Architecture Review (2026-07-20); WP-014-R1/R2/R3 Accepted; PR #18 approved for merge; fixture hardware NOT IMPLEMENTED; no procurement/construction; no VE |
 | Hardware design | **NOT IMPLEMENTED** — detailed sizing/schematic/PCB **NOT AUTHORIZED** |
 | Firmware bring-up | NOT IMPLEMENTED |
 | Physical verification | NOT VERIFIED |
@@ -146,7 +146,7 @@ Still open decision **requests** (no Accepted ADR yet): `ADR-DK-008`, `ADR-DK-00
 
 Open thresholds: `TBD-DK-001` … `TBD-DK-022` (Status Open — WP-009 methods Accepted; numeric values not Approved). `TBD-DK-007` remains **BLOCKED_BY_EDL_CLARIFICATION** — not Resolved.
 
-**Next step (after WP-014 Architecture Acceptance):** Fixture preliminary design requirements only (Architect-authorized). ADR-DK-011/012 may proceed in parallel when authorized.
+**Next authorized work:** WP-015 — Fixture Preliminary Design Architecture (Architect-authorized). ADR-DK-011/012 may proceed in parallel when authorized. Not authorized: MPN, numeric freeze, procurement, construction, energization, physical testing, DevKit schematic/PCB, VE.
 
 **Not authorized:** MPN selection · BOM · schematics · PCB · numeric threshold freeze · EDL file edit · final electrical sizing completion · Verification Evidence creation · fixture procurement · fixture construction · energization.
 
@@ -177,3 +177,4 @@ Open thresholds: `TBD-DK-001` … `TBD-DK-022` (Status Open — WP-009 methods A
 | 1.19 | 2026-07-20 | WP-014 — fixture and load-bank requirements package (Proposed); CIA-2026-009 / RHP-2026-008 |
 | 1.20 | 2026-07-20 | WP-014-R1 — architecture consistency corrections; Ready for Final Architecture Review |
 | 1.21 | 2026-07-20 | WP-014-R2/R3 — fault-energy consistency; self-contained RHP; FX group notation; Ready for Final Architecture Acceptance |
+| 1.22 | 2026-07-20 | WP-014 Architecture Acceptance — package Accepted; PR #18 approved for merge; WP-015 authorized |

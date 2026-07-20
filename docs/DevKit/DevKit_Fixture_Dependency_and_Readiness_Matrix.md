@@ -1,8 +1,8 @@
 # DevKit Fixture Dependency and Readiness Matrix — WP-014
 
 **Document ID:** DOC-DK-FDRM-001  
-**Version:** 1.1  
-**Status:** Proposed — Architecture Review pending  
+**Version:** 1.2  
+**Status:** Accepted — Architecture Review (2026-07-20)  
 **Work Package:** WP-014  
 **Date:** 2026-07-20
 
@@ -53,3 +53,4 @@
 |---------|------|--------|
 | 1.0 | 2026-07-20 | WP-014 initial fixture dependency and readiness matrix — Proposed |
 | 1.1 | 2026-07-20 | WP-014-R1 — E-stop readiness split; EXTERNAL_ENERGY_ARMED / OI-GND block |
+| 1.2 | 2026-07-20 | Architecture Review **Accepted** (WP-014; reviewed head `084f579`, PR #18); Open decisions retained; NOT VERIFIED |

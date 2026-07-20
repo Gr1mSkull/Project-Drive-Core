@@ -1,8 +1,8 @@
 # DevKit Fixture Verification Capability Matrix — WP-014
 
 **Document ID:** DOC-DK-FVCM-001  
-**Version:** 1.1  
-**Status:** Proposed — Architecture Review pending  
+**Version:** 1.2  
+**Status:** Accepted — Architecture Review (2026-07-20)  
 **Work Package:** WP-014  
 **Date:** 2026-07-20
 
@@ -52,3 +52,4 @@ No case PASS. No requirement Verified. No VE created.
 |---------|------|--------|
 | 1.0 | 2026-07-20 | WP-014 initial fixture verification capability matrix — Proposed |
 | 1.1 | 2026-07-20 | WP-014-R1 — FX-005/071 readiness; E-stop design blocked |
+| 1.2 | 2026-07-20 | Architecture Review **Accepted** (WP-014; reviewed head `084f579`, PR #18); Open decisions retained; NOT VERIFIED |

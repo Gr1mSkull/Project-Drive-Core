@@ -1,8 +1,8 @@
 # DevKit Fixture Interface and Measurement Register — WP-014
 
 **Document ID:** DOC-DK-FIMR-001  
-**Version:** 1.1  
-**Status:** Proposed — Architecture Review pending  
+**Version:** 1.2  
+**Status:** Accepted — Architecture Review (2026-07-20)  
 **Work Package:** WP-014  
 **Date:** 2026-07-20
 
@@ -66,3 +66,4 @@ Carry-forward DevKit MPs (MP-IN-V, MP-IN-I, MP-KILL-*, MP-GLOBAL-ENABLE, MP-CH-*
 |---------|------|--------|
 | 1.0 | 2026-07-20 | WP-014 initial fixture interface and measurement register — Proposed |
 | 1.1 | 2026-07-20 | WP-014-R1 — load-bank fault containment; measurement isolation wording |
+| 1.2 | 2026-07-20 | Architecture Review **Accepted** (WP-014; reviewed head `084f579`, PR #18); Open decisions retained; NOT VERIFIED |

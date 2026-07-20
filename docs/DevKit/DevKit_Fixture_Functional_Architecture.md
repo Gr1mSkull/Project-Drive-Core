@@ -1,8 +1,8 @@
 # DevKit Fixture Functional Architecture — WP-014
 
 **Document ID:** DOC-DK-FFA-001  
-**Version:** 1.1  
-**Status:** Proposed — Architecture Review pending  
+**Version:** 1.2  
+**Status:** Accepted — Architecture Review (2026-07-20)  
 **Work Package:** WP-014  
 **Date:** 2026-07-20
 
@@ -118,3 +118,4 @@ ADR-020/021/023 · PWR-A-001…005 · OI-FIX-001/002 · OI-GND-001 · WP-010 SSM
 |---------|------|--------|
 | 1.0 | 2026-07-20 | WP-014 initial fixture functional architecture — Proposed |
 | 1.1 | 2026-07-20 | WP-014-R1 — EXTERNAL_ENERGY_ARMED authorization-only; OI-GND-001 combined BASE/EXT block |
+| 1.2 | 2026-07-20 | Architecture Review **Accepted** (WP-014; reviewed head `084f579`, PR #18); Open decisions retained; NOT VERIFIED |
