@@ -1,8 +1,8 @@
 # DriveCore Gen1 DevKit — Document Set
 
 **Document ID:** DOC-DK-INDEX-001  
-**Version:** 1.19  
-**Status:** Accepted (index); WP-013 **Accepted**; WP-014 **Proposed**  
+**Version:** 1.20  
+**Status:** Accepted (index); WP-013 **Accepted**; WP-014 **Proposed** (R1)  
 **Work Package:** WP-007…WP-013 (Accepted) / WP-014 (Proposed)  
 **Date:** 2026-07-20
 
@@ -174,3 +174,4 @@ Open thresholds: `TBD-DK-001` … `TBD-DK-022` (Status Open — WP-009 methods A
 | 1.17 | 2026-07-20 | WP-013-R1 — capability-role mapping; observation conditional; symbolic equation corrections |
 | 1.18 | 2026-07-20 | Architecture Review — WP-013 Accepted; PR #17 merged (`d1698a0` / `23bdb07`); final classes Open; TBD-DK-007 BLOCKED unchanged |
 | 1.19 | 2026-07-20 | WP-014 — fixture and load-bank requirements package (Proposed); CIA-2026-009 / RHP-2026-008 |
+| 1.20 | 2026-07-20 | WP-014-R1 — architecture consistency corrections; Ready for Final Architecture Review |
