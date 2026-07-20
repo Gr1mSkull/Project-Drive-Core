@@ -1,16 +1,17 @@
 # DevKit EDL-011 Clarification Proposal — WP-011
 
 **Document ID:** DOC-DK-EDL011-001  
-**Version:** 1.0  
-**Status:** Proposed — requires Architecture Review  
+**Version:** 1.1  
+**Status:** Ready for Final Architecture Review  
 **Work Package:** WP-011  
 **Date:** 2026-07-20  
 **Author role:** Implementation Engineer
 
 ```text
 Clarification PROPOSAL only — EDL-011 file is NOT modified by this document.
+WP-011 Option D is an architectural interpretation only and does not modify EDL-011.
 No numeric timing value is Approved.
-TBD-DK-007 remains BLOCKED until Architect accepts an interpretation path.
+TBD-DK-007 numeric threshold remains Open; verification Not Verified.
 ```
 
 ## 1. Purpose
@@ -118,9 +119,11 @@ The `>100 ms` phrase is **informational context only** until a separate Accepted
 
 ## 6. Recommendation (Implementation Engineer — not Approved)
 
-**Recommend Option D** for Architecture Review acceptance:
+**Recommend Option D** for Final Architecture Review acceptance:
 
 ```text
+WP-011 Option D is an architectural interpretation only and does not modify EDL-011.
+
 1. EDL-011 normatively requires SPI-loss / nENABLE_GLOBAL fail-safe → outputs OFF.
 2. EDL-011 does NOT Approved TBD-DK-007 numeric value.
 3. The ">100 ms" phrase is NOT an Accepted lower bound, upper bound, or pass criterion.
@@ -147,15 +150,25 @@ Numeric control-loss timeout for verification: TBD-DK-007 (Open) — not defined
 
 Exact CR wording requires System Architect authorization. **WP-011 does not create or submit this CR.**
 
-## 8. Impact on TBD-DK-007 disposition
+## 8. TBD-DK-007 disposition separation
 
-| Field | WP-011 proposal |
-|-------|-----------------|
+WP-011 separates three independent dimensions. Accepting Option D semantics does **not** close numeric threshold or verification.
+
+| Dimension | Disposition | Notes |
+|-----------|-------------|-------|
+| **Semantics** | **Accepted architecture interpretation** | Option D — fail-safe requirement normative; `>100 ms` phrase non-numeric; EDL-011 file unchanged |
+| **Numeric threshold** | **Open** | No ms value Approved; TBD-DK-007 register Status Open; WP-009 budget method Accepted |
+| **Verification** | **Not Verified** | VER-DCC-DK-A-008, C-012 remain **BLOCKED** for numeric PASS; no VE records |
+
+```text
+WP-011 Option D is an architectural interpretation only and does not modify EDL-011.
+```
+
+| Field | WP-011 disposition |
+|-------|-------------------|
 | Register Status | **Open** (unchanged) |
-| Blocker | **BLOCKED_BY_EDL_CLARIFICATION** until Architect accepts Option D (or alternative) |
+| Prior blocker label | **BLOCKED_BY_EDL_CLARIFICATION** — semantics layer addressed by Option D; numeric/verification Open |
 | Methods Accepted | WP-009 budget + measurement (unchanged) |
-| Numeric | **Open** — no ms value Approved |
-| Verification | VER-DCC-DK-A-008, C-012 remain **BLOCKED** for numeric PASS |
 
 ## 9. Traceability
 
@@ -172,3 +185,4 @@ Exact CR wording requires System Architect authorization. **WP-011 does not crea
 | Version | Date | Change |
 |---------|------|--------|
 | 1.0 | 2026-07-20 | WP-011 initial EDL-011 clarification proposal — Proposed |
+| 1.1 | 2026-07-20 | WP-011-R1 — Option D scope statement; TBD-DK-007 disposition separation; Ready for Final Architecture Review |

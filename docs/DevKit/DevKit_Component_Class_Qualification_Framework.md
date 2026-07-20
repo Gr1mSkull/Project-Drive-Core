@@ -1,19 +1,22 @@
 # DevKit Component-Class Qualification Framework — WP-011
 
 **Document ID:** DOC-DK-CCQF-001  
-**Version:** 1.0  
-**Status:** Proposed — requires Architecture Review  
+**Version:** 1.1  
+**Status:** Ready for Final Architecture Review  
 **Work Package:** WP-011  
 **Date:** 2026-07-20
 
 ```text
 Qualification FRAMEWORK only — no MPNs, no manufacturers, no BOM.
+Component class definitions are evaluation criteria, not procurement shortlist.
 Prepares future component selection under CR-001 / WP-002 methodology.
 ```
 
 ## 1. Purpose
 
 Define **how** DevKit component classes will be evaluated before any concrete part is selected. This framework supports Accepted **ADR-019** representative capabilities and Accepted **WP-010** functional architecture without authorizing schematic or BOM work.
+
+**Component class definitions are evaluation criteria, not procurement shortlist.**
 
 **Out of scope:** MPN selection · datasheet values as Approved limits · PCB design · verification evidence.
 
@@ -34,12 +37,25 @@ DevKit component-class qualification **extends** platform methodology with DevKi
 ```text
 Requirements (ADR-019, REQ-DCC-V-DK-*)
   → Class definition (this framework)
-  → Candidate class identification (matrix — no MPN)
+  → Evaluation class identification (matrix — no MPN)
   → Class-level evaluation criteria scoring (future WP)
   → Architect acceptance of class direction
   → MPN qualification (future WP — CR-001 path)
   → Schematic authorization (future WP)
 ```
+
+## 3.1 Qualification gating
+
+Component class **selection** cannot proceed before the following inputs are Accepted or explicitly bounded for DevKit:
+
+| Prerequisite | Source | Status |
+|--------------|--------|--------|
+| **Current envelope definition** | TBD-DK-002/003; WP-009; ADR-021 | Open |
+| **Thermal assumptions** | TBD-DK-018/019; ADR-DK-011 | Open |
+| **Protection philosophy** | WP-010 OI-PROT-*; TBD-DK-002 input protection | Open |
+| **Verification boundary** | WP-007 verification plan; ADR-020 external path | Accepted structure; cases Not Verified |
+
+Evaluation-class identification (WP-011 matrix) may proceed in parallel; **narrowing to a selected class** for schematic or MPN work remains gated until prerequisites close.
 
 ## 4. High-side switching class
 
@@ -147,3 +163,4 @@ Protection coordination (channel vs system on SC) remains **sizing WP** scope.
 | Version | Date | Change |
 |---------|------|--------|
 | 1.0 | 2026-07-20 | WP-011 initial component-class qualification framework — Proposed |
+| 1.1 | 2026-07-20 | WP-011-R1 — evaluation-class terminology; procurement disclaimer; qualification gating |

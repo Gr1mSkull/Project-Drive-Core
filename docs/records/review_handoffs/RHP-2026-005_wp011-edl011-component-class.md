@@ -7,7 +7,7 @@
 | **Related Requirements** | REQ-DCC-V-DK-011, 035, 039–055, 093–097; DK-GOV-009; TBD-DK-007 |
 | **Related Architecture** | EDL-011 (unchanged); ADR-019, 022; WP-009, WP-010 Accepted |
 | **Related WP / CR** | WP-011 (depends on WP-010 / `c98ce56`+); CR-001 qualification framework |
-| **Impact Level** | 2 |
+| **Impact Level** | 2 (initial); **Level 1** (WP-011-R1 corrections) |
 | **Date** | 2026-07-20 |
 | **Implementer (name/agent)** | Implementation Engineer (cloud agent) |
 | **Implementer role** | Implementation Engineer |
@@ -21,21 +21,24 @@
 * Created: `docs/records/change_impact/CIA-2026-006_wp011-edl011-component-class.md`
 * Created: this RHP
 * Modified: DevKit README; roadmap; traceability; `.ai/current_phase.md`; root README
+* WP-011-R1: four DevKit docs v1.1; integration navigation updates
 
 ### Changed Interfaces
 
 | Interface | From version | To version | CIA / Impact note |
 |-----------|--------------|------------|-------------------|
-| J_LP control-loss semantics | Ambiguous (WP-009) | Proposal Option D (WP-011) | CIA-2026-006 — EDL file unchanged |
-| Component classes | Undefined | Candidate classes proposed | No MPN impact |
+| J_LP control-loss semantics | Ambiguous (WP-009) | Option D semantics Accepted architecture interpretation (WP-011-R1) | CIA-2026-006 — EDL file unchanged |
+| Component classes | Undefined | Evaluation classes proposed | No MPN impact |
 
 ### Changed Assumptions
 
 * EDL-011 fail-safe **requirement** is normative; `>100 ms` phrase is **not** Approved numeric bound.
+* **WP-011 Option D is an architectural interpretation only and does not modify EDL-011.**
 * Recommended interpretation: Option D (requirement in EDL + timing from safety architecture).
-* TBD-DK-007 remains BLOCKED until Architect accepts proposal (optional EDL CR may follow).
-* Component classes are candidates only — no MPN, no BOM, no schematic authorization.
-* ED-IN-* register references Open TBD-DK-* — no invented values.
+* TBD-DK-007 disposition: semantics Accepted architecture interpretation; numeric Open; verification Not Verified.
+* Component classes are evaluation criteria, not procurement shortlist — no MPN, no BOM, no schematic authorization.
+* ED-IN-* register references Open TBD-DK-* — dependency references only (R6); no invented values.
+* Class selection gated until current envelope, thermal assumptions, protection philosophy, verification boundary.
 
 ### Change Impact Analysis
 
@@ -58,8 +61,8 @@ WP-011 documentation validation complete. No physical tests. No VE records. EDL 
 ### Known Weaknesses
 
 * Option D leaves EDL wording ambiguous until optional EDL CR.
-* Class matrix lists multiple parallel candidates — selection deferred.
-* ED-IN-006 remains BLOCKED — sizing WP cannot close control-loss timing yet.
+* Class matrix lists multiple parallel evaluation classes — selection deferred and gated.
+* ED-IN-006 numeric path remains Open — sizing WP cannot close control-loss timing yet.
 
 ### Known Risks
 
@@ -69,10 +72,10 @@ WP-011 documentation validation complete. No physical tests. No VE records. EDL 
 
 ### Open Questions
 
-1. Does Architect accept Option D (or alternative A/B/C)?
+1. Final Architecture Review acceptance of EDL-011 Option D semantics?
 2. Is separate EDL-011 text CR required or is architecture disposition sufficient?
-3. Which component classes to prioritize for first qualification WP?
-4. Does TBD-DK-007 blocker change to BOUND_ESTABLISHED_VALUE_OPEN after proposal acceptance?
+3. Which evaluation classes to prioritize for first qualification WP?
+4. Authorize class selection after qualification gating prerequisites close?
 
 ### Critical Review Focus Areas
 
@@ -81,18 +84,19 @@ WP-011 documentation validation complete. No physical tests. No VE records. EDL 
 * No EDL file modification in diff
 * No MPN/manufacturer in class matrix
 * Class framework covers ADR-019 mandatory set
-* ED-IN register has no invented values
+* ED-IN register has no invented values; R6 dependency-reference rule applied
+* Qualification gating prerequisites documented
 
 ### Rollback Considerations
 
-Revert WP-011 PR; WP-010 baseline preserved; TBD-DK-007 BLOCKED unchanged.
+Revert WP-011 PR (including R1); WP-010 baseline preserved; TBD-DK-007 numeric Open.
 
 ### Architecture review questions
 
-1. Accept EDL-011 Option D recommendation?
+1. Accept EDL-011 Option D semantics (architecture interpretation only)?
 2. Accept component-class qualification framework structure?
-3. Accept candidate classes in matrix (without selection)?
-4. Accept ED-IN register as sizing input authority?
+3. Accept evaluation classes in matrix (without selection)?
+4. Accept ED-IN register as dependency reference (not approved design input)?
 5. Authorize follow-on: EDL CR vs proceed without EDL edit?
 6. Authorize next WP: component-class qualification execution vs electrical sizing?
 
@@ -105,7 +109,7 @@ Revert WP-011 PR; WP-010 baseline preserved; TBD-DK-007 BLOCKED unchanged.
 | **Independent Reviewer (name/agent)** | TBD |
 | **Independent Reviewer role** | Independent Reviewer |
 | **Independent review date** | TBD |
-| **Final Review Outcome** | TBD — Architecture Review pending |
+| **Final Review Outcome** | **Ready for Final Architecture Review** — WP-011-R1 applied |
 | **Architecture / policy approval** | Separate — System Architect only |
 
 ## Revision history
@@ -113,3 +117,4 @@ Revert WP-011 PR; WP-010 baseline preserved; TBD-DK-007 BLOCKED unchanged.
 | Version | Date | Change |
 |---------|------|--------|
 | 1.0 | 2026-07-20 | WP-011 initial RHP — Draft |
+| 1.1 | 2026-07-20 | WP-011-R1 — review corrections; Ready for Final Architecture Review |

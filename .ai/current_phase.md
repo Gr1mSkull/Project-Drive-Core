@@ -1,6 +1,6 @@
 # DriveCore — Current Phase
 
-**Updated:** WP-011 Proposed — EDL-011 clarification + component-class prep (2026-07-20)
+**Updated:** WP-011 Ready for Final Architecture Review — WP-011-R1 (2026-07-20)
 
 ## Documentation
 
@@ -16,7 +16,7 @@
 | **WP-008 DevKit P0 architecture decisions** | ✅ Accepted (2026-07-20) — ADR-016…023 |
 | **WP-009 DevKit threshold analysis** | ✅ Accepted (2026-07-20) — methods Accepted; numeric Open |
 | **WP-010 DevKit functional electrical architecture** | ✅ Accepted (2026-07-20) — WP-010-R1 Accepted |
-| **WP-011 EDL-011 + component-class prep** | ⏳ Proposed — Architecture Review pending |
+| **WP-011 EDL-011 + component-class prep** | ⏳ Ready for Final Architecture Review — WP-011-R1 |
 
 ## DevKit (WP-007 … WP-011)
 
@@ -27,10 +27,10 @@
 | P0 ADRs ADR-016…023 | **Accepted** |
 | Threshold analysis methods | **Accepted** (WP-009) |
 | Threshold numeric values | **Open** (TBD-DK-001…022) |
-| TBD-DK-007 | **BLOCKED_BY_EDL_CLARIFICATION** — WP-011 proposal pending Review |
 | Functional electrical architecture | **Accepted** (WP-010 / WP-010-R1) |
-| EDL-011 clarification proposal | **Proposed** (WP-011) |
-| Component-class qualification prep | **Proposed** (WP-011) |
+| TBD-DK-007 | **Semantics:** Accepted architecture interpretation (Option D) · **Numeric:** Open · **Verification:** Not Verified |
+| EDL-011 clarification proposal | **Ready for Final Architecture Review** (WP-011-R1) |
+| Component-class qualification prep | **Ready for Final Architecture Review** (WP-011-R1) |
 | Hardware design approved | **No** — NOT IMPLEMENTED |
 | Detailed electrical sizing | **NOT AUTHORIZED** |
 | Schematics / PCB | **NOT AUTHORIZED** |
@@ -44,7 +44,7 @@ Component-class qualification execution · electrical sizing and protection coor
 
 ## Active branch
 
-`cursor/wp011-edl011-component-class-3bb9` — PR #15 (Architecture Review pending)
+`cursor/wp011-edl011-component-class-3bb9` — PR #15 (Final Architecture Review pending)
 
 ## Do not start without approval
 

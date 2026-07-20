@@ -1,16 +1,16 @@
 # DevKit Component-Class Matrix — WP-011
 
 **Document ID:** DOC-DK-CCM-001  
-**Version:** 1.0  
-**Status:** Proposed — requires Architecture Review  
+**Version:** 1.1  
+**Status:** Ready for Final Architecture Review  
 **Work Package:** WP-011  
 **Date:** 2026-07-20
 
-Candidate **classes** only — no MPN, no manufacturer, no BOM.
+Evaluation **classes** only — no MPN, no manufacturer, no BOM. Component class definitions are evaluation criteria, not procurement shortlist.
 
 ## 1. Component-class matrix
 
-| Function | Required capability | Candidate classes | Forbidden assumptions | Open questions |
+| Function | Required capability | Evaluation classes | Forbidden assumptions | Open questions |
 |----------|-------------------|-------------------|----------------------|----------------|
 | **High-side switching** | ON/OFF; PWM; OC/SC reaction; control-loss OFF; retry/latch | **Class HS-INT-DIAG** — integrated smart switch with diagnostics; **Class HS-GATE-DISCRETE** — discrete FET + gate driver + separate protection; **Class HS-HYBRID** — integrated switch + external shunt | Assuming headline `I_D` equals continuous DevKit rating; assuming open-load on all channels; assuming single class covers all HS aliases | Which class supports PWM + sense + P5 fault without invalidating P3 envelope? Thermal simultaneous profile (TBD-DK-003)? |
 | **Bidirectional channel** | Forward/reverse; conflict prevention; shoot-through prevention; safe OFF | **Class BI-HB-FULL** — full-bridge topology; **Class BI-HB-HALF** — half-bridge + routing; **Class BI-DUAL-SW** — dual independent switches with interlock | Assuming Gen1 production H-bridge MPN applies to DevKit; assuming stall test without fixture | OI-BI-001 topology; TBD-DK-022 stall fixture; shoot-through proof method |
@@ -36,14 +36,16 @@ Physical channel sharing (WP-010-R1) may combine aliases on one switch class **o
 
 ## 3. Class selection rules (future WP)
 
-1. Candidate class must cover all **mandatory** ADR-019 capabilities claimed for DevKit.
+1. Evaluation class must cover all **mandatory** ADR-019 capabilities claimed for DevKit.
 2. Class must not require violating Accepted WP-010 safe-state or KILL topology.
 3. Class thermal and current claims remain **Open** until sizing + qualification evidence.
-4. Multiple candidate classes may remain in parallel until Architect narrows scope.
+4. Multiple evaluation classes may remain in parallel until Architect narrows scope.
 5. No class selection authorizes schematic capture.
+6. Class selection gated per [`DevKit_Component_Class_Qualification_Framework.md`](DevKit_Component_Class_Qualification_Framework.md) §3.1 (current envelope, thermal assumptions, protection philosophy, verification boundary).
 
 ## 4. Revision history
 
 | Version | Date | Change |
 |---------|------|--------|
 | 1.0 | 2026-07-20 | WP-011 initial component-class matrix — Proposed |
+| 1.1 | 2026-07-20 | WP-011-R1 — evaluation-class terminology; selection gating reference |

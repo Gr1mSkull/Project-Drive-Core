@@ -15,14 +15,14 @@
 | DevKit requirements baseline (`REQ-DCC-V-DK-*`) | **Accepted** (WP-007 / PR #11) — evidence NOT VERIFIED |
 | DevKit verification plan (DK-A…DK-D) | **Accepted** structure — cases NOT EXECUTED / BLOCKED |
 | DevKit P0 ADRs (ADR-016…023) | **Accepted** (WP-008); ADR-021/022 numerics Open |
-| WP-009 threshold analysis | **Accepted** (2026-07-20); numeric values Open; TBD-DK-007 BLOCKED_BY_EDL_CLARIFICATION |
+| WP-009 threshold analysis | **Accepted** (2026-07-20); numeric values Open; TBD-DK-007 semantics Accepted (Option D); numeric Open |
 | WP-010 functional electrical architecture | **Accepted** (2026-07-20); WP-010-R1 Accepted |
-| WP-011 EDL-011 + component-class prep | **Proposed** — Architecture Review pending |
+| WP-011 EDL-011 + component-class prep | **Ready for Final Architecture Review** — WP-011-R1 |
 | DevKit hardware design | **NOT IMPLEMENTED** — sizing/schematic/PCB NOT AUTHORIZED |
 | DevKit built / verified | **No** — NOT VERIFIED |
-| Remaining decisions | ADR-DK-008/009/011/012; EDL-011 clarification; thresholds TBD-DK-001…022 Open |
+| Remaining decisions | ADR-DK-008/009/011/012; TBD-DK-007 numeric Open; thresholds TBD-DK-001…022 Open |
 
-**Next step:** Architecture Review of WP-011 (EDL-011 clarification + component-class qualification preparation).
+**Next step:** Final Architecture Review of WP-011 (WP-011-R1 corrections applied).
 
 **Next expected engineering stage:** WP-011 acceptance → component-class qualification / electrical sizing → fixture requirements → (only then) schematic/PCB/firmware WPs.
 

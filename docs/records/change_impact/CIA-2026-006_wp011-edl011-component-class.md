@@ -25,9 +25,22 @@ WP-010 Architecture Review authorized WP-011 to resolve EDL-011 control-loss amb
 ### Proposed Behaviour
 
 * **Proposed** EDL-011 clarification proposal (Option D recommended; EDL file unchanged).
-* Component-class qualification framework and matrix (candidate classes only).
+* Component-class qualification framework and matrix (evaluation classes only).
 * Electrical design input register (`ED-IN-*`) referencing Open TBD-DK-* values.
 * Traceability navigation updates; requirements remain NOT VERIFIED.
+
+### WP-011-R1 corrections (Level 1)
+
+Documentation-only review corrections (2026-07-20):
+
+* Explicit Option D scope: architectural interpretation only; does not modify EDL-011.
+* TBD-DK-007 disposition separation: semantics Accepted architecture interpretation; numeric Open; verification Not Verified.
+* Terminology: **evaluation classes** (not candidate classes).
+* Component classes are evaluation criteria, not procurement shortlist.
+* ED-IN R6: entries are dependency references, not approved design inputs.
+* Qualification gating: class selection blocked until current envelope, thermal assumptions, protection philosophy, verification boundary.
+
+**Impact Level (R1):** Level 1 — documentation correction only.
 
 ### Affected Requirements
 
@@ -122,3 +135,4 @@ See RHP-2026-005 and EDL-011 proposal §6.
 | Version | Date | Change |
 |---------|------|--------|
 | 1.0 | 2026-07-20 | WP-011 initial CIA — Draft |
+| 1.1 | 2026-07-20 | WP-011-R1 — Level 1 documentation corrections |
