@@ -8,8 +8,8 @@
 | **Author** | Implementation Engineer (cloud agent) |
 | **Author role** | Implementation Engineer |
 | **Date** | 2026-07-20 |
-| **Status** | Draft — Under Architecture Review |
-| **Related WP / CR** | WP-013; depends on WP-012 Accepted (`fe700d4` / `653264d`+); WP-011 Accepted; ADR-016…023 Accepted |
+| **Status** | Draft — Under Architecture Review (WP-013-R1 corrections applied) |
+| **Related WP / CR** | WP-013 / WP-013-R1; depends on WP-012 Accepted (`fe700d4` / `653264d`+); WP-011 Accepted; ADR-016…023 Accepted |
 
 ### Reason for Change
 
@@ -26,9 +26,23 @@ WP-011 defined evaluation classes and qualification criteria; WP-012 defined siz
 
 * Class comparisons for high-side, current-observation, protection, and bidirectional domains.
 * Controller-interface assessment preserving hardwired KILL.
-* Symbolic preliminary calculations under WP-012 sign convention.
+* Symbolic preliminary calculations under WP-012 sign convention (WP-013-R1 equation corrections).
 * Class recommendation and readiness matrix (Proposed — not Accepted).
 * Explicit blockers for provisional baseline, MPN qual, fixture, schematic, PCB.
+
+### WP-013-R1 corrections (Level 1)
+
+Documentation-only review corrections (2026-07-20):
+
+* HS capability-role mapping: aliases are roles; HS-INT-DIAG for SENSE/PROTECTED instances; HS-INT-BASIC conditionally viable for BASE/PWM-only instances; no universal primary class.
+* SENSE-HYBRID no longer unconditional preferred; SENSE-INTEGRATED conditional for diag/protect; final choice blocked by ED-IN-011/032 / OI-SENSE-001.
+* Conduction loss: profile-consistent forms; no `I_RMS_PROFILE² × R × D`.
+* Switching loss: event-based; `f_EVENT=0` if static ON/OFF.
+* Stall: `E_SOURCE_STALL` ≠ `E_BRIDGE_LOSS`; thermal-state retry evolution.
+* Fault energy: `E_FAULT_BOUND = V_BOUND × I_BOUND × T_BOUND` only when bounds proven; else BLOCKED_BY_INPUT.
+* OI-PROT-001/002 remain Open; TBD-DK-007 BLOCKED retained.
+
+**Impact Level (R1):** Level 1 — documentation correction only.
 
 ### Scope exclusions (mandatory)
 
@@ -118,3 +132,4 @@ Architecture Review of WP-013 package. No physical tests. No VE.
 | Version | Date | Change |
 |---------|------|--------|
 | 1.0 | 2026-07-20 | WP-013 initial CIA — Draft |
+| 1.1 | 2026-07-20 | WP-013-R1 — capability-role mapping; observation conditional; symbolic equation corrections |

@@ -1,9 +1,9 @@
 # DevKit Bidirectional Class Comparison — WP-013
 
 **Document ID:** DOC-DK-BCC-001  
-**Version:** 1.0  
-**Status:** Proposed — Architecture Review pending  
-**Work Package:** WP-013  
+**Version:** 1.1  
+**Status:** Ready for Final Architecture Review  
+**Work Package:** WP-013 / WP-013-R1  
 **Date:** 2026-07-20
 
 ```text
@@ -48,24 +48,52 @@ WP-011 also listed BI-HB-HALF / BI-DUAL-SW as related concepts; WP-013 evaluates
 
 ## 4. Symbolic relationships (no numeric substitution)
 
-### Stall energy
+### Separated energy quantities
+
+| Symbol | Meaning |
+|--------|---------|
+| `E_SOURCE_STALL` | Source-referred electrical energy during stall |
+| `E_BRIDGE_LOSS` | Bridge dissipation energy (not equal to source energy) |
+| `E_LOAD_ABSORBED` | Energy absorbed in the load |
+| `E_RETURNED` | Energy returned toward the source |
+| `E_CLAMPED` | Energy absorbed in clamp/protection paths |
 
 ```text
-E_STALL = ∫_0^{T_STALL} V_BRIDGE(t) × I_STALL(t) dt
+E_SOURCE_STALL =
+∫ V_ENTRY(t) × I_CH_IN_BI(t) dt
 ```
-
-### Retry accumulation
 
 ```text
-E_RETRY_ACCUM = Σ_k E_STALL_k × (subject to cooling interval Δt_k)
-T_ELEMENT rises per WP-012 thermal: T = T_AMB + P_LOSS × R_TH_EFFECTIVE
+E_BRIDGE_LOSS =
+∫ P_BRIDGE_LOSS(t) dt
 ```
-
-### Bridge conduction loss
 
 ```text
-P_COND_BRIDGE = f(I_RMS_leg, R_on_leg(T) or V_drop, number of conducting devices, duty)
+P_BRIDGE_LOSS =
+P_CONDUCTION_LEGS
++ P_SWITCHING
++ P_GATE_CONTROL
++ P_SENSE
++ P_CLAMP_SHARE
 ```
+
+**Do not** treat `E_SOURCE_STALL` as semiconductor thermal loss.
+
+### Retry thermal-state evolution
+
+```text
+T_END_k =
+thermal_response(T_START_k, P_BRIDGE_LOSS_k(t), Z_TH(t))
+
+T_START_(k+1) =
+T_AMBIENT + cooling_model(T_END_k, T_AMBIENT, Δt_k, thermal_state)
+```
+
+Exact `Z_TH(t)` remains Open. Steady-state `P × R_TH` is **not** the sole model for short stall pulses or retry accumulation.
+
+### Bridge conduction (profile-consistent)
+
+Apply SPC §2 current-symbol discipline (`I_ON` / `I_RMS_PROFILE`) — no double duty factor.
 
 ### Returned energy (source-referred)
 
@@ -110,3 +138,4 @@ REQ-DCC-V-DK-042 · ADR-019 · ED-IN-020/031 · OI-COMP-002 · OI-BI-001 · OI-F
 | Version | Date | Change |
 |---------|------|--------|
 | 1.0 | 2026-07-20 | WP-013 initial bidirectional class comparison — Proposed |
+| 1.1 | 2026-07-20 | WP-013-R1 — separated stall/bridge energies; thermal-state retry model |

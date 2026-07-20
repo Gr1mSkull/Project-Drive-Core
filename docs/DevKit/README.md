@@ -1,8 +1,8 @@
 # DriveCore Gen1 DevKit — Document Set
 
 **Document ID:** DOC-DK-INDEX-001  
-**Version:** 1.16  
-**Status:** Accepted (index); WP-013 **Proposed** — Architecture Review pending  
+**Version:** 1.17  
+**Status:** Accepted (index); WP-013 **Ready for Final Architecture Review**  
 **Work Package:** WP-007 / WP-008 (Accepted) / WP-009 (Accepted) / WP-010 (Accepted) / WP-011 (Accepted) / WP-012 (Accepted) / WP-013 (Proposed)  
 **Date:** 2026-07-20
 
@@ -121,7 +121,7 @@ Every DevKit gate evidence package shall record a **composite system baseline** 
 | WP-010 functional electrical architecture | **Accepted** (2026-07-20) — WP-010-R1 Accepted |
 | WP-011 EDL-011 + component-class prep | **Accepted** (2026-07-20) — WP-011-R1 Accepted |
 | WP-012 electrical sizing architecture framework | **Accepted** (2026-07-20) — WP-012-R1/R2 Accepted; PR #16 merged (`9c5c7e7` / `fe700d4`) |
-| WP-013 component-class qualification + symbolic calcs | **Proposed** — Architecture Review pending; recommendations class-level only |
+| WP-013 component-class qualification + symbolic calcs | **Ready for Final Architecture Review** — WP-013-R1 applied |
 | Hardware design | **NOT IMPLEMENTED** — detailed sizing/schematic/PCB **NOT AUTHORIZED** |
 | Firmware bring-up | NOT IMPLEMENTED |
 | Physical verification | NOT VERIFIED |
@@ -161,3 +161,4 @@ Open thresholds: `TBD-DK-001` … `TBD-DK-022` (Status Open — WP-009 methods A
 | 1.14 | 2026-07-20 | WP-012-R2 — sign convention; Stage [D] authority; Ready for Final Architecture Acceptance |
 | 1.15 | 2026-07-20 | Architecture Review — WP-012 Accepted; PR #16 merged (`9c5c7e7` / `fe700d4`); TBD-DK-007 BLOCKED unchanged |
 | 1.16 | 2026-07-20 | WP-013 — component-class qualification + symbolic preliminary calculations (Proposed) |
+| 1.17 | 2026-07-20 | WP-013-R1 — capability-role mapping; observation conditional; symbolic equation corrections |

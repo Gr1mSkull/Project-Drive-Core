@@ -1,9 +1,9 @@
 # DevKit Component-Class Qualification Report — WP-013
 
 **Document ID:** DOC-DK-CCQR-001  
-**Version:** 1.0  
-**Status:** Proposed — Architecture Review pending  
-**Work Package:** WP-013  
+**Version:** 1.1  
+**Status:** Ready for Final Architecture Review  
+**Work Package:** WP-013 / WP-013-R1  
 **Date:** 2026-07-20  
 **Author role:** Implementation Engineer
 
@@ -75,18 +75,22 @@ Implementation Engineer may recommend; System Architect accepts.
 | [DevKit_Symbolic_Preliminary_Calculations.md](DevKit_Symbolic_Preliminary_Calculations.md) | Symbolic losses, entry reconcile, fault, thermal, BI |
 | [DevKit_Class_Recommendation_and_Readiness_Matrix.md](DevKit_Class_Recommendation_and_Readiness_Matrix.md) | Master recommendations |
 
-## 5. Executive class recommendations (Proposed)
+## 5. Executive class recommendations (Proposed — WP-013-R1)
 
-| Domain | Preferred (IE) | Fallback / retain | Not recommended |
-|--------|----------------|-------------------|-----------------|
-| High-side | **HS-INT-DIAG** | HS-HYBRID; HS-GATE-DISCRETE | HS-INT-BASIC as primary |
-| Current observation | **SENSE-HYBRID** | SENSE-INTEGRATED (conditional); SENSE-SHUNT-HS | SENSE-SHUNT-LS primary; SENSE-INDIRECT sole |
-| Reverse polarity | Direction **BLOCKED** on OI-PROT-001 | RP-ACTIVE-IDEAL preferred *if* arch opens | RP-RELAY primary |
-| Transient | TRANSIENT-CLAMP-DISCONNECT / MULTISTAGE | CLAMP or DISCONNECT alone | — |
+**WP-010 rule:** capability aliases are roles — not a single class for every physical channel. Population remains Open.
+
+| Domain | Evaluation direction (IE) | Conditional / retain | Not recommended (scoped) |
+|--------|---------------------------|----------------------|--------------------------|
+| High-side | **HS-INT-DIAG** for instances claiming SENSE and/or PROTECTED | **HS-INT-BASIC** for BASE/PWM-only instances (SENSE/PROTECTED elsewhere); HS-HYBRID when external elements needed; GATE-DISCRETE / ARRAY retain | One class for entire population (**rejected assumption**) |
+| Current observation | **SENSE-INTEGRATED** conditional for diag/protect when claims fit | **SENSE-HYBRID** conditional when independence/accuracy required (**not** unconditional preferred); SHUNT-HS / MAGNETIC retain | SENSE-SHUNT-LS as **primary HS**; SENSE-INDIRECT as **sole** verification |
+| Reverse polarity | Direction **Open** (OI-PROT-001) | RP-ACTIVE-IDEAL / PASSIVE / HYBRID retain if arch opens | RP-RELAY primary |
+| Transient | Direction **Open** (OI-PROT-002) | CLAMP-DISCONNECT / MULTISTAGE conditional | — |
 | Replaceable input | **INPUT-HYBRID** philosophy | FUSE / ELECTRONIC with PWR-A-016 | Fuse = continuous cert (**rejected**) |
-| Channel protection | **CH-HYBRID-PROTECTION** when independence required | CH-INTEGRATED with HS-INT-DIAG | — |
+| Channel protection | **CH-HYBRID** when independence required | CH-INTEGRATED with HS-INT-DIAG instances | — |
 | Bidirectional | **BI-HB-FULL** or **BI-HB-HYBRID** | DISCRETE / DUAL-HSLS | BI-RELAY-REVERSING primary |
-| Controller IF | **CTRL-MIXED-HARDWIRED** | CTRL-SPI-MCU / SPI-SAFETY for cmd/diag | SPI-owned physical KILL (**rejected**) |
+| Controller IF | **CTRL-MIXED-HARDWIRED** | CTRL-SPI-MCU / SPI-SAFETY for cmd/diag only | SPI-owned physical KILL (**rejected**) |
+
+`RECOMMENDED_FOR_NEXT_STAGE` = continued evaluation permitted — **not** Architecture class Accepted, MPN, procurement, or schematic/PCB.
 
 ## 6. Controller-interface assessment
 
@@ -114,17 +118,14 @@ Control-loss numeric **TBD-DK-007** remains Open / **BLOCKED_BY_EDL_CLARIFICATIO
 
 ## 7. Symbolic calculation summary
 
-Accepted WP-012 entry reconcile and signed-net accounting applied. All preliminary calculations remain **symbolic**. Readiness: see [DevKit_Symbolic_Preliminary_Calculations.md](DevKit_Symbolic_Preliminary_Calculations.md) §11.
+Accepted WP-012 entry reconcile and signed-net accounting applied. WP-013-R1 corrects:
 
-Key preservations:
+- conduction-loss duty discipline (`I_ON`/`I_RMS_PROFILE` — no double duty);
+- event-based switching loss (`f_EVENT=0` if static ON/OFF);
+- separated `E_SOURCE_STALL` vs `E_BRIDGE_LOSS`; thermal-state retry evolution;
+- fault-energy bound only with proven `V_BOUND`/`I_BOUND`/`T_BOUND`.
 
-- positive current = source draw;
-- signed-net `I_CH_IN_n` / `I_DOM_IN_x`;
-- `I_STORAGE_NET` unallocated-only;
-- no cross-boundary load/rail sum;
-- P6 outside base envelope;
-- PCB derating candidate-only;
-- fault/thermal equations symbolic.
+All preliminary calculations remain **symbolic**. Readiness: see [DevKit_Symbolic_Preliminary_Calculations.md](DevKit_Symbolic_Preliminary_Calculations.md) §11.
 
 ## 8. Missing inputs and blockers (index)
 
@@ -142,16 +143,16 @@ Key preservations:
 
 ## 9. Answers to WP-013 objective questions
 
-| # | Answer (Proposed) |
-|---|-------------------|
-| 1 | Viable: HS-INT-DIAG/HYBRID/GATE-DISCRETE/ARRAY; SENSE-HYBRID/INTEGRATED/SHUNT-HS/MAGNETIC; INPUT-*; CH-*; BI-HB-*; CTRL-MIXED/SPI-* (cmd only) |
-| 2 | Conditionally preferred: HS-INT-DIAG; SENSE-HYBRID; INPUT-HYBRID; CH-HYBRID or INTEGRATED; BI-HB-FULL/HYBRID; CTRL-MIXED-HARDWIRED |
-| 3 | Reject/not recommend as primary: HS-INT-BASIC; SENSE-SHUNT-LS; SENSE-INDIRECT sole; BI-RELAY-REVERSING; SPI-owned KILL |
-| 4 | Cannot evaluate numeric envelopes, R_TH, fuse ratings, dead-time, stall current without Open inputs |
-| 5–6 | See symbolic calculations + class docs |
+| # | Answer (Proposed — WP-013-R1) |
+|---|-------------------------------|
+| 1 | Viable by role: HS-INT-DIAG (SENSE/PROTECTED instances); HS-INT-BASIC (BASE/PWM-only); HYBRID/GATE-DISCRETE/ARRAY; SENSE-INTEGRATED/HYBRID (conditional); SHUNT-HS/MAGNETIC; INPUT-*; CH-*; BI-HB-*; CTRL-MIXED/SPI-* (cmd only) |
+| 2 | Conditionally preferred **by role**: HS-INT-DIAG for SENSE/PROTECTED instances; SENSE-INTEGRATED for diag/protect when claims fit; SENSE-HYBRID when independence/accuracy required; INPUT-HYBRID; CH-HYBRID or INTEGRATED; BI-HB-FULL/HYBRID; CTRL-MIXED-HARDWIRED |
+| 3 | Reject/not recommend (scoped): one HS class for all channels; SENSE-HYBRID as unconditional preferred; SENSE-SHUNT-LS as primary HS; SENSE-INDIRECT as sole; BI-RELAY-REVERSING; SPI-owned KILL |
+| 4 | Cannot evaluate numeric envelopes, R_TH, fuse ratings, dead-time, stall current, or conservative fault bounds without Open inputs |
+| 5–6 | See symbolic calculations (R1) + class docs |
 | 7 | Class acceptance + CR-001 evidence + thermal/protection inputs |
 | 8 | Architect provisional baseline + closed symbolic models + declared assumptions |
-| 9 | See §8 blockers |
+| 9 | See §8 blockers; OI-PROT-001/002 remain Open |
 | 10 | After acceptance: fixture/load-bank requirements; ADR-DK-011/012; optional provisional baseline prep; concrete MPN qual prep — **not** schematic/PCB until gates |
 
 ## 10. Explicit exclusions
@@ -176,3 +177,4 @@ CIA: `CIA-2026-008` · RHP: `RHP-2026-007`.
 | Version | Date | Change |
 |---------|------|--------|
 | 1.0 | 2026-07-20 | WP-013 initial component-class qualification report — Proposed |
+| 1.1 | 2026-07-20 | WP-013-R1 — capability-role mapping; observation conditional; symbolic equation corrections |

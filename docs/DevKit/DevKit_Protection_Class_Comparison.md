@@ -1,9 +1,9 @@
 # DevKit Protection Class Comparison — WP-013
 
 **Document ID:** DOC-DK-PCC-001  
-**Version:** 1.0  
-**Status:** Proposed — Architecture Review pending  
-**Work Package:** WP-013  
+**Version:** 1.1  
+**Status:** Ready for Final Architecture Review  
+**Work Package:** WP-013 / WP-013-R1  
 **Date:** 2026-07-20
 
 ```text
@@ -98,16 +98,24 @@ No clamp voltage Approved.
 ## 7. Symbolic fault energy (class-agnostic)
 
 ```text
-E_FAULT = ∫ V(t) × I(t) dt
+E_FAULT =
+∫ V(t) × I(t) dt
 ```
 
-Conservative candidate form (not Approved numeric):
+Conservative bound form (conditional):
 
 ```text
-E_FAULT ≈ V_nom × I_FAULT_PEAK × T_FAULT_CLEAR
+E_FAULT_BOUND =
+V_BOUND × I_BOUND × T_BOUND
 ```
 
-Required inputs remain Open: ED-IN-009 (`I_psc`), ED-IN-021, TBD-DK-011 — **BLOCKED_BY_INPUT** for numeric.
+Conservative **only when** `|V(t)| ≤ V_BOUND`, `|I(t)| ≤ I_BOUND`, and fault duration ≤ `T_BOUND` over the declared boundary/interval. If bounds are not established: **BLOCKED_BY_INPUT**.
+
+**Prohibited:** presenting `V_nom × I_FAULT_PEAK × T_FAULT_CLEAR` as a conservative bound without proven upper-bound justification.
+
+Required inputs remain Open: ED-IN-009 (`I_psc`), ED-IN-021, TBD-DK-011 — numeric/bound closure **BLOCKED_BY_INPUT**.
+
+**OI-PROT-001** and **OI-PROT-002** remain **Open** in WP-013-R1.
 
 ## 8. Traceability
 
@@ -118,3 +126,4 @@ WP-012 protection framework · ADR-021/023 · OI-PROT-001/002 · ED-IN-008/009/0
 | Version | Date | Change |
 |---------|------|--------|
 | 1.0 | 2026-07-20 | WP-013 initial protection class comparison — Proposed |
+| 1.1 | 2026-07-20 | WP-013-R1 — fault-energy bound form; OI-PROT-001/002 remain Open |

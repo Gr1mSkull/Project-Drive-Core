@@ -1,13 +1,14 @@
 # DevKit Current-Observation Class Comparison — WP-013
 
 **Document ID:** DOC-DK-COCC-001  
-**Version:** 1.0  
-**Status:** Proposed — Architecture Review pending  
-**Work Package:** WP-013  
+**Version:** 1.1  
+**Status:** Ready for Final Architecture Review  
+**Work Package:** WP-013 / WP-013-R1  
 **Date:** 2026-07-20
 
 ```text
 Class comparison only — no accuracy target, MPN, or ADC Approved.
+Final observation-class choice remains blocked while ED-IN-011/032 and OI-SENSE-001 are Open.
 ```
 
 ## 1. Purpose
@@ -65,7 +66,7 @@ No numeric accuracy Approved. ED-IN-011 remains **Open**.
 | Unidirectional / BI | Often uni; BI claim-dependent | Uni or BI with topology | Often uni; BI difficult | BI capable (class-dependent) | Model-dependent | Flexible |
 | PWM observability | Claim-dependent bandwidth | Layout + amp BW | Same | Sensor BW | Weak during PWM edges | Precision path designable |
 | Calibration | Device trim / class cal | Gain/offset cal | Gain/offset + GND | Offset/scale cal | Model identification | Dual cal |
-| Burden / loss | Low–moderate | `P_SENSE = I²R_shunt` | Same | Low conduction | Software only | Shunt + integrated |
+| Burden / loss | Low–moderate | Profile-consistent `I²R` (see SPC) | Same | Sensor supply | Compute only | Integrated + shunt — allocate once |
 | Ground/reference impact | Device-referenced | High-side isolation needs | Strong GND dependence | Isolated | N/A electrical | Mixed |
 | Fault survivability | Limited by device | Shunt/amp rating | Same | Sensor rating | Survives but blind | External path survivability |
 | Open-load compatibility | Claim-dependent | Possible with bias | Possible | Limited | Weak | Claim + external |
@@ -77,23 +78,25 @@ No numeric accuracy Approved. ED-IN-011 remains **Open**.
 
 | Class | Capability for CH-HS-SENSE | PWM / BI fit | Main advantage | Main limitation | Main blockers | Qualification status |
 |-------|----------------------------|--------------|----------------|-----------------|---------------|----------------------|
-| **SENSE-INTEGRATED** | Viable if claim covers accuracy/PWM | PWM claim-dependent; BI claim-dependent | Low parts count; channel-local | Accuracy/BW Open; coupled to switch | ED-IN-011/032; OI-SENSE-001 | **CLASS_CONDITIONALLY_VIABLE** |
-| **SENSE-SHUNT-HS** | Strong for precision I_LOAD | Good with amp design; BI possible | Independent of switch die | Loss, layout, common-mode | Same + PCB | **CLASS_CONDITIONALLY_VIABLE** |
-| **SENSE-SHUNT-LS** | Weak for HS power path verification | Poor for HS; GND issues | Simple amp | Does not observe HS path current under many faults | Topology mismatch for HS-dominant DevKit | **CLASS_NOT_RECOMMENDED** as primary HS observation |
-| **SENSE-MAGNETIC** | Viable for isolation / higher current | BI-friendly | Galvanic isolation | Cost/BW/offset class burden; fixture cal | ED-IN-011; fixture | **CLASS_CONDITIONALLY_VIABLE** — retain |
-| **SENSE-INDIRECT** | Insufficient as sole CH-HS-SENSE | Weak | No shunt loss | Not independent physical observation | Verification independence | **CLASS_NOT_RECOMMENDED** as primary |
-| **SENSE-HYBRID** | Strong (diag + precision) | Designable | Independence + integrated fault flags | Dual path complexity | ED-IN-011/032 | **CLASS_CONDITIONALLY_VIABLE** → prefer next stage |
+| **SENSE-INTEGRATED** | Viable if claim covers accuracy/PWM for mapped role | PWM claim-dependent; BI claim-dependent | Low parts count; channel-local | Accuracy/BW Open; coupled to switch | ED-IN-011/032; OI-SENSE-001 | **CLASS_CONDITIONALLY_VIABLE** |
+| **SENSE-SHUNT-HS** | Strong for precision I_LOAD | Good with amp design; BI possible | Independent of switch die | Loss, layout, common-mode | Same + PCB | **CLASS_CONDITIONALLY_VIABLE** — retain precision class |
+| **SENSE-SHUNT-LS** | Weak as **primary** HS-path observation | Poor for many HS faults; GND issues | Simple amp | Does not observe HS path under many faults | Topology mismatch for HS-primary use | **CLASS_NOT_RECOMMENDED** as primary HS observation — **not** globally rejected |
+| **SENSE-MAGNETIC** | Viable for isolation / higher current / BI | BI-friendly | Galvanic isolation | Cost/BW/offset class burden; fixture cal | ED-IN-011; fixture | **CLASS_CONDITIONALLY_VIABLE** — retain |
+| **SENSE-INDIRECT** | Insufficient as **sole** CH-HS-SENSE verification | Weak | No shunt loss | Not independent physical observation | Verification independence | **CLASS_NOT_RECOMMENDED** as sole verification observation |
+| **SENSE-HYBRID** | Strong when independence/accuracy required | Designable | Independence + integrated fault flags | Dual path complexity; inputs Open | ED-IN-011/032; OI-SENSE-001 | **CLASS_CONDITIONALLY_VIABLE** — **not** unconditional preferred |
 
-## 7. Recommendations (not Accepted)
+## 7. Recommendations (not Accepted) — WP-013-R1
+
+While **ED-IN-011**, **ED-IN-032**, and **OI-SENSE-001** remain Open, no observation class is an unconditional preferred selection. Architect may accept **evaluation directions**; final choice remains **blocked by measurement requirements**.
 
 | Class | Recommendation | Conditions |
 |-------|----------------|------------|
-| **SENSE-HYBRID** | **RECOMMENDED_FOR_NEXT_STAGE** | Precision path defined at class level; integrated path used for protection/diagnostics; referral model documented; numerics Open |
-| **SENSE-INTEGRATED** | **CONDITIONALLY_RECOMMENDED** | Acceptable sole path only if Architect accepts claim-limited accuracy/BW for DK-C-004 and CH-HS-SENSE |
-| **SENSE-SHUNT-HS** | **RETAIN_FOR_COMPARISON** | Prefer as precision half of hybrid or fallback if integrated insufficient |
-| **SENSE-MAGNETIC** | **RETAIN_FOR_COMPARISON** | Consider for isolated / external-envelope observation (P6 distinct — PWR-A-001) |
-| **SENSE-SHUNT-LS** | **NOT_RECOMMENDED** | Primary HS channel observation |
-| **SENSE-INDIRECT** | **NOT_RECOMMENDED** | Sole verification observation |
+| **SENSE-INTEGRATED** | **CONDITIONALLY_RECOMMENDED** | For diagnostic/protection observation when accuracy, bandwidth, PWM, and fault-state claims satisfy the mapped verification role |
+| **SENSE-HYBRID** | **CONDITIONALLY_RECOMMENDED** | When an Accepted requirement demands greater accuracy, independent observation, calibration separation, or diagnostic diversity — **not** unconditional preferred |
+| **SENSE-SHUNT-HS** | **RETAIN_FOR_COMPARISON** | External precision-observation class |
+| **SENSE-MAGNETIC** | **RETAIN_FOR_COMPARISON** | Bidirectional, isolated, or external-envelope cases (P6 distinct — PWR-A-001) |
+| **SENSE-SHUNT-LS** | **NOT_RECOMMENDED** as primary HS observation | Not globally rejected for other topologies/roles |
+| **SENSE-INDIRECT** | **NOT_RECOMMENDED** | **Not permitted** as the sole verification observation |
 
 ## 8. Traceability
 
@@ -104,3 +107,4 @@ REQ-DCC-V-DK-043 · VER-DCC-DK-C-004 · ADR-019 · ED-IN-011/032 · OI-SENSE-001
 | Version | Date | Change |
 |---------|------|--------|
 | 1.0 | 2026-07-20 | WP-013 initial current-observation class comparison — Proposed |
+| 1.1 | 2026-07-20 | WP-013-R1 — SENSE-HYBRID conditional only; INTEGRATED conditional for diag/protect; SHUNT-LS not globally rejected |

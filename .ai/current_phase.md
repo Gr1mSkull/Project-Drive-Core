@@ -18,7 +18,7 @@
 | **WP-010 DevKit functional electrical architecture** | ✅ Accepted (2026-07-20) — WP-010-R1 Accepted |
 | **WP-011 EDL-011 + component-class prep** | ✅ Accepted (2026-07-20) — WP-011-R1 Accepted |
 | **WP-012 electrical sizing architecture framework** | ✅ Accepted (2026-07-20) — WP-012-R1/R2 Accepted |
-| **WP-013 component-class qualification + symbolic calcs** | ⏳ Proposed — Architecture Review pending |
+| **WP-013 component-class qualification + symbolic calcs** | ⏳ Ready for Final Architecture Review — WP-013-R1 |
 
 ## DevKit (WP-007 … WP-013)
 
@@ -33,7 +33,7 @@
 | TBD-DK-007 | **BLOCKED_BY_EDL_CLARIFICATION** — not Resolved; numeric Open; verification Not Verified |
 | Component-class qualification prep | **Accepted** (WP-011) |
 | Electrical sizing framework | **Accepted** (WP-012) |
-| Component-class recommendations | **Proposed** (WP-013) — not Accepted |
+| Component-class recommendations | **Ready for Final Architecture Review** (WP-013-R1) |
 | Concrete component qualification | **Not started** |
 | MPN selection | **Not authorized** |
 | Symbolic preliminary calculations | **Proposed** (WP-013) |
