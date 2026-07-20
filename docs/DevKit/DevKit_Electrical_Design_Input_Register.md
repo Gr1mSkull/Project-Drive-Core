@@ -1,7 +1,7 @@
 # DevKit Electrical Design Input Register — WP-011
 
 **Document ID:** DOC-DK-EDIR-001  
-**Version:** 1.2  
+**Version:** 1.3  
 **Status:** Accepted — Architecture Review  
 **Work Package:** WP-011  
 **Date:** 2026-07-20
@@ -86,10 +86,30 @@ WP-011 adds **ED-IN-029..032** as architecture-prep inputs; does **not** resolve
 WP-011 Option D is an architectural interpretation only and does not modify EDL-011.
 ```
 
-## 5. Revision history
+## 6. WP-012 sizing integration (Proposed)
+
+WP-012 adds sizing-method references. **ED-IN entries remain dependency references (R6) — not frozen.**
+
+| ED-IN | WP-012 sizing method | Required calculation | Closure readiness | Missing input | Downstream consumer |
+|-------|---------------------|----------------------|-------------------|---------------|---------------------|
+| ED-IN-001 | Input domain §4.1 | V_IN envelope | INPUTS_INCOMPLETE | TBD-DK-001 numeric | Sizing WP |
+| ED-IN-002 | Budget §5; limit stack | I_certified_cont min() | BLOCKED_BY_THRESHOLD | L2–L13 terms | Component qual |
+| ED-IN-003 | Profile P4; overlap | I_simultaneous peak/avg | BLOCKED_BY_THRESHOLD | Overlap profiles | DK-C P4 |
+| ED-IN-006 | Protection P5; timing | T_CTRL_LOSS budget | BLOCKED | TBD-DK-007 numeric | DK-A-008 |
+| ED-IN-008 | Protection P2 | I_protection vs I_certified | BLOCKED_BY_THRESHOLD | Protection class | Schematic WP |
+| ED-IN-009 | E_FAULT model | Fault energy | INPUTS_INCOMPLETE | Injection fixture | Fixture WP |
+| ED-IN-017 | Thermal framework | R_th / derating | BLOCKED_BY_ARCHITECTURE | ADR-DK-011 | Thermal WP |
+| ED-IN-024/025 | Domain budget §4 | I_LOGIC/RADIO peaks | INPUTS_INCOMPLETE | Load analysis | Sizing WP |
+| ED-IN-026/027 | Channel domain §4.5 | I_CHANNEL_CONT/inrush | BLOCKED_BY_THRESHOLD | Class + thermal | Qualification WP |
+| ED-IN-030/031/032 | Evaluation readiness §2 | Class comparison | PARTIAL / NOT_READY | ED-IN-002, 017 | Qualification WP |
+
+Full matrix: [`DevKit_Sizing_Dependency_and_Closure_Matrix.md`](DevKit_Sizing_Dependency_and_Closure_Matrix.md).
+
+## 7. Revision history
 
 | Version | Date | Change |
 |---------|------|--------|
 | 1.0 | 2026-07-20 | WP-011 initial electrical design input register — Proposed |
 | 1.1 | 2026-07-20 | WP-011-R1 — R6 dependency-reference rule; TBD-DK-007 disposition separation |
 | 1.2 | 2026-07-20 | Architecture Review Accepted — PR #15; TBD-DK-007 BLOCKED retained |
+| 1.3 | 2026-07-20 | WP-012 — sizing method cross-reference (ED-IN not frozen) |
