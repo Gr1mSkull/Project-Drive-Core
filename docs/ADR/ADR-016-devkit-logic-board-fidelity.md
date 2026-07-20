@@ -5,13 +5,13 @@
 | **Canonical ADR ID** | `ADR-016` |
 | **Originating decision request** | `ADR-DK-001` |
 | **Title** | DevKit Logic Board Fidelity and Reuse |
-| **Status** | Proposed |
+| **Status** | Accepted |
 | **Date** | 2026-07-20 |
 | **Decision owner** | System Architect |
-| **Work Package** | WP-008 |
-| **Deliverable status** | Proposed — requires Architecture Review |
+| **Work Package** | WP-008 / WP-008-R1 (Accepted) |
+| **Deliverable status** | Accepted — Architecture Review (2026-07-20) |
 
-> This ADR is **Proposed**. Recommendations are not Accepted. Implementation Engineer cannot approve.
+> This ADR is **Accepted** by Architecture Review (2026-07-20). Implementation and verification evidence remain separate; TBD numeric thresholds (if any) remain Open unless stated otherwise.
 
 
 ### Context
@@ -121,10 +121,10 @@ Ratings: **Strong** · **Acceptable** · **Weak** · **Unacceptable**. Rationale
 | same firmware interface | As needed for experiments | **Required** for RT app evidence | **Required** | **Required** | **Required** | **Required** |
 | same behavioural contract | Partial OK | **Required** for exercised paths | **Required** | **Required** | **Required** | **Required** |
 
-### Proposed decision text
+### Decision text (Accepted)
 
 ```text
-PROPOSED: DevKit Logic fidelity shall follow a staged model (Option D).
+DECISION (Accepted): DevKit Logic fidelity shall follow a staged model (Option D).
 Pre-gate bring-up may use evaluation hardware that does not generate DK-A…DK-D PASS evidence for Logic electrical/safety behaviour.
 For Gates DK-A through DK-D, the Logic implementation shall be production-interface-conformant (Option B minimum):
   - STM32G474-class processor per EDL-001 (DevKit-only G431 candidate in docs/007 is not authorized for gate evidence without superseding EDL-001);
@@ -210,14 +210,19 @@ Superseding ADR; do not delete. If Architect selects Option A immediately, this 
 
 | Field | Value |
 |-------|-------|
-| **Review status** | Pending Architecture Review |
-| **Architect decision** | TBD |
-| **Acceptance conditions** | TBD |
-| **Rejection / correction notes** | TBD |
+| **Review status** | Complete |
+| **Architect decision** | Accepted |
+| **Approver role** | System Architect |
+| **Acceptance date** | 2026-07-20 |
+| **Acceptance conditions** | None for architecture decision body. Implementation, fixtures, and verification evidence remain outstanding. |
+| **Rejection / correction notes** | None — blocking architecture findings: NONE |
+| **WP-008** | Accepted |
+| **PR** | #12 approved for merge |
+
 
 ### Revision history
 
 | Version | Date | Author | Change |
 |---------|------|--------|--------|
 | 1.0 | 2026-07-20 | Implementation Engineer (WP-008) | Proposed package |
-
+| 1.2 | 2026-07-20 | System Architect (acceptance) | Architecture Review — ACCEPTED |

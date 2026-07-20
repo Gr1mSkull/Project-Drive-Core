@@ -5,13 +5,13 @@
 | **Canonical ADR ID** | `ADR-018` |
 | **Originating decision request** | `ADR-DK-003` |
 | **Title** | DevKit Firmware Equivalence |
-| **Status** | Proposed |
+| **Status** | Accepted |
 | **Date** | 2026-07-20 |
 | **Decision owner** | System Architect |
-| **Work Package** | WP-008 |
-| **Deliverable status** | Proposed — requires Architecture Review |
+| **Work Package** | WP-008 / WP-008-R1 (Accepted) |
+| **Deliverable status** | Accepted — Architecture Review (2026-07-20) |
 
-> This ADR is **Proposed**. Recommendations are not Accepted. Implementation Engineer cannot approve.
+> This ADR is **Accepted** by Architecture Review (2026-07-20). Implementation and verification evidence remain separate; TBD numeric thresholds (if any) remain Open unless stated otherwise.
 
 
 ### Context
@@ -67,7 +67,7 @@ Ratings: **Strong** · **Acceptable** · **Weak** · **Unacceptable**.
 
 **Recommended option: Option D for lifecycle, with Option B as the certification equivalence model for production-path artifacts.**
 
-**Reason:** Byte-identical binaries (Option A) are only honest if Logic/Radio hardware targets are identical (ADR-016/017 Option A). Given Proposed ADR-016/017 allow separate DevKit PCBs, Option B is the coherent equivalence model: one source tree, shared `firmware/shared` protocols, board BSP/config differences producing distinct binaries with recorded identity. Separate DevKit applications (Option C) create dual maintenance and weaken gate claims.
+**Reason:** Byte-identical binaries (Option A) are only honest if Logic/Radio hardware targets are identical (ADR-016/017 Option A). Given Accepted ADR-016/017 allow separate DevKit PCBs, Option B is the coherent equivalence model: one source tree, shared `firmware/shared` protocols, board BSP/config differences producing distinct binaries with recorded identity. Separate DevKit applications (Option C) create dual maintenance and weaken gate claims.
 
 **Residual risks:** Feature-flag drift; test hooks left enabled; dirty builds admitted as PASS contrary to ADR-015 policy.
 
@@ -97,10 +97,10 @@ Ratings: **Strong** · **Acceptable** · **Weak** · **Unacceptable**.
 | Dirty builds | Per ADR-015 — incomplete identity ⇒ BLOCKED / NOT ASSESSED, not PASS |
 | Equivalence proof | Source revision + build flags + board target + binary hash recorded; claim “same binary” only when hashes match |
 
-### Proposed decision text
+### Decision text (Accepted)
 
 ```text
-PROPOSED: Firmware equivalence for DevKit gate certification is Option B under staged Option D lifecycle.
+DECISION (Accepted): Firmware equivalence for DevKit gate certification is Option B under staged Option D lifecycle.
 DevKit and DCC Gen1 shall share one application source tree and feature set for Real-Time and Service production-path firmware, with board-support and board-target configuration permitted to produce distinct binaries.
 Byte-identical binaries (Option A) shall not be claimed unless the corresponding hardware targets are the same physical assemblies and the recorded binary hashes match.
 Separate DevKit-only applications (Option C) are rejected for gate certification of production behaviours.
@@ -159,14 +159,19 @@ Superseding ADR.
 
 | Field | Value |
 |-------|-------|
-| **Review status** | Pending Architecture Review |
-| **Architect decision** | TBD |
-| **Acceptance conditions** | TBD |
-| **Rejection / correction notes** | TBD |
+| **Review status** | Complete |
+| **Architect decision** | Accepted |
+| **Approver role** | System Architect |
+| **Acceptance date** | 2026-07-20 |
+| **Acceptance conditions** | None for architecture decision body. Implementation, fixtures, and verification evidence remain outstanding. |
+| **Rejection / correction notes** | None — blocking architecture findings: NONE |
+| **WP-008** | Accepted |
+| **PR** | #12 approved for merge |
+
 
 ### Revision history
 
 | Version | Date | Author | Change |
 |---------|------|--------|--------|
 | 1.0 | 2026-07-20 | Implementation Engineer (WP-008) | Proposed package |
-
+| 1.2 | 2026-07-20 | System Architect (acceptance) | Architecture Review — ACCEPTED |

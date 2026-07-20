@@ -14,12 +14,12 @@
 |------|--------|
 | DevKit requirements baseline (`REQ-DCC-V-DK-*`) | **Accepted** (WP-007 / PR #11) — evidence NOT VERIFIED |
 | DevKit verification plan (DK-A…DK-D) | **Accepted** structure — cases NOT EXECUTED / BLOCKED |
-| DevKit P0 ADRs (ADR-016…023) | **Proposed** (WP-008) — Architecture Review required |
+| DevKit P0 ADRs (ADR-016…023) | **Accepted** (WP-008 Architecture Review 2026-07-20); ADR-021/022 numerics Open |
 | DevKit hardware design | **Not approved** |
 | DevKit built / verified | **No** — NOT IMPLEMENTED / NOT VERIFIED |
-| Blocking decisions | Proposed ADR-016…023 pending acceptance; ADR-DK-008/009/011/012 still open requests; thresholds TBD-DK-001…022 Open |
+| Remaining decisions | ADR-DK-008/009/011/012 open requests; thresholds TBD-DK-001…022 Open |
 
-**Next expected engineering stage after WP-008 Architecture Review:** accept/correct P0 ADRs → threshold-analysis WP (currents/timings) → DevKit electrical architecture → fixture/load-bank requirements → component qualification → (only then) PCB/firmware bring-up WPs.
+**Next expected engineering stage after WP-008 acceptance:** threshold-analysis WP (currents/timings) → DevKit electrical architecture → fixture/load-bank requirements → component qualification → (only then) PCB/firmware bring-up WPs.
 
 ## Фаза 1 — Первый автомобиль (E30)
 

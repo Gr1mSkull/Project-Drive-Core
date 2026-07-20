@@ -5,13 +5,13 @@
 | **Canonical ADR ID** | `ADR-019` |
 | **Originating decision request** | `ADR-DK-004` |
 | **Title** | DevKit Represented Power Capabilities |
-| **Status** | Proposed |
+| **Status** | Accepted |
 | **Date** | 2026-07-20 |
 | **Decision owner** | System Architect |
-| **Work Package** | WP-008 / WP-008-R1 |
-| **Deliverable status** | Proposed — requires Architecture Review |
+| **Work Package** | WP-008 / WP-008-R1 (Accepted) |
+| **Deliverable status** | Accepted — Architecture Review (2026-07-20) |
 
-> This ADR is **Proposed**. Recommendations are not Accepted. Implementation Engineer cannot approve.
+> This ADR is **Accepted** by Architecture Review (2026-07-20). Implementation and verification evidence remain separate; TBD numeric thresholds (if any) remain Open unless stated otherwise.
 
 
 ### Context
@@ -87,10 +87,10 @@ Ratings: **Strong** · **Acceptable** · **Weak** · **Unacceptable**.
 | Retry/latch behaviour | **MANDATORY_ON_DEVKIT** | State-model evidence | 049 | C-014 | On protected channel | Infinite retry policies |
 | Control-loss safe OFF | **MANDATORY_ON_DEVKIT** | EDL-011 fail-safe | 035 | C-012, A-008 | Interface + Power | Service-path dependency |
 
-### Proposed decision text
+### Decision text (Accepted)
 
 ```text
-PROPOSED: The DevKit minimum representative power capability set is Option B as tabulated above.
+DECISION (Accepted): The DevKit minimum representative power capability set is Option B as tabulated above.
 Unconditional minimum on DevKit: switched HS, PWM-capable HS, current sense, medium-current class behaviour, overcurrent protection, short-circuit protection behaviour, retry/latch, control-loss safe OFF, and one bidirectional channel (or bidirectional Method:Test cases remain BLOCKED).
 Open-load diagnostics are CONDITIONAL_ON_DEVKIT: required only when the selected representative channel or implementation claims open-load diagnostic capability. If not claimed, open-load verification is DEFERRED_EXCLUDED and gate coverage shall explicitly exclude that capability. This ADR does not require every DevKit smart high-side channel to provide open-load diagnostics and does not select an MPN to obtain that capability.
 Highest-current continuous class representation follows ADR-020 (not assumed on DevKit Power PCB).
@@ -148,10 +148,15 @@ Superseding ADR.
 
 | Field | Value |
 |-------|-------|
-| **Review status** | Pending Architecture Review |
-| **Architect decision** | TBD |
-| **Acceptance conditions** | TBD |
-| **Rejection / correction notes** | TBD |
+| **Review status** | Complete |
+| **Architect decision** | Accepted |
+| **Approver role** | System Architect |
+| **Acceptance date** | 2026-07-20 |
+| **Acceptance conditions** | None for architecture decision body. Implementation, fixtures, and verification evidence remain outstanding. |
+| **Rejection / correction notes** | None — blocking architecture findings: NONE |
+| **WP-008** | Accepted |
+| **PR** | #12 approved for merge |
+
 
 ### Revision history
 
@@ -159,4 +164,4 @@ Superseding ADR.
 |---------|------|--------|--------|
 | 1.0 | 2026-07-20 | Implementation Engineer (WP-008) | Proposed package |
 | 1.1 | 2026-07-20 | Implementation Engineer (WP-008-R1) | Open-load → CONDITIONAL_ON_DEVKIT; unconditional min set clarified |
-
+| 1.2 | 2026-07-20 | System Architect (acceptance) | Architecture Review — ACCEPTED |

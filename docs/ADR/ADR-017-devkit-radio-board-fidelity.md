@@ -5,13 +5,13 @@
 | **Canonical ADR ID** | `ADR-017` |
 | **Originating decision request** | `ADR-DK-002` |
 | **Title** | DevKit Radio Board Fidelity and Reuse |
-| **Status** | Proposed |
+| **Status** | Accepted |
 | **Date** | 2026-07-20 |
 | **Decision owner** | System Architect |
-| **Work Package** | WP-008 |
-| **Deliverable status** | Proposed — requires Architecture Review |
+| **Work Package** | WP-008 / WP-008-R1 (Accepted) |
+| **Deliverable status** | Accepted — Architecture Review (2026-07-20) |
 
-> This ADR is **Proposed**. Recommendations are not Accepted. Implementation Engineer cannot approve.
+> This ADR is **Accepted** by Architecture Review (2026-07-20). Implementation and verification evidence remain separate; TBD numeric thresholds (if any) remain Open unless stated otherwise.
 
 
 ### Context
@@ -90,10 +90,10 @@ Ratings: **Strong** · **Acceptable** · **Weak** · **Unacceptable**.
 | Antenna / EMC / environmental RF | Not required for DK-B exit | Not required for DK-D exit | **DCC Gen1 / product qual** |
 | Production Radio PCB identity | Preferred | Preferred | Phase E / product |
 
-### Proposed decision text
+### Decision text (Accepted)
 
 ```text
-PROPOSED: DevKit Radio fidelity follows Option D.
+DECISION (Accepted): DevKit Radio fidelity follows Option D.
 Pre-gate bring-up may use commercial ESP32-class modules.
 For DK-B and DK-D Method:Test evidence claiming DCPI, Service APIs, configuration transport, or fail-operational Service isolation, Radio shall be production-interface-conformant (Option B minimum): separate Radio domain, DCPI binary+CRC per EDL-010, power/reset isolation from Real-Time safety path, and firmware identity under ADR-015.
 Same physical Radio PCB as DCC Gen1 (Option A) is preferred when available but not required to exit DK-B/D.
@@ -164,14 +164,19 @@ Superseding ADR.
 
 | Field | Value |
 |-------|-------|
-| **Review status** | Pending Architecture Review |
-| **Architect decision** | TBD |
-| **Acceptance conditions** | TBD |
-| **Rejection / correction notes** | TBD |
+| **Review status** | Complete |
+| **Architect decision** | Accepted |
+| **Approver role** | System Architect |
+| **Acceptance date** | 2026-07-20 |
+| **Acceptance conditions** | None for architecture decision body. Implementation, fixtures, and verification evidence remain outstanding. |
+| **Rejection / correction notes** | None — blocking architecture findings: NONE |
+| **WP-008** | Accepted |
+| **PR** | #12 approved for merge |
+
 
 ### Revision history
 
 | Version | Date | Author | Change |
 |---------|------|--------|--------|
 | 1.0 | 2026-07-20 | Implementation Engineer (WP-008) | Proposed package |
-
+| 1.2 | 2026-07-20 | System Architect (acceptance) | Architecture Review — ACCEPTED |

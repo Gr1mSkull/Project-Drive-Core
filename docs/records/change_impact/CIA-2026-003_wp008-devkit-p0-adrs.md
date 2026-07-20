@@ -4,11 +4,11 @@
 |-------|-------|
 | **Change ID** | CIA-2026-003 |
 | **Impact Level** | 2 — Full CIA |
-| **Title** | WP-008 Gen1 DevKit P0 Architecture Decision Package (Proposed ADR-016…023) |
+| **Title** | WP-008 Gen1 DevKit P0 Architecture Decision Package (Accepted ADR-016…023) |
 | **Author** | Implementation Engineer (cloud agent) |
 | **Author role** | Implementation Engineer |
 | **Date** | 2026-07-20 |
-| **Status** | Under Review |
+| **Status** | Accepted |
 | **Related WP / CR** | WP-008 / WP-008-R1; depends on WP-007 Accepted (PR #11 / `d176d9f`); originating requests ADR-DK-001…007, ADR-DK-010 |
 
 ### Reason for Change
@@ -33,10 +33,10 @@ WP-007 Accepted the DevKit requirements structure, verification governance, and 
 
 | Requirement ID | Source | Impact |
 |----------------|--------|--------|
-| REQ-DCC-V-DK-005, 020, 026, 039–055 | DevKit_System_Requirements | Architecture reference → Proposed ADR-019…021, 023 (capabilities / current / faults) |
-| REQ-DCC-V-DK-017, 018, 023, 035, 038, 043–048, 054, 055, 058, 060, 067, 072, 073, 079, 080, 085, 087, 099, 100 | DevKit_System_Requirements | Fault-injection / testability → Proposed ADR-023 (not REQ-114) |
-| REQ-DCC-V-DK-009…014, 017–018, 102–103, 114 | DevKit_System_Requirements | Fidelity / reuse → Proposed ADR-016/017/018 |
-| REQ-DCC-V-DK-021, 031–038 | DevKit_System_Requirements | Timing policy → Proposed ADR-022 |
+| REQ-DCC-V-DK-005, 020, 026, 039–055 | DevKit_System_Requirements | Architecture reference → Accepted ADR-019…021, 023 (capabilities / current / faults) |
+| REQ-DCC-V-DK-017, 018, 023, 035, 038, 043–048, 054, 055, 058, 060, 067, 072, 073, 079, 080, 085, 087, 099, 100 | DevKit_System_Requirements | Fault-injection / testability → Accepted ADR-023 (not REQ-114) |
+| REQ-DCC-V-DK-009…014, 017–018, 102–103, 114 | DevKit_System_Requirements | Fidelity / reuse → Accepted ADR-016/017/018 |
+| REQ-DCC-V-DK-021, 031–038 | DevKit_System_Requirements | Timing policy → Accepted ADR-022 |
 | DK-GOV-009, 012, 024, 025 | Verification_Governance | Equivalence / freeze rules clarified by Proposed ADRs (status unchanged) |
 | EDL-001…003, 007, 010, 011, 014 | docs/EDL | **Unchanged**; cited as constraints |
 | ADR-DK-008, 009, 011, 012 | Decision requests | Remain open; sequencing noted only |
@@ -53,7 +53,7 @@ Documentation / architecture-decision package only. No firmware, hardware design
 | DCPI | Accepted | Unchanged | NO |
 | DCP / CAN | Accepted | Unchanged | NO |
 | DCFG | Accepted intent | Unchanged | NO |
-| DevKit decision requests ADR-DK-* | Open requests | Mapped to Proposed ADR-016…023 (subset) | NO (aliases retained) |
+| DevKit decision requests ADR-DK-* | Open requests | Mapped to Accepted ADR-016…023 (subset) | NO (aliases retained) |
 
 ### Affected Files
 
@@ -109,9 +109,9 @@ Documentation validation per WP-008 §26; Architecture Review of Proposed ADRs; 
 | **ADR Required** | YES — this package *is* the ADR set (Proposed) |
 | **Architect Approval Required** | YES |
 | **ADR / EDL reference** | ADR-016…023 Proposed; EDL-001…014 Accepted constraints |
-| **Architect approver (name/agent)** | TBD |
+| **Architect approver (name/agent)** | System Architect |
 | **Architect role** | System Architect |
-| **Architect approval date** | TBD |
+| **Architect approval date** | 2026-07-20 |
 
 ### Review acknowledgment (not architecture approval)
 
@@ -128,3 +128,4 @@ Documentation validation per WP-008 §26; Architecture Review of Proposed ADRs; 
 |---------|------|--------|
 | 1.0 | 2026-07-20 | WP-008 initial CIA |
 | 1.1 | 2026-07-20 | WP-008-R1 Level 1 consistency: open-load conditional; ADR-023 REQs without 114; supply interruption DK-A/DK-D; core recommendations unchanged |
+| 1.2 | 2026-07-20 | Architecture Review — Accepted; ADR-016…023 Accepted; WP-008 Accepted; PR #12 approved for merge |

@@ -5,13 +5,13 @@
 | **Canonical ADR ID** | `ADR-023` |
 | **Originating decision request** | `ADR-DK-010` |
 | **Title** | DevKit Fault Injection Scope and Fixture Boundary |
-| **Status** | Proposed |
+| **Status** | Accepted |
 | **Date** | 2026-07-20 |
 | **Decision owner** | System Architect |
-| **Work Package** | WP-008 / WP-008-R1 |
-| **Deliverable status** | Proposed — requires Architecture Review |
+| **Work Package** | WP-008 / WP-008-R1 (Accepted) |
+| **Deliverable status** | Accepted — Architecture Review (2026-07-20) |
 
-> This ADR is **Proposed**. Recommendations are not Accepted. Implementation Engineer cannot approve.
+> This ADR is **Accepted** by Architecture Review (2026-07-20). Implementation and verification evidence remain separate; TBD numeric thresholds (if any) remain Open unless stated otherwise.
 
 
 ### Context
@@ -31,7 +31,7 @@ Which fault injections are mandatory at which DevKit gates, and what fixture bou
 | REQ-DCC-V-DK-044…047, 054, 055, 079, 080, 087, 100 | Power fault reactions, BI faults, node-loss/LoC testability, invalid config, fault-injection method definition |
 | REQ-DCC-V-DK-017, 023, 038, 058, 060, 067, 072, 073, 085, 099 | BOARD_ID, first-power/reset safe state, watchdog, DCPI integrity, Service restart, Tablet disconnect, capacity reject |
 | REQ-DCC-V-DK-046 | Open-load indication **where supported** (conditional) |
-| ADR-019–022 Proposed | Capabilities, HC scope, current envelope, timing policy |
+| ADR-019–022 Accepted | Capabilities, HC scope, current envelope, timing policy |
 | DK-GOV | Evidence rules; no PASS without VE |
 | Verification plan | Open-load C-007 is CONDITIONAL_MANDATORY / DEFERRED_EXCLUDED; supply interruption cases A-003 and D-017 |
 
@@ -119,10 +119,10 @@ Additional classifications:
 7. No fixture schematic, relay/contactor/resistor/electronic-load MPN is selected here.
 ```
 
-### Proposed decision text
+### Decision text (Accepted)
 
 ```text
-PROPOSED: Mandatory fault-injection scope follows the gate-tiered table in this ADR (Option B) with Option D method rules.
+DECISION (Accepted): Mandatory fault-injection scope follows the gate-tiered table in this ADR (Option B) with Option D method rules.
 DK-A emphasizes bring-up safety faults: supply interruption (controlled power removal/reapplication and default safe outputs per VER-DCC-DK-A-003), Logic↔Power comm-loss, DCPI CRC rejection, watchdog, BOARD_ID when implemented.
 DK-B emphasizes communications/node/DCPI config-path faults.
 DK-C emphasizes power-channel physical faults (OC, SC, UV, control-loss, BI conflicts; open-load CONDITIONAL_MANDATORY when diagnostic claimed else DEFERRED_EXCLUDED; stall CONDITIONAL_MANDATORY). Supply interruption is not MANDATORY_DK_C.
@@ -208,10 +208,15 @@ Superseding ADR.
 
 | Field | Value |
 |-------|-------|
-| **Review status** | Pending Architecture Review |
-| **Architect decision** | TBD |
-| **Acceptance conditions** | TBD |
-| **Rejection / correction notes** | TBD |
+| **Review status** | Complete |
+| **Architect decision** | Accepted |
+| **Approver role** | System Architect |
+| **Acceptance date** | 2026-07-20 |
+| **Acceptance conditions** | None for architecture decision body. Implementation, fixtures, and verification evidence remain outstanding. |
+| **Rejection / correction notes** | None — blocking architecture findings: NONE |
+| **WP-008** | Accepted |
+| **PR** | #12 approved for merge |
+
 
 ### Revision history
 
@@ -219,4 +224,4 @@ Superseding ADR.
 |---------|------|--------|--------|
 | 1.0 | 2026-07-20 | Implementation Engineer (WP-008) | Proposed package |
 | 1.1 | 2026-07-20 | Implementation Engineer (WP-008-R1) | Open-load CONDITIONAL_MANDATORY; remove unrelated fidelity REQ from affected set; supply interruption DK-A/DK-D only |
-
+| 1.2 | 2026-07-20 | System Architect (acceptance) | Architecture Review — ACCEPTED |

@@ -50,8 +50,8 @@ It is not a reduced production DCC and not a substitute for DCC Gen1 acceptance.
 
 | Board | Legacy/candidate statement in prior docs | WP-007 classification |
 |-------|------------------------------------------|------------------------|
-| Logic | “Identical to DCC Gen1 Rev.A” (`docs/008` historical) | **CANDIDATE → Proposed ADR-016** (not Accepted) — do not assume same physical board |
-| Radio | “Identical to DCC Gen1 Rev.A” | **CANDIDATE → Proposed ADR-017** (not Accepted) |
+| Logic | “Identical to DCC Gen1 Rev.A” (`docs/008` historical) | **Accepted ADR-016** — staged fidelity; Option B min for DK-A…DK-D |
+| Radio | “Identical to DCC Gen1 Rev.A” | **Accepted ADR-017** — staged fidelity; Option B min for DK-B/D |
 | Power | Rev.DK reduced channels, lab terminals, indicators | **CANDIDATE DESIGN** pending acceptance of ADR-019/020/021 and ADR-DK-012 |
 
 Exact channel counts, MPNs, enclosure models, connector families, lamp wattages, and “same binary” claims from historical `docs/008` / `docs/007` tables are **not** normative requirements. See gap assessment and threshold register (`TBD-DK-*`).
@@ -59,7 +59,7 @@ Exact channel counts, MPNs, enclosure models, connector families, lamp wattages,
 ### 2.2 Configuration intent
 
 Profile scaffold: `config/vehicles/devkit.yaml` (**PARTIAL** — schema field `hardware.profile` not defined in `docs/005`).  
-Firmware equivalence rules: originating **ADR-DK-003** → **Proposed ADR-018** (not Accepted).
+Firmware equivalence rules: originating **ADR-DK-003** → **Accepted ADR-018**.
 
 ## 3. Инженерный стенд (overview)
 
@@ -155,7 +155,7 @@ When firmware trees exist, modules (Power Manager, VCM, CAN, Rules, Config, DCPI
 - [x] DevKit requirements + verification plan (**Accepted** structure)
 - [x] Traceability import of `REQ-DCC-V-DK-*` (baseline Accepted; evidence NOT VERIFIED)
 - [x] Architecture Review acceptance of DevKit baseline (2026-07-20)
-- [ ] P0 ADRs ADR-016…023 Accepted (WP-008 — currently **Proposed**)
+- [x] P0 ADRs ADR-016…023 Accepted (WP-008 Architecture Review 2026-07-20; ADR-021/022 numerics Open)
 - [ ] DevKit hardware design approved
 - [ ] First physical Phase A execution / VE records
 
@@ -169,7 +169,7 @@ When firmware trees exist, modules (Power Manager, VCM, CAN, Rules, Config, DCPI
 - [006_Web_Interface.md](006_Web_Interface.md)
 - [009_Roadmap.md](009_Roadmap.md)
 - [ADR-015](ADR/ADR-015-platform-revision-identity.md) / [STD-REV-001](standards/REVISION_IDENTITY_STANDARD.md)
-- [ADR index](ADR/README.md) — includes Proposed ADR-016…023
+- [ADR index](ADR/README.md) — includes Accepted ADR-016…023
 - [EDL](EDL/README.md) — EDL-014
 - [agents_stuff/devkit_bench_v0.1.md](../agents_stuff/devkit_bench_v0.1.md) — operational notes (non-normative)
 
@@ -182,3 +182,4 @@ When firmware trees exist, modules (Power Manager, VCM, CAN, Rules, Config, DCPI
 | 0.1.2 | 2026-07-19 | WP-007-R1 — link verification governance document |
 | 0.1.3 | 2026-07-20 | WP-007 Architecture Review ACCEPTED — status checklist updated |
 | 0.1.4 | 2026-07-20 | WP-008 — navigation to Proposed ADR-016…023; no procedure PASS claims |
+| 0.1.5 | 2026-07-20 | WP-008 Architecture Review — ADR-016…023 Accepted |

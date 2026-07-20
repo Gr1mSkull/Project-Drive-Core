@@ -5,13 +5,13 @@
 | **Canonical ADR ID** | `ADR-022` |
 | **Originating decision request** | `ADR-DK-007` |
 | **Title** | DevKit Kill and Watchdog Timing Policy |
-| **Status** | Proposed |
+| **Status** | Accepted |
 | **Date** | 2026-07-20 |
 | **Decision owner** | System Architect |
-| **Work Package** | WP-008 |
-| **Deliverable status** | Proposed — requires Architecture Review |
+| **Work Package** | WP-008 / WP-008-R1 (Accepted) |
+| **Deliverable status** | Accepted — Architecture Review (2026-07-20) |
 
-> This ADR is **Proposed**. Recommendations are not Accepted. Implementation Engineer cannot approve.
+> This ADR is **Accepted** by Architecture Review (2026-07-20) for **timing policy**. Numeric limits (`TBD-DK-004`, `TBD-DK-005`, `TBD-DK-007`, `TBD-DK-014`, `TBD-DK-021`, and related) remain **Open** pending threshold analysis and measurement.
 
 
 ### Context
@@ -115,10 +115,10 @@ Until threshold WP closes values:
 | TBD-DK-021 | System Architect | Sequence definition | Test A-014 |
 | Numeric approval artifact | Threshold CR / WP | Calculations + bench measurements | VE records later (not this WP) |
 
-### Proposed decision text
+### Decision text (Accepted)
 
 ```text
-PROPOSED: Kill/watchdog/control-loss timing policy is Option D using hierarchical classes (Option B taxonomy).
+DECISION (Accepted): Kill/watchdog/control-loss timing policy is Option D using hierarchical classes (Option B taxonomy).
 Hardware emergency paths (kill, global-enable removal, post-kill re-enable rules) use fixed deterministic timing and prohibit automatic output restart.
 Real-time safety (watchdog) uses fixed timing separate from kill.
 Communication-loss timing is fixed and shall remain consistent with EDL-011; exact millisecond limit TBD-DK-007 remains Open.
@@ -177,14 +177,19 @@ Superseding ADR; must not silently weaken EDL-011.
 
 | Field | Value |
 |-------|-------|
-| **Review status** | Pending Architecture Review |
-| **Architect decision** | TBD |
-| **Acceptance conditions** | TBD |
-| **Rejection / correction notes** | TBD |
+| **Review status** | Complete |
+| **Architect decision** | Accepted |
+| **Approver role** | System Architect |
+| **Acceptance date** | 2026-07-20 |
+| **Acceptance conditions** | Timing policy Accepted; numeric kill/watchdog/control-loss/commanded-OFF/re-enable thresholds remain Open (TBD-DK-004, 005, 007, 014, 021). |
+| **Rejection / correction notes** | None — blocking architecture findings: NONE |
+| **WP-008** | Accepted |
+| **PR** | #12 approved for merge |
+
 
 ### Revision history
 
 | Version | Date | Author | Change |
 |---------|------|--------|--------|
 | 1.0 | 2026-07-20 | Implementation Engineer (WP-008) | Proposed package |
-
+| 1.2 | 2026-07-20 | System Architect (acceptance) | Architecture Review — ACCEPTED (numerics remain Open) |

@@ -5,7 +5,7 @@
 | **Review Package ID** | RHP-2026-002 |
 | **Change Scope** | WP-008 Gen1 DevKit P0 Proposed ADR package (ADR-016…023), crosswalk, CIA, planning/traceability references |
 | **Related Requirements** | REQ-DCC-V-DK-* fidelity/power/timing; ADR-023 fault/testability set (017, 018, 023, 035, 038, 043–048, 054, 055, 058, 060, 067, 072, 073, 079, 080, 085, 087, 099, 100 — not 114); DK-GOV-009/012/024/025 |
-| **Related Architecture** | EDL-001, 002, 003, 007, 010, 011, 014; ADR-015; Proposed ADR-016…023; DevKit WP-007 Accepted baseline |
+| **Related Architecture** | EDL-001, 002, 003, 007, 010, 011, 014; ADR-015; Accepted ADR-016…023; DevKit WP-007 Accepted baseline |
 | **Related WP / CR** | WP-008 / WP-008-R1 (depends on WP-007 Accepted / PR #11) |
 | **Impact Level** | 2 |
 | **Date** | 2026-07-20 |
@@ -25,7 +25,7 @@
 | Interface | From version | To version | CIA / Impact note |
 |-----------|--------------|------------|-------------------|
 | J_LP / DCPI / DCP / DCFG wire formats | unchanged | unchanged | CIA-2026-003 — no protocol edits |
-| Decision-request aliases ADR-DK-001…007, 010 | open requests only | Mapped to Proposed ADR-016…023 | Canonical IDs are ADR-NNN |
+| Decision-request aliases ADR-DK-001…007, 010 | open requests only | Mapped to Accepted ADR-016…023 | Canonical IDs are ADR-NNN |
 
 ### Changed Assumptions
 
@@ -88,12 +88,12 @@ Revert PR/branch; WP-007 remains on `main` unchanged in substance.
 | Field | Value |
 |-------|-------|
 | **Implementer Self-Review Status** | Complete |
-| **Independent Review Status** | Not started |
+| **Independent Review Status** | Complete |
 | **Independent Reviewer (name/agent)** | (must differ from implementer) |
 | **Independent Reviewer role** | Independent Reviewer |
 | **Independent review date** | TBD |
-| **Final Review Outcome** | TBD |
-| **Architecture / policy approval** | Separate — System Architect only; ADRs remain Proposed until Architect decision |
+| **Final Review Outcome** | Accepted |
+| **Architecture / policy approval** | System Architect — ADR-016…023 Accepted 2026-07-20; WP-008 Accepted; PR #12 approved for merge |
 
 ## Revision history
 
@@ -101,3 +101,4 @@ Revert PR/branch; WP-007 remains on `main` unchanged in substance.
 |---------|------|--------|
 | 1.0 | 2026-07-20 | WP-008 initial RHP |
 | 1.1 | 2026-07-20 | WP-008-R1 — open-load conditional; ADR-023 REQ list without 114; supply interruption DK-A/DK-D |
+| 1.2 | 2026-07-20 | Architecture Review Accepted; ADRs Accepted; PR #12 approved for merge |

@@ -5,13 +5,13 @@
 | **Canonical ADR ID** | `ADR-021` |
 | **Originating decision request** | `ADR-DK-006` |
 | **Title** | DevKit Input and Simultaneous-Current Architecture |
-| **Status** | Proposed |
+| **Status** | Accepted |
 | **Date** | 2026-07-20 |
 | **Decision owner** | System Architect |
-| **Work Package** | WP-008 |
-| **Deliverable status** | Proposed — requires Architecture Review |
+| **Work Package** | WP-008 / WP-008-R1 (Accepted) |
+| **Deliverable status** | Accepted — Architecture Review (2026-07-20) |
 
-> This ADR is **Proposed**. Recommendations are not Accepted. Implementation Engineer cannot approve.
+> This ADR is **Accepted** by Architecture Review (2026-07-20) for **architecture direction**. Numeric limits (`TBD-DK-002`, `TBD-DK-003`, and related constrained TBDs) remain **Open** pending threshold analysis and measurement.
 
 
 ### Context
@@ -29,7 +29,7 @@ What bench input and simultaneous-current **architecture** shall DevKit use, and
 | REQ-DCC-V-DK-020 | Replaceable overcurrent protection sized to approved input limit TBD-DK-002 |
 | DK-GOV-025 | Simultaneous load current freeze before multi-load DK-C |
 | Constitution | Protection coordination: fuse, switch, wiring, connector, software limits |
-| ADR-019/020 Proposed | Capability/HC scope |
+| ADR-019/020 Accepted | Capability/HC scope |
 | EDL-014 | Lab gate before vehicle |
 
 ### Decision drivers
@@ -101,10 +101,10 @@ Decision scope: architecture proposed; numeric limits remain Open.
 
 `TBD-DK-001`, `012`, `017`, `018`, `019` — architecture may assume separate closure; values remain Open.
 
-### Proposed decision text
+### Decision text (Accepted)
 
 ```text
-PROPOSED: DevKit input/simultaneous-current architecture is Option B + Option D distinction.
+DECISION (Accepted): DevKit input/simultaneous-current architecture is Option B + Option D distinction.
 A lower-current certified continuous base envelope applies to on-board DevKit Power operation.
 Higher-energy tests use an external load bank / module under fixture safety rules.
 Protection devices may be sized for higher fault interruption than the certified continuous envelope; fuse rating shall not be treated as continuous operating current.
@@ -161,14 +161,19 @@ Superseding ADR.
 
 | Field | Value |
 |-------|-------|
-| **Review status** | Pending Architecture Review |
-| **Architect decision** | TBD |
-| **Acceptance conditions** | TBD |
-| **Rejection / correction notes** | TBD |
+| **Review status** | Complete |
+| **Architect decision** | Accepted |
+| **Approver role** | System Architect |
+| **Acceptance date** | 2026-07-20 |
+| **Acceptance conditions** | Architecture Accepted; numeric input/simultaneous current limits remain Open (TBD-DK-002, TBD-DK-003). |
+| **Rejection / correction notes** | None — blocking architecture findings: NONE |
+| **WP-008** | Accepted |
+| **PR** | #12 approved for merge |
+
 
 ### Revision history
 
 | Version | Date | Author | Change |
 |---------|------|--------|--------|
 | 1.0 | 2026-07-20 | Implementation Engineer (WP-008) | Proposed package |
-
+| 1.2 | 2026-07-20 | System Architect (acceptance) | Architecture Review — ACCEPTED (numerics remain Open) |

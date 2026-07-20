@@ -5,13 +5,13 @@
 | **Canonical ADR ID** | `ADR-020` |
 | **Originating decision request** | `ADR-DK-005` |
 | **Title** | DevKit Highest-Current Verification Scope |
-| **Status** | Proposed |
+| **Status** | Accepted |
 | **Date** | 2026-07-20 |
 | **Decision owner** | System Architect |
-| **Work Package** | WP-008 |
-| **Deliverable status** | Proposed — requires Architecture Review |
+| **Work Package** | WP-008 / WP-008-R1 (Accepted) |
+| **Deliverable status** | Accepted — Architecture Review (2026-07-20) |
 
-> This ADR is **Proposed**. Recommendations are not Accepted. Implementation Engineer cannot approve.
+> This ADR is **Accepted** by Architecture Review (2026-07-20). Implementation and verification evidence remain separate; TBD numeric thresholds (if any) remain Open unless stated otherwise.
 
 
 ### Context
@@ -28,7 +28,7 @@ Where shall the highest-current channel class be verified, and which verificatio
 |--------|------------|
 | EDL-014 | Phase E critical items on full DCC Gen1; DevKit does not replace Phase E |
 | REQ-DCC-V-DK-005 | Not full production population by default |
-| ADR-019 (Proposed) | High-current continuous classified EXTERNAL_FIXTURE / deferred |
+| ADR-019 (Accepted) | High-current continuous classified EXTERNAL_FIXTURE / deferred |
 | Constitution | High-current copper/thermal must be verified — not headline ratings |
 | Candidate docs/008 | no-HS60 on DevKit — candidate only |
 
@@ -96,10 +96,10 @@ Ratings: **Strong** · **Acceptable** · **Weak** · **Unacceptable**.
 | thermal HC sustained | Not DevKit PCB mandate | **Required** |
 | vehicle-load | Out of DevKit | **Required** (as applicable) |
 
-### Proposed decision text
+### Decision text (Accepted)
 
 ```text
-PROPOSED: Highest-current class verification follows Option D.
+DECISION (Accepted): Highest-current class verification follows Option D.
 DevKit Power Board is not required to implement a production highest-current channel.
 Early bounded high-current discovery may use an external load-bank/module driven through production-intent control/diagnostic interfaces.
 Continuous-current, sustained thermal, and vehicle-load verification for the highest class remain mandatory on DCC Gen1 Phase E hardware and are not replaced by DevKit evidence.
@@ -155,14 +155,19 @@ Superseding ADR.
 
 | Field | Value |
 |-------|-------|
-| **Review status** | Pending Architecture Review |
-| **Architect decision** | TBD |
-| **Acceptance conditions** | TBD |
-| **Rejection / correction notes** | TBD |
+| **Review status** | Complete |
+| **Architect decision** | Accepted |
+| **Approver role** | System Architect |
+| **Acceptance date** | 2026-07-20 |
+| **Acceptance conditions** | None for architecture decision body. Implementation, fixtures, and verification evidence remain outstanding. |
+| **Rejection / correction notes** | None — blocking architecture findings: NONE |
+| **WP-008** | Accepted |
+| **PR** | #12 approved for merge |
+
 
 ### Revision history
 
 | Version | Date | Author | Change |
 |---------|------|--------|--------|
 | 1.0 | 2026-07-20 | Implementation Engineer (WP-008) | Proposed package |
-
+| 1.2 | 2026-07-20 | System Architect (acceptance) | Architecture Review — ACCEPTED |

@@ -1,17 +1,17 @@
 # DevKit P0 Decision Crosswalk — WP-008
 
 **Document ID:** DOC-DK-P0-XWALK-001  
-**Version:** 1.1  
-**Status:** Proposed  
-**Work Package:** WP-008 / WP-008-R1  
+**Version:** 1.2  
+**Status:** Accepted  
+**Work Package:** WP-008 / WP-008-R1 (Accepted)  
 **Date:** 2026-07-20
 
-> Maps Proposed ADR-016…023 recommendations to requirements, cases, TBDs, and next Work Packages.  
-> ADR acceptance is **not** implied. Evidence remains **NOT VERIFIED**.
+> Maps Accepted ADR-016…023 recommendations to requirements, cases, TBDs, and next Work Packages.  
+> Architecture Review Accepted (2026-07-20). Evidence remains **NOT VERIFIED**. ADR-021/022 numerics remain **Open**.
 
 ## 1. Decision summary table
 
-| Topic | ADR | Recommended decision (Proposed) | Requirements affected (primary) | Cases affected (primary) | TBDs affected | Next WP |
+| Topic | ADR | Accepted decision | Requirements affected (primary) | Cases affected (primary) | TBDs affected | Next WP |
 |-------|-----|----------------------------------|----------------------------------|--------------------------|---------------|---------|
 | Logic fidelity | ADR-016 | Option D; Option B min for DK-A…DK-D; EDL-001 processor | 009, 011, 012, 017, 018, 102, 103 | A-007…A-017, B-006 | — (identity map later) | Electrical architecture; platform |
 | Radio fidelity | ADR-017 | Option D; Option B min for DK-B/D Service/DCPI | 010, 012, 018, 102, 103 | A-005, A-009, B-006…B-015, D-012, D-013 | TBD-DK-006 (timing only) | Electrical; Radio qual; ADR-DK-008 |
@@ -66,7 +66,7 @@ No hidden circular dependencies identified. Soft couplings shall be closed by th
 
 ## 4. Blocker state after Proposed acceptance (hypothetical)
 
-| Area | If P0 ADRs Accepted | Still blocked by |
+| Area | After P0 ADRs Accepted | Still blocked by |
 |------|---------------------|------------------|
 | Architecture direction | Architecture blocker reduced | — |
 | Electrical design start | May be authorized by Architect as next WP | Implementation not started |
@@ -75,7 +75,7 @@ No hidden circular dependencies identified. Soft couplings shall be closed by th
 | Evidence | — | Remains NOT VERIFIED |
 
 ```text
-Architecture blocker resolved (if Accepted)
+Architecture blocker resolved (Accepted)
 Implementation blocker remains
 Fixture blocker remains
 Threshold blocker remains
@@ -105,3 +105,4 @@ Evidence remains NOT VERIFIED
 |---------|------|--------|
 | 1.0 | 2026-07-20 | WP-008 initial crosswalk |
 | 1.1 | 2026-07-20 | WP-008-R1 — open-load conditional; ADR-023 REQs without 114; supply interruption DK-A/DK-D |
+| 1.2 | 2026-07-20 | Architecture Review — ADR-016…023 Accepted; WP-008 Accepted |
