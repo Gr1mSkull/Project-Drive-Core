@@ -10,7 +10,7 @@
 | **Impact Level** | 2 (package); R1 = Level 1 (architecture consistency) |
 | **Reviewed baseline** | `bc7c6b6f302aa8a2e6eccc54284dad6628d7101b` (WP-014 acceptance on `main`) |
 | **R1 reviewed head (pre-R1)** | `56707ff5e0dc58c44b6b425d1ef9920c3cd81169` |
-| **Proposed head** | WP-015 branch tip after R1 (PR #19) |
+| **Proposed head** | WP-015-R2 correction commit `49c5a95558ca25707cefd396dd913a14b02eacd5` (PR #19); metadata commit records this SHA |
 | **Date** | 2026-07-21 |
 | **Implementer** | Implementation Engineer (cloud agent) |
 | **Implementer role** | Implementation Engineer |
