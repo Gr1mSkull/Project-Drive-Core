@@ -1,7 +1,7 @@
 # DevKit Fixture Preliminary Design Architecture — WP-015
 
 **Document ID:** DOC-DK-FPDA-001  
-**Version:** 1.0  
+**Version:** 1.1  
 **Status:** Proposed — Architecture Review pending  
 **Work Package:** WP-015  
 **Baseline:** WP-014 Accepted (`bc7c6b6`)  
@@ -91,17 +91,17 @@ Modules are functional; a module does **not** imply a separate enclosure or PCB.
 
 | Module ID | Purpose | Inputs (symbolic) | Outputs (symbolic) | Energy authority | Control authority | Observation role | Safe default | Safe minimum on failure | Upstream dep | Downstream dep | Open issue | Design status |
 |-----------|---------|-------------------|--------------------|--------------------|-------------------|------------------|--------------|-------------------------|--------------|----------------|------------|---------------|
-| `FX-SOURCE-CONTROL` | Control base/external source outputs | AUTH grants, operator req | Source enable cmd | Executes source enable under AUTH | Command only under AUTH | Source-state observe | Output inactive | Inhibit source output | FX-AUTHORIZATION | FX-BASE-ENERGY-PATH / FX-EXTERNAL-ENERGY-BOUNDARY | — | PROPOSED_DESIGN |
-| `FX-BASE-ENERGY-PATH` | Base envelope energy delivery to DUT | Base source energy | DUT base energy | Base | None (path) | Entry/base MPs | De-energized | Inhibit/remove base energy | FX-SOURCE-CONTROL | FX-DUT-INTERFACE | — | PROPOSED_DESIGN |
-| `FX-EXTERNAL-ENERGY-BOUNDARY` | External envelope boundary + back-feed prevention | Ext source energy | Ext energy (bounded) | External | None (function) | Ext MPs; back-feed observe | De-energized; isolated-by-function | Inhibit ext energy; prevent back-feed | FX-SOURCE-CONTROL | FX-LOAD-BANK / DUT-under-EXT | OI-GND-001 | BLOCKED_BY_ARCHITECTURE |
+| `FX-SOURCE-CONTROL` | Command/control of source enablement (issues enable commands) | AUTH grants, operator req | Source-enable **command** (`[C]`) | **None — command/control only; originates no energy; not proof of energy removal; does not replace energy-path observation** | Command only under AUTH | Source-state observe | Command inactive | Inhibit source-enable command | FX-AUTHORIZATION | BASE-ENERGY-CONTROL / EXT-ENERGY-CONTROL (energy-control elements) | — | PROPOSED_DESIGN |
+| `FX-BASE-ENERGY-PATH` | Base envelope energy delivery to DUT (via BASE-ENERGY-CONTROL) | Base source energy (from BASE-SOURCE→BASE-ENERGY-CONTROL) | DUT base energy | Base | None (path) | Entry/base MPs | De-energized | Inhibit/remove base energy | BASE-ENERGY-CONTROL | FX-DUT-INTERFACE | — | PROPOSED_DESIGN |
+| `FX-EXTERNAL-ENERGY-BOUNDARY` | External envelope boundary + back-feed prevention (via EXT-ENERGY-CONTROL) | Ext source energy (from EXT-SOURCE→EXT-ENERGY-CONTROL) | Ext energy (bounded) | External | None (function) | Ext MPs; back-feed observe | De-energized; functionally separated; no uncontrolled interconnection; ground/isolation topology Open | Inhibit ext energy; prevent back-feed | EXT-ENERGY-CONTROL | FX-LOAD-BANK / DUT-under-EXT | OI-GND-001 | BLOCKED_BY_ARCHITECTURE |
 | `FX-ENERGY-REMOVAL` | Remove/inhibit hazardous energy | Removal request, E-stop | Removal action | Overrides all AUTH | Removal command | Residual observe | Removal-capable | Force removal/inhibit | FX-ESTOP, FX-INTERLOCK-CONTROLLER | FX-DISCHARGE | Timing Open | PROPOSED_DESIGN |
 | `FX-ESTOP` | Emergency energy inhibit independent of DUT firmware | Operator E-stop | Inhibit-all | Inhibits all fixture hazardous AUTH | Highest override | E-stop state | Asserted-safe on loss | Inhibit hazardous energy | Operator | FX-ENERGY-REMOVAL, FX-AUTHORIZATION | REQ-DCC-V-FX-071 | BLOCKED_BY_ARCHITECTURE (topology) |
 | `FX-AUTHORIZATION` | Grant/revoke `AUTH_*` | Identity/config/state, E-stop | AUTH grants | Sole grantor | Arbitration | AUTH-state observe | All AUTH inactive | Revoke all AUTH | FX-INTERLOCK-CONTROLLER | Source/sink/fault/DUT modules | — | PROPOSED_DESIGN |
 | `FX-INTERLOCK-CONTROLLER` | Evaluate interlocks and state | All safety inputs | Interlock verdicts | None (logic) | Gates AUTH | Interlock observe | Fail-safe inhibit | Inhibit on any unmet interlock | Observations | FX-AUTHORIZATION | — | PROPOSED_DESIGN |
 | `FX-DUT-INTERFACE` | Allocate DUT power/logic/KILL/enable/comm | Fixture energy/signals | DUT connections | Base (gated) | Under AUTH | KILL/nENABLE observe | Disconnected/inactive | Inhibit DUT energy | FX-BASE-ENERGY-PATH | DUT | — | PROPOSED_DESIGN |
-| `FX-LOAD-BANK` | Controlled energy sink | DUT output, AUTH | Load control | Sink | Under `AUTH_LOAD_BANK` | Sink/load observe | Inactive | Revoke + upstream removal | FX-AUTHORIZATION | FX-ENERGY-REMOVAL | OI-BI-001 | PROPOSED_DESIGN / BLOCKED (regen) |
+| `FX-LOAD-BANK` | Controlled energy sink-function (no independent origination); returned-energy reverse-flow separately contained | DUT output, AUTH | Load control | Sink-function; independent energy origination prohibited; returned-energy reverse-flow BLOCKED_BY_ARCHITECTURE | Under `AUTH_LOAD_BANK` | Sink/load observe | Inactive | Revoke + upstream removal | FX-AUTHORIZATION | FX-ENERGY-REMOVAL | OI-BI-001, OI-GND-001 | PROPOSED_DESIGN / BLOCKED (returned energy) |
 | `FX-FAULT-INJECTION` | Bounded authorized fault application | AUTH, preconditions | Fault stimulus | Conditional | Under `AUTH_FAULT_INJECTION` | Fault-state observe | Inhibited | Inhibit + lockout | FX-AUTHORIZATION | FX-ENERGY-REMOVAL | OI-SC-001, OI-FIX-002 | BLOCKED_BY_DETAILED_DESIGN |
-| `FX-MEASUREMENT` | Envelope-aware observation | Signals | Measured quantities | None | None | Primary observer | High-Z/safe | Block dependent tests | Energy paths | FX-DAQ | OI-SENSE-001, OI-GND-001 | PROPOSED_DESIGN / PARTIAL |
+| `FX-MEASUREMENT` | Observation-purpose (a physical connection is a potential energy/reference/fault path until qualified) | Signals | Measured quantities | None **as designed**; physical connection treated as potential energy/reference/fault path (impedance/protection/reference/isolation/fault behavior Open) | None | Primary observer | High-Z/safe (impedance/protection Open) | Block dependent tests | Energy paths | FX-DAQ | OI-SENSE-001, OI-GND-001 | PROPOSED_DESIGN / PARTIAL |
 | `FX-DAQ` | Acquire/log measured/derived data | Measurements | Data records | None | None | Logger | Passive | Continue logging or flag loss | FX-MEASUREMENT | FX-OPERATOR-CONTROL, evidence | Accuracy/BW Open | PROPOSED_DESIGN |
 | `FX-OPERATOR-CONTROL` | Operator commands/requests | Operator input | Requests | None (request-only) | Request-only | — | No hazardous request honored by default | Requests ignored if unsafe | Operator | FX-AUTHORIZATION | — | PROPOSED_DESIGN |
 | `FX-STATUS-INDICATION` | Indicate fixture state | Observations | Indications | None | None | Indicator | Safe/off indication | Indicate unknown/unsafe | Observations | Operator | — | PROPOSED_DESIGN |
@@ -110,6 +110,11 @@ Modules are functional; a module does **not** imply a separate enclosure or PCB.
 | `FX-SERVICE-INTERFACE` | Service/UI/logging link | Service comms | Service data | None (never hazardous) | Request-only | — | No AUTH | No energy authority | — | FX-DAQ | — | PROPOSED_DESIGN |
 
 Detail per module in the block/energy/state/interface documents.
+
+**WP-015-R1 notes:**
+- `FX-SOURCE-CONTROL` is a command/control function only; it originates no energy, is not proof of energy removal, and does not replace energy-path observation. Energy control is performed by `BASE-ENERGY-CONTROL` / `EXT-ENERGY-CONTROL` in the energy path (see energy-control document §1).
+- `FX-MEASUREMENT` is observation-purpose; a physical measurement connection is treated as a potential energy/reference/fault path until qualified (no unconditional non-energy classification).
+- `FX-LOAD-BANK` uses a **sink-function** architecture; independent energy origination is prohibited. Regenerative/bidirectional **returned energy** is an energy-bearing reverse-flow condition requiring explicit containment; it does not reclassify the load bank as `EXT-SOURCE`, and remains `BLOCKED_BY_ARCHITECTURE` until OI-BI-001 and OI-GND-001 are dispositioned.
 
 ## 7. Readiness overview
 
@@ -136,3 +141,4 @@ Detail: [DevKit_Fixture_Implementation_Readiness_Matrix.md](DevKit_Fixture_Imple
 | Version | Date | Change |
 |---------|------|--------|
 | 1.0 | 2026-07-20 | WP-015 initial preliminary design architecture anchor — Proposed |
+| 1.1 | 2026-07-21 | WP-015-R1 — source-control vs energy path separated; measurement as potential energy/fault path; load-bank sink-function + returned-energy containment; isolated-by-function removed |

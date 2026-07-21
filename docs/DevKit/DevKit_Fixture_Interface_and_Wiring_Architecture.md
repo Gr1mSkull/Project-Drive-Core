@@ -1,7 +1,7 @@
 # DevKit Fixture Interface and Wiring Architecture — WP-015
 
 **Document ID:** DOC-DK-FIWA-001  
-**Version:** 1.0  
+**Version:** 1.1  
 **Status:** Proposed — Architecture Review pending  
 **Work Package:** WP-015  
 **Date:** 2026-07-20
@@ -23,7 +23,7 @@ No connector family, pinout, conductor size, insulation, color, or rating select
 | `IF-FX-GLOBAL-ENABLE` | nENABLE_GLOBAL | Signal (safety) | Fixture↔DUT | High (safety) | Inactive | Dedicated safety separation | nENABLE MP | — | Safety WP |
 | `IF-FX-LOAD-BANK` | sink control, sink sense | Hazardous (load) | DUT→sink | High | Inactive | From source | I_LOAD_n, V_LOAD_n | OI-BI-001 | Load-bank WP |
 | `IF-FX-FAULT-INJECTION` | fault stimulus, abort | Conditional | Fixture→DUT | High | Inhibited | Contained | fault MPs | OI-SC-001 | Fault WP |
-| `IF-FX-MEASUREMENT` | sense taps | None (non-energy) | DUT/fixture→sense | Medium (observation) | High-Z/safe | From energy paths | all MPs | OI-GND-001 | Measurement WP |
+| `IF-FX-MEASUREMENT` | sense taps | Potential energy/reference/fault path (until qualified) | DUT/fixture→sense | Medium–High (potential energy/fault path) | High-Z/safe (impedance/protection Open) | From energy paths; reference-path Open | all MPs | OI-GND-001 | Measurement WP |
 | `IF-FX-DAQ` | acquisition/log | None | Sense→DAQ | Medium | Passive | From energy | — | accuracy Open | DAQ WP |
 | `IF-FX-ESTOP` | emergency inhibit | Safety-effective | Operator→fixture | Highest | Asserted-safe | Dedicated | E-stop state | REQ-DCC-V-FX-071 | Safety WP |
 | `IF-FX-SERVICE` | service/UI/log | None (never hazardous) | Bidirectional | Low (non-safety) | No AUTH | From safety | — | — | Service WP |
@@ -41,11 +41,13 @@ No connector families or pinouts are selected.
 | `W-FX-SAFETY` | E-stop/KILL/enable | Signal (safety) | Dedicated, independent | Integrity-monitored | safety-state MPs | loss of inhibit | integrity inputs Open | — | REQ-DCC-V-FX-071 |
 | `W-FX-CONTROL` | Command/control | Signal | From power/safety | Noise-controlled | — | wrong command | — | — | — |
 | `W-FX-COMMUNICATION` | CAN/service comms | Signal | From power | Impedance-controlled | — | comm loss | — | — | — |
-| `W-FX-MEASUREMENT` | Sense/observation | Non-energy | From power; high-Z | Shielded/twisted (class) | all MPs | wrong reading | accuracy inputs Open | — | OI-SENSE-001; OI-GND-001 |
+| `W-FX-MEASUREMENT` | Sense/observation | Potential energy/reference/fault path (until qualified) | From power; high-Z; reference-path controlled | Shielded/twisted (class); protection/impedance Open | all MPs | wrong reading; fault-energy carry; unintended reference/back-feed | accuracy/fault-energy/impedance/protection inputs Open | — | OI-SENSE-001; OI-GND-001 |
 | `W-FX-SHIELD` | Shielding/reference | Reference | Per GND decision | Per GND decision | — | noise/ground loop | — | — | OI-GND-001 |
 | `W-FX-FAULT-INJECTION` | Fault stimulus routing | Conditional | Contained, dedicated | Contained | fault MPs | uncontrolled fault | bounds Open | — | OI-SC-001 |
 
 No conductor size, insulation type, color, or connector is selected.
+
+**Measurement wiring/interface note (WP-015-R1):** `W-FX-MEASUREMENT` and `IF-FX-MEASUREMENT` are **not** classified as unconditionally non-energy. A measurement conductor/instrument input is treated as a potential energy/reference/fault path until its impedance, protection, reference, isolation, and fault behavior are qualified (see `DevKit_Fixture_Measurement_and_DAQ_Architecture.md` §1). No isolation topology is selected (OI-GND-001 Open).
 
 ## 3. Operator control and indication (§27)
 
@@ -79,3 +81,4 @@ REQ-DCC-V-FX-005/010…015/030…034/040/060…062/070/071 · PWR-A-024 · OI-GN
 | Version | Date | Change |
 |---------|------|--------|
 | 1.0 | 2026-07-20 | WP-015 initial interface and wiring architecture (+ operator control/indication) — Proposed |
+| 1.1 | 2026-07-21 | WP-015-R1 — measurement interface/wiring reclassified as potential energy/reference/fault path (not unconditional non-energy) |

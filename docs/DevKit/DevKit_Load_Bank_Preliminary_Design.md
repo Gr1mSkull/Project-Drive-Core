@@ -1,15 +1,37 @@
 # DevKit Load-Bank Preliminary Design — WP-015
 
 **Document ID:** DOC-DK-LBPD-001  
-**Version:** 1.0  
+**Version:** 1.1  
 **Status:** Proposed — Architecture Review pending  
 **Work Package:** WP-015  
 **Date:** 2026-07-20
 
 ```text
-Load-bank FUNCTIONAL preliminary design. The load bank is a controlled energy SINK.
+Load-bank FUNCTIONAL preliminary design — sink-function architecture.
 No physical load-bank technology, device, rating, power, thermal, or cooling value selected.
 ```
+
+## 0. Source / sink / regenerative semantics (WP-015-R1)
+
+```text
+The load bank does not originate an independent source envelope.
+
+A regenerative or bidirectional load may return energy toward its
+associated source or absorption path. Such returned energy does not
+reclassify the load bank as EXT-SOURCE, but it is an energy-bearing
+reverse-flow condition requiring explicit containment.
+```
+
+Accordingly:
+
+```text
+sink-function architecture;
+independent energy origination prohibited;
+returned-energy behavior separately controlled and BLOCKED_BY_ARCHITECTURE
+until OI-BI-001 and OI-GND-001 are dispositioned.
+```
+
+`PWR-A-023` (EXT-LOAD-BANK is a sink, not an independent source) is unchanged.
 
 ## 1. Functional load classes (§19)
 
@@ -19,10 +41,10 @@ No physical load-bank technology, device, rating, power, thermal, or cooling val
 | `LB-INDUCTIVE` | Inductive turn-off | DUT output + stored | Draw; clamp on interrupt | AUTH gated | FX-AUTHORIZATION | V spike, I | Command + clamp | Removal + decay | High (L energy) | arc/spike; clamp fail | Controlled decay | V spike capture | Clamp energy Open | PARTIAL |
 | `LB-ELECTRONIC` | Programmable profile | DUT/ext output | Draw (+) | AUTH gated | FX-AUTHORIZATION | I command/actual | Command removal | Upstream inhibit/remove | Device-dependent | fail-to-remove | Sink inactive | I profile | Ratings Open | PARTIAL |
 | `LB-MOTOR_OR_ACTUATOR` | Motor/actuator load | DUT output | Draw; possible return | AUTH gated | FX-AUTHORIZATION | I, direction | Command removal | Upstream inhibit/remove | Mechanical/inductive | stall; reverse current | Sink inactive | I, direction | OI-FIX-002; TBD-DK-022 | BLOCKED_BY_DETAILED_DESIGN |
-| `LB-BIDIRECTIONAL_OR_REGENERATIVE` | Bidirectional / returning energy | DUT/bridge | Both (+/−) | AUTH gated | FX-AUTHORIZATION | signed I | Command + clamp/absorb | Removal + absorb path | Returned energy | source cannot absorb | Inhibit; do not assume absorb | signed I; bridge/load split | OI-BI-001 | BLOCKED_BY_ARCHITECTURE |
+| `LB-BIDIRECTIONAL_OR_REGENERATIVE` | Bidirectional / returning energy (returned-energy reverse-flow, not independent origination) | DUT/bridge (upstream origin; load bank never originates) | Both (+/−) | AUTH gated | FX-AUTHORIZATION | signed I | Command + clamp/absorb | Removal + absorb path | Returned energy (reverse-flow) | source cannot absorb | Inhibit; do not assume absorb; explicit containment | signed I; bridge/load split | OI-BI-001; OI-GND-001 | BLOCKED_BY_ARCHITECTURE |
 | `LB-FAULT-SIMULATION` | Fault emulation (open/overload/short) | DUT/ext output | Fault-dependent | AUTH_FAULT gated | FX-AUTHORIZATION | fault MPs | Abort + removal | Upstream inhibit/remove | Fault energy | uncontrolled fault | Inhibit + lockout | fault MPs | OI-SC-001; ED-IN-021; bounds Open | BLOCKED_BY_DETAILED_DESIGN |
 
-No physical load-bank technology is selected. `I_loadbank_limit` remains Open (ED-IN-022) and does not increase `I_certified_cont`.
+No physical load-bank technology is selected. `I_loadbank_limit` remains Open (ED-IN-022) and does not increase `I_certified_cont`. The "Energy source" column identifies the **upstream** energy origin (DUT/ext/bridge); the load bank itself never originates an independent source envelope. Returned/regenerative energy is a reverse-flow condition requiring explicit containment (BLOCKED_BY_ARCHITECTURE until OI-BI-001 and OI-GND-001 are dispositioned).
 
 ## 2. Load-bank failure behavior (§20)
 
@@ -67,3 +89,4 @@ REQ-DCC-V-FX-032/050/056/060 · PWR-A-002/023 · OI-BI-001 · OI-SC-001 · OI-FI
 | Version | Date | Change |
 |---------|------|--------|
 | 1.0 | 2026-07-20 | WP-015 initial load-bank preliminary design — Proposed |
+| 1.1 | 2026-07-21 | WP-015-R1 — source/sink/regenerative semantics reconciled; absolute "never sourced / sink-only" removed; returned-energy reverse-flow containment BLOCKED_BY_ARCHITECTURE; PWR-A-023 unchanged |

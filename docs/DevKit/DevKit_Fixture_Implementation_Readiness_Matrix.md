@@ -1,7 +1,7 @@
 # DevKit Fixture Implementation Readiness Matrix — WP-015
 
 **Document ID:** DOC-DK-FIRM-001  
-**Version:** 1.0  
+**Version:** 1.1  
 **Status:** Proposed — Architecture Review pending  
 **Work Package:** WP-015  
 **Date:** 2026-07-20
@@ -28,7 +28,8 @@ procurement, construction, or energization ready.
 | Stuck-on containment | READY_IF_ACCEPTED | READY_IF_ACCEPTED | NOT_READY | NOT_READY | PARTIAL | NOT_AUTHORIZED | NOT_AUTHORIZED | NOT_AUTHORIZED | Upstream-removal realization | Detailed design WP |
 | Discharge | READY_IF_ACCEPTED | PARTIAL | NOT_READY | NOT_READY | NOT_READY | NOT_AUTHORIZED | NOT_AUTHORIZED | NOT_AUTHORIZED | Stored-energy inputs Open | Detailed design WP |
 | DUT interface | READY_IF_ACCEPTED | READY_IF_ACCEPTED | NOT_READY | NOT_READY | NOT_READY | NOT_AUTHORIZED | NOT_AUTHORIZED | NOT_AUTHORIZED | Connector/pinout Open | DUT interface WP |
-| Measurement | READY_IF_ACCEPTED | PARTIAL | NOT_READY | BLOCKED | NOT_READY | NOT_AUTHORIZED | NOT_AUTHORIZED | NOT_AUTHORIZED | OI-SENSE-001; OI-GND-001 | Measurement WP |
+| Measurement | READY_IF_ACCEPTED | PARTIAL | NOT_READY | BLOCKED | NOT_READY | NOT_AUTHORIZED | NOT_AUTHORIZED | NOT_AUTHORIZED | OI-SENSE-001; OI-GND-001; measurement-connection energy/fault path unqualified (FX-PD-018) | Measurement WP |
+| Load bank (returned energy) | READY_IF_ACCEPTED | BLOCKED | NOT_READY | NOT_READY | BLOCKED | NOT_AUTHORIZED | NOT_AUTHORIZED | NOT_AUTHORIZED | Returned-energy reverse-flow containment (OI-BI-001; OI-GND-001; FX-PD-019) | Load-bank WP |
 | DAQ | READY_IF_ACCEPTED | PARTIAL | NOT_READY | NOT_READY | NOT_READY | NOT_AUTHORIZED | NOT_AUTHORIZED | NOT_AUTHORIZED | Accuracy/BW Open | DAQ WP |
 | Fault injection | READY_IF_ACCEPTED | BLOCKED | NOT_READY | NOT_READY | BLOCKED | NOT_AUTHORIZED | NOT_AUTHORIZED | NOT_AUTHORIZED | OI-SC-001; bounds Open | Fault WP |
 | Operator controls | READY_IF_ACCEPTED | READY_IF_ACCEPTED | NOT_READY | NOT_READY | NOT_READY | NOT_AUTHORIZED | NOT_AUTHORIZED | NOT_AUTHORIZED | Panel detailed design | Detailed design WP |
@@ -57,3 +58,4 @@ REQ-DCC-V-FX-* · OI-GND-001 · OI-PROT-001/002 · OI-SC-001 · OI-FIX-002 · OI
 | Version | Date | Change |
 |---------|------|--------|
 | 1.0 | 2026-07-20 | WP-015 initial implementation readiness matrix — Proposed |
+| 1.1 | 2026-07-21 | WP-015-R1 — measurement blocker (energy/fault path unqualified); returned-energy containment row (FX-PD-019) |

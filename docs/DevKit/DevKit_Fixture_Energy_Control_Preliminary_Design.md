@@ -1,7 +1,7 @@
 # DevKit Fixture Energy-Control Preliminary Design — WP-015
 
 **Document ID:** DOC-DK-FECPD-001  
-**Version:** 1.0  
+**Version:** 1.1  
 **Status:** Proposed — Architecture Review pending  
 **Work Package:** WP-015  
 **Date:** 2026-07-20
@@ -26,6 +26,30 @@ and fault-injection boundaries. No ratings, isolation/grounding topology, device
 | `DISCHARGE` | Controlled stored-energy decay | All | under removal | PROPOSED_DESIGN |
 | `BACK-FEED-PREVENTION` | Prevent external→base energization | Base boundary | function | BLOCKED_BY_ARCHITECTURE (OI-GND-001) |
 
+### 1.1 Energy path versus source-control path (WP-015-R1)
+
+The energy path and the source-control (command/authorization) path are distinct:
+
+```text
+ENERGY PATH (base):
+BASE-SOURCE --[E]--> BASE-ENERGY-CONTROL --[E]--> FX-BASE-ENERGY-PATH --[E]--> FX-DUT-INTERFACE --[E]--> DUT
+
+CONTROL / AUTHORIZATION PATH (base):
+FX-AUTHORIZATION --[A]--> FX-SOURCE-CONTROL --[C]--> BASE-ENERGY-CONTROL
+
+ENERGY PATH (external):
+EXT-SOURCE --[E]--> EXT-ENERGY-CONTROL --[E]--> FX-EXTERNAL-ENERGY-BOUNDARY --[E]--> {EXT-POWER-MODULE | DUT-under-EXT | FX-LOAD-BANK}
+
+CONTROL / AUTHORIZATION PATH (external):
+FX-AUTHORIZATION --[A]--> FX-SOURCE-CONTROL(ext) --[C]--> EXT-ENERGY-CONTROL
+```
+
+`FX-SOURCE-CONTROL` is a command/control function. It:
+
+- does **not** create energy authority by itself;
+- is **not** physical proof of energy removal;
+- does **not** replace energy-path observation (`ENERGY_PATH_OBSERVED_ACTIVE/INACTIVE`).
+
 ## 2. Preserved energy invariants
 
 ```text
@@ -49,12 +73,13 @@ While OI-GND-001 is Open: simultaneous BASE + externally energized operation is 
 
 | Option | Description | Functional | Safety | Measurement | Back-feed | Fault-injection | Complexity class (no price) | Required evidence | Blocked downstream |
 |--------|-------------|------------|--------|-------------|-----------|-----------------|-----------------------------|-------------------|--------------------|
-| `GND-OPTION-A` | Controlled common reference | Shared reference simplifies measurement | Common-mode fault risk if reference fails | Single reference frame | Requires active back-feed prevention | Return-path defined | Moderate | Common-mode fault analysis; back-feed proof | Ext detailed design |
-| `GND-OPTION-B` | Single-point reference | One bonding point | Ground-loop control; single-point integrity critical | Reference at one node | Requires directional prevention | Defined return | Moderate | Single-point integrity analysis | Ext detailed design |
-| `GND-OPTION-C` | Galvanically isolated measurement/control boundary | Decoupled domains | Highest separation; isolation integrity critical | Isolated sensing needed | Strong inherent barrier | Isolated injection | Higher | Isolation qualification | Ext + measurement design |
-| `GND-OPTION-D` | Separate fixtures / mutually exclusive modes | No simultaneous combined operation | Avoids combined-energy hazard by exclusion | Per-mode reference | Exclusion prevents cross-feed | Per-mode injection | Lower–Moderate | Mode-exclusion interlock proof | Combined-mode tests only |
+| `GND-OPTION-A` | Controlled common reference | Shared reference simplifies measurement | Common-mode fault risk if reference fails | Single reference frame | Requires a back-feed-prevention function (realization Open) | Return-path defined | Moderate | Common-mode fault analysis; back-feed-prevention evidence | Ext detailed design |
+| `GND-OPTION-B` | Single-point reference | One bonding point | Ground-loop control; single-point integrity critical | Reference at one node | Requires a directional back-feed-prevention function (realization Open) | Defined return | Moderate | Single-point integrity analysis; back-feed-prevention evidence | Ext detailed design |
+| `GND-OPTION-C` | Galvanically isolated measurement/control boundary | Decoupled domains | Provides galvanic separation **only when** the complete implemented boundary is qualified for normal and fault conditions; isolation integrity critical | Isolated sensing needed | Provides a separation barrier **only when** the boundary is qualified for normal and fault conditions | Isolated injection | Higher | Isolation qualification (normal + fault) | Ext + measurement design |
+| `GND-OPTION-D1` | Physically separate fixture / interconnection arrangements | No shared hazardous interconnection between arrangements | Combined-energy hazard avoided by physical separation | Per-arrangement reference | Physical separation between arrangements | Per-arrangement injection | Lower–Moderate | Separation/interconnection analysis | Combined-mode tests only |
+| `GND-OPTION-D2` | Shared fixture with mutually exclusive operating modes | No simultaneous combined operation | Mode exclusivity limits combined operation | Per-mode reference | **Mode exclusivity alone does not prove prevention of physical back-feed; separate back-feed analysis and evidence remain required** | Per-mode injection | Lower–Moderate | Mode-exclusion interlock proof **and** separate back-feed analysis/evidence | Combined-mode tests only |
 
-**WP-015 selects none.** Disposition is reserved to the Architect (dedicated OI-GND-001 decision package).
+**WP-015 selects none.** Disposition is reserved to the Architect (dedicated OI-GND-001 decision package). D1 (physically separate arrangements) and D2 (shared fixture, mutually exclusive modes) have different fault and back-feed properties and are dispositioned separately.
 
 ## 4. Authorization versus physical energy state (§15)
 
@@ -113,3 +138,4 @@ REQ-DCC-V-FX-005/020…026/030…034/052…056 · PWR-A-001/002/003/017/018 · O
 | Version | Date | Change |
 |---------|------|--------|
 | 1.0 | 2026-07-20 | WP-015 initial energy-control preliminary design — Proposed |
+| 1.1 | 2026-07-21 | WP-015-R1 — energy vs source-control path separation (§1.1); GND-OPTION-D split into D1/D2; Option C conditional galvanic-separation language; A/B back-feed-prevention wording de-committed; removed absolute separation claims |

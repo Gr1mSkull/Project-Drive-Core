@@ -1,7 +1,7 @@
 # DevKit Fixture Preliminary Block Design — WP-015
 
 **Document ID:** DOC-DK-FPBD-001  
-**Version:** 1.0  
+**Version:** 1.1  
 **Status:** Proposed — Architecture Review pending  
 **Work Package:** WP-015  
 **Date:** 2026-07-20
@@ -25,19 +25,34 @@ Every diagram distinguishes path types:
 
 ## 2. Base-energy operation
 
+Energy path and source-control path are shown separately. `FX-SOURCE-CONTROL` is a command/control function: it does **not** originate energy, is **not** physical proof of energy removal, and does **not** replace energy-path observation.
+
 ```text
-FX-OPERATOR-CONTROL --[C]--> FX-AUTHORIZATION --[A]--> FX-SOURCE-CONTROL
-FX-SOURCE-CONTROL   --[E]--> FX-BASE-ENERGY-PATH --[E]--> FX-DUT-INTERFACE --[E]--> DUT(base)
-FX-MEASUREMENT      --[O]--> (entry/base MPs)
-FX-ESTOP            --[S]--> FX-ENERGY-REMOVAL --[S]--> FX-SOURCE-CONTROL / FX-BASE-ENERGY-PATH
+ENERGY PATH:
+BASE-SOURCE --[E]--> BASE-ENERGY-CONTROL --[E]--> FX-BASE-ENERGY-PATH --[E]--> FX-DUT-INTERFACE --[E]--> DUT(base)
+
+CONTROL / AUTHORIZATION PATH:
+FX-OPERATOR-CONTROL --[C]--> FX-AUTHORIZATION --[A]--> FX-SOURCE-CONTROL --[C]--> BASE-ENERGY-CONTROL
+
+OBSERVATION PATH:
+FX-MEASUREMENT --[O]--> (entry/base MPs; ENERGY_PATH_OBSERVED_ACTIVE/INACTIVE)
+
+SAFETY-EFFECTIVE PATH:
+FX-ESTOP --[S]--> FX-ENERGY-REMOVAL --[S]--> BASE-ENERGY-CONTROL / FX-BASE-ENERGY-PATH
 ```
 
 ## 3. External-energy boundary
 
 ```text
-FX-AUTHORIZATION --[A]--> FX-SOURCE-CONTROL(ext)  (AUTH_EXT_SOURCE; blocked simultaneous with base while OI-GND-001 Open)
-FX-SOURCE-CONTROL(ext) --[E]--> FX-EXTERNAL-ENERGY-BOUNDARY --[E]--> {EXT-POWER-MODULE | DUT-under-EXT | FX-LOAD-BANK}
-FX-EXTERNAL-ENERGY-BOUNDARY --[S]--> back-feed-prevention (toward base distribution: PROHIBITED)
+ENERGY PATH:
+EXT-SOURCE --[E]--> EXT-ENERGY-CONTROL --[E]--> FX-EXTERNAL-ENERGY-BOUNDARY --[E]--> {EXT-POWER-MODULE | DUT-under-EXT | FX-LOAD-BANK}
+
+CONTROL / AUTHORIZATION PATH:
+FX-AUTHORIZATION --[A]--> FX-SOURCE-CONTROL(ext) --[C]--> EXT-ENERGY-CONTROL
+  (AUTH_EXT_SOURCE; simultaneous BASE+EXT blocked while OI-GND-001 Open)
+
+SAFETY-EFFECTIVE PATH:
+FX-EXTERNAL-ENERGY-BOUNDARY --[S]--> back-feed-prevention (external→base: PROHIBITED)
 Boundary label: "Open decision — OI-GND-001" (no isolation/grounding topology shown)
 ```
 
@@ -45,11 +60,13 @@ Boundary label: "Open decision — OI-GND-001" (no isolation/grounding topology 
 
 ```text
 Operator req --[C]--> FX-AUTHORIZATION
-FX-INTERLOCK-CONTROLLER --[A-gate]--> FX-AUTHORIZATION
+FX-INTERLOCK-CONTROLLER --[A]--> FX-AUTHORIZATION (gate/revoke)
    inputs [O]: identity, config, state, E-stop, measurement-ready, back-feed, load-bank state
 FX-AUTHORIZATION --[A]--> {source, load-bank, fault, DUT-enable}
-Any unmet interlock --[S]--> inhibit (fail-safe)
+Any unmet interlock --[A]--> AUTH inhibited/revoked
 ```
+
+Note: AUTH gating/revocation is `[A]`, not `[S]`. A hardware-effective `[S]` inhibit/removal for a specific interlock is a **separate Proposed design allocation** with a named blocker and future proof artifact (see decision register).
 
 ## 5. E-stop and energy-removal flow
 
@@ -65,7 +82,9 @@ FX-AUTHORIZATION --[A]--> all AUTH revoked (stale); recovery requires new epoch
 
 ```text
 FX-AUTHORIZATION --[A]--> FX-LOAD-BANK   (AUTH_LOAD_BANK)
-DUT/ext output --[E]--> FX-LOAD-BANK (sink; energy absorbed, never sourced)
+DUT/ext output --[E]--> FX-LOAD-BANK (sink-function; independent energy origination prohibited)
+Regenerative/bidirectional return --[E, reverse]--> requires explicit containment
+  (does NOT reclassify load bank as EXT-SOURCE; BLOCKED_BY_ARCHITECTURE until OI-BI-001 / OI-GND-001 dispositioned)
 FX-MEASUREMENT --[O]--> sink state / load current
 Stuck-on --[S]--> revoke AUTH + inhibit/remove UPSTREAM energy --> FX-ENERGY-REMOVAL --> LOCKOUT
 ```
@@ -74,8 +93,10 @@ Stuck-on --[S]--> revoke AUTH + inhibit/remove UPSTREAM energy --> FX-ENERGY-REM
 
 ```text
 Energy/signal nodes --[O]--> FX-MEASUREMENT --[O]--> FX-DAQ --> {logger, operator UI, test controller}
-FX-MEASUREMENT is non-energy-bearing ([O] only; never [E])
-Required measurement absent --[S]--> block dependent tests
+FX-MEASUREMENT is observation-purpose. A physical measurement connection shall be treated as a
+  potential energy/reference/fault path until its impedance, protection, reference, isolation, and
+  fault behavior are qualified (dependency Open; OI-GND-001 where applicable).
+Required measurement absent --[C/A]--> dependent test blocked / AUTH inhibited
 ```
 
 ## 8. Fault-injection authority
@@ -112,3 +133,4 @@ Concrete components, final connectors/pinouts, selected isolation topology, sele
 | Version | Date | Change |
 |---------|------|--------|
 | 1.0 | 2026-07-20 | WP-015 initial preliminary block design — Proposed |
+| 1.1 | 2026-07-21 | WP-015-R1 — energy vs source-control paths separated; measurement as potential energy/fault path; regenerative reverse-flow containment; [S] legend misuse corrected to [A]/[C] |

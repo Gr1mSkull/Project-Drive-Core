@@ -6,14 +6,24 @@
 | **Change Scope** | WP-015 Gen1 DevKit fixture preliminary design architecture |
 | **Related Requirements** | REQ-DCC-V-FX-* (Accepted); FX-* modules / FX-PD-* decisions (Proposed) |
 | **Related Architecture** | ADR-019…023; WP-010…014 Accepted; PWR-A-017/018/021…024 ACCEPTED_CONSTRAINT |
-| **Related WP / CR** | WP-015 |
-| **Impact Level** | 2 |
+| **Related WP / CR** | WP-015 / WP-015-R1 |
+| **Impact Level** | 2 (package); R1 = Level 1 (architecture consistency) |
 | **Reviewed baseline** | `bc7c6b6f302aa8a2e6eccc54284dad6628d7101b` (WP-014 acceptance on `main`) |
-| **Proposed head** | see PR #19 head at review time (WP-015 branch tip) |
-| **Date** | 2026-07-20 |
+| **R1 reviewed head (pre-R1)** | `56707ff5e0dc58c44b6b425d1ef9920c3cd81169` |
+| **Proposed head** | WP-015 branch tip after R1 (PR #19) |
+| **Date** | 2026-07-21 |
 | **Implementer** | Implementation Engineer (cloud agent) |
 | **Implementer role** | Implementation Engineer |
-| **Status** | Ready for Architecture Review |
+| **Status** | Ready for Final Architecture Review (after R1) |
+
+## 0. WP-015-R1 change summary
+
+1. Measurement boundary reclassified as observation-purpose; a physical measurement connection is a potential energy/reference/fault path until qualified (no unconditional non-energy classification).
+2. Source/sink/regenerative semantics reconciled: sink-function architecture; independent origination prohibited; returned-energy reverse-flow containment `BLOCKED_BY_ARCHITECTURE` (OI-BI-001/OI-GND-001); `PWR-A-023` unchanged.
+3. Energy path separated from source-control path; `FX-SOURCE-CONTROL` is command/control only.
+4. `[S]` safety-effective legend misuse corrected: AUTH gating = `[A]`, test blocking = `[C]`, `[S]` reserved for genuine hardware-effective allocations (Proposed, with blocker + proof artifact; FX-PD-020).
+5. State-machine hazardous-exit guard added (`FX_TEST_ACTIVE`/`FX_FAULT`/`FX_ENERGY_REMOVAL`/`FX_DISCHARGE`); no direct energized/unconfirmed → recoverable lockout.
+6. `GND-OPTION-D` split into `D1`/`D2` (D2 requires separate back-feed evidence); Option C galvanic separation conditional; removed unconditional separation superlatives and `isolated-by-function`.
 
 ## 1. Deliverables
 
@@ -195,6 +205,28 @@ rg -n '\| PASS \|' docs/DevKit/DevKit_Fixture_*.md docs/DevKit/DevKit_Load_Bank_
 
 Physical tests: **NOT EXECUTED**.
 
+#### R1 corrections — reproducible checks
+
+`D` = the nine WP-015 DevKit documents.
+
+| ID | Command | Exit | Result |
+|----|---------|------|--------|
+| R1.1 | `rg 'non-energy-bearing observation boundary' $D` | 1 | PASS |
+| R1.2 | `rg '\| None \(non-energy\) \|' $D` | 1 | PASS |
+| R1.3 | `rg 'energy absorbed, never sourced\|never sourced' $D \| rg -v 'WP-015-R1 —'` | 1 | PASS |
+| R1.4 | `rg 'sink-only functional classes\|class-neutral; sink-only\|Sink-only' $D` | 1 | PASS |
+| R1.5 | `rg 'independent energy origination prohibited' $D` | 0 | PASS (positive) |
+| R1.6 | `rg 'Any unmet interlock --\[S\]' $D` | 1 | PASS |
+| R1.7 | `rg 'Required measurement absent --\[S\]' $D` | 1 | PASS |
+| R1.8 | `rg 'Energy path versus source-control\|command/control only' $D` | 0 | PASS (positive) |
+| R1.9 | `rg 'only when removal confirmed\|UNCONFIRMED' Interlock_and_State_Model.md` | 0 | PASS (positive) |
+| R1.10 | `rg 'GND-OPTION-D1\|GND-OPTION-D2' $D` | 0 | PASS |
+| R1.11 | `rg 'Highest separation\|Strong inherent barrier\|isolated-by-function' $D \| rg -v 'WP-015-R1 —'` | 1 | PASS |
+| R1.12 | OI Open (TBD-DK-007 BLOCKED; OI-GND-001 present) | 0 | PASS |
+| R1.16 | no `\| PASS \|` cells; no VE dir change | 1 / 0 | PASS |
+| R1.17 | no EDL/ADR/hardware/firmware/config diff | 0 | PASS |
+| R1.18 | no MPN/BOM/numeric-approval | 1 | PASS |
+
 ## 12. Exact Architect questions
 
 1. Accept the preliminary fixture functional decomposition? **Yes / No**
@@ -231,13 +263,17 @@ and E-stop (REQ-DCC-V-FX-071) architecture issues.
 
 Does not authorize procurement, construction, or energization.
 
+## 13a. Architect R1 disposition status (pre-review record)
+
+The R1 corrections target the four review items marked *Revision required* (path separation; fixture state model; measurement-boundary model) and the semantic/option-split items (load-bank semantics; GND-OPTION D1/D2; safety-path legend). Items previously *Accept* / *Accept conditionally* are unchanged in intent. Detailed design remains *Not yet*; procurement/construction/energization remain **No**.
+
 ## 14. Review status
 
 | Field | Value |
 |-------|-------|
-| **Implementer Self-Review Status** | Complete |
+| **Implementer Self-Review Status** | Complete (R1) |
 | **Independent Review Status** | Not started |
-| **Final Review Outcome** | **Ready for Architecture Review** |
+| **Final Review Outcome** | **Ready for Final Architecture Review** |
 | **Architecture / policy approval** | Separate — System Architect only |
 
 ## Revision history
@@ -245,3 +281,4 @@ Does not authorize procurement, construction, or energization.
 | Version | Date | Change |
 |---------|------|--------|
 | 1.0 | 2026-07-20 | WP-015 initial RHP — Draft; self-contained validation + full Architect questions |
+| 1.1 | 2026-07-21 | WP-015-R1 — change summary + reproducible R1.1–R1.18 checks; Ready for Final Architecture Review |

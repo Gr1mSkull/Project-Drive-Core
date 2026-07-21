@@ -1,7 +1,7 @@
 # DevKit Fixture Measurement and DAQ Architecture — WP-015
 
 **Document ID:** DOC-DK-FMDA-001  
-**Version:** 1.0  
+**Version:** 1.1  
 **Status:** Proposed — Architecture Review pending  
 **Work Package:** WP-015  
 **Date:** 2026-07-20
@@ -14,7 +14,40 @@ An instrument connection shall not become an uncontrolled energy path.
 
 ## 1. Measurement boundary principle
 
-`FX-MEASUREMENT` is a **non-energy-bearing observation boundary**. Where a required measurement is unavailable, dependent tests are **blocked**. Measurements shall not be combined across boundaries without an explicit power-balance model.
+`FX-MEASUREMENT` is **observation-purpose**.
+
+```text
+A physical measurement connection shall be treated as a potential
+energy / reference / fault path until its impedance, protection, reference,
+isolation and fault behavior are qualified.
+```
+
+A physical measurement connection may carry fault energy, create an unintended reference path, link base and external envelopes, form a back-feed path through the instrument, or violate a later-selected ground/isolation architecture. Where a required measurement is unavailable, dependent tests are **blocked**. Measurements shall not be combined across boundaries without an explicit power-balance model. No isolation topology is selected (OI-GND-001 Open).
+
+### 1.1 Measurement concept separation
+
+| Concept | Meaning |
+|---------|---------|
+| measurement function | the quantity to be observed |
+| measurement conductor | the physical wire/path (potential energy/fault path) |
+| instrument input | the instrument's terminal (finite impedance; possible energy path) |
+| reference connection | the reference/return the measurement is taken against (potential cross-envelope link) |
+| safety observation | an observation consumed by the safety layer |
+| independent reference instrument | a separate, qualified instrument used for evidence independence |
+
+### 1.2 Per-boundary dependencies (all Open)
+
+Each measurement boundary carries the following dependencies, all **Open**:
+
+- maximum available fault-energy dependency — Open;
+- reference-path dependency;
+- input-impedance dependency;
+- protection / current-limiting dependency;
+- instrument ground/reference dependency;
+- failure behavior (open / short / reference-fault);
+- blocker `OI-GND-001` where the boundary crosses or references envelopes.
+
+No isolation topology is selected.
 
 ## 2. Measurement boundaries (§21)
 
@@ -32,6 +65,8 @@ Sign convention: **positive current = draw from the associated source; negative 
 | `V_LOAD_n` | Load voltage | Load node | — | per envelope | Open | — | Open | OI-GND-001 | FX-DAQ | Proposed | C-002 | — |
 
 Anti double-count (WP-012 R1–R5): returned/reactive/storage energy is not double-counted across `I_CH_IN_n`/`I_DOM_IN_x` and `I_STORAGE_NET`.
+
+**Every measurement boundary above additionally inherits the §1.2 dependencies** (maximum available fault-energy — Open; reference-path; input-impedance; protection/current-limiting; instrument ground/reference; failure behavior; `OI-GND-001` blocker where it crosses/references envelopes). Each measurement conductor and instrument input is therefore treated as a **potential energy/reference/fault path** until qualified; none is classified unconditionally as non-energy.
 
 ## 3. DAQ responsibility split (§22)
 
@@ -64,3 +99,4 @@ REQ-DCC-V-FX-060/061/062 · WP-014 FIMR (FX-MP-*) · WP-010 MP-* · OI-SENSE-001
 | Version | Date | Change |
 |---------|------|--------|
 | 1.0 | 2026-07-20 | WP-015 measurement and DAQ architecture (boundaries + DAQ responsibility split) — Proposed |
+| 1.1 | 2026-07-21 | WP-015-R1 — measurement is observation-purpose; connection treated as potential energy/reference/fault path; concept separation + per-boundary Open dependencies; no unconditional non-energy classification |

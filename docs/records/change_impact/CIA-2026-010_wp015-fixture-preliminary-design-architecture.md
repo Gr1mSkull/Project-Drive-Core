@@ -8,8 +8,8 @@
 | **Author** | Implementation Engineer (cloud agent) |
 | **Author role** | Implementation Engineer |
 | **Date** | 2026-07-20 |
-| **Status** | Draft — Under Architecture Review |
-| **Related WP / CR** | WP-015; baseline WP-014 Accepted (`bc7c6b6`); ADR-016…023 Accepted |
+| **Status** | Draft — Ready for Final Architecture Review (after R1) |
+| **Related WP / CR** | WP-015 / WP-015-R1; baseline WP-014 Accepted (`bc7c6b6`); ADR-016…023 Accepted |
 
 ### Reason for Change
 
@@ -84,7 +84,16 @@ No EDL/ADR content change. No hardware/firmware/config implementation. No schema
 
 Revert WP-015 PR; WP-014 Accepted baseline (`bc7c6b6`) preserved.
 
-### Validation performed (WP-015 — reproducible)
+### WP-015-R1 change summary (Level 1 — architecture consistency)
+
+1. **Measurement boundary:** `FX-MEASUREMENT` is now observation-purpose; a physical measurement connection is treated as a potential energy/reference/fault path until impedance/protection/reference/isolation/fault behavior are qualified. Removed unconditional non-energy classification from anchor, block design, measurement/DAQ, and interface/wiring docs; added concept separation and per-boundary Open dependencies. No isolation topology selected.
+2. **Source/sink/regenerative semantics:** removed absolute "energy absorbed, never sourced" / "sink-only functional classes" / "class-neutral; sink-only"; adopted sink-function architecture with independent origination prohibited and returned-energy reverse-flow containment `BLOCKED_BY_ARCHITECTURE` until OI-BI-001/OI-GND-001. `PWR-A-023` unchanged.
+3. **Energy vs source-control path:** separated energy path (`BASE-SOURCE → BASE-ENERGY-CONTROL → …`) from control/authorization path; `FX-SOURCE-CONTROL` is command/control only (no energy origination; not proof of removal; not a substitute for observation).
+4. **Safety-effective legend:** corrected `[S]` misuse — AUTH gating/revocation retagged `[A]`; test blocking `[C]`; `[S]` reserved for genuinely safety-effective allocations (E-stop, energy-removal, stuck-on upstream containment, back-feed), each a Proposed allocation with named blocker + future proof artifact (FX-PD-020).
+5. **State-machine hazardous exit:** added hazardous-exit guard; `FX_TEST_ACTIVE` normal/abort/fault → `FX_ENERGY_REMOVAL`; `FX_FAULT`/`FX_ENERGY_REMOVAL` → `FX_LOCKOUT` only when removal confirmed and discharge complete/proven N/A; `FX_DISCHARGE` unconfirmed residual holds lockout with energy state `UNCONFIRMED` (no recovery).
+6. **Ground options:** split `GND-OPTION-D` into `D1` (physically separate) and `D2` (mutually exclusive modes; separate back-feed analysis/evidence required); Option C galvanic separation made conditional on qualified boundary; removed unconditional "Highest separation"/"Strong inherent barrier"/"isolated-by-function"; A/B back-feed-prevention de-committed to "function (realization Open)".
+
+### Validation performed (WP-015 / R1 — reproducible)
 
 #### V1 — Baseline ancestry
 
@@ -231,6 +240,57 @@ rg -n '\| PASS \|' docs/DevKit/DevKit_Fixture_*.md docs/DevKit/DevKit_Load_Bank_
 | PASS cells | none; exit `1` |
 | result | **PASS** — no VE, no case PASS; no requirement marked Verified |
 
+### WP-015-R1 reproducible checks
+
+`D` = the nine WP-015 DevKit documents.
+
+```bash
+# R1.1 no active "FX-MEASUREMENT is non-energy-bearing"
+rg -n 'non-energy-bearing observation boundary' $D                       # exit 1 (no match) → PASS
+# R1.2 no measurement interface unconditional "None (non-energy)"
+rg -n '\| None \(non-energy\) \|' $D                                     # exit 1 → PASS
+# R1.3 no active "energy absorbed, never sourced"
+rg -n 'energy absorbed, never sourced|never sourced' $D | rg -v 'WP-015-R1 —'   # exit 1 → PASS
+# R1.4 no "sink-only functional classes" / "class-neutral; sink-only"
+rg -n 'sink-only functional classes|class-neutral; sink-only|Sink-only' $D      # exit 1 → PASS
+# R1.5 regenerative not independent source (positive present)
+rg -n 'independent energy origination prohibited|does not reclassify the load bank as EXT-SOURCE' $D   # exit 0 → PASS
+# R1.6 no "Any unmet interlock --[S]"
+rg -n 'Any unmet interlock --\[S\]' $D                                   # exit 1 → PASS
+# R1.7 no "Required measurement absent --[S]"
+rg -n 'Required measurement absent --\[S\]' $D                           # exit 1 → PASS
+# R1.8 energy vs source-control separation (positive)
+rg -n 'Energy path versus source-control|command/control only' $D        # exit 0 → PASS
+# R1.9 hazardous-exit guard (positive)
+rg -n 'only when removal confirmed|UNCONFIRMED|hazardous energy active or unconfirmed' \
+  docs/DevKit/DevKit_Fixture_Interlock_and_State_Model.md                 # exit 0 → PASS
+# R1.10 GND-OPTION-D1 and D2 distinct
+rg -n 'GND-OPTION-D1|GND-OPTION-D2' $D                                    # exit 0 → PASS
+# R1.11 no active "Highest separation"/"Strong inherent barrier"/"isolated-by-function"
+rg -n 'Highest separation|Strong inherent barrier|isolated-by-function' $D | rg -v 'WP-015-R1 —'  # exit 1 → PASS
+```
+
+| Check | Exit | Result |
+|-------|------|--------|
+| R1.1 | 1 | PASS |
+| R1.2 | 1 | PASS |
+| R1.3 (active) | 1 | PASS |
+| R1.4 | 1 | PASS |
+| R1.5 (positive) | 0 | PASS |
+| R1.6 | 1 | PASS |
+| R1.7 | 1 | PASS |
+| R1.8 (positive) | 0 | PASS |
+| R1.9 (positive) | 0 | PASS |
+| R1.10 | 0 | PASS |
+| R1.11 (active) | 1 | PASS |
+| R1.12 OI Open (TBD-DK-007 BLOCKED; OI-GND-001 present) | 0 | PASS |
+| R1.16 no `\| PASS \|` / no VE dir change | 1 / 0 | PASS |
+| R1.17 no EDL/ADR/hardware/firmware/config diff | 0 | PASS |
+| R1.18 no MPN/BOM/numeric-approval | 1 | PASS |
+| V6 links `OK: 9 files, 9 relative links verified` | 0 | PASS |
+
+Requirements remain NOT VERIFIED; fixture NOT IMPLEMENTED; cases NOT EXECUTED/BLOCKED; no VE; no case PASS; Open issues (OI-GND-001, OI-PROT-001/002, OI-FIX-001/002, OI-SC-001, OI-BI-001, OI-SENSE-001, TBD-DK-007) unchanged.
+
 ### Approvals
 
 | Field | Value |
@@ -245,3 +305,4 @@ rg -n '\| PASS \|' docs/DevKit/DevKit_Fixture_*.md docs/DevKit/DevKit_Load_Bank_
 | Version | Date | Change |
 |---------|------|--------|
 | 1.0 | 2026-07-20 | WP-015 initial CIA — Draft; reproducible V1–V7 against the nine required deliverables |
+| 1.1 | 2026-07-21 | WP-015-R1 — six architecture-consistency corrections; reproducible R1.1–R1.18 checks; Open decisions unchanged |
