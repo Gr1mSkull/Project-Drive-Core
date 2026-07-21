@@ -60,3 +60,11 @@ REQ-DCC-V-FX-* · OI-GND-001 · OI-PROT-001/002 · OI-SC-001 · OI-FIX-002 · OI
 | 1.0 | 2026-07-20 | WP-015 initial implementation readiness matrix — Proposed |
 | 1.1 | 2026-07-21 | WP-015-R1 — measurement blocker (energy/fault path unqualified); returned-energy containment row (FX-PD-019) |
 | 1.2 | 2026-07-21 | Architecture Review **Accepted** (WP-015 / R1 / R2 / R3; reviewed head `227ea78`, PR #19); Open decisions retained; NOT VERIFIED |
+
+## WP-016 cross-reference
+
+Detailed-design readiness and entry gates are extended by WP-016 in [`DevKit_Fixture_Detailed_Design_Readiness_and_Gate_Matrix.md`](DevKit_Fixture_Detailed_Design_Readiness_and_Gate_Matrix.md) and the WP-016 decision proposals. WP-016 does not authorize procurement/construction/energization.
+
+| Version | Date | Change |
+|---------|------|--------|
+| next | 2026-07-21 | WP-016 cross-reference to detailed-design readiness/gate matrix |

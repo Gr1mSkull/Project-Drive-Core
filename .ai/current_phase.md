@@ -1,6 +1,6 @@
 # DriveCore — Current Phase
 
-**Updated:** WP-015 Accepted — fixture preliminary design architecture (2026-07-21)
+**Updated:** WP-016 Proposed — fixture architecture decision closure and detailed-design inputs (2026-07-21)
 
 ## Documentation
 
@@ -26,6 +26,8 @@
 | Fixture requirements | **Accepted** (WP-014) — NOT VERIFIED |
 | Fixture architecture | **Accepted** (WP-014) |
 | Fixture preliminary design | **Accepted** (WP-015) |
+| Fixture architecture decision closure | **Proposed** (WP-016) |
+| Fixture detailed design | **Not started / not authorized by WP-016 alone** |
 | Fixture detailed design | **Not started** |
 | Fixture hardware | **NOT IMPLEMENTED** |
 | Fixture procurement / construction | **Not authorized** |
@@ -34,13 +36,14 @@
 | Physical verification | **NOT VERIFIED** |
 | OI-GND-001 · OI-FIX-001/002 · OI-PROT-001/002 · OI-SC-001 | **Open** |
 
-## Next authorized work
+## Next authorized work (after WP-016 acceptance)
 
-**WP-016 — Fixture Architecture Decision Closure and Detailed-Design Inputs** (Architect-authorized): OI-GND-001 / external-energy boundary; E-stop topology & integrity; input/back-feed protection; measurement-connection protection; returned-energy containment; detailed-design input register. Blocked subsystems remain blocked. Not authorized: schematic/BOM release, procurement, construction, energization, physical fault injection, verification.
+Fixture detailed design + component qualification for non-blocked functions (base source/path, load-bank sink, DUT interface, operator controls). OI-GND-001 / E-stop topology / protection classes proceed as decision/qualification work. Not authorized: schematic/BOM release, procurement, construction, energization, verification.
+
 
 ## Active branch
 
-`main` — WP-015 Accepted; PR #19 merged (`287e18d`)
+`cursor/wp016-fixture-architecture-decision-closure-3bb9` — WP-016 Proposed
 
 ## Do not start without approval
 

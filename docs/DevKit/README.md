@@ -1,8 +1,8 @@
 # DriveCore Gen1 DevKit — Document Set
 
 **Document ID:** DOC-DK-INDEX-001  
-**Version:** 1.26  
-**Status:** Accepted (index); WP-013/WP-014 **Accepted**; WP-015 **Proposed**  
+**Version:** 1.27  
+**Status:** Accepted (index); WP-013…WP-015 **Accepted**; WP-016 **Proposed**  
 **Work Package:** WP-007…WP-014 (Accepted) / WP-015 (Proposed)  
 **Date:** 2026-07-20
 
@@ -74,6 +74,14 @@ It does **not** define the final circuit, PCB, component set, enclosure, or BOM.
 | [DevKit_Fixture_Interface_and_Wiring_Architecture.md](DevKit_Fixture_Interface_and_Wiring_Architecture.md) | WP-015 interfaces, wiring classes, operator control | **Accepted** |
 | [DevKit_Fixture_Preliminary_Design_Decision_Register.md](DevKit_Fixture_Preliminary_Design_Decision_Register.md) | WP-015 `FX-PD-*` proposed decisions | **Accepted** |
 | [DevKit_Fixture_Implementation_Readiness_Matrix.md](DevKit_Fixture_Implementation_Readiness_Matrix.md) | WP-015 readiness for detailed design/procurement/construction | **Proposed** |
+| [DevKit_Fixture_Ground_and_Reference_Decision_Proposal.md](DevKit_Fixture_Ground_and_Reference_Decision_Proposal.md) | WP-016 ground/reference decision proposal + external-energy/back-feed | **Proposed** |
+| [DevKit_Fixture_EStop_Architecture_Decision_Proposal.md](DevKit_Fixture_EStop_Architecture_Decision_Proposal.md) | WP-016 E-stop architecture decision proposal | **Proposed** |
+| [DevKit_Fixture_Protection_Architecture_Decision_Proposal.md](DevKit_Fixture_Protection_Architecture_Decision_Proposal.md) | WP-016 protection architecture (OI-PROT-001/002) | **Proposed** |
+| [DevKit_Fixture_Measurement_Connection_Safety_Architecture.md](DevKit_Fixture_Measurement_Connection_Safety_Architecture.md) | WP-016 measurement-connection safety | **Proposed** |
+| [DevKit_Fixture_Returned_Energy_Containment_Architecture.md](DevKit_Fixture_Returned_Energy_Containment_Architecture.md) | WP-016 returned-energy containment | **Proposed** |
+| [DevKit_Fixture_Preliminary_Safety_Allocation_Matrix.md](DevKit_Fixture_Preliminary_Safety_Allocation_Matrix.md) | WP-016 preliminary safety allocation | **Proposed** |
+| [DevKit_Fixture_Detailed_Design_Input_Register.md](DevKit_Fixture_Detailed_Design_Input_Register.md) | WP-016 detailed-design inputs (`FX-DD-IN-*`) | **Proposed** |
+| [DevKit_Fixture_Detailed_Design_Readiness_and_Gate_Matrix.md](DevKit_Fixture_Detailed_Design_Readiness_and_Gate_Matrix.md) | WP-016 detailed-design readiness/gate matrix | **Proposed** |
 | This README | Navigation and authority statement | Accepted |
 
 ## Relationship to EDL-014
@@ -124,6 +132,8 @@ Every DevKit gate evidence package shall record a **composite system baseline** 
 | Review Handoff (WP-013) | [`docs/records/review_handoffs/RHP-2026-007_wp013-component-class-qualification.md`](../records/review_handoffs/RHP-2026-007_wp013-component-class-qualification.md) |
 | CIA (WP-015) | [`docs/records/change_impact/CIA-2026-010_wp015-fixture-preliminary-design-architecture.md`](../records/change_impact/CIA-2026-010_wp015-fixture-preliminary-design-architecture.md) |
 | Review Handoff (WP-015) | [`docs/records/review_handoffs/RHP-2026-009_wp015-fixture-preliminary-design-architecture.md`](../records/review_handoffs/RHP-2026-009_wp015-fixture-preliminary-design-architecture.md) |
+| CIA (WP-016) | [`docs/records/change_impact/CIA-2026-011_wp016-fixture-architecture-decisions.md`](../records/change_impact/CIA-2026-011_wp016-fixture-architecture-decisions.md) |
+| Review Handoff (WP-016) | [`docs/records/review_handoffs/RHP-2026-010_wp016-fixture-architecture-decisions.md`](../records/review_handoffs/RHP-2026-010_wp016-fixture-architecture-decisions.md) |
 | CIA (WP-014) | [`docs/records/change_impact/CIA-2026-009_wp014-fixture-load-bank-requirements.md`](../records/change_impact/CIA-2026-009_wp014-fixture-load-bank-requirements.md) |
 | Review Handoff (WP-014) | [`docs/records/review_handoffs/RHP-2026-008_wp014-fixture-load-bank-requirements.md`](../records/review_handoffs/RHP-2026-008_wp014-fixture-load-bank-requirements.md) |
 | P0 ADR package | [`docs/ADR/README.md`](../ADR/README.md) — ADR-016…023 **Accepted** |
@@ -145,6 +155,7 @@ Every DevKit gate evidence package shall record a **composite system baseline** 
 | WP-013 component-class qualification + symbolic calcs | **Accepted** (2026-07-20) — WP-013-R1 Accepted; PR #17 merged (`d1698a0` / `23bdb07`); final classes/topology Open |
 | WP-014 fixture and load-bank requirements | **Accepted** — Architecture Review (2026-07-20); WP-014-R1/R2/R3 Accepted; PR #18 merged (`7c72181` / `e46aff4`); fixture hardware NOT IMPLEMENTED; no procurement/construction; no VE |
 | WP-015 fixture preliminary design architecture | **Accepted** — Architecture Review (2026-07-21); PR #19 merged (`5610790` / `287e18d`); fixture NOT IMPLEMENTED; detailed design / procurement / construction / energization NOT AUTHORIZED; no VE |
+| WP-016 fixture architecture decision closure and detailed-design inputs | **Proposed** — Architecture Review pending; OI dispositions proposed (statuses unchanged); detailed design/procurement/construction/energization NOT AUTHORIZED |
 | Hardware design | **NOT IMPLEMENTED** — detailed sizing/schematic/PCB **NOT AUTHORIZED** |
 | Firmware bring-up | NOT IMPLEMENTED |
 | Physical verification | NOT VERIFIED |
@@ -158,7 +169,7 @@ Still open decision **requests** (no Accepted ADR yet): `ADR-DK-008`, `ADR-DK-00
 
 Open thresholds: `TBD-DK-001` … `TBD-DK-022` (Status Open — WP-009 methods Accepted; numeric values not Approved). `TBD-DK-007` remains **BLOCKED_BY_EDL_CLARIFICATION** — not Resolved.
 
-**WP-015 Accepted** (Architecture Review 2026-07-21; PR #19 approved for merge). **Next authorized work:** WP-016 — Fixture Architecture Decision Closure and Detailed-Design Inputs (Architect-authorized). Not authorized: final schematic/BOM release, procurement, construction, energization, physical fault injection, verification execution. ADR-DK-011/012 may proceed in parallel when authorized. Not authorized: MPN, numeric freeze, procurement, construction, energization, physical testing, DevKit schematic/PCB, VE.
+**WP-015 Accepted** (Architecture Review 2026-07-21; PR #19 approved for merge). **Current:** WP-016 — Fixture Architecture Decision Closure and Detailed-Design Inputs **Proposed** (Architecture Review pending). Next after acceptance: fixture detailed design + component qualification for non-blocked functions. Not authorized: schematic/BOM release, procurement, construction, energization, verification.
 
 **Not authorized:** MPN selection · BOM · schematics · PCB · numeric threshold freeze · EDL file edit · final electrical sizing completion · Verification Evidence creation · fixture procurement · fixture construction · energization.
 
@@ -194,3 +205,4 @@ Open thresholds: `TBD-DK-001` … `TBD-DK-022` (Status Open — WP-009 methods A
 | 1.24 | 2026-07-20 | WP-015 — fixture preliminary design architecture package (Proposed); CIA-2026-010 / RHP-2026-009 |
 | 1.25 | 2026-07-21 | WP-015 Architecture Acceptance — package Accepted; PR #19 approved for merge; WP-016 authorized |
 | 1.26 | 2026-07-21 | WP-015 PR #19 merged (`5610790` / `287e18d`) — acceptance metadata on main |
+| 1.27 | 2026-07-21 | WP-016 — fixture architecture decision closure package (Proposed); CIA-2026-011 / RHP-2026-010 |

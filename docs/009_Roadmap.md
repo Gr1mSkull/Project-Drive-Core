@@ -22,12 +22,13 @@
 | WP-013 component-class qualification + symbolic calcs | **Accepted** (2026-07-20); WP-013-R1 Accepted; PR #17 merged (`d1698a0` / `23bdb07`) |
 | WP-014 fixture and load-bank requirements | **Accepted** (2026-07-20) — R1/R2/R3 Accepted; PR #18 merged (`7c72181` / `e46aff4`); REQ-DCC-V-FX-* Accepted; fixture hardware NOT IMPLEMENTED |
 | WP-015 fixture preliminary design architecture | **Accepted** (2026-07-21) — R1/R2/R3 Accepted; PR #19 merged (`5610790` / `287e18d`); `FX-*` modules / `FX-PD-*` dispositions; fixture NOT IMPLEMENTED |
+| WP-016 fixture architecture decision closure and detailed-design inputs | **Proposed** (2026-07-21) — Architecture Review pending; OI dispositions proposed; fixture NOT IMPLEMENTED |
 | DevKit hardware design | **NOT IMPLEMENTED** — sizing/schematic/PCB NOT AUTHORIZED |
 | Fixture hardware / procurement / construction | **NOT IMPLEMENTED / Not authorized** |
 | DevKit built / verified | **No** — NOT VERIFIED |
 | Remaining decisions | ADR-DK-008/009/011/012; OI-GND-001; OI-FIX-001/002; OI-SC-001; OI-COMP-001/002; OI-SENSE-001; OI-PROT-001/002; OI-BI-001; TBD-DK-007 BLOCKED (not Resolved); thresholds TBD-DK-001…022 Open |
 
-**Next step:** WP-016 — Fixture Architecture Decision Closure and Detailed-Design Inputs (Architect-authorized).
+**Next step:** Architecture Review of WP-016. After acceptance: fixture detailed design + component qualification for non-blocked functions (Architect-authorized).
 
 **Next expected engineering stage:** WP-016 decision closure (OI-GND-001 / OI-PROT / E-stop / measurement / returned-energy) + detailed-design input register · fixture component qualification · ADR-DK-011/012 → (only then) schematic/PCB/harness/firmware WPs. **Not authorized:** final schematic/BOM release / procurement / construction / energization / physical testing / numeric freeze / VE.
 
