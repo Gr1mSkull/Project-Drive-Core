@@ -8,8 +8,8 @@
 | **Author** | Implementation Engineer (cloud agent) |
 | **Author role** | Implementation Engineer |
 | **Date** | 2026-07-20 |
-| **Status** | Draft — Ready for Final Architecture Review (after R1) |
-| **Related WP / CR** | WP-015 / WP-015-R1; baseline WP-014 Accepted (`bc7c6b6`); ADR-016…023 Accepted |
+| **Status** | Draft — Ready for Final Architecture Review (after R2) |
+| **Related WP / CR** | WP-015 / WP-015-R1 / WP-015-R2; baseline WP-014 Accepted (`bc7c6b6`); ADR-016…023 Accepted |
 
 ### Reason for Change
 
@@ -62,7 +62,7 @@ Distinct authorities preserved (E-stop / KILL / nENABLE / AUTH_*); back-feed pre
 
 ### Open-issue impact
 
-OI-GND-001, OI-PROT-001/002, OI-FIX-001/002, OI-SC-001, OI-BI-001, OI-SENSE-001, OI-CONFIG-001, ADR-DK-011/012 remain **Open**; WP-015 compares options (e.g. GND-OPTION-A…D, E-STOP-OPT-1…4) but selects none.
+OI-GND-001, OI-PROT-001/002, OI-FIX-001/002, OI-SC-001, OI-BI-001, OI-SENSE-001, OI-CONFIG-001, ADR-DK-011/012 remain **Open**; WP-015 compares options (GND-OPTION-A/B/C/D1/D2, E-STOP-OPT-1…4; decisions FX-PD-001…021) but selects none.
 
 ### Traceability impact
 
@@ -92,6 +92,13 @@ Revert WP-015 PR; WP-014 Accepted baseline (`bc7c6b6`) preserved.
 4. **Safety-effective legend:** corrected `[S]` misuse — AUTH gating/revocation retagged `[A]`; test blocking `[C]`; `[S]` reserved for genuinely safety-effective allocations (E-stop, energy-removal, stuck-on upstream containment, back-feed), each a Proposed allocation with named blocker + future proof artifact (FX-PD-020).
 5. **State-machine hazardous exit:** added hazardous-exit guard; `FX_TEST_ACTIVE` normal/abort/fault → `FX_ENERGY_REMOVAL`; `FX_FAULT`/`FX_ENERGY_REMOVAL` → `FX_LOCKOUT` only when removal confirmed and discharge complete/proven N/A; `FX_DISCHARGE` unconfirmed residual holds lockout with energy state `UNCONFIRMED` (no recovery).
 6. **Ground options:** split `GND-OPTION-D` into `D1` (physically separate) and `D2` (mutually exclusive modes; separate back-feed analysis/evidence required); Option C galvanic separation made conditional on qualified boundary; removed unconditional "Highest separation"/"Strong inherent barrier"/"isolated-by-function"; A/B back-feed-prevention de-committed to "function (realization Open)".
+
+### WP-015-R2 change summary (Level 1 — architecture/governance consistency)
+
+1. **Lockout contradiction resolved:** single `FX_LOCKOUT` formally split into `FX_LOCKOUT_UNCONFIRMED` (residual may exist/unknown; energy-removal/discharge/diagnosis permitted; recovery prohibited; cannot enter `FX_RECOVERY_CHECK`) and `FX_LOCKOUT_SAFE` (all paths observed inactive; removal confirmed; discharge complete/proven N/A; deliberate recovery permitted). State table, hazardous-exit guard, block-design recovery diagram, load-bank sequence, RHP updated.
+2. **FX_FAULT energy-state:** no longer claims all energy inhibited; permits no *newly authorized* hazardous energy, while pre-existing energy may be active/unconfirmed pending `FX_ENERGY_REMOVAL`; safe minimum = AUTH revoked/inhibited, removal initiated when active/unconfirmed, recovery prohibited. Direct `FX_FAULT → FX_LOCKOUT_SAFE` only after confirmations.
+3. **Recovery diagram:** routes `FX_FAULT → FX_ENERGY_REMOVAL → FX_DISCHARGE (when applicable) → FX_LOCKOUT_UNCONFIRMED → FX_LOCKOUT_SAFE → RECOVERY CONFIRM → FX_RECOVERY_CHECK`; direct `FX_FAULT → FX_RECOVERY_CHECK` explicitly prohibited; guarded shortcut `FX_FAULT → FX_LOCKOUT_SAFE` only when confirmations already hold.
+4. **Stale references fixed:** removed "Sink-only functional classes" from RHP; RHP/decision register/CIA use `FX-PD-001…021` and `GND-OPTION-A/B/C/D1/D2`; decision register `FX-PD-004` options updated; RHP records exact R2 head SHA.
 
 ### Validation performed (WP-015 / R1 — reproducible)
 
@@ -291,6 +298,52 @@ rg -n 'Highest separation|Strong inherent barrier|isolated-by-function' $D | rg 
 
 Requirements remain NOT VERIFIED; fixture NOT IMPLEMENTED; cases NOT EXECUTED/BLOCKED; no VE; no case PASS; Open issues (OI-GND-001, OI-PROT-001/002, OI-FIX-001/002, OI-SC-001, OI-BI-001, OI-SENSE-001, TBD-DK-007) unchanged.
 
+### WP-015-R2 reproducible checks
+
+`S` = interlock/state model; `B` = block design; `D` = the nine WP-015 DevKit docs.
+
+```bash
+# R2.1 two lockout substates; no ambiguous bare FX_LOCKOUT row
+rg -c 'FX_LOCKOUT_UNCONFIRMED|FX_LOCKOUT_SAFE' $S      # 15
+rg -n '\| `FX_LOCKOUT` \|' $S                          # exit 1 (no bare state) → PASS
+# R2.2 unconfirmed lockout cannot recover
+rg -n 'FX_LOCKOUT_UNCONFIRMED → FX_RECOVERY_CHECK is PROHIBITED|CANNOT transition to FX_RECOVERY_CHECK' $S   # exit 0 → PASS
+# R2.3 FX_FAULT not "all energy inhibited"
+rg -n 'FX_FAULT.*Inhibited \| All hazardous' $S        # exit 1 → PASS
+# R2.4 active/unconfirmed energy from FX_FAULT → energy removal
+rg -n 'hazardous energy active or unconfirmed → \*\*FX_ENERGY_REMOVAL' $S    # exit 0 → PASS
+# R2.5 direct FX_FAULT → FX_RECOVERY_CHECK prohibited
+rg -n 'FX_FAULT → FX_RECOVERY_CHECK \(direct\) is PROHIBITED' $S   # exit 0 → PASS
+# R2.6 recovery diagram uses substates
+rg -n 'FX_LOCKOUT_UNCONFIRMED|FX_LOCKOUT_SAFE' $B      # exit 0 → PASS
+# R2.7 no active "Sink-only functional classes" (excluding change descriptions)
+rg -n 'Sink-only functional classes' $D docs/records/review_handoffs/RHP-2026-009_*.md   # exit 1 → PASS
+# R2.8/R2.9 current ranges
+rg -n 'FX-PD-001 … FX-PD-021' docs/records/review_handoffs/RHP-2026-009_*.md   # exit 0
+rg -n 'GND-OPTION-A/B/C/D1/D2' docs/records/review_handoffs/RHP-2026-009_*.md docs/DevKit/DevKit_Fixture_Preliminary_Design_Decision_Register.md   # exit 0
+# R2.9b no stale bare GND-OPTION-A…D / A/B/C/D
+rg -n 'GND-OPTION-A…D|GND-OPTION-A/B/C/D\b' $D docs/records/review_handoffs/RHP-2026-009_*.md | rg -v 'D1/D2'   # exit 1 → PASS
+```
+
+| Check | Exit | Result |
+|-------|------|--------|
+| R2.1 substates defined; no bare `FX_LOCKOUT` row | 1 | PASS |
+| R2.2 unconfirmed lockout cannot recover | 0 | PASS |
+| R2.3 FX_FAULT not all-inhibited | 1 | PASS |
+| R2.4 active/unconfirmed → energy removal | 0 | PASS |
+| R2.5 direct fault→recovery prohibited | 0 | PASS |
+| R2.6 recovery diagram agrees (substates) | 0 | PASS |
+| R2.7 no active "Sink-only functional classes" | 1 | PASS |
+| R2.8 RHP/register use `FX-PD-001…021` | 0 | PASS |
+| R2.9 RHP/register use `GND-OPTION-A/B/C/D1/D2` | 0 | PASS |
+| R2.9b no stale bare GND-OPTION-A…D | 1 | PASS |
+| R2.16 no EDL/ADR/hardware/firmware/config diff | 0 | PASS |
+| R2.17 no MPN/BOM/numeric | 1 | PASS |
+| R2.15 no `\| PASS \|` / no VE dir change | 1 / 0 | PASS |
+| Links `OK: 11 files, N relative links verified` | 0 | PASS |
+
+Requirements NOT VERIFIED; fixture NOT IMPLEMENTED; cases NOT EXECUTED/BLOCKED; no VE; no PASS; Open issues unchanged.
+
 ### Approvals
 
 | Field | Value |
@@ -306,3 +359,4 @@ Requirements remain NOT VERIFIED; fixture NOT IMPLEMENTED; cases NOT EXECUTED/BL
 |---------|------|--------|
 | 1.0 | 2026-07-20 | WP-015 initial CIA — Draft; reproducible V1–V7 against the nine required deliverables |
 | 1.1 | 2026-07-21 | WP-015-R1 — six architecture-consistency corrections; reproducible R1.1–R1.18 checks; Open decisions unchanged |
+| 1.2 | 2026-07-21 | WP-015-R2 — lockout substates; FX_FAULT energy-state; recovery diagram; stale-reference cleanup; reproducible R2 checks |

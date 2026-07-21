@@ -1,7 +1,7 @@
 # DevKit Fixture Interlock and State Model — WP-015
 
 **Document ID:** DOC-DK-FISM-001  
-**Version:** 1.1  
+**Version:** 1.2  
 **Status:** Proposed — Architecture Review pending  
 **Work Package:** WP-015  
 **Date:** 2026-07-20
@@ -26,32 +26,54 @@ No transition depends solely on UI state or software display.
 | `FX_EXTERNAL_ENERGY_ARMED` | Ext AUTH requested (authorization only) | None by itself | Combined BASE+EXT | Command ext energy | Auth record; base inactive | Exclusivity; back-feed prevent | → FX_EXTERNAL_ENERGIZED | → FX_ENERGY_REMOVAL | Inhibit ext | FX-INTERLOCK |
 | `FX_EXTERNAL_ENERGIZED` | Ext energy observed active | EXT paths | Base (while OI-GND-001 Open) | Test start; energy remove | ENERGY_PATH_OBSERVED_ACTIVE (ext) | Ext interlocks; back-feed | → FX_TEST_ACTIVE / FX_ENERGY_REMOVAL | → FX_ENERGY_REMOVAL | Remove ext | FX-ENERGY-REMOVAL |
 | `FX_TEST_ACTIVE` | Required AUTH + measurements | Declared-profile paths (no simultaneous BASE+EXT while OI-GND-001 Open) | Undeclared paths | Test abort; fault arm | Profile MPs available | All required interlocks | normal stop / abort / fault → **FX_ENERGY_REMOVAL** | → FX_ENERGY_REMOVAL | Exit via FX_ENERGY_REMOVAL | Test controller (gated) |
-| `FX_ENERGY_REMOVAL` | Any hazardous exit / E-stop | Removal in progress | New AUTH grant | Confirm removal | Residual observation | Override all AUTH | → FX_DISCHARGE (if discharge applicable) ; → FX_LOCKOUT **only when removal confirmed AND discharge complete or proven not applicable** | stay | Force removal | FX-ENERGY-REMOVAL |
-| `FX_DISCHARGE` | Removal in progress | Discharge action | Hazardous | Await decay | Residual/discharge observe | Discharge interlock | DISCHARGE_COMPLETE (residual confirmed) → FX_LOCKOUT | residual **UNCONFIRMED** → hold FX_LOCKOUT with energy state UNCONFIRMED (recovery not permitted) | Hold until safe decay confirmed | FX-DISCHARGE |
-| `FX_LOCKOUT` | After removal/discharge | Inhibited | All hazardous | Recovery request | Safe state confirmed | Prior AUTH revoked; stale | → FX_RECOVERY_CHECK | stay | Inhibited | Operator (deliberate) |
-| `FX_FAULT` | Any detected fault | Inhibited | All hazardous | Diagnose; reset req | Fault captured | Inhibit-all | If hazardous energy active or unconfirmed → **FX_ENERGY_REMOVAL**; direct → FX_LOCKOUT **only when all applicable paths observed inactive AND removal confirmed AND discharge complete or proven N/A** | stay | Inhibited | Operator |
-| `FX_RECOVERY_CHECK` | Deliberate recovery | Inhibited until pass | Hazardous | Validate | Identity/config; residual safe | Recovery interlocks | pass → FX_SAFE/READY | → FX_FAULT | Inhibited | Operator + interlock |
+| `FX_ENERGY_REMOVAL` | Any hazardous exit / E-stop | Removal in progress | New AUTH grant | Confirm removal | Residual observation | Override all AUTH | → FX_DISCHARGE (if discharge applicable); → FX_LOCKOUT_SAFE **only when** removal confirmed AND discharge complete/proven N/A; otherwise → FX_LOCKOUT_UNCONFIRMED | stay | Force removal | FX-ENERGY-REMOVAL |
+| `FX_DISCHARGE` | Removal in progress | Discharge action | Hazardous | Await decay | Residual/discharge observe | Discharge interlock | DISCHARGE_COMPLETE (residual confirmed) → FX_LOCKOUT_SAFE | residual **UNCONFIRMED** → FX_LOCKOUT_UNCONFIRMED (recovery not permitted) | Hold until safe decay confirmed | FX-DISCHARGE |
+| `FX_LOCKOUT_UNCONFIRMED` | Removal done but residual/paths not all confirmed | Inhibited (no new hazardous energy) | New hazardous energy | Energy-removal/discharge; diagnosis | Residual/path observation (incomplete) | All AUTH inactive; stale | → FX_LOCKOUT_SAFE **when** all applicable paths observed inactive AND removal confirmed AND discharge complete/proven N/A | stay (residual may exist/unknown) | New hazardous energy prohibited; recovery prohibited | Operator + interlock |
+| `FX_LOCKOUT_SAFE` | All applicable paths observed inactive; removal confirmed; discharge complete/proven N/A | Inhibited | All hazardous | Recovery request | Safe state confirmed | Prior AUTH revoked; stale | → FX_RECOVERY_CHECK (deliberate) | → FX_LOCKOUT_UNCONFIRMED if any confirmation lost | Inhibited; recovery permitted | Operator (deliberate) |
+| `FX_FAULT` | Any detected fault | No newly authorized hazardous energy; pre-existing energy may be active/unconfirmed pending removal | New hazardous energy | Diagnose; reset req | Fault captured | Inhibit-all AUTH | If hazardous energy active or unconfirmed → **FX_ENERGY_REMOVAL**; direct → FX_LOCKOUT_SAFE **only when** all applicable paths observed inactive AND removal confirmed AND discharge complete/proven N/A | stay | All AUTH revoked/inhibited; energy removal initiated when energy active/unconfirmed; recovery prohibited | Operator |
+| `FX_RECOVERY_CHECK` | Deliberate recovery **from FX_LOCKOUT_SAFE only** | Inhibited until pass | Hazardous; direct entry from FX_FAULT | Validate | Identity/config; residual safe | Recovery interlocks | pass → FX_SAFE/READY | → FX_FAULT | Inhibited | Operator + interlock |
 
 Uncommanded startup / power restoration enters `FX_SAFE` (never resumes prior test/fault). Stale-command invalidation after E-stop, physical KILL, power/source interruption, controller reset, invalid identity/config, or loss of control authority.
 
 ### 1.1 Hazardous-exit guard (WP-015-R1)
 
 ```text
+Two lockout states are formally defined (not a note):
+
+FX_LOCKOUT_UNCONFIRMED
+  - all AUTH inactive; new energy application prohibited;
+  - residual energy may exist or be unknown;
+  - energy-removal/discharge actions permitted; diagnosis permitted;
+  - recovery request prohibited; CANNOT transition to FX_RECOVERY_CHECK.
+
+FX_LOCKOUT_SAFE
+  - all applicable energy paths observed inactive;
+  - energy removal confirmed; discharge complete or proven not applicable;
+  - deliberate recovery request permitted; may transition to FX_RECOVERY_CHECK.
+
+Guards:
 Any exit from an energized or energy-uncertain state shall pass through
 FX_ENERGY_REMOVAL unless all applicable energy paths are independently
 observed inactive and no stored-energy discharge is required.
 
-FX_ENERGY_REMOVAL → FX_LOCKOUT is permitted only when:
+FX_ENERGY_REMOVAL → FX_LOCKOUT_SAFE is permitted only when:
     energy removal is confirmed
-    AND discharge is complete or proven not applicable.
+    AND discharge is complete or proven not applicable;
+otherwise → FX_LOCKOUT_UNCONFIRMED.
 
-FX_FAULT → FX_LOCKOUT (direct) is permitted only when:
+FX_FAULT → FX_LOCKOUT_SAFE (direct) is permitted only when:
     all applicable paths are observed inactive
     AND energy removal is confirmed
-    AND discharge is complete or proven not applicable.
+    AND discharge is complete or proven not applicable;
+otherwise FX_FAULT → FX_ENERGY_REMOVAL.
 
-If FX_DISCHARGE cannot confirm residual state, FX_LOCKOUT is held with
-energy state = UNCONFIRMED and recovery is not permitted.
+FX_FAULT → FX_RECOVERY_CHECK (direct) is PROHIBITED.
+
+FX_LOCKOUT_UNCONFIRMED → FX_RECOVERY_CHECK is PROHIBITED.
+Only FX_LOCKOUT_SAFE → FX_RECOVERY_CHECK (deliberate) is permitted.
+
+If FX_DISCHARGE cannot confirm residual state, the fixture remains in
+FX_LOCKOUT_UNCONFIRMED and recovery is not permitted.
 ```
 
 ## 2. Interlock architecture (§17)
@@ -105,3 +127,4 @@ REQ-DCC-V-FX-001…005/010…015/052/071 · PWR-A-021…024 · ADR-022/023 · OI
 |---------|------|--------|
 | 1.0 | 2026-07-20 | WP-015 initial interlock and state model — Proposed |
 | 1.1 | 2026-07-21 | WP-015-R1 — hazardous-exit guard (§1.1); FX_TEST_ACTIVE/FX_FAULT/FX_ENERGY_REMOVAL/FX_DISCHARGE exit guards; interlock effective-action retagged [A]/[C]/[S] with [S] as Proposed allocations + proof artifacts |
+| 1.2 | 2026-07-21 | WP-015-R2 — FX_LOCKOUT split into FX_LOCKOUT_UNCONFIRMED / FX_LOCKOUT_SAFE; FX_FAULT energy-state corrected; direct FX_FAULT→FX_RECOVERY_CHECK prohibited |

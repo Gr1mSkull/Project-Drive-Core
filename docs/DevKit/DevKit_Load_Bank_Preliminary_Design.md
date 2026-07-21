@@ -1,7 +1,7 @@
 # DevKit Load-Bank Preliminary Design — WP-015
 
 **Document ID:** DOC-DK-LBPD-001  
-**Version:** 1.1  
+**Version:** 1.2  
 **Status:** Proposed — Architecture Review pending  
 **Work Package:** WP-015  
 **Date:** 2026-07-20
@@ -55,8 +55,8 @@ Revoke authorization
 + Inhibit or remove upstream energy
 + Enter ENERGY_REMOVAL
 + Confirm safe electrical state where possible
-+ Enter LOCKOUT
-+ Require deliberate recovery
++ Enter FX_LOCKOUT_UNCONFIRMED (→ FX_LOCKOUT_SAFE only after removal/discharge confirmed)
++ Require deliberate recovery (from FX_LOCKOUT_SAFE only)
 ```
 
 ```text
@@ -67,8 +67,8 @@ Analyzed failure modes:
 
 | Failure mode | Detection (functional) | Safe-minimum response |
 |--------------|------------------------|-----------------------|
-| control stuck ON | command vs observed mismatch | revoke + upstream removal + lockout |
-| switching element shorted | current persists after removal command | upstream inhibit/remove + lockout |
+| control stuck ON | command vs observed mismatch | revoke + upstream removal + FX_LOCKOUT_UNCONFIRMED (→ SAFE after confirm) |
+| switching element shorted | current persists after removal command | upstream inhibit/remove + FX_LOCKOUT_UNCONFIRMED (→ SAFE after confirm) |
 | switching element open | expected load absent | flag; safe (no hazardous energy added) |
 | load disconnected | load current absent under command | flag; verify no arc; safe |
 | unexpected reverse current | signed-I sign anomaly | inhibit; do not assume source absorbs (OI-BI-001) |
@@ -90,3 +90,4 @@ REQ-DCC-V-FX-032/050/056/060 · PWR-A-002/023 · OI-BI-001 · OI-SC-001 · OI-FI
 |---------|------|--------|
 | 1.0 | 2026-07-20 | WP-015 initial load-bank preliminary design — Proposed |
 | 1.1 | 2026-07-21 | WP-015-R1 — source/sink/regenerative semantics reconciled; absolute "never sourced / sink-only" removed; returned-energy reverse-flow containment BLOCKED_BY_ARCHITECTURE; PWR-A-023 unchanged |
+| 1.2 | 2026-07-21 | WP-015-R2 — lockout substate references (UNCONFIRMED→SAFE) in stuck-on sequence |

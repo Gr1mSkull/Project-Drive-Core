@@ -16,6 +16,30 @@
 | **Implementer role** | Implementation Engineer |
 | **Status** | Ready for Final Architecture Review (after R1) |
 
+## 0a. WP-015-R2 change summary
+
+1. `FX_LOCKOUT` formally split into `FX_LOCKOUT_UNCONFIRMED` (residual may exist/unknown; removal/discharge/diagnosis permitted; recovery prohibited; cannot enter `FX_RECOVERY_CHECK`) and `FX_LOCKOUT_SAFE` (paths observed inactive; removal confirmed; discharge complete/proven N/A; deliberate recovery permitted).
+2. `FX_FAULT` corrected: no newly authorized hazardous energy; pre-existing energy may be active/unconfirmed pending `FX_ENERGY_REMOVAL`; recovery prohibited.
+3. Recovery routes `FX_FAULT → FX_ENERGY_REMOVAL → FX_DISCHARGE (when applicable) → FX_LOCKOUT_UNCONFIRMED → FX_LOCKOUT_SAFE → RECOVERY CONFIRM → FX_RECOVERY_CHECK`; direct `FX_FAULT → FX_RECOVERY_CHECK` prohibited.
+4. Stale references cleaned: no "Sink-only functional classes"; `FX-PD-001…021`; `GND-OPTION-A/B/C/D1/D2`; exact R2 head recorded below.
+
+### R2 reproducible checks
+
+| ID | Command | Exit | Result |
+|----|---------|------|--------|
+| R2.1 | `rg -n '\| \`FX_LOCKOUT\` \|' $S` (no bare state) | 1 | PASS |
+| R2.2 | `rg -n 'FX_LOCKOUT_UNCONFIRMED → FX_RECOVERY_CHECK is PROHIBITED' $S` | 0 | PASS |
+| R2.3 | `rg -n 'FX_FAULT.*Inhibited \| All hazardous' $S` | 1 | PASS |
+| R2.4 | `rg -n 'active or unconfirmed → \*\*FX_ENERGY_REMOVAL' $S` | 0 | PASS |
+| R2.5 | `rg -n 'FX_FAULT → FX_RECOVERY_CHECK \(direct\) is PROHIBITED' $S` | 0 | PASS |
+| R2.6 | `rg -n 'FX_LOCKOUT_UNCONFIRMED\|FX_LOCKOUT_SAFE' $B` | 0 | PASS |
+| R2.7 | `rg -n 'Sink-only functional classes' RHP` | 1 | PASS |
+| R2.8 | `rg -n 'FX-PD-001 … FX-PD-021' RHP` | 0 | PASS |
+| R2.9 | `rg -n 'GND-OPTION-A/B/C/D1/D2' RHP register` | 0 | PASS |
+| R2.16 | forbidden-path diff empty | 0 | PASS |
+| R2.17 | no MPN/BOM/numeric | 1 | PASS |
+| R2.15 | no `\| PASS \|` / no VE dir change | 1 / 0 | PASS |
+
 ## 0. WP-015-R1 change summary
 
 1. Measurement boundary reclassified as observation-purpose; a physical measurement connection is a potential energy/reference/fault path until qualified (no unconditional non-energy classification).
@@ -57,7 +81,7 @@ Fixture states `FX_OFF … FX_RECOVERY_CHECK` with entry/exit, permitted/prohibi
 
 ## 5. Load-bank summary
 
-Sink-only functional classes (`LB-RESISTIVE`, `LB-INDUCTIVE`, `LB-ELECTRONIC`, `LB-MOTOR_OR_ACTUATOR`, `LB-BIDIRECTIONAL_OR_REGENERATIVE`, `LB-FAULT-SIMULATION`). Stuck-on containment: revoke AUTH + inhibit/remove upstream energy + ENERGY_REMOVAL + confirm safe state + LOCKOUT + deliberate recovery; AUTH revoke alone does not prove de-energization.
+Sink-function architecture; independent energy origination prohibited; returned-energy reverse-flow handled separately (BLOCKED_BY_ARCHITECTURE until OI-BI-001/OI-GND-001). Functional classes: `LB-RESISTIVE`, `LB-INDUCTIVE`, `LB-ELECTRONIC`, `LB-MOTOR_OR_ACTUATOR`, `LB-BIDIRECTIONAL_OR_REGENERATIVE`, `LB-FAULT-SIMULATION`. Stuck-on containment: revoke AUTH + inhibit/remove upstream energy + ENERGY_REMOVAL + confirm safe state + FX_LOCKOUT_UNCONFIRMED (→ FX_LOCKOUT_SAFE after confirmation) + deliberate recovery; AUTH revoke alone does not prove de-energization.
 
 ## 6. Measurement / DAQ summary
 
@@ -69,11 +93,11 @@ Symbolic interface groups (`IF-FX-SOURCE … IF-FX-EXTERNAL-ENERGY`) and evaluat
 
 ## 8. Proposed decisions
 
-`FX-PD-001 … FX-PD-017` (module decomposition, base-energy control, external-energy exclusivity, ground/reference option, back-feed placement, E-stop path, energy-removal observation, discharge observation, load-bank architecture, stuck-on containment, DAQ split, reference independence, fault-injection authorization, DUT interface grouping, operator control authority, lockout/recovery authority, containment boundary) — all `PROPOSED_DESIGN` / `PROPOSED_CONSTRAINT` / `ALTERNATIVE_UNDER_EVALUATION` / `BLOCKED_BY_ARCHITECTURE`. None self-approved.
+`FX-PD-001 … FX-PD-021` (module decomposition, base-energy control, external-energy exclusivity, ground/reference option, back-feed placement, E-stop path, energy-removal observation, discharge observation, load-bank architecture, stuck-on containment, DAQ split, reference independence, fault-injection authorization, DUT interface grouping, operator control authority, lockout/recovery authority, containment boundary, measurement-connection energy/fault model, regenerative/returned-energy containment, interlock effective-action allocation, GND-OPTION-D1/D2 split) — all `PROPOSED_DESIGN` / `PROPOSED_CONSTRAINT` / `ALTERNATIVE_UNDER_EVALUATION` / `BLOCKED_BY_ARCHITECTURE`. None self-approved. Ground/reference options compared: `GND-OPTION-A/B/C/D1/D2`.
 
 ## 9. Unresolved issues (preserved Open)
 
-OI-GND-001 · OI-PROT-001/002 · OI-FIX-001/002 · OI-SC-001 · OI-BI-001 · OI-SENSE-001 · OI-CONFIG-001 · ADR-DK-011/012 · TBD-DK-007 (BLOCKED_BY_EDL_CLARIFICATION) · TBD-DK-001…022 numeric Open. WP-015 compares options (GND-OPTION-A…D; E-STOP-OPT-1…4) but resolves none.
+OI-GND-001 · OI-PROT-001/002 · OI-FIX-001/002 · OI-SC-001 · OI-BI-001 · OI-SENSE-001 · OI-CONFIG-001 · ADR-DK-011/012 · TBD-DK-007 (BLOCKED_BY_EDL_CLARIFICATION) · TBD-DK-001…022 numeric Open. WP-015 compares options (GND-OPTION-A/B/C/D1/D2; E-STOP-OPT-1…4) but resolves none.
 
 ## 10. Readiness assessment
 
@@ -282,3 +306,4 @@ The R1 corrections target the four review items marked *Revision required* (path
 |---------|------|--------|
 | 1.0 | 2026-07-20 | WP-015 initial RHP — Draft; self-contained validation + full Architect questions |
 | 1.1 | 2026-07-21 | WP-015-R1 — change summary + reproducible R1.1–R1.18 checks; Ready for Final Architecture Review |
+| 1.2 | 2026-07-21 | WP-015-R2 — lockout substates; FX_FAULT energy-state; recovery diagram; stale-reference cleanup; exact R2 head recorded |
