@@ -1,8 +1,8 @@
 # DevKit Fixture Preliminary Block Design — WP-015
 
 **Document ID:** DOC-DK-FPBD-001  
-**Version:** 1.2  
-**Status:** Proposed — Architecture Review pending  
+**Version:** 1.3  
+**Status:** Accepted — Architecture Review (2026-07-21)  
 **Work Package:** WP-015  
 **Date:** 2026-07-20
 
@@ -152,3 +152,4 @@ Concrete components, final connectors/pinouts, selected isolation topology, sele
 | 1.0 | 2026-07-20 | WP-015 initial preliminary block design — Proposed |
 | 1.1 | 2026-07-21 | WP-015-R1 — energy vs source-control paths separated; measurement as potential energy/fault path; regenerative reverse-flow containment; [S] legend misuse corrected to [A]/[C] |
 | 1.2 | 2026-07-21 | WP-015-R2 — recovery diagram routes FX_FAULT via energy-removal/discharge/lockout substates; no direct fault→recovery |
+| 1.3 | 2026-07-21 | Architecture Review **Accepted** (WP-015 / R1 / R2 / R3; reviewed head `227ea78`, PR #19); Open decisions retained; NOT VERIFIED |

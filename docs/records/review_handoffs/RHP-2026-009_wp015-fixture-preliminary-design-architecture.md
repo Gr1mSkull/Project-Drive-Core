@@ -17,7 +17,7 @@
 | **Date** | 2026-07-21 |
 | **Implementer** | Implementation Engineer (cloud agent) |
 | **Implementer role** | Implementation Engineer |
-| **Status** | Ready for Final Architecture Acceptance after R3 |
+| **Status** | **Accepted** — Architecture Review (2026-07-21); PR #19 approved for merge |
 
 ## 0a. WP-015-R2 change summary
 
@@ -497,9 +497,9 @@ Detailed design remains *Not yet*; procurement/construction/energization remain 
 | Field | Value |
 |-------|-------|
 | **Implementer Self-Review Status** | Complete through R3 |
-| **Independent Review Status** | Architecture content reviewed through R2; final governance consistency pending R3 review |
-| **Final Review Outcome** | **Ready for Final Architecture Acceptance after R3** |
-| **Architecture / policy approval** | Separate — System Architect only |
+| **Independent Review Status** | Complete — Architecture Review (2026-07-21) |
+| **Final Review Outcome** | **Accepted** — Architecture Review (2026-07-21); WP-015 / R1 / R2 / R3 Accepted; reviewed head `227ea78`; PR #19 approved for merge; FX-PD dispositions per decision register §0 |
+| **Architecture / policy approval** | Accepted — System Architect (2026-07-21); OI-GND-001 / E-stop topology / enclosure DEFERRED (Open); WP-016 authorized |
 
 ## Revision history
 
@@ -509,3 +509,4 @@ Detailed design remains *Not yet*; procurement/construction/energization remain 
 | 1.1 | 2026-07-21 | WP-015-R1 — change summary + reproducible R1.1–R1.18 checks; Ready for Final Architecture Review |
 | 1.2 | 2026-07-21 | WP-015-R2 — lockout substates; FX_FAULT energy-state; recovery diagram; stale-reference cleanup; exact R2 head recorded |
 | 1.3 | 2026-07-21 | WP-015-R3 — metadata (R1/R2/R3); Q5 A/B/C/D1/D2/Defer; review-status history; full self-contained R2 validation package; actual link evidence; commit-identity model |
+| 1.4 | 2026-07-21 | WP-015 Architecture Acceptance recorded — Accepted; PR #19 approved for merge; Q5=DEFER; Q9=DEFER; FX-PD dispositions; WP-016 authorized |

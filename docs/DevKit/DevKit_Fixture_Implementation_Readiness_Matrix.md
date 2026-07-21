@@ -1,8 +1,8 @@
 # DevKit Fixture Implementation Readiness Matrix — WP-015
 
 **Document ID:** DOC-DK-FIRM-001  
-**Version:** 1.1  
-**Status:** Proposed — Architecture Review pending  
+**Version:** 1.2  
+**Status:** Accepted — Architecture Review (2026-07-21)  
 **Work Package:** WP-015  
 **Date:** 2026-07-20
 
@@ -59,3 +59,4 @@ REQ-DCC-V-FX-* · OI-GND-001 · OI-PROT-001/002 · OI-SC-001 · OI-FIX-002 · OI
 |---------|------|--------|
 | 1.0 | 2026-07-20 | WP-015 initial implementation readiness matrix — Proposed |
 | 1.1 | 2026-07-21 | WP-015-R1 — measurement blocker (energy/fault path unqualified); returned-energy containment row (FX-PD-019) |
+| 1.2 | 2026-07-21 | Architecture Review **Accepted** (WP-015 / R1 / R2 / R3; reviewed head `227ea78`, PR #19); Open decisions retained; NOT VERIFIED |

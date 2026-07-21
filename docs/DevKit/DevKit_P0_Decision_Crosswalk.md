@@ -215,6 +215,7 @@ This acceptance update does not rewrite the BOM or select a component.
 | 1.10 | 2026-07-20 | WP-012 Accepted status alignment; WP-013 class qualification mapping (Proposed) |
 | 1.11 | 2026-07-20 | WP-013 Accepted status; WP-014 fixture/load-bank mapping (Proposed) |
 | 1.12 | 2026-07-20 | WP-015 fixture preliminary design mapping (Proposed) |
+| 1.13 | 2026-07-21 | WP-015 Architecture Acceptance — preliminary design Accepted; FX-PD dispositions; WP-016 next |
 
 ## 13. WP-015 fixture preliminary design mapping
 
@@ -222,6 +223,6 @@ WP-015 converts Accepted `REQ-DCC-V-FX-*` into a preliminary design architecture
 
 | Artifact | Document | Status |
 |----------|----------|--------|
-| Preliminary design anchor | [`DevKit_Fixture_Preliminary_Design_Architecture.md`](DevKit_Fixture_Preliminary_Design_Architecture.md) | Proposed |
-| Decision register | [`DevKit_Fixture_Preliminary_Design_Decision_Register.md`](DevKit_Fixture_Preliminary_Design_Decision_Register.md) | Proposed |
-| Implementation readiness | [`DevKit_Fixture_Implementation_Readiness_Matrix.md`](DevKit_Fixture_Implementation_Readiness_Matrix.md) | Proposed |
+| Preliminary design anchor | [`DevKit_Fixture_Preliminary_Design_Architecture.md`](DevKit_Fixture_Preliminary_Design_Architecture.md) | **Accepted** (2026-07-21) |
+| Decision register | [`DevKit_Fixture_Preliminary_Design_Decision_Register.md`](DevKit_Fixture_Preliminary_Design_Decision_Register.md) | **Accepted** — FX-PD dispositions |
+| Implementation readiness | [`DevKit_Fixture_Implementation_Readiness_Matrix.md`](DevKit_Fixture_Implementation_Readiness_Matrix.md) | **Accepted** |

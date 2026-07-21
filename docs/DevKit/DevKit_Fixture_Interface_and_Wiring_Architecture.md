@@ -1,8 +1,8 @@
 # DevKit Fixture Interface and Wiring Architecture — WP-015
 
 **Document ID:** DOC-DK-FIWA-001  
-**Version:** 1.1  
-**Status:** Proposed — Architecture Review pending  
+**Version:** 1.2  
+**Status:** Accepted — Architecture Review (2026-07-21)  
 **Work Package:** WP-015  
 **Date:** 2026-07-20
 
@@ -82,3 +82,4 @@ REQ-DCC-V-FX-005/010…015/030…034/040/060…062/070/071 · PWR-A-024 · OI-GN
 |---------|------|--------|
 | 1.0 | 2026-07-20 | WP-015 initial interface and wiring architecture (+ operator control/indication) — Proposed |
 | 1.1 | 2026-07-21 | WP-015-R1 — measurement interface/wiring reclassified as potential energy/reference/fault path (not unconditional non-energy) |
+| 1.2 | 2026-07-21 | Architecture Review **Accepted** (WP-015 / R1 / R2 / R3; reviewed head `227ea78`, PR #19); Open decisions retained; NOT VERIFIED |

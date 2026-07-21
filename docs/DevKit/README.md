@@ -1,7 +1,7 @@
 # DriveCore Gen1 DevKit — Document Set
 
 **Document ID:** DOC-DK-INDEX-001  
-**Version:** 1.24  
+**Version:** 1.25  
 **Status:** Accepted (index); WP-013/WP-014 **Accepted**; WP-015 **Proposed**  
 **Work Package:** WP-007…WP-014 (Accepted) / WP-015 (Proposed)  
 **Date:** 2026-07-20
@@ -65,14 +65,14 @@ It does **not** define the final circuit, PCB, component set, enclosure, or BOM.
 | [DevKit_Fixture_Verification_Capability_Matrix.md](DevKit_Fixture_Verification_Capability_Matrix.md) | WP-014 requirement/case → fixture capability | **Proposed** |
 | [DevKit_Fixture_Hazard_and_Interlock_Register.md](DevKit_Fixture_Hazard_and_Interlock_Register.md) | WP-014 H-FX-* hazards and interlocks | **Proposed** |
 | [DevKit_Fixture_Dependency_and_Readiness_Matrix.md](DevKit_Fixture_Dependency_and_Readiness_Matrix.md) | WP-014 capability readiness and next WP | **Proposed** |
-| [DevKit_Fixture_Preliminary_Design_Architecture.md](DevKit_Fixture_Preliminary_Design_Architecture.md) | WP-015 preliminary design anchor (`FX-*` modules, lifecycle) | **Proposed** |
-| [DevKit_Fixture_Preliminary_Block_Design.md](DevKit_Fixture_Preliminary_Block_Design.md) | WP-015 functional block diagrams | **Proposed** |
-| [DevKit_Fixture_Measurement_and_DAQ_Architecture.md](DevKit_Fixture_Measurement_and_DAQ_Architecture.md) | WP-015 measurement boundaries and DAQ split | **Proposed** |
-| [DevKit_Fixture_Energy_Control_Preliminary_Design.md](DevKit_Fixture_Energy_Control_Preliminary_Design.md) | WP-015 energy/control paths; OI-GND options; auth-vs-physical state | **Proposed** |
-| [DevKit_Fixture_Interlock_and_State_Model.md](DevKit_Fixture_Interlock_and_State_Model.md) | WP-015 states, interlocks, E-stop integrity | **Proposed** |
-| [DevKit_Load_Bank_Preliminary_Design.md](DevKit_Load_Bank_Preliminary_Design.md) | WP-015 load-bank classes and failure behavior | **Proposed** |
-| [DevKit_Fixture_Interface_and_Wiring_Architecture.md](DevKit_Fixture_Interface_and_Wiring_Architecture.md) | WP-015 interfaces, wiring classes, operator control | **Proposed** |
-| [DevKit_Fixture_Preliminary_Design_Decision_Register.md](DevKit_Fixture_Preliminary_Design_Decision_Register.md) | WP-015 `FX-PD-*` proposed decisions | **Proposed** |
+| [DevKit_Fixture_Preliminary_Design_Architecture.md](DevKit_Fixture_Preliminary_Design_Architecture.md) | WP-015 preliminary design anchor (`FX-*` modules, lifecycle) | **Accepted** |
+| [DevKit_Fixture_Preliminary_Block_Design.md](DevKit_Fixture_Preliminary_Block_Design.md) | WP-015 functional block diagrams | **Accepted** |
+| [DevKit_Fixture_Measurement_and_DAQ_Architecture.md](DevKit_Fixture_Measurement_and_DAQ_Architecture.md) | WP-015 measurement boundaries and DAQ split | **Accepted** |
+| [DevKit_Fixture_Energy_Control_Preliminary_Design.md](DevKit_Fixture_Energy_Control_Preliminary_Design.md) | WP-015 energy/control paths; OI-GND options; auth-vs-physical state | **Accepted** |
+| [DevKit_Fixture_Interlock_and_State_Model.md](DevKit_Fixture_Interlock_and_State_Model.md) | WP-015 states, interlocks, E-stop integrity | **Accepted** |
+| [DevKit_Load_Bank_Preliminary_Design.md](DevKit_Load_Bank_Preliminary_Design.md) | WP-015 load-bank classes and failure behavior | **Accepted** |
+| [DevKit_Fixture_Interface_and_Wiring_Architecture.md](DevKit_Fixture_Interface_and_Wiring_Architecture.md) | WP-015 interfaces, wiring classes, operator control | **Accepted** |
+| [DevKit_Fixture_Preliminary_Design_Decision_Register.md](DevKit_Fixture_Preliminary_Design_Decision_Register.md) | WP-015 `FX-PD-*` proposed decisions | **Accepted** |
 | [DevKit_Fixture_Implementation_Readiness_Matrix.md](DevKit_Fixture_Implementation_Readiness_Matrix.md) | WP-015 readiness for detailed design/procurement/construction | **Proposed** |
 | This README | Navigation and authority statement | Accepted |
 
@@ -144,7 +144,7 @@ Every DevKit gate evidence package shall record a **composite system baseline** 
 | WP-012 electrical sizing architecture framework | **Accepted** (2026-07-20) — WP-012-R1/R2 Accepted; PR #16 merged (`9c5c7e7` / `fe700d4`) |
 | WP-013 component-class qualification + symbolic calcs | **Accepted** (2026-07-20) — WP-013-R1 Accepted; PR #17 merged (`d1698a0` / `23bdb07`); final classes/topology Open |
 | WP-014 fixture and load-bank requirements | **Accepted** — Architecture Review (2026-07-20); WP-014-R1/R2/R3 Accepted; PR #18 merged (`7c72181` / `e46aff4`); fixture hardware NOT IMPLEMENTED; no procurement/construction; no VE |
-| WP-015 fixture preliminary design architecture | **Proposed** — Architecture Review pending; fixture NOT IMPLEMENTED; detailed design / procurement / construction / energization NOT AUTHORIZED; no VE |
+| WP-015 fixture preliminary design architecture | **Accepted** — Architecture Review (2026-07-21); reviewed head `227ea78`; PR #19 approved for merge; fixture NOT IMPLEMENTED; detailed design / procurement / construction / energization NOT AUTHORIZED; no VE |
 | Hardware design | **NOT IMPLEMENTED** — detailed sizing/schematic/PCB **NOT AUTHORIZED** |
 | Firmware bring-up | NOT IMPLEMENTED |
 | Physical verification | NOT VERIFIED |
@@ -158,7 +158,7 @@ Still open decision **requests** (no Accepted ADR yet): `ADR-DK-008`, `ADR-DK-00
 
 Open thresholds: `TBD-DK-001` … `TBD-DK-022` (Status Open — WP-009 methods Accepted; numeric values not Approved). `TBD-DK-007` remains **BLOCKED_BY_EDL_CLARIFICATION** — not Resolved.
 
-**Current:** WP-015 — Fixture Preliminary Design Architecture **Proposed** (Architecture Review pending). ADR-DK-011/012 may proceed in parallel when authorized. Not authorized: MPN, numeric freeze, procurement, construction, energization, physical testing, DevKit schematic/PCB, VE.
+**WP-015 Accepted** (Architecture Review 2026-07-21; PR #19 approved for merge). **Next authorized work:** WP-016 — Fixture Architecture Decision Closure and Detailed-Design Inputs (Architect-authorized). Not authorized: final schematic/BOM release, procurement, construction, energization, physical fault injection, verification execution. ADR-DK-011/012 may proceed in parallel when authorized. Not authorized: MPN, numeric freeze, procurement, construction, energization, physical testing, DevKit schematic/PCB, VE.
 
 **Not authorized:** MPN selection · BOM · schematics · PCB · numeric threshold freeze · EDL file edit · final electrical sizing completion · Verification Evidence creation · fixture procurement · fixture construction · energization.
 
@@ -192,3 +192,4 @@ Open thresholds: `TBD-DK-001` … `TBD-DK-022` (Status Open — WP-009 methods A
 | 1.22 | 2026-07-20 | WP-014 Architecture Acceptance — package Accepted; PR #18 approved for merge; WP-015 authorized |
 | 1.23 | 2026-07-20 | WP-014 PR #18 merged (`7c72181` / `e46aff4`) — acceptance metadata recorded on main |
 | 1.24 | 2026-07-20 | WP-015 — fixture preliminary design architecture package (Proposed); CIA-2026-010 / RHP-2026-009 |
+| 1.25 | 2026-07-21 | WP-015 Architecture Acceptance — package Accepted; PR #19 approved for merge; WP-016 authorized |

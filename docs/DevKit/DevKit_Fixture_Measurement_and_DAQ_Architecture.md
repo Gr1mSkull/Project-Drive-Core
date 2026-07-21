@@ -1,8 +1,8 @@
 # DevKit Fixture Measurement and DAQ Architecture — WP-015
 
 **Document ID:** DOC-DK-FMDA-001  
-**Version:** 1.1  
-**Status:** Proposed — Architecture Review pending  
+**Version:** 1.2  
+**Status:** Accepted — Architecture Review (2026-07-21)  
 **Work Package:** WP-015  
 **Date:** 2026-07-20
 
@@ -100,3 +100,4 @@ REQ-DCC-V-FX-060/061/062 · WP-014 FIMR (FX-MP-*) · WP-010 MP-* · OI-SENSE-001
 |---------|------|--------|
 | 1.0 | 2026-07-20 | WP-015 measurement and DAQ architecture (boundaries + DAQ responsibility split) — Proposed |
 | 1.1 | 2026-07-21 | WP-015-R1 — measurement is observation-purpose; connection treated as potential energy/reference/fault path; concept separation + per-boundary Open dependencies; no unconditional non-energy classification |
+| 1.2 | 2026-07-21 | Architecture Review **Accepted** (WP-015 / R1 / R2 / R3; reviewed head `227ea78`, PR #19); Open decisions retained; NOT VERIFIED |

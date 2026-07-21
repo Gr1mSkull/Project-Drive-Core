@@ -1,8 +1,8 @@
 # DevKit Load-Bank Preliminary Design — WP-015
 
 **Document ID:** DOC-DK-LBPD-001  
-**Version:** 1.2  
-**Status:** Proposed — Architecture Review pending  
+**Version:** 1.3  
+**Status:** Accepted — Architecture Review (2026-07-21)  
 **Work Package:** WP-015  
 **Date:** 2026-07-20
 
@@ -91,3 +91,4 @@ REQ-DCC-V-FX-032/050/056/060 · PWR-A-002/023 · OI-BI-001 · OI-SC-001 · OI-FI
 | 1.0 | 2026-07-20 | WP-015 initial load-bank preliminary design — Proposed |
 | 1.1 | 2026-07-21 | WP-015-R1 — source/sink/regenerative semantics reconciled; absolute "never sourced / sink-only" removed; returned-energy reverse-flow containment BLOCKED_BY_ARCHITECTURE; PWR-A-023 unchanged |
 | 1.2 | 2026-07-21 | WP-015-R2 — lockout substate references (UNCONFIRMED→SAFE) in stuck-on sequence |
+| 1.3 | 2026-07-21 | Architecture Review **Accepted** (WP-015 / R1 / R2 / R3; reviewed head `227ea78`, PR #19); Open decisions retained; NOT VERIFIED |

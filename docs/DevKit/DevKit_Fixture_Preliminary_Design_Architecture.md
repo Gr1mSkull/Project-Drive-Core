@@ -1,8 +1,8 @@
 # DevKit Fixture Preliminary Design Architecture — WP-015
 
 **Document ID:** DOC-DK-FPDA-001  
-**Version:** 1.1  
-**Status:** Proposed — Architecture Review pending  
+**Version:** 1.2  
+**Status:** Accepted — Architecture Review (2026-07-21)  
 **Work Package:** WP-015  
 **Baseline:** WP-014 Accepted (`bc7c6b6`)  
 **Date:** 2026-07-20
@@ -45,7 +45,7 @@ HISTORICAL_ONLY
 REJECTED
 ```
 
-State separation (not equivalent): Requirement Accepted → Constraint Accepted → Preliminary design proposed → Preliminary design accepted → Detailed design completed → Implementation authorized → Implementation completed → Physical verification completed. The Implementation Engineer shall not mark new WP-015 design decisions Accepted.
+State separation (not equivalent): Requirement Accepted → Constraint Accepted → Preliminary design proposed → **Preliminary design accepted (WP-015 Architecture Review 2026-07-21)** → Detailed design completed → Implementation authorized → Implementation completed → Physical verification completed. WP-015 preliminary design is now **Accepted at Architecture Review**; per-entry FX-PD dispositions are recorded in the decision register §0. Acceptance does not mean detailed design complete, safe to build, safe to energize, or requirements verified. The Implementation Engineer did not self-approve; acceptance is the Architect's disposition.
 
 ## 4. Document set
 
@@ -142,3 +142,4 @@ Detail: [DevKit_Fixture_Implementation_Readiness_Matrix.md](DevKit_Fixture_Imple
 |---------|------|--------|
 | 1.0 | 2026-07-20 | WP-015 initial preliminary design architecture anchor — Proposed |
 | 1.1 | 2026-07-21 | WP-015-R1 — source-control vs energy path separated; measurement as potential energy/fault path; load-bank sink-function + returned-energy containment; isolated-by-function removed |
+| 1.2 | 2026-07-21 | Architecture Review **Accepted** (WP-015 / R1 / R2 / R3; reviewed head `227ea78`, PR #19); Open decisions retained; NOT VERIFIED |

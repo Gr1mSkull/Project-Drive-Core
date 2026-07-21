@@ -1,8 +1,8 @@
 # DevKit Fixture Energy-Control Preliminary Design — WP-015
 
 **Document ID:** DOC-DK-FECPD-001  
-**Version:** 1.1  
-**Status:** Proposed — Architecture Review pending  
+**Version:** 1.2  
+**Status:** Accepted — Architecture Review (2026-07-21)  
 **Work Package:** WP-015  
 **Date:** 2026-07-20
 
@@ -139,3 +139,4 @@ REQ-DCC-V-FX-005/020…026/030…034/052…056 · PWR-A-001/002/003/017/018 · O
 |---------|------|--------|
 | 1.0 | 2026-07-20 | WP-015 initial energy-control preliminary design — Proposed |
 | 1.1 | 2026-07-21 | WP-015-R1 — energy vs source-control path separation (§1.1); GND-OPTION-D split into D1/D2; Option C conditional galvanic-separation language; A/B back-feed-prevention wording de-committed; removed absolute separation claims |
+| 1.2 | 2026-07-21 | Architecture Review **Accepted** (WP-015 / R1 / R2 / R3; reviewed head `227ea78`, PR #19); Open decisions retained; NOT VERIFIED |

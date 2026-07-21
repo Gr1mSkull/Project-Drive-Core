@@ -1,8 +1,8 @@
 # DevKit Fixture Interlock and State Model — WP-015
 
 **Document ID:** DOC-DK-FISM-001  
-**Version:** 1.2  
-**Status:** Proposed — Architecture Review pending  
+**Version:** 1.3  
+**Status:** Accepted — Architecture Review (2026-07-21)  
 **Work Package:** WP-015  
 **Date:** 2026-07-20
 
@@ -128,3 +128,4 @@ REQ-DCC-V-FX-001…005/010…015/052/071 · PWR-A-021…024 · ADR-022/023 · OI
 | 1.0 | 2026-07-20 | WP-015 initial interlock and state model — Proposed |
 | 1.1 | 2026-07-21 | WP-015-R1 — hazardous-exit guard (§1.1); FX_TEST_ACTIVE/FX_FAULT/FX_ENERGY_REMOVAL/FX_DISCHARGE exit guards; interlock effective-action retagged [A]/[C]/[S] with [S] as Proposed allocations + proof artifacts |
 | 1.2 | 2026-07-21 | WP-015-R2 — FX_LOCKOUT split into FX_LOCKOUT_UNCONFIRMED / FX_LOCKOUT_SAFE; FX_FAULT energy-state corrected; direct FX_FAULT→FX_RECOVERY_CHECK prohibited |
+| 1.3 | 2026-07-21 | Architecture Review **Accepted** (WP-015 / R1 / R2 / R3; reviewed head `227ea78`, PR #19); Open decisions retained; NOT VERIFIED |
