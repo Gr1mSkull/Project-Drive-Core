@@ -1,7 +1,7 @@
 # DriveCore Traceability Matrix
 
 **Document ID:** DOC-TRACE-MAT-001  
-**Version:** 1.6.9  
+**Version:** 1.7.1  
 **Status:** Accepted  
 **Work Package:** WP-007 (Accepted); WP-010 architecture refs
 
@@ -200,6 +200,24 @@ Prefix `REQ-DCC-V-FX-*` newly allocated. All rows **NOT VERIFIED**. Implementati
 
 Fixture-dependent DevKit cases (examples): VER-DCC-DK-A-011/012/014; VER-DCC-DK-C-002…014 — remain **NOT EXECUTED / BLOCKED**. Mapping: `DevKit_Fixture_Verification_Capability_Matrix.md`.
 
+
+## Fixture preliminary design matrix — WP-015 (Proposed)
+
+`FX-*` modules and `FX-PD-*` decisions are Proposed preliminary design; they consume Accepted `REQ-DCC-V-FX-*`. All remain **NOT VERIFIED**; fixture **NOT IMPLEMENTED**; no VE; no case PASS.
+
+| Element | Source | Consumes | Status | Notes |
+|---------|--------|----------|--------|-------|
+| FX-* module set | DevKit_Fixture_Preliminary_Design_Architecture.md | REQ-DCC-V-FX-001…071 | PROPOSED_DESIGN | NOT IMPLEMENTED |
+| FX-PD-001…017 | DevKit_Fixture_Preliminary_Design_Decision_Register.md | REQ-DCC-V-FX-*; OI-* | PROPOSED_DESIGN / BLOCKED | none self-approved |
+| Energy/control paths | DevKit_Fixture_Energy_Control_Preliminary_Design.md | REQ-DCC-V-FX-005/020…034/052…056; PWR-A-001/002/003 | PROPOSED_DESIGN | OI-GND-001 Open |
+| State/interlock model | DevKit_Fixture_Interlock_and_State_Model.md | REQ-DCC-V-FX-001…005/010…015/071 | PROPOSED_DESIGN | E-stop topology BLOCKED |
+| Load-bank prelim design | DevKit_Load_Bank_Preliminary_Design.md | REQ-DCC-V-FX-032/050/056 | PROPOSED_DESIGN | OI-BI-001 Open |
+| Measurement/DAQ | DevKit_Fixture_Measurement_and_DAQ_Architecture.md | REQ-DCC-V-FX-060/061/062 | PROPOSED_DESIGN | OI-SENSE-001 Open |
+| Interface/wiring | DevKit_Fixture_Interface_and_Wiring_Architecture.md | REQ-DCC-V-FX-070; IF-FX-* | PROPOSED_DESIGN | connectors/pinouts Open |
+| Implementation readiness | DevKit_Fixture_Implementation_Readiness_Matrix.md | REQ-DCC-V-FX-* | PROPOSED_DESIGN | procurement/construction NOT_AUTHORIZED |
+
+Fixture-dependent DevKit cases remain **NOT EXECUTED / BLOCKED**.
+
 ## Notes
 
 * All DevKit statuses remain `NOT VERIFIED`. No Verification Evidence records created in WP-007 / R1 / R2 / WP-008.
@@ -219,6 +237,8 @@ Fixture-dependent DevKit cases (examples): VER-DCC-DK-A-011/012/014; VER-DCC-DK-
 * WP-013 (2026-07-20): Component-class qualification and symbolic preliminary calculations **Proposed**; class recommendations Proposed (not Accepted); no MPN; numeric Open; NOT VERIFIED unchanged; TBD-DK-007 BLOCKED retained.
 * WP-013 Architecture Review (2026-07-20): Component-class qualification methodology **Accepted** — WP-013-R1 Accepted; PR #17 merged (`d1698a0` / `23bdb07`); evaluation directions Accepted; final HS/sense/BI/protection classes **Open**; OI-COMP/SENSE/PROT/BI remain Open; numeric Open; NOT VERIFIED unchanged; TBD-DK-007 **BLOCKED_BY_EDL_CLARIFICATION** retained; WP-014 authorized.
 * WP-014 (2026-07-20): Fixture and load-bank requirements **Proposed**; REQ-DCC-V-FX-* NOT VERIFIED; fixture NOT IMPLEMENTED; no VE; no PASS; numeric Open; TBD-DK-007 BLOCKED retained; OI-GND-001 Open; WP-013 Accepted baseline retained.
+* WP-015 Architecture Acceptance (2026-07-21): Fixture preliminary design architecture **Accepted** — R1/R2/R3 Accepted; reviewed head `227ea78`; PR #19 approved for merge; `FX-*`/`FX-PD-*` dispositions (accept/conditional/defer); REQ-DCC-V-FX-* remain **NOT VERIFIED**; fixture **NOT IMPLEMENTED**; no VE; no case PASS; numeric Open; TBD-DK-007 BLOCKED_BY_EDL_CLARIFICATION retained; OI-GND-001/PROT/FIX/SC/BI/SENSE remain Open; PWR-A-017/018/021…024 ACCEPTED_CONSTRAINT; WP-016 authorized.
+* WP-015 (2026-07-20): Fixture preliminary design architecture **Proposed** — `FX-*` modules, `FX-PD-001…017` decisions, block/energy/interlock/load-bank/measurement/interface/readiness docs; baseline WP-014 `bc7c6b6`; REQ-DCC-V-FX-* remain **NOT VERIFIED**; fixture **NOT IMPLEMENTED**; no VE; no case PASS; numeric Open; TBD-DK-007 BLOCKED_BY_EDL_CLARIFICATION retained; OI-GND-001/PROT/FIX/SC/BI/SENSE remain Open; PWR-A-017/018/021…024 ACCEPTED_CONSTRAINT; detailed design/procurement/construction/energization NOT AUTHORIZED.
 * WP-014 Architecture Acceptance (2026-07-20): Fixture and load-bank requirements **Accepted** — R1/R2/R3 Accepted; PR #18 merged (`7c72181` / `e46aff4`; reviewed head `084f579`); REQ-DCC-V-FX-* Accepted as requirements but remain **NOT VERIFIED**; fixture **NOT IMPLEMENTED**; no VE; no case PASS; numeric Open; TBD-DK-007 BLOCKED_BY_EDL_CLARIFICATION retained; OI-GND-001/OI-PROT/OI-FIX/OI-SC/OI-BI remain Open; PWR-A-017/018/021…024 ACCEPTED_CONSTRAINT; WP-015 authorized.
 * WP-014-R1 (2026-07-20): Architecture consistency corrections — EXTERNAL_ENERGY_ARMED authorization-only; OI-GND combined BASE/EXT block; load-bank stuck-on upstream energy remove; E-stop integrity REQ-DCC-V-FX-071; PWR-A-017/018 **ACCEPTED_CONSTRAINT**; PWR-A-021…024 remain PROPOSED_CONSTRAINT; NOT VERIFIED retained; TBD-DK-007 BLOCKED retained.
 * WP-007-R4: Method:Test cases enforce semantic placeholder policy (unjustified placeholders remaining = 0).
@@ -253,3 +273,5 @@ Fixture-dependent DevKit cases (examples): VER-DCC-DK-A-011/012/014; VER-DCC-DK-
 | 1.6.7 | 2026-07-20 | WP-014-R1 — FX-005/071; PWR-A-017/018 Accepted disposition notes; NOT VERIFIED retained |
 | 1.6.8 | 2026-07-20 | WP-014 Architecture Acceptance — package Accepted; REQ-DCC-V-FX-* NOT VERIFIED retained; TBD-DK-007 BLOCKED retained |
 | 1.6.9 | 2026-07-20 | WP-014 PR #18 merged (`7c72181` / `e46aff4`) — acceptance metadata on main |
+| 1.7.0 | 2026-07-20 | WP-015 — fixture preliminary design architecture (Proposed); architecture refs; NOT VERIFIED retained |
+| 1.7.1 | 2026-07-21 | WP-015 Architecture Acceptance — package Accepted; NOT VERIFIED retained; TBD-DK-007 BLOCKED retained |

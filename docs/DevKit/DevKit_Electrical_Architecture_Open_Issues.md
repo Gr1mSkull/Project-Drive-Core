@@ -1,7 +1,7 @@
 # DevKit Electrical Architecture Open Issues — WP-010
 
 **Document ID:** DOC-DK-OI-001  
-**Version:** 1.5  
+**Version:** 1.6  
 **Status:** Accepted — Architecture Review  
 **Review date:** 2026-07-20  
 **Approver role:** System Architect  
@@ -74,7 +74,8 @@ Base and external envelopes are functionally separated and protected against bac
 | Electrical sizing framework (WP-012) | OI-CUR-001…003, OI-PCB-001, OI-RAIL-001, OI-UV-001 |
 | Component-class comparison (WP-013) | OI-COMP-001, OI-COMP-002, OI-BI-001, OI-SENSE-001, OI-PROT-001/002 — recommendations **Proposed** |
 | Fixture/load-bank requirements (WP-014 Proposed) | OI-GND-001, OI-FIX-001, OI-FIX-002, OI-SC-001 — statuses remain Open |
-| Fixture preliminary design (after WP-014 Accepted) | OI-FIX-001/002, OI-SC-001 (design); OI-GND-001 (Architect) |
+| Fixture preliminary design (WP-015 Proposed) | OI-GND-001 (GND-OPTION-A…D compared, not selected); OI-PROT-001/002; OI-SC-001; OI-FIX-002; OI-BI-001; OI-SENSE-001 — all statuses remain Open; WP-015 maps options only |
+| OI-GND-001 / OI-PROT / E-stop decision packages (after WP-015) | OI-GND-001, OI-PROT-001/002, REQ-DCC-V-FX-071 E-stop topology |
 | Schematic WP | OI-PROT-001/002, OI-KILL-001, OI-CONN-001, OI-CHAN-001 |
 | PCB constraints/layout WP | OI-PCB-001 |
 | FW BSP planning | OI-WD-001, OI-EPOCH-001, OI-CONFIG-001 |
@@ -89,3 +90,4 @@ Base and external envelopes are functionally separated and protected against bac
 | 1.3 | 2026-07-20 | WP-012 — downstream mapping for sizing framework |
 | 1.4 | 2026-07-20 | WP-013 — downstream mapping for class comparison (OI statuses unchanged) |
 | 1.5 | 2026-07-20 | WP-014 — fixture OI consumers updated; all listed OI remain Open |
+| 1.6 | 2026-07-20 | WP-015 — preliminary-design downstream mapping (options compared, not selected); OI statuses unchanged |
