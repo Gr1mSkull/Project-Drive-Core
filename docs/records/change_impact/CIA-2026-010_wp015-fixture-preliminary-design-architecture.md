@@ -8,8 +8,9 @@
 | **Author** | Implementation Engineer (cloud agent) |
 | **Author role** | Implementation Engineer |
 | **Date** | 2026-07-20 |
-| **Status** | Draft — Ready for Final Architecture Review (after R2) |
-| **Related WP / CR** | WP-015 / WP-015-R1 / WP-015-R2; baseline WP-014 Accepted (`bc7c6b6`); ADR-016…023 Accepted |
+| **Status** | Draft — Ready for Final Architecture Acceptance after R3 |
+| **Related WP / CR** | WP-015 / WP-015-R1 / WP-015-R2 / WP-015-R3; baseline WP-014 Accepted (`bc7c6b6`); ADR-016…023 Accepted |
+| **Impact levels** | Level 2 package; R1 and R2 = Level 1 architecture consistency; R3 = Level 1 editorial/governance consistency |
 
 ### Reason for Change
 
@@ -98,7 +99,7 @@ Revert WP-015 PR; WP-014 Accepted baseline (`bc7c6b6`) preserved.
 1. **Lockout contradiction resolved:** single `FX_LOCKOUT` formally split into `FX_LOCKOUT_UNCONFIRMED` (residual may exist/unknown; energy-removal/discharge/diagnosis permitted; recovery prohibited; cannot enter `FX_RECOVERY_CHECK`) and `FX_LOCKOUT_SAFE` (all paths observed inactive; removal confirmed; discharge complete/proven N/A; deliberate recovery permitted). State table, hazardous-exit guard, block-design recovery diagram, load-bank sequence, RHP updated.
 2. **FX_FAULT energy-state:** no longer claims all energy inhibited; permits no *newly authorized* hazardous energy, while pre-existing energy may be active/unconfirmed pending `FX_ENERGY_REMOVAL`; safe minimum = AUTH revoked/inhibited, removal initiated when active/unconfirmed, recovery prohibited. Direct `FX_FAULT → FX_LOCKOUT_SAFE` only after confirmations.
 3. **Recovery diagram:** routes `FX_FAULT → FX_ENERGY_REMOVAL → FX_DISCHARGE (when applicable) → FX_LOCKOUT_UNCONFIRMED → FX_LOCKOUT_SAFE → RECOVERY CONFIRM → FX_RECOVERY_CHECK`; direct `FX_FAULT → FX_RECOVERY_CHECK` explicitly prohibited; guarded shortcut `FX_FAULT → FX_LOCKOUT_SAFE` only when confirmations already hold.
-4. **Stale references fixed:** removed "Sink-only functional classes" from RHP; RHP/decision register/CIA use `FX-PD-001…021` and `GND-OPTION-A/B/C/D1/D2`; decision register `FX-PD-004` options updated; RHP records exact R2 head SHA.
+4. **Stale references fixed:** removed the absolute sink-only class wording from RHP; RHP/decision register/CIA use `FX-PD-001…021` and `GND-OPTION-A/B/C/D1/D2`; decision register `FX-PD-004` options updated; RHP distinguishes R2 architecture commit from metadata tip.
 
 ### Validation performed (WP-015 / R1 — reproducible)
 
@@ -316,8 +317,8 @@ rg -n 'hazardous energy active or unconfirmed → \*\*FX_ENERGY_REMOVAL' $S    #
 rg -n 'FX_FAULT → FX_RECOVERY_CHECK \(direct\) is PROHIBITED' $S   # exit 0 → PASS
 # R2.6 recovery diagram uses substates
 rg -n 'FX_LOCKOUT_UNCONFIRMED|FX_LOCKOUT_SAFE' $B      # exit 0 → PASS
-# R2.7 no active "Sink-only functional classes" (excluding change descriptions)
-rg -n 'Sink-only functional classes' $D docs/records/review_handoffs/RHP-2026-009_*.md   # exit 1 → PASS
+# R2.7 no active "sink-only functional classes" wording in the nine architecture docs (ARCH9)
+rg -n 'Sink-only functional classes' $D   # exit 1 → PASS (no active class claim)
 # R2.8/R2.9 current ranges
 rg -n 'FX-PD-001 … FX-PD-021' docs/records/review_handoffs/RHP-2026-009_*.md   # exit 0
 rg -n 'GND-OPTION-A/B/C/D1/D2' docs/records/review_handoffs/RHP-2026-009_*.md docs/DevKit/DevKit_Fixture_Preliminary_Design_Decision_Register.md   # exit 0
@@ -333,14 +334,47 @@ rg -n 'GND-OPTION-A…D|GND-OPTION-A/B/C/D\b' $D docs/records/review_handoffs/RH
 | R2.4 active/unconfirmed → energy removal | 0 | PASS |
 | R2.5 direct fault→recovery prohibited | 0 | PASS |
 | R2.6 recovery diagram agrees (substates) | 0 | PASS |
-| R2.7 no active "Sink-only functional classes" | 1 | PASS |
+| R2.7 no active sink-only class wording (ARCH9) | 1 | PASS |
 | R2.8 RHP/register use `FX-PD-001…021` | 0 | PASS |
 | R2.9 RHP/register use `GND-OPTION-A/B/C/D1/D2` | 0 | PASS |
 | R2.9b no stale bare GND-OPTION-A…D | 1 | PASS |
 | R2.16 no EDL/ADR/hardware/firmware/config diff | 0 | PASS |
 | R2.17 no MPN/BOM/numeric | 1 | PASS |
 | R2.15 no `\| PASS \|` / no VE dir change | 1 / 0 | PASS |
-| Links `OK: 11 files, N relative links verified` | 0 | PASS |
+| R2.18 Markdown links (ARCH9) — see command/output below | 0 | PASS |
+
+#### R2.18 — Markdown relative links (nine WP-015 DevKit documents)
+
+```bash
+python3 - <<'PY'
+import re, os, sys
+root="docs/DevKit"
+files=["DevKit_Fixture_Preliminary_Design_Architecture.md","DevKit_Fixture_Preliminary_Block_Design.md",
+ "DevKit_Fixture_Energy_Control_Preliminary_Design.md","DevKit_Fixture_Interlock_and_State_Model.md",
+ "DevKit_Load_Bank_Preliminary_Design.md","DevKit_Fixture_Measurement_and_DAQ_Architecture.md",
+ "DevKit_Fixture_Interface_and_Wiring_Architecture.md","DevKit_Fixture_Preliminary_Design_Decision_Register.md",
+ "DevKit_Fixture_Implementation_Readiness_Matrix.md"]
+errors=[];checked=0
+for f in files:
+    text=open(os.path.join(root,f),encoding="utf-8").read()
+    for m in re.finditer(r'\[[^\]]*\]\(([^)]+)\)',text):
+        t=m.group(1).split('#')[0]
+        if not t or t.startswith('http'): continue
+        checked+=1
+        if not os.path.exists(os.path.normpath(os.path.join(root,t))): errors.append((f,t))
+if errors:
+    [print("MISSING",f,"->",t) for f,t in errors]; sys.exit(1)
+print(f"OK: {len(files)} files, {checked} relative links verified")
+PY
+```
+
+```text
+OK: 9 files, 9 relative links verified
+```
+
+| exit | `0` | result | **PASS** |
+
+This link-validation scope (nine DevKit architecture documents) is recorded identically in RHP-2026-009 §R2.18.
 
 Requirements NOT VERIFIED; fixture NOT IMPLEMENTED; cases NOT EXECUTED/BLOCKED; no VE; no PASS; Open issues unchanged.
 
@@ -360,3 +394,4 @@ Requirements NOT VERIFIED; fixture NOT IMPLEMENTED; cases NOT EXECUTED/BLOCKED; 
 | 1.0 | 2026-07-20 | WP-015 initial CIA — Draft; reproducible V1–V7 against the nine required deliverables |
 | 1.1 | 2026-07-21 | WP-015-R1 — six architecture-consistency corrections; reproducible R1.1–R1.18 checks; Open decisions unchanged |
 | 1.2 | 2026-07-21 | WP-015-R2 — lockout substates; FX_FAULT energy-state; recovery diagram; stale-reference cleanup; reproducible R2 checks |
+| 1.3 | 2026-07-21 | WP-015-R3 — governance/editorial: actual link-validation evidence (9 files/9 links, no placeholder); R2.7 scoped to ARCH9; metadata aligned with RHP; commit-identity model |

@@ -6,39 +6,221 @@
 | **Change Scope** | WP-015 Gen1 DevKit fixture preliminary design architecture |
 | **Related Requirements** | REQ-DCC-V-FX-* (Accepted); FX-* modules / FX-PD-* decisions (Proposed) |
 | **Related Architecture** | ADR-019…023; WP-010…014 Accepted; PWR-A-017/018/021…024 ACCEPTED_CONSTRAINT |
-| **Related WP / CR** | WP-015 / WP-015-R1 |
-| **Impact Level** | 2 (package); R1 = Level 1 (architecture consistency) |
+| **Related WP / CR** | WP-015 / WP-015-R1 / WP-015-R2 / WP-015-R3 |
+| **Impact Level** | Level 2 package; R1 and R2 = Level 1 architecture consistency; R3 = Level 1 editorial/governance consistency |
 | **Reviewed baseline** | `bc7c6b6f302aa8a2e6eccc54284dad6628d7101b` (WP-014 acceptance on `main`) |
 | **R1 reviewed head (pre-R1)** | `56707ff5e0dc58c44b6b425d1ef9920c3cd81169` |
-| **Proposed head** | WP-015-R2 correction commit `49c5a95558ca25707cefd396dd913a14b02eacd5` (PR #19); metadata commit records this SHA |
+| **R2 architecture correction commit** | `49c5a95558ca25707cefd396dd913a14b02eacd5` |
+| **R2 metadata tip reviewed** | `8a7c4fd6604967a17dd0c030a64cb50997782bff` |
+| **R3 governance correction commit** | recorded in the Completion Report / PR body after creation (this RHP does not record the SHA of the commit that edits itself) |
+| **Current PR tip** | verified externally in the PR body and Completion Report |
 | **Date** | 2026-07-21 |
 | **Implementer** | Implementation Engineer (cloud agent) |
 | **Implementer role** | Implementation Engineer |
-| **Status** | Ready for Final Architecture Review (after R1) |
+| **Status** | Ready for Final Architecture Acceptance after R3 |
 
 ## 0a. WP-015-R2 change summary
 
 1. `FX_LOCKOUT` formally split into `FX_LOCKOUT_UNCONFIRMED` (residual may exist/unknown; removal/discharge/diagnosis permitted; recovery prohibited; cannot enter `FX_RECOVERY_CHECK`) and `FX_LOCKOUT_SAFE` (paths observed inactive; removal confirmed; discharge complete/proven N/A; deliberate recovery permitted).
 2. `FX_FAULT` corrected: no newly authorized hazardous energy; pre-existing energy may be active/unconfirmed pending `FX_ENERGY_REMOVAL`; recovery prohibited.
 3. Recovery routes `FX_FAULT → FX_ENERGY_REMOVAL → FX_DISCHARGE (when applicable) → FX_LOCKOUT_UNCONFIRMED → FX_LOCKOUT_SAFE → RECOVERY CONFIRM → FX_RECOVERY_CHECK`; direct `FX_FAULT → FX_RECOVERY_CHECK` prohibited.
-4. Stale references cleaned: no "Sink-only functional classes"; `FX-PD-001…021`; `GND-OPTION-A/B/C/D1/D2`; exact R2 head recorded below.
+4. Stale references cleaned: removed the absolute sink-only class wording; `FX-PD-001…021`; `GND-OPTION-A/B/C/D1/D2`; exact R2 architecture commit and metadata tip distinguished in the header.
 
-### R2 reproducible checks
+### R2 reproducible validation package (self-contained)
 
-| ID | Command | Exit | Result |
-|----|---------|------|--------|
-| R2.1 | `rg -n '\| \`FX_LOCKOUT\` \|' $S` (no bare state) | 1 | PASS |
-| R2.2 | `rg -n 'FX_LOCKOUT_UNCONFIRMED → FX_RECOVERY_CHECK is PROHIBITED' $S` | 0 | PASS |
-| R2.3 | `rg -n 'FX_FAULT.*Inhibited \| All hazardous' $S` | 1 | PASS |
-| R2.4 | `rg -n 'active or unconfirmed → \*\*FX_ENERGY_REMOVAL' $S` | 0 | PASS |
-| R2.5 | `rg -n 'FX_FAULT → FX_RECOVERY_CHECK \(direct\) is PROHIBITED' $S` | 0 | PASS |
-| R2.6 | `rg -n 'FX_LOCKOUT_UNCONFIRMED\|FX_LOCKOUT_SAFE' $B` | 0 | PASS |
-| R2.7 | `rg -n 'Sink-only functional classes' RHP` | 1 | PASS |
-| R2.8 | `rg -n 'FX-PD-001 … FX-PD-021' RHP` | 0 | PASS |
-| R2.9 | `rg -n 'GND-OPTION-A/B/C/D1/D2' RHP register` | 0 | PASS |
-| R2.16 | forbidden-path diff empty | 0 | PASS |
-| R2.17 | no MPN/BOM/numeric | 1 | PASS |
-| R2.15 | no `\| PASS \|` / no VE dir change | 1 / 0 | PASS |
+`S` = `docs/DevKit/DevKit_Fixture_Interlock_and_State_Model.md`; `B` = `docs/DevKit/DevKit_Fixture_Preliminary_Block_Design.md`; `ARCH9` = the nine WP-015 DevKit documents.
+
+#### R2.1 — Lockout state is unambiguous (two substates; no bare `FX_LOCKOUT` state row)
+
+```bash
+rg -n '\| `FX_LOCKOUT` \|' docs/DevKit/DevKit_Fixture_Interlock_and_State_Model.md
+rg -c 'FX_LOCKOUT_UNCONFIRMED|FX_LOCKOUT_SAFE' docs/DevKit/DevKit_Fixture_Interlock_and_State_Model.md
+```
+
+```text
+(stdout of first command: empty)
+15
+```
+
+| exit | `1` (no bare state) / `0` | result | **PASS** |
+|------|--------------------------|--------|----------|
+
+#### R2.2 — Energy-unconfirmed lockout cannot enter recovery
+
+```bash
+rg -n 'FX_LOCKOUT_UNCONFIRMED → FX_RECOVERY_CHECK is PROHIBITED' docs/DevKit/DevKit_Fixture_Interlock_and_State_Model.md
+```
+
+```text
+72:FX_LOCKOUT_UNCONFIRMED → FX_RECOVERY_CHECK is PROHIBITED.
+```
+
+| exit | `0` | result | **PASS** |
+
+#### R2.3 — `FX_FAULT` does not claim all energy already inhibited
+
+```bash
+rg -n 'FX_FAULT.*Inhibited \| All hazardous' docs/DevKit/DevKit_Fixture_Interlock_and_State_Model.md
+```
+
+```text
+(stdout: empty)
+```
+
+| exit | `1` | result | **PASS** |
+
+#### R2.4 — Active/unconfirmed energy from `FX_FAULT` proceeds through energy removal
+
+```bash
+rg -n 'hazardous energy active or unconfirmed → \*\*FX_ENERGY_REMOVAL' docs/DevKit/DevKit_Fixture_Interlock_and_State_Model.md
+```
+
+```text
+33:| `FX_FAULT` | Any detected fault | No newly authorized hazardous energy; pre-existing energy may be active/unconfirmed pending removal | ... | If hazardous energy active or unconfirmed → **FX_ENERGY_REMOVAL**; ... |
+```
+
+| exit | `0` | result | **PASS** |
+
+#### R2.5 — No direct `FX_FAULT → FX_RECOVERY_CHECK`
+
+```bash
+rg -n 'FX_FAULT → FX_RECOVERY_CHECK \(direct\) is PROHIBITED' docs/DevKit/DevKit_Fixture_Interlock_and_State_Model.md
+```
+
+```text
+70:FX_FAULT → FX_RECOVERY_CHECK (direct) is PROHIBITED.
+```
+
+| exit | `0` | result | **PASS** |
+
+#### R2.6 — Recovery diagram agrees with the state table (substates present)
+
+```bash
+rg -n 'FX_LOCKOUT_UNCONFIRMED|FX_LOCKOUT_SAFE' docs/DevKit/DevKit_Fixture_Preliminary_Block_Design.md
+```
+
+```text
+89:Stuck-on --[S]--> revoke AUTH + inhibit/remove UPSTREAM energy --> FX-ENERGY-REMOVAL --> FX_LOCKOUT_UNCONFIRMED (→ FX_LOCKOUT_SAFE after confirmation)
+108:Fault active --[S]--> FX-ENERGY-REMOVAL --> FX_LOCKOUT_UNCONFIRMED --> (confirmation) --> FX_LOCKOUT_SAFE --> deliberate recovery
+126:  --[O]--> FX_LOCKOUT_UNCONFIRMED
+128:           FX_LOCKOUT_SAFE
+135:FX_FAULT --> FX_LOCKOUT_SAFE
+139:FX_LOCKOUT_UNCONFIRMED --> FX_RECOVERY_CHECK
+```
+
+| exit | `0` | result | **PASS** |
+
+#### R2.7 — No active "sink-only functional classes" wording in the architecture documents
+
+```bash
+rg -n 'Sink-only functional classes' docs/DevKit/DevKit_Fixture_Preliminary_Design_Architecture.md \
+  docs/DevKit/DevKit_Fixture_Preliminary_Block_Design.md docs/DevKit/DevKit_Fixture_Energy_Control_Preliminary_Design.md \
+  docs/DevKit/DevKit_Fixture_Interlock_and_State_Model.md docs/DevKit/DevKit_Load_Bank_Preliminary_Design.md \
+  docs/DevKit/DevKit_Fixture_Measurement_and_DAQ_Architecture.md docs/DevKit/DevKit_Fixture_Interface_and_Wiring_Architecture.md \
+  docs/DevKit/DevKit_Fixture_Preliminary_Design_Decision_Register.md docs/DevKit/DevKit_Fixture_Implementation_Readiness_Matrix.md
+```
+
+```text
+(stdout: empty)
+```
+
+| exit | `1` | result | **PASS** — no active class claim in ARCH9 |
+
+#### R2.8 — RHP and decision register use `FX-PD-001…021`
+
+```bash
+rg -n 'FX-PD-001 … FX-PD-021' docs/records/review_handoffs/RHP-2026-009_wp015-fixture-preliminary-design-architecture.md
+rg -n 'FX-PD-021' docs/DevKit/DevKit_Fixture_Preliminary_Design_Decision_Register.md
+```
+
+```text
+72:`FX-PD-001 … FX-PD-021` (module decomposition, …, GND-OPTION-D1/D2 split) …
+39:| FX-PD-021 | GND-OPTION-D split | … | PROPOSED_DESIGN | …
+```
+
+| exit | `0` / `0` | result | **PASS** |
+
+#### R2.9 — RHP and decision register use `GND-OPTION-A/B/C/D1/D2`
+
+```bash
+rg -n 'GND-OPTION-A/B/C/D1/D2' docs/records/review_handoffs/RHP-2026-009_wp015-fixture-preliminary-design-architecture.md docs/DevKit/DevKit_Fixture_Preliminary_Design_Decision_Register.md
+```
+
+```text
+(matches in RHP §8/§9 and decision register FX-PD-004)
+```
+
+| exit | `0` | result | **PASS** |
+
+#### R2.16 — No forbidden implementation-path changes
+
+```bash
+git diff --name-only main...HEAD -- docs/EDL docs/ADR hardware firmware config
+```
+
+```text
+(stdout: empty)
+```
+
+| exit | `0` | result | **PASS** |
+
+#### R2.17 — No MPN / BOM / numeric approval
+
+```bash
+rg -i 'MPN:|preferred manufacturer|BOM entry|approved (current|voltage|timing|temperature)' \
+  docs/DevKit/DevKit_Fixture_*.md docs/DevKit/DevKit_Load_Bank_Preliminary_Design.md
+```
+
+```text
+(stdout: empty)
+```
+
+| exit | `1` | result | **PASS** |
+
+#### R2.15 — No verification PASS / no VE
+
+```bash
+rg -n '\| PASS \|' docs/DevKit/DevKit_Fixture_*.md docs/DevKit/DevKit_Load_Bank_Preliminary_Design.md
+git diff --name-only main...HEAD -- docs/records/verification
+```
+
+```text
+(first: empty)
+(second: empty)
+```
+
+| exit | `1` / `0` | result | **PASS** — no case PASS; no VE directory change |
+
+#### R2.18 — Markdown relative links (nine WP-015 DevKit documents)
+
+```bash
+python3 - <<'PY'
+import re, os, sys
+root="docs/DevKit"
+files=["DevKit_Fixture_Preliminary_Design_Architecture.md","DevKit_Fixture_Preliminary_Block_Design.md",
+ "DevKit_Fixture_Energy_Control_Preliminary_Design.md","DevKit_Fixture_Interlock_and_State_Model.md",
+ "DevKit_Load_Bank_Preliminary_Design.md","DevKit_Fixture_Measurement_and_DAQ_Architecture.md",
+ "DevKit_Fixture_Interface_and_Wiring_Architecture.md","DevKit_Fixture_Preliminary_Design_Decision_Register.md",
+ "DevKit_Fixture_Implementation_Readiness_Matrix.md"]
+errors=[];checked=0
+for f in files:
+    text=open(os.path.join(root,f),encoding="utf-8").read()
+    for m in re.finditer(r'\[[^\]]*\]\(([^)]+)\)',text):
+        t=m.group(1).split('#')[0]
+        if not t or t.startswith('http'): continue
+        checked+=1
+        if not os.path.exists(os.path.normpath(os.path.join(root,t))): errors.append((f,t))
+if errors:
+    [print("MISSING",f,"->",t) for f,t in errors]; sys.exit(1)
+print(f"OK: {len(files)} files, {checked} relative links verified")
+PY
+```
+
+```text
+OK: 9 files, 9 relative links verified
+```
+
+| exit | `0` | result | **PASS** |
 
 ## 0. WP-015-R1 change summary
 
@@ -257,7 +439,18 @@ Physical tests: **NOT EXECUTED**.
 2. Accept the separation of energy, control, authorization, observation and safety paths? **Yes / No**
 3. Accept the preliminary base-energy architecture? **Yes / No**
 4. Accept the external-energy exclusivity model while `OI-GND-001` remains Open? **Yes / No**
-5. Which `OI-GND-001` option should proceed to a dedicated decision package? **A / B / C / D / Defer**
+5. Which `OI-GND-001` option should proceed to a dedicated decision package? **A / B / C / D1 / D2 / Defer**
+
+   ```text
+   A  — Controlled common reference
+   B  — Single-point reference
+   C  — Galvanically separated boundary
+   D1 — Physically separate fixture/interconnection arrangements
+   D2 — Shared fixture with mutually exclusive modes
+   Defer — No option advances yet
+   ```
+
+   This is not a selection. `OI-GND-001` remains Open.
 6. Accept the authorization versus physical-energy state model? **Yes / No**
 7. Accept the fixture state model? **Yes / No**
 8. Accept the interlock model? **Yes / No**
@@ -287,17 +480,25 @@ and E-stop (REQ-DCC-V-FX-071) architecture issues.
 
 Does not authorize procurement, construction, or energization.
 
-## 13a. Architect R1 disposition status (pre-review record)
+## 13a. Architect review disposition history
 
-The R1 corrections target the four review items marked *Revision required* (path separation; fixture state model; measurement-boundary model) and the semantic/option-split items (load-bank semantics; GND-OPTION D1/D2; safety-path legend). Items previously *Accept* / *Accept conditionally* are unchanged in intent. Detailed design remains *Not yet*; procurement/construction/energization remain **No**.
+```text
+Architect review disposition history:
+- Initial review: Revision Required
+- R1 review: Revision Required
+- R2 architecture content: Acceptable
+- R3 purpose: editorial/governance consistency only
+```
+
+Detailed design remains *Not yet*; procurement/construction/energization remain **No**; `OI-GND-001` remains Open.
 
 ## 14. Review status
 
 | Field | Value |
 |-------|-------|
-| **Implementer Self-Review Status** | Complete (R1) |
-| **Independent Review Status** | Not started |
-| **Final Review Outcome** | **Ready for Final Architecture Review** |
+| **Implementer Self-Review Status** | Complete through R3 |
+| **Independent Review Status** | Architecture content reviewed through R2; final governance consistency pending R3 review |
+| **Final Review Outcome** | **Ready for Final Architecture Acceptance after R3** |
 | **Architecture / policy approval** | Separate — System Architect only |
 
 ## Revision history
@@ -307,3 +508,4 @@ The R1 corrections target the four review items marked *Revision required* (path
 | 1.0 | 2026-07-20 | WP-015 initial RHP — Draft; self-contained validation + full Architect questions |
 | 1.1 | 2026-07-21 | WP-015-R1 — change summary + reproducible R1.1–R1.18 checks; Ready for Final Architecture Review |
 | 1.2 | 2026-07-21 | WP-015-R2 — lockout substates; FX_FAULT energy-state; recovery diagram; stale-reference cleanup; exact R2 head recorded |
+| 1.3 | 2026-07-21 | WP-015-R3 — metadata (R1/R2/R3); Q5 A/B/C/D1/D2/Defer; review-status history; full self-contained R2 validation package; actual link evidence; commit-identity model |
