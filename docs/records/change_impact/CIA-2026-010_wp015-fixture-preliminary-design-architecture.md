@@ -29,7 +29,25 @@ The preliminary architecture will later constrain fixture detailed design, prote
 ### Proposed Behaviour
 
 * Proposed functional module decomposition, block design, energy/control architecture with OI-GND-001 option comparison, authorization-vs-physical-state model, fixture state and interlock model, E-stop integrity options, load-bank classes and failure behavior, measurement boundaries and DAQ responsibility split, symbolic interfaces and wiring classes, operator control/indication, `FX-PD-*` decision register, and implementation readiness matrix.
-* All new WP-015 elements are `PROPOSED_DESIGN` / `PROPOSED_CONSTRAINT` / `ALTERNATIVE_UNDER_EVALUATION` / `BLOCKED_BY_*`; none self-approved.
+* All new WP-015 elements were **proposed** as `PROPOSED_DESIGN` / `PROPOSED_CONSTRAINT` / `ALTERNATIVE_UNDER_EVALUATION` / `BLOCKED_BY_*` and were dispositioned at Architecture Review (see Final Architecture Review Disposition below); none self-approved.
+
+### Final Architecture Review Disposition
+
+```text
+WP-015 / R1 / R2 / R3:
+ACCEPTED (Architecture Review 2026-07-21; reviewed head 227ea78; PR #19)
+
+FX-PD final dispositions:
+- Accepted: FX-PD-001, 002, 003, 007, 008, 010, 011, 012, 013, 014,
+            015, 016, 018, 019, 020, 021
+- Accepted Conditionally: FX-PD-005, FX-PD-009
+- Deferred: FX-PD-004, FX-PD-006, FX-PD-017
+
+Deferred and conditional dependencies remain Open/Blocked.
+No implementation, verification or numeric authorization is created.
+```
+
+The historical `Current Behaviour` / `Proposed Behaviour` sections above are retained as the pre-acceptance record; the Implementation Engineer authored the proposals, which were accepted only through System Architect review (no self-approval).
 
 ### Scope exclusions (mandatory)
 

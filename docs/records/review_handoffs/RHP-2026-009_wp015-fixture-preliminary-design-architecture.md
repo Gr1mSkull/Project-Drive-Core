@@ -4,7 +4,7 @@
 |-------|-------|
 | **Review Package ID** | RHP-2026-009 |
 | **Change Scope** | WP-015 Gen1 DevKit fixture preliminary design architecture |
-| **Related Requirements** | REQ-DCC-V-FX-* (Accepted); FX-* modules / FX-PD-* decisions (Proposed) |
+| **Related Requirements** | REQ-DCC-V-FX-* (Accepted); FX-* modules Accepted as WP-015 preliminary architecture; FX-PD-* dispositions Accepted / Accepted Conditionally / Deferred per Architecture Review |
 | **Related Architecture** | ADR-019…023; WP-010…014 Accepted; PWR-A-017/018/021…024 ACCEPTED_CONSTRAINT |
 | **Related WP / CR** | WP-015 / WP-015-R1 / WP-015-R2 / WP-015-R3 |
 | **Impact Level** | Level 2 package; R1 and R2 = Level 1 architecture consistency; R3 = Level 1 editorial/governance consistency |
@@ -275,7 +275,21 @@ Symbolic interface groups (`IF-FX-SOURCE … IF-FX-EXTERNAL-ENERGY`) and evaluat
 
 ## 8. Proposed decisions
 
-`FX-PD-001 … FX-PD-021` (module decomposition, base-energy control, external-energy exclusivity, ground/reference option, back-feed placement, E-stop path, energy-removal observation, discharge observation, load-bank architecture, stuck-on containment, DAQ split, reference independence, fault-injection authorization, DUT interface grouping, operator control authority, lockout/recovery authority, containment boundary, measurement-connection energy/fault model, regenerative/returned-energy containment, interlock effective-action allocation, GND-OPTION-D1/D2 split) — all `PROPOSED_DESIGN` / `PROPOSED_CONSTRAINT` / `ALTERNATIVE_UNDER_EVALUATION` / `BLOCKED_BY_ARCHITECTURE`. None self-approved. Ground/reference options compared: `GND-OPTION-A/B/C/D1/D2`.
+`FX-PD-001 … FX-PD-021` final Architecture Review dispositions:
+
+```text
+ACCEPTED:
+FX-PD-001, 002, 003, 007, 008, 010, 011, 012, 013, 014,
+015, 016, 018, 019, 020, 021
+
+ACCEPTED CONDITIONALLY:
+FX-PD-005, FX-PD-009
+
+DEFERRED:
+FX-PD-004, FX-PD-006, FX-PD-017
+```
+
+No entry was self-approved. Acceptance does not authorize implementation or resolve dependent Open issues. Deferred entries remain Open/Blocked (not rejected); conditional entries retain their blockers (FX-PD-005 → OI-GND-001/OI-PROT-001; FX-PD-009 → OI-BI-001/OI-GND-001 + future bounded-energy design). Ground/reference options compared: `GND-OPTION-A/B/C/D1/D2` (Q5 = DEFER; none selected; OI-GND-001 Open).
 
 ## 9. Unresolved issues (preserved Open)
 

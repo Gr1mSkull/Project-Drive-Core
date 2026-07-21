@@ -7,9 +7,21 @@
 **Date:** 2026-07-20
 
 ```text
-Proposed decisions and options only. No entry is Accepted, selected, frozen, or authorized for procurement.
-All new entries remain PROPOSED_DESIGN / ALTERNATIVE_UNDER_EVALUATION / BLOCKED_BY_ARCHITECTURE until Architect Review.
-The Implementation Engineer shall not self-approve any decision.
+This register contains the final WP-015 Architecture Review dispositions.
+
+Entries are classified as:
+- ACCEPTED;
+- ACCEPTED CONDITIONALLY;
+- DEFERRED.
+
+Accepted and conditionally accepted entries remain preliminary architecture
+decisions. They do not authorize detailed design, procurement, construction,
+energization, verification, or closure of dependent OI/TBD items.
+
+Deferred entries remain Open/Blocked and are not rejected.
+
+The original proposals were authored by the Implementation Engineer and were
+accepted only through System Architect review; no entry was self-approved.
 ```
 
 ## 0. Architect disposition (Architecture Review 2026-07-21)
