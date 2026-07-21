@@ -8,7 +8,7 @@
 | **Author** | Implementation Engineer (cloud agent) |
 | **Author role** | Implementation Engineer |
 | **Date** | 2026-07-20 |
-| **Status** | **Accepted** — Architecture Review (2026-07-21); reviewed head `227ea78`; PR #19 approved for merge |
+| **Status** | **Accepted** — Architecture Review (2026-07-21); reviewed head `227ea78`; PR #19 merged (`5610790` / `287e18d`) |
 | **Related WP / CR** | WP-015 / WP-015-R1 / WP-015-R2 / WP-015-R3; baseline WP-014 Accepted (`bc7c6b6`); ADR-016…023 Accepted |
 | **Impact levels** | Level 2 package; R1 and R2 = Level 1 architecture consistency; R3 = Level 1 editorial/governance consistency |
 
@@ -415,3 +415,4 @@ Requirements NOT VERIFIED; fixture NOT IMPLEMENTED; cases NOT EXECUTED/BLOCKED; 
 | 1.2 | 2026-07-21 | WP-015-R2 — lockout substates; FX_FAULT energy-state; recovery diagram; stale-reference cleanup; reproducible R2 checks |
 | 1.3 | 2026-07-21 | WP-015-R3 — governance/editorial: actual link-validation evidence (9 files/9 links, no placeholder); R2.7 scoped to ARCH9; metadata aligned with RHP; commit-identity model |
 | 1.4 | 2026-07-21 | WP-015 Architecture Acceptance recorded — Accepted; PR #19 approved for merge; FX-PD dispositions; WP-016 authorized; Open decisions retained |
+| 1.5 | 2026-07-21 | WP-015 PR #19 merged (`5610790` / `287e18d`) — merge commit recorded |

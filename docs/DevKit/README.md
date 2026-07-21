@@ -1,7 +1,7 @@
 # DriveCore Gen1 DevKit — Document Set
 
 **Document ID:** DOC-DK-INDEX-001  
-**Version:** 1.25  
+**Version:** 1.26  
 **Status:** Accepted (index); WP-013/WP-014 **Accepted**; WP-015 **Proposed**  
 **Work Package:** WP-007…WP-014 (Accepted) / WP-015 (Proposed)  
 **Date:** 2026-07-20
@@ -144,7 +144,7 @@ Every DevKit gate evidence package shall record a **composite system baseline** 
 | WP-012 electrical sizing architecture framework | **Accepted** (2026-07-20) — WP-012-R1/R2 Accepted; PR #16 merged (`9c5c7e7` / `fe700d4`) |
 | WP-013 component-class qualification + symbolic calcs | **Accepted** (2026-07-20) — WP-013-R1 Accepted; PR #17 merged (`d1698a0` / `23bdb07`); final classes/topology Open |
 | WP-014 fixture and load-bank requirements | **Accepted** — Architecture Review (2026-07-20); WP-014-R1/R2/R3 Accepted; PR #18 merged (`7c72181` / `e46aff4`); fixture hardware NOT IMPLEMENTED; no procurement/construction; no VE |
-| WP-015 fixture preliminary design architecture | **Accepted** — Architecture Review (2026-07-21); reviewed head `227ea78`; PR #19 approved for merge; fixture NOT IMPLEMENTED; detailed design / procurement / construction / energization NOT AUTHORIZED; no VE |
+| WP-015 fixture preliminary design architecture | **Accepted** — Architecture Review (2026-07-21); PR #19 merged (`5610790` / `287e18d`); fixture NOT IMPLEMENTED; detailed design / procurement / construction / energization NOT AUTHORIZED; no VE |
 | Hardware design | **NOT IMPLEMENTED** — detailed sizing/schematic/PCB **NOT AUTHORIZED** |
 | Firmware bring-up | NOT IMPLEMENTED |
 | Physical verification | NOT VERIFIED |
@@ -193,3 +193,4 @@ Open thresholds: `TBD-DK-001` … `TBD-DK-022` (Status Open — WP-009 methods A
 | 1.23 | 2026-07-20 | WP-014 PR #18 merged (`7c72181` / `e46aff4`) — acceptance metadata recorded on main |
 | 1.24 | 2026-07-20 | WP-015 — fixture preliminary design architecture package (Proposed); CIA-2026-010 / RHP-2026-009 |
 | 1.25 | 2026-07-21 | WP-015 Architecture Acceptance — package Accepted; PR #19 approved for merge; WP-016 authorized |
+| 1.26 | 2026-07-21 | WP-015 PR #19 merged (`5610790` / `287e18d`) — acceptance metadata on main |

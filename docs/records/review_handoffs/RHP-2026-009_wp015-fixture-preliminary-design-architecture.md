@@ -17,7 +17,7 @@
 | **Date** | 2026-07-21 |
 | **Implementer** | Implementation Engineer (cloud agent) |
 | **Implementer role** | Implementation Engineer |
-| **Status** | **Accepted** — Architecture Review (2026-07-21); PR #19 approved for merge |
+| **Status** | **Accepted** — Architecture Review (2026-07-21); PR #19 merged (`5610790` / `287e18d`) |
 
 ## 0a. WP-015-R2 change summary
 
@@ -524,3 +524,4 @@ Detailed design remains *Not yet*; procurement/construction/energization remain 
 | 1.2 | 2026-07-21 | WP-015-R2 — lockout substates; FX_FAULT energy-state; recovery diagram; stale-reference cleanup; exact R2 head recorded |
 | 1.3 | 2026-07-21 | WP-015-R3 — metadata (R1/R2/R3); Q5 A/B/C/D1/D2/Defer; review-status history; full self-contained R2 validation package; actual link evidence; commit-identity model |
 | 1.4 | 2026-07-21 | WP-015 Architecture Acceptance recorded — Accepted; PR #19 approved for merge; Q5=DEFER; Q9=DEFER; FX-PD dispositions; WP-016 authorized |
+| 1.5 | 2026-07-21 | WP-015 PR #19 merged (`5610790` / `287e18d`) — merge commit recorded |
