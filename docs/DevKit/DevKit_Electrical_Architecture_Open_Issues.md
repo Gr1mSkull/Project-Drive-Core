@@ -1,7 +1,7 @@
 # DevKit Electrical Architecture Open Issues — WP-010
 
 **Document ID:** DOC-DK-OI-001  
-**Version:** 1.6  
+**Version:** 1.7  
 **Status:** Accepted — Architecture Review  
 **Review date:** 2026-07-20  
 **Approver role:** System Architect  
@@ -80,6 +80,22 @@ Base and external envelopes are functionally separated and protected against bac
 | PCB constraints/layout WP | OI-PCB-001 |
 | FW BSP planning | OI-WD-001, OI-EPOCH-001, OI-CONFIG-001 |
 
+
+
+## 3.1 WP-016 proposed dispositions (statuses UNCHANGED pending Architecture Review)
+
+| Issue | Existing status | WP-016 proposed disposition | Residual blocker | Proposed Architect action |
+|-------|-----------------|-----------------------------|------------------|---------------------------|
+| OI-GND-001 | OPEN | DEFER combined-mode; near-term D1 basis | Numeric envelopes; isolation/back-feed qualification | ACCEPT ARCHITECTURE; SPLIT / DEFER |
+| OI-PROT-001 | OPEN | RP class direction (series blocking / ideal-diode, P2 + P0/P1) | Numeric; component qual | ACCEPT ARCHITECTURE; SPLIT / DEFER |
+| OI-PROT-002 | OPEN | Hybrid layered transient (clamp + foldback + removal) | Waveform/energy bound (BLOCKED_BY_INPUT) | ACCEPT ARCHITECTURE; SPLIT / DEFER |
+| OI-SENSE-001 | OPEN | Measurement-connection safety model + independence | Accuracy/topology; OI-GND-001 | ACCEPT ARCHITECTURE; SPLIT / DEFER |
+| OI-BI-001 | OPEN | Gen1 returned-energy policy D (prohibit regen) | Future bidirectional design | ACCEPT ARCHITECTURE; SPLIT / DEFER |
+| OI-FIX-001/002 | OPEN | Consumed by fixture decision packages; remain Open | Fixture detailed design | KEEP OPEN |
+| OI-SC-001 | OPEN | Consumed by protection/fault packages; remain Open | SC injection design; bounds | KEEP OPEN |
+
+These are **proposed** dispositions only. No OI status changes until the System Architect accepts. See WP-016 decision proposals in `docs/DevKit/DevKit_Fixture_*_Decision_Proposal.md` and related architecture docs.
+
 ## 4. Revision history
 
 | Version | Date | Change |
@@ -91,3 +107,4 @@ Base and external envelopes are functionally separated and protected against bac
 | 1.4 | 2026-07-20 | WP-013 — downstream mapping for class comparison (OI statuses unchanged) |
 | 1.5 | 2026-07-20 | WP-014 — fixture OI consumers updated; all listed OI remain Open |
 | 1.6 | 2026-07-20 | WP-015 — preliminary-design downstream mapping (options compared, not selected); OI statuses unchanged |
+| 1.7 | 2026-07-21 | WP-016 — proposed OI dispositions added (statuses unchanged; Open) |

@@ -1,7 +1,7 @@
 # DevKit Fixture Preliminary Design Decision Register — WP-015
 
 **Document ID:** DOC-DK-FPDDR-001  
-**Version:** 1.2  
+**Version:** 1.3  
 **Status:** Accepted — Architecture Review (2026-07-21); per-entry dispositions applied  
 **Work Package:** WP-015  
 **Date:** 2026-07-20
@@ -33,6 +33,10 @@ WP-015 Accepted (reviewed head `227ea78`, PR #19). Per-entry dispositions:
 - **DEFERRED** (remains Open/Blocked, not rejected): FX-PD-004 (ground/reference option), FX-PD-006 (E-stop physical topology), FX-PD-017 (enclosure/containment realization).
 
 Acceptance of a decision does not authorize detailed design, procurement, construction, or energization, and does not resolve any Open OI/TBD entry.
+
+## 0a. WP-016 linkage (dispositions unchanged)
+
+WP-016 produces Architect-ready decision proposals for the deferred/conditional entries (FX-PD-004/005/006/009/017) in `docs/DevKit/DevKit_Fixture_*_Decision_Proposal.md` and related architecture documents. **FX-PD accept/conditional/defer dispositions in this register are unchanged**; WP-016 recommendations remain proposals until Architecture Review.
 
 ## 1. Decision register
 
@@ -77,3 +81,4 @@ REQ-DCC-V-FX-* · OI-GND-001 · OI-PROT-001/002 · OI-SC-001 · OI-FIX-002 · OI
 | 1.0 | 2026-07-20 | WP-015 initial preliminary design decision register (FX-PD-001…017) — Proposed |
 | 1.1 | 2026-07-21 | WP-015-R1 — FX-PD-009 sink-function wording; added FX-PD-018 (measurement path), FX-PD-019 (returned energy), FX-PD-020 (interlock [S] allocation), FX-PD-021 (GND-D1/D2 split) |
 | 1.2 | 2026-07-21 | Architecture Review Accepted — per-entry FX-PD dispositions (accept/conditional/defer); Open decisions retained |
+| 1.3 | 2026-07-21 | WP-016 linkage note — decision proposals for deferred/conditional entries; dispositions unchanged |

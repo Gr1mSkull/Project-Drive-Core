@@ -1,7 +1,7 @@
 # DevKit Power-Path Assumption Register — WP-012
 
 **Document ID:** DOC-DK-PPAR-001  
-**Version:** 1.8  
+**Version:** 1.9  
 **Status:** Accepted — Architecture Review  
 **Work Package:** WP-012  
 **Date:** 2026-07-20
@@ -58,6 +58,8 @@ Assumptions in this register shall **not** be converted to requirements or numer
 
 **WP-014 / WP-014-R1 note:** PWR-A-017 and PWR-A-018 are **ACCEPTED_CONSTRAINT** by explicit Architecture Review disposition (non-numeric; no component, topology, fuse, current, or clearing time approved; no verification claim). PWR-A-003 closure artifact no longer requires an unconditional isolation proof — isolation proof is a possible future artifact only if Architect selects galvanic isolation under OI-GND-001.
 
+**WP-016 note (2026-07-21):** WP-016 decision proposals consume PWR-A-003/017/018 as `ACCEPTED_INPUT` and introduce no new PWR-A status. Back-feed prohibition (PWR-A-003), PSU-limit-not-sole-protection (PWR-A-017), and software-OFF-not-containment (PWR-A-018) are reaffirmed in the protection architecture proposal. No status change.
+
 **WP-015 note (2026-07-20):** WP-015 preliminary design consumes PWR-A constraints as `ACCEPTED_INPUT`; it introduces no new PWR-A status and does not alter PWR-A-017/018/021…024 (all ACCEPTED_CONSTRAINT). New WP-015 constraints live in the WP-015 decision register as `PROPOSED_*`.
 
 **WP-014 acceptance note (2026-07-20):** PWR-A-021…024 are now **ACCEPTED_CONSTRAINT** through WP-014 Architecture Acceptance (non-numeric safety-authority/sink/UI boundaries; no component, topology, or numeric value approved; no verification claim). OI-GND-001 and all listed OI-* remain Open; TBD-DK-007 remains BLOCKED_BY_EDL_CLARIFICATION.
@@ -74,3 +76,4 @@ Assumptions in this register shall **not** be converted to requirements or numer
 | 1.6 | 2026-07-20 | WP-014-R1 — PWR-A-017/018 ACCEPTED_CONSTRAINT; PWR-A-003 closure artifact (no isolation proof mandate) |
 | 1.7 | 2026-07-20 | WP-014 Architecture Acceptance — PWR-A-021…024 ACCEPTED_CONSTRAINT; Open decisions retained |
 | 1.8 | 2026-07-20 | WP-015 — note: preliminary design consumes PWR-A as ACCEPTED_INPUT; no status change |
+| 1.9 | 2026-07-21 | WP-016 — note: decision proposals consume PWR-A-003/017/018 as ACCEPTED_INPUT; no status change |

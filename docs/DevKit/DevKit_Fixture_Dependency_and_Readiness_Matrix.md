@@ -56,3 +56,7 @@
 | 1.1 | 2026-07-20 | WP-014-R1 — E-stop readiness split; EXTERNAL_ENERGY_ARMED / OI-GND block |
 | 1.2 | 2026-07-20 | Architecture Review **Accepted** (WP-014; reviewed head `084f579`, PR #18); Open decisions retained; NOT VERIFIED |
 | 1.3 | 2026-07-20 | WP-015 — cross-reference to preliminary design + implementation readiness matrix; detailed-design gate added |
+
+## WP-016 note
+
+WP-016 provides architecture decision proposals and a detailed-design input register/gate matrix that further disposition the Open dependencies listed above (OI-GND-001, OI-PROT-001/002, OI-SC-001, OI-BI-001, OI-SENSE-001, REQ-DCC-V-FX-071). Statuses remain Open pending Architecture Review.

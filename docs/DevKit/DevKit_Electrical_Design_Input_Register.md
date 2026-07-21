@@ -1,7 +1,7 @@
 # DevKit Electrical Design Input Register — WP-011
 
 **Document ID:** DOC-DK-EDIR-001  
-**Version:** 1.6  
+**Version:** 1.7  
 **Status:** Accepted — Architecture Review  
 **Work Package:** WP-011  
 **Date:** 2026-07-20
@@ -124,6 +124,10 @@ ED-IN-020…023, ED-IN-033…035 are consumed by Proposed WP-014 fixture require
 
 WP-015 preliminary design references ED-IN entries as **dependency references (R6)** — not approved inputs. Fixture-relevant consumers: ED-IN-011/032 (sense topology/accuracy → measurement architecture), ED-IN-021 (SC injection → fault-injection), ED-IN-022 (external load-bank envelope → load-bank preliminary design), ED-IN-023 (base/external ground/isolation → OI-GND-001 option comparison), ED-IN-033…035 (fixture identity/config; E-stop energy-removal timing; fault-energy bounds). No numeric value invented; all remain OPEN/BLOCKED.
 
+## 7.2 WP-016 detailed-design input linkage
+
+WP-016 introduces a fixture **detailed-design input register** (`FX-DD-IN-*`, `DevKit_Fixture_Detailed_Design_Input_Register.md`) that references ED-IN entries as dependency references (R6 retained). ED-IN consumers: ED-IN-002/008/009 (source/protection envelopes → FX-DD-IN-011/020), ED-IN-011/012 (measurement accuracy → FX-DD-IN-018), ED-IN-016/017 (thermal → FX-DD-IN-017), ED-IN-021/022 (SC/load-bank → returned-energy/fault), ED-IN-028 (connector → FX-DD-IN-016). No numeric value Approved by WP-016.
+
 ## 8. Revision history
 
 | Version | Date | Change |
@@ -135,3 +139,4 @@ WP-015 preliminary design references ED-IN entries as **dependency references (R
 | 1.4 | 2026-07-20 | WP-013 — ED-IN-030/031/032 reference Proposed class comparisons (Status Open unchanged) |
 | 1.5 | 2026-07-20 | WP-014 — fixture consumers; ED-IN-033…035 added (OPEN; no numerics); R6 retained |
 | 1.6 | 2026-07-20 | WP-015 — preliminary-design consumers noted (R6 retained; no value changes) |
+| 1.7 | 2026-07-21 | WP-016 — FX-DD-IN linkage (dependency references; R6 retained; no values Approved) |
